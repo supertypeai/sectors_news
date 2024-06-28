@@ -29,7 +29,7 @@ jobs:
       - name: Run scraping script idx
         env:
           proxy: ${{ secrets.PROXY }}
-        run: python scrape_idx.py 1 idx_scrape True
+        run: python scrape_idx.py 1 100 idx_scrape True
 
       - name: Commit and push changes
         run: |
