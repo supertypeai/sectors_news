@@ -2,7 +2,7 @@ name: Scrape News and Commit Results
 
 on:
   schedule:
-    - cron: "0 0 10 */3 *"
+    - cron: "0 0 10 */3 *" # Runs at 10:00 on every 3rd day of the month
   workflow_dispatch:
 
 jobs:
@@ -23,8 +23,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run scraping script
+      - name: Run scraping script idnfinancials
         run: python scrape_idnfinancials.py 1 idn_financial_scrape True
+
+      - name: Run scraping script idx
+        env:
+          proxy: ${{ secrets.PROXY }}
+        run: python scrape_idx.py 1 idx_scrape True
 
       - name: Commit and push changes
         run: |
