@@ -1,6 +1,11 @@
 import requests
 import json
-API_KEY = "442861ec22184f0eb100ceb63a29aa8c"
+import os
+import dotenv
+
+dotenv.load_dotenv()
+
+API_KEY = os.getenv('API_KEY_NEWSAPI')
 
 def fetch_news(api_key, query):
     url = f"https://newsapi.org/v2/everything?q={query}&apiKey={api_key}"
@@ -11,5 +16,5 @@ def fetch_news(api_key, query):
 news_articles = fetch_news(API_KEY, "banking")
 print(news_articles)
 
-with open('./res/newsAPIbanking.json', 'w') as f:
+with open('../data/newsAPIbanking.json', 'w') as f:
     json.dump(news_articles, f)
