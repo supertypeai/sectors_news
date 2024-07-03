@@ -68,7 +68,7 @@ def main():
     
   write_json(articles, args.filename)
 
-  if args.write_csv:
+  if args.csv:
      write_csv(args.filename)
 
 if __name__ == "__main__":
