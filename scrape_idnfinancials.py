@@ -53,7 +53,7 @@ def main():
   parser = argparse.ArgumentParser(description="Script for scraping data from idnfinancials")
   parser.add_argument("page_number", type=int, default=1)
   parser.add_argument("filename", type=str, default="idnarticles")
-  parser.add_argument("write_csv", type=bool, default=False)
+  parser.add_argument("--csv", type='store_true', help="Flag to indicate write to csv file")
 
   args = parser.parse_args()
 

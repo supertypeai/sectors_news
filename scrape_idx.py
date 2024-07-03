@@ -70,7 +70,7 @@ def main():
   parser.add_argument("page_number", type=int, default=1)
   parser.add_argument("page_size", type=int, default=100, help="Page size max is 1000")
   parser.add_argument("filename", type=str, default="idxarticles")
-  parser.add_argument("write_csv", type=bool, default=False)
+  parser.add_argument("--csv", type='store_true', help="Flag to indicate write to csv file")
 
   args = parser.parse_args()
 
