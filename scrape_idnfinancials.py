@@ -1,17 +1,9 @@
-import requests
-from bs4 import BeautifulSoup
-import json
-import csv
 import argparse
+from scraper import Scraper
 
-# Fetching news data from idnfinancials using requests
-def fetch_news(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
-    return soup
-
-def extract_news(soup):
-    articles = []
+class IDNFinancialScraper(Scraper):
+  def extract_news(self, url):
+    soup = self.fetch_news(url)
     for item in soup.find_all('article'):
         div = item.find('div', class_='col-8')
         if div:  
@@ -19,36 +11,19 @@ def extract_news(soup):
           body = div.find('p', class_='summary').text
           source = div.find('h2', class_='title').find('a')['href']
           timestamp = div.find('p', class_='date-published')['data-date']
-          articles.append({'title': title, 'body': body, 'source': source, 'timestamp': timestamp})
-    return articles
-
-def write_json(jsontext, filename):
-  with open(f'./data/{filename}.json', 'w') as f:
-    json.dump(jsontext, f, indent=4)
-
-def write_file_soup(filetext, filename):
-  with open(f'./data/{filename}.txt', 'w', encoding='utf-8') as f:
-    f.write(filetext.prettify())
-
-def write_csv(filename):
-  with open(f'./data/{filename}.json', 'r', encoding='utf-8') as json_file:
-    data = json.load(json_file)
-
-  with open(f'./data/{filename}.csv', 'w', newline='', encoding='utf-8') as csv_file:
-    
-      # Create a CSV writer object
-      csv_writer = csv.writer(csv_file)
-        
-      # Write the header
-      header = data[0].keys()
-      csv_writer.writerow(header)
-
-      # Write the data rows
-      for item in data:
-        csv_writer.writerow(item.values())
+          self.articles.append({'title': title, 'body': body, 'source': source, 'timestamp': timestamp})
+    return self.articles
+   
+  def extract_news_pages(self, num_pages):
+    for i in range(num_pages):
+      self.extract_news(self.get_page(i))
+    return self.articles
+   
+  def get_page(self, page_num):
+    return f'https://www.idnfinancials.com/news/page/{page_num}'
 
 def main():
-  url = 'https://www.idnfinancials.com/news'
+  scraper = IDNFinancialScraper()
 
   parser = argparse.ArgumentParser(description="Script for scraping data from idnfinancials")
   parser.add_argument("page_number", type=int, default=1)
@@ -59,17 +34,12 @@ def main():
 
   num_page = args.page_number
 
-  soup = fetch_news(url)
-  articles = extract_news(soup)
-
-  for i in range(1, num_page):
-    soup = fetch_news(url + f"/page/{i}")
-    articles.extend(extract_news(soup))   
+  scraper.extract_news_pages(num_page)
     
-  write_json(articles, args.filename)
+  scraper.write_json(scraper.articles, args.filename)
 
   if args.csv:
-     write_csv(args.filename)
+     scraper.write_csv(scraper.articles, args.filename)
 
 if __name__ == "__main__":
     main()

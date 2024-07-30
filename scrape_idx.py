@@ -1,31 +1,11 @@
 import json
-import csv
 import argparse
-import ssl
-import urllib.request
-import os
+from scraper import Scraper
 
-ssl._create_default_https_context = ssl._create_unverified_context
-
-# Fetching news data from idnfinancials using requests
-def fetch_news(url):
-    proxy = os.environ.get("proxy")
-    print("proxy", proxy)
-
-    proxy_support = urllib.request.ProxyHandler({'http': proxy,'https': proxy})
-    opener = urllib.request.build_opener(proxy_support)
-    urllib.request.install_opener(opener)
-
-    with urllib.request.urlopen(url) as response:
-      data = response.read()
-      data = json.loads(data)
-
-    # write_json(data, "testidxsoup")
-
-    # with open("./data/testidxsoup.json", "r") as f:
-    #    data = json.loads(f.read())
-
-    articles = []
+class IDXScraper(Scraper):
+  def extract_news(self, url):
+    data = self.fetch_news_with_proxy(url)
+    data = json.loads(data)
 
     for item in data['Items']:
        title = item['Title']
@@ -33,38 +13,19 @@ def fetch_news(url):
        body = item['Summary']
        source = item['Links'][0]['Href']
        tags = item['Tags']
-       articles.append({'title': title, 'body': body, 'source': source, 'timestamp': timestamp, 'tags': tags})
-    return articles
+       self.articles.append({'title': title, 'body': body, 'source': source, 'timestamp': timestamp, 'tags': tags})
+    return self.articles
+  
+  def extract_news_pages(self, num_pages, page_size):
+    for i in range(num_pages):
+      self.extract_news(self.get_page(i, page_size))
+    return self.articles
 
-def write_json(jsontext, filename):
-  with open(f'./data/{filename}.json', 'w') as f:
-    json.dump(jsontext, f, indent=4)
-
-def write_file_soup(filetext, filename):
-  with open(f'./data/{filename}.txt', 'w', encoding='utf-8') as f:
-    f.write(filetext.prettify())
-
-def write_csv(filename):
-  with open(f'./data/{filename}.json', 'r', encoding='utf-8') as json_file:
-    data = json.load(json_file)
-
-  with open(f'./data/{filename}.csv', 'w', newline='', encoding='utf-8') as csv_file:
-    
-      # Create a CSV writer object
-      csv_writer = csv.writer(csv_file)
-        
-      # Write the header
-      header = data[0].keys()
-      csv_writer.writerow(header)
-
-      # Write the data rows
-      for item in data:
-        csv_writer.writerow(item.values())
-
-def get_page(page_num, page_size):
-   return f"https://www.idx.co.id/primary/NewsAnnouncement/GetNewsSearch?locale=id-id&pageNumber={page_num}&pageSize={page_size}"
+  def get_page(self, page_num, page_size):
+    return f"https://www.idx.co.id/primary/NewsAnnouncement/GetNewsSearch?locale=id-id&pageNumber={page_num}&pageSize={page_size}"
 
 def main():
+  scraper = IDXScraper()
 
   parser = argparse.ArgumentParser(description="Script for scraping data from idx")
   parser.add_argument("page_number", type=int, default=1)
@@ -77,15 +38,12 @@ def main():
   num_page = args.page_number
   size_page = args.page_size
   
-  articles = fetch_news(get_page(1, size_page))
-
-  for i in range(1, num_page):
-    articles.extend(fetch_news(get_page(i, size_page))) 
+  scraper.extract_news_pages(num_page, size_page)
     
-  write_json(articles, args.filename)
+  scraper.write_json(scraper.articles, args.filename)
 
   if args.csv:
-     write_csv(args.filename)
+     scraper.write_csv(scraper.articles, args.filename)
 
 if __name__ == "__main__":
     main()

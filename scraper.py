@@ -1,0 +1,66 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+import csv
+import ssl
+import urllib.request
+import os
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
+class Scraper:
+  soup: BeautifulSoup
+  articles: list
+  proxy: str | None
+
+  def __init__(self):
+    self.articles = []
+
+  # Fetch news using requests but no proxy
+  def fetch_news(self, url):
+    response = requests.get(url)
+    self.soup = BeautifulSoup(response.content, 'html.parser')
+    return self.soup
+  
+  # Fetch news using urllib.request with proxy
+  def fetch_news_with_proxy(self, url):
+    self.proxy = os.environ.get("proxy")
+
+    print("proxy", self.proxy)
+
+    proxy_support = urllib.request.ProxyHandler({'http': self.proxy,'https': self.proxy})
+    opener = urllib.request.build_opener(proxy_support)
+    urllib.request.install_opener(opener)
+
+    with urllib.request.urlopen(url) as response:
+      data = response.read()
+
+    return data    
+  
+  # Will be overridden by subclass
+  def extract_news(self):
+    pass
+
+  def extract_news_pages(self, num_pages):
+    pass
+  
+  # Writer methods
+  def write_json(self, jsontext, filename):
+    with open(f'./data/{filename}.json', 'w') as f:
+      json.dump(jsontext, f, indent=4)
+
+  def write_file_soup(self, filetext, filename):
+    with open(f'./data/{filename}.txt', 'w', encoding='utf-8') as f:
+      f.write(filetext.prettify())
+
+  def write_csv(self, data, filename):
+    
+    with open(f'./data/{filename}.csv', 'w', newline='', encoding='utf-8') as csv_file:
+    
+      csv_writer = csv.writer(csv_file)
+        
+      header = data[0].keys()
+      csv_writer.writerow(header)
+
+      for item in data:
+        csv_writer.writerow(item.values())
