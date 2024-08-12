@@ -6,8 +6,8 @@ import argparse
 
 load_dotenv()
 
-URL = os.getenv('DATABASE_URL')
-KEY = os.getenv('DB_KEY')
+URL = os.environ.get('DATABASE_URL')
+KEY = os.environ.get('DB_KEY')
 
 def post_articles(jsonfile):
   with open(f'./data/{jsonfile}.json', 'r') as f:
