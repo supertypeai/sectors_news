@@ -25,6 +25,13 @@ jobs:
 
       - name: Run scraping script idnfinancials
         run: python pipeline.py 5 pipeline
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DB_KEY: ${{ secrets.DB_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          proxy: ${{ secrets.PROXY }}
 
       - name: Commit and push changes
         run: |
