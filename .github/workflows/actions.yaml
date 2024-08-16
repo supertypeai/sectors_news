@@ -2,7 +2,7 @@ name: Scrape News and Commit Results
 
 on:
   schedule:
-    - cron: "0 0 10 */3 *" # Runs at 10:00 on every 3rd day of the month
+    - cron: "0 0 10 * *" # Runs at 10:00 on every 3rd day of the month
   workflow_dispatch:
 
 jobs:
