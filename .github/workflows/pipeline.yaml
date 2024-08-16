@@ -2,7 +2,7 @@ name: Scrape News and Submit to Database
 
 on:
   schedule:
-    - cron: "0 10 3 * *" # Runs at 10:00 AM UTC+7 every day
+    - cron: "38 * * * *" # Runs at 10:00 AM UTC+7 every day
   workflow_dispatch:
 
 jobs:
