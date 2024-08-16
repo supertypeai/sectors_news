@@ -31,6 +31,14 @@ jobs:
           proxy: ${{ secrets.PROXY }}
         run: python scrape_idx.py 1 100 idx_scrape --csv
 
+      - name: Run universal scraping script
+        env:
+          proxy: ${{ secrets.PROXY }}
+        run: python universal_news_scraper_main.py 0:7
+      
+      - name: Pull changes
+        run: git pull origin main
+
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
