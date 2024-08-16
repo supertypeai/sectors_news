@@ -2,11 +2,11 @@ name: Scrape News and Submit to Database
 
 on:
   schedule:
-    - cron: "0 0 10 * *" # Runs at 10:00 AM every day
+    - cron: "0 0 3 * *" # Runs at 10:00 AM UTC+7 every day
   workflow_dispatch:
 
 jobs:
-  scrape_and_commit:
+  run_scraper_and_submit:
     runs-on: ubuntu-latest
 
     steps:
