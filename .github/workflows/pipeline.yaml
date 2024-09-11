@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run universal scraper
-        run: python universal_news_scraper_main.py 0:7
+        run: python universal_news_scraper_main.py 2
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
