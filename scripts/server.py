@@ -1,3 +1,6 @@
+"""
+Script to submit 
+"""
 import requests
 from dotenv import load_dotenv
 import os
@@ -8,6 +11,7 @@ load_dotenv()
 
 URL = os.environ.get('DATABASE_URL')
 KEY = os.environ.get('DB_KEY')
+MININUM_SCORE = 60
 
 def post_articles(jsonfile):
   with open(f'./data/{jsonfile}.json', 'r') as f:
@@ -47,7 +51,6 @@ def post_article(jsonfile):
 def post_source(jsonfile):
   with open(f'./data/{jsonfile}.json', 'r') as f:
     articles = json.load(f)
-
   headers = {
     'Authorization': f'Bearer {KEY}',
     'Content-Type': 'application/json'
@@ -79,7 +82,26 @@ def post_source(jsonfile):
       else:
         print("Article already exists")
     
-    response = requests.post(URL + '/articles/list', json=submit_article, headers=headers)
+    submit_index = []
+    for i, article in enumerate(submit_article):
+      print(article)
+      response = requests.post(URL + '/evaluate-article', json=article, headers=headers)
+      print("score:", response.json()['score'])
+      
+      if int(response.json()['score']) > MININUM_SCORE:
+        submit_index.append(i)
+    
+    print(submit_index)
+    
+    final_submit = []
+    for i in submit_index:
+      final_submit.append(submit_article[i])
+    
+    # with open('./submit.json', 'w') as f:
+      # f.write(json.dumps(submit_article))
+    with open('./final.json', 'w') as f:
+      f.write(json.dumps(final_submit))
+    response = requests.post(URL + '/articles/list', json=final_submit, headers=headers)
     if response.status_code == 200:
       print('Success:', response.json())
       submit_article.append(response.json())

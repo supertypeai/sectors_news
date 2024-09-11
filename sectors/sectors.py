@@ -1,3 +1,6 @@
+"""
+Script to get all subsectors data from sectors app
+"""
 import requests
 import pandas as pd
 import altair as alt

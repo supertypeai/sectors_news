@@ -42,4 +42,8 @@ def main():
      scraper.write_csv(scraper.articles, args.filename)
 
 if __name__ == "__main__":
-    main()
+  '''
+  How to run:
+  python scrape_idnfinancials.py <page_number> <filename_saved> <--csv (optional)>
+  '''
+  main()

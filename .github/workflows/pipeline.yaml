@@ -23,6 +23,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run universal scraper
+        run: python universal_news_scraper_main.py 0:7
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DB_KEY: ${{ secrets.DB_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          proxy: ${{ secrets.PROXY }}
+
+      - name: Submit to database
+        run: python universal_pipeline.py news_yahoo_finance
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DB_KEY: ${{ secrets.DB_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          proxy: ${{ secrets.PROXY }}
+
       - name: Run scraping script idnfinancials
         run: python pipeline.py 5 pipeline
         env:

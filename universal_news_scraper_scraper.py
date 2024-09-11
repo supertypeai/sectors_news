@@ -169,7 +169,7 @@ def handle_idn_financials(dict_key: str, dict_url : str) -> list:
           date = soup.find("div", {"class" : "date-published"})['content']
           title = soup.find("h2", {"class" : "title"}).text
           data_dict = {
-            "url" : article_url,
+            "source" : article_url,
             "timestamp" : date,
             "title" : sanitize_title(title)
           }
@@ -235,7 +235,7 @@ def handle_cnbc(dict_key: str, dict_url : str):
           date = convert_datetime_to_datestring(date_elm['datetime'], "%Y-%m-%dT%H:%M:%S%z")
           title = title_elm.text
           data_dict = {
-            "url" : article_url,
+            "source" : article_url,
             "timestamp" : date,
             "title" : sanitize_title(title)
           }
@@ -286,7 +286,7 @@ def handle_yahoo_finance(dict_key: str, dict_url : str):
           title_elm = soup.find("h1", {"data-test-locator" : "headline"})
           title = title_elm.text
           data_dict = {
-            "url" : article_url,
+            "source" : article_url,
             "timestamp" : date,
             "title" : sanitize_title(title)
           }
@@ -324,7 +324,7 @@ def handle_idx(dict_key: str, dict_url : str):
           # Adjust date
           date = convert_datetime_to_datestring(item_date, "%Y-%m-%dT%H:%M:%S")
           data_dict = {
-            "url" : f"{url_prefix}{item_id}",
+            "source" : f"{url_prefix}{item_id}",
             "timestamp" : date,
             "title" : sanitize_title(title)
           }
@@ -385,7 +385,7 @@ def handle_cnn_edition(dict_key: str, dict_url : str):
           title_elm = soup.find("h1", {"id" : "maincontent"})
           title = title_elm.text
           data_dict = {
-            "url" : article_url,
+            "source" : article_url,
             "timestamp" : date,
             "title" : sanitize_title(title)
           }
@@ -445,7 +445,7 @@ def handle_finance_detik(dict_key: str, dict_url : str):
           date = convert_datetime_to_datestring(new_date_string, "%H:%M %b %d %Y")
 
           data_dict = {
-            "url" : article_url,
+            "source" : article_url,
             "timestamp" : date,
             "title" : sanitize_title(title)
           }
@@ -520,7 +520,7 @@ def handle_ekonomi_bisnis(dict_key: str, dict_url : str):
           title_elm = soup.find("h1", {"class" : "detailsTitleCaption"})
           title = title_elm.text
           data_dict = {
-            "url" : article_url,
+            "source" : article_url,
             "timestamp" : date,
             "title" : sanitize_title(title)
           }
