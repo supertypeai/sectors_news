@@ -1,5 +1,5 @@
 import argparse
-from scraper import Scraper
+from base_model.scraper import Scraper
 
 class IDNFinancialScraper(Scraper):
   def extract_news(self, url):

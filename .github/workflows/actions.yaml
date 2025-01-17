@@ -24,12 +24,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run scraping script idnfinancials
-        run: python scrape_idnfinancials.py 1 idn_financial_scrape --csv
+        run: python models/scrape_idnfinancials.py 1 idn_financial_scrape --csv
 
       - name: Run scraping script idx
         env:
           proxy: ${{ secrets.PROXY }}
-        run: python scrape_idx.py 1 100 idx_scrape --csv
+        run: python models/scrape_idx.py 1 100 idx_scrape --csv
 
       - name: Run universal scraping script
         env:

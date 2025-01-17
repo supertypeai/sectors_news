@@ -1,6 +1,6 @@
 import json
 import argparse
-from scraper import Scraper
+from base_model.scraper import Scraper
 
 class IDXScraper(Scraper):
   def extract_news(self, url):

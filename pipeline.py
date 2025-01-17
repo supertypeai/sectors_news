@@ -1,4 +1,4 @@
-from scrape_idnfinancials import IDNFinancialScraper
+from models.scrape_idnfinancials import IDNFinancialScraper
 import argparse
 from scripts.server import post_source
 
