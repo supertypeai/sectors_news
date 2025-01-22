@@ -58,7 +58,7 @@ def post_source(jsonfile):
   
   
   if isinstance(articles, list):
-    
+    # Discard redundant entries
     all_articles_db = requests.get(URL + '/articles', headers=headers).json()
     links = []
     for article_db in all_articles_db:
@@ -66,6 +66,7 @@ def post_source(jsonfile):
         links.append(article_db['source'])
     # print(links)
     
+    # Classify article metadata
     submit_article = []
     for article in articles:
       if article['source'] not in links:
@@ -85,10 +86,13 @@ def post_source(jsonfile):
     submit_index = []
     for i, article in enumerate(submit_article):
       print(article)
-      response = requests.post(URL + '/evaluate-article', json=article, headers=headers)
-      print("score:", response.json()['score'])
+      # response = requests.post(URL + '/evaluate-article', json=article, headers=headers)
+      # print("score:", response.json()['score'])
       
-      if int(response.json()['score']) > MININUM_SCORE:
+      # if int(response.json()['score']) > MININUM_SCORE:
+        # submit_index.append(i)
+        
+      if article['score'] > MININUM_SCORE:
         submit_index.append(i)
     
     print(submit_index)
