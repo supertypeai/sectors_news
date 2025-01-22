@@ -1,5 +1,11 @@
 import argparse
-from base_model.scraper import Scraper
+import sys
+import os
+
+# Add the parent directory (project root) to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from base_model import Scraper
+
 
 class PetromindoScraper(Scraper):
   categories = ['oil-gas', 'electricity-renewables-carbon', 'coal', 'minerals']
@@ -30,7 +36,7 @@ def main():
   parser.add_argument("category", type=int, default=0)
   # 0: 'oil-gas', 1: 'electricity-renewables-carbon', 2: 'coal', 3: 'minerals'
   parser.add_argument("page_number", type=int, default=1)
-  parser.add_argument("filename", type=str, default="idnarticles")
+  parser.add_argument("filename", type=str, default="petromindoarticles")
   parser.add_argument("--csv", action='store_true', help="Flag to indicate write to csv file")
 
   args = parser.parse_args()

@@ -5,6 +5,14 @@ import csv
 import ssl
 import urllib.request
 import os
+from dotenv import load_dotenv
+
+# Determine the base directory where the .env file is located
+base_dir = os.path.dirname(os.path.abspath(__file__))  # This will resolve to the directory containing scraper.py
+project_root = os.path.abspath(os.path.join(base_dir, '..'))  # Move one level up to the base folder
+
+# Load the .env file from the base directory
+load_dotenv(os.path.join(project_root, '.env'))
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -34,8 +42,10 @@ class Scraper:
 
     with urllib.request.urlopen(url) as response:
       data = response.read()
+      data = data.decode('utf-8')
 
-    return data    
+    self.soup = BeautifulSoup(data, 'html.parser')
+    return self.soup
   
   # Will be overridden by subclass
   def extract_news(self):

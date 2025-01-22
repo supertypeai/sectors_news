@@ -6,17 +6,17 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from base_model import Scraper
 
-class IDNFinancialScraper(Scraper):
+
+class ICNScraper(Scraper):
   def extract_news(self, url):
     soup = self.fetch_news(url)
     for item in soup.find_all('article'):
-        div = item.find('div', class_='col-8')
-        if div:  
-          title = div.find('h2', class_='title').find('a').text
-          body = div.find('p', class_='summary').text
-          source = div.find('h2', class_='title').find('a')['href']
-          timestamp = div.find('p', class_='date-published')['data-date']
-          self.articles.append({'title': title, 'body': body, 'source': source, 'timestamp': timestamp})
+      div = item.find('div', class_='elementor-post__card')
+      if div:
+        title = div.find('div', class_='elementor-post__text').find('h3', class_='elementor-post__title').find('a').text.strip()
+        source = div.find('a', class_='elementor-post__thumbnail__link')['href'].strip()
+        timestamp = div.find('div', class_='elementor-post__meta-data').find('span', class_='elementor-post-date').text.strip()
+        self.articles.append({'title': title, 'source': source, 'timestamp': timestamp})
     return self.articles
    
   def extract_news_pages(self, num_pages):
@@ -25,14 +25,14 @@ class IDNFinancialScraper(Scraper):
     return self.articles
    
   def get_page(self, page_num):
-    return f'https://www.idnfinancials.com/news/page/{page_num}'
+    return f'https://www.indonesiancoalandnickel.com/lintasan-berita/page/{page_num}/'
 
 def main():
-  scraper = IDNFinancialScraper()
+  scraper = ICNScraper()
 
-  parser = argparse.ArgumentParser(description="Script for scraping data from idnfinancials")
+  parser = argparse.ArgumentParser(description="Script for scraping data from indonesiancoalandnickel")
   parser.add_argument("page_number", type=int, default=1)
-  parser.add_argument("filename", type=str, default="idnarticles")
+  parser.add_argument("filename", type=str, default="icnarticles")
   parser.add_argument("--csv", action='store_true', help="Flag to indicate write to csv file")
 
   args = parser.parse_args()
@@ -49,6 +49,7 @@ def main():
 if __name__ == "__main__":
   '''
   How to run:
-  python scrape_idnfinancials.py <page_number> <filename_saved> <--csv (optional)>
+  python scrape_icn.py <page_number> <filename_saved> < --csv (optional) >
   '''
   main()
+  
