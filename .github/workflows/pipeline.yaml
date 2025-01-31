@@ -23,6 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Debug installed packages
+        run: pip list
+
       - name: Run scraping script for all news source
         run: python scripts/pipeline.py 2 pipeline
         env:
