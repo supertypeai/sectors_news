@@ -23,8 +23,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run scraping script idnfinancials
-        run: python pipeline.py 5 pipeline
+      - name: Run scraping script for all news source
+        run: python scripts/pipeline.py 2 pipeline
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
