@@ -1,6 +1,7 @@
 import argparse
 import sys
 import os
+import dateparser
 
 # Add the parent directory (project root) to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -16,6 +17,7 @@ class ICNScraper(Scraper):
         title = div.find('div', class_='elementor-post__text').find('h3', class_='elementor-post__title').find('a').text.strip()
         source = div.find('a', class_='elementor-post__thumbnail__link')['href'].strip()
         timestamp = div.find('div', class_='elementor-post__meta-data').find('span', class_='elementor-post-date').text.strip()
+        timestamp = dateparser.parse(timestamp).strftime("%Y-%m-%d %H:%M:%S")
         self.articles.append({'title': title, 'source': source, 'timestamp': timestamp})
     return self.articles
    

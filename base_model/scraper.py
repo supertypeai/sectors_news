@@ -8,8 +8,8 @@ import os
 from dotenv import load_dotenv
 
 # Determine the base directory where the .env file is located
-base_dir = os.path.dirname(os.path.abspath(__file__))  # This will resolve to the directory containing scraper.py
-project_root = os.path.abspath(os.path.join(base_dir, '..'))  # Move one level up to the base folder
+base_dir = os.path.dirname(os.path.abspath(__file__)) 
+project_root = os.path.abspath(os.path.join(base_dir, '..')) 
 
 # Load the .env file from the base directory
 load_dotenv(os.path.join(project_root, '.env'))

@@ -1,6 +1,11 @@
 import argparse
+from datetime import datetime
+import locale
 import sys
 import os
+import dateparser
+
+locale.setlocale(locale.LC_TIME, "en_US.UTF-8")
 
 # Add the parent directory (project root) to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -18,10 +23,16 @@ class PetromindoScraper(Scraper):
         # body = item.find('p', class_='summary').text
         source = item.find('a', class_='highlight-link')['href'].strip()
         timestamp = div.find('div', class_='highlight-meta').find('span', class_='posted').text.strip()
+        timestamp = dateparser.parse(timestamp).strftime("%Y-%m-%d %H:%M:%S")
         self.articles.append({'title': title, 'source': source, 'timestamp': timestamp, 'category': category})
     return self.articles
    
-  def extract_news_pages(self, category, num_pages):
+  def extract_news_pages(self, num_pages):
+    for category in self.categories:
+      self.extract_news_pages_category(category, num_pages)
+    return self.articles
+  
+  def extract_news_pages_category(self, category, num_pages):
     for i in range(num_pages):
       self.extract_news(category, self.get_page(category, i))
     return self.articles
