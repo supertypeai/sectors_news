@@ -18,7 +18,7 @@ def main():
   
   scrapercollection = ScraperCollection()
   scrapercollection.add_scraper(idnscraper)
-  scrapercollection.add_scraper(petromindoscraper)
+  # scrapercollection.add_scraper(petromindoscraper)
   scrapercollection.add_scraper(icnscraper)
   scrapercollection.add_scraper(gapkiscraper)
 
