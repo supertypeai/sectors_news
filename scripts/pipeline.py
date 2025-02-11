@@ -8,6 +8,10 @@ from models.scrape_idnfinancials import IDNFinancialScraper
 from models.scrape_petromindo import PetromindoScraper
 from models.scrape_icn import ICNScraper
 from models.scrape_gapki import GapkiScraper
+from models.scrape_minerba import MinerbaScraper
+from models.scrape_abaf import AbafScraper
+from models.scrape_kontan import KontanScraper
+from models.scrape_idnminer import IdnMinerScraper
 from scripts.server import post_source
 
 def main():
@@ -15,12 +19,20 @@ def main():
   petromindoscraper = PetromindoScraper()
   icnscraper = ICNScraper()
   gapkiscraper = GapkiScraper()
+  minerbascraper = MinerbaScraper()
+  abafscraper = AbafScraper()
+  kontanscraper = KontanScraper()
+  idnminerscraper = IdnMinerScraper()
   
   scrapercollection = ScraperCollection()
   scrapercollection.add_scraper(idnscraper)
   # scrapercollection.add_scraper(petromindoscraper)
   scrapercollection.add_scraper(icnscraper)
   scrapercollection.add_scraper(gapkiscraper)
+  scrapercollection.add_scraper(minerbascraper)
+  scrapercollection.add_scraper(abafscraper)
+  scrapercollection.add_scraper(kontanscraper)
+  scrapercollection.add_scraper(idnminerscraper)
 
   parser = argparse.ArgumentParser(description="Script for scraping data with pipeline")
   parser.add_argument("page_number", type=int, default=1)

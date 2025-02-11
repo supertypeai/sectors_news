@@ -29,10 +29,7 @@ class ScraperCollection:
   
   def run_all(self, num_page):
     for scraper in self.scrapers:
-      if isinstance(scraper, PetromindoScraper):
-        articles = scraper.extract_news_pages(num_page)
       articles = scraper.extract_news_pages(num_page)
-      # self.articles.append(articles)
       self.articles = [*self.articles, *articles]
     return self.articles
   
