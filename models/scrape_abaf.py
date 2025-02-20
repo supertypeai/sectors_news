@@ -16,7 +16,6 @@ from base_model import Scraper
 class AbafScraper(Scraper):
   def extract_news(self, url):
     soup = self.fetch_news(url)
-    self.write_file_soup(soup, "abaf")
     
     headline = soup.find('div', class_='item--large with-border-bottom')
     if headline:

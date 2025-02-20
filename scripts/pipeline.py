@@ -12,6 +12,7 @@ from models.scrape_minerba import MinerbaScraper
 from models.scrape_abaf import AbafScraper
 from models.scrape_kontan import KontanScraper
 from models.scrape_idnminer import IdnMinerScraper
+from models.scrape_jakartaglobe import JGScraper
 from scripts.server import post_source
 
 def main():
@@ -23,6 +24,7 @@ def main():
   abafscraper = AbafScraper()
   kontanscraper = KontanScraper()
   idnminerscraper = IdnMinerScraper()
+  jgscraper = JGScraper()
   
   scrapercollection = ScraperCollection()
   scrapercollection.add_scraper(idnscraper)
@@ -33,6 +35,7 @@ def main():
   scrapercollection.add_scraper(abafscraper)
   scrapercollection.add_scraper(kontanscraper)
   scrapercollection.add_scraper(idnminerscraper)
+  scrapercollection.add_scraper(jgscraper)
 
   parser = argparse.ArgumentParser(description="Script for scraping data with pipeline")
   parser.add_argument("page_number", type=int, default=1)
