@@ -16,7 +16,7 @@ class GapkiScraper(Scraper):
       if div:
         title = div.find('div', class_='nv-post-thumbnail-wrap').find('a')['title'].strip()
         source = div.find('div', class_='nv-post-thumbnail-wrap').find('a')['href'].strip()
-        timestamp = div.find('div', class_='non-grid-content').find('ul', class_='nv-meta-list').find('time', class_='updated')['datetime'].strip()
+        timestamp = div.find('div', class_='non-grid-content').find('ul', class_='nv-meta-list').find('li').find('time', class_='updated')['datetime'].strip()
         timestamp = datetime.fromisoformat(timestamp).strftime("%Y-%m-%d %H:%M:%S")
         self.articles.append({'title': title, 'source': source, 'timestamp': timestamp})
     return self.articles

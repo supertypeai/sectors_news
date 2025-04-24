@@ -29,8 +29,12 @@ class ScraperCollection:
   
   def run_all(self, num_page):
     for scraper in self.scrapers:
-      articles = scraper.extract_news_pages(num_page)
-      self.articles = [*self.articles, *articles]
+      try:
+        articles = scraper.extract_news_pages(num_page)
+        self.articles = [*self.articles, *articles]
+      except Exception as e:
+        print(f"Error in scraper {scraper.__class__.__name__}: {e}")
+        continue
     return self.articles
   
   # Writer methods

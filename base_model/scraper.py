@@ -26,26 +26,36 @@ class Scraper:
 
   # Fetch news using requests but no proxy
   def fetch_news(self, url):
-    response = requests.get(url)
-    self.soup = BeautifulSoup(response.content, 'html.parser')
-    return self.soup
-  
+    try:
+      response = requests.get(url)
+      self.soup = BeautifulSoup(response.content, 'html.parser')
+      return self.soup
+    except Exception as e:
+      print(f"Error fetching the URL: {e}")
+      return BeautifulSoup()
+    
+    
   # Fetch news using urllib.request with proxy
   def fetch_news_with_proxy(self, url):
-    self.proxy = os.environ.get("proxy")
+    try:
+      self.proxy = os.environ.get("proxy")
 
-    print("proxy", self.proxy)
+      print("proxy", self.proxy)
 
-    proxy_support = urllib.request.ProxyHandler({'http': self.proxy,'https': self.proxy})
-    opener = urllib.request.build_opener(proxy_support)
-    urllib.request.install_opener(opener)
+      proxy_support = urllib.request.ProxyHandler({'http': self.proxy,'https': self.proxy})
+      opener = urllib.request.build_opener(proxy_support)
+      urllib.request.install_opener(opener)
 
-    with urllib.request.urlopen(url) as response:
-      data = response.read()
-      data = data.decode('utf-8')
+      with urllib.request.urlopen(url) as response:
+        data = response.read()
+        data = data.decode('utf-8')
 
-    self.soup = BeautifulSoup(data, 'html.parser')
-    return self.soup
+      self.soup = BeautifulSoup(data, 'html.parser')
+      return self.soup
+    except Exception as e:
+      print(f"Error fetching the URL: {e}")
+      return BeautifulSoup()
+      
   
   # Will be overridden by subclass
   def extract_news(self):
