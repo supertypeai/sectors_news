@@ -14,6 +14,7 @@ from models.scrape_kontan import KontanScraper
 from models.scrape_idnminer import IdnMinerScraper
 from models.scrape_jakartaglobe import JGScraper
 from scripts.server import post_source
+from models.scrape_mining import MiningScraper
 
 def main():
   idnscraper = IDNFinancialScraper()
@@ -25,6 +26,7 @@ def main():
   kontanscraper = KontanScraper()
   idnminerscraper = IdnMinerScraper()
   jgscraper = JGScraper()
+  miningscraper = MiningScraper()
   
   scrapercollection = ScraperCollection()
   scrapercollection.add_scraper(idnscraper)
@@ -36,7 +38,9 @@ def main():
   scrapercollection.add_scraper(kontanscraper)
   scrapercollection.add_scraper(idnminerscraper)
   scrapercollection.add_scraper(jgscraper)
-
+  # Insider specific, should be filtered to go inside insider db
+  # scrapercollection.add_scraper(miningscraper)
+  
   parser = argparse.ArgumentParser(description="Script for scraping data with pipeline")
   parser.add_argument("page_number", type=int, default=1)
   parser.add_argument("filename", type=str, default="scraped_articles")
