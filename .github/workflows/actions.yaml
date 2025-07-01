@@ -1,0 +1,50 @@
+name: Scrape News and Commit Results
+
+on:
+  schedule:
+    - cron: "0 3 3 * *" # Runs at 10:00 on every 3rd day of the month
+  workflow_dispatch:
+
+jobs:
+  scrape_and_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run scraping script idnfinancials
+        run: python models/scrape_idnfinancials.py 1 idn_financial_scrape --csv
+
+      - name: Run scraping script idx
+        env:
+          proxy: ${{ secrets.PROXY }}
+        run: python models/scrape_idx.py 1 100 idx_scrape --csv
+
+      - name: Run universal scraping script
+        env:
+          proxy: ${{ secrets.PROXY }}
+        run: python universal_news_scraper_main.py 0:7
+      
+      - name: Pull changes
+        run: git pull origin main
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -m "Updated scraped news articles" --allow-empty)
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
