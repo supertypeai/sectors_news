@@ -103,13 +103,13 @@ def main():
     scrapercollection = ScraperCollection()
     scrapercollection.add_scraper(idnscraper)
     # scrapercollection.add_scraper(petromindoscraper)
-    scrapercollection.add_scraper(icnscraper)
-    scrapercollection.add_scraper(gapkiscraper)
-    scrapercollection.add_scraper(minerbascraper)
-    scrapercollection.add_scraper(abafscraper)
-    scrapercollection.add_scraper(kontanscraper)
-    scrapercollection.add_scraper(idnminerscraper)
-    scrapercollection.add_scraper(jgscraper)
+    # scrapercollection.add_scraper(icnscraper)
+    # scrapercollection.add_scraper(gapkiscraper)
+    # scrapercollection.add_scraper(minerbascraper)
+    # scrapercollection.add_scraper(abafscraper)
+    # scrapercollection.add_scraper(kontanscraper)
+    # scrapercollection.add_scraper(idnminerscraper)
+    # scrapercollection.add_scraper(jgscraper)
     # Insider specific, should be filtered to go inside insider db
     # scrapercollection.add_scraper(miningscraper)
 
@@ -151,7 +151,7 @@ def main_new():
 
 
 if __name__ == "__main__":
-    main_new()
-    delete_outdated_news()
+    main()
+    # delete_outdated_news()
 
 # python scripts/pipeline.py page_num filename --csv
