@@ -122,7 +122,7 @@ def post_source(jsonfile):
     with open(f'./data/{jsonfile}.json', 'r') as f:
         articles = json.load(f)
     
-    articles = articles[:2]
+    articles = articles[:3]
     print(f"Total articles scraped on pipeline.json: {len(articles)}")
 
     headers = {
@@ -132,8 +132,13 @@ def post_source(jsonfile):
     
     # Get all existing articles from the database
     if isinstance(articles, list):
-      all_articles_db = requests.get(URL + '/articles', headers=headers).json()
-        
+      all_articles_db = requests.get(f"{URL}/rest/v1/idx_news?select=*",
+                                      headers={
+                                          "apikey": KEY,
+                                          "Authorization": f"Bearer {KEY}"
+                                        }
+                                    ).json()
+     
       links = [article_db['source'] for article_db in all_articles_db]
       print(links, '\n')
       
@@ -193,7 +198,7 @@ def post_source(jsonfile):
       if final_submit_batch:
           print(f"Writing remaining batch of {len(final_submit_batch)} articles to CSV…")
 
-          df = pd.to_DataFrame(final_submit_batch)
+          df = pd.DataFrame(final_submit_batch)
           df.to_csv("test_all_flow.csv", index=False)
             # print(f"Submitting remaining batch of {len(final_submit_batch)} articles...")
             # batch_response = requests.post(

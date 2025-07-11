@@ -64,7 +64,8 @@ class ArticleScorer:
     def _get_default_criteria(self) -> str:
         """Get default scoring criteria."""
         return """
-            News Article Scoring Criteria (0-100)
+            News Article Scoring Criteria (0-100). 
+            Score the summary article based on below criteria do not too strict but do not make things up as well.
 
             1. Timeliness (0-10)
             Keywords: "recent", "today", "this week", "Q3 2024", "latest market movement".
