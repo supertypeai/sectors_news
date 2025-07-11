@@ -24,12 +24,12 @@ class LLMCollection:
                 init_chat_model(
                     "gpt-4o",
                     model_provider="openai",
-                    temperature=0.6,
+                    temperature=0.3,
                 ),
                 init_chat_model(
                     "gpt-4o",
                     model_provider="openai",
-                    temperature=0.6,
+                    temperature=0.3,
                 )
             ]
         return cls._instance
