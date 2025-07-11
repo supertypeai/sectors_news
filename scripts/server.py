@@ -140,7 +140,6 @@ def post_source(jsonfile):
                                     ).json()
      
       links = [article_db['source'] for article_db in all_articles_db]
-      print(links, '\n')
       
       final_submit_batch = []  # To hold articles for batch submission
       BATCH_SIZE = 5  # Modify this to your desired batch size
