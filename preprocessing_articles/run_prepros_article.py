@@ -53,6 +53,7 @@ async def generate_article_async(data):
 
         # Run synchronous summarize_news in a thread pool
         title, body = await loop.run_in_executor(EXECUTOR, summarize_news, source)
+        print(f'SUMMARY RESULT BODY: {body}')
 
         if len(body) > 0:
             (

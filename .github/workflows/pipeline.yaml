@@ -23,6 +23,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Setup NLTK data
+        run: |
+          mkdir -p ./nltk_data
+          python -c "
+          import nltk
+          nltk.data.path.append('./nltk_data')
+          nltk.download('punkt_tab', download_dir='./nltk_data')
+          nltk.download('punkt', download_dir='./nltk_data')
+          "
+          
       - name: Debug installed packages
         run: pip list
 
