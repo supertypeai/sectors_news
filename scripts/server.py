@@ -10,7 +10,9 @@ import os
 import json
 import argparse
 import openai
+import time 
 import pandas as pd 
+from config.setup import LOGGER
 
 load_dotenv(override=True)
 
@@ -122,7 +124,7 @@ def post_source(jsonfile):
     with open(f'./data/{jsonfile}.json', 'r') as f:
         articles = json.load(f)
     
-    articles = articles[:3]
+    articles = articles[:7]
     print(f"Total articles scraped on pipeline.json: {len(articles)}")
 
     headers = {
@@ -144,33 +146,44 @@ def post_source(jsonfile):
       final_submit_batch = []  # To hold articles for batch submission
       BATCH_SIZE = 5  # Modify this to your desired batch size
       
+      start = time.time()
       for article in articles:
-          if article['source'] not in links:
-              print("Processing Each Source \n")
+          if article.get('source') not in links:
+              print(f"\nProcessing Source: {article.get('source')}")
+              
+              # processed_article = None 
+              # for attempt in range(3):
+              #   try:
+              #     processed_article_object = generate_article(article)
             
-              processed_article = None 
-              for attempt in range(3):
-                try:
+              #     # processed_article = processed_article_object.model_dump_json()
+              #     processed_article = processed_article_object.to_dict()
+              #     break 
+              #   except openai.RateLimitError:
+              #     wait_time = (attempt + 1) * 10 # Wait longer each time
+              #     print(f"Rate limit hit. Waiting for {wait_time} seconds before retrying...\n")
+              #     time.sleep(wait_time)
+              try:
                   processed_article_object = generate_article(article)
-            
-                  # processed_article = processed_article_object.model_dump_json()
                   processed_article = processed_article_object.to_dict()
-                  break 
-                except openai.RateLimitError:
-                  wait_time = (attempt + 1) * 10 # Wait longer each time
-                  print(f"Rate limit hit. Waiting for {wait_time} seconds before retrying...\n")
-                  time.sleep(wait_time)
+              except Exception as error:
+                  LOGGER.error(f"Failed to process article {article["source"]}: {error}")
+                  return None
 
-                links.append(article['source'])
+
+
+              links.append(article['source'])
 
               # Check if the article's score meets the minimum threshold
-              if processed_article['score'] is not None and processed_article['score'] > MININUM_SCORE:
+              if processed_article.get('score') is not None and processed_article.get('score') > MININUM_SCORE:
                 final_submit_batch.append(processed_article)
                 print(f"Article added to batch: {processed_article['source']}")
 
                 # Check if batch size reached
                 if len(final_submit_batch) >= BATCH_SIZE:
                     print(f"TEST batch of {BATCH_SIZE} articles...")
+                    df = pd.DataFrame(final_submit_batch)
+                    df.to_csv("test_batch_flow.csv", mode='a', header=False, index=False)
                     # batch_response =  requests.post(
                     #                                 f"{URL}/rest/v1/idx_news",
                     #                                 json=final_submit_batch,  
@@ -195,10 +208,12 @@ def post_source(jsonfile):
         
         # Submit remaining articles in the batch if any
       if final_submit_batch:
+          end_time = time.time()
           print(f"Writing remaining batch of {len(final_submit_batch)} articles to CSV…")
 
           df = pd.DataFrame(final_submit_batch)
           df.to_csv("test_all_flow.csv", index=False)
+          LOGGER.info(f"END TIME: {end_time - start}")
             # print(f"Submitting remaining batch of {len(final_submit_batch)} articles...")
             # batch_response = requests.post(
             #                       f"{URL}/rest/v1/idx_news",

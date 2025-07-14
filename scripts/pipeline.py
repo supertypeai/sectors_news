@@ -3,23 +3,23 @@ import os
 import argparse
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from base_model.scraper_collection import ScraperCollection
-from models.scrape_idnfinancials import IDNFinancialScraper
-from models.scrape_petromindo import PetromindoScraper
-from models.scrape_icn import ICNScraper
-from models.scrape_gapki import GapkiScraper
-from models.scrape_minerba import MinerbaScraper
-from models.scrape_abaf import AbafScraper
-from models.scrape_kontan import KontanScraper
-from models.scrape_idnminer import IdnMinerScraper
-from models.scrape_jakartaglobe import JGScraper
-from scripts.server import post_source
-from models.scrape_mining import MiningScraper
+from base_model.scraper_collection  import ScraperCollection
+from models.scrape_idnfinancials    import IDNFinancialScraper
+from models.scrape_petromindo       import PetromindoScraper
+from models.scrape_icn              import ICNScraper
+from models.scrape_gapki            import GapkiScraper
+from models.scrape_minerba          import MinerbaScraper
+from models.scrape_abaf             import AbafScraper
+from models.scrape_kontan           import KontanScraper
+from models.scrape_idnminer         import IdnMinerScraper
+from models.scrape_jakartaglobe     import JGScraper
+from scripts.server                 import post_source
+from models.scrape_mining           import MiningScraper
 
 import json
-from dotenv import load_dotenv
-from supabase import create_client, Client
-from datetime import datetime, timezone, timedelta
+from dotenv     import load_dotenv
+from supabase   import create_client, Client
+from datetime   import datetime, timezone, timedelta
 
 load_dotenv()
 
@@ -89,6 +89,10 @@ def delete_outdated_news():
 
 
 def main():
+    """ 
+    Main function to run the scraper collection and post the results.
+    It initializes the scrapers, runs them, and posts the scraped articles to the server.
+    """
     idnscraper = IDNFinancialScraper()
     petromindoscraper = PetromindoScraper()
     icnscraper = ICNScraper()
@@ -151,7 +155,7 @@ def main_new():
 
 
 if __name__ == "__main__":
-    main()
+    main_new()
     # delete_outdated_news()
 
 # python scripts/pipeline.py page_num filename --csv
