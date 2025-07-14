@@ -101,7 +101,7 @@ def post_source(jsonfile):
                   processed_article_object = generate_article(article)
                   processed_article = processed_article_object.to_dict()
               except Exception as error:
-                  LOGGER.error(f"Failed to process article {article["source"]}: {error}")
+                  LOGGER.error(f"Failed to process article {article.get('source')}: {error}")
                   return None
 
               links.append(article['source'])
