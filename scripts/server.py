@@ -85,7 +85,7 @@ def post_source(jsonfile):
       start = time.time()
       for article in articles:
           if article.get('source') not in links:
-              print(f"\nProcessing Source: {article.get('source')}")
+              LOGGER.info(f"\nProcessing Source: {article.get('source')}")
               
               # processed_article = None 
               # for attempt in range(3):
@@ -112,7 +112,7 @@ def post_source(jsonfile):
 
                 # Check if batch size reached
                 if len(final_submit_batch) >= BATCH_SIZE:
-                    print(f"TEST batch of {BATCH_SIZE} articles...")
+                    LOGGER.info(f"TEST batch of {BATCH_SIZE} articles...")
                     df = pd.DataFrame(final_submit_batch)
                     df.to_csv("test_batch_flow.csv", mode='a', header=False, index=False)
                     # batch_response =  requests.post(
@@ -133,9 +133,9 @@ def post_source(jsonfile):
                     # Reset batch list
                     final_submit_batch = []
               else:
-                  print(f"Article skipped due to low score: {processed_article.get('source')} (Score: {processed_article.get('score')})")
+                  LOGGER.info(f"Article skipped due to low score: {processed_article.get('source')} (Score: {processed_article.get('score')})")
           else:
-              print("Article already exists")
+              LOGGER.info("Article already exists")
         
         # Submit remaining articles in the batch if any
       if final_submit_batch:

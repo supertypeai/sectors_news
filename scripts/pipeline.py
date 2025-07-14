@@ -107,10 +107,10 @@ def main():
     scrapercollection.add_scraper(icnscraper)
     scrapercollection.add_scraper(gapkiscraper)
     scrapercollection.add_scraper(minerbascraper)
-    # scrapercollection.add_scraper(abafscraper)
-    # scrapercollection.add_scraper(kontanscraper)
-    # scrapercollection.add_scraper(idnminerscraper)
-    # scrapercollection.add_scraper(jgscraper)
+    scrapercollection.add_scraper(abafscraper)
+    scrapercollection.add_scraper(kontanscraper)
+    scrapercollection.add_scraper(idnminerscraper)
+    scrapercollection.add_scraper(jgscraper)
     # Insider specific, should be filtered to go inside insider db
     # scrapercollection.add_scraper(miningscraper)
 
