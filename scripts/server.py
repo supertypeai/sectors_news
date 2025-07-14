@@ -16,9 +16,6 @@ from config.setup import LOGGER, SUPABASE_KEY, SUPABASE_URL
 
 load_dotenv(override=True)
 
-SUPABASE_URL = os.environ.get('SUPABASE_URL')
-print(SUPABASE_URL)
-SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
 MININUM_SCORE = 10
 
 def post_articles(jsonfile):
