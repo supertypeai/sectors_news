@@ -15,16 +15,13 @@ from models.scrape_idnminer         import IdnMinerScraper
 from models.scrape_jakartaglobe     import JGScraper
 from scripts.server                 import post_source
 from models.scrape_mining           import MiningScraper
+from config.setup                   import SUPABASE_KEY, SUPABASE_URL
 
 import json
-from dotenv     import load_dotenv
 from supabase   import create_client, Client
 from datetime   import datetime, timezone, timedelta
 
-load_dotenv()
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 if not SUPABASE_URL or not SUPABASE_KEY:
     raise RuntimeError("Missing SUPABASE_URL or SUPABASE_ANON_KEY in environment")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
