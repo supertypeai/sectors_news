@@ -1,13 +1,9 @@
 from datetime import datetime
 from supabase import create_client, Client
-import os
+
+from config.setup import SUPABASE_KEY, SUPABASE_URL
+
 import json
-from dotenv import load_dotenv 
-
-load_dotenv(override=True)
-
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-SUPABASE_URL = os.getenv("SUPABASE_URL")
 
 if not SUPABASE_URL or not SUPABASE_KEY:
     raise Exception("Supabase key and URL must be set")
