@@ -60,7 +60,7 @@ def post_source(jsonfile):
     with open(f'./data/{jsonfile}.json', 'r') as f:
         articles = json.load(f)
     
-    articles = articles[:7]
+    articles = articles
     print(f"Total articles scraped on pipeline.json: {len(articles)}")
 
     # headers = {
