@@ -1,15 +1,14 @@
 from datetime import datetime
 
-from .filings_model                         import Filing
-from database_management.database_connect   import sectors_data
-from .extract_metadata                      import extract_metadata
-from .extract_summary_news                  import summarize_news
+from database.database_connect  import sectors_data
+from .extract_metadata          import extract_metadata
+from .extract_summary_news      import summarize_news
 
 import pytz
 import json
 
 
-timezone = pytz.timezone('Asia/Bangkok')
+TIMEZONE = pytz.timezone('Asia/Bangkok')
 
 class News:
     def __init__(self, title, body, source, timestamp, sector, sub_sector, tags, tickers, dimension, score):
@@ -90,7 +89,7 @@ class News:
         title = data.get("title", "").strip()
         body = data.get("body", "").strip()
         source = data.get("source", "").strip()
-        timestamp_str = data.get("timestamp", datetime.now(timezone).isoformat()).strip()
+        timestamp_str = data.get("timestamp", datetime.now(TIMEZONE).isoformat()).strip()
         timestamp_str = timestamp_str.replace("T", " ")
         timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
         score = int(data.get("score")) if data.get("score") else None

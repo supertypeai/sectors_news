@@ -9,63 +9,46 @@ Provides comprehensive scoring based on multiple criteria including:
 - Bonus criteria for high-quality news
 """
 
-import logging
-from typing import Optional
-import os
-from pathlib import Path
+from langchain_core.runnables       import RunnableParallel
+from operator                       import itemgetter
+from langchain.prompts              import PromptTemplate
+from langchain_core.output_parsers  import JsonOutputParser
+
+from llm_models.get_models  import LLMCollection, invoke_llm
+from llm_models.llm_prompts import ScoringNews, ClassifierPrompts
+from config.setup           import LOGGER
+from .extract_summary_news  import json_handle_payload
+
+from datetime       import datetime
+from typing         import Optional
+from urllib.parse   import urlparse
 import openai 
-import dotenv
-from llm_models.get_models import LLMCollection
-from datetime import datetime
-
-# Load environment variables
-dotenv.load_dotenv()
-
-# Configure logging
-logger = logging.getLogger(__name__)
+import json 
 
 
 class ArticleScorer:
-    """Enhanced article scorer with robust error handling and configurable criteria."""
-
+    """
+    Enhanced article scorer with robust error handling and configurable criteria.
+    """
     def __init__(self):
-        """Initialize the article scorer."""
+        """
+        Initialize the article scorer.
+        """
         self.llm_collection = LLMCollection()
         self._criteria_cache: Optional[str] = None
 
-    def _load_scoring_criteria(self) -> str:
-        """
-        Load scoring criteria from configuration file or use default.
-
-        Returns:
-            str: Scoring criteria text
-        """
-        if self._criteria_cache is not None:
-            return self._criteria_cache
-
-        # Try to load from external config file first
-        criteria_file = Path("config/scoring_criteria.txt")
-        if criteria_file.exists():
-            try:
-                with open(criteria_file, "r", encoding="utf-8") as f:
-                    criteria = f.read()
-                    self._criteria_cache = criteria
-                    logger.info("Loaded scoring criteria from config file")
-                    return criteria
-            except Exception as e:
-                logger.warning(f"Could not load criteria from config file: {e}")
-
-        # Use default embedded criteria
-        criteria = self._get_default_criteria()
-        self._criteria_cache = criteria
-        logger.info("Using default embedded scoring criteria")
-        return criteria
+        # Classifier prompts
+        self.prompts = ClassifierPrompts()
 
     def _get_default_criteria(self) -> str:
-        """Get default scoring criteria."""
+        """
+        Get default scoring criteria.
+
+        Returns:
+            str: Default scoring criteria for news articles.
+        """
         return """
             News Article Scoring Criteria (0-100). 
-            Score the summary article based on below criteria do not too strict but do not make things up as well.
 
             1. Timeliness (0-10)
             Keywords: "recent", "today", "this week", "Q3 2024", "latest market movement".
@@ -178,7 +161,7 @@ class ArticleScorer:
             - Bonus Score: Additional points based on Primary and Secondary CTA criteria.
 
             Standard Scores for Example Articles. 
-            The final score can be any number between 0 and 100.
+            The final score can be any number in range 0 and 100.
                 0 Score: The article is outdated, from an unknown source, poorly structured, has no relevance to the IDX, lacks analysis, financial data, or any market impact, and does not mention any CTA. Example: "Some company in Asia made a move."
                 25 Score: The article is from a moderately credible source, somewhat recent, with basic relevance to the IDX but lacks depth, analysis, or financial data. It's somewhat organized but still vague. Example: "PT X acquired 20% of PT Y."
                 50 Score: The article is recent, from a credible source, somewhat relevant to the IDX, provides basic analysis and financial data, and has a moderate impact on the market. It is organized and mentions some sector focus. Example: "PT X acquired 55% of PT Y, affecting the IDX slightly."
@@ -194,162 +177,113 @@ class ArticleScorer:
             3. big movement of money (merger and acquisitions, large insider purchase etc)
             4. potential big changes for market cap in the industry
             """
+    
+    def _extract_domain_urlparse(self, url:str):
+        """
+        Extract domain from URL using urllib.parse (more robust)
+        
+        Args:
+            url (str): Input URL
+            
+        Returns:
+            str: Domain name or None if invalid
+        """
+        try:
+            parsed = urlparse(url)
+            return parsed.netloc
+        except:
+            return None
 
-    def get_article_score(self, body: str, article_date: str, datetime_now) -> int:
+    def get_article_score(self, body: str, article_date: str, source: str) -> int:
         """
         Calculate the score for a news article based on comprehensive criteria.
 
         Args:
             body (str): The article content to score
+            article_date (str): The date of the article in ISO format (YYYY-MM-DD).
 
         Returns:
             int: Score between 0 and 100 (or higher with bonus points)
         """
-        if not body or not isinstance(body, str):
-            logger.warning("Invalid article body provided for scoring")
-            return 0
+        # Get the scoring prompt template
+        template = self.prompts.get_scoring_prompt()
+        
+        # Create a scoring parser using the JsonOutputParser
+        scoring_parser = JsonOutputParser(pydantic_object=ScoringNews)
+        # Prepare the scoring prompt with the template and format instructions
+        scoring_prompt = PromptTemplate(
+            template = template, 
+            input_variables=[
+                "criteria",
+                "body",
+                "source",
+                "article_date", 
+                "current_datetime"
+            ],
+            partial_variables={
+                "format_instructions": scoring_parser.get_format_instructions()
+            }
+        )
 
-        if not body.strip():
-            logger.warning("Empty article body provided for scoring")
-            return 0
+        # Prepare the scoring system that will handle the article input
+        runnable_scoring_system = RunnableParallel(
+            {   
+                "criteria": itemgetter("criteria"),
+                "body": itemgetter("body"),
+                "source": itemgetter("source"),
+                "article_date": itemgetter("article_date"),
+                "current_datetime": lambda _: datetime.now()
+            }
+        )
 
-        try:
-            logger.info(f"Scoring article ({len(body)} characters)")
+        # Prepare the input data for the LLM
+        extract_domain = self._extract_domain_urlparse(source)
+        input_data = {"criteria":self._get_default_criteria(), 
+                      "body":body, 
+                      "source":extract_domain,
+                      "article_date":article_date}
 
-            criteria = self._load_scoring_criteria()
-            prompt = self._build_scoring_prompt(body, criteria, article_date, datetime_now)
-
-            score = self._get_score_from_llm(prompt)
-
-            logger.info(f"Article scored: {score}")
-            return score
-
-        except Exception as e:
-            logger.error(f"Error scoring article: {e}")
-            return 0
-
-    def _build_scoring_prompt(self, body: str, criteria: str, 
-                              article_date: str, datetime_now) -> str:
-        """
-        Build the scoring prompt for the LLM.
-
-        Args:
-            body (str): Article content
-            criteria (str): Scoring criteria
-
-        Returns:
-            str: Complete prompt for LLM
-        """
-        return f"""
-            You are an expert at scoring article summary. 
-            Your task is to scoring for summary article based on Scoring Criteria.
-
-            Given the following article a score
-            
-            Article:
-            {body}
-
-            Given the scoring criteria of a news article with relevance to the Indonesia Stock Market. 
-            {criteria}
-
-            Article Publish Date:
-            {article_date}
-
-            Datetime Now:
-            {datetime_now}
-
-            Answer without additional explanation and format. Give the score as a number between 0 and 100.
-
-            If no article is given, give it a score of 0"""
-
-    def _get_score_from_llm(self, prompt: str) -> int:
-        """
-        Get score from LLM with fallback handling.
-
-        Args:
-            prompt (str): Scoring prompt
-
-        Returns:
-            int: Article score
-        """
         for llm in self.llm_collection.get_llms():
             try:
-                response = llm.invoke(prompt)
-                output = str(response.content).strip()
+                # Create a scoring chain that combines the system, prompt, and LLM
+                scoring_chain = (
+                        runnable_scoring_system
+                        | scoring_prompt
+                        | llm
+                        | scoring_parser
+                    )
+                
+                # Process with current LLM
+                try:
+                    result_score_raw = invoke_llm(scoring_chain, input_data)
+                except json.JSONDecodeError:
+                    error_msg = str(error)
+                    LOGGER.error("Failed to parse JSON response", error_msg)
+                    result_score_raw = json_handle_payload(error_msg)
 
-                # Extract first number from response
-                score_str = output.split()[0] if output.split() else "0"
+                result_score = result_score_raw.get('score', 0)
 
-                # Handle various number formats
-                score_str = score_str.replace(",", "").replace(".", "")
-
-                if score_str.isdigit():
-                    score = int(score_str)
-                    # Validate score range (allow bonus points above 100)
-                    if 0 <= score <= 150:  # Allow up to 150 for bonus points
-                        return score
-                    else:
-                        logger.warning(
-                            f"Score out of range: {score}, capping at valid range"
-                        )
-                        return max(0, min(150, score))
-                else:
-                    logger.warning(f"Non-numeric score received: {score_str}")
-                    continue
+                if 0 <= result_score <= 150:
+                    return result_score
+                else: 
+                    LOGGER.warning(
+                        f"Score out of range: {result_score}, capping at valid range"
+                    )
+                    return max(0, min(150, result_score))
 
             except openai.RateLimitError as limit:
                 # Re-raise the error so the main loop can handle it
                 raise limit
-        
-            except Exception as e:
-                logger.warning(f"LLM failed with error: {e}")
-                continue
-
-        logger.error("All LLMs failed to provide a valid score")
-        return 0
-
-    def get_detailed_score_breakdown(self, body: str) -> dict:
-        """
-        Get detailed score breakdown for debugging and analysis.
-
-        Args:
-            body (str): Article content
-
-        Returns:
-            dict: Detailed scoring information
-        """
-        if not body or not body.strip():
-            return {
-                "total_score": 0,
-                "article_length": 0,
-                "error": "Empty or invalid article content",
-            }
-
-        try:
-            score = self.get_article_score(body)
-
-            return {
-                "total_score": score,
-                "article_length": len(body),
-                "word_count": len(body.split()),
-                "criteria_version": "v1.0",
-                "scoring_method": "LLM-based comprehensive evaluation",
-            }
-
-        except Exception as e:
-            return {
-                "total_score": 0,
-                "article_length": len(body) if body else 0,
-                "error": str(e),
-            }
+            
+            except Exception as error:
+                LOGGER.warning(f"LLM failed with error: {error}")
 
 
-# Global instance for backward compatibility
-_scorer = ArticleScorer()
-
+# So we can use the scorer as a singleton
+_SCORER = ArticleScorer()
 
 # Backward compatible function
-def get_article_score(body: str, article_date: str, datetime_now) -> int:
+def get_article_score(body: str, article_date: str, source: str) -> int:
     """
     Calculate the score for a news article.
 
@@ -361,7 +295,4 @@ def get_article_score(body: str, article_date: str, datetime_now) -> int:
     Returns:
         int: Score between 0 and 100 (or higher with bonus points)
     """
-    return _scorer.get_article_score(body, article_date, datetime_now)
-
-
-# print(get_article_score("Thai investor Siam Kraft Industry Company Limited acquired 55.24% ownership of PT Fajar Surya Wisesa Tbk, purchasing over 1.36 billion shares, while other investors made notable transactions, including Low Tuck Kwong increasing his stake in PT Bayan Resources Tbk to 62.15%. Meanwhile, foreign investor Chemical Asia Corporation Pte Ltd reduced its shares in PT Victoria Investama Tbk, and other investors sold shares in various companies, including PT Platinum Wahab Nusantara Tbk and PT Sinar Mas Multiartha Tbk."))
+    return _SCORER.get_article_score(body, article_date, source)

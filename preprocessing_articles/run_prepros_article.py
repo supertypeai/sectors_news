@@ -1,18 +1,10 @@
 from concurrent.futures import ThreadPoolExecutor
 
-from .news_model            import News 
-from .extract_summary_news  import summarize_news
-from .extract_score_news    import get_article_score
-from database_management.database_connect import supabase, sectors_data, top300_data
-from .extract_classifier import (
-    get_tickers,
-    get_tags_chat,
-    get_subsector_chat,
-    load_company_data,
-    predict_dimension,
-    get_sentiment_chat,
-    NewsClassifier,
-)
+from .news_model                import News 
+from .extract_summary_news      import summarize_news
+from .extract_score_news        import get_article_score
+from database.database_connect  import sectors_data
+from .extract_classifier        import load_company_data, NewsClassifier
 
 import asyncio
 from datetime import datetime
@@ -23,7 +15,7 @@ EXECUTOR = ThreadPoolExecutor(max_workers=4)
 COMPANY_DATA = load_company_data()
 
 
-async def generate_article_async(data):
+async def generate_article_async(data: dict):
     """
     @helper-function
     @brief Generate article from URL asynchronously.
@@ -53,8 +45,7 @@ async def generate_article_async(data):
 
         # Run synchronous summarize_news in a thread pool
         title, body = await loop.run_in_executor(EXECUTOR, summarize_news, source)
-        print(f'SUMMARY RESULT BODY: {body}')
-
+       
         if len(body) > 0:
             (
                 tags,
@@ -64,8 +55,10 @@ async def generate_article_async(data):
                 dimension,
             ) = await CLASSIFIER.classify_article_async(title, body)
 
-            if sentiment and len(sentiment) > 0:
-                tags.append(sentiment[0])
+            
+
+            if sentiment:
+                tags.append(sentiment)
 
             checked_tickers = []
             valid_tickers = [COMPANY_DATA[ticker]["symbol"] for ticker in COMPANY_DATA]
@@ -96,7 +89,7 @@ async def generate_article_async(data):
             new_article.tags = tags
             new_article.tickers = tickers
             new_article.dimension = dimension
-            new_article.score = int(get_article_score(body, timestamp, datetime.now()))
+            new_article.score = int(get_article_score(body, timestamp, source))
 
         return new_article
     
@@ -120,7 +113,7 @@ async def generate_article_async(data):
         )
 
 
-def generate_article(data):
+def generate_article(data: dict):
     """
     @helper-function
     @brief Generate article from URL.

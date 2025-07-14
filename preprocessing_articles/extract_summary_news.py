@@ -2,24 +2,26 @@
 Script to use LLM for summarizing a news article, uses OpenAI and Groq
 """
 
-from bs4            import BeautifulSoup
-from nltk.tokenize  import sent_tokenize, word_tokenize
-from goose3         import Goose
-from requests       import Response, Session
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import JsonOutputParser
-from pydantic import BaseModel
+from bs4                            import BeautifulSoup
+from nltk.tokenize                  import sent_tokenize, word_tokenize
+from goose3                         import Goose
+from requests                       import Response, Session
+from langchain_core.output_parsers  import JsonOutputParser
+from langchain.prompts              import PromptTemplate
+from langchain_core.runnables       import RunnableParallel
+from operator                       import itemgetter
 
-from llm_models.get_models  import LLMCollection
+from llm_models.get_models  import LLMCollection, invoke_llm
+from llm_models.llm_prompts import ClassifierPrompts, SummaryNews
+from config.setup           import LOGGER
 
-import dotenv
 import requests
 import os
 import re
 import nltk
 import openai 
+import json 
 
-dotenv.load_dotenv()
 # NLTK download
 nltk.data.path.append("./nltk_data")
 
@@ -38,60 +40,114 @@ HEADERS = {
     "x-test": "true",
 }
 
-class NewsOutput(BaseModel):
-    title: str
-    body: str
+# Model Creation and prompts
+LLMCOLLECTION = LLMCollection()
+PROMPTS = ClassifierPrompts()
 
-# Model Creation
-llmcollection = LLMCollection()
 
-def summarize_llama(body):
-    # Define JSON schema for output
-    json_parser = JsonOutputParser(pydantic_object=NewsOutput)
+def summarize_article(body: str) -> dict[str]:
+    """ 
+    Summarize engine for news articles using LLMs.
 
-    # Create a combined prompt template
-    prompt_template = ChatPromptTemplate.from_template(
-        """Analyze this news article and provide both a title and summary.
-        For the title: Create a one sentence title that is not misleading and gives general understanding.
-        For the body: Provide a concise, maximum 2 sentences summary highlighting main points, key events, and financial metrics.
-        For company mentions, maintain the format 'Company Name (TICKER)'.
+    Args:
+        body (str): The text of the article to be summarized.
+    
+    Returns:
+        dict[str]: A dictionary containing the title and body of the summary.
+    """
+    # Get the prompt template for summarization
+    template = PROMPTS.get_summarize_prompt()
 
-        News: {text}
-
-        {format_instructions}
-        """
+    # Create a summary parser using the JsonOutputParser
+    summary_parser = JsonOutputParser(pydantic_object=SummaryNews)
+    # Prepare the prompt with the template and format instructions
+    summary_prompt = PromptTemplate(
+        template=template, 
+        input_variables=["article"],
+        partial_variables={
+            "format_instructions": summary_parser.get_format_instructions()
+        }
     )
 
-    # Create chain with the first available LLM
-    for llm in llmcollection.get_llms():
-        try:
-            chain = prompt_template | llm | json_parser
-            response = chain.invoke(
-                {
-                    "text": body,
-                    "format_instructions": json_parser.get_format_instructions(),
-                }
-            )
+    # Create a runnable system that will handle the article input
+    runnable_summary_system = RunnableParallel(
+            {   
+                "article": itemgetter("article")
+            }
+        )
 
-            # Ensure we have both title and body
-            if not response.get("title") or not response.get("body"):
-                print("[ERROR] LLM returned incomplete response")
+    # Prepare the input data for the LLM
+    input_data = {"article": body}
+    
+    for llm in LLMCOLLECTION.get_llms():
+        try:
+            # Create a summary chain that combines the system, prompt, and LLM
+            summary_chain = (
+                runnable_summary_system
+                | summary_prompt
+                | llm 
+                | summary_parser
+            )
+            
+            try:
+                summary_result = invoke_llm(summary_chain, input_data)
+            except json.JSONDecodeError as error:
+                error_msg = str(error)
+                LOGGER.error("Failed to parse JSON response", error_msg)
+                summary_result = json_handle_payload(error_msg)
+
+            if not summary_result.get("title") or not summary_result.get("body"):
+                LOGGER.info("[ERROR] LLM returned incomplete summary_result")
                 continue
 
-            return response
-        
+            return summary_result
+
         except openai.RateLimitError as limit:
-            # Re-raise the error so the main loop can handle it
-            raise limit
-
-        except Exception as e:
-            print(f"[ERROR] LLM failed with error: {e}")
-            continue
-
-    # If all LLMs fail, return empty strings
+                # Re-raise the error of rate limit
+                raise limit
+            
+        except Exception as error:
+            LOGGER.warning(f"LLM failed with error: {error}")
+    
     return {"title": "", "body": ""}
 
+
+def json_handle_payload(json_str):
+    """
+    Cleans and parses a JSON string into a Python dictionary.
+    
+    Args:
+        json_str (str): The JSON string to be cleaned and parsed.
+
+    Returns:
+        dict: A Python dictionary representation of the JSON string if parsing is successful.
+              If parsing fails, returns a dictionary containing an "error" key with the error message.
+    """
+
+    # Pre-process to fix common JSON issues like trailing commas
+    response_text = re.sub(r',\s*([\]}])', r'\1', json_str)  # Remove trailing commas before closing braces or brackets
+    try:
+        # Attempt to parse the JSON
+        response = json.loads(response_text)
+    except json.JSONDecodeError as error:
+        error_message = str(error)
+        LOGGER.error(f"Failed to parse JSON response After trying to fix commas: {error_message}")
+        response = {"error": error_message}
+
+    return response
+
+
 def preprocess_text(news_text: str) -> str:
+    """ 
+    Preprocesses the news text by removing parenthesis, tokenizing sentences and words,
+    removing stopwords, and formatting the text.
+
+    Args:
+        news_text (str): The raw text of the news article to be preprocessed.
+
+    Returns:
+        str: The preprocessed text ready for summarization.
+    """
     # Remove parenthesis
     news_text = re.sub(r"\(.*?\)", "", news_text)
 
@@ -133,7 +189,16 @@ def preprocess_text(news_text: str) -> str:
     return processed_text
 
 
-def get_article_body(url: str):
+def get_article_body(url: str) -> str:
+    """ 
+    Extracts the body of an article from a given URL using Goose3.
+
+    Args:
+        url (str): The URL of the article to be extracted.
+    
+    Returns:
+        str: The cleaned text of the article body. If extraction fails, returns an empty string
+    """
     try:
         proxy = os.environ.get("PROXY_KEY")
         proxy_support = {"http": proxy, "https": proxy}
@@ -175,12 +240,21 @@ def get_article_body(url: str):
 
 
 def summarize_news(url: str) -> tuple[str, str]:
+    """ 
+    Main function to summarize a news article from a given URL.
+
+    Args:
+        url (str): The URL of the news article to be summarized.
+    
+    Returns:
+        tuple[str, str]: A tuple containing the title and body of the summarized article.
+    """
     news_text = get_article_body(url)
     if len(news_text) > 0:
         news_text = preprocess_text(news_text)
-        response = summarize_llama(news_text)
+        response = summarize_article(news_text)
 
-        return response["title"], response["body"]
+        return response.get("title"), response.get("body")
     else:
         return "", ""
 
