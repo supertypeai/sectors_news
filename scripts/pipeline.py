@@ -108,7 +108,7 @@ def main():
     scrapercollection.add_scraper(idnscraper)
     # scrapercollection.add_scraper(petromindoscraper)
     scrapercollection.add_scraper(icnscraper)
-    # scrapercollection.add_scraper(gapkiscraper)
+    scrapercollection.add_scraper(gapkiscraper)
     # scrapercollection.add_scraper(minerbascraper)
     # scrapercollection.add_scraper(abafscraper)
     # scrapercollection.add_scraper(kontanscraper)
@@ -155,7 +155,7 @@ def main_new():
 
 
 if __name__ == "__main__":
-    main_new()
+    main()
     # delete_outdated_news()
 
 # python scripts/pipeline.py page_num filename --csv

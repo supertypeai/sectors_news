@@ -12,13 +12,13 @@ import argparse
 import openai
 import time 
 import pandas as pd 
-from config.setup import LOGGER
+from config.setup import LOGGER, SUPABASE_KEY, SUPABASE_URL
 
 load_dotenv(override=True)
 
-URL = os.environ.get('SUPABASE_URL')
-print(URL)
-KEY = os.environ.get('SUPABASE_KEY')
+SUPABASE_URL = os.environ.get('SUPABASE_URL')
+print(SUPABASE_URL)
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
 MININUM_SCORE = 10
 
 def post_articles(jsonfile):
@@ -26,11 +26,11 @@ def post_articles(jsonfile):
     articles = json.load(f)
 
   headers = {
-    'Authorization': f'Bearer {KEY}',
+    'Authorization': f'Bearer {SUPABASE_KEY}',
     'Content-Type': 'application/json'
   }
 
-  response = requests.post(URL + '/articles/list', json=articles, headers=headers)
+  response = requests.post(SUPABASE_URL + '/articles/list', json=articles, headers=headers)
 
   if response.status_code == 200:
     print('Success:', response.json())
@@ -45,81 +45,18 @@ def post_article(jsonfile):
     article = article[0]
   
   headers = {
-    'Authorization': f'Bearer {KEY}',
+    'Authorization': f'Bearer {SUPABASE_KEY}',
     'Content-Type': 'application/json'
   }
 
-  response = requests.post(URL + '/articles', json=article, headers=headers)
+  response = requests.post(SUPABASE_URL + '/articles', json=article, headers=headers)
 
   if response.status_code == 200:
     print('Success:', response.json())
   else:
     print('Failed:', response.status_code, response.text)
 
-# def post_source(jsonfile):
-#   with open(f'./data/{jsonfile}.json', 'r') as f:
-#     articles = json.load(f)
-#   headers = {
-#     'Authorization': f'Bearer {KEY}',
-#     'Content-Type': 'application/json'
-#   }
-  
-  
-#   if isinstance(articles, list):
-#     # Discard redundant entries
-#     all_articles_db = requests.get(URL + '/articles', headers=headers).json()
-#     links = []
-#     for article_db in all_articles_db:
-#       if article_db['source'] not in links:
-#         links.append(article_db['source'])
-#     # print(links)
-    
-#     # Classify article metadata
-#     submit_article = []
-#     for article in articles:
-#       if article['source'] not in links:
-#         response = requests.post(URL + '/url-article', json=article, headers=headers)
-    
 
-#         if response.status_code == 200:
-#           print('Inference Success:', response.json()['source'])
-#           submit_article.append(response.json())
-#           links.append(article['source'])
-#         else:
-#           print('Inference Failed:', response.status_code, response.text)
-#     # print(submit_article)
-#       else:
-#         print("Article already exists")
-    
-#     submit_index = []
-#     for i, article in enumerate(submit_article):
-#       print(article)
-#       # response = requests.post(URL + '/evaluate-article', json=article, headers=headers)
-#       # print("score:", response.json()['score'])
-      
-#       # if int(response.json()['score']) > MININUM_SCORE:
-#         # submit_index.append(i)
-        
-#       if article['score'] > MININUM_SCORE:
-#         submit_index.append(i)
-    
-#     print(submit_index)
-    
-#     final_submit = []
-#     for i in submit_index:
-#       final_submit.append(submit_article[i])
-    
-#     # with open('./submit.json', 'w') as f:
-#       # f.write(json.dumps(submit_article))
-#     with open('./final.json', 'w') as f:
-#       f.write(json.dumps(final_submit))
-#     response = requests.post(URL + '/articles/list', json=final_submit, headers=headers)
-#     if response.status_code == 200:
-#       print('Success:', response.json())
-#       submit_article.append(response.json())
-#     else:
-#       print('Failed:', response.status_code, response.text)
-        
 def post_source(jsonfile):
     with open(f'./data/{jsonfile}.json', 'r') as f:
         articles = json.load(f)
@@ -127,17 +64,17 @@ def post_source(jsonfile):
     articles = articles[:7]
     print(f"Total articles scraped on pipeline.json: {len(articles)}")
 
-    headers = {
-        'Authorization': f'Bearer {KEY}',
-        'Content-Type': 'application/json'
-    }
+    # headers = {
+    #     'Authorization': f'Bearer {SUPABASE_KEY}',
+    #     'Content-Type': 'application/json'
+    # }
     
     # Get all existing articles from the database
     if isinstance(articles, list):
-      all_articles_db = requests.get(f"{URL}/rest/v1/idx_news?select=*",
+      all_articles_db = requests.get(f"{SUPABASE_URL}/rest/v1/idx_news?select=*",
                                       headers={
-                                          "apikey": KEY,
-                                          "Authorization": f"Bearer {KEY}"
+                                          "apiSUPABASE_KEY": SUPABASE_KEY,
+                                          "Authorization": f"Bearer {SUPABASE_KEY}"
                                         }
                                     ).json()
      
@@ -170,8 +107,6 @@ def post_source(jsonfile):
                   LOGGER.error(f"Failed to process article {article["source"]}: {error}")
                   return None
 
-
-
               links.append(article['source'])
 
               # Check if the article's score meets the minimum threshold
@@ -185,11 +120,11 @@ def post_source(jsonfile):
                     df = pd.DataFrame(final_submit_batch)
                     df.to_csv("test_batch_flow.csv", mode='a', header=False, index=False)
                     # batch_response =  requests.post(
-                    #                                 f"{URL}/rest/v1/idx_news",
+                    #                                 f"{SUPABASE_URL}/rest/v1/idx_news",
                     #                                 json=final_submit_batch,  
                     #                                 headers={
-                    #                                         "apikey": KEY,
-                    #                                         "Authorization": f"Bearer {KEY}",
+                    #                                         "apiSUPABASE_KEY": SUPABASE_KEY,
+                    #                                         "Authorization": f"Bearer {SUPABASE_KEY}",
                     #                                         "Content-Type": "application/json",
                     #                                         "Prefer": "return=representation"  # optional for returning rows
                     #                                     }
@@ -216,11 +151,11 @@ def post_source(jsonfile):
           LOGGER.info(f"END TIME: {end_time - start}")
             # print(f"Submitting remaining batch of {len(final_submit_batch)} articles...")
             # batch_response = requests.post(
-            #                       f"{URL}/rest/v1/idx_news",
+            #                       f"{SUPABASE_URL}/rest/v1/idx_news",
             #                       json=final_submit_batch,
             #                       headers={
-            #                           "apikey": KEY,
-            #                           "Authorization": f"Bearer {KEY}",
+            #                           "apiSUPABASE_KEY": SUPABASE_KEY,
+            #                           "Authorization": f"Bearer {SUPABASE_KEY}",
             #                           "Content-Type": "application/json",
             #                           "Prefer": "return=representation"
             #                       }
