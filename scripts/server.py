@@ -14,9 +14,11 @@ import time
 import pandas as pd 
 from config.setup import LOGGER, SUPABASE_KEY, SUPABASE_URL
 
+
 load_dotenv(override=True)
 
 MININUM_SCORE = 10
+
 
 def post_articles(jsonfile):
   with open(f'./data/{jsonfile}.json', 'r') as f:
@@ -70,11 +72,11 @@ def post_source(jsonfile):
     if isinstance(articles, list):
       all_articles_db = requests.get(f"{SUPABASE_URL}/rest/v1/idx_news?select=*",
                                       headers={
-                                          "apiSUPABASE_KEY": SUPABASE_KEY,
+                                          "apikey": SUPABASE_KEY,
                                           "Authorization": f"Bearer {SUPABASE_KEY}"
                                         }
                                     ).json()
-     
+      print(all_articles_db)
       links = [article_db['source'] for article_db in all_articles_db]
       
       final_submit_batch = []  # To hold articles for batch submission
@@ -97,12 +99,9 @@ def post_source(jsonfile):
               #     wait_time = (attempt + 1) * 10 # Wait longer each time
               #     print(f"Rate limit hit. Waiting for {wait_time} seconds before retrying...\n")
               #     time.sleep(wait_time)
-              try:
-                  processed_article_object = generate_article(article)
-                  processed_article = processed_article_object.to_dict()
-              except Exception as error:
-                  LOGGER.error(f"Failed to process article {article.get('source')}: {error}")
-                  return None
+            
+              processed_article_object = generate_article(article)
+              processed_article = processed_article_object.to_dict()
 
               links.append(article['source'])
 
@@ -120,7 +119,7 @@ def post_source(jsonfile):
                     #                                 f"{SUPABASE_URL}/rest/v1/idx_news",
                     #                                 json=final_submit_batch,  
                     #                                 headers={
-                    #                                         "apiSUPABASE_KEY": SUPABASE_KEY,
+                    #                                         "apikey": SUPABASE_KEY,
                     #                                         "Authorization": f"Bearer {SUPABASE_KEY}",
                     #                                         "Content-Type": "application/json",
                     #                                         "Prefer": "return=representation"  # optional for returning rows
@@ -151,7 +150,7 @@ def post_source(jsonfile):
             #                       f"{SUPABASE_URL}/rest/v1/idx_news",
             #                       json=final_submit_batch,
             #                       headers={
-            #                           "apiSUPABASE_KEY": SUPABASE_KEY,
+            #                           "apikey": SUPABASE_KEY,
             #                           "Authorization": f"Bearer {SUPABASE_KEY}",
             #                           "Content-Type": "application/json",
             #                           "Prefer": "return=representation"
