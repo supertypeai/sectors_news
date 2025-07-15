@@ -1,23 +1,21 @@
 """
 Script to submit 
 """
+
 from preprocessing_articles.run_prepros_article import generate_article
 
-import time
-import requests
-from dotenv import load_dotenv
-import os
-import json
-import argparse
-import openai
-import time 
-import pandas as pd 
 from config.setup import LOGGER, SUPABASE_KEY, SUPABASE_URL
 
+import pandas as pd 
+import time
+import requests
+import json
+import argparse
+import time 
 
-load_dotenv(override=True)
 
-MININUM_SCORE = 10
+MININUM_SCORE = 60
+BATCH_SIZE = 5
 
 
 def post_articles(jsonfile):
@@ -56,114 +54,152 @@ def post_article(jsonfile):
     print('Failed:', response.status_code, response.text)
 
 
-def post_source(jsonfile):
+def send_data_to_db(successful_articles: list):
+  """ 
+  Sends the processed articles to the database in batches.
+  This function takes a list of successfully processed articles and submits them to the database in batches.
+
+  Args:
+      successful_articles (list): A list of dictionaries containing the processed articles to be submitted.
+  """
+  # Supabase submission with batch
+  for i in range(0, len(successful_articles), BATCH_SIZE):
+    batch_to_submit = successful_articles[i:i + BATCH_SIZE]
+    LOGGER.info(f"Submitting batch {i//BATCH_SIZE + 1} with {len(batch_to_submit)} articles...")
+    
+    batch_headers = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": f"Bearer {SUPABASE_KEY}",
+        "Content-Type": "application/json",
+        "Prefer": "return=representation"
+    }
+    response = requests.post(f"{SUPABASE_URL}/rest/v1/idx_news", json=batch_to_submit, headers=batch_headers)
+    
+    if 200 <= response.status_code < 300:
+        LOGGER.info(f'  Batch Submission Success: {response.status_code}')
+    else:
+        LOGGER.info(f'  Batch Submission Failed: {response.status_code} - {response.text}')
+  return response
+
+
+def post_source(jsonfile: str, is_check_csv: bool = False):
+  """
+  Posts articles to the database server after processing them.
+  This function reads articles from a JSON file, processes each article to generate 
+  a News object, and submits them to the database in batches.
+  If an article fails to process, it is added to a retry queue for a second attempt.
+
+  Args:
+      jsonfile (str): The name of the JSON file containing articles to be processed.
+      is_check_csv (bool): Flag to indicate whether to save the final processed articles to a CSV file for verification.
+  """
+  try: 
+    # Open the JSON file and load the articles
     with open(f'./data/{jsonfile}.json', 'r') as f:
-        articles = json.load(f)
+      all_articles = json.load(f)
     
-    articles = articles
-    print(f"Total articles scraped on pipeline.json: {len(articles)}")
-
-    # headers = {
-    #     'Authorization': f'Bearer {SUPABASE_KEY}',
-    #     'Content-Type': 'application/json'
-    # }
+    # Headers for Supabase database connection
+    db_headers = {"apikey": SUPABASE_KEY,
+                  "Authorization": f"Bearer {SUPABASE_KEY}"
+                  }
+    # Check if the database is reachable and get existing articles
+    all_articles_db = requests.get(f"{SUPABASE_URL}/rest/v1/idx_news?select=*",
+                                    headers=db_headers
+                                  ).json()
     
-    # Get all existing articles from the database
-    if isinstance(articles, list):
-      all_articles_db = requests.get(f"{SUPABASE_URL}/rest/v1/idx_news?select=*",
-                                      headers={
-                                          "apikey": SUPABASE_KEY,
-                                          "Authorization": f"Bearer {SUPABASE_KEY}"
-                                        }
-                                    ).json()
-      print(all_articles_db)
-      links = [article_db['source'] for article_db in all_articles_db]
+    # Create a set of existing links from the database
+    existing_links = {db_article.get('source') for db_article in all_articles_db}
       
-      final_submit_batch = []  # To hold articles for batch submission
-      BATCH_SIZE = 5  # Modify this to your desired batch size
-      
-      start = time.time()
-      for article in articles:
-          if article.get('source') not in links:
-              LOGGER.info(f"\nProcessing Source: {article.get('source')}")
-              
-              # processed_article = None 
-              # for attempt in range(3):
-              #   try:
-              #     processed_article_object = generate_article(article)
-            
-              #     # processed_article = processed_article_object.model_dump_json()
-              #     processed_article = processed_article_object.to_dict()
-              #     break 
-              #   except openai.RateLimitError:
-              #     wait_time = (attempt + 1) * 10 # Wait longer each time
-              #     print(f"Rate limit hit. Waiting for {wait_time} seconds before retrying...\n")
-              #     time.sleep(wait_time)
-            
-              processed_article_object = generate_article(article)
-              processed_article = processed_article_object.to_dict()
+    # Filter out articles that already exist in the database
+    articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
+    # articles_to_process = articles_to_process[:5]
+    LOGGER.info(f"Total Article to process: {len(articles_to_process)}")  
 
-              links.append(article['source'])
+  except (FileNotFoundError, requests.RequestException, KeyError) as e:
+      LOGGER.error(f"Failed during setup phase: {e}")
+      return
+    
+  # Initialize lists to hold successful articles and failed articles for retry
+  successful_articles = []
+  failed_articles_queue = []
+  start_time = time.time()
 
-              # Check if the article's score meets the minimum threshold
-              if processed_article.get('score') is not None and processed_article.get('score') > MININUM_SCORE:
-                final_submit_batch.append(processed_article)
-                print(f"Article added to batch: {processed_article['source']}")
+  for article_data in articles_to_process:
+    source_url = article_data.get('source')
+    LOGGER.info(f'Processing: {source_url}')
 
-                # Check if batch size reached
-                if len(final_submit_batch) >= BATCH_SIZE:
-                    LOGGER.info(f"TEST batch of {BATCH_SIZE} articles...")
-                    df = pd.DataFrame(final_submit_batch)
-                    df.to_csv("test_batch_flow.csv", mode='a', header=False, index=False)
-                    # batch_response =  requests.post(
-                    #                                 f"{SUPABASE_URL}/rest/v1/idx_news",
-                    #                                 json=final_submit_batch,  
-                    #                                 headers={
-                    #                                         "apikey": SUPABASE_KEY,
-                    #                                         "Authorization": f"Bearer {SUPABASE_KEY}",
-                    #                                         "Content-Type": "application/json",
-                    #                                         "Prefer": "return=representation"  # optional for returning rows
-                    #                                     }
-                    #                             )
-                    # if batch_response.status_code == 200:
-                    #     print('Batch Submission Success:', batch_response.json())
-                    # else:
-                    #     print('Batch Submission Failed:', batch_response.status_code, batch_response.text)
-                    
-                    # Reset batch list
-                    final_submit_batch = []
-              else:
-                  LOGGER.info(f"Article skipped due to low score: {processed_article.get('source')} (Score: {processed_article.get('score')})")
-          else:
-              LOGGER.info("Article already exists")
-        
-        # Submit remaining articles in the batch if any
-      if final_submit_batch:
-          end_time = time.time()
-          print(f"Writing remaining batch of {len(final_submit_batch)} articles to CSV…")
+    try:
+      # Get all the necessary data with LLM calls
+      processed_article_object = generate_article(article_data)
+          
+      # Check for the failure signal from the processing function
+      if not processed_article_object:
+          raise ValueError("generate_article returned None, signaling a failure.")
 
-          df = pd.DataFrame(final_submit_batch)
-          df.to_csv("test_all_flow.csv", index=False)
-          LOGGER.info(f"END TIME: {end_time - start}")
-            # print(f"Submitting remaining batch of {len(final_submit_batch)} articles...")
-            # batch_response = requests.post(
-            #                       f"{SUPABASE_URL}/rest/v1/idx_news",
-            #                       json=final_submit_batch,
-            #                       headers={
-            #                           "apikey": SUPABASE_KEY,
-            #                           "Authorization": f"Bearer {SUPABASE_KEY}",
-            #                           "Content-Type": "application/json",
-            #                           "Prefer": "return=representation"
-            #                       }
-            #                   )
-            # if batch_response.status_code == 200:
-            #     print('Final Batch Submission Success:', batch_response.json())
-            # else:
-            #     print('Final Batch Submission Failed:', batch_response.status_code, batch_response.text)
+      processed_article = processed_article_object.to_dict()
+
+      # Check the score and decide whether to batch it
+      if processed_article.get('score', 0) > MININUM_SCORE:
+          LOGGER.info(f"  [SUCCESS] Article will be batched. Score: {processed_article.get('score')}")
+          successful_articles.append(processed_article)
+
+          if len(successful_articles) > 1:
+            break
+      else:
+          LOGGER.info(f"  [SKIPPED] Low score: {processed_article.get('score')}")
+
+    except Exception as error:
+      LOGGER.error(f"  [FAILED] Adding to retry queue. Reason: {error}")
+      failed_articles_queue.append(article_data)
+      continue
+  
+  if failed_articles_queue:
+    for article_data in failed_articles_queue:
+      source_url = article_data.get('source')
+      LOGGER.info(f'Retrying: {source_url}')
+
+      try:
+        processed_article_object = generate_article(article_data)
+        # Check for the failure signal from the processing function
+        if not processed_article_object:
+            raise ValueError("generate_article returned None, signaling a failure.")
+
+        processed_article = processed_article_object.to_dict()
+
+        if processed_article.get('score', 0) > MININUM_SCORE:
+            LOGGER.info(f"  [SUCCESS] Article will be batched. Score: {processed_article.get('score')}")
+            successful_articles.append(processed_article)
+        else:
+            LOGGER.info(f"  [SKIPPED] Low score: {processed_article.get('score')}")
+
+      except Exception as error:
+        LOGGER.error(f"  [FAILED ON RETRY] Giving up on {source_url}: {error}")
+
+  # Final Batch 
+  end_time = time.time()
+  LOGGER.info(f"Total processing time: {end_time - start_time:.2f} seconds")
+
+  if successful_articles:
+    LOGGER.info(f"\n--- PREPARING TO SUBMIT {len(successful_articles)} ARTICLES IN BATCHES OF {BATCH_SIZE} ---")
+    
+    # Saving to CSV to verify the output 
+    if is_check_csv:
+      df = pd.DataFrame(successful_articles)
+      df.to_csv("final_processed_articles.csv", index=False)
+      LOGGER.info("All successful articles saved to final_processed_articles.csv")
+
+    # Push data with batch processing
+    response = send_data_to_db(successful_articles)
+
+    if 200 <= response.status_code < 300:
+        LOGGER.info(f"  Batch Submission Success: {response.status_code}")
+    else:
+        LOGGER.info(f"  Batch Submission Failed: {response.status_code} - {response.text}")
+  else:
+      LOGGER.info("\nNo articles met the criteria for submission.")
 
 
 def main():
-
   parser = argparse.ArgumentParser(description="Script for posting articles to database server")
   parser.add_argument("filename", type=str, default="labeled_articles")
   parser.add_argument("--list", action='store_true', help="Flag to indicate posting a list of articles")
@@ -179,6 +215,7 @@ def main():
     post_articles(filename)
   else:
     post_article(filename)
+
 
 if __name__ == "__main__":
   main()
