@@ -89,12 +89,10 @@ def summarize_article(body: str) -> dict[str]:
                 | summary_parser
             )
             
-            try:
-                summary_result = invoke_llm(summary_chain, input_data)
-            except json.JSONDecodeError as error:
-                error_msg = str(error)
-                LOGGER.error("Failed to parse JSON response", error_msg)
-                summary_result = json_handle_payload(error_msg)
+            summary_result = invoke_llm(summary_chain, input_data)
+            if summary_result is None:
+                LOGGER.warning("API call failed after all retries, trying next LLM...")
+                continue
 
             if not summary_result.get("title") or not summary_result.get("body"):
                 LOGGER.info("[ERROR] LLM returned incomplete summary_result")
@@ -102,39 +100,15 @@ def summarize_article(body: str) -> dict[str]:
 
             return summary_result
 
-        except openai.RateLimitError as limit:
-                # Re-raise the error of rate limit
-                raise limit
+        except json.JSONDecodeError as error:
+            LOGGER.error(f"Failed to parse JSON response: {error}, trying next LLM...")
+            continue
             
         except Exception as error:
             LOGGER.warning(f"LLM failed with error: {error}")
     
-    return {"title": "", "body": ""}
-
-
-def json_handle_payload(json_str):
-    """
-    Cleans and parses a JSON string into a Python dictionary.
-    
-    Args:
-        json_str (str): The JSON string to be cleaned and parsed.
-
-    Returns:
-        dict: A Python dictionary representation of the JSON string if parsing is successful.
-              If parsing fails, returns a dictionary containing an "error" key with the error message.
-    """
-
-    # Pre-process to fix common JSON issues like trailing commas
-    response_text = re.sub(r',\s*([\]}])', r'\1', json_str)  # Remove trailing commas before closing braces or brackets
-    try:
-        # Attempt to parse the JSON
-        response = json.loads(response_text)
-    except json.JSONDecodeError as error:
-        error_message = str(error)
-        LOGGER.error(f"Failed to parse JSON response After trying to fix commas: {error_message}")
-        response = {"error": error_message}
-
-    return response
+    LOGGER.error("All LLMs failed to return a valid summary.")
+    return None
 
 
 def preprocess_text(news_text: str) -> str:
@@ -249,14 +223,22 @@ def summarize_news(url: str) -> tuple[str, str]:
     Returns:
         tuple[str, str]: A tuple containing the title and body of the summarized article.
     """
-    news_text = get_article_body(url)
-    if len(news_text) > 0:
-        news_text = preprocess_text(news_text)
-        response = summarize_article(news_text)
+    try:
+        news_text = get_article_body(url)
+        if len(news_text) > 0:
+            news_text = preprocess_text(news_text)
 
-        return response.get("title"), response.get("body")
-    else:
-        return "", ""
+            response = summarize_article(news_text)
+            if not response or not response.get("body"):
+                LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
+                return None
+            
+            return response.get("title"), response.get("body")
+        else:
+            return "", ""
+    except Exception as error: 
+        LOGGER.error(f"An unexpected error occurred in summarize_news for {url}: {error}")
+        return None
 
 
 # urls = [

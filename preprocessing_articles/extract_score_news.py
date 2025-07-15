@@ -254,12 +254,12 @@ class ArticleScorer:
                     )
                 
                 # Process with current LLM
-                try:
-                    result_score_raw = invoke_llm(scoring_chain, input_data)
-                except json.JSONDecodeError:
-                    error_msg = str(error)
-                    LOGGER.error("Failed to parse JSON response", error_msg)
-                    result_score_raw = json_handle_payload(error_msg)
+                result_score_raw = invoke_llm(scoring_chain, input_data)
+
+                # If the wrapper signaled a permanent API failure, just try the next LLM.
+                if result_score_raw is None:
+                    LOGGER.warning("API call failed after all retries, trying next LLM...")
+                    continue
 
                 result_score = result_score_raw.get('score', 0)
 
@@ -271,19 +271,21 @@ class ArticleScorer:
                     )
                     return max(0, min(150, result_score))
 
-            except openai.RateLimitError as limit:
-                # Re-raise the error so the main loop can handle it
-                raise limit
-            
+            except json.JSONDecodeError as error:
+                LOGGER.error(f"Failed to parse JSON response: {error}")
+                continue
+
             except Exception as error:
                 LOGGER.warning(f"LLM failed with error: {error}")
-
+                continue
+        
+        return None 
 
 # So we can use the scorer as a singleton
 _SCORER = ArticleScorer()
 
 # Backward compatible function
-def get_article_score(body: str, article_date: str, source: str) -> int:
+def get_article_score(body: str, article_date: str, source: str):
     """
     Calculate the score for a news article.
 

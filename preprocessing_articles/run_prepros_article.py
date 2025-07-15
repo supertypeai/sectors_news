@@ -5,10 +5,11 @@ from .extract_summary_news      import summarize_news
 from .extract_score_news        import get_article_score
 from database.database_connect  import sectors_data
 from .extract_classifier        import load_company_data, NewsClassifier
+from config.setup               import LOGGER
 
 import asyncio
 from datetime import datetime
-import openai
+
 
 CLASSIFIER = NewsClassifier()
 EXECUTOR = ThreadPoolExecutor(max_workers=4)
@@ -26,93 +27,68 @@ async def generate_article_async(data: dict):
     source = data.get("source").strip()
 
     try:
-        timestamp_str = data.get("timestamp").strip()
-        timestamp_str = timestamp_str.replace("T", " ")
+        timestamp_str = data.get("timestamp").strip().replace("T", " ")
         timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
 
+        # Sumamrize 
+        summary_result = await loop.run_in_executor(EXECUTOR, summarize_news, source)
+        if not summary_result:
+            LOGGER.error(f"Summarization failed for {source}, failing article.")
+            # Fail the whole process
+            return None 
+        title, body = summary_result
+
+        # Classify
+        classification_results = await CLASSIFIER.classify_article_async(title, body)
+        if not classification_results:
+            LOGGER.error(f"Classification failed for {source}, failing article.")
+            # Fail the whole process
+            return None 
+        tags, tickers, sub_sector_result, sentiment, dimension = classification_results
+
+        # Score
+        score_result = get_article_score(body, timestamp, source)
+
+        # Assemble the final News object
         new_article = News(
-            title="",
-            body="",
-            source=source,
-            timestamp=timestamp.isoformat(),
-            sector="",
-            sub_sector=[],
-            tags=[],
-            tickers=[],
-            dimension=None,
-            score=None,
+            title=title, body=body, source=source, timestamp=timestamp.isoformat(),
+            score=score_result, tags=tags, tickers=[], sub_sector=[], sector="",
+            dimension=None
         )
 
-        # Run synchronous summarize_news in a thread pool
-        title, body = await loop.run_in_executor(EXECUTOR, summarize_news, source)
-       
-        if len(body) > 0:
-            (
-                tags,
-                tickers,
-                sub_sector_result,
-                sentiment,
-                dimension,
-            ) = await CLASSIFIER.classify_article_async(title, body)
+        # Post-processing
+        # sentiment added into tags
+        if sentiment:
+            tags.append(sentiment)
+        
+        # Tickers checking with COMPANY_DATA
+        checked_tickers = []
+        for ticker in tickers:
+            if ticker in COMPANY_DATA or f"{ticker}.JK" in COMPANY_DATA:
+                checked_tickers.append(ticker)
+        new_article.tickers = checked_tickers
 
-            
+        # Sub sector
+        if not checked_tickers and sub_sector_result:
+            new_article.sub_sector = [sub_sector_result[0].lower()] if sub_sector_result else []
+        else:
+            new_article.sub_sector = [COMPANY_DATA[ticker]["sub_sector"] for ticker in checked_tickers if ticker in COMPANY_DATA]
 
-            if sentiment:
-                tags.append(sentiment)
-
-            checked_tickers = []
-            valid_tickers = [COMPANY_DATA[ticker]["symbol"] for ticker in COMPANY_DATA]
-            for ticker in tickers:
-                if ticker in valid_tickers or f"{ticker}.JK" in valid_tickers:
-                    checked_tickers.append(ticker)
-            tickers = checked_tickers
-
-            if len(tickers) == 0 and sub_sector_result and len(sub_sector_result) > 0:
-                sub_sector = [sub_sector_result[0].lower()]
-            else:
-                sub_sector = [
-                    COMPANY_DATA[ticker]["sub_sector"]
-                    for ticker in tickers
-                    if ticker in COMPANY_DATA
-                ]
-
-            sector = ""
-            for e in sub_sector:
-                if e in sectors_data:
-                    sector = sectors_data[e]
-                    break
-
-            new_article.title = title
-            new_article.body = body
-            new_article.sector = sector
-            new_article.sub_sector = sub_sector
-            new_article.tags = tags
-            new_article.tickers = tickers
-            new_article.dimension = dimension
-            new_article.score = int(get_article_score(body, timestamp, source))
+        # Sectors data 
+        for sub in new_article.sub_sector:
+            if sub in sectors_data: 
+                new_article.sector = sectors_data[sub]
+                break
+        
+        new_article.dimension = dimension
 
         return new_article
-    
-    except openai.RateLimitError as limit:
-            # Re-raise the error so the main loop can handle it
-            raise limit
-    
-    except Exception as e:
-        print(f"[ERROR] Error in generate_article_async for source {source}: {e}")
-        return News(
-            title="Error processing article",
-            body=f"Failed to process article content from {source}",
-            source=source,
-            timestamp=datetime.now().isoformat(),
-            sector="",
-            sub_sector=[],
-            tags=[],
-            tickers=[],
-            dimension=None,
-            score=0,
-        )
 
+    except Exception as error: 
+        LOGGER.error(f"A critical, unexpected error occurred in generate_article_async for {source}: {error}")
+        return None
 
+ 
 def generate_article(data: dict):
     """
     @helper-function

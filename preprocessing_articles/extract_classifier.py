@@ -6,6 +6,7 @@ from langchain.prompts              import PromptTemplate
 from langchain_core.output_parsers  import JsonOutputParser
 from langchain_core.runnables       import RunnableParallel
 from operator                       import itemgetter
+from supabase                       import create_client, Client
 
 from llm_models.get_models  import LLMCollection, invoke_llm_async
 from llm_models.llm_prompts import (ClassifierPrompts, 
@@ -14,12 +15,12 @@ from llm_models.llm_prompts import (ClassifierPrompts,
                                     SubsectorClassification, 
                                     SentimentClassification, 
                                     DimensionClassification)
-from .extract_summary_news  import json_handle_payload
-from config.setup           import LOGGER
+
+from config.setup           import LOGGER, SUPABASE_URL, SUPABASE_KEY
 
 import json
 import asyncio
-import openai
+import os
 from datetime import datetime
 from typing import List, Dict, Optional, Union, Tuple
 
@@ -31,6 +32,9 @@ class NewsClassifier:
 
     def __init__(self):
         """Initialize the NewsClassifier with required dependencies."""
+        # Supabase setup
+        self.supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
         # LLM setup
         self.llm_collection = LLMCollection()
 
@@ -233,24 +237,20 @@ class NewsClassifier:
                 )
 
                 # Process with current LLM
-                try:
-                    result = await invoke_llm_async(classifier_chain, input_data)
-                except json.JSONDecodeError:
-                    error_msg = str(error)
-                    LOGGER.error("Failed to parse JSON response", error_msg)
-                    result = json_handle_payload(error_msg)
+                result = await invoke_llm_async(classifier_chain, input_data)
+                if result is None: 
+                    LOGGER.warning(f"API call failed for category '{category}', trying next LLM...")
+                    continue 
 
                 # Return based on category type
                 if category == "tags":
                     result_output = result.get("tags", [])
-                    print(f"raw tags: {result_output}")
                     seen = set()
                     check_tags = []
                     for tag in result_output: 
                         if tag in tags and tag not in seen:
                             seen.add(tag)
                             check_tags.append(tag) 
-                    print(f'process tags: {check_tags}')
                     return check_tags
                 elif category == "tickers":
                     return result.get("tickers", [])
@@ -274,29 +274,14 @@ class NewsClassifier:
                             "ownership": result.get("ownership", None),
                             "sustainability": result.get("sustainability", None),
                         }
-                    
-            except openai.RateLimitError as limit:
-                # Re-raise the error so the main loop server.py can handle it
-                raise limit
             
             except Exception as error:
                 print(f"[ERROR] LLM failed with error: {error}")
                 continue
         
         # Return appropriate default if all LLMs fail
-        if category == "dimension":
-            return {
-                "valuation": None,
-                "future": None,
-                "technical": None,
-                "financials": None,
-                "dividend": None,
-                "management": None,
-                "ownership": None,
-                "sustainability": None,
-            }
-        else:
-            return [] if category in ["tags", "tickers", "subsectors"] else ""
+        LOGGER.error(f"All LLMs failed for category '{category}'.")
+        return None
 
     async def classify_article_async(
         self, title: str, body: str
@@ -321,10 +306,14 @@ class NewsClassifier:
             self._classify_openai_async(body, "dimension", title),
         ]
 
-        results = await asyncio.gather(*tasks)
+        results = await asyncio.gather(*tasks, return_exceptions=True)
         
-        tags, tickers, subsector, sentiment, dimension = results
+        # Check for ANY failure: either an unexpected Exception OR None signal
+        if any(isinstance(res, Exception) or res is None for res in results):
+            LOGGER.error("One or more classification steps failed. Failing entire article classification.")
+            return None
 
+        tags, tickers, subsector, sentiment, dimension = results
         return tags, tickers, subsector, sentiment, dimension
 
 
@@ -333,5 +322,10 @@ CLASSIFIER = NewsClassifier()
 
 # Backward compatibility functions
 def load_company_data() -> Dict[str, Dict[str, str]]:
-    """Load company data from Supabase or cache."""
+    """
+    Load company data from Supabase or cache.
+
+    Returns:
+        Dict[str, Dict[str, str]]: Dictionary mapping company symbols to their details.
+    """
     return CLASSIFIER._load_company_data()

@@ -136,23 +136,9 @@ def main():
 
     post_source(args.filename)
 
-def main_new():
-    parser = argparse.ArgumentParser(
-        description="Script for scraping data with pipeline"
-    )
-    # parser.add_argument("page_number", type=int, default=1)
-    parser.add_argument("filename", type=str, default="scraped_articles")
-    # parser.add_argument(
-    #     "--csv", action="store_true", help="Flag to indicate write to csv file"
-    # )
-
-    args = parser.parse_args()
-
-    post_source(args.filename)
-
 
 if __name__ == "__main__":
     main()
-    # delete_outdated_news()
+    delete_outdated_news()
 
 # python scripts/pipeline.py page_num filename --csv
