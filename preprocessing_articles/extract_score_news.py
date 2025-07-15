@@ -17,7 +17,6 @@ from langchain_core.output_parsers  import JsonOutputParser
 from llm_models.get_models  import LLMCollection, invoke_llm
 from llm_models.llm_prompts import ScoringNews, ClassifierPrompts
 from config.setup           import LOGGER
-from .extract_summary_news  import json_handle_payload
 
 from datetime       import datetime
 from typing         import Optional

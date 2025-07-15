@@ -20,7 +20,6 @@ from config.setup           import LOGGER, SUPABASE_URL, SUPABASE_KEY
 
 import json
 import asyncio
-import os
 from datetime import datetime
 from typing import List, Dict, Optional, Union, Tuple
 
