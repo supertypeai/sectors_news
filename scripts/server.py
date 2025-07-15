@@ -142,9 +142,6 @@ def post_source(jsonfile: str, is_check_csv: bool = False):
       if processed_article.get('score', 0) > MININUM_SCORE:
           LOGGER.info(f"  [SUCCESS] Article will be batched. Score: {processed_article.get('score')}")
           successful_articles.append(processed_article)
-
-          if len(successful_articles) > 1:
-            break
       else:
           LOGGER.info(f"  [SKIPPED] Low score: {processed_article.get('score')}")
 
