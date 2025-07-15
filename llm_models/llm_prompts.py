@@ -1,8 +1,5 @@
-from pydantic                       import Field, BaseModel
-from langchain_core.output_parsers  import JsonOutputParser
-from langchain.prompts              import PromptTemplate 
-from langchain_core.runnables       import RunnableParallel
-from typing                         import List, Dict, Optional, Tuple, Union
+from pydantic import Field, BaseModel
+from typing   import List, Optional
 
 
 # Define Pydantic models for each classification type
