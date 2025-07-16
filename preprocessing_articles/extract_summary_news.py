@@ -19,8 +19,8 @@ import requests
 import os
 import re
 import nltk
-import openai 
 import json 
+import cloudscraper
 
 # NLTK download
 nltk.data.path.append("./nltk_data")
@@ -173,6 +173,7 @@ def get_article_body(url: str) -> str:
     Returns:
         str: The cleaned text of the article body. If extraction fails, returns an empty string
     """
+    # First attempt try to get full article with goose3 proxy and soup as fallback
     try:
         proxy = os.environ.get("PROXY_KEY")
         proxy_support = {"http": proxy, "https": proxy}
@@ -185,7 +186,6 @@ def get_article_body(url: str) -> str:
         g = Goose({"http_session": session})
         article = g.extract(url=url)
         print(f"[SUCCESS] Article from url {url} inferenced")
-        # print("cleaned text", article.cleaned_text)
 
         if article.cleaned_text:
             return article.cleaned_text
@@ -202,15 +202,38 @@ def get_article_body(url: str) -> str:
         
     except Exception as error:
         print(
-            f"[PROXY FAIL] Goose3 failed with error, trying with no proxy: {error} to url {url}"
+            f"[PROXY FAIL] Goose3 failed with error {error} for url {url}"
         )
-        try:
-            g = Goose()
-            article = g.extract(url=url)
+
+    # Fallback two if first attempt is completly failed
+    try:
+        print("[FALLBACK] Attempt 2: Trying with cloudscraper...")
+
+        scraper = cloudscraper.create_scraper() 
+        g = Goose({'browser_user_agent': USER_AGENT, 'http_session': scraper})
+
+        article = g.extract(url=url)
+        if article.cleaned_text:
+            print(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
+
             return article.cleaned_text
-        except Exception as error:
-            print(f"[ERROR] Goose3 failed with error: {error}")
-            return ""
+        
+    except Exception as error:
+        print(f"[ERROR] Cloudscraper failed: {error}")
+
+    # Last fallback if first and second are failed
+    try:
+        print("[FALLBACK] Attempt 3: Trying with no PROXY...")
+
+        g = Goose()
+        article = g.extract(url=url)
+
+        print(f"[SUCCESS] Article inferenced from url {url} with no PROXY")
+        return article.cleaned_text
+    
+    except Exception as error:
+        print(f"[ERROR] Goose3 with no PROXY failed with error: {error}")
+        return ""
 
 
 def summarize_news(url: str) -> tuple[str, str]:
