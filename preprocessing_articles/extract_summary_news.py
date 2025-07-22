@@ -1,5 +1,5 @@
 """
-Script to use LLM for summarizing a news article, uses OpenAI and Groq
+Script to use LLM for summarizing a news article, uses Llama Groq
 """
 
 from bs4                            import BeautifulSoup
@@ -10,6 +10,7 @@ from langchain_core.output_parsers  import JsonOutputParser
 from langchain.prompts              import PromptTemplate
 from langchain_core.runnables       import RunnableParallel
 from operator                       import itemgetter
+from groq                           import RateLimitError
 
 from llm_models.get_models  import LLMCollection, invoke_llm
 from llm_models.llm_prompts import ClassifierPrompts, SummaryNews
@@ -21,6 +22,8 @@ import re
 import nltk
 import json 
 import cloudscraper
+import time 
+import random 
 
 # NLTK download
 nltk.data.path.append("./nltk_data")
@@ -45,7 +48,7 @@ LLMCOLLECTION = LLMCollection()
 PROMPTS = ClassifierPrompts()
 
 
-def summarize_article(body: str) -> dict[str]:
+def summarize_article(body: str, url: str) -> dict[str]:
     """ 
     Summarize engine for news articles using LLMs.
 
@@ -97,8 +100,15 @@ def summarize_article(body: str) -> dict[str]:
             if not summary_result.get("title") or not summary_result.get("body"):
                 LOGGER.info("[ERROR] LLM returned incomplete summary_result")
                 continue
-
+            
+            LOGGER.info(f"[SUCCES] Summarize for url: {url}")
             return summary_result
+
+        except RateLimitError as error:
+            error_message = str(error).lower()
+            if "tokens per day" in error_message or "tpd" in error_message:
+                LOGGER.warning(f"LLM: {llm.model_name} hit its daily token limit. Moving to next LLM")
+                continue 
 
         except json.JSONDecodeError as error:
             LOGGER.error(f"Failed to parse JSON response: {error}, trying next LLM...")
@@ -106,7 +116,8 @@ def summarize_article(body: str) -> dict[str]:
             
         except Exception as error:
             LOGGER.warning(f"LLM failed with error: {error}")
-    
+            continue 
+
     LOGGER.error("All LLMs failed to return a valid summary.")
     return None
 
@@ -247,11 +258,18 @@ def summarize_news(url: str) -> tuple[str, str]:
         tuple[str, str]: A tuple containing the title and body of the summarized article.
     """
     try:
+        # Getting full article from the url
         news_text = get_article_body(url)
+        time.sleep(random.uniform(5, 12))
+        LOGGER.info(f"Check full article content: {news_text[:50]}")
+        
         if len(news_text) > 0:
             news_text = preprocess_text(news_text)
 
-            response = summarize_article(news_text)
+            # Summarize the article and force to sleep 5s
+            response = summarize_article(news_text, url)
+            time.sleep(5)
+
             if not response or not response.get("body"):
                 LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
                 return None

@@ -13,17 +13,18 @@ from langchain_core.runnables       import RunnableParallel
 from operator                       import itemgetter
 from langchain.prompts              import PromptTemplate
 from langchain_core.output_parsers  import JsonOutputParser
+from groq                           import RateLimitError
 
 from llm_models.get_models  import LLMCollection, invoke_llm
 from llm_models.llm_prompts import ScoringNews, ClassifierPrompts
 from config.setup           import LOGGER
 
-from datetime       import datetime
+from datetime       import datetime, timedelta
 from typing         import Optional
 from urllib.parse   import urlparse
-import openai 
 import json 
-
+import time
+import re 
 
 class ArticleScorer:
     """
@@ -47,134 +48,59 @@ class ArticleScorer:
             str: Default scoring criteria for news articles.
         """
         return """
-            News Article Scoring Criteria (0-100). 
+            News Article Scoring Criteria (0-100). But with bonus point can goes up to 135.
 
-            1. Timeliness (0-10)
-            Keywords: "recent", "today", "this week", "Q3 2024", "latest market movement".
-            Instructions:
+            Tier 0: Noise / Irrelevant (Score 0-10)
+            - Description: The news has no discernible connection to the Indonesian market, specific IDX companies, or relevant economic factors. 
+              It is generic, trivial, or completely off-topic.
+            - Example: "A foreign celebrity launched a new clothing line. The event was attended by many fans."
 
-            Score 0-2: Article is outdated (e.g., more than 2 weeks old) and does not reflect current market conditions.
-            Score 3-5: Article is somewhat recent (published within the last 2 weeks) but may not be directly tied to current market movements.
-            Score 6-8: Article is published within the last week and covers recent developments related to the Indonesia Stock Market.
-            Score 9-10: Article is very recent (published within the last 24-48 hours) and is highly relevant to ongoing market conditions.
+            Tier 1: General Context (Score 11-40)
+            - Description: The news provides general background information about the Indonesian economy, a broad market sector, or global trends that have a weak or indirect link to the IDX. 
+              It lacks specific company details or actionable events.
+            - Example: "The Indonesian central bank noted that inflation has remained stable for the past quarter. Global commodity prices have seen slight fluctuations this week."
 
-            2. Source Credibility (0-10)
-            Keywords: "Bloomberg", "Reuters", "Kontan", "Bisnis Indonesia", "IDX", "OJK".
-            Instructions:
+            Tier 2: Notable Event (Score 41-70)
+            - Description: The news reports on a specific IDX-listed company or a direct policy change affecting a specific sector. 
+              It describes a concrete event like a new project, a strategic partnership, management changes, or an analyst's rating update. 
+              This tier is for news that is clearly relevant and noteworthy for tracking.
+            - Example: "PT Aneka Tambang (ANTM) announced it is exploring a new partnership to develop an EV battery ecosystem. The company's stock rose 2% on the news."
 
-            Score 0-2: Article is from an unknown or unreliable source with no established credibility.
-            Score 3-5: Article is from a moderately credible source, such as a regional news outlet or less-known publication.
-            Score 6-8: Article is from a well-established national news outlet in Indonesia with some authority in financial reporting.
-            Score 9-10: Article is from a top-tier, highly credible source with a strong reputation in financial markets (e.g., Bloomberg, IDX official reports).
-
-            3. Clarity and Structure (0-10)
-            Keywords: "clear headline", "well-structured", "organized", "informative lead".
-            Instructions:
-
-            Score 0-2: Article is poorly structured, with unclear headlines and a confusing body.
-            Score 3-5: Article is somewhat organized but lacks clarity in its lead or body.
-            Score 6-8: Article is well-organized, with a clear headline and body that is easy to follow.
-            Score 9-10: Article is excellently structured, with a highly informative headline, lead, and logically organized body that enhances readability.
-
-            4. Relevance to the Indonesia Stock Market (0-15)
-            Keywords: "IDX", "JCI", "Jakarta Composite Index", "Indonesian companies", "OJK regulations".
-            Instructions:
-
-            Score 0-5: Article has little to no relevance to the IDX or the Indonesian stock market, or it is only tangentially related.
-            Score 6-10: Article discusses some relevant aspects of the Indonesian market, such as general market movements or non-specific company events.
-            Score 11-15: Article is directly relevant to key drivers of the Indonesian stock market, including specific IDX-listed companies, regulatory changes, or major sector developments.
-
-            5. Depth of Analysis (0-15)
-            Keywords: "detailed analysis", "market data", "earnings report", "sector outlook".
-            Instructions:
-
-            Score 0-5: Article provides only superficial coverage, with little to no analysis or data.
-            Score 6-10: Article includes some level of analysis, such as basic data or expert opinions, but lacks depth.
-            Score 11-15: Article offers a comprehensive analysis with detailed data, expert insights, and thorough exploration of market implications, particularly for the Indonesian market.
-
-            6. Financial Data Inclusion (0-10)
-            Keywords: "earnings", "stock price", "P/E ratio", "ROE", "dividends".
-            Instructions:
-
-            Score 0-2: Article includes no financial data relevant to the Indonesian market.
-            Score 3-5: Article includes basic financial data, such as stock prices or general market indices, with limited context.
-            Score 6-8: Article includes detailed financial metrics, such as earnings, ratios, or dividends, with some analysis.
-            Score 9-10: Article is rich in relevant financial data, providing extensive metrics and detailed analysis specific to Indonesian companies or sectors.
-
-            7. Balanced Reporting (0-5)
-            Keywords: "balanced view", "multiple perspectives", "neutral tone", "pros and cons".
-            Instructions:
-
-            Score 0-1: Article is highly biased, presenting a one-sided view without acknowledging alternative perspectives.
-            Score 2-3: Article attempts some balance but is still somewhat skewed or lacks depth in presenting multiple viewpoints.
-            Score 4-5: Article is well-balanced, presenting multiple perspectives and a neutral tone, offering a comprehensive view of the topic.
-
-            8. Sector and Industry Focus (0-10)
-            Keywords: "banking sector", "telecom industry", "consumer goods", "mining", "energy", "manufacturing".
-            Instructions:
-
-            Score 0-2: Article lacks any clear sector or industry focus relevant to Indonesia.
-            Score 3-5: Article discusses sectors or industries in general terms without specificity.
-            Score 6-8: Article provides a focused discussion on a specific sector or industry relevant to the Indonesian market.
-            Score 9-10: Article is highly specific, with in-depth coverage of key sectors or industries, offering detailed insights into Indonesian market trends.
-
-            9. Market Impact Relevance (0-10)
-            Keywords: "market movement", "investor sentiment", "stock price impact", "IDX fluctuations".
-            Instructions:
-
-            Score 0-2: Article does not discuss or predict any market impact.
-            Score 3-5: Article mentions potential market impacts but lacks detail or analysis.
-            Score 6-8: Article discusses market impacts with a reasonable degree of detail, including potential effects on stock prices or investor sentiment.
-            Score 9-10: Article clearly outlines both immediate and long-term market impacts, with detailed analysis of how news might influence the IDX or specific stocks.
-
-            10. Forward-Looking Statements (0-10)
-            Keywords: "future outlook", "market trend", "forecast", "projections", "strategic move".
-            Instructions:
-
-            Score 0-2: Article contains no forward-looking statements or projections.
-            Score 3-5: Article offers basic projections or trends but lacks depth.
-            Score 6-8: Article provides well-informed short-term and some long-term projections relevant to the Indonesian market.
-            Score 9-10: Article includes detailed and insightful projections, offering a clear outlook for both short-term and long-term market developments in Indonesia.
+            Tier 3: Critical & Actionable (Score 71-100)
+            - Description: The news reports on a major, market-moving event for a specific IDX-listed company. These are high-impact events that investors often act on immediately.
+            - Keywords to look for:
+                - Merger / Acquisition (M&A)
+                - Earnings Report (especially with results like "beat expectations" or "missed targets")
+                - Dividend Announcement (especially with specific rates or dates)
+                - Stock Buyback / Rights Issue
+                - Major Insider Trading (large buy/sell by executives)
+                - A government contract awarded or a major regulatory approval/rejection.
+            - Example: "PT GoTo Gojek Tokopedia (GOTO) reported a 30% revenue jump in its Q2 2025 earnings, significantly beating forecasts. The company also announced a 1 trillion rupiah stock buyback program to boost shareholder value."
 
             Bonus Criteria for High-Quality News (Additional Points)
 
             1. Primary CTA (Up to 5 Points Each):
-            - Does the article mention any of the following?
-                - Dividend rate + cum date (+5 points)
-                - Policy/Bill Passing (especially if it's eyeball-catching) (+5 points)
-                - Insider trading (especially if it's eyeball-catching) (+5 points)
-                - Acquisition/Merging (+5 points)
-                - Launching of a new company business plan (new project/income source/new partner/new contract) (+5 points)
-                - Earnings Report (+5 points)
+                Does the article mention any of the following?
+                 - Dividend rate + cum date (+5 points)
+                 - Policy/Bill Passing (especially if it's eyeball-catching) (+5 points)
+                 - Insider trading (especially if it's eyeball-catching) (+5 points)
+                 - Acquisition/Merging (+5 points)
+                 - Launching of a new company business plan (new project/income source/new partner/new contract) (+5 points)
+                 - Earnings Report (+5 points)
 
             2. Secondary CTA (Up to 2 Points Each):
-            - Does the article mention any of the following?
-                - IDX performance against the US market (+2 points)
-                - Rupiah performance (+2 points)
-                - Net foreign buy and sell (+2 points)
-                - Recommended stocks (stock watchlist) (+2 points)
-                - Global commodities prices (+2 points)
-
-            Total Score:
-            - Base Score: Up to 100 points based on the 10 main criteria.
-            - Bonus Score: Additional points based on Primary and Secondary CTA criteria.
-
-            Standard Scores for Example Articles. 
-            The final score can be any number in range 0 and 100.
-                0 Score: The article is outdated, from an unknown source, poorly structured, has no relevance to the IDX, lacks analysis, financial data, or any market impact, and does not mention any CTA. Example: "Some company in Asia made a move."
-                25 Score: The article is from a moderately credible source, somewhat recent, with basic relevance to the IDX but lacks depth, analysis, or financial data. It's somewhat organized but still vague. Example: "PT X acquired 20% of PT Y."
-                50 Score: The article is recent, from a credible source, somewhat relevant to the IDX, provides basic analysis and financial data, and has a moderate impact on the market. It is organized and mentions some sector focus. Example: "PT X acquired 55% of PT Y, affecting the IDX slightly."
-                75 Score: The article is very recent, from a top-tier source, highly relevant to the IDX, offers detailed analysis, includes extensive financial data, and has a significant market impact. It is well-organized, balanced, and focuses on key sectors. Example: "PT X acquired 55% of PT Y, which is expected to significantly impact the IDX and the mining sector."
-                80 Score: The article includes the above qualities plus mentions a Primary CTA like a new business plan, earnings report, or acquisition. It's relevant, well-structured, with clear forward-looking statements. Example: "PT X's acquisition of PT Y and their new strategic partnership is expected to double their earnings next quarter."
-                90 Score: The article is highly detailed, with extensive analysis, financial data, balanced reporting, and multiple Primary CTAs like dividends, acquisitions, and earnings reports. Example: "PT X's acquisition of PT Y, coupled with their new dividend policy, is expected to significantly boost their stock price and impact the IDX."
-                95 Score: The article includes all the above qualities, with additional insight into long-term market impacts, multiple sector focuses, and comprehensive forward-looking statements. Example: "PT X's strategic acquisition and upcoming merger, along with their new dividend policy, are projected to drive long-term growth in the Indonesian market."
-                100 Score: The article is from a top-tier source, published within the last 24 hours, covers multiple Primary and Secondary CTAs, offers in-depth analysis with detailed financial metrics, balanced reporting, comprehensive forward-looking statements, and discusses immediate and long-term market impacts. Example: "PT X's acquisition of PT Y, insider trading activities, new strategic projects, and a 20% increase in dividends, will likely lead to a significant uptick in the IDX over the next year.
+                Does the article mention any of the following?
+                 - IDX performance against the US market (+2 points)
+                 - Rupiah performance (+2 points)
+                 - Net foreign buy and sell (+2 points)
+                 - Recommended stocks (stock watchlist) (+2 points)
+                 - Global commodities prices (+2 points)
                         
             A high quality news article is one that is:
-            1. actionable
-            2. commercially valuable (request for proposal on a new coal site)
-            3. big movement of money (merger and acquisitions, large insider purchase etc)
-            4. potential big changes for market cap in the industry
+                1. actionable
+                2. commercially valuable (request for proposal on a new coal site)
+                3. big movement of money (merger and acquisitions, large insider purchase etc)
+                4. potential big changes for market cap in the industry
             """
     
     def _extract_domain_urlparse(self, url:str):
@@ -193,7 +119,73 @@ class ArticleScorer:
         except:
             return None
 
-    def get_article_score(self, body: str, article_date: str, source: str) -> int:
+    def manual_score_time(self, publication_timestamp: str) -> int:
+        """
+        Scores an article's timeliness based on its publication date.
+
+        Args:
+            publication_timestamp: A datetime object representing when the article was published.
+
+        Returns:
+            An integer score from 0 to 10.
+        """
+        if isinstance(publication_timestamp, str): 
+            publication_timestamp = datetime.strptime(publication_timestamp, '%Y-%m-%d %H:%M:%S')
+        
+        current_time = datetime.now()
+
+        # scoring manual for timestamp 
+        time_difference = current_time - publication_timestamp 
+
+        # Score 9-10: Very recent (published within the last 48 hours)
+        if time_difference <= timedelta(hours=48):
+            return 10
+    
+        # Score 6-8: Recent (published within the last week)
+        elif time_difference <= timedelta(days=7):
+            # Representative score for the 6-8 range
+            return 7 
+
+        # Score 3-5: Somewhat recent (published within the last 2 weeks)
+        elif time_difference <= timedelta(days=14):
+            # Representative score for the 3-5 range
+            return 4 
+
+        # Score 0-2: Outdated (more than 2 weeks old)
+        else:
+            return 1
+
+    def manual_score_source(self, source: str) -> int: 
+        """
+        Scores a source's credibility based on its domain.
+
+        Args:
+            source_url: The full URL of the article source.
+
+        Returns:
+            An integer score from 0 to 10.
+        """
+        extract_domain = self._extract_domain_urlparse(source)
+        domain = extract_domain.lower().strip()
+        
+        top_tier_sources = {"bloomberg.com", "reuters.com", "idx.co.id", "ojk.go.id"}
+        national_sources = {"kontan.co.id", "bisnis.com", "cnbcindonesia.com", "investor.id", "kompas.com", "detik.com"}
+
+        # Score 9-10: Top-tier, highly credible source
+        if any(keyword in domain for keyword in top_tier_sources):
+            return 10
+
+        # Score 6-8: Well-established national news outlet
+        elif any(keyword in domain for keyword in national_sources):
+            # Representative score for the 6-8 range
+            return 7 
+
+        # Score 0-2: Unknown or unreliable source
+        else:
+            # Representative score
+            return 1
+
+    def get_article_score(self, body: str, article_date: str, article_source: str) -> int:
         """
         Calculate the score for a news article based on comprehensive criteria.
 
@@ -215,9 +207,6 @@ class ArticleScorer:
             input_variables=[
                 "criteria",
                 "body",
-                "source",
-                "article_date", 
-                "current_datetime"
             ],
             partial_variables={
                 "format_instructions": scoring_parser.get_format_instructions()
@@ -229,18 +218,13 @@ class ArticleScorer:
             {   
                 "criteria": itemgetter("criteria"),
                 "body": itemgetter("body"),
-                "source": itemgetter("source"),
-                "article_date": itemgetter("article_date"),
-                "current_datetime": lambda _: datetime.now()
             }
         )
 
         # Prepare the input data for the LLM
-        extract_domain = self._extract_domain_urlparse(source)
+        # extract_domain = self._extract_domain_urlparse(source)
         input_data = {"criteria":self._get_default_criteria(), 
-                      "body":body, 
-                      "source":extract_domain,
-                      "article_date":article_date}
+                      "body":body}
 
         for llm in self.llm_collection.get_llms():
             try:
@@ -259,16 +243,26 @@ class ArticleScorer:
                 if result_score_raw is None:
                     LOGGER.warning("API call failed after all retries, trying next LLM...")
                     continue
-
+                
+                # Final score adding with manual score time and source
+                score_timeliness = self.manual_score_time(article_date)
+                score_source_credibilty = self.manual_score_source(article_source)
                 result_score = result_score_raw.get('score', 0)
+                final_score = result_score + score_source_credibilty + score_timeliness
 
-                if 0 <= result_score <= 150:
-                    return result_score
+                if 0 <= final_score <= 155:
+                    return final_score
                 else: 
                     LOGGER.warning(
-                        f"Score out of range: {result_score}, capping at valid range"
+                        f"Score out of range: {final_score}, capping at valid range"
                     )
-                    return max(0, min(150, result_score))
+                    return max(0, min(155, final_score))
+
+            except RateLimitError as error:
+                error_message = str(error).lower()
+                if "tokens per day" in error_message or "tpd" in error_message:
+                    LOGGER.warning(f"LLM: {llm.model_name} hit its daily token limit. Moving to next LLM.")
+                    continue 
 
             except json.JSONDecodeError as error:
                 LOGGER.error(f"Failed to parse JSON response: {error}")
@@ -277,17 +271,18 @@ class ArticleScorer:
             except Exception as error:
                 LOGGER.warning(f"LLM failed with error: {error}")
                 continue
-        
+
+        LOGGER.error("All llm failed return None for scoring")
         return None 
+    
 
 # So we can use the scorer as a singleton
 _SCORER = ArticleScorer()
 
 # Backward compatible function
-def get_article_score(body: str, article_date: str, source: str):
+def get_article_score(body: str, article_date: str, article_source: str) -> int:
     """
     Calculate the score for a news article.
-
     This function maintains backward compatibility with existing code.
 
     Args:
@@ -296,4 +291,7 @@ def get_article_score(body: str, article_date: str, source: str):
     Returns:
         int: Score between 0 and 100 (or higher with bonus points)
     """
-    return _SCORER.get_article_score(body, article_date, source)
+    final_score = _SCORER.get_article_score(body, article_date, article_source)
+    LOGGER.info(f'[SUCCES] Scoring news for url: {article_source}')
+    time.sleep(7)
+    return final_score

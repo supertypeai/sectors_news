@@ -22,7 +22,8 @@ import json
 import asyncio
 from datetime import datetime
 from typing import List, Dict, Optional, Union, Tuple
-
+from groq import RateLimitError
+import re 
 
 class NewsClassifier:
     """
@@ -168,9 +169,13 @@ class NewsClassifier:
             "dimension": self.prompts.get_dimension_prompt()
         }
 
-        # Load required data
+        # Load tag data
         tags = self._load_tag_data()
+
+        # Load company data 
         company = self._load_company_data()
+        
+        # Load subsector data
         subsectors = self._load_subsector_data()
 
         # Pydantic mapping 
@@ -237,8 +242,12 @@ class NewsClassifier:
 
                 # Process with current LLM
                 result = await invoke_llm_async(classifier_chain, input_data)
-                if result is None: 
-                    LOGGER.warning(f"API call failed for category '{category}', trying next LLM...")
+    
+                # Sleep 8s
+                await asyncio.sleep(8)
+
+                if result is None : 
+                    LOGGER.warning(f"API call failed for category: {category}. trying next LLM.")
                     continue 
 
                 # Return based on category type
@@ -274,10 +283,20 @@ class NewsClassifier:
                             "sustainability": result.get("sustainability", None),
                         }
             
-            except Exception as error:
-                print(f"[ERROR] LLM failed with error: {error}")
+            except RateLimitError as error:
+                error_message = str(error).lower()
+                if "tokens per day" in error_message or "tpd" in error_message:
+                    LOGGER.warning(f"LLM: {llm.model_name} hit its daily token limit. Moving to next LLM.")
+                    continue 
+
+            except json.JSONDecodeError as error:
+                LOGGER.error(f"[ERROR] LLM Failed classified returned malformed JSON: {error}")
                 continue
-        
+
+            except Exception as error:
+                LOGGER.error(f"[ERROR] LLM failed classified with error: {error}")
+                continue
+            
         # Return appropriate default if all LLMs fail
         LOGGER.error(f"All LLMs failed for category '{category}'.")
         return None
@@ -296,23 +315,19 @@ class NewsClassifier:
             Tuple[List[str], List[str], str, str, Dict[str, Optional[int]]]:
                 (tags, tickers, subsector, sentiment, dimensions)
         """
-        # Run all classifications concurrently
-        tasks = [
-            self._classify_openai_async(body, "tags", title),
-            self._classify_openai_async(body, "tickers", title),
-            self._classify_openai_async(body, "subsectors", title),
-            self._classify_openai_async(body, "sentiment", title),
-            self._classify_openai_async(body, "dimension", title),
-        ]
+        # Llama groq sensitive to ratelimit, so decied to not use .gather but sequential instead
+        tags = await self._classify_openai_async(body, "tags", title)
+        tickers = await self._classify_openai_async(body, "tickers", title)  
+        subsector = await self._classify_openai_async(body, "subsectors", title)
+        sentiment = await self._classify_openai_async(body, "sentiment", title)
+        dimension = await self._classify_openai_async(body, "dimension", title)
 
-        results = await asyncio.gather(*tasks, return_exceptions=True)
-        
         # Check for ANY failure: either an unexpected Exception OR None signal
+        results = [tags, tickers, subsector, sentiment, dimension]
         if any(isinstance(res, Exception) or res is None for res in results):
             LOGGER.error("One or more classification steps failed. Failing entire article classification.")
             return None
 
-        tags, tickers, subsector, sentiment, dimension = results
         return tags, tickers, subsector, sentiment, dimension
 
 
