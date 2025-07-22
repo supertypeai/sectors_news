@@ -69,8 +69,8 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_tickers_prompt():
-        return """You are an expert at classified tickers from an article for a company. 
-            Your task is to classified tickers from 'Article Content' based on 'List of Available Tickers'.
+        return """You are an expert financial analyst for classified tickers for Indonesia Stock Market (IDX) summary article. 
+            Your task is to classified tickers company from 'Article Content' based on 'List of Available Tickers'.
             
             List of Available Tickers:
             {tickers}
@@ -78,16 +78,12 @@ class ClassifierPrompts:
             Article Content:
             {body}
 
-            Note:
-            - ONLY USE the tickers listed on 'List of Available Tickers'. 
-            - DO NOT infer or create tickers that are not explicitly provided.
-            - Look from 'Article Content' for company name and then try to match it with tickers on 'List of Available Tickers'
-
             Ticker Extraction Rules:
             - Identify all tickers that are explicitly mentioned in the 'Article Content'.
             - Do NOT modify, infer, or abbreviate ticker symbols.
+            - Ensure to match company name with the correct tickers symbol provided on 'List of Available Tickers'.
 
-            Ensure to return the selected tickers as a following JSON format.
+            Please Ensure to return the selected tickers as a following JSON FORMAT.
             {format_instructions}
         """
     
@@ -131,7 +127,7 @@ class ClassifierPrompts:
             - Classify the article into one of three categories and do not make things up:
             - "Bullish" → Indicates positive or optimistic sentiment toward stocks.
             - "Bearish" → Indicates negative or pessimistic sentiment toward stocks.
-            - "Beutral" → Indicates a balanced or uncertain outlook.
+            - "Neutral" → Indicates a balanced or uncertain outlook.
             
             Ensure to return the sentiment as a following JSON format.
             {format_instructions}
@@ -177,29 +173,18 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_scoring_prompt():
-        return """You are an expert at scoring summary article. 
-            Your task is to score article summary based only on provided Scoring Criteria. 
-            
+        return """You are an expert financial analyst for scoring Indonesia Stock Market (IDX) summary article. 
+            Your task is to score article summary, based solely on a brief two-sentence summary. 
+            Your evaluation is based on the provided 'Scoring Criteria'.
+
             Scoring Criteria:
             {criteria}
 
             Article Summary: 
             {body}
 
-            Article Source: 
-            {source}
-
-            Article Publish Date:
-            {article_date}
-
-            Current Datetime:
-            {current_datetime}
-
             Note:
             - Take a look at criteria first before begin to score the summary article
-            - Score could be in a range of 0-150 due to bonus point
-            - You need to determine the implicit story from the 'Article Summary' to help you scoring based on 'Criteria'
-            - 'Article Source' is the article publisher source
 
             Ensure to return the article score in following JSON format.
             {format_instructions} 
@@ -207,7 +192,7 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_summarize_prompt():
-        return """You are an expert at summarizing an article. 
+        return """You are an expert financial analyst for summarizing Indonesia Stock Market (IDX) article. 
             Your task is to generate summary and title based on the article content.
 
             Article Content:
@@ -216,7 +201,7 @@ class ClassifierPrompts:
             Note:
             - For the title: Create a one sentence title that is not misleading and gives general understanding.
             - For the body: Provide a concise, maximum 2 sentences summary highlighting main points, key events, and financial metrics.
-            And if there is company mentions, maintain the format 'Company Name (TICKER)'.
+              And if there is company mentions, maintain the format 'Company Name (TICKER)'.
 
             Ensure to return the title and summary in the following JSON format.
             {format_instructions}

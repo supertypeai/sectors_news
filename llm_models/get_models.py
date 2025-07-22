@@ -1,16 +1,11 @@
 from langchain.chat_models      import init_chat_model
 from langchain_core.runnables   import Runnable
-from threading                  import Semaphore
 
-from config.setup import LOGGER, OPENAI_API_KEY
+from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, OPENAI_API_KEY,    
+                          _LLM_SEMAPHORE, _LLM_SEMAPHORE_SYNC)
 
-import asyncio
+import groq 
 import openai
-
-
-_LLM_SEMAPHORE_SYNC = Semaphore(5)
-_LLM_SEMAPHORE = asyncio.Semaphore(5)
-
 
 class LLMCollection:
     """
@@ -28,19 +23,54 @@ class LLMCollection:
             cls._instance = super(LLMCollection, cls).__new__(cls)
             cls._instance._llms = [
                 init_chat_model(
-                    "gpt-4o",
-                    model_provider="openai",
+                    "llama3-70b-8192",
+                    model_provider="groq",
                     temperature=0.2,
                     max_retries=3,
-                    api_key=OPENAI_API_KEY
+                    api_key=GROQ_API_KEY1
                 ),
                 init_chat_model(
-                    "gpt-4o",
+                   "llama-3.3-70b-versatile",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY1
+                ),
+                init_chat_model(
+                   "llama3-70b-8192",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY2
+                ),
+                init_chat_model(
+                   "llama-3.3-70b-versatile",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY2
+                ), 
+                init_chat_model(
+                   "llama3-70b-8192",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY3
+                ),
+                init_chat_model(
+                   "llama-3.3-70b-versatile",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY3
+                ), 
+                init_chat_model(
+                   "gpt-4.1-mini",
                     model_provider="openai",
                     temperature=0.2,
                     max_retries=3,
                     api_key=OPENAI_API_KEY
-                )
+                ), 
             ]
         return cls._instance
 
@@ -75,10 +105,8 @@ def invoke_llm(chain: Runnable, input_data: dict):
         try:
             return chain.invoke(input_data)
         
-        except (openai.APIError, openai.APITimeoutError) as error:
-            # This line only runs if the API call fails after all retries are exhausted.
-            LOGGER.error(f"LLM call failed after all retries: {error}")
-            return None
+        except (groq.APIError, groq.APITimeoutError, openai.APIError, openai.APITimeoutError) as error:
+            raise 
 
 
 async def invoke_llm_async(chain: Runnable, input_data: dict):
@@ -97,10 +125,8 @@ async def invoke_llm_async(chain: Runnable, input_data: dict):
         try:
             return await chain.ainvoke(input_data)
         
-        except (openai.APIError, openai.APITimeoutError) as error:
-            # This line only runs if the API call fails after all retries are exhausted.
-            LOGGER.error(f"Async LLM call failed after all retries: {error}")
-            return None
+        except (groq.APIError, groq.APITimeoutError, openai.APIError, openai.APITimeoutError) as error:
+            raise
 
 
 # Example usage:
