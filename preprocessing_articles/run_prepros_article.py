@@ -63,8 +63,11 @@ async def generate_article_async(data: dict):
         
         # Tickers checking with COMPANY_DATA
         checked_tickers = []
-        for ticker in tickers:
-            if ticker in COMPANY_DATA or f"{ticker}.JK" in COMPANY_DATA:
+        for raw_ticker in tickers:
+            # Normalize tickers to have .JK
+            ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
+            # Checking the correct tickers
+            if ticker in COMPANY_DATA:
                 checked_tickers.append(ticker)
         new_article.tickers = checked_tickers
 
@@ -85,7 +88,7 @@ async def generate_article_async(data: dict):
         return new_article
 
     except Exception as error: 
-        LOGGER.error(f"A critical, unexpected error occurred in generate_article_async for {source}: {error}")
+        LOGGER.error(f"[ERROR] A critical, unexpected error occurred in generate_article_async for {source}: {error}")
         return None
 
  

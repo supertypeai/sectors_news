@@ -12,6 +12,7 @@ import requests
 import json
 import argparse
 import time 
+import random 
 
 
 MININUM_SCORE = 60
@@ -112,13 +113,12 @@ def post_source(jsonfile: str, is_check_csv: bool = False):
       
     # Filter out articles that already exist in the database
     articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
-    # articles_to_process = articles_to_process[:5]
     LOGGER.info(f"Total Article to process: {len(articles_to_process)}")  
 
-  except (FileNotFoundError, requests.RequestException, KeyError) as e:
-      LOGGER.error(f"Failed during setup phase: {e}")
-      return
-    
+  except (FileNotFoundError, requests.RequestException, KeyError) as error:
+      LOGGER.error(f"Failed during setup phase: {error}")
+      return 
+  
   # Initialize lists to hold successful articles and failed articles for retry
   successful_articles = []
   failed_articles_queue = []
@@ -131,7 +131,7 @@ def post_source(jsonfile: str, is_check_csv: bool = False):
     try:
       # Get all the necessary data with LLM calls
       processed_article_object = generate_article(article_data)
-          
+
       # Check for the failure signal from the processing function
       if not processed_article_object:
           raise ValueError("generate_article returned None, signaling a failure.")
