@@ -36,7 +36,13 @@ async def generate_article_async(data: dict):
             LOGGER.error(f"Summarization failed for {source}, failing article.")
             # Fail the whole process
             return None 
+        
         title, body = summary_result
+        
+        # Second validation
+        if not title or not body:
+            LOGGER.error(f"Summarization failed resulted in an empty body or title for {source}.")
+            return None
 
         # Classify
         classification_results = await CLASSIFIER.classify_article_async(title, body)

@@ -196,6 +196,11 @@ class ArticleScorer:
         Returns:
             int: Score between 0 and 100 (or higher with bonus points)
         """
+        # Validation body before goes into llm
+        if not body or len(body.strip()) < 10:
+            LOGGER.warning(f"Article body is empty or too short for scoring. Returning 0.")
+            return 0
+
         # Get the scoring prompt template
         template = self.prompts.get_scoring_prompt()
         

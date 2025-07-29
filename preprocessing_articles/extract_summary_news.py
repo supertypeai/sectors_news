@@ -244,7 +244,8 @@ def get_article_body(url: str) -> str:
     
     except Exception as error:
         print(f"[ERROR] Goose3 with no PROXY failed with error: {error}")
-        return ""
+    
+    return ""
 
 
 def summarize_news(url: str) -> tuple[str, str]:
@@ -276,7 +277,8 @@ def summarize_news(url: str) -> tuple[str, str]:
             
             return response.get("title"), response.get("body")
         else:
-            return "", ""
+            LOGGER.warning(f"Scraper returned empty content for {url}. Failing summarization.")
+            return None
     except Exception as error: 
         LOGGER.error(f"An unexpected error occurred in summarize_news for {url}: {error}")
         return None

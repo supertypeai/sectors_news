@@ -113,6 +113,7 @@ def post_source(jsonfile: str, is_check_csv: bool = False):
       
     # Filter out articles that already exist in the database
     articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
+
     LOGGER.info(f"Total Article to process: {len(articles_to_process)}")  
 
   except (FileNotFoundError, requests.RequestException, KeyError) as error:
@@ -153,7 +154,7 @@ def post_source(jsonfile: str, is_check_csv: bool = False):
   if failed_articles_queue:
     for article_data in failed_articles_queue:
       source_url = article_data.get('source')
-      LOGGER.info(f'Retrying: {source_url}')
+      LOGGER.info(f' [RETRY] Retrying for URL: {source_url}')
 
       try:
         processed_article_object = generate_article(article_data)
