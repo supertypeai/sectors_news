@@ -4,6 +4,7 @@ import sys
 import os
 import dateparser
 
+
 locale.setlocale(locale.LC_TIME, "en_US.UTF-8")
 
 # Add the parent directory (project root) to sys.path
@@ -15,13 +16,36 @@ class IdnMinerScraper(Scraper):
   def extract_news(self, url):
     soup = self.fetch_news(url)
     for item in soup.find_all('div', class_='col-12'):
-      source = item.find('a')['href'].strip()
-      box = item.find('div', class_='box-news')
-      if box:
-        title = box.find('div', class_='content').find('h4').text.strip()
-        timestamp = box.find('div', class_='image').find('div', class_='date').text.strip()
-        timestamp = dateparser.parse(timestamp).strftime("%Y-%m-%d %H:%M:%S")
-        self.articles.append({'title': title, 'source': source, 'timestamp': timestamp})
+      link_tag = item.find('a')
+
+      if link_tag and 'href' in link_tag.attrs:
+        source = link_tag['href'].strip()
+
+        if '/news/detail/' in source:
+            # title tag
+            title_tag = link_tag.find('h5', class_='card-title')
+            # timestamp tag
+            timestamp_container = link_tag.find('div', class_='mb-2 text-muted small')
+
+            if title_tag and timestamp_container:
+              title = title_tag.text.strip()
+              all_text_parts = timestamp_container.get_text(separator='|', strip=True).split('|')
+                        
+              if all_text_parts:
+                  timestamp_str = all_text_parts[0] # The date is the first element
+                  timestamp = dateparser.parse(timestamp_str).strftime("%Y-%m-%d %H:%M:%S")
+                  
+                  self.articles.append({'title': title, 'source': source, 'timestamp': timestamp})
+
+            else:
+              print(f"[IDNMINERSCRAPER] Could not find title or timestamp in a news item, link: {source}")
+        
+        else:
+          print(f"[IDNMINERSCRAPER] Non-news link found: {source}")
+
+      else:
+        print(f"[IDNMINERSCRAPER] No '<a>' tag found in this item")
+    
     return self.articles
    
   def extract_news_pages(self, num_pages):
@@ -31,6 +55,7 @@ class IdnMinerScraper(Scraper):
    
   def get_page(self, page_num):
     return f'https://indonesiaminer.com/news?page={page_num}'
+
 
 def main():
   scraper = IdnMinerScraper()
@@ -50,6 +75,7 @@ def main():
 
   if args.csv:
      scraper.write_csv(scraper.articles, args.filename)
+
 
 if __name__ == "__main__":
   '''
