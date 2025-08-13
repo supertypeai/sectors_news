@@ -1,11 +1,18 @@
-import requests
-from bs4 import BeautifulSoup
+from selenium                           import webdriver
+from selenium.webdriver.chrome.service  import Service as ChromeService
+from webdriver_manager.chrome           import ChromeDriverManager
+from selenium.webdriver.chrome.options  import Options
+from bs4                                import BeautifulSoup
+from dotenv                             import load_dotenv
+
 import json
 import csv
 import ssl
 import urllib.request
+import requests
 import os
-from dotenv import load_dotenv
+import time 
+
 
 # Determine the base directory where the .env file is located
 base_dir = os.path.dirname(os.path.abspath(__file__)) 
@@ -34,13 +41,11 @@ class Scraper:
       print(f"Error fetching the URL: {e}")
       return BeautifulSoup()
     
-    
   # Fetch news using urllib.request with proxy
   def fetch_news_with_proxy(self, url):
     try:
       self.proxy = os.environ.get("proxy")
-
-      print("proxy", self.proxy)
+      # print("proxy", self.proxy)
 
       proxy_support = urllib.request.ProxyHandler({'http': self.proxy,'https': self.proxy})
       opener = urllib.request.build_opener(proxy_support)
@@ -55,8 +60,7 @@ class Scraper:
     except Exception as e:
       print(f"Error fetching the URL: {e}")
       return BeautifulSoup()
-      
-  
+
   # Will be overridden by subclass
   def extract_news(self):
     pass
@@ -84,3 +88,35 @@ class Scraper:
 
       for item in data:
         csv_writer.writerow(item.values())
+
+class SeleniumScraper(Scraper):
+  def __init__(self):
+    super().__init__()
+    self.driver = self.setup_driver()
+
+  def setup_driver(self, is_headless: bool = True):
+    chrome_options = Options()
+    if is_headless:
+      chrome_options.add_argument("--headless") 
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+    service = ChromeService(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    return driver 
+  
+  def fetch_news_with_selenium(self, url: str):
+    try:
+      self.driver.get(url)
+      time.sleep(4)
+      html_content = self.driver.page_source
+      self.soup = BeautifulSoup(html_content, 'html.parser')
+      return self.soup
+    
+    except Exception as error:
+      print(f'Failed fetch news with selenium: {error}')  
+      return BeautifulSoup()
+
+  def close_driver(self):
+    if self.driver:
+      self.driver.quit()

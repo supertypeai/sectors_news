@@ -5,20 +5,41 @@ import os
 
 # Add the parent directory (project root) to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from base_model import Scraper
+from base_model.scraper import SeleniumScraper 
 
 
-class GapkiScraper(Scraper):
+class GapkiScraper(SeleniumScraper):
   def extract_news(self, url):
-    soup = self.fetch_news_with_proxy(url)
+    soup = self.fetch_news_with_selenium(url)
+
     for item in soup.find_all('article', class_='post'):
-      div = item.find('div', class_='article-content-col').find('div', class_='content').find('div', class_='default-post')
-      if div:
-        title = div.find('div', class_='nv-post-thumbnail-wrap').find('a')['title'].strip()
-        source = div.find('div', class_='nv-post-thumbnail-wrap').find('a')['href'].strip()
-        timestamp = div.find('div', class_='non-grid-content').find('ul', class_='nv-meta-list').find('li').find('time', class_='updated')['datetime'].strip()
-        timestamp = datetime.fromisoformat(timestamp).strftime("%Y-%m-%d %H:%M:%S")
-        self.articles.append({'title': title, 'source': source, 'timestamp': timestamp})
+      # Some articles have the link in the title (h2), others in the thumbnail
+      link_element = item.select_one('h2.blog-entry-title a, .nv-post-thumbnail-wrap a')
+      
+      # The time tag has different classes for different articles ('updated' or 'entry-date')
+      time_element = item.select_one('time.updated, time.entry-date')
+
+      if link_element and time_element:
+        title = link_element.get('title', '').strip()
+        source = link_element.get('href', '').strip()
+        timestamp_str = time_element.get('datetime', '').strip()
+        
+        # Final check all data
+        if not all([title, source, timestamp_str]):
+          print(f"Skipping an article because it's missing crucial information.")
+          continue
+
+        try:
+          # Convert the ISO format timestamp to a more standard format.
+          timestamp = datetime.fromisoformat(timestamp_str).strftime("%Y-%m-%d %H:%M:%S")
+          
+          self.articles.append({'title': title, 'source': source, 'timestamp': timestamp})
+        except ValueError as error:
+          print(f"Skipping article due to invalid date format: {timestamp_str} - {error}")
+
+      else:
+        print(f'[GAPKI.ID] Could not find link element and time element')
+
     return self.articles
    
   def extract_news_pages(self, num_pages):
@@ -41,12 +62,14 @@ def main():
 
   num_page = args.page_number
 
+ 
   scraper.extract_news_pages(num_page)
     
   scraper.write_json(scraper.articles, args.filename)
 
   if args.csv:
-     scraper.write_csv(scraper.articles, args.filename)
+    scraper.write_csv(scraper.articles, args.filename)
+
 
 if __name__ == "__main__":
   '''
