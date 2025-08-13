@@ -33,6 +33,14 @@ jobs:
           nltk.download('punkt', download_dir='./nltk_data')
           "
           
+      - name: Set up Google Chrome & ChromeDriver
+        uses: browser-actions/setup-chrome@v1
+        with:
+          # installs the very latest Chrome snapshot (same as default)
+          chrome-version: 'latest'
+          # also installs the matching ChromeDriver binary
+          install-chromedriver: true
+
       - name: Debug installed packages
         run: pip list
 

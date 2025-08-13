@@ -101,38 +101,42 @@ def main():
     jgscraper = JGScraper()
     miningscraper = MiningScraper()
 
-    scrapercollection = ScraperCollection()
-    scrapercollection.add_scraper(idnscraper)
-    # scrapercollection.add_scraper(petromindoscraper)
-    scrapercollection.add_scraper(icnscraper)
-    scrapercollection.add_scraper(gapkiscraper)
-    scrapercollection.add_scraper(minerbascraper)
-    scrapercollection.add_scraper(abafscraper)
-    scrapercollection.add_scraper(kontanscraper)
-    scrapercollection.add_scraper(idnminerscraper)
-    scrapercollection.add_scraper(jgscraper)
-    # Insider specific, should be filtered to go inside insider db
-    # scrapercollection.add_scraper(miningscraper)
+    try:
+        scrapercollection = ScraperCollection()
+        # scrapercollection.add_scraper(idnscraper)
+        # scrapercollection.add_scraper(petromindoscraper)
+        scrapercollection.add_scraper(icnscraper)
+        scrapercollection.add_scraper(gapkiscraper)
+        scrapercollection.add_scraper(minerbascraper)
+        scrapercollection.add_scraper(abafscraper)
+        # scrapercollection.add_scraper(kontanscraper)
+        scrapercollection.add_scraper(idnminerscraper)
+        scrapercollection.add_scraper(jgscraper)
+        # Insider specific, should be filtered to go inside insider db
+        # scrapercollection.add_scraper(miningscraper)
 
-    parser = argparse.ArgumentParser(
-        description="Script for scraping data with pipeline"
-    )
-    parser.add_argument("page_number", type=int, default=1)
-    parser.add_argument("filename", type=str, default="scraped_articles")
-    parser.add_argument(
-        "--csv", action="store_true", help="Flag to indicate write to csv file"
-    )
+        parser = argparse.ArgumentParser(
+            description="Script for scraping data with pipeline"
+        )
+        parser.add_argument("page_number", type=int, default=1)
+        parser.add_argument("filename", type=str, default="scraped_articles")
+        parser.add_argument(
+            "--csv", action="store_true", help="Flag to indicate write to csv file"
+        )
 
-    args = parser.parse_args()
+        args = parser.parse_args()
 
-    num_page = args.page_number
+        num_page = args.page_number
 
-    scrapercollection.run_all(num_page)
+        scrapercollection.run_all(num_page)
 
-    scrapercollection.write_json(scrapercollection.articles, args.filename)
+        scrapercollection.write_json(scrapercollection.articles, args.filename)
 
-    if args.csv:
-        scrapercollection.write_csv(scrapercollection.articles, args.filename)
+        if args.csv:
+            scrapercollection.write_csv(scrapercollection.articles, args.filename)
+
+    finally:
+        gapkiscraper.close_driver()
 
     post_source(args.filename)
 
