@@ -262,7 +262,7 @@ def summarize_news(url: str) -> tuple[str, str]:
         # Getting full article from the url
         news_text = get_article_body(url)
         time.sleep(random.uniform(5, 12))
-        LOGGER.info(f"Check full article content: {news_text[:500]}")
+        LOGGER.info(f"Check full article content: {news_text[:550]}")
         
         if len(news_text) > 0:
             news_text = preprocess_text(news_text)
