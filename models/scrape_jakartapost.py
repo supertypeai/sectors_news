@@ -30,12 +30,12 @@ class JakartaPost(SeleniumScraper):
                     if date_match:
                         final_date = date_match.group(1).replace('/', '-')
                     else:
-                        print(f"[business/market] Could not find date in URL: {relative_url} Skipping")
+                        print(f"[business/market] Could not find date in URL: {relative_url}. Skipping.")
                         continue
                     
                     final_date = self.standardized_date(final_date)
                     if not final_date:
-                        print(f"Failed parse date for url: {source}. Skipping")
+                        print(f"[business/market] Failed parse date for url: {source}. Skipping")
                         continue 
 
                     article_data = {
@@ -87,13 +87,18 @@ class JakartaPost(SeleniumScraper):
                     date_dt = datetime.strptime(date, '%d %b %Y')
                     final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
                 except ValueError:
-                    # Parse Format "Jan 13, 2020" (month day, year)
+                    # Parse Format "16 Aug 2016" (day month year)
                     try:
-                        date_dt = datetime.strptime(date, '%b %d, %Y')
+                        date_dt = datetime.strptime(date, '%d %b %Y')
                         final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
-                    except ValueError as error:
-                        print(f"Error parse the date: {error}")
-                        return None
+                    except ValueError:
+                        # Parse Format "Jan 13, 2020" (month day, year)
+                        try:
+                            date_dt = datetime.strptime(date, '%b %d, %Y')
+                            final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
+                        except ValueError as e:
+                            print(f"Error parse the date: {e}")
+                            return None
             
             return final_date
 
