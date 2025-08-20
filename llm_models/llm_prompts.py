@@ -200,8 +200,10 @@ class ClassifierPrompts:
 
             Note:
             - For the title: Create a one sentence title that is not misleading and gives general understanding.
+            
+            Important Note:
             - For the body: Provide a concise, maximum 2 sentences summary highlighting main points, key events, and financial metrics.
-              And if there is company mentions, maintain the format 'Company Name (TICKER)'.
+              And make sure if there are any company mentions, MAINTAIN the format 'Company Name (TICKER)'.
 
             Ensure to return the title and summary in the following JSON format.
             {format_instructions}
