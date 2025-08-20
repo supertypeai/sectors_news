@@ -61,6 +61,18 @@ class Scraper:
       print(f"Error fetching the URL: {e}")
       return BeautifulSoup()
 
+  # Fetch news using requests post
+  def fetch_news_with_post(self, url: str, payload: dict):
+    try:
+      response = requests.post(url, data=payload)
+      data = response.json()
+      html_content = data.get('html_items')
+      self.soup = BeautifulSoup(html_content, 'html.parser')
+      return self.soup 
+    except Exception as error:
+      print(f'Error fetching article IMA: {error}')
+      return BeautifulSoup()
+    
   # Will be overridden by subclass
   def extract_news(self):
     pass
@@ -89,21 +101,47 @@ class Scraper:
       for item in data:
         csv_writer.writerow(item.values())
 
+
 class SeleniumScraper(Scraper):
+  _shared_driver = None 
+
   def __init__(self):
     super().__init__()
-    self.driver = self.setup_driver()
+    self.driver = None
+
+  @classmethod
+  def get_shared_driver(cls, is_headless: bool = True):
+    if cls._shared_driver is None:
+      chrome_options = Options()
+      if is_headless:
+        chrome_options.add_argument("--headless") 
+      chrome_options.add_argument("--no-sandbox")
+      chrome_options.add_argument("--disable-dev-shm-usage")
+      chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+      service = ChromeService(ChromeDriverManager().install())
+      driver = webdriver.Chrome(service=service, options=chrome_options)
+    return driver 
+  
+  @property
+  def driver(self):
+    if self._driver is None:
+      self._driver = self.get_shared_driver()
+    return self._driver
+  
+  @driver.setter
+  def driver(self, value):
+    self._driver = value
+  
+  @classmethod
+  def close_shared_driver(cls):
+    if cls._shared_driver:
+      print("Closing shared WebDriver...")
+      cls._shared_driver.quit()
+      cls._shared_driver = None
 
   def setup_driver(self, is_headless: bool = True):
-    chrome_options = Options()
-    if is_headless:
-      chrome_options.add_argument("--headless") 
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
-    service = ChromeService(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=chrome_options)
-    return driver 
+    # This method is now just for compatibility
+    return self.get_shared_driver(is_headless)
   
   def fetch_news_with_selenium(self, url: str):
     try:
@@ -118,5 +156,4 @@ class SeleniumScraper(Scraper):
       return BeautifulSoup()
 
   def close_driver(self):
-    if self.driver:
-      self.driver.quit()
+    pass 
