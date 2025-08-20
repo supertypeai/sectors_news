@@ -27,7 +27,10 @@ class AntaraNewsScraper(Scraper):
             timestamp = self.get_article_timestamp(source)
             # Standardize the timestamp
             final_date = self.standardize_date(timestamp)
-            
+            if not final_date:
+                print(f"[Antara News] Failed parse date for url: {source} Skipping")
+                continue 
+
             self.articles.append({
                 'title': title,
                 'source': source,

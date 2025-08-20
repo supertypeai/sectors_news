@@ -129,7 +129,6 @@ def main():
         jakartapostscraper = JakartaPost()
         kontanarticlescraper = KontanScraper()
 
-
         try:
             scrapercollection = ScraperCollection()
             # scrapercollection.add_scraper(idnscraper)
@@ -149,7 +148,6 @@ def main():
             scrapercollection.add_scraper(kontanarticlescraper)
             # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
-
 
             num_page = args.page_number
 

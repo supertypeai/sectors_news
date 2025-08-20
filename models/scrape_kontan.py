@@ -28,7 +28,10 @@ class KontanScraper(Scraper):
                     date = date_element.get_text(strip=True).lstrip('| ')
                     # Standardize date
                     final_date = self.standardize_date(date)
-                    
+                    if not final_date:
+                        print(f"[Kontan] Failed parse date for url: {article_url} Skipping")
+                        continue 
+
                     article_data = {
                         'title': title,
                         'source': article_url,
