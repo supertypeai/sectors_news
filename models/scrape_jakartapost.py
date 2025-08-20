@@ -29,8 +29,9 @@ class JakartaPost(SeleniumScraper):
                     date_match = re.search(r'/(\d{4}/\d{2}/\d{2})/', relative_url)
                     if date_match:
                         final_date = date_match.group(1).replace('/', '-')
+                        print(final_date)
                     else:
-                        print(f"Could not find date in URL: {relative_url}. Skipping.")
+                        print(f"[business/market] Could not find date in URL: {relative_url} Skipping")
                         continue
                     
                     final_date = self.standardized_date(final_date)
@@ -64,7 +65,7 @@ class JakartaPost(SeleniumScraper):
                     date = snippet_text.split('...')[0].strip()
                     final_date = self.standardized_date(date)
                     if not final_date:
-                        print(f"Failed parse date for url: {source}. Skipping")
+                        print(f"[ivesment search] Failed parse date for url: {source}. Skipping")
                         continue 
 
                     article_data = {
@@ -78,13 +79,22 @@ class JakartaPost(SeleniumScraper):
     
     def standardized_date(self, date: str):
         try:
-           
             if '-' in date:
                 date_dt = datetime.strptime(date, "%Y-%m-%d")
                 final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
             else:
-                date_dt = datetime.strptime(date, '%d %b %Y')
-                final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
+                # Parse Format "16 Aug 2016" (day month year)
+                try:
+                    date_dt = datetime.strptime(date, '%d %b %Y')
+                    final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
+                except ValueError:
+                    # Parse Format "Jan 13, 2020" (month day, year)
+                    try:
+                        date_dt = datetime.strptime(date, '%b %d, %Y')
+                        final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
+                    except ValueError as e:
+                        print(f"Error parse the date: {e}")
+                        return None
             
             return final_date
 
