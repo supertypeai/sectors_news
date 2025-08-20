@@ -83,7 +83,7 @@ def send_data_to_db(successful_articles: list):
   return response
 
 
-def get_article_to_process(jsonfile: str) -> list[str]:
+def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[str]:
   """ 
   Retrieves articles from a JSON file and filters out those that already exist in the database.
 
@@ -112,16 +112,33 @@ def get_article_to_process(jsonfile: str) -> list[str]:
       
     # Filter out articles that already exist in the database
     articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
-    LOGGER.info(f"Total Article to process: {len(articles_to_process)}")  
+    
+    # Calculate total needed batches
+    total_articles = len(articles_to_process)
+    max_needed_batches = (total_articles + batch_size - 1) // batch_size
+    
+    # If current batch is beyond what's needed, return empty
+    if batch > max_needed_batches:
+        LOGGER.info(f"Batch {batch} not needed. Only {max_needed_batches} batches required for {total_articles} articles")
+        return []
 
-    return articles_to_process
+    # Split to batch
+    start_idx = (batch - 1) * batch_size
+    end_idx = min(start_idx + batch_size, total_articles) 
+
+    LOGGER.info(f"Total Article to process: {len(articles_to_process)}")  
+    LOGGER.info(f"Batch {batch}/{max_needed_batches}: Processing articles {start_idx} to {end_idx-1}")
+
+    return articles_to_process[start_idx:end_idx]
   
   except (FileNotFoundError, requests.RequestException, KeyError) as error:
       LOGGER.error(f"Failed during setup phase: {error}")
-      return 
+      return []
 
 
-def post_source(jsonfile: str, is_check_csv: bool = False):
+def post_source(jsonfile: str,
+                batch: int, batch_size: int, 
+                is_check_csv: bool = False):
   """
   Posts articles to the database server after processing them.
   This function reads articles from a JSON file, processes each article to generate 
@@ -137,7 +154,12 @@ def post_source(jsonfile: str, is_check_csv: bool = False):
   failed_articles_queue = []
   start_time = time.time()
 
-  data_articles = get_article_to_process(jsonfile) 
+  data_articles = get_article_to_process(jsonfile, batch, batch_size) 
+  if not data_articles:
+    LOGGER.info(f"Batch {batch}: No articles to process. Exiting early.")
+    return 
+  
+  LOGGER.info(f"Batch {batch}: Processing {len(data_articles)} articles")
 
   for article_data in data_articles:
     source_url = article_data.get('source')
@@ -205,10 +227,13 @@ def post_source(jsonfile: str, is_check_csv: bool = False):
 
     if 200 <= response.status_code < 300:
         LOGGER.info(f"  Batch Submission Success: {response.status_code}")
+        LOGGER.info(f"  Batch {batch}: COMPLETED SUCCESSFULLY - Processed {len(data_articles)} articles")
     else:
         LOGGER.info(f"  Batch Submission Failed: {response.status_code} - {response.text}")
+        LOGGER.error(f"  Batch {batch}: FAILED during database submission")
   else:
       LOGGER.info("\nNo articles met the criteria for submission.")
+      LOGGER.info(f"Batch {batch}: COMPLETED - Processed {len(data_articles)} articles, but none met submission criteria")
 
 
 def main():

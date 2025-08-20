@@ -8,15 +8,18 @@ on:
 jobs:
   run_scraper_and_submit:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+       batch: [1, 2, 3, 4, 5, 6, 7, 8]
 
     steps:
       - name: Checkout repository content
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -45,7 +48,7 @@ jobs:
         run: pip list
 
       - name: Run scraping script for all news source
-        run: python scripts/pipeline.py 2 pipeline
+        run: python scripts/pipeline.py 2 pipeline --batch ${{ matrix.batch }} --batch-size 75
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}

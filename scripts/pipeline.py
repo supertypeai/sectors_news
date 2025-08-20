@@ -143,6 +143,8 @@ def main():
         parser.add_argument(
             "--csv", action="store_true", help="Flag to indicate write to csv file"
         )
+        parser.add_argument('--batch', type=int, default=1)
+        parser.add_argument('--batch-size', type=int, default=75)
 
         args = parser.parse_args()
 
@@ -158,7 +160,7 @@ def main():
     finally:
         SeleniumScraper.close_shared_driver()
 
-    post_source(args.filename)
+    post_source(args.filename, args.batch, args.batch_size)
 
 
 if __name__ == "__main__":
