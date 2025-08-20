@@ -112,9 +112,10 @@ def get_article_to_process(jsonfile: str) -> list[str]:
       
     # Filter out articles that already exist in the database
     articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
-
     LOGGER.info(f"Total Article to process: {len(articles_to_process)}")  
 
+    return articles_to_process
+  
   except (FileNotFoundError, requests.RequestException, KeyError) as error:
       LOGGER.error(f"Failed during setup phase: {error}")
       return 

@@ -57,6 +57,9 @@ jobs:
           GROQ_API_KEY3: ${{ secrets.GROQ_API_KEY3 }}
           proxy: ${{ secrets.PROXY }}
 
+      - name: Pull Latest Changes
+        run: git pull origin main
+
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
