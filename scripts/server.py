@@ -12,7 +12,6 @@ import requests
 import json
 import argparse
 import time 
-import random 
 
 
 MININUM_SCORE = 60
@@ -34,6 +33,7 @@ def post_articles(jsonfile):
     print('Success:', response.json())
   else:
     print('Failed:', response.status_code, response.text)
+
 
 def post_article(jsonfile):
   with open(f'./data/{jsonfile}.json', 'r') as f:
@@ -59,7 +59,7 @@ def send_data_to_db(successful_articles: list):
   """ 
   Sends the processed articles to the database in batches.
   This function takes a list of successfully processed articles and submits them to the database in batches.
-
+    
   Args:
       successful_articles (list): A list of dictionaries containing the processed articles to be submitted.
   """
@@ -67,7 +67,7 @@ def send_data_to_db(successful_articles: list):
   for i in range(0, len(successful_articles), BATCH_SIZE):
     batch_to_submit = successful_articles[i:i + BATCH_SIZE]
     LOGGER.info(f"Submitting batch {i//BATCH_SIZE + 1} with {len(batch_to_submit)} articles...")
-    
+
     batch_headers = {
         "apikey": SUPABASE_KEY,
         "Authorization": f"Bearer {SUPABASE_KEY}",
@@ -83,16 +83,15 @@ def send_data_to_db(successful_articles: list):
   return response
 
 
-def post_source(jsonfile: str, is_check_csv: bool = False):
-  """
-  Posts articles to the database server after processing them.
-  This function reads articles from a JSON file, processes each article to generate 
-  a News object, and submits them to the database in batches.
-  If an article fails to process, it is added to a retry queue for a second attempt.
+def get_article_to_process(jsonfile: str) -> list[str]:
+  """ 
+  Retrieves articles from a JSON file and filters out those that already exist in the database.
 
   Args:
       jsonfile (str): The name of the JSON file containing articles to be processed.
-      is_check_csv (bool): Flag to indicate whether to save the final processed articles to a CSV file for verification.
+    
+  Returns:
+      list[str]: A list of articles that are not already present in the database.
   """
   try: 
     # Open the JSON file and load the articles
@@ -119,13 +118,27 @@ def post_source(jsonfile: str, is_check_csv: bool = False):
   except (FileNotFoundError, requests.RequestException, KeyError) as error:
       LOGGER.error(f"Failed during setup phase: {error}")
       return 
-  
+
+
+def post_source(jsonfile: str, is_check_csv: bool = False):
+  """
+  Posts articles to the database server after processing them.
+  This function reads articles from a JSON file, processes each article to generate 
+  a News object, and submits them to the database in batches.
+  If an article fails to process, it is added to a retry queue for a second attempt.
+
+  Args:
+      jsonfile (str): The name of the JSON file containing articles to be processed.
+      is_check_csv (bool): Flag to indicate whether to save the final processed articles to a CSV file for verification.
+  """
   # Initialize lists to hold successful articles and failed articles for retry
   successful_articles = []
   failed_articles_queue = []
   start_time = time.time()
 
-  for article_data in articles_to_process:
+  data_articles = get_article_to_process(jsonfile) 
+
+  for article_data in data_articles:
     source_url = article_data.get('source')
     LOGGER.info(f'Processing: {source_url}')
 

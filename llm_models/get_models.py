@@ -2,10 +2,11 @@ from langchain.chat_models      import init_chat_model
 from langchain_core.runnables   import Runnable
 
 from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, OPENAI_API_KEY,    
-                          _LLM_SEMAPHORE, _LLM_SEMAPHORE_SYNC)
+                          LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC)
 
 import groq 
 import openai
+
 
 class LLMCollection:
     """
@@ -101,7 +102,7 @@ def invoke_llm(chain: Runnable, input_data: dict):
     Returns:
         The result of the LLM chain invocation, or None if the API call fails after all
     """
-    with _LLM_SEMAPHORE_SYNC:
+    with LLM_SEMAPHORE_SYNC:
         try:
             return chain.invoke(input_data)
         
@@ -121,7 +122,7 @@ async def invoke_llm_async(chain: Runnable, input_data: dict):
     Returns:
         The result of the LLM chain invocation, or None if the API call fails after all
     """
-    async with _LLM_SEMAPHORE:
+    async with LLM_SEMAPHORE:
         try:
             return await chain.ainvoke(input_data)
         

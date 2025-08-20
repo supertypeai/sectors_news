@@ -4,7 +4,6 @@ import sys
 import os
 from dotenv import load_dotenv
 
-from models.scrape_petromindo import PetromindoScraper
 
 # Determine the base directory where the .env file is located
 base_dir = os.path.dirname(os.path.abspath(__file__))  # This will resolve to the directory containing scraper.py
@@ -15,6 +14,7 @@ from .scraper import Scraper
 
 # Load the .env file from the base directory
 load_dotenv(os.path.join(project_root, '.env'))
+
 
 class ScraperCollection:
   scrapers: list[Scraper]

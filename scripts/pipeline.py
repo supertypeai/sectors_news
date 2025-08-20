@@ -3,23 +3,30 @@ import os
 import argparse
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from base_model.scraper_collection  import ScraperCollection
-from models.scrape_idnfinancials    import IDNFinancialScraper
-from models.scrape_petromindo       import PetromindoScraper
-from models.scrape_icn              import ICNScraper
-from models.scrape_gapki            import GapkiScraper
-from models.scrape_minerba          import MinerbaScraper
-from models.scrape_abaf             import AbafScraper
-from models.scrape_kontan           import KontanScraper
-from models.scrape_idnminer         import IdnMinerScraper
-from models.scrape_jakartaglobe     import JGScraper
-from scripts.server                 import post_source
-from models.scrape_mining           import MiningScraper
-from config.setup                   import SUPABASE_KEY, SUPABASE_URL
+from base_model.scraper_collection      import ScraperCollection
+from base_model.scraper                 import SeleniumScraper
+from models.scrape_idnfinancials        import IDNFinancialScraper
+from models.scrape_petromindo           import PetromindoScraper
+from models.scrape_icn                  import ICNScraper
+from models.scrape_gapki                import GapkiScraper
+from models.scrape_minerba              import MinerbaScraper
+from models.scrape_abaf                 import AbafScraper
+from models.scrape_insight_kontan       import InsightKontanScraper
+from models.scrape_idnminer             import IdnMinerScraper
+from models.scrape_jakartaglobe         import JGScraper
+from scripts.server                     import post_source
+from models.scrape_mining               import MiningScraper
+from models.scrape_antaranews           import AntaraNewsScraper
+from models.scrape_asian_telekom        import AsianTelekom
+from models.scrape_financial_bisnis     import FinansialBisnisScraper
+from models.scrape_idn_business_post    import IndonesiaBusinessPost
+from models.scrape_jakartapost          import JakartaPost 
+from models.scrape_kontan               import KontanScraper
+from config.setup                       import SUPABASE_KEY, SUPABASE_URL, LOGGER
 
 import json
-from supabase   import create_client, Client
-from datetime   import datetime, timezone, timedelta
+from supabase import create_client, Client
+from datetime import datetime, timezone, timedelta
 
 
 if not SUPABASE_URL or not SUPABASE_KEY:
@@ -68,7 +75,7 @@ def delete_outdated_news():
             with open(filename, "w") as f:
                 json.dump(combined, f, indent=4)
 
-            print(
+            LOGGER.info(
                 f"Appended {len(items_to_delete)} items—now {len(combined)} total—in {filename}"
             )
 
@@ -77,12 +84,12 @@ def delete_outdated_news():
                 "created_at", cutoff.isoformat()
             ).execute()
         else:
-            print("No outdated news items found for deletion.")
+            LOGGER.info("No outdated news items found for deletion.")
 
-        print(f"Outdated news deletion run completed at: {now.isoformat()}")
+        LOGGER.info(f"Outdated news deletion run completed at: {now.isoformat()}")
 
     except Exception as e:
-        print(f"Failed to delete or export outdated news: {e}")
+        LOGGER.error(f"Failed to delete or export outdated news: {e}")
 
 
 def main():
@@ -90,16 +97,23 @@ def main():
     Main function to run the scraper collection and post the results.
     It initializes the scrapers, runs them, and posts the scraped articles to the server.
     """
-    idnscraper = IDNFinancialScraper()
-    petromindoscraper = PetromindoScraper()
+    # idnscraper = IDNFinancialScraper()
+    # petromindoscraper = PetromindoScraper()
     icnscraper = ICNScraper()
     gapkiscraper = GapkiScraper()
     minerbascraper = MinerbaScraper()
     abafscraper = AbafScraper()
-    kontanscraper = KontanScraper()
+    # insightkontanscraper = InsightKontanScraper()
     idnminerscraper = IdnMinerScraper()
     jgscraper = JGScraper()
-    miningscraper = MiningScraper()
+    # miningscraper = MiningScraper()
+    antaranewsscraper = AntaraNewsScraper()
+    asiatelkomscraper = AsianTelekom()
+    finansialbisinisscraper = FinansialBisnisScraper()
+    idnbusinesspostscraper = IndonesiaBusinessPost()
+    jakartapostscraper = JakartaPost()
+    kontanarticlescraper = KontanScraper()
+
 
     try:
         scrapercollection = ScraperCollection()
@@ -109,9 +123,15 @@ def main():
         scrapercollection.add_scraper(gapkiscraper)
         scrapercollection.add_scraper(minerbascraper)
         scrapercollection.add_scraper(abafscraper)
-        # scrapercollection.add_scraper(kontanscraper)
+        # scrapercollection.add_scraper(insightkontanscraper) 
         scrapercollection.add_scraper(idnminerscraper)
         scrapercollection.add_scraper(jgscraper)
+        scrapercollection.add_scraper(antaranewsscraper)
+        scrapercollection.add_scraper(asiatelkomscraper)
+        scrapercollection.add_scraper(finansialbisinisscraper)
+        scrapercollection.add_scraper(idnbusinesspostscraper)
+        scrapercollection.add_scraper(jakartapostscraper)
+        scrapercollection.add_scraper(kontanarticlescraper)
         # Insider specific, should be filtered to go inside insider db
         # scrapercollection.add_scraper(miningscraper)
 
@@ -136,7 +156,7 @@ def main():
             scrapercollection.write_csv(scrapercollection.articles, args.filename)
 
     finally:
-        gapkiscraper.close_driver()
+        SeleniumScraper.close_shared_driver()
 
     post_source(args.filename)
 
