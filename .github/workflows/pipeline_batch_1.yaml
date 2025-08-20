@@ -1,0 +1,71 @@
+name: Scrape News and Submit to Database
+
+on:
+  schedule:
+    - cron: "0 3 * * *" # Runs at 10:00 AM UTC+7 every day
+  workflow_dispatch:
+
+jobs:
+  run_scraper_and_submit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Setup NLTK data
+        run: |
+          mkdir -p ./nltk_data
+          python -c "
+          import nltk
+          nltk.data.path.append('./nltk_data')
+          nltk.download('punkt_tab', download_dir='./nltk_data')
+          nltk.download('punkt', download_dir='./nltk_data')
+          "
+          
+      - name: Set up Google Chrome & ChromeDriver
+        uses: browser-actions/setup-chrome@v1
+        with:
+          # installs the very latest Chrome snapshot (same as default)
+          chrome-version: 'latest'
+          # also installs the matching ChromeDriver binary
+          install-chromedriver: true
+
+      - name: Debug installed packages
+        run: pip list
+
+      - name: Run scraping script for all news source
+        run: python scripts/pipeline.py 2 pipeline --batch 1 --batch_size 75
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DB_KEY: ${{ secrets.DB_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GROQ_API_KEY1: ${{ secrets.GROQ_API_KEY1 }}
+          GROQ_API_KEY2: ${{ secrets.GROQ_API_KEY2 }}
+          GROQ_API_KEY3: ${{ secrets.GROQ_API_KEY3 }}
+          proxy: ${{ secrets.PROXY }}
+
+      - name: Pull Latest Changes
+        run: git pull origin main
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -m "Updated scraped news articles" --allow-empty)
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
