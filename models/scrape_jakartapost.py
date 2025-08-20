@@ -29,7 +29,6 @@ class JakartaPost(SeleniumScraper):
                     date_match = re.search(r'/(\d{4}/\d{2}/\d{2})/', relative_url)
                     if date_match:
                         final_date = date_match.group(1).replace('/', '-')
-                        print(final_date)
                     else:
                         print(f"[business/market] Could not find date in URL: {relative_url} Skipping")
                         continue
@@ -92,8 +91,8 @@ class JakartaPost(SeleniumScraper):
                     try:
                         date_dt = datetime.strptime(date, '%b %d, %Y')
                         final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
-                    except ValueError as e:
-                        print(f"Error parse the date: {e}")
+                    except ValueError as error:
+                        print(f"Error parse the date: {error}")
                         return None
             
             return final_date
