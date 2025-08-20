@@ -45,7 +45,7 @@ jobs:
         run: pip list
 
       - name: Run scraping script for all news source
-        run: python scripts/pipeline.py 2 pipeline --batch 3 --batch-size 75
+        run: python scripts/pipeline.py 2 pipeline --process-only --batch 3 --batch-size 75
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}

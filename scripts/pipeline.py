@@ -97,68 +97,71 @@ def main():
     Main function to run the scraper collection and post the results.
     It initializes the scrapers, runs them, and posts the scraped articles to the server.
     """
-    # idnscraper = IDNFinancialScraper()
-    # petromindoscraper = PetromindoScraper()
-    icnscraper = ICNScraper()
-    gapkiscraper = GapkiScraper()
-    minerbascraper = MinerbaScraper()
-    abafscraper = AbafScraper()
-    # insightkontanscraper = InsightKontanScraper()
-    idnminerscraper = IdnMinerScraper()
-    jgscraper = JGScraper()
-    # miningscraper = MiningScraper()
-    antaranewsscraper = AntaraNewsScraper()
-    asiatelkomscraper = AsianTelekom()
-    finansialbisinisscraper = FinansialBisnisScraper()
-    idnbusinesspostscraper = IndonesiaBusinessPost()
-    jakartapostscraper = JakartaPost()
-    kontanarticlescraper = KontanScraper()
-
-
-    try:
-        scrapercollection = ScraperCollection()
-        # scrapercollection.add_scraper(idnscraper)
-        # scrapercollection.add_scraper(petromindoscraper)
-        scrapercollection.add_scraper(icnscraper)
-        scrapercollection.add_scraper(gapkiscraper)
-        scrapercollection.add_scraper(minerbascraper)
-        scrapercollection.add_scraper(abafscraper)
-        # scrapercollection.add_scraper(insightkontanscraper) 
-        scrapercollection.add_scraper(idnminerscraper)
-        scrapercollection.add_scraper(jgscraper)
-        scrapercollection.add_scraper(antaranewsscraper)
-        scrapercollection.add_scraper(asiatelkomscraper)
-        scrapercollection.add_scraper(finansialbisinisscraper)
-        scrapercollection.add_scraper(idnbusinesspostscraper)
-        scrapercollection.add_scraper(jakartapostscraper)
-        scrapercollection.add_scraper(kontanarticlescraper)
-        # Insider specific, should be filtered to go inside insider db
-        # scrapercollection.add_scraper(miningscraper)
-
-        parser = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
             description="Script for scraping data with pipeline"
         )
-        parser.add_argument("page_number", type=int, default=1)
-        parser.add_argument("filename", type=str, default="scraped_articles")
-        parser.add_argument(
-            "--csv", action="store_true", help="Flag to indicate write to csv file"
-        )
-        parser.add_argument('--batch', type=int, default=1)
-        parser.add_argument('--batch-size', type=int, default=75)
+    parser.add_argument("page_number", type=int, default=1)
+    parser.add_argument("filename", type=str, default="scraped_articles")
+    parser.add_argument(
+        "--csv", action="store_true", help="Flag to indicate write to csv file"
+    )
+    parser.add_argument('--batch', type=int, default=1)
+    parser.add_argument('--batch-size', type=int, default=75)
+    parser.add_argument('--process-only', action="store_true", help="Only process, don't scrape")
+    
+    args = parser.parse_args()
+    
+    if not args.process_only:
+        # idnscraper = IDNFinancialScraper()
+        # petromindoscraper = PetromindoScraper()
+        icnscraper = ICNScraper()
+        gapkiscraper = GapkiScraper()
+        minerbascraper = MinerbaScraper()
+        abafscraper = AbafScraper()
+        # insightkontanscraper = InsightKontanScraper()
+        idnminerscraper = IdnMinerScraper()
+        jgscraper = JGScraper()
+        # miningscraper = MiningScraper()
+        antaranewsscraper = AntaraNewsScraper()
+        asiatelkomscraper = AsianTelekom()
+        finansialbisinisscraper = FinansialBisnisScraper()
+        idnbusinesspostscraper = IndonesiaBusinessPost()
+        jakartapostscraper = JakartaPost()
+        kontanarticlescraper = KontanScraper()
 
-        args = parser.parse_args()
 
-        num_page = args.page_number
+        try:
+            scrapercollection = ScraperCollection()
+            # scrapercollection.add_scraper(idnscraper)
+            # scrapercollection.add_scraper(petromindoscraper)
+            scrapercollection.add_scraper(icnscraper)
+            scrapercollection.add_scraper(gapkiscraper)
+            scrapercollection.add_scraper(minerbascraper)
+            scrapercollection.add_scraper(abafscraper)
+            # scrapercollection.add_scraper(insightkontanscraper) 
+            scrapercollection.add_scraper(idnminerscraper)
+            scrapercollection.add_scraper(jgscraper)
+            scrapercollection.add_scraper(antaranewsscraper)
+            scrapercollection.add_scraper(asiatelkomscraper)
+            scrapercollection.add_scraper(finansialbisinisscraper)
+            scrapercollection.add_scraper(idnbusinesspostscraper)
+            scrapercollection.add_scraper(jakartapostscraper)
+            scrapercollection.add_scraper(kontanarticlescraper)
+            # Insider specific, should be filtered to go inside insider db
+            # scrapercollection.add_scraper(miningscraper)
 
-        scrapercollection.run_all(num_page)
 
-        scrapercollection.write_json(scrapercollection.articles, args.filename)
+            num_page = args.page_number
 
-        if args.csv:
-            scrapercollection.write_csv(scrapercollection.articles, args.filename)
+            scrapercollection.run_all(num_page)
 
-    finally:
-        SeleniumScraper.close_shared_driver()
+            scrapercollection.write_json(scrapercollection.articles, args.filename)
+
+            if args.csv:
+                scrapercollection.write_csv(scrapercollection.articles, args.filename)
+
+        finally:
+            SeleniumScraper.close_shared_driver()
 
     post_source(args.filename, args.batch, args.batch_size)
 
