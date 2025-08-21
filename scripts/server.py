@@ -164,7 +164,7 @@ def post_source(jsonfile: str,
   for article_data in data_articles:
     source_url = article_data.get('source')
     LOGGER.info(f'Processing: {source_url}')
-
+    
     try:
       # Get all the necessary data with LLM calls
       processed_article_object = generate_article(article_data)

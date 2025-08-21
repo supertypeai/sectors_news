@@ -40,7 +40,7 @@ class AsianTelekom(Scraper):
             article_data = {
                 'title': title,
                 'source': article_link,
-                'date': final_date,
+                'timestamp': final_date,
             }
             self.articles.append(article_data)
 

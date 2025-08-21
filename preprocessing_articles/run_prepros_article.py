@@ -25,7 +25,7 @@ async def generate_article_async(data: dict):
     """
     loop = asyncio.get_running_loop()
     source = data.get("source").strip()
-
+    
     try:
         timestamp_str = data.get("timestamp").strip().replace("T", " ")
         timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")

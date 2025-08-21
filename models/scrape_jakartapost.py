@@ -69,8 +69,8 @@ class JakartaPost(SeleniumScraper):
 
                     article_data = {
                         'title': title,
-                        'date': final_date,
-                        'source': source
+                        'source': source,
+                        'timestamp': final_date
                     }
                     self.articles.append(article_data)
             

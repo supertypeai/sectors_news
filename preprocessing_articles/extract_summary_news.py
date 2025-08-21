@@ -186,7 +186,7 @@ def get_article_body(url: str) -> str:
     """
     # First attempt try to get full article with goose3 proxy and soup as fallback
     try:
-        proxy = os.environ.get("PROXY_KEY")
+        proxy = os.environ.get("PROXY")
         proxy_support = {"http": proxy, "https": proxy}
 
         session = Session()
