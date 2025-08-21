@@ -139,17 +139,17 @@ class ArticleScorer:
 
         # Score 9-10: Very recent (published within the last 48 hours)
         if time_difference <= timedelta(hours=48):
-            return 10
+            return 5
     
         # Score 6-8: Recent (published within the last week)
         elif time_difference <= timedelta(days=7):
             # Representative score for the 6-8 range
-            return 7 
+            return 3 
 
         # Score 3-5: Somewhat recent (published within the last 2 weeks)
         elif time_difference <= timedelta(days=14):
             # Representative score for the 3-5 range
-            return 4 
+            return 2 
 
         # Score 0-2: Outdated (more than 2 weeks old)
         else:
@@ -173,12 +173,12 @@ class ArticleScorer:
 
         # Score 9-10: Top-tier, highly credible source
         if any(keyword in domain for keyword in top_tier_sources):
-            return 10
+            return 5
 
         # Score 6-8: Well-established national news outlet
         elif any(keyword in domain for keyword in national_sources):
             # Representative score for the 6-8 range
-            return 7 
+            return 3 
 
         # Score 0-2: Unknown or unreliable source
         else:
