@@ -23,6 +23,7 @@ class JakartaPost(SeleniumScraper):
                     
                     # Joined with base url
                     relative_url = link_tag.get('href')
+                    relative_url = re.sub(r"\.html-\d+$", ".html", relative_url)
                     source = urljoin("https://www.thejakartapost.com", relative_url)
                     
                     # Get date from url and standardize
