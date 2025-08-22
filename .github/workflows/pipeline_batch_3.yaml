@@ -32,17 +32,11 @@ jobs:
           nltk.download('punkt_tab', download_dir='./nltk_data')
           nltk.download('punkt', download_dir='./nltk_data')
           "
-          
-      - name: Set up Google Chrome & ChromeDriver
-        uses: browser-actions/setup-chrome@v1
-        with:
-          # installs the very latest Chrome snapshot (same as default)
-          chrome-version: 'latest'
-          # also installs the matching ChromeDriver binary
-          install-chromedriver: true
-
-      - name: Debug installed packages
-        run: pip list
+      - name: Pull latest changes from repository
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git pull origin main
 
       - name: Run scraping script for all news source
         run: python scripts/pipeline.py 2 pipeline --process-only --batch 3 --batch-size 75
@@ -57,15 +51,3 @@ jobs:
           GROQ_API_KEY3: ${{ secrets.GROQ_API_KEY3 }}
           PROXY: ${{ secrets.PROXY }}
 
-      - name: Pull Latest Changes
-        run: git pull origin main
-
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          git diff-index --quiet HEAD || (git commit -m "Updated scraped news articles" --allow-empty)
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

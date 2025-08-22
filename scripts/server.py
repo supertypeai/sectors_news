@@ -12,6 +12,7 @@ import requests
 import json
 import argparse
 import time 
+import os 
 
 
 MININUM_SCORE = 60
@@ -93,26 +94,49 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[
   Returns:
       list[str]: A list of articles that are not already present in the database.
   """
-  try: 
-    # Open the JSON file and load the articles
-    with open(f'./data/{jsonfile}.json', 'r') as f:
-      all_articles = json.load(f)
-    
-    # Headers for Supabase database connection
-    db_headers = {"apikey": SUPABASE_KEY,
-                  "Authorization": f"Bearer {SUPABASE_KEY}"
-                  }
-    # Check if the database is reachable and get existing articles
-    all_articles_db = requests.get(f"{SUPABASE_URL}/rest/v1/idx_news?select=*",
-                                    headers=db_headers
-                                  ).json()
-    
-    # Create a set of existing links from the database
-    existing_links = {db_article.get('source') for db_article in all_articles_db}
+  filtered_file = f'./data/{jsonfile}_filtered.json'
+
+  try:
+    if batch == 1: 
+      LOGGER.info("Batch 1: Performing fresh filtering against database")
+            
+      # Open the JSON file and load the articles
+      with open(f'./data/{jsonfile}.json', 'r') as f:
+        all_articles = json.load(f)
       
-    # Filter out articles that already exist in the database
-    articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
-    
+      # Headers for Supabase database connection
+      db_headers = {"apikey": SUPABASE_KEY,
+                    "Authorization": f"Bearer {SUPABASE_KEY}"
+                    }
+      # Check if the database is reachable and get existing articles
+      all_articles_db = requests.get(f"{SUPABASE_URL}/rest/v1/idx_news?select=*",
+                                      headers=db_headers
+                                    ).json()
+      
+      # Create a set of existing links from the database
+      existing_links = {db_article.get('source') for db_article in all_articles_db}
+        
+      # Filter out articles that already exist in the database
+      articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
+
+      # Save the filtered list for subsequent batches
+      with open(filtered_file, 'w') as file:
+          json.dump(articles_to_process, file, indent=2)
+
+      LOGGER.info(f"Saved filtered article list to {filtered_file} for subsequent batches")
+      
+    else: 
+      LOGGER.info(f"Batch {batch}: Using pre-filtered article list from batch 1")
+            
+      if os.path.exists(filtered_file):
+          with open(filtered_file, 'r') as f:
+              articles_to_process = json.load(f)
+          LOGGER.info(f"Loaded {len(articles_to_process)} articles from filtered list")
+      else:
+          LOGGER.error(f"Filtered article file not found: {filtered_file}")
+          LOGGER.error("Make sure batch 1 has completed successfully before running this batch")
+          return []
+
     # Calculate total needed batches
     total_articles = len(articles_to_process)
     max_needed_batches = (total_articles + batch_size - 1) // batch_size
