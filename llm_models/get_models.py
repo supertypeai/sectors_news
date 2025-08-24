@@ -1,8 +1,8 @@
 from langchain.chat_models      import init_chat_model
 from langchain_core.runnables   import Runnable
 
-from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, OPENAI_API_KEY,    
-                          LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC)
+from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4, 
+                          OPENAI_API_KEY, LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC)
 
 import groq 
 import openai
@@ -64,6 +64,20 @@ class LLMCollection:
                     temperature=0.2,
                     max_retries=3,
                     api_key=GROQ_API_KEY3
+                ), 
+                init_chat_model(
+                   "llama3-70b-8192",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY4
+                ),
+                init_chat_model(
+                   "llama-3.3-70b-versatile",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY4
                 ), 
                 init_chat_model(
                    "gpt-4.1-mini",
