@@ -206,7 +206,7 @@ The system classifies news into 9 main sectors:
 
 ## 📰 Scraper Status
 
-The scraper status indicates which news/data sources are currently functional and run with cron:
+The scraper status indicates which news/data sources are currently functional and run with cron
 
 | ID  | Source                      | Status   | Reason                                                                 |
 |-----|-----------------------------|----------|------------------------------------------------------------------------|
@@ -223,14 +223,14 @@ The scraper status indicates which news/data sources are currently functional an
 | 10  | KONTAN                      | Active   | -                                                                      |
 | 11   | IDN FINANCIALS              | Inactive | Cannot bypass the cloudflare to get rendered html          |
 | 12   | PETROMINDO                  | Inactive |     |
-| 13   | INSIGHT KONTAN              | Inactive | Need subscription to acces the article     |
+| 13   | INSIGHT KONTAN              | Inactive | Need subscription to access the article     |
 | 14   | FINANSIAL BISNIS            | Inactive | Failed to extract the article content with github action, but works on local              |
 | 15   | MINING.COM                  | Inactive | The sources used for sectors insider  |
 
 ## 🔄 GitHub Actions
 
 The project includes **five automated workflows**, each handling a batch of sources.  
-This batching is used to balance request limits Grow API and improve reliability
+This batching is used to balance request limits Groq API 
 
 ### Workflows
 
@@ -270,7 +270,7 @@ This batching is used to balance request limits Grow API and improve reliability
 - Each workflow runs independently with a **1-hour gap** between batches
 - This staggered schedule prevents API rate limits
 - A **default batch size of 75** is applied. Once the required total news articles are scraped (e.g., 300), later workflows may **trigger but exit immediately** without processing
-- You can also manually trigger each batch workflow via GitHub Actions.  
+- You can also manually trigger each batch workflow via GitHub Actions
 
 ## 🔧 Configuration
 
