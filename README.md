@@ -204,6 +204,29 @@ The system classifies news into 9 main sectors:
 }
 ```
 
+## 📰 Scraper Status
+
+The scraper status indicates which news/data sources are currently functional and run with cron:
+
+| ID  | Source                      | Status   | Reason                                                                 |
+|-----|-----------------------------|----------|------------------------------------------------------------------------|
+| 0   | INDONESIAN COAL AND NICKEL  | Active   | -                                                                      |
+| 1   | GAPKI                       | Active   | -                                                                      |
+| 2   | MINERBA.ESDM                | Active   | -                                                                      |
+| 3   | ASIAN BANKING AND FINANCE   | Active   | -                                                                      |
+| 4   | INDONESIA MINER             | Active   | -                                                                      |
+| 5   | JAKARTA GLOBE               | Active   | -                                                                      |
+| 6   | ANTARA NEWS                 | Active   | -                                                                      |
+| 7   | ASIAN TELECOM               | Active   | -                                                                      |
+| 8   | INDONESIA BUSINESS POST     | Active   | -                                                                      |
+| 9   | THE JAKARTA POST            | Active   | -                                                                      |
+| 10  | KONTAN                      | Active   | -                                                                      |
+| 11   | IDN FINANCIALS              | Inactive | Cannot bypass the cloudflare to get rendered html          |
+| 12   | PETROMINDO                  | Inactive |     |
+| 13   | INSIGHT KONTAN              | Inactive | Need subscription to acces the article     |
+| 14   | FINANSIAL BISNIS            | Inactive | Failed to extract the article content with github action, but works on local              |
+| 15   | MINING.COM                  | Inactive | The sources used for sectors insider  |
+
 ## 🔄 GitHub Actions
 
 The project includes **five automated workflows**, each handling a batch of sources.  
