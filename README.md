@@ -16,34 +16,58 @@ A comprehensive news scraping and classification system that automatically colle
 
 ```
 sectors_news/
-├── base_model/                 # Base scraper classes and utilities
+├── base_model/                # Base scraper classes and utilities
 │   ├── scraper.py             # Base Scraper class
 │   └── scraper_collection.py  # ScraperCollection for managing multiple scrapers
-├── models/                    # Individual scraper implementations
-│   ├── scrape_idnfinancials.py
-│   ├── scrape_petromindo.py
-│   ├── scrape_icn.py
-│   ├── scrape_gapki.py
-│   ├── scrape_minerba.py
-│   ├── scrape_abaf.py
-│   ├── scrape_kontan.py
-│   ├── scrape_idnminer.py
-│   ├── scrape_jakartaglobe.py
-│   ├── scrape_idx.py
-│   └── scrape_mining.py
-├── scripts/                   # Pipeline and server scripts
-│   ├── pipeline.py           # Main scraping pipeline
-│   └── server.py             # Database submission utilities
-├── data/                     # Data files and outputs
-│   ├── subsectors.json       # Sector and subsector definitions
+├── config/
+│   └── setup.py
+├── data/                      # Data files and outputs
+│   ├── abaf.txt
+│   ├── companies.json         # Sector and subsector definitions
+│   ├── outdated_news.json
+│   ├── pipeline.json          # Saved title, timestamp, source for all scraped news
+│   ├── pipeline_filtered.json # Saved title, timestamp, source after checking duplicated
+│   ├── sectors_data.json
+│   ├── subsectors.json
 │   ├── subsectors_data.json
-│   ├── mining.json
-│   ├── pipeline.json
-│   └── abaf.txt
+│   ├── top300.json
+│   └── unique_tags.json
+├── database/
+│   └── database_connect.json
+├── llm_models/
+│   ├── get_models.py
+│   └── llm_prompts.json
+├── models/                    # Individual scraper implementations
+│   ├── scrape_abaf.py
+│   ├── scrape_antaranews.py
+│   ├── scrape_asian_telekom.py
+│   ├── scrape_financial_bisnis.py
+│   ├── scrape_gapki.py
+│   ├── scrape_icn.py
+│   ├── scrape_idn_business_post.py
+│   ├── scrape_idnfinancials.py
+│   ├── scrape_idnminer.py
+│   ├── scrape_insight_kontan.py
+│   ├── scrape_jakartaglobe.py
+│   ├── scrape_jakartapost.py
+│   ├── scrape_kontan.py
+│   ├── scrape_minerba.py
+│   ├── scrape_mining.py
+│   └── scrape_petromindo.py
+├── preprocessing_articles/
+│   ├── extract_classifier.py
+│   ├── extract_metadata.py
+│   ├── extract_score_news.py
+│   ├── extract_summary_news.py
+│   ├── news_model.py
+│   └── run_prepros_article.py
+├── scripts/                          # Pipeline and server scripts
+│   ├── pipeline.py                   # Main scraping pipeline
+│   └── server.py                     # Database submission utilities
 ├── universal_news_scraper_main.py    # Universal scraper entry point
 ├── universal_news_scraper_scraper.py # Universal scraper implementations
 ├── universal_pipeline.py             # Universal scraper pipeline
-├── data.ipynb                       # Data analysis notebook
+├── data.ipynb                        # Data analysis notebook
 └── requirements.txt                  # Python dependencies
 ```
 
@@ -68,6 +92,10 @@ sectors_news/
    OPENAI_API_KEY=your_openai_api_key
    SUPABASE_URL=your_supabase_url
    SUPABASE_KEY=your_supabase_key
+   GROQ_API_KEY1=your_groq_api
+   GROQ_API_KEY2=your_groq_api
+   GROQ_API_KEY3=your_groq_api
+   GROQ_API_KEY4=your_groq_api
    PROXY=your_proxy_url  # Optional
    ```
 
@@ -100,19 +128,25 @@ python universal_news_scraper_main.py 0:7  # Sources 0-6
 - 8: REUTERS (requires proxy)
 - 9: BLOOMBERG (requires proxy)
 
-### 2. Sector-Specific Pipeline
+### 2. Sector-Specific Pipeline (Current Usage)
 
 Run the main scraping pipeline with sector-specific scrapers:
 
 ```bash
-# Basic usage
-python scripts/pipeline.py 2 pipeline
+# Basic usage, default batch value 1 and batch_size 75
+python scripts/pipeline.py 2 pipeline 
 
 # With CSV output
 python scripts/pipeline.py 2 pipeline --csv
 
 # Custom page count and filename
 python scripts/pipeline.py 5 my_articles --csv
+
+# Run specific batch and batch_size
+python scripts/pipeline.py 2 pipeline --batch 1 --batch-size 50
+
+# Run news preprocessing only with no scraping process
+python scripts/pipeline.py 2 pipeline --process-only --batch 5 --batch-size 75
 ```
 
 ### 3. Database Submission
@@ -172,39 +206,65 @@ The system classifies news into 9 main sectors:
 
 ## 🔄 GitHub Actions
 
-The project includes two automated workflows:
+The project includes **five automated workflows**, each handling a batch of sources.  
+This batching is used to balance request limits Grow API and improve reliability
 
-### 1. Daily Pipeline (`pipeline.yaml`)
-- **Schedule**: Runs daily at 10:00 AM UTC+7 (3:00 AM UTC)
-- **Trigger**: Manual dispatch also available
-- **Actions**:
-  - Sets up Python 3.10 environment
-  - Installs dependencies
-  - Runs scraping pipeline for all news sources
-  - Submits results to database
-  - Commits and pushes changes
+### Workflows
 
-### 2. Periodic Scraping (`actions.yaml`)
-- **Schedule**: Runs every 3rd day of the month at 10:00 AM UTC+7
-- **Trigger**: Manual dispatch also available
-- **Actions**:
-  - Scrapes from IDN Financials
-  - Scrapes from IDX (100 pages)
-  - Runs universal scraper for sources 0-6
-  - Commits and pushes results
+1. **Batch 1 (`pipeline_batch_1.yaml`)**  
+   - **Schedule**: `0 3 * * *` → Runs daily at **10:00 AM UTC+7 (03:00 UTC)**  
+   - **Trigger**: Manual dispatch also available  
+   - **Actions**:  
+     - Sets up Python 3.10 environment  
+     - Installs dependencies  
+     - Runs all scraping pipeline and preprocessing news only for batch 1  
+     - Submits results to database  
+     - Commits and pushes changes  
+
+2. **Batch 2 (`pipeline_batch_2.yaml`)**  
+   - **Schedule**: `0 5 * * *` → Runs daily at **12:00 PM UTC+7 (05:00 UTC)**  
+   - **Trigger**: Manual dispatch also available  
+   - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 2 sources
+
+3. **Batch 3 (`pipeline_batch_3.yaml`)**  
+   - **Schedule**: `0 6 * * *` → Runs daily at **01:00 PM UTC+7 (06:00 UTC)**  
+   - **Trigger**: Manual dispatch also available  
+   - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 3 sources  
+
+4. **Batch 4 (`pipeline_batch_4.yaml`)**  
+   - **Schedule**: `0 7 * * *` → Runs daily at **02:00 PM UTC+7 (07:00 UTC)**  
+   - **Trigger**: Manual dispatch also available  
+   - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 4 sources  
+
+5. **Batch 5 (`pipeline_batch_5.yaml`)**  
+   - **Schedule**: `0 8 * * *` → Runs daily at **03:00 PM UTC+7 (08:00 UTC)**  
+   - **Trigger**: Manual dispatch also available  
+   - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 5 sources
+
+---
+
+⚙️ **Notes**:
+- Each workflow runs independently with a **1-hour gap** between batches
+- This staggered schedule prevents API rate limits
+- A **default batch size of 75** is applied. Once the required total news articles are scraped (e.g., 300), later workflows may **trigger but exit immediately** without processing
+- You can also manually trigger each batch workflow via GitHub Actions.  
 
 ## 🔧 Configuration
 
 ### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `DATABASE_URL` | Database API endpoint | Yes |
-| `DB_KEY` | Database authentication key | Yes |
-| `OPENAI_API_KEY` | OpenAI API key for LLM inference | Yes |
-| `SUPABASE_URL` | Supabase project URL | Yes |
-| `SUPABASE_KEY` | Supabase API key | Yes |
-| `proxy` | Proxy URL for restricted sources | No |
+| Variable         | Description                              | Required |
+|------------------|------------------------------------------|----------|
+| `DATABASE_URL`   | Database API endpoint                    | Yes      |
+| `DB_KEY`         | Database authentication key              | Yes      |
+| `OPENAI_API_KEY` | OpenAI API key for LLM inference         | Yes      |
+| `GROQ_API_KEY1`  | Groq API key (batch 1 inference)         | Yes      |
+| `GROQ_API_KEY2`  | Groq API key (batch 2 inference)         | Yes      |
+| `GROQ_API_KEY3`  | Groq API key (batch 3 inference)         | Yes      |
+| `GROQ_API_KEY4`  | Groq API key (batch 4 inference)         | Yes      |
+| `SUPABASE_URL`   | Supabase project URL                     | Yes      |
+| `SUPABASE_KEY`   | Supabase API key                         | Yes      |
+| `proxy`          | Proxy URL for restricted sources         | No       |
 
 ### Dependencies
 
