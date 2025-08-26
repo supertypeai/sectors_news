@@ -207,9 +207,17 @@ def get_article_body(url: str) -> str:
             response.raise_for_status()
 
             soup: BeautifulSoup = BeautifulSoup(response.content, "html.parser")
-            content: BeautifulSoup = soup.find("div", class_="content")
-            print(f"[SUCCESS] Article inferenced from url {url} using soup")
-            return content.get_text()
+
+            content = soup.find("div", class_="content")
+            if content and content.get_text(strip=True):
+                print(f"[SUCCESS] Article inferenced from url {url} using soup")
+                return content.get_text(strip=True)
+            
+            # Fallback specific for antara news 
+            content = soup.find("div", class_="wrap__article-detail")
+            if content and content.get_text(strip=True):
+                print(f"[SUCCESS] Article inferenced from url {url} using soup class (wrap__article-detail-content)")
+                return content.get_text(strip=True)
         
     except Exception as error:
         print(
