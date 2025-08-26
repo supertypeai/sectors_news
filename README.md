@@ -254,16 +254,6 @@ This batching is used to balance request limits Groq API
    - **Trigger**: Manual dispatch also available  
    - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 3 sources  
 
-4. **Batch 4 (`pipeline_batch_4.yaml`)**  
-   - **Schedule**: `0 7 * * *` → Runs daily at **02:00 PM UTC+7 (07:00 UTC)**  
-   - **Trigger**: Manual dispatch also available  
-   - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 4 sources  
-
-5. **Batch 5 (`pipeline_batch_5.yaml`)**  
-   - **Schedule**: `0 8 * * *` → Runs daily at **03:00 PM UTC+7 (08:00 UTC)**  
-   - **Trigger**: Manual dispatch also available  
-   - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 5 sources
-
 ---
 
 ⚙️ **Notes**:
