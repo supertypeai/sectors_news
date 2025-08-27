@@ -109,7 +109,7 @@ class JakartaPost(SeleniumScraper):
 
     def extract_news_pages(self, num_pages: int):
         article_list = ['https://www.thejakartapost.com/business/markets',
-                        'https://www.thejakartapost.com/search?q=investment#gsc.tab=0&gsc.q=investment'] 
+                        'https://www.thejakartapost.com/search?q=investment#gsc.tab=0&gsc.q=investment&gsc.sort=date'] 
         
         for url_article in article_list:
             for page in range(1, num_pages+1):
