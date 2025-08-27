@@ -257,8 +257,8 @@ This batching is used to balance request limits Groq API
 ---
 
 ⚙️ **Notes**:
-- Each workflow runs independently with a **1-hour gap** between batches
-- This staggered schedule prevents API rate limits
+- Each batch depends on the previous one using the `needs` keyword to ensure sequential execution
+- Batch 1 performs both scraping and preprocessing, while Batch 2 and Batch 3 only preprocess news
 - A **default batch size of 75** is applied. Once the required total news articles are scraped (e.g., 300), later workflows may **trigger but exit immediately** without processing
 - You can also manually trigger each batch workflow via GitHub Actions
 
