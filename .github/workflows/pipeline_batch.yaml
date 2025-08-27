@@ -1,4 +1,4 @@
-name: Scrape News and Submit to Database Batch 1 and 2
+name: Scrape News and Submit to Database with Batch
 
 on:
   schedule:
@@ -72,7 +72,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   batch_2_process_only:
-    needs: batch_1_scrape_and_submit  # Wait for batch 1 to complete
+    needs: batch_1_scrape_and_submit # Wait for batch 1 to complete
     runs-on: ubuntu-latest
 
     steps:
@@ -118,3 +118,54 @@ jobs:
           GROQ_API_KEY3: ${{ secrets.GROQ_API_KEY3 }}
           GROQ_API_KEY4: ${{ secrets.GROQ_API_KEY4 }}
           PROXY: ${{ secrets.PROXY }}
+
+  batch_3_process_only:
+    needs: batch_2_process_only  # Wait for batch 2 to complete
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Setup NLTK data
+        run: |
+          mkdir -p ./nltk_data
+          python -c "
+          import nltk
+          nltk.data.path.append('./nltk_data')
+          nltk.download('punkt_tab', download_dir='./nltk_data')
+          nltk.download('punkt', download_dir='./nltk_data')
+          "
+          
+      - name: Pull latest changes from repository
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git pull origin main
+
+      - name: Run scraping script for batch 3 (process only)
+        run: python scripts/pipeline.py 2 pipeline --process-only --batch 3 --batch-size 75
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DB_KEY: ${{ secrets.DB_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GROQ_API_KEY1: ${{ secrets.GROQ_API_KEY1 }}
+          GROQ_API_KEY2: ${{ secrets.GROQ_API_KEY2 }}
+          GROQ_API_KEY3: ${{ secrets.GROQ_API_KEY3 }}
+          GROQ_API_KEY4: ${{ secrets.GROQ_API_KEY4 }}
+          PROXY: ${{ secrets.PROXY }}
+
+
+    
