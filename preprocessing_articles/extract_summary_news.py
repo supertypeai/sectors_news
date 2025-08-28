@@ -218,6 +218,22 @@ def get_article_body(url: str) -> str:
             if content and content.get_text(strip=True):
                 print(f"[SUCCESS] Article inferenced from url {url} using soup class (wrap__article-detail-content)")
                 return content.get_text(strip=True)
+            
+            # Fallback specific for investasi kontan news 
+            content = soup.find('div', class_='tmpt-desk-kon')
+            if content:
+                print(f"[SUCCESS] Article inferenced from url using soup class (tmpt-desk-kon)")
+                pattern = r'(?i)berita\s+terkait.*'
+
+                for strong_tag in content.find_all('strong'):
+                    if 'Baca Juga:' in strong_tag.get_text():
+                        p_tag = strong_tag.find_parent('p')
+                        if p_tag:
+                            p_tag.decompose()
+
+                text_content = content.get_text(strip=True)
+                cleaned_content = re.sub(pattern, '', text_content, flags=re.DOTALL)
+                return cleaned_content.strip()
         
     except Exception as error:
         print(
