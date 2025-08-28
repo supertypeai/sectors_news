@@ -301,8 +301,29 @@ def summarize_news(url: str) -> tuple[str, str]:
             
             return response.get("title"), response.get("body")
         else:
-            LOGGER.warning(f"Scraper returned empty content for {url}. Failing summarization.")
-            return None
+            LOGGER.warning(f"Scraper returned empty content for {url}. Trying with CloudScrapper.")
+            scraper = cloudscraper.create_scraper() 
+            g = Goose({'browser_user_agent': USER_AGENT, 'http_session': scraper})
+
+            article = g.extract(url=url)
+            if article.cleaned_text:
+                print(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
+                news_text = article.cleaned_text
+                news_text = preprocess_text(news_text)
+
+                # Summarize the article and force to sleep 5s
+                response = summarize_article(news_text, url)
+                time.sleep(5)
+
+                if not response or not response.get("body"):
+                    LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
+                    return None
+                
+                return response.get("title"), response.get("body")
+            else:
+                LOGGER.error(f"Cloudscraper also returned empty content for {url}.")
+                return None
+
     except Exception as error: 
         LOGGER.error(f"An unexpected error occurred in summarize_news for {url}: {error}")
         return None
