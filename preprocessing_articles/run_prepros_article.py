@@ -16,33 +16,6 @@ EXECUTOR = ThreadPoolExecutor(max_workers=4)
 COMPANY_DATA = load_company_data()
 
 
-def get_ticker_manual(title: str, body: str, company_data: dict) -> list[str]:
-    """ 
-    Get ticker manually by matching company names in the title and body.
-    
-    Args:
-        title (str): The title of the article.
-        body (str): The body of the article.
-        company_data (dict): Dictionary of company data with tickers as keys.
-
-    Returns:
-        list[str]: List of matched tickers.
-    """
-    full_text = f"{title} {body}".lower()
-    matched_tickers = []
-
-    for ticker, company_info in company_data.items():
-        company_name = company_info.get('name').lower()
-        company_words = [word for word in company_name.split() 
-                        if len(word) > 2 and word not in ['tbk', 'ltd', 'inc', 'corp']]
-        
-        # Check if any company word is in the text
-        if any(word in full_text for word in company_words):
-            matched_tickers.append(ticker)
-    
-    return matched_tickers
-
-
 async def generate_article_async(data: dict):
     """
     @helper-function

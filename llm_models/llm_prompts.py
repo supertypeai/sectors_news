@@ -81,7 +81,7 @@ class ClassifierPrompts:
             Ticker Extraction Rules:
             - Identify all tickers that are explicitly mentioned in the 'Article Content'.
             - Do NOT modify, infer, or abbreviate ticker symbols.
-            - Ensure to match company name with the correct tickers symbol provided on 'List of Available Tickers'.
+            - ENSURE to match company name mentioned in 'Article Content' with the correct tickers symbol provided in 'List of Available Tickers'.
 
             Please Ensure to return the selected tickers as a following JSON FORMAT.
             {format_instructions}
@@ -203,7 +203,7 @@ class ClassifierPrompts:
             
             Important Note:
             - For the body: Provide a concise, maximum 2 sentences summary highlighting main points, key events, and financial metrics.
-              And make sure if there are any company mentions, MAINTAIN the format 'Company Name (TICKER)'.
+              And MAKE SURE if there are any company mentions, MAINTAIN the format 'Company Name (TICKER)'.
 
             Ensure to return the title and summary in the following JSON format.
             {format_instructions}
