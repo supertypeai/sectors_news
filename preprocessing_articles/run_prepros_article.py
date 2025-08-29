@@ -69,9 +69,6 @@ async def generate_article_async(data: dict):
         
         # Tickers checking with COMPANY_DATA
         checked_tickers = []
-        if not tickers:
-            tickers = get_ticker_manual(title, body, COMPANY_DATA)
-
         for raw_ticker in tickers:
             # Normalize tickers to have .JK
             ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
