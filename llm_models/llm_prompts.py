@@ -203,7 +203,10 @@ class ClassifierPrompts:
             
             Important Note:
             - For the body: Provide a concise, maximum 2 sentences summary highlighting main points, key events, and financial metrics.
-              And MAKE SURE if there are any company mentions, MAINTAIN the format 'Company Name (TICKER)'.
+              And MAKE SURE if there are any company mentions, MAINTAIN the format 'Company Name'.
+            - DO NOT include any ticker symbols if 'Article Content' do not mention it. 
+              Only include actual ticker symbols, if they are EXPLICITLY MENTIONED in the article content.
+            - Be relevant based on the 'Article Content' and do not make things up.
 
             Ensure to return the title and summary in the following JSON format.
             {format_instructions}

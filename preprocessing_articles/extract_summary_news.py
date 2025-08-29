@@ -174,6 +174,22 @@ def preprocess_text(news_text: str) -> str:
     return processed_text
 
 
+def basic_cleaning_body(body: str) -> str:
+    """ 
+    Basic cleaning of the body text to remove any word 'ticker' mentions in parentheses.
+
+    Args:
+        body (str): The body text to be cleaned.
+    
+    Returns:
+        str: The cleaned body text.
+    """
+    body = re.sub(r'\([^)]*ticker[^)]*\)', '', body, flags=re.IGNORECASE)
+    body = re.sub(r'\s+', ' ', body)
+    body = body.strip()
+    return body
+
+
 def get_article_body(url: str) -> str:
     """ 
     Extracts the body of an article from a given URL using Goose3.
@@ -299,7 +315,10 @@ def summarize_news(url: str) -> tuple[str, str]:
                 LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
                 return None
             
-            return response.get("title"), response.get("body")
+            raw_body = response.get("body") 
+            cleaned_body = basic_cleaning_body(raw_body)
+
+            return response.get("title"), cleaned_body
         else:
             LOGGER.warning(f"Scraper returned empty content for {url}. Trying with CloudScrapper.")
             scraper = cloudscraper.create_scraper() 
