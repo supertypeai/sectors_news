@@ -66,7 +66,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git diff-index --quiet HEAD || (git commit -m "Updated scraped news articles  - Batch 1" --allow-empty)
+          git diff-index --quiet HEAD || (git commit -m "Updated scraped news articles" --allow-empty)
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
