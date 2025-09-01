@@ -24,7 +24,7 @@ class LLMCollection:
             cls._instance = super(LLMCollection, cls).__new__(cls)
             cls._instance._llms = [
                 init_chat_model(
-                    "llama3-70b-8192",
+                    "openai/gpt-oss-20b",
                     model_provider="groq",
                     temperature=0.2,
                     max_retries=3,
@@ -38,7 +38,14 @@ class LLMCollection:
                     api_key=GROQ_API_KEY1
                 ),
                 init_chat_model(
-                   "llama3-70b-8192",
+                   "gemma2-9b-it",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY1
+                ),
+                init_chat_model(
+                   "openai/gpt-oss-20b",
                     model_provider="groq",
                     temperature=0.2,
                     max_retries=3,
@@ -51,8 +58,15 @@ class LLMCollection:
                     max_retries=3,
                     api_key=GROQ_API_KEY2
                 ), 
+                 init_chat_model(
+                   "gemma2-9b-it",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY2
+                ),
                 init_chat_model(
-                   "llama3-70b-8192",
+                   "openai/gpt-oss-20b",
                     model_provider="groq",
                     temperature=0.2,
                     max_retries=3,
@@ -65,8 +79,15 @@ class LLMCollection:
                     max_retries=3,
                     api_key=GROQ_API_KEY3
                 ), 
+                 init_chat_model(
+                   "gemma2-9b-it",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY3
+                ),
                 init_chat_model(
-                   "llama3-70b-8192",
+                   "openai/gpt-oss-20b",
                     model_provider="groq",
                     temperature=0.2,
                     max_retries=3,
@@ -79,6 +100,13 @@ class LLMCollection:
                     max_retries=3,
                     api_key=GROQ_API_KEY4
                 ), 
+                 init_chat_model(
+                   "gemma2-9b-it",
+                    model_provider="groq",
+                    temperature=0.2,
+                    max_retries=3,
+                    api_key=GROQ_API_KEY4
+                ),
                 init_chat_model(
                    "gpt-4.1-mini",
                     model_provider="openai",
