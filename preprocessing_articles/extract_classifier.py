@@ -7,29 +7,29 @@ from langchain_core.output_parsers  import JsonOutputParser
 from langchain_core.runnables       import RunnableParallel
 from operator                       import itemgetter
 from supabase                       import create_client, Client
+from datetime                       import datetime
+from typing                         import List, Dict, Optional, Union, Tuple
+from groq                           import RateLimitError
 
-from llm_models.get_models  import LLMCollection, invoke_llm_async
+from llm_models.get_models  import LLMCollection, invoke_llm_async, invoke_llm
 from llm_models.llm_prompts import (ClassifierPrompts, 
                                     TagsClassification, 
                                     TickersClassification, 
                                     SubsectorClassification, 
                                     SentimentClassification, 
-                                    DimensionClassification)
+                                    DimensionClassification, 
+                                    CompanyNameExtraction)
 
-from config.setup           import LOGGER, SUPABASE_URL, SUPABASE_KEY
+from config.setup import LOGGER, SUPABASE_URL, SUPABASE_KEY
 
 import json
 import asyncio
-from datetime import datetime
-from typing import List, Dict, Optional, Union, Tuple
-from groq import RateLimitError
-import re 
+
 
 class NewsClassifier:
     """
     A class to handle news article classification including tags, subsectors, tickers, and sentiment.
     """
-
     def __init__(self):
         """Initialize the NewsClassifier with required dependencies."""
         # Supabase setup
@@ -329,6 +329,79 @@ class NewsClassifier:
             return None
 
         return tags, tickers, subsector, sentiment, dimension
+
+    def extract_company_name(self, body: str, title: str) -> str:
+        """ 
+        Extracts and a company name from the given body and title text with llm.
+
+        Args:
+            body (str): The main content or description that may contain the company name.
+            title (str): The title or heading that may also contain the company name.
+
+        Returns:
+            str: The cleaned company name without corporate suffixes or extra whitespace.
+        """
+        # Get the prompt template for company extraction
+        template = self.prompts.get_company_name_prompt()
+
+        # Create a company extraction parser using the JsonOutputParser
+        company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
+
+        # Prepare the prompt with the template and format instructions
+        company_prompt = PromptTemplate(
+            template=template, 
+            input_variables=["title", "body"],
+            partial_variables={
+                "format_instructions": company_extraction_parser.get_format_instructions()
+            }
+        )
+
+        # Create a runnable system that will handle the article input
+        runnable_company_system = RunnableParallel(
+                {   
+                    "title": itemgetter("title"),
+                    "body": itemgetter("body")
+                }
+            )
+
+        # Prepare the input data for the LLM
+        input_data = {"title":title, "body": body}
+        
+        for llm in self.llm_collection.get_llms():
+            try:
+                # Create a summary chain that combines the system, prompt, and LLM
+                summary_chain = (
+                    runnable_company_system
+                    | company_prompt
+                    | llm 
+                    | company_extraction_parser
+                )
+                
+                company_extracted = invoke_llm(summary_chain, input_data)
+
+                if company_extracted is None:
+                    LOGGER.warning("API call failed after all retries, trying next LLM...")
+                    continue
+
+                LOGGER.info(f"[SUCCES] Company extracted for url")
+                return company_extracted.get('company')
+
+            except RateLimitError as error:
+                error_message = str(error).lower()
+                if "tokens per day" in error_message or "tpd" in error_message:
+                    LOGGER.warning(f"LLM: {llm.model_name} hit its daily token limit. Moving to next LLM")
+                    continue 
+
+            except json.JSONDecodeError as error:
+                LOGGER.error(f"Failed to parse JSON response: {error}, trying next LLM...")
+                continue
+                
+            except Exception as error:
+                LOGGER.warning(f"LLM failed with error: {error}")
+                continue 
+
+        LOGGER.error("All LLMs failed to return a valid summary.")
+        return None
 
 
 # Create a singleton instance

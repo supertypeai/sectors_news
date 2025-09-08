@@ -16,6 +16,9 @@ class TagsClassification(BaseModel):
 class TickersClassification(BaseModel):
     tickers: List[str] = Field(description="List of stock tickers mentioned in the article")
 
+class CompanyNameExtraction(BaseModel):
+    company: str = Field(description="Company name extracted from summarize article")
+
 class SubsectorClassification(BaseModel):
     subsector: List[str] = Field(description="Primary subsector classification")
 
@@ -84,6 +87,26 @@ class ClassifierPrompts:
             - ENSURE to match company name mentioned in 'Article Content' with the correct tickers symbol provided in 'List of Available Tickers'.
 
             Please Ensure to return the selected tickers as a following JSON FORMAT.
+            {format_instructions}
+        """
+    
+    @staticmethod
+    def get_company_name_prompt():
+        return """You are an expert at extracting information. 
+            Your task is to extract company name from a summarize article.
+        
+            Title Article:
+            {title}
+
+            Summarize Article:
+            {body}
+
+            Instruction:
+            - Look carefully 'Title' and 'Summarize Article' and find COMPANY NAME.
+            - Extract the exact company name based on 'Summarize Article' do not change it. 
+            - If there is no company name to extract, state 'No Company Found'.
+
+            Ensure to return the extracted company name as a following JSON format.
             {format_instructions}
         """
     

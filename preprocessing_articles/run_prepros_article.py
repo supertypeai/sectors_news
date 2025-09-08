@@ -1,19 +1,21 @@
 from concurrent.futures import ThreadPoolExecutor
+from datetime           import datetime
 
 from .news_model                import News 
 from .extract_summary_news      import summarize_news
 from .extract_score_news        import get_article_score
-from database.database_connect  import sectors_data
+from database.database_connect  import sectors_data, ticker_index
 from .extract_classifier        import load_company_data, NewsClassifier
 from config.setup               import LOGGER
 
 import asyncio
-from datetime import datetime
+import re
 
 
 CLASSIFIER = NewsClassifier()
 EXECUTOR = ThreadPoolExecutor(max_workers=4)
 COMPANY_DATA = load_company_data()
+TICKER_INDEX = ticker_index
 
 
 async def generate_article_async(data: dict):
@@ -67,6 +69,25 @@ async def generate_article_async(data: dict):
         if sentiment:
             tags.append(sentiment)
         
+        # Fallback if tickers not found 
+        if not tickers:
+            company_extracted = CLASSIFIER.extract_company_name(body, title)
+            
+            # Clean from company extracted
+            company_extracted = re.sub(r'^\s*PT\s+', '', company_extracted, flags=re.IGNORECASE) 
+            company_extracted = re.sub(r'\s*Tbk\.?$', '', company_extracted, flags=re.IGNORECASE).strip()
+            company_extracted = re.sub(r'\s*\(Persero\)\s*', ' ', company_extracted, flags=re.IGNORECASE)
+            company_extracted = re.sub(r'\s+', ' ', company_extracted).strip().lower()
+
+            # Get ticker hash map
+            ticker_found = TICKER_INDEX.get(company_extracted)
+
+            tickers = []
+            if ticker_found:
+                tickers.append(ticker_found)
+            else:
+                tickers
+
         # Tickers checking with COMPANY_DATA
         checked_tickers = []
         for raw_ticker in tickers:
