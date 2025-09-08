@@ -11,10 +11,14 @@ import re
 class JakartaPost(SeleniumScraper):
     def extract_news(self, url):
         soup = self.fetch_news_with_selenium(url)
-
+        
         if 'business/markets' in url:
             article_containers = soup.select("div.listNews")
             for article in article_containers:
+                premium_badge = article.select_one("span.premiumBadge")
+                if premium_badge:
+                    continue 
+
                 link_tag = article.select_one("a[href*='/business/']")
                 title_tag = article.select_one("h2.titleNews")
 
@@ -108,8 +112,8 @@ class JakartaPost(SeleniumScraper):
             return None 
 
     def extract_news_pages(self, num_pages: int):
-        article_list = ['https://www.thejakartapost.com/business/markets',
-                        'https://www.thejakartapost.com/search?q=investment#gsc.tab=0&gsc.q=investment&gsc.sort=date'] 
+        article_list = ['https://www.thejakartapost.com/business/markets']
+                        # 'https://www.thejakartapost.com/search?q=investment#gsc.tab=0&gsc.q=investment&gsc.sort=date'] 
         
         for url_article in article_list:
             for page in range(1, num_pages+1):

@@ -22,6 +22,7 @@ from models.scrape_financial_bisnis     import FinansialBisnisScraper
 from models.scrape_idn_business_post    import IndonesiaBusinessPost
 from models.scrape_jakartapost          import JakartaPost 
 from models.scrape_kontan               import KontanScraper
+from models.scrape_emiten_news          import EmitenNews
 from config.setup                       import SUPABASE_KEY, SUPABASE_URL, LOGGER
 
 import json
@@ -128,6 +129,7 @@ def main():
         idnbusinesspostscraper = IndonesiaBusinessPost()
         jakartapostscraper = JakartaPost()
         kontanarticlescraper = KontanScraper()
+        emitenscraper = EmitenNews()
 
         try:
             scrapercollection = ScraperCollection()
@@ -143,9 +145,10 @@ def main():
             scrapercollection.add_scraper(antaranewsscraper)
             scrapercollection.add_scraper(asiatelkomscraper)
             # scrapercollection.add_scraper(finansialbisinisscraper)
-            scrapercollection.add_scraper(idnbusinesspostscraper)
+            # scrapercollection.add_scraper(idnbusinesspostscraper)
             scrapercollection.add_scraper(jakartapostscraper)
             scrapercollection.add_scraper(kontanarticlescraper)
+            scrapercollection.add_scraper(emitenscraper)
             # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
 
