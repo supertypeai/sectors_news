@@ -218,7 +218,7 @@ The scraper status indicates which news/data sources are currently functional an
 | 5   | JAKARTA GLOBE               | Active   | -                                                                      |
 | 6   | ANTARA NEWS                 | Active   | -                                                                      |
 | 7   | ASIAN TELECOM               | Active   | -                                                                      |
-| 8   | INDONESIA BUSINESS POST     | Active   | -                                                                      |
+| 8   | INDONESIA BUSINESS POST     | Inactive | Required Login to read the article -                                                                      |
 | 9   | THE JAKARTA POST            | Active   | -                                                                      |
 | 10  | KONTAN                      | Active   | -                                                                      |
 | 11   | IDN FINANCIALS              | Inactive | Cannot bypass the cloudflare to get rendered html          |
@@ -226,6 +226,7 @@ The scraper status indicates which news/data sources are currently functional an
 | 13   | INSIGHT KONTAN              | Inactive | Need subscription to access the article     |
 | 14   | FINANSIAL BISNIS            | Inactive | Failed to extract the article content with github action, but works on local              |
 | 15   | MINING.COM                  | Inactive | The sources used for sectors insider  |
+| 16   | EMITENNEWS.COM              | Active |                        |
 
 ## 🔄 GitHub Actions
 
