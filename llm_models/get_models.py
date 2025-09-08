@@ -14,7 +14,7 @@ class LLMCollection:
     This class ensures that only one instance of the LLMCollection exists and provides methods to add and retrieve LLM instances.
     """
     _instance = None
-
+    
     def __new__(cls):
         """
         @brief Creates a new instance of LLMCollection if it doesn't already exist.
@@ -22,99 +22,45 @@ class LLMCollection:
         """
         if cls._instance is None:
             cls._instance = super(LLMCollection, cls).__new__(cls)
-            cls._instance._llms = [
-                init_chat_model(
-                    "openai/gpt-oss-20b",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY1
-                ),
-                init_chat_model(
-                   "llama-3.3-70b-versatile",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY1
-                ),
-                init_chat_model(
-                   "gemma2-9b-it",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY1
-                ),
-                init_chat_model(
-                   "openai/gpt-oss-20b",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY2
-                ),
-                init_chat_model(
-                   "llama-3.3-70b-versatile",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY2
-                ), 
-                 init_chat_model(
-                   "gemma2-9b-it",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY2
-                ),
-                init_chat_model(
-                   "openai/gpt-oss-20b",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY3
-                ),
-                init_chat_model(
-                   "llama-3.3-70b-versatile",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY3
-                ), 
-                 init_chat_model(
-                   "gemma2-9b-it",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY3
-                ),
-                init_chat_model(
-                   "openai/gpt-oss-20b",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY4
-                ),
-                init_chat_model(
-                   "llama-3.3-70b-versatile",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY4
-                ), 
-                 init_chat_model(
-                   "gemma2-9b-it",
-                    model_provider="groq",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=GROQ_API_KEY4
-                ),
-                init_chat_model(
-                   "gpt-4.1-mini",
-                    model_provider="openai",
-                    temperature=0.2,
-                    max_retries=3,
-                    api_key=OPENAI_API_KEY
-                ), 
-            ]
+
+            model_providers = {
+                "openai/gpt-oss-20b": "groq",
+                "llama-3.3-70b-versatile": "groq",
+                "gpt-4.1-mini": "openai",
+                "openai/gpt-oss-120b": "groq",
+                "qwen/qwen3-32b": "groq",
+                "deepseek-r1-distill-llama-70b": "groq",
+            }
+
+            groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4]
+
+            llms= []
+            for model, provider in model_providers.items():
+                if provider == 'groq':
+                    for groq_key in groq_api_keys:
+                        llms.append(
+                            init_chat_model(
+                                model,
+                                model_provider=provider,
+                                temperature=0.2,
+                                max_retries=3,
+                                api_key=groq_key,
+                            )
+                        )
+                
+                if provider == 'openai':
+                     llms.append(
+                        init_chat_model(
+                            model,
+                            model_provider=provider,
+                            temperature=0.2,
+                            max_retries=3,
+                            api_key=OPENAI_API_KEY,
+                        )
+                    )
+
+            cls._instance._llms = llms 
+
         return cls._instance
 
     def add_llm(self, llm):
