@@ -1,9 +1,9 @@
 """
 Script to submit 
 """
+from collections import Counter
 
 from preprocessing_articles.run_prepros_article import generate_article
-
 from config.setup import LOGGER, SUPABASE_KEY, SUPABASE_URL
 
 import pandas as pd 
@@ -119,9 +119,19 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[
       # Filter out articles that already exist in the database
       articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
 
+      # Filter out duplicate source
+      seen_sources = set()
+      final_articles_to_process = []
+
+      for article in articles_to_process:
+        source = article.get('source')
+        if source not in seen_sources:
+          seen_sources.add(source)
+          final_articles_to_process.append(source)
+          
       # Save the filtered list for subsequent batches
       with open(filtered_file, 'w') as file:
-          json.dump(articles_to_process, file, indent=2)
+          json.dump(final_articles_to_process, file, indent=2)
 
       LOGGER.info(f"Saved filtered article list to {filtered_file} for subsequent batches")
       
@@ -130,15 +140,15 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[
             
       if os.path.exists(filtered_file):
           with open(filtered_file, 'r') as f:
-              articles_to_process = json.load(f)
-          LOGGER.info(f"Loaded {len(articles_to_process)} articles from filtered list")
+            final_articles_to_process = json.load(f)
+          LOGGER.info(f"Loaded {len(final_articles_to_process)} articles from filtered list")
       else:
           LOGGER.error(f"Filtered article file not found: {filtered_file}")
           LOGGER.error("Make sure batch 1 has completed successfully before running this batch")
           return []
 
     # Calculate total needed batches
-    total_articles = len(articles_to_process)
+    total_articles = len(final_articles_to_process)
     max_needed_batches = (total_articles + batch_size - 1) // batch_size
     
     # If current batch is beyond what's needed, return empty
@@ -150,10 +160,10 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[
     start_idx = (batch - 1) * batch_size
     end_idx = min(start_idx + batch_size, total_articles) 
 
-    LOGGER.info(f"Total Article to process: {len(articles_to_process)}")  
+    LOGGER.info(f"Total Article to process: {len(final_articles_to_process)}")  
     LOGGER.info(f"Batch {batch}/{max_needed_batches}: Processing articles {start_idx} to {end_idx-1}")
 
-    return articles_to_process[start_idx:end_idx]
+    return final_articles_to_process[start_idx:end_idx]
   
   except (FileNotFoundError, requests.RequestException, KeyError) as error:
       LOGGER.error(f"Failed during setup phase: {error}")
