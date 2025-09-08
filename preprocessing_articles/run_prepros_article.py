@@ -73,20 +73,17 @@ async def generate_article_async(data: dict):
         if not tickers:
             company_extracted = CLASSIFIER.extract_company_name(body, title)
             
-            # Clean from company extracted
-            company_extracted = re.sub(r'^\s*PT\s+', '', company_extracted, flags=re.IGNORECASE) 
-            company_extracted = re.sub(r'\s*Tbk\.?$', '', company_extracted, flags=re.IGNORECASE).strip()
-            company_extracted = re.sub(r'\s*\(Persero\)\s*', ' ', company_extracted, flags=re.IGNORECASE)
-            company_extracted = re.sub(r'\s+', ' ', company_extracted).strip().lower()
-
-            # Get ticker hash map
-            ticker_found = TICKER_INDEX.get(company_extracted)
-
             tickers = []
-            if ticker_found:
-                tickers.append(ticker_found)
-            else:
-                tickers
+            for company in company_extracted:
+                company = re.sub(r'^\s*PT\s+', '', company, flags=re.IGNORECASE) 
+                company = re.sub(r'\s*Tbk\.?$', '', company, flags=re.IGNORECASE)
+                company = re.sub(r'\s*\(Persero\)\s*', ' ', company, flags=re.IGNORECASE)
+                company = re.sub(r'\s+', ' ', company).strip().lower()
+                
+                ticker_found = TICKER_INDEX.get(company)
+
+                if ticker_found:
+                    tickers.append(ticker_found)
 
         # Tickers checking with COMPANY_DATA
         checked_tickers = []
