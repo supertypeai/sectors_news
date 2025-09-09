@@ -30,9 +30,11 @@ class LLMCollection:
                 "openai/gpt-oss-120b": "groq",
                 "qwen/qwen3-32b": "groq",
                 "deepseek-r1-distill-llama-70b": "groq",
+                "llama-3.1-8b-instant": "groq"
             }
 
-            groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4]
+            groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2, 
+                             GROQ_API_KEY3, GROQ_API_KEY4]
 
             llms= []
             for model, provider in model_providers.items():
