@@ -26,11 +26,11 @@ class LLMCollection:
             model_providers = {
                 "openai/gpt-oss-20b": "groq",
                 "llama-3.3-70b-versatile": "groq",
-                "gpt-4.1-mini": "openai",
                 "openai/gpt-oss-120b": "groq",
                 "qwen/qwen3-32b": "groq",
                 "deepseek-r1-distill-llama-70b": "groq",
-                "llama-3.1-8b-instant": "groq"
+                "llama-3.1-8b-instant": "groq",
+                "gpt-4.1-mini": "openai"
             }
 
             groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2, 
