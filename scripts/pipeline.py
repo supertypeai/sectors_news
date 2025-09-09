@@ -135,22 +135,23 @@ def main():
             scrapercollection = ScraperCollection()
             # scrapercollection.add_scraper(idnscraper)
             # scrapercollection.add_scraper(petromindoscraper)
+            # scrapercollection.add_scraper(finansialbisinisscraper)
+            # scrapercollection.add_scraper(idnbusinesspostscraper)
+            # scrapercollection.add_scraper(insightkontanscraper) 
+            # Insider specific, should be filtered to go inside insider db
+            # scrapercollection.add_scraper(miningscraper)
+            
             scrapercollection.add_scraper(icnscraper)
             scrapercollection.add_scraper(gapkiscraper)
             scrapercollection.add_scraper(minerbascraper)
             scrapercollection.add_scraper(abafscraper)
-            # scrapercollection.add_scraper(insightkontanscraper) 
             scrapercollection.add_scraper(idnminerscraper)
             scrapercollection.add_scraper(jgscraper)
             scrapercollection.add_scraper(antaranewsscraper)
             scrapercollection.add_scraper(asiatelkomscraper)
-            # scrapercollection.add_scraper(finansialbisinisscraper)
-            # scrapercollection.add_scraper(idnbusinesspostscraper)
             scrapercollection.add_scraper(jakartapostscraper)
             scrapercollection.add_scraper(kontanarticlescraper)
             scrapercollection.add_scraper(emitenscraper)
-            # Insider specific, should be filtered to go inside insider db
-            # scrapercollection.add_scraper(miningscraper)
 
             num_page = args.page_number
 

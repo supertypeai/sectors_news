@@ -127,7 +127,7 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[
         source = article.get('source')
         if source not in seen_sources:
           seen_sources.add(source)
-          final_articles_to_process.append(source)
+          final_articles_to_process.append(article)
           
       # Save the filtered list for subsequent batches
       with open(filtered_file, 'w') as file:

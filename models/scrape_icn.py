@@ -22,7 +22,7 @@ class ICNScraper(Scraper):
     return self.articles
    
   def extract_news_pages(self, num_pages):
-    for i in range(num_pages):
+    for i in range(1, num_pages+1):
       self.extract_news(self.get_page(i))
     return self.articles
    
