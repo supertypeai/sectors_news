@@ -87,7 +87,8 @@ class NewsClassifier:
 
         with open("./data/unique_tags.json", "r") as f:
             tags = json.load(f)
-
+            tags = tags.get('tags')
+            
         self._tags_cache = tags
         return tags
 

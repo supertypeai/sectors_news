@@ -30,6 +30,7 @@ def get_unique_tags() -> list[str]:
     """
     with open("data/unique_tags.json", "r") as file:
         data_tags = json.load(file)
+        data_tags = data_tags.get('tags')
     return data_tags
 
 
@@ -46,9 +47,10 @@ def get_existing_data(start_date: str) -> list[dict]:
     try:
         response = (
             supabase.table("idx_news")
-            .select("id, tags, body, timestamp")
+            .select("id, tags, body, source, timestamp")
             .gte("timestamp", start_date)   
             .lt("timestamp", (datetime.today() + timedelta(days=1)).strftime("%Y-%m-%d"))     
+            .not_.ilike("source", "%https://www.idx.co.id/StaticData%") 
             .order("timestamp", desc=True)  
             .execute()
         )
@@ -277,6 +279,7 @@ if __name__ == "__main__":
     unique_tags = get_unique_tags()
     sentiment_index = create_sentiment_indexing(data)
     run_batch_update(unique_tags, sentiment_index)
+    
 
     
 
