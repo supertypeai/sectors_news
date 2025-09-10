@@ -53,7 +53,7 @@ class EmitenNews(Scraper):
     def standardize_date(self, date: str) -> str | None:
         try:
             date_obj = datetime.strptime(date, "%d/%m/%Y")
-            final_date = date_obj.strftime("%Y-%m-%d")
+            final_date = date_obj.strftime("%Y-%m-%d %H:%M:%S")
             return final_date
         
         except (ValueError, AttributeError) as error:
