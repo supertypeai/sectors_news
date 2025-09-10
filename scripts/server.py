@@ -13,6 +13,8 @@ import json
 import argparse
 import time 
 import os 
+import shutil
+import traceback 
 
 
 MININUM_SCORE = 60
@@ -84,6 +86,53 @@ def send_data_to_db(successful_articles: list):
   return response
 
 
+def filter_article_to_process(all_articles_db: dict, all_articles: list[dict[str]], all_articles_yesterday: list[str]):
+  """
+    Filters articles to process by removing duplicates, articles already in the database, 
+    and articles that were processed yesterday.
+
+    Args:
+        all_articles_db (dict): A dictionary of articles already in the database.
+        all_articles (list[dict]): A list of all articles to be processed.
+        all_articles_yesterday (list[str]): A list of article sources processed yesterday.
+
+    Returns:
+        list[dict]: A list of filtered articles ready for processing.
+    """
+  try:
+    # Create a set of existing links from the database
+    existing_links = {db_article.get('source') for db_article in all_articles_db}
+      
+    # Filter out articles that already exist in the database
+    articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
+
+    # Filter out duplicate source
+    seen_sources = set()
+    filter_duplicate_articles = []
+
+    for article in articles_to_process:
+      source = article.get('source')
+      if source not in seen_sources:
+        seen_sources.add(source)
+        filter_duplicate_articles.append(article)
+    
+    # Filter out same sources with pipeline yesterday
+    final_articles_to_process = []
+
+    for article in filter_duplicate_articles:
+      source = article.get('source')
+      if source in all_articles_yesterday:
+          continue
+      final_articles_to_process.append(article)
+
+    return final_articles_to_process
+  
+  except Exception as error:
+        LOGGER.error(f"Error in filtering articles: {error}")
+        LOGGER.error(f"Traceback: {traceback.format_exc()}")
+        return []
+
+
 def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[str]:
   """ 
   Retrieves articles from a JSON file and filters out those that already exist in the database.
@@ -101,9 +150,14 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[
       LOGGER.info("Batch 1: Performing fresh filtering against database")
             
       # Open the JSON file and load the articles
-      with open(f'./data/{jsonfile}.json', 'r') as f:
-        all_articles = json.load(f)
+      with open(f'./data/{jsonfile}.json', 'r') as file_pipeline:
+        all_articles = json.load(file_pipeline)
       
+      # Open pipeline json yesterday 
+      with open('./data/pipeline_yesterday.json', 'r') as file_pipeline_yesterday:
+        all_articles_yesterday = json.load(file_pipeline_yesterday)
+        all_articles_yesterday = [item.get('source') for item in all_articles_yesterday]
+
       # Headers for Supabase database connection
       db_headers = {"apikey": SUPABASE_KEY,
                     "Authorization": f"Bearer {SUPABASE_KEY}"
@@ -113,22 +167,12 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[
                                       headers=db_headers
                                     ).json()
       
-      # Create a set of existing links from the database
-      existing_links = {db_article.get('source') for db_article in all_articles_db}
-        
-      # Filter out articles that already exist in the database
-      articles_to_process = [article for article in all_articles if article.get('source') not in existing_links]
+      # Filter articles
+      final_articles_to_process = filter_article_to_process(all_articles_db, all_articles, all_articles_yesterday)
 
-      # Filter out duplicate source
-      seen_sources = set()
-      final_articles_to_process = []
+      # Update yesterday pipeline checkpoint with raw pipeline.json
+      shutil.copy("./data/pipeline.json", "./data/pipeline_yesterday.json")
 
-      for article in articles_to_process:
-        source = article.get('source')
-        if source not in seen_sources:
-          seen_sources.add(source)
-          final_articles_to_process.append(article)
-          
       # Save the filtered list for subsequent batches
       with open(filtered_file, 'w') as file:
           json.dump(final_articles_to_process, file, indent=2)
