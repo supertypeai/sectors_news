@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from datetime           import datetime
+from rapidfuzz          import fuzz
 
 from .news_model                import News 
 from .extract_summary_news      import summarize_news
@@ -80,7 +81,12 @@ async def generate_article_async(data: dict):
                 company = re.sub(r'\s*\(Persero\)\s*', ' ', company, flags=re.IGNORECASE)
                 company = re.sub(r'\s+', ' ', company).strip().lower()
                 
-                ticker_found = TICKER_INDEX.get(company)
+                ticker_found = None 
+                for company_name, ticker in TICKER_INDEX.items():
+                    best_match = fuzz.partial_ratio(company, company_name)
+                    if best_match > 95: 
+                        ticker_found = ticker 
+                        break 
 
                 if ticker_found:
                     tickers.append(ticker_found)
@@ -88,7 +94,6 @@ async def generate_article_async(data: dict):
         # Tickers checking with COMPANY_DATA
         checked_tickers = []
         for raw_ticker in tickers:
-            # Normalize tickers to have .JK
             ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
             # Checking the correct tickers
             if ticker in COMPANY_DATA:
@@ -108,15 +113,17 @@ async def generate_article_async(data: dict):
                 break
         
         new_article.dimension = dimension
-
         return new_article
 
     except Exception as error: 
-        LOGGER.error(f"[ERROR] A critical, unexpected error occurred in generate_article_async for {source}: {error}")
+        LOGGER.error(
+            f"[ERROR] A critical, unexpected error occurred in generate_article_async for {source}: {error}",
+            exc_info=True
+        )
         return None
 
  
-def generate_article(data: dict):
+def generate_article(data: dict[str]):
     """
     @helper-function
     @brief Generate article from URL.
