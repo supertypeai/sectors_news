@@ -318,18 +318,18 @@ class NewsClassifier:
         """
         # Llama groq sensitive to ratelimit, so decied to not use .gather but sequential instead
         tags = await self._classify_openai_async(body, "tags", title)
-        tickers = await self._classify_openai_async(body, "tickers", title)  
+        # tickers = await self._classify_openai_async(body, "tickers", title)  
         subsector = await self._classify_openai_async(body, "subsectors", title)
         sentiment = await self._classify_openai_async(body, "sentiment", title)
         dimension = await self._classify_openai_async(body, "dimension", title)
 
         # Check for ANY failure: either an unexpected Exception OR None signal
-        results = [tags, tickers, subsector, sentiment, dimension]
+        results = [tags, subsector, sentiment, dimension]
         if any(isinstance(res, Exception) or res is None for res in results):
             LOGGER.error("One or more classification steps failed. Failing entire article classification.")
             return None
 
-        return tags, tickers, subsector, sentiment, dimension
+        return tags, subsector, sentiment, dimension
 
     def extract_company_name(self, body: str, title: str) -> str:
         """ 

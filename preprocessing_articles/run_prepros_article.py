@@ -53,7 +53,7 @@ async def generate_article_async(data: dict):
             LOGGER.error(f"Classification failed for {source}, failing article.")
             # Fail the whole process
             return None 
-        tags, tickers, sub_sector_result, sentiment, dimension = classification_results
+        tags, sub_sector_result, sentiment, dimension = classification_results
 
         # Score
         score_result = get_article_score(body, timestamp, source)
@@ -70,34 +70,40 @@ async def generate_article_async(data: dict):
         if sentiment:
             tags.append(sentiment)
         
-        # Fallback if tickers not found 
-        if not tickers:
-            company_extracted = CLASSIFIER.extract_company_name(body, title)
+        # Get tickers new flow 
+        company_extracted = CLASSIFIER.extract_company_name(body, title)
+        
+        tickers = set()
+        for company in company_extracted:
+            company = re.sub(r'^\s*PT\s+', '', company, flags=re.IGNORECASE) 
+            company = re.sub(r'\s*Tbk\.?$', '', company, flags=re.IGNORECASE)
+            company = re.sub(r'\s*\(Persero\)\s*', ' ', company, flags=re.IGNORECASE)
+            company = re.sub(r'\s+', ' ', company).strip().lower()
             
-            tickers = []
-            for company in company_extracted:
-                company = re.sub(r'^\s*PT\s+', '', company, flags=re.IGNORECASE) 
-                company = re.sub(r'\s*Tbk\.?$', '', company, flags=re.IGNORECASE)
-                company = re.sub(r'\s*\(Persero\)\s*', ' ', company, flags=re.IGNORECASE)
-                company = re.sub(r'\s+', ' ', company).strip().lower()
-                
-                ticker_found = None 
-                for company_name, ticker in TICKER_INDEX.items():
-                    best_match = fuzz.partial_ratio(company, company_name)
-                    if best_match > 95: 
+            ticker_found = None 
+            for company_name, ticker in TICKER_INDEX.items():
+                best_match = fuzz.ratio(company, company_name)
+                if best_match > 95: 
+                    ticker_found = ticker 
+                    break
+                else:
+                    best_match_fallback = fuzz.partial_ratio(company, company_name)
+                    if best_match_fallback > 95: 
                         ticker_found = ticker 
                         break 
 
-                if ticker_found:
-                    tickers.append(ticker_found)
+            if ticker_found:
+                tickers.add(ticker_found)
 
         # Tickers checking with COMPANY_DATA
         checked_tickers = []
-        for raw_ticker in tickers:
-            ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
-            # Checking the correct tickers
-            if ticker in COMPANY_DATA:
-                checked_tickers.append(ticker)
+        if tickers:
+            for raw_ticker in tickers:
+                ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
+                # Checking the correct tickers
+                if ticker in COMPANY_DATA:
+                    checked_tickers.append(ticker)
+                    
         new_article.tickers = checked_tickers
 
         # Sub sector
