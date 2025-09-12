@@ -86,6 +86,7 @@ class ClassifierPrompts:
             - Do NOT modify, infer, or abbreviate ticker symbols.
             - ENSURE to match company name mentioned in 'Article Content' with the correct tickers symbol provided in 'List of Available Tickers'.
             - ENSURE to match ticker name mentioned in 'Article Content' with the correct tickers symbol provided in 'List of Available Tickers'.
+            - Extract all tickers you can found on 'Article Content'. 
 
             Please Ensure to return the selected tickers as a following JSON FORMAT.
             {format_instructions}

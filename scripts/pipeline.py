@@ -1,8 +1,5 @@
-import sys
-import os
-import argparse
+from datetime import datetime, timezone, timedelta
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from base_model.scraper_collection      import ScraperCollection
 from base_model.scraper                 import SeleniumScraper
 from models.scrape_idnfinancials        import IDNFinancialScraper
@@ -23,16 +20,12 @@ from models.scrape_idn_business_post    import IndonesiaBusinessPost
 from models.scrape_jakartapost          import JakartaPost 
 from models.scrape_kontan               import KontanScraper
 from models.scrape_emiten_news          import EmitenNews
-from config.setup                       import SUPABASE_KEY, SUPABASE_URL, LOGGER
+from config.setup                       import LOGGER
+from database.database_connect          import supabase
 
 import json
-from supabase import create_client, Client
-from datetime import datetime, timezone, timedelta
-
-
-if not SUPABASE_URL or not SUPABASE_KEY:
-    raise RuntimeError("Missing SUPABASE_URL or SUPABASE_ANON_KEY in environment")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+import os
+import argparse
 
 
 def delete_outdated_news():

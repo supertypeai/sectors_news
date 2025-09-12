@@ -1,10 +1,9 @@
 """
 Script to submit 
 """
-from collections import Counter
 
 from preprocessing_articles.run_prepros_article import generate_article
-from config.setup import LOGGER, SUPABASE_KEY, SUPABASE_URL
+from config.setup                               import LOGGER, SUPABASE_KEY, SUPABASE_URL
 
 import pandas as pd 
 import time
@@ -21,7 +20,7 @@ MININUM_SCORE = 60
 BATCH_SIZE = 5
 
 
-def post_articles(jsonfile):
+def post_articles(jsonfile: str):
   with open(f'./data/{jsonfile}.json', 'r') as f:
     articles = json.load(f)
 
@@ -38,7 +37,7 @@ def post_articles(jsonfile):
     print('Failed:', response.status_code, response.text)
 
 
-def post_article(jsonfile):
+def post_article(jsonfile: str):
   with open(f'./data/{jsonfile}.json', 'r') as f:
     article = json.load(f)
 
@@ -67,9 +66,9 @@ def send_data_to_db(successful_articles: list):
       successful_articles (list): A list of dictionaries containing the processed articles to be submitted.
   """
   # Supabase submission with batch
-  for i in range(0, len(successful_articles), BATCH_SIZE):
-    batch_to_submit = successful_articles[i:i + BATCH_SIZE]
-    LOGGER.info(f"Submitting batch {i//BATCH_SIZE + 1} with {len(batch_to_submit)} articles...")
+  for index in range(0, len(successful_articles), BATCH_SIZE):
+    batch_to_submit = successful_articles[index:index + BATCH_SIZE]
+    LOGGER.info(f"Submitting batch {index//BATCH_SIZE + 1} with {len(batch_to_submit)} articles...")
 
     batch_headers = {
         "apikey": SUPABASE_KEY,
@@ -86,13 +85,14 @@ def send_data_to_db(successful_articles: list):
   return response
 
 
-def filter_article_to_process(all_articles_db: dict, all_articles: list[dict[str]], all_articles_yesterday: list[str]):
+def filter_article_to_process(all_articles_db: list[dict], all_articles: list[dict[str]], 
+                              all_articles_yesterday: list[str]) -> list[dict[str]]:
   """
     Filters articles to process by removing duplicates, articles already in the database, 
     and articles that were processed yesterday.
 
     Args:
-        all_articles_db (dict): A dictionary of articles already in the database.
+        all_articles_db (list[dict]): A list of dictionary of articles already in the database.
         all_articles (list[dict]): A list of all articles to be processed.
         all_articles_yesterday (list[str]): A list of article sources processed yesterday.
 
@@ -133,15 +133,17 @@ def filter_article_to_process(all_articles_db: dict, all_articles: list[dict[str
         return []
 
 
-def get_article_to_process(jsonfile: str, batch: int, batch_size: int,) -> list[str]:
+def get_article_to_process(jsonfile: str, batch: int, batch_size: int) -> list[dict[str]]:
   """ 
   Retrieves articles from a JSON file and filters out those that already exist in the database.
 
   Args:
       jsonfile (str): The name of the JSON file containing articles to be processed.
-    
+      batch (int): The batch index (1-based) indicating which chunk of articles to process. 
+      batch_size (int): Number of articles to include in each batch.
+
   Returns:
-      list[str]: A list of articles that are not already present in the database.
+      list[dict[str]]: A list of articles that are not already present in the database.
   """
   filtered_file = f'./data/{jsonfile}_filtered.json'
 

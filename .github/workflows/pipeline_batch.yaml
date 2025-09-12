@@ -45,7 +45,7 @@ jobs:
         run: pip list
 
       - name: Run scraping script for all news source
-        run: python scripts/pipeline.py 2 pipeline --batch 1 --batch-size 75
+        run: python -m scripts.pipeline 2 pipeline --batch 1 --batch-size 75
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
@@ -109,7 +109,7 @@ jobs:
           git pull origin main
 
       - name: Run scraping script for batch 2 (process only)
-        run: python scripts/pipeline.py 2 pipeline --process-only --batch 2 --batch-size 75
+        run: python -m scripts.pipeline 2 pipeline --process-only --batch 2 --batch-size 75
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
@@ -160,7 +160,7 @@ jobs:
           git pull origin main
 
       - name: Run scraping script for batch 3 (process only)
-        run: python scripts/pipeline.py 2 pipeline --process-only --batch 3 --batch-size 75
+        run: python -m scripts.pipeline 2 pipeline --process-only --batch 3 --batch-size 75
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}

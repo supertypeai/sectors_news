@@ -39,7 +39,7 @@ with open(pipeline_filtered, 'r') as file:
 
 ticker_index = {}
 for value in datas.values():
-    ticker = value.get('symbol').strip().lower()
+    ticker = value.get('symbol').strip()
     name = value.get('name')
     # remove leading "PT" and trailing "Tbk"/"Tbk."
     name = re.sub(r'^\s*PT\s+', '', name, flags=re.IGNORECASE) 

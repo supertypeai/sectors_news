@@ -1,7 +1,7 @@
 from langchain.chat_models      import init_chat_model
 from langchain_core.runnables   import Runnable
 
-from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4, 
+from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4,
                           OPENAI_API_KEY, LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC)
 
 import groq 
@@ -25,15 +25,15 @@ class LLMCollection:
 
             model_providers = {
                 "openai/gpt-oss-20b": "groq",
-                "llama-3.3-70b-versatile": "groq",
                 "openai/gpt-oss-120b": "groq",
                 "qwen/qwen3-32b": "groq",
                 "deepseek-r1-distill-llama-70b": "groq",
+                "llama-3.3-70b-versatile": "groq",
                 "llama-3.1-8b-instant": "groq",
                 "gpt-4.1-mini": "openai"
             }
 
-            groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2, 
+            groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2,
                              GROQ_API_KEY3, GROQ_API_KEY4]
 
             llms= []
