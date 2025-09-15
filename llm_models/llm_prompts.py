@@ -8,7 +8,7 @@ class ScoringNews(BaseModel):
 
 class SummaryNews(BaseModel):
     title: str = Field(description="Title from an article") 
-    body: str = Field(description="Two sentences summary from an article")
+    summary: str = Field(description="Two sentences summary from an article")
 
 class TagsClassification(BaseModel):
     tags: List[str] = Field(description="List of relevant tags for the article")
@@ -20,7 +20,7 @@ class CompanyNameExtraction(BaseModel):
     company: list[str] = Field(description="Company name or tickers extracted from summarize article")
 
 class SubsectorClassification(BaseModel):
-    subsector: List[str] = Field(description="Primary subsector classification")
+    subsector: List[str] = Field(description="Primary subsector classification chosen from only based on 'List of Available Subsectors'")
 
 class SentimentClassification(BaseModel):
     sentiment: str = Field(description="Sentiment classification (Bullish, Bearish, Neutral)")
@@ -42,12 +42,12 @@ class ClassifierPrompts:
     """
     @staticmethod
     def get_tags_prompt():
-        return """You are an expert at classified tags from an article. 
+        return """You are an expert at classified tags from financial article. 
             Your task is to classified tags from 'Article Content' based on 'List of Available Tags'.
             
             List of Available Tags:
             {tags}
-
+            
             Article Content:
             {body}
             
@@ -115,23 +115,21 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_subsectors_prompt():
-        return """You are an expert at classified subsector from an article. 
-            Your task is to classified subsector from 'Article Content' based on 'List of Available Subsectors'.
-            
+        return """You are an expert in classifying subsectors from financial articles.   
+            Your task is to determine the correct subsector for the given 'Article Content' using only the 'List of Available Subsectors'.  
+
             List of Available Subsectors:
             {subsectors}
 
             Article Content:
             {body}
 
-            Note:
-            - ONLY USE the subsectors listed on ' List of Available Subsectors'. 
-            - DO NOT create, modify, or infer new subsectors that are not explicitly provided.
-
-            Subsector Selection Rules:
+            Instructions:
+            - Classify subsector of 'Article Content' based only on 'List of Available Subsectors'. 
+            - DO NOT CREATE, MODIFY, or INFER new subsectors that are not explicitly provided on 'List of Available Subsectors'.
             - Identify ONE most relevant subsector based on the article content.
             - If multiple subsectors seem relevant, choose the most specific and dominant one.
-            - If no appropriate subsector applies, return an empty string.
+            - IF NO RELEVANT subsector can be found on 'Article Content' based on 'List of Available Subsectors' return empty list. 
 
             Ensure to return the selected subsectors as a following JSON format.
             {format_instructions}
@@ -199,9 +197,8 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_scoring_prompt():
-        return """You are an expert financial analyst for scoring Indonesia Stock Market (IDX) summary article. 
-            Your task is to score article summary, based solely on a brief two-sentence summary. 
-            Your evaluation is based on the provided 'Scoring Criteria'.
+        return """You are an expert financial analyst specializing in evaluating Indonesia Stock Market (IDX) article summaries. 
+            Your task is to assign a score to the given 'Article Summary' based strictly on the 'Scoring Criteria'.
 
             Scoring Criteria:
             {criteria}
@@ -209,30 +206,30 @@ class ClassifierPrompts:
             Article Summary: 
             {body}
 
-            Note:
-            - Take a look at criteria first before begin to score the summary article
+            Instructions:  
+            - Carefully read the criteria before evaluating the 'Article Summary'.  
+            - Base your judgment solely on how well the 'Article Summary' meets the 'Scoring Criteria'.  
+            - Be objective and concise in applying the criteria.  
 
-            Ensure to return the article score in following JSON format.
+            Ensure to return the score article score in following JSON format.
             {format_instructions} 
         """
     
     @staticmethod
     def get_summarize_prompt():
-        return """You are an expert financial analyst for summarizing Indonesia Stock Market (IDX) article. 
-            Your task is to generate summary and title based on the article content.
-
+        return """You are an expert financial analyst specializing in the Indonesia Stock Market. 
+            Your task is to generate a clear title and a concise summary based strictly on the provided 'Article Content'.  
+            
             Article Content:
             {article}
 
-            Note:
-            - For the title: Create a one sentence title that is not misleading and gives general understanding.
-            
-            Important Note:
-            - For the body: Provide a concise, maximum 2 sentences summary highlighting main points, key events, and financial metrics.
-              And MAKE SURE if there are any company mentions, MAINTAIN the format 'Company Name'.
-            - DO NOT include any ticker symbols if 'Article Content' do not mention it. 
-              Only include actual ticker symbols, if they are EXPLICITLY MENTIONED in the article content.
-            - Be relevant based on the 'Article Content' and do not make things up.
+            Instruction:
+            - Title:  Write a single-sentence title that accurately reflects the article, avoids exaggeration, and provides a clear general understanding.
+            - Summary: Write a maximum of two sentences highlighting the key events, main points, and any relevant financial metrics.  
+            - Company Mentions: Preserve company names exactly as written in the article (e.g., 'Company Name').  
+            - Ticker Symbols: Include ticker symbols ONLY IF they are explicitly PRESENT in the article. Do not infer or create ticker symbols.  
+            - Relevance: Stay strictly grounded in the article content. Do not invent information or include unrelated topics.  
+            - Conciseness: Keep the output factual, focused, and free of unnecessary detail.  
 
             Ensure to return the title and summary in the following JSON format.
             {format_instructions}
