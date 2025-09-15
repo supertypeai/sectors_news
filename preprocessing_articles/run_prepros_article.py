@@ -78,11 +78,12 @@ def post_processing(sentiment: str, tags: list[str], body: str,
     if not checked_tickers and sub_sector_result:
         sub_sector = [sub_sector_result[0].lower()] if sub_sector_result else []
     else:
-        sub_sector = [
-            COMPANY_DATA[ticker]["sub_sector"] 
+        sub_sector = {
+            COMPANY_DATA[ticker]["sub_sector"]
             for ticker in checked_tickers 
             if ticker in COMPANY_DATA
-        ]
+        }
+        sub_sector = list(sub_sector)
 
     # Sectors data 
     for sub in sub_sector:
