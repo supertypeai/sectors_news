@@ -4,28 +4,72 @@ from typing   import List, Optional
 
 # Define Pydantic models for each classification type
 class ScoringNews(BaseModel):
-    score: int = Field(description="Score of article summary")
+    """
+    Schema for scoring an article summary.
+    The model must output a single integer score that reflects how well the summary
+    meets the provided scoring criteria.
+    """
+    score: int = Field(
+        description="Integer score for the article summary, evaluated strictly based on the given scoring criteria."
+    )
 
 class SummaryNews(BaseModel):
-    title: str = Field(description="Title from an article") 
-    summary: str = Field(description="Two sentences summary from an article")
+    """
+    Schema for generating a concise financial news summary.
+    The model must provide one clear, accurate title and a maximum two-sentence summary
+    based only on the article content.
+    """
+    title: str = Field(
+        description="A single-sentence title that accurately reflects the article without exaggeration or misleading language."
+    )
+    summary: str = Field(
+        description="A concise maximum two-sentence summary that captures key events, main points, and any explicitly mentioned financial metrics."
+    )
 
 class TagsClassification(BaseModel):
-    tags: List[str] = Field(description="List of relevant tags for the article")
+    """
+    Schema for classifying tags from a financial article.
+    The model must select tags only from the provided 'List of Available Tags' and return those most relevant to the article content.
+    """
+    tags: List[str] = Field(
+        description="List of at most 5 relevant tags chosen strictly from the provided list. Do not create or infer new tags."
+    )
 
 class TickersClassification(BaseModel):
     tickers: List[str] = Field(description="List of stock tickers mentioned in the article")
 
 class CompanyNameExtraction(BaseModel):
-    company: list[str] = Field(description="Company name or tickers extracted from summarize article")
+    """
+    Schema for extracting company names mentioned in a summarized financial article.
+    The model return only company names as they appear in the text.
+    """
+    company: List[str] = Field(
+        description="List of company name or tickers extracted from summarize article"
+    )
 
 class SubsectorClassification(BaseModel):
-    subsector: List[str] = Field(description="Primary subsector classification chosen from only based on 'List of Available Subsectors'")
+    """
+    Schema for classifying the primary subsector from a financial article.
+    The model must select the subsector strictly from the provided 'List of Available Subsectors'.
+    """
+    subsector: List[str] = Field(
+        description="Most relevant subsector chosen strictly from the 'List of Available Subsectors'"
+    )
 
 class SentimentClassification(BaseModel):
-    sentiment: str = Field(description="Sentiment classification (Bullish, Bearish, Neutral)")
+    """
+    Schema for classifying sentiment from a financial article.
+    The sentiment reflect the outlook from the perspective of Indonesia's stock investors.
+    """
+    sentiment: str = Field(
+        description="Sentiment of the article as one of: 'Bullish', 'Bearish', or 'Neutral'."
+    )
 
 class DimensionClassification(BaseModel):
+    """
+    Schema for scoring multiple investment-related dimensions from a financial article.
+    Each dimension must be classified with a score of 0 (not related), 1 (slightly related), or 2 (highly related).
+    """
     valuation: Optional[int] = Field(description="Valuation score (0-2)", default=0)
     future: Optional[int] = Field(description="Future prospects score (0-2)", default=0)
     technical: Optional[int] = Field(description="Technical analysis score (0-2)", default=0)
