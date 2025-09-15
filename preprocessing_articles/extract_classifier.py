@@ -47,7 +47,17 @@ class NewsClassifier:
         # Classifier prompts
         self.prompts = ClassifierPrompts()
 
-    def _load_subsector_data(self) -> Dict[str, str]:
+    def _extract_first_sentences(self, text: str, count: int = 2) -> str:
+        parts = text.split('.')
+
+        if len(parts) <= count:
+            return text.strip()
+        
+        extracted = parts[:count]
+        result = '. '.join(extracted) + '.'
+        return result 
+
+    def _load_subsector_data(self) -> str:
         """
         Load subsector data from Supabase or cache.
 
@@ -66,14 +76,26 @@ class NewsClassifier:
 
             subsectors = {row["slug"]: row["description"] for row in response.data}
 
-            with open("./data/subsectors_data.json", "w") as f:
-                json.dump(subsectors, f)
+            with open("./data/subsectors_data.json", "w") as file:
+                json.dump(subsectors, file, indent=2)
         else:
-            with open("./data/subsectors_data.json", "r") as f:
-                subsectors = json.load(f)
+            with open("./data/subsectors_data.json", "r") as file:
+                subsectors = json.load(file)
 
-        self._subsectors_cache = subsectors
-        return subsectors
+        # Extract only the first two sentences
+        subsector_clean = {}
+        for key, value in subsectors.items():
+            clean_value = self._extract_first_sentences(value)
+            subsector_clean[key] = clean_value 
+        
+        subsector_string = "\n\n".join(
+            [
+                f"{key}:{value}" for key, value in subsector_clean.items()
+            ]
+        )
+
+        self._subsectors_cache = subsector_string
+        return subsector_string
 
     def _load_tag_data(self) -> List[str]:
         """
@@ -147,7 +169,7 @@ class NewsClassifier:
         self._company_cache = company
         return company
 
-    async def _classify_openai_async(
+    async def _classify_data_async(
         self, body: str, category: str, title: str = ""
     ) -> Union[List[str], str]:
         """
@@ -215,7 +237,7 @@ class NewsClassifier:
         elif category == "tickers":
             prompt = prompt.partial(tickers=", ".join(company.keys()))
         elif category == "subsectors":
-            prompt = prompt.partial(subsectors=", ".join(subsectors.keys()))
+            prompt = prompt.partial(subsectors=subsectors)
 
         # Create runnable system based on category
         if category == "dimension":
@@ -229,8 +251,11 @@ class NewsClassifier:
             })
         
         # Prepare input data
-        input_data = {"title": title, "body": body}
-
+        if category == "dimension":
+            input_data = {"title": title, "body": body}
+        else:
+            input_data = {"body": body}
+            
         for llm in self.llm_collection.get_llms():
             try:
                 # Create chain with current LLM
@@ -261,12 +286,19 @@ class NewsClassifier:
                             seen.add(tag)
                             check_tags.append(tag) 
                     return check_tags
+                
                 elif category == "tickers":
                     return result.get("tickers", [])
+                
                 elif category == "subsectors":
-                    return result.get("subsector", "")
+                    sub_sector = result.get("subsector", "")
+                    if len(sub_sector) >= 10:
+                        continue 
+                    return sub_sector
+                
                 elif category == "sentiment":
                     return result.get("sentiment", "")
+                
                 elif category == "dimension":
                     # For dimension, return the entire dict or extract specific fields
                     if isinstance(result, dict):
@@ -317,11 +349,11 @@ class NewsClassifier:
                 (tags, tickers, subsector, sentiment, dimensions)
         """
         # Llama groq sensitive to ratelimit, so decied to not use .gather but sequential instead
-        tags = await self._classify_openai_async(body, "tags", title)
-        # tickers = await self._classify_openai_async(body, "tickers", title)  
-        subsector = await self._classify_openai_async(body, "subsectors", title)
-        sentiment = await self._classify_openai_async(body, "sentiment", title)
-        dimension = await self._classify_openai_async(body, "dimension", title)
+        tags = await self._classify_data_async(body, "tags", title)
+        # tickers = await self._classify_data_async(body, "tickers", title)  
+        subsector = await self._classify_data_async(body, "subsectors", title)
+        sentiment = await self._classify_data_async(body, "sentiment", title)
+        dimension = await self._classify_data_async(body, "dimension", title)
 
         # Check for ANY failure: either an unexpected Exception OR None signal
         results = [tags, subsector, sentiment, dimension]
