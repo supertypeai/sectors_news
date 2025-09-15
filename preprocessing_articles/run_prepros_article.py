@@ -6,7 +6,7 @@ from .news_model                import News
 from .extract_summary_news      import summarize_news
 from .extract_score_news        import get_article_score
 from database.database_connect  import sectors_data, ticker_index
-from .extract_classifier        import load_company_data, NewsClassifier
+from .extract_classifier        import load_company_data, NewsClassifier, load_sub_sectors_data
 from config.setup               import LOGGER
 
 import asyncio
@@ -16,6 +16,7 @@ import re
 CLASSIFIER = NewsClassifier()
 EXECUTOR = ThreadPoolExecutor(max_workers=4)
 COMPANY_DATA = load_company_data()
+SUBSECTOR_DATA = load_sub_sectors_data()
 TICKER_INDEX = ticker_index
 
 
@@ -76,7 +77,8 @@ def post_processing(sentiment: str, tags: list[str], body: str,
 
     # Sub sector
     if not checked_tickers and sub_sector_result:
-        sub_sector = [sub_sector_result[0].lower()] if sub_sector_result else []
+        sub_sector = [sub_sector_result[0].lower()] if (sub_sector_result and 
+                                                        sub_sector_result[0].lower() in SUBSECTOR_DATA) else []
     else:
         sub_sector = {
             COMPANY_DATA[ticker]["sub_sector"]

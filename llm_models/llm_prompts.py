@@ -86,8 +86,8 @@ class ClassifierPrompts:
     """
     @staticmethod
     def get_tags_prompt():
-        return """You are an expert at classified tags from financial article. 
-            Your task is to classified tags from 'Article Content' based on 'List of Available Tags'.
+        return """You are an expert at classifying tags from financial article. 
+            Your task is to classifying tags from 'Article Content' based on 'List of Available Tags'.
             
             List of Available Tags:
             {tags}
@@ -116,8 +116,8 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_tickers_prompt():
-        return """You are an expert financial analyst for classified tickers for Indonesia Stock Market (IDX) summary article. 
-            Your task is to classified tickers company from 'Article Content' based on 'List of Available Tickers'.
+        return """You are an expert financial analyst for classifying tickers for Indonesia Stock Market (IDX) summary article. 
+            Your task is to classifying tickers company from 'Article Content' based on 'List of Available Tickers'.
             
             List of Available Tickers:
             {tickers}

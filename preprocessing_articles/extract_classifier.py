@@ -449,3 +449,13 @@ def load_company_data() -> Dict[str, Dict[str, str]]:
         Dict[str, Dict[str, str]]: Dictionary mapping company symbols to their details.
     """
     return CLASSIFIER._load_company_data()
+
+
+def load_sub_sectors_data() -> dict[str]:
+    """
+    Load subsector data from json.
+
+    Returns:
+        dict[str]: Dictionary containing subsector data.
+    """
+    return CLASSIFIER._load_subsector_data()
