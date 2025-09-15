@@ -93,7 +93,7 @@ def summarize_article(body: str, url: str) -> dict[str]:
             )
             
             summary_result = invoke_llm(summary_chain, input_data)
-            print(summary_result)
+         
             if summary_result is None:
                 LOGGER.warning("API call failed after all retries, trying next LLM...")
                 continue
@@ -213,13 +213,13 @@ def get_article_body(url: str) -> str:
         # g = Goose({'http_proxies': proxy_support, 'https_proxies': proxy_support})
         g = Goose({"http_session": session})
         article = g.extract(url=url)
-        print(f"[SUCCESS] Article from url {url} inferenced")
+        LOGGER.info(f"[SUCCESS] Article from url {url} inferenced")
 
         if article.cleaned_text:
             return article.cleaned_text
         else:
             # If fail, get the HTML and extract the text
-            print("[REQUEST FAIL] Goose3 returned empty string, trying with soup")
+            LOGGER.info("[REQUEST FAIL] Goose3 returned empty string, trying with soup")
             response: Response = requests.get(url)
             response.raise_for_status()
 
@@ -227,19 +227,19 @@ def get_article_body(url: str) -> str:
 
             content = soup.find("div", class_="content")
             if content and content.get_text(strip=True):
-                print(f"[SUCCESS] Article inferenced from url {url} using soup")
+                LOGGER.info(f"[SUCCESS] Article inferenced from url {url} using soup")
                 return content.get_text(strip=True)
             
             # Fallback specific for antara news 
             content = soup.find("div", class_="wrap__article-detail")
             if content and content.get_text(strip=True):
-                print(f"[SUCCESS] Article inferenced from url {url} using soup class (wrap__article-detail-content)")
+                LOGGER.info(f"[SUCCESS] Article inferenced from url {url} using soup class (wrap__article-detail-content)")
                 return content.get_text(strip=True)
             
             # Fallback specific for investasi kontan news 
             content = soup.find('div', class_='tmpt-desk-kon')
             if content:
-                print(f"[SUCCESS] Article inferenced from url using soup class (tmpt-desk-kon)")
+                LOGGER.info(f"[SUCCESS] Article inferenced from url using soup class (tmpt-desk-kon)")
                 pattern = r'(?i)berita\s+terkait.*'
 
                 for strong_tag in content.find_all('strong'):
@@ -253,38 +253,38 @@ def get_article_body(url: str) -> str:
                 return cleaned_content.strip()
         
     except Exception as error:
-        print(
+        LOGGER.error(
             f"[PROXY FAIL] Goose3 failed with error {error} for url {url}"
         )
 
     # Fallback two if first attempt is completly failed
     try:
-        print("[FALLBACK] Attempt 2: Trying with cloudscraper...")
+        LOGGER.info("[FALLBACK] Attempt 2: Trying with cloudscraper...")
 
         scraper = cloudscraper.create_scraper() 
         g = Goose({'browser_user_agent': USER_AGENT, 'http_session': scraper})
 
         article = g.extract(url=url)
         if article.cleaned_text:
-            print(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
+            LOGGER.info(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
 
             return article.cleaned_text
         
     except Exception as error:
-        print(f"[ERROR] Cloudscraper failed: {error}")
+        LOGGER.error(f"[ERROR] Cloudscraper failed: {error}")
 
     # Last fallback if first and second are failed
     try:
-        print("[FALLBACK] Attempt 3: Trying with no PROXY...")
+        LOGGER.info("[FALLBACK] Attempt 3: Trying with no PROXY...")
 
         g = Goose()
         article = g.extract(url=url)
 
-        print(f"[SUCCESS] Article inferenced from url {url} with no PROXY")
+        LOGGER.info(f"[SUCCESS] Article inferenced from url {url} with no PROXY")
         return article.cleaned_text
     
     except Exception as error:
-        print(f"[ERROR] Goose3 with no PROXY failed with error: {error}")
+        LOGGER.error(f"[ERROR] Goose3 with no PROXY failed with error: {error}")
     
     return ""
 
@@ -327,7 +327,7 @@ def summarize_news(url: str) -> tuple[str, str]:
 
             article = g.extract(url=url)
             if article.cleaned_text:
-                print(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
+                LOGGER.info(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
                 news_text = article.cleaned_text
                 news_text = preprocess_text(news_text)
 
@@ -345,7 +345,7 @@ def summarize_news(url: str) -> tuple[str, str]:
                 return None
 
     except Exception as error: 
-        LOGGER.error(f"An unexpected error occurred in summarize_news for {url}: {error}")
+        LOGGER.error(f"An unexpected error occurred in summarize_news for {url}: {error}", exc_info=True)
         return None
 
 
