@@ -93,11 +93,12 @@ def summarize_article(body: str, url: str) -> dict[str]:
             )
             
             summary_result = invoke_llm(summary_chain, input_data)
+            print(summary_result)
             if summary_result is None:
                 LOGGER.warning("API call failed after all retries, trying next LLM...")
                 continue
 
-            if not summary_result.get("title") or not summary_result.get("body"):
+            if not summary_result.get("title") or not summary_result.get("summary"):
                 LOGGER.info("[ERROR] LLM returned incomplete summary_result")
                 continue
             
@@ -311,11 +312,11 @@ def summarize_news(url: str) -> tuple[str, str]:
             response = summarize_article(news_text, url)
             time.sleep(5)
 
-            if not response or not response.get("body"):
+            if not response or not response.get("summary"):
                 LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
                 return None
             
-            raw_body = response.get("body") 
+            raw_body = response.get("summary") 
             cleaned_body = basic_cleaning_body(raw_body)
 
             return response.get("title"), cleaned_body
@@ -334,11 +335,11 @@ def summarize_news(url: str) -> tuple[str, str]:
                 response = summarize_article(news_text, url)
                 time.sleep(5)
 
-                if not response or not response.get("body"):
+                if not response or not response.get("summary"):
                     LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
                     return None
                 
-                return response.get("title"), response.get("body")
+                return response.get("title"), response.get("summary")
             else:
                 LOGGER.error(f"Cloudscraper also returned empty content for {url}.")
                 return None

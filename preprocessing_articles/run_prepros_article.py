@@ -110,7 +110,11 @@ async def generate_article_async(data: dict):
         if not checked_tickers and sub_sector_result:
             new_article.sub_sector = [sub_sector_result[0].lower()] if sub_sector_result else []
         else:
-            new_article.sub_sector = [COMPANY_DATA[ticker]["sub_sector"] for ticker in checked_tickers if ticker in COMPANY_DATA]
+            new_article.sub_sector = [
+                COMPANY_DATA[ticker]["sub_sector"] 
+                for ticker in checked_tickers 
+                if ticker in COMPANY_DATA
+            ]
 
         # Sectors data 
         for sub in new_article.sub_sector:

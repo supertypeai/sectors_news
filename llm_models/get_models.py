@@ -44,7 +44,7 @@ class LLMCollection:
                             init_chat_model(
                                 model,
                                 model_provider=provider,
-                                temperature=0.2,
+                                temperature=0.15,
                                 max_retries=3,
                                 api_key=groq_key,
                             )
@@ -55,7 +55,7 @@ class LLMCollection:
                         init_chat_model(
                             model,
                             model_provider=provider,
-                            temperature=0.2,
+                            temperature=0.15,
                             max_retries=3,
                             api_key=OPENAI_API_KEY,
                         )

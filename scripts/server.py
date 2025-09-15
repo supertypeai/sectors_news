@@ -170,6 +170,7 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int) -> list[d
                                     ).json()
       
       # Filter articles
+      LOGGER.info(f'Total article scraped {len(all_articles)}')
       final_articles_to_process = filter_article_to_process(all_articles_db, all_articles, all_articles_yesterday)
 
       # Update yesterday pipeline checkpoint with raw pipeline.json

@@ -137,18 +137,16 @@ class ArticleScorer:
         # scoring manual for timestamp 
         time_difference = current_time - publication_timestamp 
 
-        # Score 9-10: Very recent (published within the last 48 hours)
+        # Score 5: Very recent (published within the last 48 hours)
         if time_difference <= timedelta(hours=48):
             return 5
     
-        # Score 6-8: Recent (published within the last week)
+        # Score 3: Recent (published within the last week)
         elif time_difference <= timedelta(days=7):
-            # Representative score for the 6-8 range
             return 3 
 
-        # Score 3-5: Somewhat recent (published within the last 2 weeks)
+        # Score 2: Somewhat recent (published within the last 2 weeks)
         elif time_difference <= timedelta(days=14):
-            # Representative score for the 3-5 range
             return 2 
 
         # Score 0-2: Outdated (more than 2 weeks old)
@@ -171,18 +169,16 @@ class ArticleScorer:
         top_tier_sources = {"bloomberg.com", "reuters.com", "idx.co.id", "ojk.go.id"}
         national_sources = {"kontan.co.id", "bisnis.com", "cnbcindonesia.com", "investor.id", "kompas.com", "detik.com"}
 
-        # Score 9-10: Top-tier, highly credible source
+        # Score 5: Top-tier, highly credible source
         if any(keyword in domain for keyword in top_tier_sources):
             return 5
 
-        # Score 6-8: Well-established national news outlet
+        # Score 3: Well-established national news outlet
         elif any(keyword in domain for keyword in national_sources):
-            # Representative score for the 6-8 range
             return 3 
 
-        # Score 0-2: Unknown or unreliable source
+        # Score 2: Unknown or unreliable source
         else:
-            # Representative score
             return 1
 
     def get_article_score(self, body: str, article_date: str, article_source: str) -> int:
@@ -192,6 +188,7 @@ class ArticleScorer:
         Args:
             body (str): The article content to score
             article_date (str): The date of the article in ISO format (YYYY-MM-DD).
+            article_source (str): The source url of an article
 
         Returns:
             int: Score between 0 and 100 (or higher with bonus points)
@@ -206,6 +203,7 @@ class ArticleScorer:
         
         # Create a scoring parser using the JsonOutputParser
         scoring_parser = JsonOutputParser(pydantic_object=ScoringNews)
+        
         # Prepare the scoring prompt with the template and format instructions
         scoring_prompt = PromptTemplate(
             template = template, 
@@ -217,19 +215,17 @@ class ArticleScorer:
                 "format_instructions": scoring_parser.get_format_instructions()
             }
         )
+        scoring_prompt = scoring_prompt.partial(criteria=self._get_default_criteria())
 
         # Prepare the scoring system that will handle the article input
         runnable_scoring_system = RunnableParallel(
             {   
-                "criteria": itemgetter("criteria"),
                 "body": itemgetter("body"),
             }
         )
 
         # Prepare the input data for the LLM
-        # extract_domain = self._extract_domain_urlparse(source)
-        input_data = {"criteria":self._get_default_criteria(), 
-                      "body":body}
+        input_data = {"body":body}
 
         for llm in self.llm_collection.get_llms():
             try:
