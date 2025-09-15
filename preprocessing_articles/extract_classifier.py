@@ -255,7 +255,7 @@ class NewsClassifier:
             input_data = {"title": title, "body": body}
         else:
             input_data = {"body": body}
-            
+
         for llm in self.llm_collection.get_llms():
             try:
                 # Create chain with current LLM
@@ -389,7 +389,7 @@ class NewsClassifier:
             }
         )
 
-        # Create a runnable system that will handle the article input
+        # Create a runnable system that will handle the input
         runnable_company_system = RunnableParallel(
                 {   
                     "title": itemgetter("title"),
@@ -402,7 +402,7 @@ class NewsClassifier:
         
         for llm in self.llm_collection.get_llms():
             try:
-                # Create a summary chain that combines the system, prompt, and LLM
+                # Create extract company chain that combines the system, prompt, and LLM
                 summary_chain = (
                     runnable_company_system
                     | company_prompt

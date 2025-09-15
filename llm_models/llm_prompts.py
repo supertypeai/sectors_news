@@ -255,7 +255,7 @@ class ClassifierPrompts:
             - Base your judgment solely on how well the 'Article Summary' meets the 'Scoring Criteria'.  
             - Be objective and concise in applying the criteria.  
 
-            Ensure to return the score article score in following JSON format.
+            Ensure to return the article score in following JSON format.
             {format_instructions} 
         """
     

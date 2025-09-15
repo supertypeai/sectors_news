@@ -149,7 +149,7 @@ class ArticleScorer:
         elif time_difference <= timedelta(days=14):
             return 2 
 
-        # Score 0-2: Outdated (more than 2 weeks old)
+        # Score 1: Outdated (more than 2 weeks old)
         else:
             return 1
 
@@ -203,7 +203,7 @@ class ArticleScorer:
         
         # Create a scoring parser using the JsonOutputParser
         scoring_parser = JsonOutputParser(pydantic_object=ScoringNews)
-        
+
         # Prepare the scoring prompt with the template and format instructions
         scoring_prompt = PromptTemplate(
             template = template, 

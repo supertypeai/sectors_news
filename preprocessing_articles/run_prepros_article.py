@@ -36,7 +36,7 @@ def post_processing(sentiment: str, tags: list[str], body: str,
     Returns:
         dict: A dictionary containing processed tickers, sub-sectors, sectors, and dimensions.
     """
-
+    # Sentiment added to tag
     if sentiment:
         tags.append(sentiment)
         

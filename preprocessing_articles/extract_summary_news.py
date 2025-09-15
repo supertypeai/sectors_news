@@ -63,6 +63,7 @@ def summarize_article(body: str, url: str) -> dict[str]:
 
     # Create a summary parser using the JsonOutputParser
     summary_parser = JsonOutputParser(pydantic_object=SummaryNews)
+    
     # Prepare the prompt with the template and format instructions
     summary_prompt = PromptTemplate(
         template=template, 
