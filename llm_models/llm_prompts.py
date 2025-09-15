@@ -159,21 +159,21 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_subsectors_prompt():
-        return """You are an expert in classifying subsectors from financial articles.   
-            Your task is to determine the correct subsector for the given 'Article Content' using only the 'List of Available Subsectors'.  
+        return """You are an expert financial analyst specializing in classifying subsectors for financial articles.   
+            Your task is to determine the correct subsector for the given 'Article Summary' using only option in the 'List of Available Subsectors'.  
 
             List of Available Subsectors:
             {subsectors}
 
-            Article Content:
+            Article Summary:
             {body}
 
             Instructions:
-            - Classify subsector of 'Article Content' based only on 'List of Available Subsectors'. 
+            - Read carefully both the 'List of Available Subsectors' and the 'Article Summary' before deciding. 
+            - Classify subsector of 'Article Summary' based only on 'List of Available Subsectors'. 
             - DO NOT CREATE, MODIFY, or INFER new subsectors that are not explicitly provided on 'List of Available Subsectors'.
-            - Identify ONE most relevant subsector based on the article content.
+            - Identify ONE most relevant subsector based on the 'Article Summary'.
             - If multiple subsectors seem relevant, choose the most specific and dominant one.
-            - IF NO RELEVANT subsector can be found on 'Article Content' based on 'List of Available Subsectors' return empty list. 
 
             Ensure to return the selected subsectors as a following JSON format.
             {format_instructions}
@@ -181,7 +181,7 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_sentiment_prompt():
-        return """You are an expert at classified sentiment from an article. 
+        return """You are an expert at classifying sentiment from an article. 
             Your task is to classified sentiment from 'Article Content' based on 'Sentiment Rules'.
             
             Article Content:
@@ -241,7 +241,7 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_scoring_prompt():
-        return """You are an expert financial analyst specializing in evaluating Indonesia Stock Market (IDX) article summaries. 
+        return """You are an expert financial analyst specializing in evaluating article summaries. 
             Your task is to assign a score to the given 'Article Summary' based strictly on the 'Scoring Criteria'.
 
             Scoring Criteria:
@@ -261,7 +261,7 @@ class ClassifierPrompts:
     
     @staticmethod
     def get_summarize_prompt():
-        return """You are an expert financial analyst specializing in the Indonesia Stock Market. 
+        return """You are an expert financial analyst specializing in summarization article. 
             Your task is to generate a clear title and a concise summary based strictly on the provided 'Article Content'.  
             
             Article Content:
