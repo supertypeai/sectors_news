@@ -18,6 +18,7 @@ from llm_models.llm_prompts import (ClassifierPrompts,
                                     SubsectorClassification, 
                                     SentimentClassification, 
                                     DimensionClassification, 
+                                    CompanyNameTickerExtraction,
                                     CompanyNameExtraction)
 
 from config.setup import LOGGER, SUPABASE_URL, SUPABASE_KEY
@@ -363,7 +364,7 @@ class NewsClassifier:
 
         return tags, subsector, sentiment, dimension
 
-    def extract_company_name(self, body: str, title: str) -> str:
+    def extract_company_name(self, body: str, title: str, is_ticker: bool = True) -> str:
         """ 
         Extracts and a company name from the given body and title text with llm.
 
@@ -376,12 +377,14 @@ class NewsClassifier:
         """
         combined_text = f"{title} {body}"
 
-        # Get the prompt template for company extraction
-        template = self.prompts.get_company_name_prompt()
-
-        # Create a company extraction parser using the JsonOutputParser
-        company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
-
+        # Get the prompt template and pydantic parser
+        if is_ticker:
+            template = self.prompts.get_ticker_prompt()
+            company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameTickerExtraction)
+        else:
+            template = self.prompts.get_company_name_prompt()
+            company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
+        
         # Prepare the prompt with the template and format instructions
         company_prompt = PromptTemplate(
             template=template, 
@@ -418,7 +421,11 @@ class NewsClassifier:
                     continue
 
                 LOGGER.info(f"[SUCCES] Company extracted for url")
-                return company_extracted.get('company')
+                
+                if is_ticker:
+                    return company_extracted.get('tickers')
+                else:
+                    return company_extracted.get('company')
 
             except RateLimitError as error:
                 error_message = str(error).lower()

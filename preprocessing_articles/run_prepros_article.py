@@ -3,7 +3,7 @@ from datetime           import datetime
 from rapidfuzz          import fuzz
 
 from .news_model                import News 
-from .extract_summary_news      import summarize_news
+from .extract_summary_news      import summarize_news, get_article_body
 from .extract_score_news        import get_article_score
 from database.database_connect  import sectors_data, ticker_index
 from .extract_classifier        import load_company_data, NewsClassifier, load_sub_sectors_data
@@ -20,8 +20,63 @@ SUBSECTOR_DATA = load_sub_sectors_data()
 TICKER_INDEX = ticker_index
 
 
+def matching_company_name(company_extracted: list[str], is_ticker: bool = True) -> set:
+    """
+    Matches extracted company names to the companies json, with a fallback to extract
+    ticker and matching with companies json ticker.
+
+    Args:
+        company_extracted (list[str]): List of company names to match against ticker index
+        is_ticker (bool, optional): If True, matches against ticker symbols; 
+                                   if False, matches against company names. Defaults to True.
+
+    Returns:
+        set: Set of matching ticker symbols found in the ticker index
+    """
+    tickers = set()
+
+    for company in company_extracted:
+        company = re.sub(r'^\s*PT\s+', '', company, flags=re.IGNORECASE) 
+        company = re.sub(r'\s*Tbk\.?$', '', company, flags=re.IGNORECASE)
+        company = re.sub(r'\s*\(Persero\)\s*', ' ', company, flags=re.IGNORECASE)
+        company = re.sub(r'\s+', ' ', company).strip().lower()
+        
+        ticker_found = None 
+        if is_ticker:
+            for company_name, ticker in TICKER_INDEX.items():
+                ticker_lower = ticker.lower()
+                ticker_lower = ticker_lower.replace('.jk', '').strip()
+                best_match = fuzz.ratio(company, ticker_lower)
+                
+                if best_match > 95: 
+                    ticker_found = ticker 
+                    break
+                
+            if ticker_found:
+                tickers.add(ticker_found)
+        
+        else: 
+            for company_name, ticker in TICKER_INDEX.items():
+                best_match = fuzz.ratio(company, company_name)
+                
+                if best_match > 95: 
+                    ticker_found = ticker 
+                    break
+                else:
+                    best_match_fallback = fuzz.partial_ratio(company, company_name)
+                    if best_match_fallback > 95: 
+                        ticker_found = ticker 
+                        break 
+                
+            if ticker_found:
+                tickers.add(ticker_found)
+    
+    return tickers
+
+
 def post_processing(sentiment: str, tags: list[str], body: str, 
-                    title: str, sub_sector_result: list[str], dimension: dict) -> dict:
+                    title: str, sub_sector_result: list[str], 
+                    dimension: dict, url: str) -> dict:
     """
     Perform post-processing on the article, including adding sentiment, extracting tickers,
     and determining sub-sectors and sectors.
@@ -33,6 +88,7 @@ def post_processing(sentiment: str, tags: list[str], body: str,
         title (str): The title of the article.
         sub_sector_result (list[str]): The sub-sector classification result.
         dimension (dict): The dimension data for the article.
+        url (str): The article url
 
     Returns:
         dict: A dictionary containing processed tickers, sub-sectors, sectors, and dimensions.
@@ -42,29 +98,16 @@ def post_processing(sentiment: str, tags: list[str], body: str,
         tags.append(sentiment)
         
     # Get tickers new flow 
-    company_extracted = CLASSIFIER.extract_company_name(body, title)
-    
-    tickers = set()
-    for company in company_extracted:
-        company = re.sub(r'^\s*PT\s+', '', company, flags=re.IGNORECASE) 
-        company = re.sub(r'\s*Tbk\.?$', '', company, flags=re.IGNORECASE)
-        company = re.sub(r'\s*\(Persero\)\s*', ' ', company, flags=re.IGNORECASE)
-        company = re.sub(r'\s+', ' ', company).strip().lower()
-        
-        ticker_found = None 
-        for company_name, ticker in TICKER_INDEX.items():
-            best_match = fuzz.ratio(company, company_name)
-            if best_match > 95: 
-                ticker_found = ticker 
-                break
-            else:
-                best_match_fallback = fuzz.partial_ratio(company, company_name)
-                if best_match_fallback > 95: 
-                    ticker_found = ticker 
-                    break 
+    company_extracted = CLASSIFIER.extract_company_name(body, title, False)
+    tickers = matching_company_name(company_extracted, False)
 
-        if ticker_found:
-            tickers.add(ticker_found)
+    # Fallback tickers not found, only for emitennews
+    if not tickers:
+        url_to_check = "https://emitennews.com/news/"
+        if url_to_check in url:
+            full_article =  get_article_body(url)
+            company_extracted = CLASSIFIER.extract_company_name(full_article, title)
+            tickers = matching_company_name(company_extracted)
 
     # Tickers checking with COMPANY_DATA
     checked_tickers = []
@@ -112,6 +155,7 @@ async def generate_article_async(data: dict):
     source = data.get("source").strip()
     
     try:
+        article_url = data.get('source')
         timestamp_str = data.get("timestamp").strip().replace("T", " ")
         timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
 
@@ -150,7 +194,7 @@ async def generate_article_async(data: dict):
         # Post-processing
         post_process_result = post_processing(
             sentiment, tags, body, 
-            title, sub_sector_result, dimension
+            title, sub_sector_result, dimension, article_url
         )
         new_article.tickers = post_process_result.get("tickers")
         new_article.sub_sector = post_process_result.get("sub_sector")

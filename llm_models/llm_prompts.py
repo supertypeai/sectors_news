@@ -44,7 +44,16 @@ class CompanyNameExtraction(BaseModel):
     The model return only company names as they appear in the text.
     """
     company: List[str] = Field(
-        description="List of company name or tickers extracted from summarize article"
+        description="List of company name extracted from summarize article"
+    )
+
+class CompanyNameTickerExtraction(BaseModel):
+    """
+    Schema for extracting tickers mentioned in a summarized financial article.
+    The model return only tickers as they appear in the text.
+    """
+    tickers: List[str] = Field(
+        description="List of tickers extracted from summarize article"
     )
 
 class SubsectorClassification(BaseModel):
@@ -151,6 +160,24 @@ class ClassifierPrompts:
             - If there is no company name to extract, state 'No Company Found'.
 
             Ensure to return the extracted company name as a following JSON format.
+            {format_instructions}
+        """
+    
+    @staticmethod
+    def get_ticker_prompt():
+        return """You are an expert at extracting information. 
+            Your task is to extract company name ticker from a summarize article.
+        
+            Summarize Article:
+            {body}
+
+            Instruction:
+            - Look carefully 'Summarize Article' and find company name ticker.
+            - Extract the exact ticker based on 'Summarize Article' do not change it. 
+            - Extract all ticker you can find.
+            - If there is no ticker to extract, state 'No Ticker Found'.
+
+            Ensure to return the extracted ticker as a following JSON format.
             {format_instructions}
         """
     
