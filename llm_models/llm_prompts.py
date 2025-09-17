@@ -141,16 +141,13 @@ class ClassifierPrompts:
         return """You are an expert at extracting information. 
             Your task is to extract company name from a summarize article.
         
-            Title Article:
-            {title}
-
             Summarize Article:
             {body}
 
             Instruction:
-            - Look carefully 'Title' and 'Summarize Article' and find COMPANY NAME.
+            - Look carefully 'Summarize Article' and find COMPANY NAME.
             - Extract the exact company name based on 'Summarize Article' do not change it. 
-            - Extract all company name you can found.
+            - Extract all company name you can find.
             - If there is no company name to extract, state 'No Company Found'.
 
             Ensure to return the extracted company name as a following JSON format.
@@ -270,8 +267,8 @@ class ClassifierPrompts:
             Instruction:
             - Title:  Write a single-sentence title that accurately reflects the article, avoids exaggeration, and provides a clear general understanding.
             - Summary: Write a maximum of two sentences highlighting the key events, main points, and any relevant financial metrics.  
-            - Company Mentions: Preserve company names exactly as written in the article (e.g., 'Company Name').  
-            - Ticker Symbols: Include ticker symbols ONLY IF they are explicitly PRESENT in the article. Do not infer or create ticker symbols.  
+            - Company Mentions: PRESERVE COMPANY NAMES exactly as written in the article (e.g., 'Company Name').  
+            - Ticker Symbols: Include ticker company symbols ONLY IF they are explicitly PRESENT in the article. Do not infer or create ticker symbols.  
             - Relevance: Stay strictly grounded in the article content. Do not invent information or include unrelated topics.  
             - Conciseness: Keep the output factual, focused, and free of unnecessary detail.  
 

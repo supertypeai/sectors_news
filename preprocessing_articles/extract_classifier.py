@@ -374,6 +374,8 @@ class NewsClassifier:
         Returns:
             str: The cleaned company name without corporate suffixes or extra whitespace.
         """
+        combined_text = f"{title} {body}"
+
         # Get the prompt template for company extraction
         template = self.prompts.get_company_name_prompt()
 
@@ -383,7 +385,7 @@ class NewsClassifier:
         # Prepare the prompt with the template and format instructions
         company_prompt = PromptTemplate(
             template=template, 
-            input_variables=["title", "body"],
+            input_variables=["body"],
             partial_variables={
                 "format_instructions": company_extraction_parser.get_format_instructions()
             }
@@ -392,13 +394,12 @@ class NewsClassifier:
         # Create a runnable system that will handle the input
         runnable_company_system = RunnableParallel(
                 {   
-                    "title": itemgetter("title"),
                     "body": itemgetter("body")
                 }
             )
 
         # Prepare the input data for the LLM
-        input_data = {"title":title, "body": body}
+        input_data = {"body": combined_text}
         
         for llm in self.llm_collection.get_llms():
             try:
