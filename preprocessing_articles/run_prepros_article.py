@@ -94,7 +94,7 @@ def post_processing(sentiment: str, tags: list[str], body: str,
         dict: A dictionary containing processed tickers, sub-sectors, sectors, and dimensions.
     """
     # Sentiment added to tag
-    if sentiment:
+    if sentiment != 'Not Applicable':
         tags.append(sentiment)
         
     # Get tickers new flow 

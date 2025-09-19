@@ -98,7 +98,7 @@ class NewsClassifier:
         self._subsectors_cache = subsector_string
         return subsector_string
 
-    def _load_tag_data(self) -> List[str]:
+    def _load_tag_data(self) -> tuple:
         """
         Load tag data from JSON file.
 
@@ -108,12 +108,16 @@ class NewsClassifier:
         if self._tags_cache is not None:
             return self._tags_cache
 
-        with open("./data/unique_tags.json", "r") as f:
-            tags = json.load(f)
+        with open("./data/unique_tags.json", "r") as file:
+            tags = json.load(file)
             tags = tags.get('tags')
-            
-        self._tags_cache = tags
-        return tags
+        
+        full_tags = '\n\n'.join(
+                    f"{tag.get('name')} : {tag.get('description')}" for tag in tags
+                )
+        
+        self._tags_cache = (tags, full_tags)
+        return tags, full_tags
 
     def _load_company_data(self) -> Dict[str, Dict[str, str]]:
         """
@@ -194,7 +198,7 @@ class NewsClassifier:
         }
 
         # Load tag data
-        tags = self._load_tag_data()
+        tags, tags_string = self._load_tag_data()
 
         # Load company data 
         company = self._load_company_data()
@@ -234,7 +238,7 @@ class NewsClassifier:
 
         # Add category-specific data to prompt
         if category == "tags":
-            prompt = prompt.partial(tags=", ".join(tags))
+            prompt = prompt.partial(tags=tags_string)
         elif category == "tickers":
             prompt = prompt.partial(tickers=", ".join(company.keys()))
         elif category == "subsectors":
@@ -277,12 +281,14 @@ class NewsClassifier:
                     LOGGER.warning(f"API call failed for category: {category}. trying next LLM.")
                     continue 
 
-                # Return based on category type
-                if category == "tags":
-                    result_output = result.get("tags", [])
+                # Return based on category type             
+                if category == "tags":                      
+                    result_output = result.get("tags", [])  
+                    tags = [tag.get('name') for tag in tags]
+
                     seen = set()
                     check_tags = []
-                    for tag in result_output: 
+                    for tag in result_output:
                         if tag in tags and tag not in seen:
                             seen.add(tag)
                             check_tags.append(tag) 

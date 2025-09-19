@@ -34,6 +34,7 @@ class TagsClassification(BaseModel):
     tags: List[str] = Field(
         description="List of at most 5 relevant tags chosen strictly from the provided list. Do not create or infer new tags."
     )
+    reason: str = Field(description="Your reason why you classified your each tags, clearly state your reason for each tags classified")
 
 class TickersClassification(BaseModel):
     tickers: List[str] = Field(description="List of stock tickers mentioned in the article")
@@ -68,10 +69,11 @@ class SubsectorClassification(BaseModel):
 class SentimentClassification(BaseModel):
     """
     Schema for classifying sentiment from a financial article.
-    The sentiment reflect the outlook from the perspective of Indonesia's stock investors.
+    The sentiment must reflect explicit mentions of stock price trends 
+    or investor sentiment in the context of Indonesia's stock market.
     """
     sentiment: str = Field(
-        description="Sentiment of the article as one of: 'Bullish', 'Bearish', or 'Neutral'."
+        description="Sentiment of the article as one of: 'Bullish', 'Bearish', 'Neutral', 'Not Applicable."
     )
 
 class DimensionClassification(BaseModel):
@@ -106,18 +108,23 @@ class ClassifierPrompts:
             
             Note:
             - ONLY USE the tags listed on 'List of Available Tags'. 
+            - Carefully read each tag and reason its explanation before classify it for 'Article Content'.
             - DO NOT create, modify, or infer new tags that are not explicitly provided.
+            - Classify STRICTLY based on actual relevance to the article content.
 
             Tag Selection Rules:
             - Identify AT MOST 5 relevant tags from the 'List of Available Tags'.
-            - The number of tags should be based on actual relevance, not forced to be 5.
-            - If only 1, 2, 3, or 4 tags are relevant, select accordingly.
-
+            - Do not force 5 — if only 1, 2, 3, or 4 are relevant, select accordingly.
+    
             Specific Tagging Instructions:
             - `IPO` → Use ONLY for upcoming IPOs. DO NOT apply to past IPO mentions.
             - `IDX` → Use for news related to Indonesia Stock Exchange (Bursa Efek Indonesia).
             - `IDX Composite` → Use only if the article discusses the price or performance of IDX/Indeks Harga Saham Gabungan.
             - `Sharia Economy` → Use if the article mentions Sharia (Syariah) companies or economy.
+
+            IMPORTANT:
+            - You must select tags ONLY if they are strongly and directly relevant to the article content.
+            - If uncertain, do not include the tag.
 
             Ensure to return the selected tags as a following JSON format.
             {format_instructions}
@@ -202,28 +209,29 @@ class ClassifierPrompts:
             Ensure to return the selected subsectors as a following JSON format.
             {format_instructions}
         """
-    
+
     @staticmethod
     def get_sentiment_prompt():
-        return """You are an expert at classifying sentiment from an article. 
-            Your task is to classified sentiment from 'Article Content' based on 'Sentiment Rules'.
-            
-            Article Content:
-            {body}
+        return """You are an expert at classifying sentiment from an article about the Indonesian Stock Market (IDX). 
+        Your task is to classify sentiment as Bearish, Bullish, Neutral, or Not Applicable from 'Article Summarize' based on 'Sentiment Rules'.
 
-            Note:
-            - Sentiment Classification (Bullish, Bearish, Neutral)
-            - Classify the sentiment of the 'Article Content' from the perspective of Indonesia's stock investors.
+        Article Summarize:
+        {body}
 
-            Sentiment Rules:
-            - Classify the article into one of three categories and do not make things up:
-            - "Bullish" → Indicates positive or optimistic sentiment toward stocks.
-            - "Bearish" → Indicates negative or pessimistic sentiment toward stocks.
-            - "Neutral" → Indicates a balanced or uncertain outlook.
-            
-            Ensure to return the sentiment as a following JSON format.
-            {format_instructions}
-        """
+        Note:
+        - Classification must only be based on explicit mentions of stock price movement or investor sentiment.
+        - If the article does not mention stock prices, stock trends, classify it as "Not Applicable".
+
+        Sentiment Rules:
+        - "Bullish" → The article explicitly states that a stock/sector is rising, rallying, in an uptrend, or described as bullish.
+        - "Bearish" → The article explicitly states that a stock/sector is falling, declining, in a downtrend, or described as bearish.
+        - "Neutral" → The article explicitly states that a stock/sector is stable, flat, sideways, or described as neutral.
+        - "Not Applicable" → No explicit mention of stock price movement.
+
+        Output:
+        Return the classified in the following JSON format:
+        {format_instructions}
+    """
 
     @staticmethod
     def get_dimension_prompt():
@@ -299,6 +307,9 @@ class ClassifierPrompts:
             - Relevance: Stay strictly grounded in the article content. Do not invent information or include unrelated topics.  
             - Conciseness: Keep the output factual, focused, and free of unnecessary detail.  
 
+            Note:
+            - Return title and summary in english.
+            
             Ensure to return the title and summary in the following JSON format.
             {format_instructions}
         """
