@@ -3,76 +3,293 @@
     "Tags 'Bearish' and 'Bullish' are currently excluded."
   ],
   "tags": [
-  "Annual Report",
-  "Analyst Ratings",
-  "Artificial Intelligence",
-  "Asset Management",
-  "Asset Purchase",
-  "Award",
-  "Bonds",
-  "Bonus",
-  "Business Expansion",
-  "Capital & Funding",
-  "Central Bank",
-  "Commodities",
-  "Credit",
-  "Cryptocurrency",
-  "Currency & FX",
-  "Cyber Security",
-  "Debt Issuance",
-  "Delisting",
-  "Digital Payments",
-  "Digital Transformation",
-  "Diversification",
-  "Dividend Announcement",
-  "Domestic Investor",
-  "Global Economy",
-  "ESG",
-  "Executive Changes",
-  "Export",
-  "Financial Metrics",
-  "Forex",
-  "Foreign Investment",
-  "Government Policy",
-  "Halal",
-  "Housing Loan",
-  "Import",
-  "Inflation",
-  "Institutional Investor",
-  "Insider Trading",
-  "Interest Rate",
-  "IPO",
-  "Joint Operation",
-  "Joint Venture",
-  "Market Sentiment",
-  "Mergers & Acquisitions",
-  "Ministry",
-  "MoU",
-  "Mortgage",
-  "OJK",
-  "Oversubscribed",
-  "Overvalued",
-  "Ownership",
-  "Partnerships & Agreements",
-  "Pension Fund",
-  "Pilot Project",
-  "Politics & Regulation",
-  "Portfolio",
-  "Private Placement",
-  "Product Launch",
-  "Production & Operations",
-  "R&D",
-  "Rights Issue",
-  "Risk & Compliance",
-  "Shareholders General Meeting",
-  "Sharia Economy",
-  "Stock Buyback",
-  "Stock Split",
-  "Subsidies & Incentives",
-  "Subsidiaries",
-  "Suspension",
-  "Tariff & VAT",
-  "Trading Halt",
-  "Undervalued",
-  "Violation"]
+    {
+      "name": "Annual Report",
+      "description": "A yearly report by a company detailing its financial performance and activities for shareholders."
+    },
+    {
+      "name": "Analyst Ratings",
+      "description": "An evaluation by a financial analyst on a stock's future performance, often as 'buy', 'hold', or 'sell'."
+    },
+    {
+      "name": "Artificial Intelligence",
+      "description": "The development of computer systems that can perform tasks normally requiring human intelligence."
+    },
+    {
+      "name": "Asset Management",
+      "description": "The professional management of investments, such as stocks and bonds, on behalf of clients."
+    },
+    {
+      "name": "Asset Purchase",
+      "description": "The acquisition of a company's assets, rather than its shares."
+    },
+    {
+      "name": "Award",
+      "description": "A formal recognition or prize given to a company for achievement or excellence."
+    },
+    {
+      "name": "Bonds",
+      "description": "A fixed-income security representing a loan made by an investor to a borrower, such as a company or government."
+    },
+    {
+      "name": "Bonus",
+      "description": "An extra payment made to an employee, often as a reward for good performance."
+    },
+    {
+      "name": "Business Expansion",
+      "description": "A company's growth phase involving an increase in size or scope, such as entering new markets."
+    },
+    {
+      "name": "Capital & Funding",
+      "description": "The financial resources, raised through debt or equity, used by a company to fund its operations."
+    },
+    {
+      "name": "Central Bank",
+      "description": "A national institution that manages a country's currency, money supply, and interest rates, like Bank Indonesia."
+    },
+    {
+      "name": "Commodities",
+      "description": "Raw materials or basic agricultural products that can be bought and sold, such as oil or coffee."
+    },
+    {
+      "name": "Credit",
+      "description": "An agreement where a borrower receives something of value now and agrees to repay the lender later, usually with interest."
+    },
+    {
+      "name": "Cryptocurrency",
+      "description": "A digital currency secured by cryptography, making it difficult to counterfeit."
+    },
+    {
+      "name": "Currency & FX",
+      "description": "The system of money in a country (Currency) and the exchange of one currency for another (Foreign Exchange or FX)."
+    },
+    {
+      "name": "Cyber Security",
+      "description": "The practice of protecting networks, systems, and data from digital attacks or unauthorized access."
+    },
+    {
+      "name": "Debt Issuance",
+      "description": "The process of a company or government raising capital by selling debt instruments like bonds."
+    },
+    {
+      "name": "Delisting",
+      "description": "The official removal of a company's stock from a stock exchange."
+    },
+    {
+      "name": "Digital Payments",
+      "description": "Financial transactions conducted online or through digital devices without the physical exchange of money."
+    },
+    {
+      "name": "Digital Transformation",
+      "description": "The integration of digital technology into all areas of a business to improve operations and deliver value."
+    },
+    {
+      "name": "Diversification",
+      "description": "An investment strategy of holding a variety of assets to reduce risk."
+    },
+    {
+      "name": "Dividend Announcement",
+      "description": "A company's official statement declaring the date and amount of a profit distribution to its shareholders."
+    },
+    {
+      "name": "Domestic Investor",
+      "description": "An individual or institution that invests in securities within their own country."
+    },
+    {
+      "name": "Global Economy",
+      "description": "The interconnected economic activities of all countries in the world, including international trade and finance."
+    },
+    {
+      "name": "ESG",
+      "description": "Stands for Environmental, Social, and Governance; criteria used to measure a company's sustainability and ethical impact."
+    },
+    {
+      "name": "Executive Changes",
+      "description": "The appointment, resignation, or removal of a company's top-level management."
+    },
+    {
+      "name": "Export",
+      "description": "The sale of goods and services produced in one country to another country."
+    },
+    {
+      "name": "Financial Metrics",
+      "description": "Key figures from a company's financial statements used to measure its performance, such as revenue or profit margin."
+    },
+    {
+      "name": "Forex",
+      "description": "A global marketplace for exchanging national currencies against one another."
+    },
+    {
+      "name": "Foreign Investment",
+      "description": "Capital invested in a country by an individual or company from another country."
+    },
+    {
+      "name": "Government Policy",
+      "description": "A plan or action by a government intended to influence decisions and achieve specific outcomes."
+    },
+    {
+      "name": "Halal",
+      "description": "Pertaining to what is permissible under Islamic law, often applied to finance and food products."
+    },
+    {
+      "name": "Housing Loan",
+      "description": "A loan obtained from a bank or financial institution for the purpose of buying a property."
+    },
+    {
+      "name": "Import",
+      "description": "The purchase of goods or services from another country to be brought into one's own country."
+    },
+    {
+      "name": "Inflation",
+      "description": "The rate at which the general level of prices for goods and services is rising, reducing the purchasing power of currency."
+    },
+    {
+      "name": "Institutional Investor",
+      "description": "A large organization, such as a pension fund or mutual fund, that invests on behalf of its members."
+    },
+    {
+      "name": "Insider Trading",
+      "description": "The illegal act of buying or selling securities based on confidential information not available to the public."
+    },
+    {
+      "name": "Interest Rate",
+      "description": "The percentage of a loan charged by a lender to a borrower for the use of assets."
+    },
+    {
+      "name": "IPO",
+      "description": "Initial Public Offering; the first time a private company offers its shares to the public."
+    },
+    {
+      "name": "Joint Operation",
+      "description": "A business arrangement where two or more parties collaborate on a specific project by pooling resources."
+    },
+    {
+      "name": "Joint Venture",
+      "description": "A business entity created by two or more parties, characterized by shared ownership, risks, and returns."
+    },
+    {
+      "name": "Market Sentiment",
+      "description": "The overall attitude or tone of investors toward a particular financial market or security."
+    },
+    {
+      "name": "Mergers & Acquisitions",
+      "description": "The consolidation of companies or assets through various types of financial transactions."
+    },
+    {
+      "name": "Ministry",
+      "description": "A government department responsible for a specific area of public administration."
+    },
+    {
+      "name": "MoU",
+      "description": "Memorandum of Understanding; a non-binding agreement that outlines the terms of a future formal agreement."
+    },
+    {
+      "name": "Mortgage",
+      "description": "A loan specifically used to finance the purchase of real estate."
+    },
+    {
+      "name": "OJK",
+      "description": "Otoritas Jasa Keuangan; the Indonesian Financial Services Authority that regulates the country's financial sector."
+    },
+    {
+      "name": "Oversubscribed",
+      "description": "A situation where the demand for newly issued shares is greater than the number of shares available."
+    },
+    {
+      "name": "Overvalued",
+      "description": "A condition where an asset's price is higher than its determined intrinsic or fundamental value."
+    },
+    {
+      "name": "Ownership",
+      "description": "The legal right of possession over an asset; in business, it often refers to holding company shares."
+    },
+    {
+      "name": "Partnerships & Agreements",
+      "description": "A formal arrangement where two or more parties agree to cooperate to advance their mutual interests."
+    },
+    {
+      "name": "Pension Fund",
+      "description": "A fund that collects and invests capital to provide retirement income for employees."
+    },
+    {
+      "name": "Pilot Project",
+      "description": "A small-scale, preliminary study conducted to evaluate the feasibility of a full-scale project."
+    },
+    {
+      "name": "Politics & Regulation",
+      "description": "The influence of government actions, political events, and legal rules on markets and businesses."
+    },
+    {
+      "name": "Portfolio",
+      "description": "A collection of financial assets, such as stocks, bonds, and cash, held by an investor."
+    },
+    {
+      "name": "Private Placement",
+      "description": "The sale of securities to a small number of pre-selected investors rather than on the public market."
+    },
+    {
+      "name": "Product Launch",
+      "description": "The introduction of a new product or service to the market for sale."
+    },
+    {
+      "name": "Production & Operations",
+      "description": "The business function responsible for creating goods or delivering services."
+    },
+    {
+      "name": "R&D",
+      "description": "Research and Development; activities undertaken by companies to innovate and introduce new products and services."
+    },
+    {
+      "name": "Rights Issue",
+      "description": "An offer to existing shareholders to buy additional shares in the company, often at a discount."
+    },
+    {
+      "name": "Risk & Compliance",
+      "description": "The process of ensuring a company adheres to laws and regulations while managing potential threats."
+    },
+    {
+      "name": "Shareholders General Meeting",
+      "description": "A mandatory annual meeting of a company's shareholders to discuss company affairs and vote on key issues."
+    },
+    {
+      "name": "Sharia Economy",
+      "description": "An economic system based on Islamic principles, which prohibits interest (riba) and promotes ethical investments."
+    },
+    {
+      "name": "Stock Buyback",
+      "description": "When a company repurchases its own shares from the open market to reduce the number of outstanding shares."
+    },
+    {
+      "name": "Stock Split",
+      "description": "A corporate action where a company increases its number of shares by dividing existing shares, lowering the per-share price."
+    },
+    {
+      "name": "Subsidies & Incentives",
+      "description": "Financial aid or support provided by a government to a business or economic sector."
+    },
+    {
+      "name": "Subsidiaries",
+      "description": "A company that is controlled by a parent or holding company."
+    },
+    {
+      "name": "Suspension",
+      "description": "A temporary stop in the trading of a specific security on a stock exchange."
+    },
+    {
+      "name": "Tariff & VAT",
+      "description": "A tax on imported goods (Tariff) and a consumption tax on goods and services (Value-Added Tax)."
+    },
+    {
+      "name": "Trading Halt",
+      "description": "A temporary suspension of trading for an the ENTIRE MARKET, imposed by a stock exchange or regulator."
+    },
+    {
+      "name": "Undervalued",
+      "description": "A condition where an asset's price is lower than its determined intrinsic or fundamental value."
+    },
+    {
+      "name": "Violation",
+      "description": "An act that breaks a law, rule, or agreement."
+    }
+  ]
 }
