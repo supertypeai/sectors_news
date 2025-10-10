@@ -192,6 +192,44 @@ def basic_cleaning_body(body: str) -> str:
     return body
 
 
+def normalize_company_case(company_name: str) -> str:
+    """
+    Normalize the capitalization style of a company name to a consistent format.
+
+    Args:
+        company_name (str): The original company name string to normalize.
+
+    Returns:
+        str: The cleaned company name with standardized capitalization.
+    """
+    needs_cleaning = False
+
+    upper_count = sum(1 for char in company_name if char.isupper())
+    lower_count = sum(1 for char in company_name if char.islower())
+
+    # Check if the string is mostly uppercase
+    if upper_count > lower_count:
+        needs_cleaning = True
+
+    # Check if all words are capitalized
+    words = company_name.split()
+    if not needs_cleaning and not all(word[0].isupper() for word in words if word):
+        needs_cleaning = True
+
+    # Check if last letter of the last word capitalized
+    if not needs_cleaning and words:
+        last_word = words[-1]
+        if last_word and last_word[-1].isalpha() and last_word[-1].isupper():
+            needs_cleaning = True
+
+    if needs_cleaning:
+        cleaned_name = company_name.title()
+        cleaned_name = re.sub(r"\bPt\.?\b", "PT", cleaned_name)
+        return cleaned_name.strip()
+    else:
+        return company_name
+    
+
 def get_article_body(url: str) -> str:
     """ 
     Extracts the body of an article from a given URL using Goose3.
@@ -319,8 +357,12 @@ def summarize_news(url: str) -> tuple[str, str]:
             
             raw_body = response.get("summary") 
             cleaned_body = basic_cleaning_body(raw_body)
+            cleaned_body = normalize_company_case(cleaned_body)
 
-            return response.get("title"), cleaned_body
+            raw_title = response.get("title")
+            cleaned_title = normalize_company_case(raw_title)
+
+            return cleaned_title, cleaned_body
         else:
             LOGGER.warning(f"Scraper returned empty content for {url}. Trying with CloudScrapper.")
             scraper = cloudscraper.create_scraper() 
@@ -340,7 +382,14 @@ def summarize_news(url: str) -> tuple[str, str]:
                     LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
                     return None
                 
-                return response.get("title"), response.get("summary")
+                raw_body = response.get("summary") 
+                cleaned_body = basic_cleaning_body(raw_body)
+                cleaned_body = normalize_company_case(cleaned_body)
+
+                raw_title = response.get("title")
+                cleaned_title = normalize_company_case(raw_title)
+
+                return cleaned_title, cleaned_body
             else:
                 LOGGER.error(f"Cloudscraper also returned empty content for {url}.")
                 return None
