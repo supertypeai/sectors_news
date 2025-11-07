@@ -235,11 +235,11 @@ def normalize_company_abbreviations(body: str) -> str:
     return cleaned_body
 
 
-def normalize_decimal_comma(body: str) -> str:
+def normalize_dot_case(body: str) -> str:
     """
-    Safely finds decimal numbers using a period (e.g., 2.5) 
-    and replaces the period with a comma (e.g., 2,5).
-    This only targets dots surrounded by digits (e.g., 3.8, 2.5)
+    Finds Indonesian-style thousands separators (dots) 
+    and converts them to English-style (commas) to match
+    the standard (e.g., 54.110.800 -> 54,110,800).
     
     Args:
         body (str): The body text to be cleaned.
@@ -247,7 +247,14 @@ def normalize_decimal_comma(body: str) -> str:
     Returns:
         str: The cleaned body text.
     """
-    return re.sub(r"(\d)\.(\d)", r"\1,\2", body)
+    
+    # Pattern: a digit, a dot, and exactly 3 digits
+    pattern = r"(\d)\.(\d{3})"
+    
+    while re.search(pattern, body):
+        body = re.sub(pattern, r"\1,\2", body)
+        
+    return body
 
 
 def get_article_body(url: str) -> str:
@@ -379,7 +386,7 @@ def summarize_news(url: str) -> tuple[str, str]:
             cleaned_body = basic_cleaning_body(raw_body)
             cleaned_body = clean_apostrophe_case(cleaned_body)
             cleaned_body = normalize_company_abbreviations(cleaned_body)
-            cleaned_body = normalize_decimal_comma(cleaned_body)
+            cleaned_body = normalize_dot_case(cleaned_body)
 
             raw_title = response.get("title")
             cleaned_title = normalize_company_abbreviations(raw_title)
@@ -408,8 +415,8 @@ def summarize_news(url: str) -> tuple[str, str]:
                 cleaned_body = basic_cleaning_body(raw_body)
                 cleaned_body = clean_apostrophe_case(cleaned_body)
                 cleaned_body = normalize_company_abbreviations(cleaned_body)
-                cleaned_body = normalize_decimal_comma(cleaned_body)
-                
+                cleaned_body = normalize_dot_case(cleaned_body)
+
                 raw_title = response.get("title")
                 cleaned_title = normalize_company_abbreviations(raw_title)
 
