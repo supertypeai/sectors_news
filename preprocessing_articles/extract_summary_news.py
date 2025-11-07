@@ -192,43 +192,48 @@ def basic_cleaning_body(body: str) -> str:
     return body
 
 
-def normalize_company_case(company_name: str) -> str:
+def clean_apostrophe_case(body: str) -> str:
     """
-    Normalize the capitalization style of a company name to a consistent format.
+    Finds an apostrophe followed by any uppercase letter
+    at the end of a word and converts that letter to lowercase.
+    
+    Handles both straight (') and smart (’) quotes.
+    
+    Args:
+        body (str): The body text to be cleaned.
+    
+    Returns:
+        str: The cleaned body text.
+    """
+    pattern = r"(’|')([A-Z])\b"
+    
+    def replacer(match):
+        quote = match.group(1) 
+        letter = match.group(2).lower()
+        return quote + letter
+        
+    return re.sub(pattern, replacer, body)
+
+
+def normalize_company_abbreviations(body: str) -> str:
+    """
+    Safely finds all "Pt." or "Pt" abbreviations and capitalizes them to "PT".
+    This is safe to run on a whole paragraph.
 
     Args:
-        company_name (str): The original company name string to normalize.
-
-    Returns:
-        str: The cleaned company name with standardized capitalization.
-    """
-    needs_cleaning = False
-
-    upper_count = sum(1 for char in company_name if char.isupper())
-    lower_count = sum(1 for char in company_name if char.islower())
-
-    # Check if the string is mostly uppercase
-    if upper_count > lower_count:
-        needs_cleaning = True
-
-    # Check if all words are capitalized
-    words = company_name.split()
-    if not needs_cleaning and not all(word[0].isupper() for word in words if word):
-        needs_cleaning = True
-
-    # Check if last letter of the last word capitalized
-    if not needs_cleaning and words:
-        last_word = words[-1]
-        if last_word and last_word[-1].isalpha() and last_word[-1].isupper():
-            needs_cleaning = True
-
-    if needs_cleaning:
-        cleaned_name = company_name.title()
-        cleaned_name = re.sub(r"\bPt\.?\b", "PT", cleaned_name)
-        return cleaned_name.strip()
-    else:
-        return company_name
+        body (str): The body text to be cleaned.
     
+    Returns:
+        str: The cleaned body text.
+    """
+    # Fix "Pt." -> "PT" (case-insensitive)
+    cleaned_body = re.sub(r"\bPt\.?\b", "PT", body, flags=re.IGNORECASE)
+    
+    # Fix "tbk" -> "Tbk" (case-insensitive)
+    cleaned_body = re.sub(r"\bTbk\b", "Tbk", cleaned_body, flags=re.IGNORECASE)
+    
+    return cleaned_body
+
 
 def get_article_body(url: str) -> str:
     """ 
@@ -357,10 +362,11 @@ def summarize_news(url: str) -> tuple[str, str]:
             
             raw_body = response.get("summary") 
             cleaned_body = basic_cleaning_body(raw_body)
-            cleaned_body = normalize_company_case(cleaned_body)
+            cleaned_body = clean_apostrophe_case(cleaned_body)
+            cleaned_body = normalize_company_abbreviations(cleaned_body)
 
             raw_title = response.get("title")
-            cleaned_title = normalize_company_case(raw_title)
+            cleaned_title = normalize_company_abbreviations(raw_title)
 
             return cleaned_title, cleaned_body
         else:
@@ -384,10 +390,11 @@ def summarize_news(url: str) -> tuple[str, str]:
                 
                 raw_body = response.get("summary") 
                 cleaned_body = basic_cleaning_body(raw_body)
-                cleaned_body = normalize_company_case(cleaned_body)
+                cleaned_body = clean_apostrophe_case(cleaned_body)
+                cleaned_body = normalize_company_abbreviations(cleaned_body)
 
                 raw_title = response.get("title")
-                cleaned_title = normalize_company_case(raw_title)
+                cleaned_title = normalize_company_abbreviations(raw_title)
 
                 return cleaned_title, cleaned_body
             else:
