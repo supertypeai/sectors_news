@@ -247,13 +247,14 @@ def normalize_dot_case(body: str) -> str:
     Returns:
         str: The cleaned body text.
     """
+    pattern_thousands = r"(\d)\.(\d{3})(?!%)"
     
-    # Pattern: a digit, a dot, and exactly 3 digits
-    pattern = r"(\d)\.(\d{3})"
+    while re.search(pattern_thousands, body):
+        body = re.sub(pattern_thousands, r"\1,\2", body)
+
+    pattern_decimals = r"(\d),(\d{1,2})(?![\d,])"
+    body = re.sub(pattern_decimals, r"\1.\2", body)
     
-    while re.search(pattern, body):
-        body = re.sub(pattern, r"\1,\2", body)
-        
     return body
 
 
