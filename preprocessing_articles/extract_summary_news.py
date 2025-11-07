@@ -235,6 +235,21 @@ def normalize_company_abbreviations(body: str) -> str:
     return cleaned_body
 
 
+def normalize_decimal_comma(body: str) -> str:
+    """
+    Safely finds decimal numbers using a period (e.g., 2.5) 
+    and replaces the period with a comma (e.g., 2,5).
+    This only targets dots surrounded by digits (e.g., 3.8, 2.5)
+    
+    Args:
+        body (str): The body text to be cleaned.
+    
+    Returns:
+        str: The cleaned body text.
+    """
+    return re.sub(r"(\d)\.(\d)", r"\1,\2", body)
+
+
 def get_article_body(url: str) -> str:
     """ 
     Extracts the body of an article from a given URL using Goose3.
@@ -364,6 +379,7 @@ def summarize_news(url: str) -> tuple[str, str]:
             cleaned_body = basic_cleaning_body(raw_body)
             cleaned_body = clean_apostrophe_case(cleaned_body)
             cleaned_body = normalize_company_abbreviations(cleaned_body)
+            cleaned_body = normalize_decimal_comma(cleaned_body)
 
             raw_title = response.get("title")
             cleaned_title = normalize_company_abbreviations(raw_title)
@@ -392,7 +408,8 @@ def summarize_news(url: str) -> tuple[str, str]:
                 cleaned_body = basic_cleaning_body(raw_body)
                 cleaned_body = clean_apostrophe_case(cleaned_body)
                 cleaned_body = normalize_company_abbreviations(cleaned_body)
-
+                cleaned_body = normalize_decimal_comma(cleaned_body)
+                
                 raw_title = response.get("title")
                 cleaned_title = normalize_company_abbreviations(raw_title)
 
