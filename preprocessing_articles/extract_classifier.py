@@ -263,6 +263,7 @@ class NewsClassifier:
 
         for llm in self.llm_collection.get_llms():
             try:
+                LOGGER.info(f'LLM used: {llm.model}')
                 # Create chain with current LLM
                 classifier_chain = (
                     runnable_system
@@ -275,7 +276,7 @@ class NewsClassifier:
                 result = await invoke_llm_async(classifier_chain, input_data)
     
                 # Sleep 8s
-                await asyncio.sleep(8)
+                await asyncio.sleep(10)
 
                 if result is None : 
                     LOGGER.warning(f"API call failed for category: {category}. trying next LLM.")
@@ -355,7 +356,7 @@ class NewsClassifier:
             Tuple[List[str], List[str], str, str, Dict[str, Optional[int]]]:
                 (tags, tickers, subsector, sentiment, dimensions)
         """
-        # Llama groq sensitive to ratelimit, so decied to not use .gather but sequential instead
+        # Llama groq sensitive to ratelimit, so decided to not use .gather but sequential instead
         tags = await self._classify_data_async(body, "tags", title)
         # tickers = await self._classify_data_async(body, "tickers", title)  
         subsector = await self._classify_data_async(body, "subsectors", title)

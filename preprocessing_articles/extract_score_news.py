@@ -229,6 +229,7 @@ class ArticleScorer:
 
         for llm in self.llm_collection.get_llms():
             try:
+                LOGGER.info(f'LLM used: {llm.model}')
                 # Create a scoring chain that combines the system, prompt, and LLM
                 scoring_chain = (
                         runnable_scoring_system

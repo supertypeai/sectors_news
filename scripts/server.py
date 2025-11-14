@@ -14,6 +14,7 @@ import time
 import os 
 import shutil
 import traceback 
+import time 
 
 
 MININUM_SCORE = 60
@@ -249,7 +250,8 @@ def post_source(jsonfile: str,
     try:
       # Get all the necessary data with LLM calls
       processed_article_object = generate_article(article_data)
-
+      time.sleep(3) 
+      
       # Check for the failure signal from the processing function
       if not processed_article_object:
           raise ValueError("generate_article returned None, signaling a failure.")

@@ -301,13 +301,14 @@ class ClassifierPrompts:
 
             Instruction:
             - Title:  Write a single-sentence title that accurately reflects the article, avoids exaggeration, and provides a clear general understanding.
-            - Summary: Write a maximum of two sentences highlighting the key events, main points, and any relevant financial metrics.   
+            - Summary: Write a maximum of two sentences highlighting the key events, main points, and any relevant financial metrics.
             - Company Mentions: PRESERVE COMPANY NAMES exactly as written in the 'Article Content' (e.g PT Aspirasi Hidup Indonesia Tbk, PT Telemedia Komunikasi Pratama). 
-            - Ticker Symbols: Include ticker company symbols ONLY IF they are explicitly PRESENT in the article. Do not infer or create ticker symbols.  
-            - Relevance: Stay strictly grounded in the article content. Do not invent information or include unrelated topics.  
+            - Ticker Symbols: Include ticker company symbols ONLY IF they are explicitly PRESENT in the article. Do not infer or create ticker symbols.
+            - Relevance: Stay strictly grounded in the article content. Do not invent information or include unrelated topics.
             - Conciseness: Keep the output factual, focused, and free of unnecessary detail.  
 
             Note:
+            - Use natural punctuations
             - Return title and summary in english.
             
             Ensure to return the title and summary in the following JSON format.

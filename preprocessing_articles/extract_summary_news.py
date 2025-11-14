@@ -85,6 +85,7 @@ def summarize_article(body: str, url: str) -> dict[str]:
     
     for llm in LLMCOLLECTION.get_llms():
         try:
+            LOGGER.info(f'LLM used: {llm.model}')
             # Create a summary chain that combines the system, prompt, and LLM
             summary_chain = (
                 runnable_summary_system
@@ -377,7 +378,7 @@ def summarize_news(url: str) -> tuple[str, str]:
 
             # Summarize the article and force to sleep 5s
             response = summarize_article(news_text, url)
-            time.sleep(5)
+            time.sleep(7)
 
             if not response or not response.get("summary"):
                 LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
@@ -406,7 +407,7 @@ def summarize_news(url: str) -> tuple[str, str]:
 
                 # Summarize the article and force to sleep 5s
                 response = summarize_article(news_text, url)
-                time.sleep(5)
+                time.sleep(7)
 
                 if not response or not response.get("summary"):
                     LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")

@@ -2,7 +2,7 @@ from langchain.chat_models      import init_chat_model
 from langchain_core.runnables   import Runnable
 
 from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4,
-                          OPENAI_API_KEY, LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC)
+                          OPENAI_API_KEY, GEMINI_API_KEY, LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC)
 
 import groq 
 import openai
@@ -24,13 +24,14 @@ class LLMCollection:
             cls._instance = super(LLMCollection, cls).__new__(cls)
 
             model_providers = {
-                "openai/gpt-oss-20b": "groq",
                 "openai/gpt-oss-120b": "groq",
+                "gemini-2.5-flash": "google_genai",
+                "openai/gpt-oss-20b": "groq",
                 "qwen/qwen3-32b": "groq",
                 "deepseek-r1-distill-llama-70b": "groq",
                 "llama-3.3-70b-versatile": "groq",
                 "llama-3.1-8b-instant": "groq",
-                "gpt-4.1-mini": "openai"
+                "gpt-4.1-mini": "openai",
             }
 
             groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2,
@@ -50,7 +51,7 @@ class LLMCollection:
                             )
                         )
                 
-                if provider == 'openai':
+                elif provider == 'openai':
                      llms.append(
                         init_chat_model(
                             model,
@@ -60,6 +61,18 @@ class LLMCollection:
                             api_key=OPENAI_API_KEY,
                         )
                     )
+                    
+                elif provider == 'google_genai':
+                     llms.append(
+                        init_chat_model(
+                            model,
+                            model_provider=provider,
+                            temperature=0.3,
+                            max_retries=3,
+                            api_key=GEMINI_API_KEY,
+                        )
+                    )
+
 
             cls._instance._llms = llms 
 
