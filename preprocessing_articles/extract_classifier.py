@@ -263,7 +263,7 @@ class NewsClassifier:
 
         for llm in self.llm_collection.get_llms():
             try:
-                llm_used = llm.model_name or llm.model
+                llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
                 LOGGER.info(f'LLM used: {llm_used}')
                 # Create chain with current LLM
                 classifier_chain = (
@@ -413,7 +413,7 @@ class NewsClassifier:
         input_data = {"body": combined_text}
         
         for llm in self.llm_collection.get_llms():
-            llm_used = llm.model_name or llm.model
+            llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
             LOGGER.info(f'LLM used: {llm_used}')
             try:
                 # Create extract company chain that combines the system, prompt, and LLM

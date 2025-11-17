@@ -229,7 +229,7 @@ class ArticleScorer:
 
         for llm in self.llm_collection.get_llms():
             try:
-                llm_used = llm.model_name or llm.model
+                llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
                 LOGGER.info(f'LLM used: {llm_used}')
                 # Create a scoring chain that combines the system, prompt, and LLM
                 scoring_chain = (

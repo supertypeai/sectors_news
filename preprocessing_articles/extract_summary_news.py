@@ -85,7 +85,7 @@ def summarize_article(body: str, url: str) -> dict[str]:
     
     for llm in LLMCOLLECTION.get_llms():
         try:
-            llm_used = llm.model_name or llm.model
+            llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
             LOGGER.info(f'LLM used: {llm_used}')
             # Create a summary chain that combines the system, prompt, and LLM
             summary_chain = (
