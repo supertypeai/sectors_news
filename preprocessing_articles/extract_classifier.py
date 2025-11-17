@@ -263,7 +263,8 @@ class NewsClassifier:
 
         for llm in self.llm_collection.get_llms():
             try:
-                LOGGER.info(f'LLM used: {llm.model}')
+                llm_used = llm.model_name or llm.model
+                LOGGER.info(f'LLM used: {llm_used}')
                 # Create chain with current LLM
                 classifier_chain = (
                     runnable_system
@@ -327,7 +328,7 @@ class NewsClassifier:
             except RateLimitError as error:
                 error_message = str(error).lower()
                 if "tokens per day" in error_message or "tpd" in error_message:
-                    LOGGER.warning(f"LLM: {llm.model_name} hit its daily token limit. Moving to next LLM.")
+                    LOGGER.warning(f"LLM: {llm_used} hit its daily token limit. Moving to next LLM.")
                     continue 
 
             except json.JSONDecodeError as error:
@@ -412,6 +413,8 @@ class NewsClassifier:
         input_data = {"body": combined_text}
         
         for llm in self.llm_collection.get_llms():
+            llm_used = llm.model_name or llm.model
+            LOGGER.info(f'LLM used: {llm_used}')
             try:
                 # Create extract company chain that combines the system, prompt, and LLM
                 summary_chain = (
@@ -437,7 +440,7 @@ class NewsClassifier:
             except RateLimitError as error:
                 error_message = str(error).lower()
                 if "tokens per day" in error_message or "tpd" in error_message:
-                    LOGGER.warning(f"LLM: {llm.model_name} hit its daily token limit. Moving to next LLM")
+                    LOGGER.warning(f"LLM: {llm_used} hit its daily token limit. Moving to next LLM")
                     continue 
 
             except json.JSONDecodeError as error:

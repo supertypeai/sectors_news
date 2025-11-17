@@ -30,7 +30,6 @@ class LLMCollection:
                 "qwen/qwen3-32b": "groq",
                 "deepseek-r1-distill-llama-70b": "groq",
                 "llama-3.3-70b-versatile": "groq",
-                "llama-3.1-8b-instant": "groq",
                 "gpt-4.1-mini": "openai",
             }
 

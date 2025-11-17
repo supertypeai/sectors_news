@@ -85,7 +85,8 @@ def summarize_article(body: str, url: str) -> dict[str]:
     
     for llm in LLMCOLLECTION.get_llms():
         try:
-            LOGGER.info(f'LLM used: {llm.model}')
+            llm_used = llm.model_name or llm.model
+            LOGGER.info(f'LLM used: {llm_used}')
             # Create a summary chain that combines the system, prompt, and LLM
             summary_chain = (
                 runnable_summary_system
@@ -110,7 +111,7 @@ def summarize_article(body: str, url: str) -> dict[str]:
         except RateLimitError as error:
             error_message = str(error).lower()
             if "tokens per day" in error_message or "tpd" in error_message:
-                LOGGER.warning(f"LLM: {llm.model_name} hit its daily token limit. Moving to next LLM")
+                LOGGER.warning(f"LLM: {llm_used} hit its daily token limit. Moving to next LLM")
                 continue 
 
         except json.JSONDecodeError as error:
