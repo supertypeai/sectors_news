@@ -3,6 +3,7 @@ from langchain_core.runnables   import Runnable
 
 from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4,
                           OPENAI_API_KEY, GEMINI_API_KEY, LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC)
+from config.setup import LOGGER
 
 import groq 
 import openai
@@ -44,7 +45,7 @@ class LLMCollection:
                             init_chat_model(
                                 model,
                                 model_provider=provider,
-                                temperature=0.15,
+                                temperature=0.5,
                                 max_retries=3,
                                 api_key=groq_key,
                             )
@@ -55,7 +56,7 @@ class LLMCollection:
                         init_chat_model(
                             model,
                             model_provider=provider,
-                            temperature=0.15,
+                            temperature=0.5,
                             max_retries=3,
                             api_key=OPENAI_API_KEY,
                         )
@@ -66,7 +67,7 @@ class LLMCollection:
                         init_chat_model(
                             model,
                             model_provider=provider,
-                            temperature=0.3,
+                            temperature=0.5,
                             max_retries=3,
                             api_key=GEMINI_API_KEY,
                         )
@@ -129,7 +130,12 @@ async def invoke_llm_async(chain: Runnable, input_data: dict):
             return await chain.ainvoke(input_data)
         
         except (groq.APIError, groq.APITimeoutError, openai.APIError, openai.APITimeoutError) as error:
-            raise
+            LOGGER.warning(f"API error occurred: {error}")
+            return None
+
+        except Exception as error:
+            LOGGER.warning(f"Unexpected error during LLM invocation: {error}")
+            return None
 
 
 # Example usage:

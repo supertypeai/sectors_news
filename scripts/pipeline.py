@@ -26,6 +26,7 @@ from database.database_connect          import supabase
 import json
 import os
 import argparse
+import asyncio
 
 
 def delete_outdated_news():
@@ -158,7 +159,7 @@ def main():
         finally:
             SeleniumScraper.close_shared_driver()
 
-    post_source(args.filename, args.batch, args.batch_size)
+    asyncio.run(post_source(args.filename, args.batch, args.batch_size))
 
 
 if __name__ == "__main__":

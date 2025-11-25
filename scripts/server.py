@@ -2,7 +2,7 @@
 Script to submit 
 """
 
-from preprocessing_articles.run_prepros_article import generate_article
+from preprocessing_articles.run_prepros_article import generate_article, generate_article_async
 from config.setup                               import LOGGER, SUPABASE_KEY, SUPABASE_URL
 
 import pandas as pd 
@@ -15,6 +15,7 @@ import os
 import shutil
 import traceback 
 import time 
+import asyncio
 
 
 MININUM_SCORE = 60
@@ -218,7 +219,7 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int) -> list[d
       return []
 
 
-def post_source(jsonfile: str,
+async def post_source(jsonfile: str,
                 batch: int, batch_size: int, 
                 is_check_csv: bool = False):
   """
@@ -249,8 +250,8 @@ def post_source(jsonfile: str,
     
     try:
       # Get all the necessary data with LLM calls
-      processed_article_object = generate_article(article_data)
-      time.sleep(3) 
+      processed_article_object = await generate_article_async(article_data)
+      await asyncio.sleep(4)
       
       # Check for the failure signal from the processing function
       if not processed_article_object:
@@ -276,7 +277,8 @@ def post_source(jsonfile: str,
       LOGGER.info(f' [RETRY] Retrying for URL: {source_url}')
 
       try:
-        processed_article_object = generate_article(article_data)
+        processed_article_object = await generate_article_async(article_data)
+        
         # Check for the failure signal from the processing function
         if not processed_article_object:
             raise ValueError("generate_article returned None, signaling a failure.")
