@@ -96,7 +96,8 @@ def summarize_article(body: str, url: str) -> dict[str]:
             )
             
             summary_result = invoke_llm(summary_chain, input_data)
-         
+            LOGGER.info(f'reason: {summary_result.get('reasoning')}')
+
             if summary_result is None:
                 LOGGER.warning("API call failed after all retries, trying next LLM...")
                 continue
@@ -375,7 +376,9 @@ def summarize_news(url: str) -> tuple[str, str]:
         LOGGER.info(f"Check full article content: {news_text[:550]}")
         
         if len(news_text) > 0:
-            news_text = preprocess_text(news_text)
+            # Preprocess texts but convert to all lower
+            # news_text = preprocess_text(news_text)
+            # LOGGER.info(f"Check full preprocessed article content: {news_text[:550]}")
 
             # Summarize the article and force to sleep 5s
             response = summarize_article(news_text, url)
@@ -404,7 +407,7 @@ def summarize_news(url: str) -> tuple[str, str]:
             if article.cleaned_text:
                 LOGGER.info(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
                 news_text = article.cleaned_text
-                news_text = preprocess_text(news_text)
+                # news_text = preprocess_text(news_text)
 
                 # Summarize the article and force to sleep 5s
                 response = summarize_article(news_text, url)
