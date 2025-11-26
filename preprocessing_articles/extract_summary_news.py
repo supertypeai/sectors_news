@@ -373,12 +373,15 @@ def summarize_news(url: str) -> tuple[str, str]:
         # Getting full article from the url
         news_text = get_article_body(url)
         time.sleep(random.uniform(5, 12))
-        LOGGER.info(f"Check full article content: {news_text[:550]}")
-        
+
         if len(news_text) > 0:
             # Preprocess texts but convert to all lower
             # news_text = preprocess_text(news_text)
             # LOGGER.info(f"Check full preprocessed article content: {news_text[:550]}")
+            
+            # Preprocess texts by just removing extra spaces
+            news_text = re.sub(r"\s+", " ", news_text)
+            LOGGER.info(f"Check full article content: {news_text[:550]}")
 
             # Summarize the article and force to sleep 5s
             response = summarize_article(news_text, url)
@@ -408,6 +411,9 @@ def summarize_news(url: str) -> tuple[str, str]:
                 LOGGER.info(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
                 news_text = article.cleaned_text
                 # news_text = preprocess_text(news_text)
+
+                news_text = re.sub(r"\s+", " ", news_text)
+                LOGGER.info(f"Check full article content: {news_text[:550]}")
 
                 # Summarize the article and force to sleep 5s
                 response = summarize_article(news_text, url)
