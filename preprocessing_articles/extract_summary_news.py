@@ -96,7 +96,7 @@ def summarize_article(body: str, url: str) -> dict[str]:
             )
             
             summary_result = invoke_llm(summary_chain, input_data)
-            LOGGER.info(f'reason: {summary_result.get('reasoning')}')
+            LOGGER.info(f"reason: {summary_result.get('reasoning')}")
 
             if summary_result is None:
                 LOGGER.warning("API call failed after all retries, trying next LLM...")
