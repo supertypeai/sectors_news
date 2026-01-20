@@ -136,29 +136,30 @@ def main():
             # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
             
-            # scrapercollection.add_scraper(icnscraper)
-            # scrapercollection.add_scraper(gapkiscraper)
-            # scrapercollection.add_scraper(minerbascraper)
-            # scrapercollection.add_scraper(abafscraper)
-            # scrapercollection.add_scraper(idnminerscraper)
-            # scrapercollection.add_scraper(jgscraper)
-            # scrapercollection.add_scraper(antaranewsscraper)
-            # scrapercollection.add_scraper(asiatelkomscraper)
-            # scrapercollection.add_scraper(jakartapostscraper)
-            # scrapercollection.add_scraper(kontanarticlescraper)
+            scrapercollection.add_scraper(icnscraper)
+            scrapercollection.add_scraper(gapkiscraper)
+            scrapercollection.add_scraper(minerbascraper)
+            scrapercollection.add_scraper(abafscraper)
+            scrapercollection.add_scraper(idnminerscraper)
+            scrapercollection.add_scraper(jgscraper)
+            scrapercollection.add_scraper(antaranewsscraper)
+            scrapercollection.add_scraper(asiatelkomscraper)
+            scrapercollection.add_scraper(jakartapostscraper)
+            scrapercollection.add_scraper(kontanarticlescraper)
             scrapercollection.add_scraper(emitenscraper)
 
             num_page = args.page_number
-
-            # special flow for bca news
-            # since it needs undetected driver and have no method in base_model
-            parsed_bca_news = scrape_bca(num_page)
 
             scrapercollection.run_all(num_page)
 
             scrapercollection.write_json(scrapercollection.articles, args.filename)
             
+            # special flow for bca news
+            # since it needs undetected driver and have no method in base_model
+            parsed_bca_news = scrape_bca(num_page)
+
             pipeline_path = f'{args.filename}.json'
+            
             if os.path.exists(pipeline_path):
                 with open(pipeline_path, "r", encoding="utf-8") as file:
                     try:
