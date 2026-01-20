@@ -2,6 +2,8 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from datetime import datetime
 
+from config.setup import LOGGER
+
 import json
 import time
 import random
@@ -23,11 +25,11 @@ def get_chrome_version():
             version_str = output.strip().split()[-1] # Get "131.0.6778.85"
             major_version = int(version_str.split('.')[0]) # Get 131
             
-            print(f"Detected installed Chrome version: {major_version}")
+            LOGGER.info(f"Detected installed Chrome version: {major_version}")
             return major_version
         
         except Exception as e:
-            print(f"Could not detect Chrome version: {e}. Defaulting to None.")
+            LOGGER.error(f"Could not detect Chrome version: {e}. Defaulting to None.")
             return None
     return None
 
@@ -113,17 +115,17 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
     results = []
 
     try:
-        print("Priming session...")
+        LOGGER.info("Priming session")
         driver.get("https://bcasekuritas.co.id/")
         time.sleep(random.uniform(3, 5))
 
         target_url = f"https://bcasekuritas.co.id/en/latest-news/news?page={page_num}"
-        print(f"Navigating to {target_url}...")
+        LOGGER.info(f"Navigating to {target_url}...")
         driver.get(target_url)
         time.sleep(8) 
         
         # Scan ALL "data" blocks 
-        print("Scanning for valid News Data List...")
+        LOGGER.info("Scanning for valid News Data List...")
         
         scripts = driver.find_elements(By.TAG_NAME, "script")
         
@@ -140,11 +142,11 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
                         
                         # CRITICAL CHECK: We only want the LIST, not the single object
                         if isinstance(parsed_data, list):
-                            print(f"Found a LIST with {len(parsed_data)} items. Verifying content")
+                            LOGGER.info(f"Found a LIST with {len(parsed_data)} items. Verifying content")
                             
                             # Verify it contains news items (check for 'slug' or 'title_id')
                             if len(parsed_data) > 0 and ('slug' in parsed_data[0] or 'title_id' in parsed_data[0]):
-                                print("Target Data Found!")
+                                LOGGER.info("Target Data Found!")
                                 
                                 for item in parsed_data:
                                     # Safe extraction
@@ -174,7 +176,7 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
 
         # DOM Fallback 
         if not results:
-            print("JSON extraction failed. Falling back to DOM.")
+            LOGGER.info("JSON extraction failed. Falling back to DOM.")
             cards = driver.find_elements(By.CSS_SELECTOR, "div.bg-card")
             
             for card in cards:
@@ -204,12 +206,12 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
                     })
                 except: continue
 
-        # print(json.dumps(results, indent=2))
-        print(f'Data parsed total: {len(results)}')
+        # LOGGER.info(json.dumps(results, indent=2))
+        LOGGER.info(f'Data parsed total: {len(results)}')
         return results
 
     except Exception as error:
-        print(f"Fatal error: {error}")
+        LOGGER.error(f"Fatal error: {error}")
         return []
     
     finally:
