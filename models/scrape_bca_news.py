@@ -107,7 +107,7 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
     options.add_argument('--headless=new') 
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    
+
     chrome_version = get_chrome_version()
 
     driver = uc.Chrome(options=options, use_subprocess=True, version_main=chrome_version)
@@ -216,6 +216,17 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
     finally:
         try: driver.quit()
         except: pass
+
+
+def run_scrape_bca_news(num_page: int) -> list[dict[str, any]]:
+    all_articles = []
+
+    for page in range(1, num_page + 1):
+        article = scrape_bca(page)
+        all_articles.extend(article)
+        time.sleep(1.5)
+    
+    return all_articles
 
 
 if __name__ == "__main__":
