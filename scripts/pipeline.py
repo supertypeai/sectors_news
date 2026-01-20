@@ -136,17 +136,17 @@ def main():
             # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
             
-            # scrapercollection.add_scraper(icnscraper)
-            # scrapercollection.add_scraper(gapkiscraper)
-            # scrapercollection.add_scraper(minerbascraper)
-            # scrapercollection.add_scraper(abafscraper)
-            # scrapercollection.add_scraper(idnminerscraper)
-            # scrapercollection.add_scraper(jgscraper)
-            # scrapercollection.add_scraper(antaranewsscraper)
-            # scrapercollection.add_scraper(asiatelkomscraper)
-            # scrapercollection.add_scraper(jakartapostscraper)
-            # scrapercollection.add_scraper(kontanarticlescraper)
-            # scrapercollection.add_scraper(emitenscraper)
+            scrapercollection.add_scraper(icnscraper)
+            scrapercollection.add_scraper(gapkiscraper)
+            scrapercollection.add_scraper(minerbascraper)
+            scrapercollection.add_scraper(abafscraper)
+            scrapercollection.add_scraper(idnminerscraper)
+            scrapercollection.add_scraper(jgscraper)
+            scrapercollection.add_scraper(antaranewsscraper)
+            scrapercollection.add_scraper(asiatelkomscraper)
+            scrapercollection.add_scraper(jakartapostscraper)
+            scrapercollection.add_scraper(kontanarticlescraper)
+            scrapercollection.add_scraper(emitenscraper)
 
             num_page = args.page_number
 
@@ -177,7 +177,7 @@ def main():
 
             existing_articles.extend(parsed_bca_news)
 
-            with open(pipeline_path, "w", encoding="utf-8") as f:
+            with open(f'data/{pipeline_path}', "w", encoding="utf-8") as f:
                 json.dump(existing_articles, f, ensure_ascii=False, indent=2)
 
             if args.csv:

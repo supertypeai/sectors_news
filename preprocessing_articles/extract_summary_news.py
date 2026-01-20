@@ -261,6 +261,46 @@ def normalize_dot_case(body: str) -> str:
     return body
 
 
+def get_article_bca_news(url: str) -> str:
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
+    
+    try:
+        r = requests.get(url, headers=headers)
+        r.raise_for_status()
+        
+        soup = BeautifulSoup(r.text, 'html.parser')
+        
+        title_tag = soup.find('h1')
+        title = title_tag.get_text(strip=True) if title_tag else None
+
+        article_container = soup.select_one('div.prose')
+        
+        if not article_container:
+            LOGGER.info(f"Could not find 'div.prose' in {url}")
+            return ""
+
+        paragraphs = article_container.find_all('p')
+        
+        text_parts = []
+        for paragraph in paragraphs:
+            text = paragraph.get_text(strip=True)
+            # Basic noise filter
+            if text and text != "@": 
+                text_parts.append(text)
+                
+        body = "\n\n".join(text_parts)
+        body = body.replace('IQPlus,', '')
+
+        article = f'{title}\n' + body
+        return article 
+    
+    except Exception as error:
+        LOGGER.error(f"[ERROR] Failed to extract {url}: {error}")
+        return ""
+    
+
 def get_article_body(url: str) -> str:
     """ 
     Extracts the body of an article from a given URL using Goose3.
@@ -271,6 +311,14 @@ def get_article_body(url: str) -> str:
     Returns:
         str: The cleaned text of the article body. If extraction fails, returns an empty string
     """
+    if 'bcasekuritas.co.id' in url: 
+        article =  get_article_bca_news(url) 
+        
+        if not article or len(article) < 100:
+            return None 
+        
+        return article 
+    
     # First attempt try to get full article with goose3 proxy and soup as fallback
     try:
         proxy = os.environ.get("PROXY")
@@ -356,7 +404,7 @@ def get_article_body(url: str) -> str:
     except Exception as error:
         LOGGER.error(f"[ERROR] Goose3 with no PROXY failed with error: {error}")
     
-    return ""
+    return None 
 
 
 def summarize_news(url: str) -> tuple[str, str]:
@@ -374,7 +422,7 @@ def summarize_news(url: str) -> tuple[str, str]:
         news_text = get_article_body(url)
         time.sleep(random.uniform(5, 12))
 
-        if len(news_text) > 0:
+        if len(news_text) > 100:
             # Preprocess texts but convert to all lower
             # news_text = preprocess_text(news_text)
             # LOGGER.info(f"Check full preprocessed article content: {news_text[:550]}")
@@ -401,13 +449,14 @@ def summarize_news(url: str) -> tuple[str, str]:
             cleaned_title = normalize_company_abbreviations(raw_title)
 
             return cleaned_title, cleaned_body
+        
         else:
             LOGGER.warning(f"Scraper returned empty content for {url}. Trying with CloudScrapper.")
             scraper = cloudscraper.create_scraper() 
             g = Goose({'browser_user_agent': USER_AGENT, 'http_session': scraper})
 
             article = g.extract(url=url)
-            if article.cleaned_text:
+            if article.cleaned_text and len(article.cleaned_text) > 100:
                 LOGGER.info(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
                 news_text = article.cleaned_text
                 # news_text = preprocess_text(news_text)
@@ -434,7 +483,7 @@ def summarize_news(url: str) -> tuple[str, str]:
 
                 return cleaned_title, cleaned_body
             else:
-                LOGGER.error(f"Cloudscraper also returned empty content for {url}.")
+                LOGGER.error(f"Cloudscraper also returned empty content for {url} or length text < 100.")
                 return None
 
     except Exception as error: 

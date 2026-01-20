@@ -101,14 +101,13 @@ def format_iso_date(iso_str: str) -> str:
 
 
 def scrape_bca(page_num: int) -> list[dict[str, any]]:
-    print(f"Initializing BCA Scraper for page {page_num}...")
+    LOGGER.info(f"Initializing BCA Scraper for page {page_num}...")
 
     options = uc.ChromeOptions()
-    # if platform.system() == "Linux" or os.getenv("CI"):
-    print("Enabling headless mode for CI/Linux.")
     options.add_argument('--headless=new') 
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
+    
     chrome_version = get_chrome_version()
 
     driver = uc.Chrome(options=options, use_subprocess=True, version_main=chrome_version)
