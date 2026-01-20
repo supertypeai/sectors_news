@@ -17,6 +17,7 @@ from models.scrape_antaranews           import AntaraNewsScraper
 from models.scrape_asian_telekom        import AsianTelekom
 from models.scrape_financial_bisnis     import FinansialBisnisScraper
 from models.scrape_idn_business_post    import IndonesiaBusinessPost
+from models.scrape_bca_news             import scrape_bca
 from models.scrape_jakartapost          import JakartaPost 
 from models.scrape_kontan               import KontanScraper
 from models.scrape_emiten_news          import EmitenNews
@@ -152,6 +153,31 @@ def main():
             scrapercollection.run_all(num_page)
 
             scrapercollection.write_json(scrapercollection.articles, args.filename)
+
+            # special flow for bca news
+            # since it needs undetected driver and have no method in base_model
+            parsed_bca_news = scrape_bca(num_page)
+            
+            pipeline_path = f'{args.filename}.json'
+            if os.path.exists(pipeline_path):
+                with open(pipeline_path, "r", encoding="utf-8") as file:
+                    try:
+                        existing_articles = json.load(file)
+                    except json.JSONDecodeError:
+                        raise RuntimeError("pipeline.json exists but is not valid JSON")
+            else:
+                existing_articles = []
+
+            if not isinstance(existing_articles, list):
+                raise TypeError("pipeline.json must contain a list to append BCA news")
+
+            if not isinstance(parsed_bca_news, list):
+                raise TypeError("parsed_bca_news must be a list")
+
+            existing_articles.extend(parsed_bca_news)
+
+            with open(pipeline_path, "w", encoding="utf-8") as f:
+                json.dump(existing_articles, f, ensure_ascii=False, indent=2)
 
             if args.csv:
                 scrapercollection.write_csv(scrapercollection.articles, args.filename)
