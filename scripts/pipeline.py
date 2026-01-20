@@ -136,25 +136,25 @@ def main():
             # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
             
-            # scrapercollection.add_scraper(icnscraper)
-            # scrapercollection.add_scraper(gapkiscraper)
-            # scrapercollection.add_scraper(minerbascraper)
-            # scrapercollection.add_scraper(abafscraper)
-            # scrapercollection.add_scraper(idnminerscraper)
-            # scrapercollection.add_scraper(jgscraper)
-            # scrapercollection.add_scraper(antaranewsscraper)
-            # scrapercollection.add_scraper(asiatelkomscraper)
-            # scrapercollection.add_scraper(jakartapostscraper)
-            # scrapercollection.add_scraper(kontanarticlescraper)
+            scrapercollection.add_scraper(icnscraper)
+            scrapercollection.add_scraper(gapkiscraper)
+            scrapercollection.add_scraper(minerbascraper)
+            scrapercollection.add_scraper(abafscraper)
+            scrapercollection.add_scraper(idnminerscraper)
+            scrapercollection.add_scraper(jgscraper)
+            scrapercollection.add_scraper(antaranewsscraper)
+            scrapercollection.add_scraper(asiatelkomscraper)
+            scrapercollection.add_scraper(jakartapostscraper)
+            scrapercollection.add_scraper(kontanarticlescraper)
             scrapercollection.add_scraper(emitenscraper)
 
             num_page = args.page_number
 
-            scrapercollection.run_all(num_page)
-
             # special flow for bca news
             # since it needs undetected driver and have no method in base_model
             parsed_bca_news = run_scrape_bca_news(num_page)
+
+            scrapercollection.run_all(num_page)
             
             all_articles = scrapercollection.articles + parsed_bca_news
 
