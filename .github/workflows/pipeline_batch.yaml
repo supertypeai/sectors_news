@@ -11,17 +11,19 @@ jobs:
 
     steps:
       - name: Checkout repository content
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      
+      - name: Install uv (Python package manager)
+        uses: astral-sh/setup-uv@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          uv sync
 
       - name: Setup NLTK data
         run: |
@@ -41,11 +43,8 @@ jobs:
           # also installs the matching ChromeDriver binary
           install-chromedriver: true
 
-      - name: Debug installed packages
-        run: pip list
-
       - name: Run scraping script for all news source
-        run: python -m scripts.pipeline 2 pipeline --batch 1 --batch-size 75
+        run: uv run -m scripts.pipeline 2 pipeline --batch 1 --batch-size 75
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
@@ -78,20 +77,22 @@ jobs:
 
     steps:
       - name: Checkout repository content
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      - name: Install uv (Python package manager)
+        uses: astral-sh/setup-uv@v2
+        
       - name: Wait 5 minutes
         run: sleep 5m
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          uv sync
 
       - name: Setup NLTK data
         run: |
@@ -110,7 +111,7 @@ jobs:
           git pull origin main
 
       - name: Run scraping script for batch 2 (process only)
-        run: python -m scripts.pipeline 2 pipeline --process-only --batch 2 --batch-size 75
+        run: uv run -m scripts.pipeline 2 pipeline --process-only --batch 2 --batch-size 75
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}

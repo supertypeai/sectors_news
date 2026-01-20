@@ -204,7 +204,8 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
                     })
                 except: continue
 
-        print(json.dumps(results, indent=2))
+        # print(json.dumps(results, indent=2))
+        print(f'Data parsed total: {len(results)}')
         return results
 
     except Exception as error:

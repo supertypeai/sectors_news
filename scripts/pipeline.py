@@ -150,13 +150,13 @@ def main():
 
             num_page = args.page_number
 
-            scrapercollection.run_all(num_page)
-
-            scrapercollection.write_json(scrapercollection.articles, args.filename)
-
             # special flow for bca news
             # since it needs undetected driver and have no method in base_model
             parsed_bca_news = scrape_bca(num_page)
+
+            scrapercollection.run_all(num_page)
+
+            scrapercollection.write_json(scrapercollection.articles, args.filename)
             
             pipeline_path = f'{args.filename}.json'
             if os.path.exists(pipeline_path):
