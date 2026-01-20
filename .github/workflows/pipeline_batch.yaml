@@ -95,8 +95,7 @@ jobs:
 
       - name: Setup NLTK data
         run: |
-          mkdir -p ./nltk_data
-          python -c "
+          uv run python -c "
           import nltk
           nltk.data.path.append('./nltk_data')
           nltk.download('punkt_tab', download_dir='./nltk_data')
