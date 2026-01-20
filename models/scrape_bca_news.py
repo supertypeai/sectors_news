@@ -5,6 +5,31 @@ from datetime import datetime
 import json
 import time
 import random
+import subprocess
+import platform
+
+
+def get_chrome_version():
+    """
+    Detects the installed Google Chrome version on Linux/GitHub Actions.
+    Returns the major version (int), e.g., 131.
+    """
+    if platform.system() == "Linux":
+        try:
+            # Run 'google-chrome --version' to get installed version
+            output = subprocess.check_output(["google-chrome", "--version"], text=True)
+            
+            # Output example: "Google Chrome 131.0.6778.85"
+            version_str = output.strip().split()[-1] # Get "131.0.6778.85"
+            major_version = int(version_str.split('.')[0]) # Get 131
+            
+            print(f"Detected installed Chrome version: {major_version}")
+            return major_version
+        
+        except Exception as e:
+            print(f"Could not detect Chrome version: {e}. Defaulting to None.")
+            return None
+    return None
 
 
 def extract_json_objects(text: str, target_key='"data":'):
@@ -82,8 +107,9 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
     options.add_argument('--headless=new') 
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    
-    driver = uc.Chrome(options=options, use_subprocess=True)
+    chrome_version = get_chrome_version()
+
+    driver = uc.Chrome(options=options, use_subprocess=True, version_main=chrome_version)
     results = []
 
     try:
@@ -178,7 +204,7 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
                     })
                 except: continue
 
-        # print(json.dumps(results, indent=2))
+        print(json.dumps(results, indent=2))
         return results
 
     except Exception as error:
