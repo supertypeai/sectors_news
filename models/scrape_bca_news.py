@@ -28,9 +28,10 @@ def get_chrome_version():
             LOGGER.info(f"Detected installed Chrome version: {major_version}")
             return major_version
         
-        except Exception as e:
-            LOGGER.error(f"Could not detect Chrome version: {e}. Defaulting to None.")
+        except Exception as error:
+            LOGGER.error(f"Could not detect Chrome version: {error}. Defaulting to None.")
             return None
+    
     return None
 
 
@@ -108,6 +109,18 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
+    options.add_argument('--window-size=1920,1080')
+    
+    # Force a standard User-Agent
+    options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
+    
+    # Explicitly disable automation flags 
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    
+    # Ignore SSL errors (Cause sometimes WAFs reset connections on SSL handshake)
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--allow-running-insecure-content')
+
     chrome_version = get_chrome_version()
 
     driver = uc.Chrome(options=options, use_subprocess=True, version_main=chrome_version)
@@ -119,12 +132,11 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
         time.sleep(random.uniform(3, 5))
 
         target_url = f"https://bcasekuritas.co.id/en/latest-news/news?page={page_num}"
-        LOGGER.info(f"Navigating to {target_url}...")
+        LOGGER.info(f"Navigating to {target_url}")
         driver.get(target_url)
         time.sleep(8) 
         
-        # Scan ALL "data" blocks 
-        LOGGER.info("Scanning for valid News Data List...")
+        LOGGER.info("Scanning for valid News Data List")
         
         scripts = driver.find_elements(By.TAG_NAME, "script")
         
@@ -139,7 +151,7 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
                     try:
                         parsed_data = json.loads(json_str)
                         
-                        # CRITICAL CHECK: We only want the LIST, not the single object
+                        # We only want the LIST, not the single object
                         if isinstance(parsed_data, list):
                             LOGGER.info(f"Found a LIST with {len(parsed_data)} items. Verifying content")
                             
