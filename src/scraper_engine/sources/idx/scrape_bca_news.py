@@ -2,13 +2,15 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from datetime import datetime
 
-from config.setup import LOGGER
-
 import json
 import time
 import random
 import subprocess
 import platform
+import logging 
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 def get_chrome_version():

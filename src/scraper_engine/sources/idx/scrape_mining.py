@@ -5,9 +5,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import dateparser
 
-# Add the parent directory (project root) to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from base_model import Scraper
+from scraper_engine.base.scraper import Scraper
 
 
 class MiningScraper(Scraper):

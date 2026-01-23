@@ -2,14 +2,10 @@ import argparse
 from datetime import datetime, timedelta
 import locale
 import re
-import sys
-import os
 
 locale.setlocale(locale.LC_TIME, "en_US.UTF-8")
 
-# Add the parent directory (project root) to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from base_model import Scraper
+from scraper_engine.base.scraper import Scraper
 
 
 class JGScraper(Scraper):

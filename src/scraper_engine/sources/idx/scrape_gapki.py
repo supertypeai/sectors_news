@@ -1,11 +1,7 @@
 import argparse
 from datetime import datetime
-import sys
-import os
 
-# Add the parent directory (project root) to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from base_model.scraper import SeleniumScraper 
+from scraper_engine.base.scraper import SeleniumScraper 
 
 
 class GapkiScraper(SeleniumScraper):

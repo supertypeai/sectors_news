@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from base_model.scraper import SeleniumScraper
+from scraper_engine.base.scraper import SeleniumScraper
 
 import argparse
 import time

@@ -1,11 +1,7 @@
 import argparse
-import sys
-import os
 import dateparser
 
-# Add the parent directory (project root) to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from base_model import Scraper
+from scraper_engine.base import Scraper
 
 
 class ICNScraper(Scraper):
