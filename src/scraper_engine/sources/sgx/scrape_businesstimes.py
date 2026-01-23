@@ -34,7 +34,7 @@ def scrape_businesstimes(num_page: int):
     all_news = []
 
     for page_num in range(1, num_page + 1):
-        LOGGER.info(f"Scraping page straitsnews: {page_num}")
+        LOGGER.info(f"Scraping page businesstimes: {page_num}")
 
         params = {'page': page_num}
 
@@ -106,12 +106,12 @@ def scrape_businesstimes(num_page: int):
                 })
             
             time.sleep(2)
-            
-            return all_news
         
         except Exception as error:
             LOGGER.error(f'scrape_straitsnews_sgx error: {error}', exc_info=True) 
-            return []
+            return []   
+    
+    return all_news
 
 
 if __name__ == '__main__': 

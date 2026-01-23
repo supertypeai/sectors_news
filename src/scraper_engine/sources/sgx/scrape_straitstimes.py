@@ -22,7 +22,7 @@ def format_iso_date(iso_str: str) -> str:
         return iso_str
     
 
-def scrape_straitsnews_sgx(pages_to_scrape=2):
+def scrape_straitsnews_sgx(pages_to_scrape: int = 2):
     api_url = "https://www.straitstimes.com/_plat/api/v1/articlesListing"
     root_url = 'https://www.straitstimes.com'
 
@@ -63,11 +63,11 @@ def scrape_straitsnews_sgx(pages_to_scrape=2):
             
             time.sleep(2)
 
-            return all_news
-
         except Exception as error:
             LOGGER.error(f'scrape_straitsnews_sgx error: {error}', exc_info=True) 
             return []
+
+    return all_news
 
 
 if __name__ == '__main__':
