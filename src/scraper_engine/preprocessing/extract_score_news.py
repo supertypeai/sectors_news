@@ -44,7 +44,7 @@ class ArticleScorer:
         # Classifier prompts
         self.prompts = ClassifierPrompts()
 
-    def _get_default_criteria(self) -> str:
+    def _get_default_criteria_idx(self) -> str:
         """
         Get default scoring criteria.
 
@@ -96,6 +96,69 @@ class ArticleScorer:
                 Does the article mention any of the following?
                  - IDX performance against the US market (+2 points)
                  - Rupiah performance (+2 points)
+                 - Net foreign buy and sell (+2 points)
+                 - Recommended stocks (stock watchlist) (+2 points)
+                 - Global commodities prices (+2 points)
+                        
+            A high quality news article is one that is:
+                1. actionable
+                2. commercially valuable (request for proposal on a new coal site)
+                3. big movement of money (merger and acquisitions, large insider purchase etc)
+                4. potential big changes for market cap in the industry
+            """
+
+    def _get_default_criteria_sgx(self) -> str:
+        """
+        Get default scoring criteria.
+
+        Returns:
+            str: Default scoring criteria for news articles.
+        """
+        return """
+            News Article Scoring Criteria (0-100). But with bonus point can goes up to 135.
+
+            Tier 0: Noise / Irrelevant (Score 0-10)
+            - Description: The news has no discernible connection to the Singapore market, specific SGX companies, or relevant economic factors. 
+              It is generic, trivial, or completely off-topic.
+            - Example: "A foreign celebrity launched a new clothing line. The event was attended by many fans."
+
+            Tier 1: General Context (Score 11-40)
+            - Description: The news provides general background information about the Singapore economy, a broad market sector, or global trends that have a weak or indirect link to the SGX. 
+              It lacks specific company details or actionable events.
+            - Example: "The Monetary Authority of Singapore (MAS) noted that inflation has remained stable for the past quarter. Global commodity prices have seen slight fluctuations this week."
+
+            Tier 2: Notable Event (Score 41-70)
+            - Description: The news reports on a specific SGX-listed company or a direct policy change affecting a specific sector. 
+              It describes a concrete event like a new project, a strategic partnership, management changes, or an analyst's rating update. 
+              This tier is for news that is clearly relevant and noteworthy for tracking.
+            - Example: "Keppel Ltd (BN4) announced it is exploring a new partnership to develop a renewable energy ecosystem. The company's stock rose 2% on the news."
+
+            Tier 3: Critical & Actionable (Score 71-100)
+            - Description: The news reports on a major, market-moving event for a specific SGX-listed company. These are high-impact events that investors often act on immediately.
+            - Keywords to look for:
+                - Merger / Acquisition (M&A)
+                - Earnings Report (especially with results like "beat expectations" or "missed targets")
+                - Dividend Announcement (especially with specific rates or dates)
+                - Stock Buyback / Rights Issue
+                - Major Insider Trading (large buy/sell by executives)
+                - A government contract awarded or a major regulatory approval/rejection.
+            - Example: "DBS Group Holdings (D05) reported a 30% revenue jump in its Q2 2025 earnings, significantly beating forecasts. The company also announced a 1 billion SGD stock buyback program to boost shareholder value."
+
+            Bonus Criteria for High-Quality News (Additional Points)
+
+            1. Primary CTA (Up to 5 Points Each):
+                Does the article mention any of the following?
+                 - Dividend rate + cum date (+5 points)
+                 - Policy/Bill Passing (especially if it's eyeball-catching) (+5 points)
+                 - Insider trading (especially if it's eyeball-catching) (+5 points)
+                 - Acquisition/Merging (+5 points)
+                 - Launching of a new company business plan (new project/income source/new partner/new contract) (+5 points)
+                 - Earnings Report (+5 points)
+
+            2. Secondary CTA (Up to 2 Points Each):
+                Does the article mention any of the following?
+                 - SGX performance against the US market (+2 points)
+                 - Singapore Dollar (SGD) performance (+2 points)
                  - Net foreign buy and sell (+2 points)
                  - Recommended stocks (stock watchlist) (+2 points)
                  - Global commodities prices (+2 points)
@@ -185,7 +248,7 @@ class ArticleScorer:
         else:
             return 1
 
-    def get_article_score(self, body: str, article_date: str, article_source: str) -> int:
+    def get_article_score(self, body: str, article_date: str, article_source: str, source_criteria: str) -> int:
         """
         Calculate the score for a news article based on comprehensive criteria.
 
@@ -219,7 +282,13 @@ class ArticleScorer:
                 "format_instructions": scoring_parser.get_format_instructions()
             }
         )
-        scoring_prompt = scoring_prompt.partial(criteria=self._get_default_criteria())
+
+        criteria_source_map = {
+            'idx': self._get_default_criteria_idx(),
+            'sgx': self._get_default_criteria_sgx()
+        }
+
+        scoring_prompt = scoring_prompt.partial(criteria=criteria_source_map.get(source_criteria))
 
         # Prepare the scoring system that will handle the article input
         runnable_scoring_system = RunnableParallel(
@@ -287,7 +356,7 @@ class ArticleScorer:
 _SCORER = ArticleScorer()
 
 # Backward compatible function
-def get_article_score(body: str, article_date: str, article_source: str) -> int:
+def get_article_score(body: str, article_date: str, article_source: str, source_criteria: str) -> int:
     """
     Calculate the score for a news article.
     This function maintains backward compatibility with existing code.
@@ -298,7 +367,7 @@ def get_article_score(body: str, article_date: str, article_source: str) -> int:
     Returns:
         int: Score between 0 and 100 (or higher with bonus points)
     """
-    final_score = _SCORER.get_article_score(body, article_date, article_source)
+    final_score = _SCORER.get_article_score(body, article_date, article_source, source_criteria)
     LOGGER.info(f'[SUCCES] Scoring news for url: {article_source}')
     time.sleep(7)
     return final_score

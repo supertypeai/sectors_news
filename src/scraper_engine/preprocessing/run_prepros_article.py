@@ -148,7 +148,7 @@ def post_processing(sentiment: str, tags: list[str], body: str,
     }
 
 
-async def generate_article_async(data: dict):
+async def generate_article_async(data: dict, source_scraper: str):
     """
     @helper-function
     @brief Generate article from URL asynchronously.
@@ -186,7 +186,7 @@ async def generate_article_async(data: dict):
         tags, sub_sector_result, sentiment, dimension = classification_results
 
         # Score
-        score_result = get_article_score(body, timestamp, source)
+        score_result = get_article_score(body, timestamp, source, source_scraper)
 
         # Assemble the final News object
         new_article = News(
@@ -215,7 +215,7 @@ async def generate_article_async(data: dict):
         return None
 
  
-def generate_article(data: dict[str]):
+def generate_article(data: dict[str], source_scraper: str):
     """
     @helper-function
     @brief Generate article from URL.
@@ -224,4 +224,4 @@ def generate_article(data: dict[str]):
 
     @return Generated article in News model.
     """
-    return asyncio.run(generate_article_async(data))
+    return asyncio.run(generate_article_async(data, source_scraper))

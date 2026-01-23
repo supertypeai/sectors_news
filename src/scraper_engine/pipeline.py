@@ -139,6 +139,7 @@ def main_idx(
     batch_size: Annotated[int, typer.Option(help="Batch size for processing")] = 75,
     process_only: Annotated[bool, typer.Option(help="Only process, don't scrape")] = False,
     table_name: Annotated[str, typer.Option(help="Table name to push into db")] = 'idx_news',
+    source_scraper: Annotated[str, typer.Option(help="Source scraper to define score prompt criteria")] = 'idx',
 ):
     """
     Main function to run the scraper collection (IDX News) and post results.
@@ -201,7 +202,7 @@ def main_idx(
         finally:
             SeleniumScraper.close_shared_driver()
 
-    asyncio.run(post_source(filename, batch, batch_size, table_name))
+    asyncio.run(post_source(filename, batch, batch_size, table_name, source_scraper))
 
 
 @app.command(name="main_sgx")
@@ -213,6 +214,7 @@ def main_sgx(
     batch_size: Annotated[int, typer.Option(help="Batch size for processing")] = 75,
     process_only: Annotated[bool, typer.Option(help="Only process, don't scrape")] = False,
     table_name: Annotated[str, typer.Option(help="Table name to push into db")] = 'sgx_news',
+    source_scraper: Annotated[str, typer.Option(help="Source scraper to define score prompt criteria")] = 'sgx',
 ):
     """
     Main function to run the scraper collection (SGX News) and post results.
@@ -236,7 +238,7 @@ def main_sgx(
         finally:
             SeleniumScraper.close_shared_driver()
 
-    asyncio.run(post_source(filename, batch, batch_size, table_name))
+    asyncio.run(post_source(filename, batch, batch_size, table_name, source_scraper))
 
 
 if __name__ == "__main__":
