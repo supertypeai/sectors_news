@@ -303,9 +303,14 @@ class ClassifierPrompts:
             {article}
 
             Instruction:
-            - Title:  Write a single-sentence title that accurately reflects the article, avoids exaggeration, and provides a clear general understanding.
-            - Summary: Write a maximum of two sentences highlighting the key events, main points, and any relevant financial metrics.
-            - Company Mentions: PRESERVE COMPANY NAMES exactly as written in the 'Article Content' (e.g PT Aspirasi Hidup Indonesia Tbk, PT Telemedia Komunikasi Pratama). 
+            - Title:  
+                - Write a single-sentence title that accurately reflects the article, avoids exaggeration, and provides a clear general understanding.
+            - Summary: 
+                - Write a maximum of two sentences highlighting the key events, main points, and any relevant financial metrics.
+                - Company Mentions: 
+                    - Include in the summary if any company names mentioned in the article.
+                    - Please do not include any parantheses written in company name and just remove period ('.') if found in company name.
+                    - PRESERVE COMPANY NAMES exactly as written in the 'Article Content' (e.g PT Aspirasi Hidup Indonesia Tbk, PT Telemedia Komunikasi Pratama). 
             - Relevance: Stay strictly grounded in the article content. Do not invent information or include unrelated topics.
             - Conciseness: Keep the output factual, focused, and free of unnecessary detail.  
 

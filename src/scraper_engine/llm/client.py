@@ -1,12 +1,17 @@
-from langchain.chat_models      import init_chat_model
-from langchain_core.runnables   import Runnable
+from langchain.chat_models import init_chat_model
+from langchain_core.runnables import Runnable
 
-from config.setup import (GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4,
-                          OPENAI_API_KEY, GEMINI_API_KEY, LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC)
-from config.setup import LOGGER
+from scraper_engine.config.conf import (
+    GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4,
+    OPENAI_API_KEY, GEMINI_API_KEY, LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC
+)
 
 import groq 
 import openai
+import logging 
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class LLMCollection:

@@ -2,8 +2,8 @@
 Script to submit 
 """
 
-from preprocessing_articles.run_prepros_article import generate_article, generate_article_async
-from config.setup                               import LOGGER, SUPABASE_KEY, SUPABASE_URL
+from scraper_engine.preprocessing.run_prepros_article import generate_article_async
+from scraper_engine.config.conf import SUPABASE_KEY, SUPABASE_URL
 
 import pandas as pd 
 import time
@@ -16,7 +16,10 @@ import shutil
 import traceback 
 import time 
 import asyncio
+import logging
 
+
+LOGGER = logging.getLogger(__name__)
 
 MININUM_SCORE = 60
 BATCH_SIZE = 5
@@ -59,7 +62,7 @@ def post_article(jsonfile: str):
     print('Failed:', response.status_code, response.text)
 
 
-def send_data_to_db(successful_articles: list):
+def send_data_to_db(successful_articles: list, table_name: str):
   """ 
   Sends the processed articles to the database in batches.
   This function takes a list of successfully processed articles and submits them to the database in batches.
@@ -78,12 +81,12 @@ def send_data_to_db(successful_articles: list):
         "Content-Type": "application/json",
         "Prefer": "return=representation"
     }
-    response = requests.post(f"{SUPABASE_URL}/rest/v1/idx_news", json=batch_to_submit, headers=batch_headers)
+    response = requests.post(f"{SUPABASE_URL}/rest/v1/{table_name}", json=batch_to_submit, headers=batch_headers)
     
     if 200 <= response.status_code < 300:
-        LOGGER.info(f'  Batch Submission Success: {response.status_code}')
+        LOGGER.info(f' Batch Submission Success: {response.status_code}')
     else:
-        LOGGER.info(f'  Batch Submission Failed: {response.status_code} - {response.text}')
+        LOGGER.info(f' Batch Submission Failed: {response.status_code} - {response.text}')
   return response
 
 
@@ -135,7 +138,7 @@ def filter_article_to_process(all_articles_db: list[dict], all_articles: list[di
         return []
 
 
-def get_article_to_process(jsonfile: str, batch: int, batch_size: int) -> list[dict[str]]:
+def get_article_to_process(jsonfile: str, batch: int, batch_size: int, table_name: str) -> list[dict[str]]:
   """ 
   Retrieves articles from a JSON file and filters out those that already exist in the database.
 
@@ -148,6 +151,7 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int) -> list[d
       list[dict[str]]: A list of articles that are not already present in the database.
   """
   filtered_file = f'./data/{jsonfile}_filtered.json'
+  yesterday_file = f'./data/{jsonfile}_yesterday.json'
 
   try:
     if batch == 1: 
@@ -158,25 +162,47 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int) -> list[d
         all_articles = json.load(file_pipeline)
       
       # Open pipeline json yesterday 
-      with open('./data/pipeline_yesterday.json', 'r') as file_pipeline_yesterday:
-        all_articles_yesterday = json.load(file_pipeline_yesterday)
-        all_articles_yesterday = [item.get('source') for item in all_articles_yesterday]
+      all_articles_yesterday = []
+      if os.path.exists(yesterday_file):
+        try:
+          with open(yesterday_file, 'r') as file_pipeline_yesterday:
+            data = json.load(file_pipeline_yesterday)
+
+            if isinstance(all_articles_yesterday, list):
+              all_articles_yesterday = [
+                item.get('source') if isinstance(item, dict) else item 
+                for item in data
+              ]
+            else:
+              all_articles_yesterday = []
+
+        except Exception as error:
+              LOGGER.warning(f"Failed to read yesterday file: {error}. Starting fresh")
+              all_articles_yesterday = []
 
       # Headers for Supabase database connection
-      db_headers = {"apikey": SUPABASE_KEY,
-                    "Authorization": f"Bearer {SUPABASE_KEY}"
-                    }
+      db_headers = {
+        "apikey": SUPABASE_KEY,
+        "Authorization": f"Bearer {SUPABASE_KEY}"
+      }
       # Check if the database is reachable and get existing articles
-      all_articles_db = requests.get(f"{SUPABASE_URL}/rest/v1/idx_news?select=*",
-                                      headers=db_headers
-                                    ).json()
-      
+      response = requests.get(
+        f"{SUPABASE_URL}/rest/v1/{table_name}?select=*",
+        headers=db_headers
+      )
+
+      if response.status_code != 200:
+        LOGGER.error(f"Database Error ({response.status_code}): {response.text}")
+        all_articles_db = []
+      else:
+          all_articles_db = response.json()
+
       # Filter articles
       LOGGER.info(f'Total article scraped {len(all_articles)}')
       final_articles_to_process = filter_article_to_process(all_articles_db, all_articles, all_articles_yesterday)
 
       # Update yesterday pipeline checkpoint with raw pipeline.json
-      shutil.copy("./data/pipeline.json", "./data/pipeline_yesterday.json")
+      shutil.copy(f"./data/{jsonfile}.json", yesterday_file)
 
       # Save the filtered list for subsequent batches
       with open(filtered_file, 'w') as file:
@@ -188,8 +214,8 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int) -> list[d
       LOGGER.info(f"Batch {batch}: Using pre-filtered article list from batch 1")
             
       if os.path.exists(filtered_file):
-          with open(filtered_file, 'r') as f:
-            final_articles_to_process = json.load(f)
+          with open(filtered_file, 'r') as file:
+            final_articles_to_process = json.load(file)
           LOGGER.info(f"Loaded {len(final_articles_to_process)} articles from filtered list")
       else:
           LOGGER.error(f"Filtered article file not found: {filtered_file}")
@@ -219,9 +245,13 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int) -> list[d
       return []
 
 
-async def post_source(jsonfile: str,
-                batch: int, batch_size: int, 
-                is_check_csv: bool = False):
+async def post_source(
+    jsonfile: str,
+    batch: int, 
+    batch_size: int,
+    table_name: str,
+    is_check_csv: bool = False
+):
   """
   Posts articles to the database server after processing them.
   This function reads articles from a JSON file, processes each article to generate 
@@ -237,7 +267,8 @@ async def post_source(jsonfile: str,
   failed_articles_queue = []
   start_time = time.time()
 
-  data_articles = get_article_to_process(jsonfile, batch, batch_size) 
+  data_articles = get_article_to_process(jsonfile, batch, batch_size, table_name)
+
   if not data_articles:
     LOGGER.info(f"Batch {batch}: No articles to process. Exiting early.")
     return 
@@ -251,7 +282,7 @@ async def post_source(jsonfile: str,
     try:
       # Get all the necessary data with LLM calls
       processed_article_object = await generate_article_async(article_data)
-      await asyncio.sleep(4)
+      await asyncio.sleep(5)
       
       # Check for the failure signal from the processing function
       if not processed_article_object:
@@ -261,13 +292,13 @@ async def post_source(jsonfile: str,
 
       # Check the score and decide whether to batch it
       if processed_article.get('score', 0) > MININUM_SCORE:
-          LOGGER.info(f"  [SUCCESS] Article will be batched. Score: {processed_article.get('score')}")
+          LOGGER.info(f" [SUCCESS] Article will be batched. Score: {processed_article.get('score')}")
           successful_articles.append(processed_article)
       else:
-          LOGGER.info(f"  [SKIPPED] Low score: {processed_article.get('score')}")
+          LOGGER.info(f" [SKIPPED] Low score: {processed_article.get('score')}")
 
     except Exception as error:
-      LOGGER.error(f"  [FAILED] Adding to retry queue. Reason: {error}")
+      LOGGER.error(f" [FAILED] Adding to retry queue. Reason: {error}")
       failed_articles_queue.append(article_data)
       continue
   
@@ -286,13 +317,13 @@ async def post_source(jsonfile: str,
         processed_article = processed_article_object.to_dict()
 
         if processed_article.get('score', 0) > MININUM_SCORE:
-            LOGGER.info(f"  [SUCCESS] Article will be batched. Score: {processed_article.get('score')}")
+            LOGGER.info(f" [SUCCESS] Article will be batched. Score: {processed_article.get('score')}")
             successful_articles.append(processed_article)
         else:
-            LOGGER.info(f"  [SKIPPED] Low score: {processed_article.get('score')}")
+            LOGGER.info(f" [SKIPPED] Low score: {processed_article.get('score')}")
 
       except Exception as error:
-        LOGGER.error(f"  [FAILED ON RETRY] Giving up on {source_url}: {error}")
+        LOGGER.error(f" [FAILED ON RETRY] Giving up on {source_url}: {error}")
 
   # Final Batch 
   end_time = time.time()
@@ -304,43 +335,43 @@ async def post_source(jsonfile: str,
     # Saving to CSV to verify the output 
     if is_check_csv:
       df = pd.DataFrame(successful_articles)
-      df.to_csv("final_processed_articles.csv", index=False)
+      df.to_csv("final_processed_articles_{table_name}.csv", index=False)
       LOGGER.info("All successful articles saved to final_processed_articles.csv")
 
     # Push data with batch processing
-    response = send_data_to_db(successful_articles)
+    response = send_data_to_db(successful_articles, table_name)
 
     if 200 <= response.status_code < 300:
-        LOGGER.info(f"  Batch Submission Success: {response.status_code}")
-        LOGGER.info(f"  Batch {batch}: COMPLETED SUCCESSFULLY - Processed {len(data_articles)} articles")
+        LOGGER.info(f" Batch Submission Success: {response.status_code}")
+        LOGGER.info(f" Batch {batch}: COMPLETED SUCCESSFULLY - Processed {len(data_articles)} articles")
     else:
-        LOGGER.info(f"  Batch Submission Failed: {response.status_code} - {response.text}")
-        LOGGER.error(f"  Batch {batch}: FAILED during database submission")
+        LOGGER.info(f" Batch Submission Failed: {response.status_code} - {response.text}")
+        LOGGER.error(f" Batch {batch}: FAILED during database submission")
   else:
       LOGGER.info("\nNo articles met the criteria for submission.")
       LOGGER.info(f"Batch {batch}: COMPLETED - Processed {len(data_articles)} articles, but none met submission criteria")
 
 
-def main():
-  parser = argparse.ArgumentParser(description="Script for posting articles to database server")
-  parser.add_argument("filename", type=str, default="labeled_articles")
-  parser.add_argument("--list", action='store_true', help="Flag to indicate posting a list of articles")
-  parser.add_argument("--i", action='store_true', help="Flag to use LLM inferencing")
+# def main():
+#   parser = argparse.ArgumentParser(description="Script for posting articles to database server")
+#   parser.add_argument("filename", type=str, default="labeled_articles")
+#   parser.add_argument("--list", action='store_true', help="Flag to indicate posting a list of articles")
+#   parser.add_argument("--i", action='store_true', help="Flag to use LLM inferencing")
 
-  args = parser.parse_args()
+#   args = parser.parse_args()
 
-  filename = args.filename
+#   filename = args.filename
   
-  if args.i:
-    post_source(filename)
-  elif args.list:
-    post_articles(filename)
-  else:
-    post_article(filename)
+#   if args.i:
+#     post_source(filename)
+#   elif args.list:
+#     post_articles(filename)
+#   else:
+#     post_article(filename)
 
 
-if __name__ == "__main__":
-  main()
+# if __name__ == "__main__":
+#   main()
 
 # Sample usage
 # python ./scripts/server.py filename --list

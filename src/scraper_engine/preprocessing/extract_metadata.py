@@ -17,6 +17,7 @@ import os
 import dotenv
 import requests
 import concurrent.futures
+import logging 
 
 # Load environment variables
 dotenv.load_dotenv()
@@ -24,7 +25,7 @@ dotenv.load_dotenv()
 # Configure SSL context
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# Configure logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -39,7 +40,7 @@ class MetadataExtractor:
             timeout (int): Request timeout in seconds
         """
         self.timeout = timeout
-        self.proxy = os.environ.get("PROXY_KEY")
+        self.proxy = os.environ.get("PROXY")
         self.proxy_support = (
             {"http": self.proxy, "https": self.proxy} if self.proxy else None
         )

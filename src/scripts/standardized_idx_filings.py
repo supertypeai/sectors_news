@@ -1,14 +1,15 @@
 from datetime import datetime, timedelta, timezone
 
-from database.database_connect import supabase
-from preprocessing_articles.extract_summary_news import normalize_dot_case
-from config.setup import LOGGER
+from scraper_engine.database.client import SUPABASE_CLIENT
+from scraper_engine.preprocessing.extract_summary_news import normalize_dot_case
 
 import pytz
 import re 
 import json 
 import os 
+import logging 
 
+LOGGER = logging.getLogger(__name__)
 
 def get_filings_data(
     base_dir: str,
@@ -35,7 +36,7 @@ def get_filings_data(
         print(f"Fetching filings between {start_utc} and {end_utc}")
 
         response = (
-            supabase
+            SUPABASE_CLIENT
             .table("idx_news")
             .select("*")
             .gte("created_at", start_utc)
@@ -59,7 +60,7 @@ def get_filings_data(
 def upsert_to_db(payload: list[dict[str, any]]):
     try:
         response = (
-             supabase
+             SUPABASE_CLIENT
             .table("idx_news")         
             .upsert(payload, on_conflict=['id'])             
             .execute()

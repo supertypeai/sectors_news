@@ -6,25 +6,31 @@ from langchain.prompts              import PromptTemplate
 from langchain_core.output_parsers  import JsonOutputParser
 from langchain_core.runnables       import RunnableParallel
 from operator                       import itemgetter
-from supabase                       import create_client, Client
+from supabase                       import Client
 from datetime                       import datetime
 from typing                         import List, Dict, Optional, Union, Tuple
 from groq                           import RateLimitError
 
-from llm_models.get_models  import LLMCollection, invoke_llm_async, invoke_llm
-from llm_models.llm_prompts import (ClassifierPrompts, 
-                                    TagsClassification, 
-                                    TickersClassification, 
-                                    SubsectorClassification, 
-                                    SentimentClassification, 
-                                    DimensionClassification, 
-                                    CompanyNameTickerExtraction,
-                                    CompanyNameExtraction)
+from scraper_engine.llm.client  import LLMCollection, invoke_llm_async, invoke_llm
+from scraper_engine.llm.prompts import (
+    ClassifierPrompts, 
+    TagsClassification, 
+    TickersClassification, 
+    SubsectorClassification, 
+    SentimentClassification, 
+    DimensionClassification, 
+    CompanyNameTickerExtraction,
+    CompanyNameExtraction
+)
 
-from config.setup import LOGGER, SUPABASE_URL, SUPABASE_KEY
+from scraper_engine.database.client import SUPABASE_CLIENT
 
 import json
 import asyncio
+import logging 
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class NewsClassifier:
@@ -34,7 +40,7 @@ class NewsClassifier:
     def __init__(self):
         """Initialize the NewsClassifier with required dependencies."""
         # Supabase setup
-        self.supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+        self.supabase: Client = SUPABASE_CLIENT
 
         # LLM setup
         self.llm_collection = LLMCollection()

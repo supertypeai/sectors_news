@@ -15,16 +15,20 @@ from langchain.prompts              import PromptTemplate
 from langchain_core.output_parsers  import JsonOutputParser
 from groq                           import RateLimitError
 
-from llm_models.get_models  import LLMCollection, invoke_llm
-from llm_models.llm_prompts import ScoringNews, ClassifierPrompts
-from config.setup           import LOGGER
+from scraper_engine.llm.client  import LLMCollection, invoke_llm
+from scraper_engine.llm.prompts import ScoringNews, ClassifierPrompts
 
 from datetime       import datetime, timedelta
 from typing         import Optional
 from urllib.parse   import urlparse
+
 import json 
 import time
-import re 
+import logging
+
+
+LOGGER = logging.getLogger(__name__)
+
 
 class ArticleScorer:
     """

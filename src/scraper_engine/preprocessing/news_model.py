@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from database.database_connect  import sectors_data
-from .extract_metadata          import extract_metadata
-from .extract_summary_news      import summarize_news
+from scraper_engine.database.metadata import get_sectors_data
+from .extract_metadata import extract_metadata
+from .extract_summary_news import summarize_news
 
 import pytz
 import json
@@ -106,6 +106,7 @@ class News:
             sub_sector = data.get("subsector")
 
         sector = ""
+        sectors_data = get_sectors_data()
 
         if "sector" in data and isinstance(data.get("sector"), str):
             sector = data.get("sector").strip()

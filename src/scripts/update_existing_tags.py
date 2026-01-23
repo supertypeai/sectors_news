@@ -6,16 +6,18 @@ from datetime                       import datetime, timedelta
 from typing                         import List, Dict
 from groq                           import RateLimitError
 
-from llm_models.get_models  import LLMCollection, invoke_llm
-from llm_models.llm_prompts import (ClassifierPrompts, TagsClassification)
+from scraper_engine.llm.client  import LLMCollection, invoke_llm
+from scraper_engine.llm.prompts import (ClassifierPrompts, TagsClassification)
 
-from config.setup               import LOGGER
-from database.database_connect  import supabase
+from scraper_engine.database.client  import SUPABASE_CLIENT
 
 import json 
 import os 
 import traceback
+import logging 
 
+
+LOGGER = logging.getLogger(__name__)
 
 LLMCOLLECTION = LLMCollection()
 PROMPTS = ClassifierPrompts()
@@ -46,7 +48,7 @@ def get_existing_data(start_date: str) -> list[dict]:
     """
     try:
         response = (
-            supabase.table("idx_news")
+            SUPABASE_CLIENT.table("idx_news")
             .select("id, tags, body, source, timestamp")
             .gte("timestamp", start_date)   
             .lt("timestamp", (datetime.today() + timedelta(days=1)).strftime("%Y-%m-%d"))     
@@ -218,7 +220,7 @@ def run_update_existing_tags(batch_data: list[dict[str]], unique_tags: list[str]
 
             # Update Supabase
             response = (
-                supabase.table("idx_news")
+                SUPABASE_CLIENT.table("idx_news")
                 .update({"tags": new_tags})
                 .eq("id", int(raw_id))
                 .execute()
@@ -282,4 +284,3 @@ if __name__ == "__main__":
     
 
     
-

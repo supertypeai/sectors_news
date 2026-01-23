@@ -3,23 +3,16 @@ from selenium.webdriver.chrome.service  import Service as ChromeService
 from webdriver_manager.chrome           import ChromeDriverManager
 from selenium.webdriver.chrome.options  import Options
 from bs4                                import BeautifulSoup
-from dotenv                             import load_dotenv
+
+from scraper_engine.config.conf import PROXY
 
 import json
 import csv
 import ssl
 import urllib.request
 import requests
-import os
 import time 
 
-
-# Determine the base directory where the .env file is located
-base_dir = os.path.dirname(os.path.abspath(__file__)) 
-project_root = os.path.abspath(os.path.join(base_dir, '..')) 
-
-# Load the .env file from the base directory
-load_dotenv(os.path.join(project_root, '.env'))
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -44,7 +37,7 @@ class Scraper:
   # Fetch news using urllib.request with proxy
   def fetch_news_with_proxy(self, url):
     try:
-      self.proxy = os.environ.get("proxy")
+      self.proxy = PROXY
       # print("proxy", self.proxy)
 
       proxy_support = urllib.request.ProxyHandler({'http': self.proxy,'https': self.proxy})
@@ -57,6 +50,7 @@ class Scraper:
 
       self.soup = BeautifulSoup(data, 'html.parser')
       return self.soup
+    
     except Exception as e:
       print(f"Error fetching the URL: {e}")
       return BeautifulSoup()

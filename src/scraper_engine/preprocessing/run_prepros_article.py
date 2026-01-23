@@ -2,22 +2,26 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime           import datetime
 from rapidfuzz          import fuzz
 
-from .news_model                import News 
-from .extract_summary_news      import summarize_news, get_article_body
-from .extract_score_news        import get_article_score
-from database.database_connect  import sectors_data, ticker_index
-from .extract_classifier        import load_company_data, NewsClassifier, load_sub_sectors_data
-from config.setup               import LOGGER
+from .news_model import News 
+from .extract_summary_news import summarize_news, get_article_body
+from .extract_score_news import get_article_score
+from scraper_engine.database.metadata import get_sectors_data, build_ticker_index
+from .extract_classifier import load_company_data, NewsClassifier, load_sub_sectors_data
 
 import asyncio
 import re
+import logging
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 CLASSIFIER = NewsClassifier()
 EXECUTOR = ThreadPoolExecutor(max_workers=4)
 COMPANY_DATA = load_company_data()
 SUBSECTOR_DATA = load_sub_sectors_data()
-TICKER_INDEX = ticker_index
+TICKER_INDEX = build_ticker_index()
+SECTORS_DATA = get_sectors_data()
 
 
 def matching_company_name(company_extracted: list[str], is_ticker: bool = True) -> set:
@@ -132,8 +136,8 @@ def post_processing(sentiment: str, tags: list[str], body: str,
 
     # Sectors data 
     for sub in sub_sector:
-        if sub in sectors_data: 
-            sector = sectors_data[sub]
+        if sub in SECTORS_DATA: 
+            sector = SECTORS_DATA[sub]
             break
 
     return {

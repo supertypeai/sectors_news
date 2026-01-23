@@ -12,9 +12,8 @@ from langchain_core.runnables       import RunnableParallel
 from operator                       import itemgetter
 from groq                           import RateLimitError
 
-from llm_models.get_models  import LLMCollection, invoke_llm
-from llm_models.llm_prompts import ClassifierPrompts, SummaryNews
-from config.setup           import LOGGER
+from scraper_engine.llm.client  import LLMCollection, invoke_llm
+from scraper_engine.llm.prompts import ClassifierPrompts, SummaryNews
 
 import requests
 import os
@@ -24,6 +23,10 @@ import json
 import cloudscraper
 import time 
 import random 
+import logging
+
+
+LOGGER = logging.getLogger(__name__)
 
 # NLTK download
 nltk.data.path.append("./nltk_data")
@@ -334,7 +337,12 @@ def get_article_body(url: str) -> str:
         LOGGER.info(f"[SUCCESS] Article from url {url} inferenced")
 
         if article.cleaned_text:
+            if 'www.straitstimes' in url:
+                texts = article.cleaned_text
+                texts = texts.replace("Sign up now: Get ST's newsletters delivered to your inbox", "")
+                return texts     
             return article.cleaned_text
+        
         else:
             # If fail, get the HTML and extract the text
             LOGGER.info("[REQUEST FAIL] Goose3 returned empty string, trying with soup")
