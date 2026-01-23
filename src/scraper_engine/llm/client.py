@@ -3,7 +3,8 @@ from langchain_core.runnables import Runnable
 
 from scraper_engine.config.conf import (
     GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4,
-    OPENAI_API_KEY, GEMINI_API_KEY, LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC
+    OPENAI_API_KEY, GEMINI_API_KEY, GEMINI_API_KEY2,
+    LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC
 )
 
 import groq 
@@ -32,6 +33,7 @@ class LLMCollection:
             model_providers = {
                 "openai/gpt-oss-120b": "groq",
                 "gemini-2.5-flash": "google_genai",
+                "gemini-2.5-flash-lite": "google_genai",
                 "openai/gpt-oss-20b": "groq",
                 "qwen/qwen3-32b": "groq",
                 "deepseek-r1-distill-llama-70b": "groq",
@@ -41,6 +43,8 @@ class LLMCollection:
 
             groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2,
                              GROQ_API_KEY3, GROQ_API_KEY4]
+            
+            gemini_api_keys = [GEMINI_API_KEY, GEMINI_API_KEY2]
 
             llms= []
             for model, provider in model_providers.items():
@@ -68,15 +72,16 @@ class LLMCollection:
                     )
                     
                 elif provider == 'google_genai':
-                     llms.append(
-                        init_chat_model(
-                            model,
-                            model_provider=provider,
-                            temperature=0.5,
-                            max_retries=3,
-                            api_key=GEMINI_API_KEY,
+                    for gemini_key in gemini_api_keys:
+                        llms.append(
+                            init_chat_model(
+                                model,
+                                model_provider=provider,
+                                temperature=0.5,
+                                max_retries=3,
+                                api_key=gemini_key,
+                            )
                         )
-                    )
 
 
             cls._instance._llms = llms 

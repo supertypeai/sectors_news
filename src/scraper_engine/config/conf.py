@@ -29,9 +29,10 @@ try:
     GROQ_API_KEY3 = get_required_env("GROQ_API_KEY3")
     GROQ_API_KEY4 = get_required_env("GROQ_API_KEY4")
     GEMINI_API_KEY = get_required_env("GEMINI_API_KEY")
+    GEMINI_API_KEY2 = get_required_env("GEMINI_API_KEY2")
     
     PROXY = get_required_env('PROXY')
-    
+
     # Semaphores
     LLM_SEMAPHORE_SYNC = Semaphore(5)
     LLM_SEMAPHORE = asyncio.Semaphore(5)

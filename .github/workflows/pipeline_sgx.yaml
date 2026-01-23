@@ -50,6 +50,7 @@ jobs:
           GROQ_API_KEY3: ${{ secrets.GROQ_API_KEY3 }}
           GROQ_API_KEY4: ${{ secrets.GROQ_API_KEY4 }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
           PROXY: ${{ secrets.PROXY }}
 
       - name: Pull Latest Changes
