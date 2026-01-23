@@ -1,4 +1,4 @@
-name: Scrape News and Submit to Database with Batch
+name: Scrape IDX News and Submit to Database with Batch
 
 on:
   schedule:
@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync
+          uv pip install -e .  # Register 'src' as a package
 
       - name: Setup NLTK data
         run: |
@@ -43,7 +44,9 @@ jobs:
           install-chromedriver: true
 
       - name: Run scraping script for all news source
-        run: uv run -m scripts.pipeline 2 pipeline --batch 1 --batch-size 75
+        run: |
+          uv run -m scraper_engine.pipeline main_idx --page-number 2 --batch 1
+          uv run -m scraper_engine.pipeline remove_outdated_news --table-name idx_news
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
@@ -92,6 +95,7 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync
+          uv pip install -e .  # Register 'src' as a package
 
       - name: Setup NLTK data
         run: |
@@ -109,7 +113,7 @@ jobs:
           git pull origin main
 
       - name: Run scraping script for batch 2 (process only)
-        run: uv run -m scripts.pipeline 2 pipeline --process-only --batch 2 --batch-size 75
+        run: uv run -m scraper_engine.pipeline main_idx --page-number 2 --batch 1 --process-only
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
