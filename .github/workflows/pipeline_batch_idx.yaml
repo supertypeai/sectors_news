@@ -60,15 +60,20 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PROXY: ${{ secrets.PROXY }}
 
-      - name: Pull Latest Changes
-        run: git pull origin main
-
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          
+          # Stage changes
           git add -A
-          git diff-index --quiet HEAD || (git commit -m "Updated scraped news articles" --allow-empty)
+          
+          # Create Commit (if changes exist)
+          git diff-index --quiet HEAD || git commit -m "Updated scraped news articles"
+          
+          # Rebase
+          git pull --rebase origin main
+          
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -106,10 +111,8 @@ jobs:
           nltk.download('punkt', download_dir='./nltk_data')
           "
           
-      - name: Pull latest changes from repository
+      - name: Pull latest changes from batch 1
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
           git pull origin main
 
       - name: Run scraping script for batch 2 (process only)

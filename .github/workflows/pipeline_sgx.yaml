@@ -53,15 +53,20 @@ jobs:
           GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
           PROXY: ${{ secrets.PROXY }}
 
-      - name: Pull Latest Changes
-        run: git pull origin main
-
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          
+          # Stage changes
           git add -A
-          git diff-index --quiet HEAD || (git commit -m "Updated scraped news articles" --allow-empty)
+          
+          # Create Commit (if changes exist)
+          git diff-index --quiet HEAD || git commit -m "Updated scraped news articles"
+          
+          # Rebase
+          git pull --rebase origin main
+          
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
