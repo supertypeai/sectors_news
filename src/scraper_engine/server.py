@@ -4,6 +4,7 @@ Script to submit
 
 from scraper_engine.preprocessing.run_prepros_article import generate_article_async
 from scraper_engine.config.conf import SUPABASE_KEY, SUPABASE_URL
+from scraper_engine.database.client import SUPABASE_CLIENT
 
 import pandas as pd 
 import time
@@ -142,22 +143,19 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int, table_nam
               LOGGER.warning(f"Failed to read yesterday file: {error}. Starting fresh")
               all_articles_yesterday = []
 
-      # Headers for Supabase database connection
-      db_headers = {
-        "apikey": SUPABASE_KEY,
-        "Authorization": f"Bearer {SUPABASE_KEY}"
-      }
       # Check if the database is reachable and get existing articles
-      response = requests.get(
-        f"{SUPABASE_URL}/rest/v1/{table_name}?select=source",
-        headers=db_headers
+      response = (
+        SUPABASE_CLIENT
+        .table(table_name)
+        .select('source')
+        .execute()
       )
 
       if response.status_code != 200:
         LOGGER.error(f"Database Error ({response.status_code}): {response.text}")
         all_articles_db = []
       else:
-        all_articles_db = response.json()
+        all_articles_db = response.data
 
       # Filter articles
       LOGGER.info(f'Total article scraped {len(all_articles)}')
