@@ -3,7 +3,7 @@ name: Scrape IDX News and Submit to Database with Batch
 on:
   schedule:
     # - cron: "0 3 * * *" # Runs at 10:00 AM UTC+7 every day
-    - cron: "30 5 * * *" # 12:30 utc+7
+    - cron: "30 4 * * *" # 11:30 UTC+7
   workflow_dispatch:
 
 jobs:
