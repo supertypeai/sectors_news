@@ -9,7 +9,6 @@ import pandas as pd
 import time
 import requests
 import json
-import argparse
 import time 
 import os 
 import shutil
@@ -23,43 +22,6 @@ LOGGER = logging.getLogger(__name__)
 
 MININUM_SCORE = 60
 BATCH_SIZE = 5
-
-
-def post_articles(jsonfile: str):
-  with open(f'./data/{jsonfile}.json', 'r') as f:
-    articles = json.load(f)
-
-  headers = {
-    'Authorization': f'Bearer {SUPABASE_KEY}',
-    'Content-Type': 'application/json'
-  }
-
-  response = requests.post(SUPABASE_URL + '/articles/list', json=articles, headers=headers)
-
-  if response.status_code == 200:
-    print('Success:', response.json())
-  else:
-    print('Failed:', response.status_code, response.text)
-
-
-def post_article(jsonfile: str):
-  with open(f'./data/{jsonfile}.json', 'r') as f:
-    article = json.load(f)
-
-  if isinstance(article, list):
-    article = article[0]
-  
-  headers = {
-    'Authorization': f'Bearer {SUPABASE_KEY}',
-    'Content-Type': 'application/json'
-  }
-
-  response = requests.post(SUPABASE_URL + '/articles', json=article, headers=headers)
-
-  if response.status_code == 200:
-    print('Success:', response.json())
-  else:
-    print('Failed:', response.status_code, response.text)
 
 
 def send_data_to_db(successful_articles: list, table_name: str):
@@ -352,27 +314,3 @@ async def post_source(
       LOGGER.info("\nNo articles met the criteria for submission.")
       LOGGER.info(f"Batch {batch}: COMPLETED - Processed {len(data_articles)} articles, but none met submission criteria")
 
-
-# def main():
-#   parser = argparse.ArgumentParser(description="Script for posting articles to database server")
-#   parser.add_argument("filename", type=str, default="labeled_articles")
-#   parser.add_argument("--list", action='store_true', help="Flag to indicate posting a list of articles")
-#   parser.add_argument("--i", action='store_true', help="Flag to use LLM inferencing")
-
-#   args = parser.parse_args()
-
-#   filename = args.filename
-  
-#   if args.i:
-#     post_source(filename)
-#   elif args.list:
-#     post_articles(filename)
-#   else:
-#     post_article(filename)
-
-
-# if __name__ == "__main__":
-#   main()
-
-# Sample usage
-# python ./scripts/server.py filename --list

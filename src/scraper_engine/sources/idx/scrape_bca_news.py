@@ -162,22 +162,13 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
                                 LOGGER.info("Target Data Found!")
                                 
                                 for item in parsed_data:
-                                    # Safe extraction
                                     slug = item.get("slug", "")
                                     title = item.get("title_en") or item.get("title_id")
-                                    
-                                    # Stock Code Extraction
-                                    stock_code = None
-                                    stock_info = item.get("meta", {}).get("cover", {}).get("stock_information_data", [])
-                                    if stock_info and isinstance(stock_info, list) and len(stock_info) > 0:
-                                        stock_code = stock_info[0].get("code")
 
                                     results.append({
                                         "title": title,
                                         "timestamp": format_iso_date(item.get("published_at")),
                                         "source": f"https://bcasekuritas.co.id/en/latest-news/news/{slug}",
-                                        # "category": "News",
-                                        # "stock_code": stock_code
                                     })
                                 break 
 
@@ -214,8 +205,6 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
                         "title": title,
                         "timestamp": date_formatted,
                         "source": link,
-                        # "category": "News",
-                        # "stock_code": None
                     })
                 except: continue
 
