@@ -144,18 +144,17 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int, table_nam
               all_articles_yesterday = []
 
       # Check if the database is reachable and get existing articles
-      response = (
-        SUPABASE_CLIENT
-        .table(table_name)
-        .select('source')
-        .execute()
-      )
-
-      if response.status_code != 200:
-        LOGGER.error(f"Database Error ({response.status_code}): {response.text}")
-        all_articles_db = []
-      else:
+      try:
+        response = (
+          SUPABASE_CLIENT
+          .table(table_name)
+          .select('source')
+          .execute()
+        )
         all_articles_db = response.data
+      except Exception as error: 
+        LOGGER.error(f"Database Error: {error}")
+        all_articles_db = []
 
       # Filter articles
       LOGGER.info(f'Total article scraped {len(all_articles)}')
