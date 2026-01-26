@@ -130,7 +130,7 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int, table_nam
           with open(yesterday_file, 'r') as file_pipeline_yesterday:
             data = json.load(file_pipeline_yesterday)
 
-            if isinstance(all_articles_yesterday, list):
+            if isinstance(data, list):
               all_articles_yesterday = [
                 item.get('source') if isinstance(item, dict) else item 
                 for item in data
@@ -149,7 +149,7 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int, table_nam
       }
       # Check if the database is reachable and get existing articles
       response = requests.get(
-        f"{SUPABASE_URL}/rest/v1/{table_name}?select=*",
+        f"{SUPABASE_URL}/rest/v1/{table_name}?select=source",
         headers=db_headers
       )
 
@@ -157,7 +157,7 @@ def get_article_to_process(jsonfile: str, batch: int, batch_size: int, table_nam
         LOGGER.error(f"Database Error ({response.status_code}): {response.text}")
         all_articles_db = []
       else:
-          all_articles_db = response.json()
+        all_articles_db = response.json()
 
       # Filter articles
       LOGGER.info(f'Total article scraped {len(all_articles)}')
