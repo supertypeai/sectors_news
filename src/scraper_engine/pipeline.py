@@ -91,10 +91,8 @@ def delete_outdated_news(
         items_to_delete = response.data or []
 
         # ensure data directory exists
-        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-        output_dir = os.path.join(project_root, "data")
+        output_dir = "data"
         os.makedirs(output_dir, exist_ok=True)
-
         filename = os.path.join(output_dir, "outdated_news.json")
 
         if items_to_delete:
