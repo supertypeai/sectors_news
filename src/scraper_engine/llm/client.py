@@ -2,7 +2,7 @@ from langchain.chat_models import init_chat_model
 from langchain_core.runnables import Runnable
 
 from scraper_engine.config.conf import (
-    GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4,
+    GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4, GROQ_API_KEY_DEV,
     OPENAI_API_KEY, GEMINI_API_KEY, GEMINI_API_KEY2,
     LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC
 )
@@ -41,8 +41,10 @@ class LLMCollection:
                 "gpt-4.1-mini": "openai",
             }
 
-            groq_api_keys = [GROQ_API_KEY1, GROQ_API_KEY2,
-                             GROQ_API_KEY3, GROQ_API_KEY4]
+            groq_api_keys = [
+                GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY_DEV,
+                GROQ_API_KEY3, GROQ_API_KEY4
+            ]
             
             gemini_api_keys = [GEMINI_API_KEY, GEMINI_API_KEY2]
 

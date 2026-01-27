@@ -30,7 +30,8 @@ try:
     GROQ_API_KEY4 = get_required_env("GROQ_API_KEY4")
     GEMINI_API_KEY = get_required_env("GEMINI_API_KEY")
     GEMINI_API_KEY2 = get_required_env("GEMINI_API_KEY2")
-    
+    GROQ_API_KEY_DEV = get_required_env("GROQ_API_KEY_DEV")
+
     PROXY = get_required_env('PROXY')
 
     # Semaphores

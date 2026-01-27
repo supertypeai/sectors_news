@@ -283,7 +283,7 @@ class NewsClassifier:
                 result = await invoke_llm_async(classifier_chain, input_data)
     
                 # Sleep 8s
-                await asyncio.sleep(10)
+                await asyncio.sleep(8)
 
                 if result is None : 
                     LOGGER.warning(f"API call failed for category: {category}. trying next LLM.")
