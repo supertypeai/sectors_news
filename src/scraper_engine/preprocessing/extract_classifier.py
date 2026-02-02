@@ -378,7 +378,11 @@ class NewsClassifier:
 
         return tags, subsector, sentiment, dimension
 
-    def extract_company_name(self, body: str, title: str, is_ticker: bool = True) -> str:
+    def extract_company_name(
+        self, body: str, 
+        title: str, 
+        is_ticker: bool = True
+    ) -> list[str]:
         """ 
         Extracts and a company name from the given body and title text with llm.
 

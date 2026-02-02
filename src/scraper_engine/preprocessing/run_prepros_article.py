@@ -5,7 +5,7 @@ from rapidfuzz          import fuzz
 from .news_model import News 
 from .extract_summary_news import summarize_news, get_article_body
 from .extract_score_news import get_article_score
-from scraper_engine.database.metadata import get_sectors_data, build_ticker_index
+from scraper_engine.database.metadata import get_sectors_data, build_ticker_index, build_sgx_ticker_index
 from .extract_classifier import load_company_data, NewsClassifier, load_sub_sectors_data
 
 import asyncio
@@ -21,10 +21,11 @@ EXECUTOR = ThreadPoolExecutor(max_workers=4)
 COMPANY_DATA = load_company_data()
 SUBSECTOR_DATA = load_sub_sectors_data()
 TICKER_INDEX = build_ticker_index()
+TICKER_INDEX_SGX = build_sgx_ticker_index()
 SECTORS_DATA = get_sectors_data()
 
 
-def matching_company_name(company_extracted: list[str], is_ticker: bool = True) -> set:
+def matching_company_name(company_extracted: list[str], is_ticker: bool = True, is_sgx: bool = False) -> set:
     """
     Matches extracted company names to the companies json, with a fallback to extract
     ticker and matching with companies json ticker.
@@ -39,6 +40,11 @@ def matching_company_name(company_extracted: list[str], is_ticker: bool = True) 
     """
     tickers = set()
 
+    if is_sgx: 
+        ticker_index = TICKER_INDEX_SGX
+    else:
+        ticker_index = TICKER_INDEX
+
     for company in company_extracted:
         company = re.sub(r'^\s*PT\s+', '', company, flags=re.IGNORECASE) 
         company = re.sub(r'\s*Tbk\.?$', '', company, flags=re.IGNORECASE)
@@ -47,7 +53,7 @@ def matching_company_name(company_extracted: list[str], is_ticker: bool = True) 
         
         ticker_found = None 
         if is_ticker:
-            for company_name, ticker in TICKER_INDEX.items():
+            for company_name, ticker in ticker_index.items():
                 ticker_lower = ticker.lower()
                 ticker_lower = ticker_lower.replace('.jk', '').strip()
                 best_match = fuzz.ratio(company, ticker_lower)
@@ -60,7 +66,7 @@ def matching_company_name(company_extracted: list[str], is_ticker: bool = True) 
                 tickers.add(ticker_found)
         
         else: 
-            for company_name, ticker in TICKER_INDEX.items():
+            for company_name, ticker in ticker_index.items():
                 best_match = fuzz.ratio(company, company_name)
                 
                 if best_match > 95: 
@@ -78,9 +84,16 @@ def matching_company_name(company_extracted: list[str], is_ticker: bool = True) 
     return tickers
 
 
-def post_processing(sentiment: str, tags: list[str], body: str, 
-                    title: str, sub_sector_result: list[str], 
-                    dimension: dict, url: str) -> dict:
+def post_processing(
+    sentiment: str, 
+    tags: list[str], 
+    body: str, 
+    title: str, 
+    sub_sector_result: list[str], 
+    dimension: dict, 
+    url: str,
+    is_sgx: bool = False
+) -> dict[str, any]:
     """
     Perform post-processing on the article, including adding sentiment, extracting tickers,
     and determining sub-sectors and sectors.
@@ -102,25 +115,30 @@ def post_processing(sentiment: str, tags: list[str], body: str,
         tags.append(sentiment)
         
     # Get tickers new flow 
-    company_extracted = CLASSIFIER.extract_company_name(body, title, False)
-    tickers = matching_company_name(company_extracted, False)
+    if is_sgx:
+        company_extracted = CLASSIFIER.extract_company_name(body, title, False)
+        matched_tickers = matching_company_name(company_extracted, is_ticker=False, is_sgx=True) 
+        checked_tickers = list(matched_tickers)
+    else: 
+        company_extracted = CLASSIFIER.extract_company_name(body, title, False)
+        tickers = matching_company_name(company_extracted, is_ticker=False)
 
-    # Fallback tickers not found, only for emitennews
-    if not tickers:
-        url_to_check = "https://emitennews.com/news/"
-        if url_to_check in url:
-            full_article =  get_article_body(url)
-            company_extracted = CLASSIFIER.extract_company_name(full_article, title)
-            tickers = matching_company_name(company_extracted)
+        # Fallback tickers not found, only for emitennews
+        if not tickers:
+            url_to_check = "https://emitennews.com/news/"
+            if url_to_check in url:
+                full_article =  get_article_body(url)
+                company_extracted = CLASSIFIER.extract_company_name(full_article, title)
+                tickers = matching_company_name(company_extracted)
 
-    # Tickers checking with COMPANY_DATA
-    checked_tickers = []
-    if tickers:
-        for raw_ticker in tickers:
-            ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
-            # Checking the correct tickers
-            if ticker in COMPANY_DATA:
-                checked_tickers.append(ticker)
+        # Tickers checking with COMPANY_DATA
+        checked_tickers = []
+        if tickers:
+            for raw_ticker in tickers:
+                ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
+                # Checking the correct tickers
+                if ticker in COMPANY_DATA:
+                    checked_tickers.append(ticker)
 
     # Sub sector
     if not checked_tickers and sub_sector_result:
@@ -148,7 +166,7 @@ def post_processing(sentiment: str, tags: list[str], body: str,
     }
 
 
-async def generate_article_async(data: dict, source_scraper: str):
+async def generate_article_async(data: dict, source_scraper: str, is_sgx: bool = False):
     """
     @helper-function
     @brief Generate article from URL asynchronously.
@@ -198,7 +216,8 @@ async def generate_article_async(data: dict, source_scraper: str):
         # Post-processing
         post_process_result = post_processing(
             sentiment, tags, body, 
-            title, sub_sector_result, dimension, article_url
+            title, sub_sector_result, dimension, 
+            article_url, is_sgx
         )
         new_article.tickers = post_process_result.get("tickers")
         new_article.sub_sector = post_process_result.get("sub_sector")

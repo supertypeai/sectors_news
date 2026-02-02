@@ -14,6 +14,7 @@ from groq                           import RateLimitError
 
 from scraper_engine.llm.client  import LLMCollection, invoke_llm
 from scraper_engine.llm.prompts import ClassifierPrompts, SummaryNews
+from scraper_engine.config.conf import PROXY
 
 import requests
 import os
@@ -304,7 +305,7 @@ def get_article_bca_news(url: str) -> str:
         return ""
     
 
-def get_article_body(url: str) -> str:
+def get_article_body(url: str) -> str | None:
     """ 
     Extracts the body of an article from a given URL using Goose3.
 
@@ -324,16 +325,16 @@ def get_article_body(url: str) -> str:
     
     # First attempt try to get full article with goose3 proxy and soup as fallback
     try:
-        proxy = os.environ.get("PROXY")
+        proxy = PROXY
         proxy_support = {"http": proxy, "https": proxy}
 
         session = Session()
         session.proxies.update(proxy_support)
         session.headers.update(HEADERS)
-
+        
         # g = Goose({'http_proxies': proxy_support, 'https_proxies': proxy_support})
-        g = Goose({"http_session": session})
-        article = g.extract(url=url)
+        goose_extractor = Goose({"http_session": session})
+        article = goose_extractor.extract(url=url)
         LOGGER.info(f"[SUCCESS] Article from url {url} inferenced")
 
         if article.cleaned_text:
@@ -427,7 +428,7 @@ def summarize_news(url: str) -> tuple[str, str]:
     """
     try:
         # Getting full article from the url
-        news_text = get_article_body(url)
+        news_text = get_article_body(url) or ''
         time.sleep(random.uniform(5, 12))
 
         if len(news_text) > 100:

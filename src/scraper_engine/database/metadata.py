@@ -84,3 +84,48 @@ def build_ticker_index() -> dict[str, str]:
         ticker_index[normalized_name] = symbol
 
     return ticker_index
+
+
+def build_sgx_ticker_index() -> dict[str, str]:
+    if datetime.today().day in [1, 15]:
+        response = (
+            SUPABASE_CLIENT
+            .table('sgx_company_report')
+            .select('symbol', 'name', 'sub_sector')
+            .execute()
+        )
+
+        lookup = {}
+        for item in response.data:
+            lookup[item['symbol']] = {
+                'symbol': item['symbol'],
+                'name': item['name'],
+                'sub_sector': item['sub_sector']
+            }
+        path = DATA_DIR / "sgx_companies.json"
+        with open(path, 'w') as file:
+            json.dump(lookup, file, indent=4)
+
+    path = DATA_DIR / "sgx_companies.json"
+   
+    with open(path, 'r', encoding="utf-8") as file:
+        companies_data = json.load(file)
+
+    ticker_index = {}
+    
+    # create lookup with cleaned names
+    for entry in companies_data.values():
+        symbol = entry.get('symbol', '').strip()
+        raw_name = entry.get('name', '')
+        
+        if not symbol or not raw_name:
+            continue
+
+        # Clean the company name
+        # Remove trailing Ltd
+        clean_name = re.sub(r'\s*Ltd\.?$', '', raw_name, flags=re.IGNORECASE)
+        
+        normalized_name = clean_name.strip().lower()
+        ticker_index[normalized_name] = symbol
+
+    return ticker_index

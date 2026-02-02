@@ -236,7 +236,7 @@ def main_sgx(
         finally:
             SeleniumScraper.close_shared_driver()
 
-    asyncio.run(post_source(filename, batch, batch_size, table_name, source_scraper))
+    asyncio.run(post_source(filename, batch, batch_size, table_name, source_scraper, is_sgx=True))
 
 
 if __name__ == "__main__":

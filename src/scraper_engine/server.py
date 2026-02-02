@@ -210,6 +210,7 @@ async def post_source(
     batch_size: int,
     table_name: str,
     source_scraper: str,
+    is_sgx: bool = False,
     is_check_csv: bool = False
 ):
   """
@@ -241,7 +242,7 @@ async def post_source(
     
     try:
       # Get all the necessary data with LLM calls
-      processed_article_object = await generate_article_async(article_data, source_scraper)
+      processed_article_object = await generate_article_async(article_data, source_scraper, is_sgx)
       await asyncio.sleep(5)
       
       # Check for the failure signal from the processing function
