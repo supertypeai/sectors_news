@@ -219,22 +219,18 @@ def main_sgx(
     """
     
     if not process_only:
-        try:
-            # just need to use the method write json and csv
-            scrapercollection = ScraperCollection()
+        # just need to use the method write json and csv
+        scrapercollection = ScraperCollection()
 
-            payload_business_times = scrape_businesstimes(page_number)
-            payload_straitsnews = scrape_straitsnews_sgx(page_number)
+        payload_business_times = scrape_businesstimes(page_number)
+        payload_straitsnews = scrape_straitsnews_sgx(page_number)
 
-            all_articles = payload_straitsnews + payload_business_times 
+        all_articles = payload_straitsnews + payload_business_times 
 
-            scrapercollection.write_json(all_articles, filename)
-            
-            if csv:
-                scrapercollection.write_csv(scrapercollection.articles, filename)
-
-        finally:
-            SeleniumScraper.close_shared_driver()
+        scrapercollection.write_json(all_articles, filename)
+        
+        if csv:
+            scrapercollection.write_csv(scrapercollection.articles, filename)
 
     asyncio.run(post_source(filename, batch, batch_size, table_name, source_scraper, is_sgx=True))
 

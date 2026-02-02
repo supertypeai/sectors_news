@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 
 import time 
 import logging 
+import requests
 
 
 LOGGER = logging.getLogger(__name__)
@@ -21,6 +22,30 @@ def format_iso_date(iso_str: str) -> str:
     except ValueError:
         return iso_str
     
+
+def check_valid_article(url: str) -> bool: 
+    try: 
+        response = requests.get(url, timeout=10) 
+        response.raise_for_status()
+
+        if response.status_code == 200: 
+            soup = BeautifulSoup(response.text, 'html.parser') 
+
+            if soup.find(attrs={"data-testid": "kicker-subscriber-label-separator"}):
+                LOGGER.info(f"Skipping Subscriber Article: {url}")
+                return False
+            
+            subscriber_text = soup.find(string=lambda t: t and "SUBSCRIBERS" in t.upper())
+            if subscriber_text:
+                LOGGER.info(f"Skipping Subscriber Article (Text Found): {url}")
+                return False
+
+            return True
+
+    except Exception as error: 
+        LOGGER.error(f"Failed to check validity for {url}: {error}")
+        return False
+
 
 def scrape_businesstimes(num_page: int) -> list[dict[str]]:
     base_url = 'https://www.businesstimes.com.sg/keywords/sgx'
@@ -76,6 +101,9 @@ def scrape_businesstimes(num_page: int) -> list[dict[str]]:
             else:
                 url = relative_url
 
+            if not check_valid_article(url): 
+                continue
+
             time_tag = card.find('div', attrs={'data-testid': 'created-time-component'})
             raw_time = time_tag.get_text(strip=True) if time_tag else ""
            
@@ -92,6 +120,10 @@ def scrape_businesstimes(num_page: int) -> list[dict[str]]:
     except Exception as error:
         LOGGER.error(f'scrape_straitsnews_sgx error: {error}', exc_info=True) 
         return []  
+
+    finally: 
+        LOGGER.info("Closing Browser")
+        driver.quit()
 
 
 if __name__ == '__main__': 
