@@ -24,7 +24,7 @@ def get_sectors_data() -> dict[str, any]:
 
 
 def update_top300() -> list[dict[str, any]]:
-    cache_path = DATA_DIR / "top300.json"
+    cache_path = DATA_DIR / "idx/top300.json"
     
     # Run update logic only on the 1st of the month
     if datetime.today().day == 1:
@@ -55,7 +55,7 @@ def update_top300() -> list[dict[str, any]]:
 
 
 def build_ticker_index() -> dict[str, str]:
-    path = DATA_DIR / "companies.json"
+    path = DATA_DIR / "idx/companies.json"
     if not path.exists():
         return {}
 
@@ -106,7 +106,7 @@ def build_sgx_ticker_index() -> dict[str, str]:
         with open(path, 'w') as file:
             json.dump(lookup, file, indent=4)
 
-    path = DATA_DIR / "sgx_companies.json"
+    path = DATA_DIR / "sgx/sgx_companies.json"
    
     with open(path, 'r', encoding="utf-8") as file:
         companies_data = json.load(file)

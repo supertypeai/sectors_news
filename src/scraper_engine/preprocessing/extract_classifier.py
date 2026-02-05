@@ -1,7 +1,3 @@
-"""
-Script to classify the tags, subsector, tickers, and sentiment of the news article
-"""
-
 from langchain.prompts              import PromptTemplate
 from langchain_core.output_parsers  import JsonOutputParser
 from langchain_core.runnables       import RunnableParallel
@@ -119,8 +115,8 @@ class NewsClassifier:
             tags = tags.get('tags')
         
         full_tags = '\n\n'.join(
-                    f"{tag.get('name')} : {tag.get('description')}" for tag in tags
-                )
+            f"{tag.get('name')} : {tag.get('description')}" for tag in tags
+        )
         
         self._tags_cache = (tags, full_tags)
         return tags, full_tags
@@ -171,14 +167,26 @@ class NewsClassifier:
                     .lower()
                 )
 
-            with open("./data/companies.json", "w") as f:
+            with open("./data/idx/companies.json", "w") as f:
                 json.dump(company, f, indent=2)
         else:
-            with open("./data/companies.json", "r") as f:
+            with open("./data/idx/companies.json", "r") as f:
                 company = json.load(f)
 
         self._company_cache = company
         return company
+    
+    def _load_sgx_companies_name(self): 
+        with open("./data/sgx/sgx_companies.json", "r") as file:
+                company = json.load(file)
+
+        companies_name = []
+        for _, value in company.items(): 
+            company_name = value.get('name')
+            companies_name.append(company_name)
+
+        companies_name_str = ', '.join(companies_name)
+        return companies_name_str
 
     async def _classify_data_async(
         self, body: str, category: str, title: str = ""
@@ -197,7 +205,6 @@ class NewsClassifier:
         # Prompt template mapping
         prompt_methods = {
             "tags": self.prompts.get_tags_prompt(),
-            "tickers": self.prompts.get_tickers_prompt(),
             "subsectors": self.prompts.get_subsectors_prompt(),
             "sentiment": self.prompts.get_sentiment_prompt(),
             "dimension": self.prompts.get_dimension_prompt()
@@ -205,9 +212,6 @@ class NewsClassifier:
 
         # Load tag data
         tags, tags_string = self._load_tag_data()
-
-        # Load company data 
-        company = self._load_company_data()
         
         # Load subsector data
         subsectors = self._load_subsector_data()
@@ -215,7 +219,6 @@ class NewsClassifier:
         # Pydantic mapping 
         model_mapping = {
             "tags": TagsClassification,
-            "tickers": TickersClassification,
             "subsectors": SubsectorClassification,
             "sentiment": SentimentClassification,
             "dimension": DimensionClassification
@@ -245,8 +248,7 @@ class NewsClassifier:
         # Add category-specific data to prompt
         if category == "tags":
             prompt = prompt.partial(tags=tags_string)
-        elif category == "tickers":
-            prompt = prompt.partial(tickers=", ".join(company.keys()))
+
         elif category == "subsectors":
             prompt = prompt.partial(subsectors=subsectors)
 
@@ -315,7 +317,6 @@ class NewsClassifier:
                     return result.get("sentiment", "")
                 
                 elif category == "dimension":
-                    # For dimension, return the entire dict or extract specific fields
                     if isinstance(result, dict):
                         return result
                     else:
@@ -353,7 +354,7 @@ class NewsClassifier:
         self, title: str, body: str
     ) -> Tuple[List[str], List[str], str, str, Dict[str, Optional[int]]]:
         """
-        Asynchronously classify an article's tags, tickers, subsector, sentiment, and dimensions.
+        Asynchronously classify an article's tags, subsector, sentiment, and dimensions.
 
         Args:
             title (str): Article title
@@ -361,11 +362,10 @@ class NewsClassifier:
 
         Returns:
             Tuple[List[str], List[str], str, str, Dict[str, Optional[int]]]:
-                (tags, tickers, subsector, sentiment, dimensions)
+                (tags, subsector, sentiment, dimensions)
         """
         # Llama groq sensitive to ratelimit, so decided to not use .gather but sequential instead
         tags = await self._classify_data_async(body, "tags", title)
-        # tickers = await self._classify_data_async(body, "tickers", title)  
         subsector = await self._classify_data_async(body, "subsectors", title)
         sentiment = await self._classify_data_async(body, "sentiment", title)
         dimension = await self._classify_data_async(body, "dimension", title)
@@ -381,34 +381,43 @@ class NewsClassifier:
     def extract_company_name(
         self, body: str, 
         title: str, 
+        is_sgx: bool = False,
         is_ticker: bool = True
     ) -> list[str]:
-        """ 
-        Extracts and a company name from the given body and title text with llm.
+        """
+        Extract company identifiers from article body and title.
 
         Args:
-            body (str): The main content or description that may contain the company name.
-            title (str): The title or heading that may also contain the company name.
+            body (str): Article body text.
+            title (str): Article title.
+            is_sgx (bool): Apply SGX-specific extraction rules if True.
+            is_ticker (bool): Prefer ticker symbols over company names if True.
 
         Returns:
-            str: The cleaned company name without corporate suffixes or extra whitespace.
+            list[str]: Extracted company names or ticker symbols.
         """
-        combined_text = f"{title} {body}"
-
-        # Get the prompt template and pydantic parser
         if is_ticker:
             template = self.prompts.get_ticker_prompt()
             company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameTickerExtraction)
         else:
-            template = self.prompts.get_company_name_prompt()
-            company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
+            if is_sgx: 
+                template = self.prompts.get_company_name_prompt_sgx()
+                company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
+            else: 
+                template = self.prompts.get_company_name_prompt_idx()
+                company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
+
+        # Prepare for input
+        combined_text = f"{title} {body}"   
+        company_names_desc = self._load_sgx_companies_name()
         
         # Prepare the prompt with the template and format instructions
         company_prompt = PromptTemplate(
             template=template, 
-            input_variables=["body"],
+            input_variables=["body", 'company_names'],
             partial_variables={
-                "format_instructions": company_extraction_parser.get_format_instructions()
+                "format_instructions": company_extraction_parser.get_format_instructions(), 
+                 "company_names": company_names_desc
             }
         )
 
@@ -419,14 +428,13 @@ class NewsClassifier:
                 }
             )
 
-        # Prepare the input data for the LLM
         input_data = {"body": combined_text}
         
         for llm in self.llm_collection.get_llms():
             llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
             LOGGER.info(f'LLM used: {llm_used}')
+
             try:
-                # Create extract company chain that combines the system, prompt, and LLM
                 summary_chain = (
                     runnable_company_system
                     | company_prompt
@@ -435,9 +443,9 @@ class NewsClassifier:
                 )
                 
                 company_extracted = invoke_llm(summary_chain, input_data)
-
-                if company_extracted is None:
-                    LOGGER.warning("API call failed after all retries, trying next LLM...")
+                
+                if 'company' not in company_extracted or 'reason' not in company_extracted:
+                    LOGGER.warning("Output not complete, trying next LLM...")
                     continue
 
                 LOGGER.info(f"[SUCCES] Company extracted for url")
@@ -445,6 +453,7 @@ class NewsClassifier:
                 if is_ticker:
                     return company_extracted.get('tickers')
                 else:
+                    LOGGER.info(f'reason company extraction: {company_extracted.get('reason')}')
                     return company_extracted.get('company')
 
             except RateLimitError as error:

@@ -1,7 +1,3 @@
-"""
-Script to use LLM for summarizing a news article, uses Llama Groq
-"""
-
 from bs4                            import BeautifulSoup
 from nltk.tokenize                  import sent_tokenize, word_tokenize
 from goose3                         import Goose
@@ -11,13 +7,13 @@ from langchain.prompts              import PromptTemplate
 from langchain_core.runnables       import RunnableParallel
 from operator                       import itemgetter
 from groq                           import RateLimitError
+from io                             import StringIO
 
 from scraper_engine.llm.client  import LLMCollection, invoke_llm
 from scraper_engine.llm.prompts import ClassifierPrompts, SummaryNews
 from scraper_engine.config.conf import PROXY
 
 import requests
-import os
 import re
 import nltk
 import json 
@@ -25,9 +21,11 @@ import cloudscraper
 import time 
 import random 
 import logging
+import csv
 
 
 LOGGER = logging.getLogger(__name__)
+
 
 # NLTK download
 nltk.data.path.append("./nltk_data")
@@ -129,58 +127,6 @@ def summarize_article(body: str, url: str) -> dict[str]:
 
     LOGGER.error("All LLMs failed to return a valid summary.")
     return None
-
-
-def preprocess_text(news_text: str) -> str:
-    """ 
-    Preprocesses the news text by removing parenthesis, tokenizing sentences and words,
-    removing stopwords, and formatting the text.
-
-    Args:
-        news_text (str): The raw text of the news article to be preprocessed.
-
-    Returns:
-        str: The preprocessed text ready for summarization.
-    """
-    # Remove parenthesis
-    news_text = re.sub(r"\(.*?\)", "", news_text)
-
-    # Tokenize into sentences
-    sentences = sent_tokenize(news_text)
-
-    # Tokenize into words, remove stopwords, and convert to lowercase
-    stop_words = {
-        "a",
-        "an",
-        "the",
-        "with",
-        "of",
-        "to",
-        "and",
-        "in",
-        "on",
-        "for",
-        "as",
-        "by",
-    }
-    words = [word_tokenize(sentence) for sentence in sentences]
-    words = [
-        [word.lower() for word in sentence if word.lower() not in stop_words]
-        for sentence in words
-    ]
-
-    # Combine words back into sentences
-    processed_sentences = [" ".join(sentence) for sentence in words]
-
-    # Combine sentences back into a single string
-    processed_text = " ".join(processed_sentences)
-
-    # Remove spaces before punctuation
-    processed_text = re.sub(r'\s+([?.!,"])', r"\1", processed_text)
-    # Remove multiple spaces
-    processed_text = re.sub(r"\s+", " ", processed_text)
-
-    return processed_text
 
 
 def basic_cleaning_body(body: str) -> str:
@@ -303,7 +249,70 @@ def get_article_bca_news(url: str) -> str:
     except Exception as error:
         LOGGER.error(f"[ERROR] Failed to extract {url}: {error}")
         return ""
+
+
+def extract_table_content(url: str) -> str:
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
+    res = requests.get(url, headers=headers)
+    res.raise_for_status()
+
+    soup = BeautifulSoup(res.text, "html.parser")
+     
+    content_buffer = []
     
+    # Find all Datawrapper iframes
+    iframes = soup.find_all('iframe', src=lambda x: x and 'datawrapper.dwcdn.net' in x)
+    
+    for iframe in iframes:
+        src = iframe['src']
+      
+        if src.startswith('//'):
+            src = 'https:' + src
+            
+        try:
+            # Datawrapper often exposes data at /dataset.csv
+            # Example: https://datawrapper.dwcdn.net/ZslC8/3/ -> https://datawrapper.dwcdn.net/ZslC8/3/dataset.csv
+            if src.endswith('/'):
+                csv_url = src + 'dataset.csv'
+            else:
+                csv_url = src + '/dataset.csv'
+                
+            response = requests.get(csv_url, timeout=5)
+            
+            if response.status_code == 200:
+                csv_text = response.text
+                reader = csv.reader(StringIO(csv_text))
+                
+                # Format as plain text for llm input
+                formatted_table = "\nDetail each company in a table form:\n"
+                for row in reader:
+                    formatted_table += " | ".join(row) + "\n"
+                
+                content_buffer.append(formatted_table)
+                continue 
+                
+        except Exception:
+            pass
+            
+        # If CSV fails, fetch the iframe HTML and get the title/aria-label
+        # (Fallback for when dataset.csv is disabled)
+        try:
+            response = requests.get(src, timeout=5)
+            if response.status_code == 200:
+                iframe_soup = BeautifulSoup(response.text, 'html.parser')
+                
+                # Datawrapper usually puts the title in the <title> tag
+                title = iframe_soup.title.string if iframe_soup.title else ""
+                content_buffer.append(f"\n[Chart/Table: {title}] (Data extraction failed, view at {src})\n")
+                
+        except Exception as error:
+            LOGGER.info(f"Failed to expand Datawrapper: {error}")
+            return ''
+
+    return "\n".join(content_buffer)
+
 
 def get_article_body(url: str) -> str | None:
     """ 
@@ -432,16 +441,19 @@ def summarize_news(url: str) -> tuple[str, str]:
         time.sleep(random.uniform(5, 12))
 
         if len(news_text) > 100:
-            # Preprocess texts but convert to all lower
-            # news_text = preprocess_text(news_text)
-            # LOGGER.info(f"Check full preprocessed article content: {news_text[:550]}")
-            
             # Preprocess texts by just removing extra spaces
             news_text = re.sub(r"\s+", " ", news_text)
+            if 'businesstimes' in url: 
+                table_text = extract_table_content(url) 
+                if table_text: 
+                    news_text = news_text + '\n' + table_text
+
             LOGGER.info(f"Check full article content: {news_text[:550]}")
 
             # Summarize the article and force to sleep 5s
             response = summarize_article(news_text, url)
+            LOGGER.info(f'reason summary: {response['reasoning']}')
+            
             time.sleep(7)
 
             if not response or not response.get("summary"):
@@ -468,13 +480,19 @@ def summarize_news(url: str) -> tuple[str, str]:
             if article.cleaned_text and len(article.cleaned_text) > 100:
                 LOGGER.info(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
                 news_text = article.cleaned_text
-                # news_text = preprocess_text(news_text)
 
                 news_text = re.sub(r"\s+", " ", news_text)
+                if 'businesstimes' in url: 
+                    table_text = extract_table_content(url) 
+                    if table_text: 
+                        news_text = news_text + '\n' + table_text
+
                 LOGGER.info(f"Check full article content: {news_text[:550]}")
 
                 # Summarize the article and force to sleep 5s
                 response = summarize_article(news_text, url)
+                LOGGER.info(f'reason summary: {response['reasoning']}')
+
                 time.sleep(7)
 
                 if not response or not response.get("summary"):
@@ -499,15 +517,3 @@ def summarize_news(url: str) -> tuple[str, str]:
         LOGGER.error(f"An unexpected error occurred in summarize_news for {url}: {error}", exc_info=True)
         return None
 
-
-# urls = [
-#     "https://www.idnfinancials.com/news/50366/boosting-growth-tpma-acquires-worth-us",
-#     "https://www.idnfinancials.com/news/50438/consistent-profit-dividend-ptba-rakes-indeks-categories",
-#     "https://www.idnfinancials.com/news/50433/smdr-listed-dividend-category-indeks-tempo-idnfinancials",
-#     "https://www.idnfinancials.com/news/50431/declining-market-cap-sido-listed-categories-indeks"
-# ]
-
-# for url in urls:
-#     title, body = summarize_news(url)
-#     print(title)
-#     print(body)

@@ -1,14 +1,3 @@
-"""
-Script to generate the score of news articles.
-
-Provides comprehensive scoring based on multiple criteria including:
-- Timeliness and source credibility
-- Clarity, structure, and relevance to Indonesia Stock Market
-- Depth of analysis and financial data inclusion
-- Market impact and forward-looking statements
-- Bonus criteria for high-quality news
-"""
-
 from langchain_core.runnables       import RunnableParallel
 from operator                       import itemgetter
 from langchain.prompts              import PromptTemplate
@@ -260,12 +249,10 @@ class ArticleScorer:
         Returns:
             int: Score between 0 and 100 (or higher with bonus points)
         """
-        # Validation body before goes into llm
         if not body or len(body.strip()) < 10:
             LOGGER.warning(f"Article body is empty or too short for scoring. Returning 0.")
             return 0
 
-        # Get the scoring prompt template
         template = self.prompts.get_scoring_prompt()
         
         # Create a scoring parser using the JsonOutputParser
@@ -304,7 +291,7 @@ class ArticleScorer:
             try:
                 llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
                 LOGGER.info(f'LLM used: {llm_used}')
-                # Create a scoring chain that combines the system, prompt, and LLM
+            
                 scoring_chain = (
                         runnable_scoring_system
                         | scoring_prompt
@@ -312,10 +299,8 @@ class ArticleScorer:
                         | scoring_parser
                     )
                 
-                # Process with current LLM
                 result_score_raw = invoke_llm(scoring_chain, input_data)
 
-                # If the wrapper signaled a permanent API failure, just try the next LLM.
                 if result_score_raw is None:
                     LOGGER.warning("API call failed after all retries, trying next LLM...")
                     continue
@@ -352,9 +337,6 @@ class ArticleScorer:
         return None 
     
 
-# So we can use the scorer as a singleton
-_SCORER = ArticleScorer()
-
 # Backward compatible function
 def get_article_score(body: str, article_date: str, article_source: str, source_criteria: str) -> int:
     """
@@ -367,7 +349,8 @@ def get_article_score(body: str, article_date: str, article_source: str, source_
     Returns:
         int: Score between 0 and 100 (or higher with bonus points)
     """
-    final_score = _SCORER.get_article_score(body, article_date, article_source, source_criteria)
+    scorer = ArticleScorer()
+    final_score = scorer.get_article_score(body, article_date, article_source, source_criteria)
     LOGGER.info(f'[SUCCES] Scoring news for url: {article_source}')
     time.sleep(7)
     return final_score

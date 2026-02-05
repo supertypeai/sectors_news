@@ -192,10 +192,10 @@ def main_idx(
             
             all_articles = scrapercollection.articles + parsed_bca_news
 
-            scrapercollection.write_json(all_articles, filename)
+            scrapercollection.write_json(all_articles, source_scraper, filename)
 
             if csv:
-                scrapercollection.write_csv(scrapercollection.articles, filename)
+                scrapercollection.write_csv(scrapercollection.articles, source_scraper, filename)
 
         finally:
             SeleniumScraper.close_shared_driver()
@@ -227,10 +227,10 @@ def main_sgx(
 
         all_articles = payload_straitsnews + payload_business_times 
 
-        scrapercollection.write_json(all_articles, filename)
+        scrapercollection.write_json(all_articles, source_scraper, filename)
         
         if csv:
-            scrapercollection.write_csv(scrapercollection.articles, filename)
+            scrapercollection.write_csv(scrapercollection.articles, source_scraper, filename)
 
     asyncio.run(post_source(filename, batch, batch_size, table_name, source_scraper, is_sgx=True))
 

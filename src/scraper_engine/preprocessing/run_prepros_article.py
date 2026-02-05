@@ -1,6 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
-from datetime           import datetime
-from rapidfuzz          import fuzz
+from datetime import datetime
+from rapidfuzz import fuzz
 
 from .news_model import News 
 from .extract_summary_news import summarize_news, get_article_body
@@ -27,16 +27,16 @@ SECTORS_DATA = get_sectors_data()
 
 def matching_company_name(company_extracted: list[str], is_ticker: bool = True, is_sgx: bool = False) -> set:
     """
-    Matches extracted company names to the companies json, with a fallback to extract
-    ticker and matching with companies json ticker.
+    Match extracted company identifiers against the company index.
 
     Args:
-        company_extracted (list[str]): List of company names to match against ticker index
-        is_ticker (bool, optional): If True, matches against ticker symbols; 
-                                   if False, matches against company names. Defaults to True.
+        company_extracted (list[str]): Extracted company names or tickers.
+        is_ticker (bool): Match using ticker symbols if True, otherwise
+            match using company names.
+        is_sgx (bool): Use SGX-specific company index or rules if True.
 
     Returns:
-        set: Set of matching ticker symbols found in the ticker index
+        set: Set of matched company identifiers.
     """
     tickers = set()
 
@@ -95,20 +95,21 @@ def post_processing(
     is_sgx: bool = False
 ) -> dict[str, any]:
     """
-    Perform post-processing on the article, including adding sentiment, extracting tickers,
-    and determining sub-sectors and sectors.
+    Enrich an article with derived metadata such as tickers,
+    sector information, and dimensions.
 
     Args:
-        sentiment (str): The sentiment of the article.
-        tags (list[str]): The tags associated with the article.
-        body (str): The body content of the article.
-        title (str): The title of the article.
-        sub_sector_result (list[str]): The sub-sector classification result.
-        dimension (dict): The dimension data for the article.
-        url (str): The article url
+        sentiment (str): Article sentiment label.
+        tags (list[str]): Article tags.
+        body (str): Article body text.
+        title (str): Article title.
+        sub_sector_result (list[str]): Sub-sector classification output.
+        dimension (dict): Dimension metadata.
+        url (str): Article URL.
+        is_sgx (bool): Apply SGX-specific processing if True.
 
     Returns:
-        dict: A dictionary containing processed tickers, sub-sectors, sectors, and dimensions.
+        dict[str, any]: Post-processed article metadata.
     """
     # Sentiment added to tag
     if sentiment != 'Not Applicable':
@@ -116,11 +117,11 @@ def post_processing(
         
     # Get tickers new flow 
     if is_sgx:
-        company_extracted = CLASSIFIER.extract_company_name(body, title, False)
+        company_extracted = CLASSIFIER.extract_company_name(body, title, is_sgx=True, is_ticker=False)
         matched_tickers = matching_company_name(company_extracted, is_ticker=False, is_sgx=True) 
         checked_tickers = list(matched_tickers)
     else: 
-        company_extracted = CLASSIFIER.extract_company_name(body, title, False)
+        company_extracted = CLASSIFIER.extract_company_name(body, title, is_ticker=False)
         tickers = matching_company_name(company_extracted, is_ticker=False)
 
         # Fallback tickers not found, only for emitennews
@@ -142,8 +143,10 @@ def post_processing(
 
     # Sub sector
     if not checked_tickers and sub_sector_result:
-        sub_sector = [sub_sector_result[0].lower()] if (sub_sector_result and 
-                                                        sub_sector_result[0].lower() in SUBSECTOR_DATA) else []
+        sub_sector = [sub_sector_result[0].lower()] if (
+            sub_sector_result and 
+            sub_sector_result[0].lower() in SUBSECTOR_DATA
+        ) else []
     else:
         sub_sector = {
             COMPANY_DATA[ticker]["sub_sector"]
@@ -168,10 +171,15 @@ def post_processing(
 
 async def generate_article_async(data: dict, source_scraper: str, is_sgx: bool = False):
     """
-    @helper-function
-    @brief Generate article from URL asynchronously.
-    @param data source URL and timestamp.
-    @return Generated article in News model.
+    Asynchronously generate an article object from source data.
+
+    Args:
+        data (dict): Source data containing at least a URL and timestamp.
+        source_scraper (str): Identifier of the scraper source.
+        is_sgx (bool): Apply SGX-specific parsing or logic if True.
+
+    Returns:
+        News: Generated article object.
     """
     loop = asyncio.get_running_loop()
     source = data.get("source").strip()

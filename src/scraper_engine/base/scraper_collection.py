@@ -26,16 +26,16 @@ class ScraperCollection:
         return self.articles
     
     # Writer methods
-    def write_json(self, jsontext, filename):
-        with open(f'./data/{filename}.json', 'w') as f:
+    def write_json(self, jsontext, source: str, filename: str):
+        with open(f'./data/{source}/{filename}.json', 'w') as f:
             json.dump(jsontext, f, indent=4)
 
     def write_file_soup(self, filetext, filename):
         with open(f'./data/{filename}.txt', 'w', encoding='utf-8') as f:
             f.write(filetext.prettify())
 
-    def write_csv(self, data, filename):
-        with open(f'./data/{filename}.csv', 'w', newline='', encoding='utf-8') as csv_file:
+    def write_csv(self, data, source: str, filename: str):
+        with open(f'./data/{source}/{filename}.csv', 'w', newline='', encoding='utf-8') as csv_file:
             csv_writer = csv.writer(csv_file)
                 
             header = data[0].keys()

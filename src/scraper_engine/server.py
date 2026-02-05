@@ -1,7 +1,3 @@
-"""
-Script to submit 
-"""
-
 from scraper_engine.preprocessing.run_prepros_article import generate_article_async
 from scraper_engine.config.conf import SUPABASE_KEY, SUPABASE_URL
 from scraper_engine.database.client import SUPABASE_CLIENT
@@ -26,12 +22,12 @@ BATCH_SIZE = 5
 
 
 def send_data_to_db(successful_articles: list, table_name: str):
-  """ 
-  Sends the processed articles to the database in batches.
-  This function takes a list of successfully processed articles and submits them to the database in batches.
-    
+  """
+  Insert processed articles into the specified database table.
+
   Args:
-      successful_articles (list): A list of dictionaries containing the processed articles to be submitted.
+    successful_articles (list): List of processed article records to insert.
+    table_name (str): Target database table name.
   """
   # Supabase submission with batch
   for index in range(0, len(successful_articles), BATCH_SIZE):
@@ -53,16 +49,19 @@ def send_data_to_db(successful_articles: list, table_name: str):
   return response
 
 
-def filter_article_to_process(all_articles_db: list[dict], all_articles: list[dict[str]], 
-                              all_articles_yesterday: list[str]) -> list[dict[str]]:
+def filter_article_to_process(
+  all_articles_db: list[dict], 
+  all_articles: list[dict[str]], 
+  all_articles_yesterday: list[str]
+) -> list[dict[str]]:
   """
     Filters articles to process by removing duplicates, articles already in the database, 
     and articles that were processed yesterday.
 
     Args:
-        all_articles_db (list[dict]): A list of dictionary of articles already in the database.
-        all_articles (list[dict]): A list of all articles to be processed.
-        all_articles_yesterday (list[str]): A list of article sources processed yesterday.
+      all_articles_db (list[dict]): A list of dictionary of articles already in the database.
+      all_articles (list[dict]): A list of all articles to be processed.
+      all_articles_yesterday (list[str]): A list of article sources processed yesterday.
 
     Returns:
         list[dict]: A list of filtered articles ready for processing.
@@ -101,20 +100,28 @@ def filter_article_to_process(all_articles_db: list[dict], all_articles: list[di
         return []
 
 
-def get_article_to_process(jsonfile: str, batch: int, batch_size: int, table_name: str) -> list[dict[str]]:
+def get_article_to_process(
+  jsonfile: str, 
+  batch: int, 
+  batch_size: int, 
+  table_name: str, 
+  source_scraper: str
+) -> list[dict[str]]:
   """ 
   Retrieves articles from a JSON file and filters out those that already exist in the database.
 
   Args:
-      jsonfile (str): The name of the JSON file containing articles to be processed.
-      batch (int): The batch index (1-based) indicating which chunk of articles to process. 
-      batch_size (int): Number of articles to include in each batch.
+    jsonfile (str): The name of the JSON file containing articles to be processed.
+    batch (int): The batch index (1-based) indicating which chunk of articles to process. 
+    batch_size (int): Number of articles to include in each batch.
+    table_name (str): Database table used for existence checks.
+    source_scraper (str): Scraper/source identifier for filtering.
 
   Returns:
       list[dict[str]]: A list of articles that are not already present in the database.
   """
-  filtered_file = f'./data/{jsonfile}_filtered.json'
-  yesterday_file = f'./data/{jsonfile}_yesterday.json'
+  filtered_file = f'./data/{source_scraper}/{jsonfile}_filtered.json'
+  yesterday_file = f'./data/{source_scraper}/{jsonfile}_yesterday.json'
 
   try:
     if batch == 1: 
@@ -214,21 +221,24 @@ async def post_source(
     is_check_csv: bool = False
 ):
   """
-  Posts articles to the database server after processing them.
-  This function reads articles from a JSON file, processes each article to generate 
-  a News object, and submits them to the database in batches.
-  If an article fails to process, it is added to a retry queue for a second attempt.
+  Load articles from a JSON file, process a selected batch, and post them
+  to the database.
 
   Args:
-      jsonfile (str): The name of the JSON file containing articles to be processed.
-      is_check_csv (bool): Flag to indicate whether to save the final processed articles to a CSV file for verification.
+    jsonfile (str): Path to the JSON file containing articles.
+    batch (int): 1-based batch index to process.
+    batch_size (int): Number of articles per batch.
+    table_name (str): Target database table.
+    source_scraper (str): Source identifier for the articles.
+    is_sgx (bool): Apply SGX-specific processing logic if True.
+    is_check_csv (bool): Save processed articles to CSV for verification.
   """
   # Initialize lists to hold successful articles and failed articles for retry
   successful_articles = []
   failed_articles_queue = []
   start_time = time.time()
 
-  data_articles = get_article_to_process(jsonfile, batch, batch_size, table_name)
+  data_articles = get_article_to_process(jsonfile, batch, batch_size, table_name, source_scraper)
 
   if not data_articles:
     LOGGER.info(f"Batch {batch}: No articles to process. Exiting early.")
@@ -269,7 +279,7 @@ async def post_source(
       LOGGER.info(f' [RETRY] Retrying for URL: {source_url}')
 
       try:
-        processed_article_object = await generate_article_async(article_data)
+        processed_article_object = await generate_article_async(article_data, source_scraper, is_sgx)
         
         # Check for the failure signal from the processing function
         if not processed_article_object:

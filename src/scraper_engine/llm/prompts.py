@@ -47,8 +47,11 @@ class CompanyNameExtraction(BaseModel):
     Schema for extracting company names mentioned in a summarized financial article.
     The model return only company names as they appear in the text.
     """
-    company: List[str] = Field(
+    company: list[str] = Field(
         description="List of company name extracted from summarize article"
+    )
+    reason: str = Field(
+        description="Explanation of why these companies were identified in the article"
     )
 
 class CompanyNameTickerExtraction(BaseModel):
@@ -156,7 +159,7 @@ class ClassifierPrompts:
         """
     
     @staticmethod
-    def get_company_name_prompt():
+    def get_company_name_prompt_idx():
         return """You are an expert at extracting information. 
             Your task is to extract company name from a summarize article.
         
@@ -168,6 +171,32 @@ class ClassifierPrompts:
             - Extract the exact company name based on 'Summarize Article' do not change it. 
             - Extract all company name you can find.
             - If there is no company name to extract, state 'No Company Found'.
+
+            Ensure to return the extracted company name as a following JSON format.
+            {format_instructions}
+        """
+    
+    @staticmethod
+    def get_company_name_prompt_sgx():
+        return """You are an expert at extracting information. 
+            Your task is to extract company name from a summarize article.
+
+            Full Company Information: 
+            {company_names}
+
+            Summarize Article:
+            {body}
+
+            Instruction:
+            1. PLease analyze carefully step by step both Full Company Information and Summarize Article!
+            2. Look carefully 'Summarize Article' and find COMPANY NAME even if they are ABBREVIATION (e.g Lonza, Prudential, Singapore Exchange, etc).
+               - Look carefully on detail data for each company in table too if they are present!
+            3. Extract the exact company name mentions based on 'Summarize Article' and Extract all company name you can find!
+            4. If the company mentions on abbreviation update to use the full name company
+               - Do not extract names that are part of an ETF or Index title unless they are mentioned as a standalone corporate entity (e.g do NOT extract "Lion-Phillip" from "Lion-Phillip S-REIT ETF")
+               - You must use 'Full Company Information' to get the full company name!
+               - If you can't match with the 'Full Company Information' it's fine still include it please
+            5. If there is no company name to extract, state 'No Company Found'.
 
             Ensure to return the extracted company name as a following JSON format.
             {format_instructions}
@@ -311,6 +340,7 @@ class ClassifierPrompts:
                     - Include in the summary if any company names mentioned in the article.
                     - Please do not include any parantheses written in company name and just remove period ('.') if found in company name.
                     - PRESERVE COMPANY NAMES exactly as written in the 'Article Content' (e.g PT Aspirasi Hidup Indonesia Tbk, PT Telemedia Komunikasi Pratama). 
+                - Look carefully the table that mentions most companies, you may extract some to stay relevance, if table PRESENT! 
             - Relevance: Stay strictly grounded in the article content. Do not invent information or include unrelated topics.
             - Conciseness: Keep the output factual, focused, and free of unnecessary detail.  
 

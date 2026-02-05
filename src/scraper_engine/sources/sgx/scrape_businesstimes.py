@@ -100,6 +100,8 @@ def scrape_businesstimes(num_page: int) -> list[dict[str]]:
                 url = f"https://www.businesstimes.com.sg{relative_url}"
             else:
                 url = relative_url
+                
+            url = url.strip().rstrip(':')
 
             if not check_valid_article(url): 
                 continue

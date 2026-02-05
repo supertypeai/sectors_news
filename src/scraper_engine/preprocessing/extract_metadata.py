@@ -1,12 +1,3 @@
-"""
-Script to extract the title and body metadata from a news article page.
-
-Supports extracting metadata from various Indonesian news sources including:
-- IDN Financials, Detik, Tempo, CNBC, Okezone, Tribun, Liputan6
-- Antaranews, CNN, Kompas, Yahoo Finance, TradingView, MorningStar
-- Livemint, Financial Times, and more
-"""
-
 from requests.exceptions    import RequestException, Timeout, ConnectionError
 from typing                 import Optional, Tuple
 from bs4                    import BeautifulSoup
@@ -30,8 +21,6 @@ logger = logging.getLogger(__name__)
 
 
 class MetadataExtractor:
-    """Enhanced metadata extractor with robust error handling and fallback strategies."""
-
     def __init__(self, timeout: int = 30):
         """
         Initialize metadata extractor.
