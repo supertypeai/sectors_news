@@ -128,7 +128,7 @@ def get_article_to_process(
       LOGGER.info("Batch 1: Performing fresh filtering against database")
             
       # Open the JSON file and load the articles
-      with open(f'./data/{jsonfile}.json', 'r') as file_pipeline:
+      with open(f'./data/{source_scraper}/{jsonfile}.json', 'r') as file_pipeline:
         all_articles = json.load(file_pipeline)
       
       # Open pipeline json yesterday 
@@ -168,7 +168,7 @@ def get_article_to_process(
       final_articles_to_process = filter_article_to_process(all_articles_db, all_articles, all_articles_yesterday)
 
       # Update yesterday pipeline checkpoint with raw pipeline.json
-      shutil.copy(f"./data/{jsonfile}.json", yesterday_file)
+      shutil.copy(f"./data/{source_scraper}/{jsonfile}.json", yesterday_file)
 
       # Save the filtered list for subsequent batches
       with open(filtered_file, 'w') as file:
