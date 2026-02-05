@@ -1,77 +1,55 @@
 # Sectors News
 
-A comprehensive news scraping and classification system that automatically collects financial and business news from multiple sources, classifies them by sectors and subsectors, and stores them in a database. The system includes both universal news scrapers and specialized sector-specific scrapers.
+A news scraping and classification pipeline focused on IDX (Indonesia) and SGX (Singapore) sources. The system scrapes articles, summarizes and classifies them with LLMs, scores and tags them, and posts results to Supabase.
 
-## 🚀 Features
+## Features
 
-- **Multi-source News Scraping**: Scrapes news from 10+ financial and business news sources
-- **Sector Classification**: Automatically classifies news articles into 9 main sectors and 30+ subsectors
-- **Universal Scraper**: Handles major international news sources (Bloomberg, CNBC, Reuters, etc.)
-- **Specialized Scrapers**: Sector-specific scrapers for Indonesian markets (mining, oil & gas, etc.)
-- **Automated Pipeline**: GitHub Actions for scheduled scraping and database updates
-- **Machine Learning**: Multiple classification approaches (BERT, Logistic Regression, Keyword-based)
-- **Data Export**: Supports JSON and CSV output formats
+- IDX and SGX scraping pipelines with batching
+- LLM-powered summarization, tagging, and sector classification
+- Article scoring and filtering before database submission
+- JSON and CSV outputs
+- Automated GitHub Actions workflows for scheduled runs
 
-## 📁 Project Structure
+## Project Structure
 
-```
+```text
 sectors_news/
-├── base_model/                # Base scraper classes and utilities
-│   ├── scraper.py             # Base Scraper class
-│   └── scraper_collection.py  # ScraperCollection for managing multiple scrapers
-├── config/
-│   └── setup.py
-├── data/                      # Data files and outputs
-│   ├── abaf.txt
-│   ├── companies.json         # Sector and subsector definitions
+├── .github/workflows/
+│   ├── pipeline_idx.yaml
+│   └── pipeline_sgx.yaml
+├── data/
+│   ├── idx/
+│   └── sgx/
 │   ├── outdated_news.json
-│   ├── pipeline.json          # Saved title, timestamp, source for all scraped news
-│   ├── pipeline_filtered.json # Saved title, timestamp, source after checking duplicated
 │   ├── sectors_data.json
-│   ├── subsectors.json
 │   ├── subsectors_data.json
-│   ├── top300.json
 │   └── unique_tags.json
-├── database/
-│   └── database_connect.json
-├── llm_models/
-│   ├── get_models.py
-│   └── llm_prompts.json
-├── models/                    # Individual scraper implementations
-│   ├── scrape_abaf.py
-│   ├── scrape_antaranews.py
-│   ├── scrape_asian_telekom.py
-│   ├── scrape_financial_bisnis.py
-│   ├── scrape_gapki.py
-│   ├── scrape_icn.py
-│   ├── scrape_idn_business_post.py
-│   ├── scrape_idnfinancials.py
-│   ├── scrape_idnminer.py
-│   ├── scrape_insight_kontan.py
-│   ├── scrape_jakartaglobe.py
-│   ├── scrape_jakartapost.py
-│   ├── scrape_kontan.py
-│   ├── scrape_minerba.py
-│   ├── scrape_mining.py
-│   └── scrape_petromindo.py
-├── preprocessing_articles/
-│   ├── extract_classifier.py
-│   ├── extract_metadata.py
-│   ├── extract_score_news.py
-│   ├── extract_summary_news.py
-│   ├── news_model.py
-│   └── run_prepros_article.py
-├── scripts/                          # Pipeline and server scripts
-│   ├── pipeline.py                   # Main scraping pipeline
-│   └── server.py                     # Database submission utilities
-├── universal_news_scraper_main.py    # Universal scraper entry point
-├── universal_news_scraper_scraper.py # Universal scraper implementations
-├── universal_pipeline.py             # Universal scraper pipeline
-├── data.ipynb                        # Data analysis notebook
-└── requirements.txt                  # Python dependencies
+├── src/
+│   ├── scraper_engine/
+│   │   ├── base/
+│   │   ├── config/
+│   │   ├── database/
+│   │   ├── llm/
+│   │   ├── preprocessing/
+│   │   ├── sources/                 # scrapers
+│   │   │   ├── idx/
+│   │   │   └── sgx/
+│   │   ├── pipeline.py
+│   │   └── server.py
+│   ├── scripts/
+│   │   ├── standardized_idx_filings.py
+│   │   └── update_existing_tags.py
+│   └── sectors_news.egg-info/
+├── universal_news_scraper_main.py
+├── universal_news_scraper_scraper.py
+├── universal_pipeline.py
+├── data.ipynb
+├── pyproject.toml
+├── uv.lock
+└── README.md
 ```
 
-## 🛠️ Installation
+## Installation
 
 1. **Clone the repository**
    ```bash
@@ -81,228 +59,153 @@ sectors_news/
 
 2. **Install dependencies**
    ```bash
-   pip install -r requirements.txt
+   uv sync
    ```
 
 3. **Set up environment variables**
-   Create a `.env` file in the root directory with the following variables:
+
+   Create a `.env` file in the root directory:
+
    ```env
-   DATABASE_URL=your_database_url
-   DB_KEY=your_database_key
-   OPENAI_API_KEY=your_openai_api_key
    SUPABASE_URL=your_supabase_url
    SUPABASE_KEY=your_supabase_key
-   GROQ_API_KEY1=your_groq_api
-   GROQ_API_KEY2=your_groq_api
-   GROQ_API_KEY3=your_groq_api
-   GROQ_API_KEY4=your_groq_api
-   PROXY=your_proxy_url  # Optional
+
+   OPENAI_API_KEY=your_openai_api_key
+
+   GROQ_API_KEY1=your_groq_api_key
+   GROQ_API_KEY2=your_groq_api_key
+   GROQ_API_KEY3=your_groq_api_key
+   GROQ_API_KEY4=your_groq_api_key
+   GROQ_API_KEY_DEV=your_groq_api_key
+
+   GEMINI_API_KEY=your_gemini_api_key
+   GEMINI_API_KEY2=your_gemini_api_key
+
+   PROXY=your_proxy_url
    ```
 
-## 🚀 Usage
+## Usage
 
-### 1. Universal News Scraper
-
-Scrape from major international news sources:
+### Register 'src' as a package
 
 ```bash
-# Scrape all sources (0-9)
-python universal_news_scraper_main.py all
-
-# Scrape specific source by index
-python universal_news_scraper_main.py 3  # IDX only
-
-# Scrape range of sources
-python universal_news_scraper_main.py 0:7  # Sources 0-6
+uv pip install -e .
 ```
 
-**Available Sources:**
-- 0: IDN_FINANCIALS
-- 1: CNBC
-- 2: YAHOO_FINANCE
-- 3: IDX
-- 4: CNN_EDITION
-- 5: FINANCE_DETIK
-- 6: EKONOMI_BISNIS
-- 7: MARKET_WATCH (requires proxy)
-- 8: REUTERS (requires proxy)
-- 9: BLOOMBERG (requires proxy)
-
-### 2. Sector-Specific Pipeline (Current Usage)
-
-Run the main scraping pipeline with sector-specific scrapers:
+### Run the IDX pipeline
 
 ```bash
-# Basic usage, default batch value 1 and batch_size 75
-python scripts/pipeline.py 2 pipeline 
-
-# With CSV output
-python scripts/pipeline.py 2 pipeline --csv
-
-# Custom page count and filename
-python scripts/pipeline.py 5 my_articles --csv
-
-# Run specific batch and batch_size
-python scripts/pipeline.py 2 pipeline --batch 1 --batch-size 50
-
-# Run news preprocessing only with no scraping process
-python scripts/pipeline.py 2 pipeline --process-only --batch 5 --batch-size 75
+uv run -m scraper_engine.pipeline main_idx --page-number 2 --batch 1
 ```
 
-### 3. Database Submission
-
-Submit scraped articles to the database:
+### Run the SGX pipeline
 
 ```bash
-# Submit single article
-python scripts/server.py filename
-
-# Submit list of articles
-python scripts/server.py filename --list
-
-# Submit with LLM inference
-python scripts/server.py filename --i
+uv run -m scraper_engine.pipeline main_sgx --page-number 2 --batch 1
 ```
 
-### 4. Universal Pipeline
+### Common options (IDX and SGX)
 
-Submit data from files to the database:
+- `--page-number`
+- `--filename`
+- `--csv`
+- `--batch`
+- `--batch-size`
+- `--process-only`
+- `--table-name`
+- `--source-scraper`
+
+Examples:
 
 ```bash
-python universal_pipeline.py filename1 filename2
+uv run -m scraper_engine.pipeline main_idx --page-number 2 --batch 1 --batch-size 50
+uv run -m scraper_engine.pipeline main_sgx --page-number 1 --batch 1 --csv
+uv run -m scraper_engine.pipeline main_idx --process-only --batch 2 --batch-size 75
 ```
 
-## 📊 Data Structure
+### Remove outdated news
 
-### Sectors and Subsectors
+Remove news older than 120 days and append it to `outdated_news.json`:
 
-The system classifies news into 9 main sectors:
+```bash
+uv run -m scraper_engine.pipeline remove_outdated_news --table-name idx_news
+uv run -m scraper_engine.pipeline remove_outdated_news --table-name sgx_news
+```
 
-1. **Infrastructures**: telecommunication, heavy-constructions, utilities, transportation-infrastructure
-2. **Energy**: oil-gas-coal, alternative-energy
-3. **Financials**: financing-service, investment-service, insurance, banks, holding-investment-companies
-4. **Consumer Cyclicals**: apparel-luxury-goods, consumer-services, automobiles-components, media-entertainment, household-goods, leisure-goods, retailing
-5. **Technology**: software-it-services, technology-hardware-equipment
-6. **Industrials**: industrial-services, multi-sector-holdings, industrial-goods
-7. **Healthcare**: healthcare-equipment-providers, pharmaceuticals-health-care-research
-8. **Basic Materials**: basic-materials
-9. **Properties & Real Estate**: properties-real-estate
-10. **Transportation & Logistics**: logistics-deliveries, transportation
-11. **Consumer Non-Cyclicals**: tobacco, nondurable-household-products, food-staples-retailing, food-beverage
+## Current Sources
 
-### Article Data Structure
+The scraper status indicates which news/data sources are currently functional and run with cron.
+
+### IDX
+
+| ID | Source                     | Status   | Reason |
+|---:|----------------------------|----------|--------|
+| 1  | INDONESIAN COAL AND NICKEL | Active   | - |
+| 2  | GAPKI                      | Active   | - |
+| 3  | MINERBA.ESDM               | Active   | - |
+| 4  | ASIAN BANKING AND FINANCE  | Active   | - |
+| 5  | INDONESIA MINER            | Active   | - |
+| 6  | JAKARTA GLOBE              | Active   | - |
+| 7  | ANTARA NEWS                | Active   | - |
+| 8  | ASIAN TELECOM              | Active   | - |
+| 9  | INDONESIA BUSINESS POST    | Inactive | Requires login to read the article |
+| 10 | THE JAKARTA POST           | Active   | - |
+| 11 | KONTAN                     | Active   | - |
+| 12 | IDN FINANCIALS             | Inactive | Cannot bypass Cloudflare to get rendered HTML |
+| 13 | PETROMINDO                 | Inactive | - |
+| 14 | INSIGHT KONTAN             | Inactive | Needs subscription to access the article |
+| 15 | FINANSIAL BISNIS           | Inactive | Failed to extract content on GitHub Actions, works locally |
+| 16 | MINING.COM                 | Inactive | Source used for Sectors insider |
+| 17 | EMITENNEWS.COM             | Active   | - |
+| 18 | BCA NEWS                   | Active   | - |
+
+### SGX
+
+| ID | Source          | Status | Reason |
+|---:|-----------------|--------|--------|
+| 1  | BUSINESS TIMES  | Active | - |
+| 2  | STRAIT TIMES    | Active | - |
+
+## Data Outputs
+
+- IDX outputs: `pipeline.json`, `pipeline_filtered.json`, `pipeline_yesterday.json`
+- SGX outputs: `pipeline_sgx.json`, `pipeline_sgx_filtered.json`, `pipeline_sgx_yesterday.json`
+
+### Article schema
 
 ```json
 {
   "title": "Article title",
   "body": "Article content",
   "source": "Source URL",
-  "date": "Publication date",
+  "timestamp": "2026-02-05 11:26:00",
   "sector": "classified_sector",
-  "subsector": "classified_subsector",
-  "score": 85.5
+  "sub_sector": ["classified_subsector"],
+  "tags": ["tag1", "tag2"],
+  "tickers": ["BBCA.JK"],
+  "dimension": {"...": "..."},
+  "score": 82.5
 }
 ```
 
-## 📰 Scraper Status
+## GitHub Actions
 
-The scraper status indicates which news/data sources are currently functional and run with cron
+Two scheduled workflows are defined:
 
-| ID  | Source                      | Status   | Reason                                                                 |
-|-----|-----------------------------|----------|------------------------------------------------------------------------|
-| 0   | INDONESIAN COAL AND NICKEL  | Active   | -                                                                      |
-| 1   | GAPKI                       | Active   | -                                                                      |
-| 2   | MINERBA.ESDM                | Active   | -                                                                      |
-| 3   | ASIAN BANKING AND FINANCE   | Active   | -                                                                      |
-| 4   | INDONESIA MINER             | Active   | -                                                                      |
-| 5   | JAKARTA GLOBE               | Active   | -                                                                      |
-| 6   | ANTARA NEWS                 | Active   | -                                                                      |
-| 7   | ASIAN TELECOM               | Active   | -                                                                      |
-| 8   | INDONESIA BUSINESS POST     | Inactive | Required Login to read the article -                                                                      |
-| 9   | THE JAKARTA POST            | Active   | -                                                                      |
-| 10  | KONTAN                      | Active   | -                                                                      |
-| 11   | IDN FINANCIALS              | Inactive | Cannot bypass the cloudflare to get rendered html          |
-| 12   | PETROMINDO                  | Inactive |     |
-| 13   | INSIGHT KONTAN              | Inactive | Need subscription to access the article     |
-| 14   | FINANSIAL BISNIS            | Inactive | Failed to extract the article content with github action, but works on local              |
-| 15   | MINING.COM                  | Inactive | The sources used for sectors insider  |
-| 16   | EMITENNEWS.COM              | Active |                        |
+- `pipeline_idx.yaml`
+  - Schedule: `30 4 * * *` (11:30 UTC+7, daily)
+  - Runs IDX scraping, preprocessing, and submission
+- `pipeline_sgx.yaml`
+  - Schedule: `0 3 * * *` (10:00 UTC+7, daily)
+  - Runs SGX scraping, preprocessing, and submission
 
-## 🔄 GitHub Actions
+Both workflows install dependencies with `uv`, set up NLTK data, run the pipeline, and commit results back to the repo.
 
-The project includes **five automated workflows**, each handling a batch of sources.  
-This batching is used to balance request limits Groq API 
+## Maintenance Scripts
 
-### Workflows
+- `standardized_idx_filings.py`  
+  Standardizes IDX filings data and upserts updates to Supabase.
 
-1. **Batch 1 (`pipeline_batch_1.yaml`)**  
-   - **Schedule**: `0 3 * * *` → Runs daily at **10:00 AM UTC+7 (03:00 UTC)**  
-   - **Trigger**: Manual dispatch also available  
-   - **Actions**:  
-     - Sets up Python 3.10 environment  
-     - Installs dependencies  
-     - Runs all scraping pipeline and preprocessing news only for batch 1  
-     - Submits results to database  
-     - Commits and pushes changes  
+- `update_existing_tags.py`  
+  Re-tags existing records in Supabase using LLM prompts.
 
-2. **Batch 2 (`pipeline_batch_2.yaml`)**  
-   - **Schedule**: `0 5 * * *` → Runs daily at **12:00 PM UTC+7 (05:00 UTC)**  
-   - **Trigger**: Manual dispatch also available  
-   - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 2 sources
-
-3. **Batch 3 (`pipeline_batch_3.yaml`)**  
-   - **Schedule**: `0 6 * * *` → Runs daily at **01:00 PM UTC+7 (06:00 UTC)**  
-   - **Trigger**: Manual dispatch also available  
-   - **Actions**: Same as Batch 1, but only runs preprocessing news for batch 3 sources  
-
----
-
-⚙️ **Notes**:
-- Each batch depends on the previous one using the `needs` keyword to ensure sequential execution
-- Batch 1 performs both scraping and preprocessing, while Batch 2 and Batch 3 only preprocess news
-- A **default batch size of 75** is applied. Once the required total news articles are scraped (e.g., 300), later workflows may **trigger but exit immediately** without processing
-- You can also manually trigger each batch workflow via GitHub Actions
-
-## 🔧 Configuration
-
-### Environment Variables
-
-| Variable         | Description                              | Required |
-|------------------|------------------------------------------|----------|
-| `DATABASE_URL`   | Database API endpoint                    | Yes      |
-| `DB_KEY`         | Database authentication key              | Yes      |
-| `OPENAI_API_KEY` | OpenAI API key for LLM inference         | Yes      |
-| `GROQ_API_KEY1`  | Groq API key (batch 1 inference)         | Yes      |
-| `GROQ_API_KEY2`  | Groq API key (batch 2 inference)         | Yes      |
-| `GROQ_API_KEY3`  | Groq API key (batch 3 inference)         | Yes      |
-| `GROQ_API_KEY4`  | Groq API key (batch 4 inference)         | Yes      |
-| `SUPABASE_URL`   | Supabase project URL                     | Yes      |
-| `SUPABASE_KEY`   | Supabase API key                         | Yes      |
-| `proxy`          | Proxy URL for restricted sources         | No       |
-
-### Dependencies
-
-Key dependencies include:
-- `beautifulsoup4`: Web scraping
-- `requests_html`: Advanced web requests
-- `transformers`: BERT and transformer models
-- `torch`: PyTorch for ML models
-- `scikit_learn`: Traditional ML algorithms
-- `pandas`: Data manipulation
-- `python-dotenv`: Environment variable management
-
-## 📈 Data Analysis
-
-The `data.ipynb` notebook provides examples of:
-- Loading and analyzing scraped data
-- Sector distribution analysis
-- Text preprocessing for ML models
-- Model training and evaluation
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
