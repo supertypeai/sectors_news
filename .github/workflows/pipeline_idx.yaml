@@ -1,4 +1,4 @@
-name: Scrape IDX News and Submit to Database with Batch
+name: Scrape IDX News and Submit to Database
 
 on:
   schedule:
@@ -80,58 +80,4 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  batch_2_process_only:
-    needs: batch_1_scrape_and_submit # Wait for batch 1 to complete
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository content
-        uses: actions/checkout@v4
-
-      - name: Install uv (Python package manager)
-        uses: astral-sh/setup-uv@v2
-        
-      - name: Wait 5 minutes
-        run: sleep 5m
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: |
-          uv sync
-          uv pip install -e .  # Register 'src' as a package
-
-      - name: Setup NLTK data
-        run: |
-          uv run python -c "
-          import nltk
-          nltk.data.path.append('./nltk_data')
-          nltk.download('punkt_tab', download_dir='./nltk_data')
-          nltk.download('punkt', download_dir='./nltk_data')
-          "
-          
-      - name: Pull latest changes from batch 1
-        run: |
-          git pull origin main
-
-      - name: Run scraping script for batch 2 (process only)
-        run: uv run -m scraper_engine.pipeline main_idx --page-number 2 --batch 1 --process-only
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DB_KEY: ${{ secrets.DB_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          GROQ_API_KEY1: ${{ secrets.GROQ_API_KEY1 }}
-          GROQ_API_KEY2: ${{ secrets.GROQ_API_KEY2 }}
-          GROQ_API_KEY_DEV: ${{ secrets.GROQ_API_KEY_DEV }}
-          GROQ_API_KEY3: ${{ secrets.GROQ_API_KEY3 }}
-          GROQ_API_KEY4: ${{ secrets.GROQ_API_KEY4 }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
-          PROXY: ${{ secrets.PROXY }}
 
