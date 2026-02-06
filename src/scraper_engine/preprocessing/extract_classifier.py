@@ -176,7 +176,7 @@ class NewsClassifier:
         self._company_cache = company
         return company
     
-    def _load_sgx_companies_name(self): 
+    def _load_sgx_company_data(self): 
         with open("./data/sgx/sgx_companies.json", "r") as file:
                 company = json.load(file)
 
@@ -409,7 +409,7 @@ class NewsClassifier:
 
         # Prepare for input
         combined_text = f"{title} {body}"   
-        company_names_desc = self._load_sgx_companies_name()
+        company_names_desc = self._load_sgx_company_data()
         
         # Prepare the prompt with the template and format instructions
         company_prompt = PromptTemplate(

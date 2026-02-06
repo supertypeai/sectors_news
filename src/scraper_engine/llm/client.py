@@ -42,8 +42,8 @@ class LLMCollection:
             }
 
             groq_api_keys = [
-                GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY_DEV,
-                GROQ_API_KEY3, GROQ_API_KEY4
+                GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, 
+                GROQ_API_KEY_DEV, GROQ_API_KEY4
             ]
             
             gemini_api_keys = [GEMINI_API_KEY, GEMINI_API_KEY2]

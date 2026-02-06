@@ -18,7 +18,8 @@ LOGGER = logging.getLogger(__name__)
 
 CLASSIFIER = NewsClassifier()
 EXECUTOR = ThreadPoolExecutor(max_workers=4)
-COMPANY_DATA = load_company_data()
+COMPANY_DATA_IDX = load_company_data()
+COMPANY_DATA_SGX = CLASSIFIER._load_sgx_company_data()
 SUBSECTOR_DATA = load_sub_sectors_data()
 TICKER_INDEX = build_ticker_index()
 TICKER_INDEX_SGX = build_sgx_ticker_index()
@@ -111,6 +112,8 @@ def post_processing(
     Returns:
         dict[str, any]: Post-processed article metadata.
     """
+    companies_lookup = COMPANY_DATA_SGX if is_sgx else COMPANY_DATA_IDX 
+
     # Sentiment added to tag
     if sentiment != 'Not Applicable':
         tags.append(sentiment)
@@ -118,6 +121,7 @@ def post_processing(
     # Get tickers new flow 
     if is_sgx:
         company_extracted = CLASSIFIER.extract_company_name(body, title, is_sgx=True, is_ticker=False)
+        LOGGER.info(f'raw company: {company_extracted}')
         matched_tickers = matching_company_name(company_extracted, is_ticker=False, is_sgx=True) 
         checked_tickers = list(matched_tickers)
     else: 
@@ -138,24 +142,33 @@ def post_processing(
             for raw_ticker in tickers:
                 ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
                 # Checking the correct tickers
-                if ticker in COMPANY_DATA:
+                if ticker in companies_lookup:
                     checked_tickers.append(ticker)
 
     # Sub sector
-    if not checked_tickers and sub_sector_result:
+    if is_sgx:
         sub_sector = [sub_sector_result[0].lower()] if (
             sub_sector_result and 
             sub_sector_result[0].lower() in SUBSECTOR_DATA
         ) else []
     else:
-        sub_sector = {
-            COMPANY_DATA[ticker]["sub_sector"]
-            for ticker in checked_tickers 
-            if ticker in COMPANY_DATA
-        }
-        sub_sector = list(sub_sector)
+        if not checked_tickers and sub_sector_result:
+            sub_sector = [sub_sector_result[0].lower()] if (
+                sub_sector_result and 
+                sub_sector_result[0].lower() in SUBSECTOR_DATA
+            ) else []
+        else:
+            sub_sector = {
+                companies_lookup[ticker]["sub_sector"]
+                for ticker in checked_tickers 
+                if ticker in companies_lookup
+            }
+    
+    sub_sector = list(sub_sector)
 
     # Sectors data 
+    sector = None 
+    
     for sub in sub_sector:
         if sub in SECTORS_DATA: 
             sector = SECTORS_DATA[sub]

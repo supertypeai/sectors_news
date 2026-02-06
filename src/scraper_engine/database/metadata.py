@@ -91,7 +91,7 @@ def build_sgx_ticker_index() -> dict[str, str]:
         response = (
             SUPABASE_CLIENT
             .table('sgx_company_report')
-            .select('symbol', 'name', 'sub_sector')
+            .select('symbol', 'name', 'sub_sector', 'sector')
             .execute()
         )
 

@@ -95,9 +95,9 @@ def filter_article_to_process(
     return final_articles_to_process
   
   except Exception as error:
-        LOGGER.error(f"Error in filtering articles: {error}")
-        LOGGER.error(f"Traceback: {traceback.format_exc()}")
-        return []
+    LOGGER.error(f"Error in filtering articles: {error}")
+    LOGGER.error(f"Traceback: {traceback.format_exc()}")
+    return []
 
 
 def get_article_to_process(
@@ -127,7 +127,7 @@ def get_article_to_process(
     if batch == 1: 
       LOGGER.info("Batch 1: Performing fresh filtering against database")
             
-      # Open the JSON file and load the articles
+      # Open the JSON pipeline
       with open(f'./data/{source_scraper}/{jsonfile}.json', 'r') as file_pipeline:
         all_articles = json.load(file_pipeline)
       
@@ -180,13 +180,13 @@ def get_article_to_process(
       LOGGER.info(f"Batch {batch}: Using pre-filtered article list from batch 1")
             
       if os.path.exists(filtered_file):
-          with open(filtered_file, 'r') as file:
-            final_articles_to_process = json.load(file)
-          LOGGER.info(f"Loaded {len(final_articles_to_process)} articles from filtered list")
+        with open(filtered_file, 'r') as file:
+          final_articles_to_process = json.load(file)
+        LOGGER.info(f"Loaded {len(final_articles_to_process)} articles from filtered list")
       else:
-          LOGGER.error(f"Filtered article file not found: {filtered_file}")
-          LOGGER.error("Make sure batch 1 has completed successfully before running this batch")
-          return []
+        LOGGER.error(f"Filtered article file not found: {filtered_file}")
+        LOGGER.error("Make sure batch 1 has completed successfully before running this batch")
+        return []
 
     # Calculate total needed batches
     total_articles = len(final_articles_to_process)
@@ -194,8 +194,8 @@ def get_article_to_process(
     
     # If current batch is beyond what's needed, return empty
     if batch > max_needed_batches:
-        LOGGER.info(f"Batch {batch} not needed. Only {max_needed_batches} batches required for {total_articles} articles")
-        return []
+      LOGGER.info(f"Batch {batch} not needed. Only {max_needed_batches} batches required for {total_articles} articles")
+      return []
 
     # Split to batch
     start_idx = (batch - 1) * batch_size
@@ -207,8 +207,8 @@ def get_article_to_process(
     return final_articles_to_process[start_idx:end_idx]
   
   except (FileNotFoundError, requests.RequestException, KeyError) as error:
-      LOGGER.error(f"Failed during setup phase: {error}")
-      return []
+    LOGGER.error(f"Failed during setup phase: {error}")
+    return []
 
 
 async def post_source(
