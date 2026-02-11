@@ -196,7 +196,7 @@ class NewsClassifier:
 
         Args:
             body (str): Text to classify
-            category (str): Category to classify into (tags, tickers, subsectors, sentiment, dimension)
+            category (str): Category to classify into (tags, subsectors, sentiment, dimension)
             title (str): Article title (required for dimension category)
 
         Returns:
@@ -303,9 +303,6 @@ class NewsClassifier:
                             seen.add(tag)
                             check_tags.append(tag) 
                     return check_tags
-                
-                elif category == "tickers":
-                    return result.get("tickers", [])
                 
                 elif category == "subsectors":
                     sub_sector = result.get("subsector", "")

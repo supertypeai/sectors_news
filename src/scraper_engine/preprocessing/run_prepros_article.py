@@ -125,23 +125,27 @@ def post_processing(
         matched_tickers = matching_company_name(company_extracted, is_ticker=False, is_sgx=True) 
         checked_tickers = list(matched_tickers)
     else: 
-        company_extracted = CLASSIFIER.extract_company_name(body, title, is_ticker=False)
-        tickers = matching_company_name(company_extracted, is_ticker=False)
+        tickers = set()
+
+        company_extracted = CLASSIFIER.extract_company_name(body, title, is_ticker=False) or []
+        if company_extracted: 
+            tickers = matching_company_name(company_extracted, is_ticker=False)
 
         # Fallback tickers not found, only for emitennews
         if not tickers:
             url_to_check = "https://emitennews.com/news/"
             if url_to_check in url:
                 full_article =  get_article_body(url)
-                company_extracted = CLASSIFIER.extract_company_name(full_article, title)
-                tickers = matching_company_name(company_extracted)
+                company_extracted = CLASSIFIER.extract_company_name(full_article, title) or []
+                if company_extracted:
+                    tickers = matching_company_name(company_extracted)
 
         # Tickers checking with COMPANY_DATA
         checked_tickers = []
         if tickers:
             for raw_ticker in tickers:
                 ticker = raw_ticker if raw_ticker.endswith('.JK') else raw_ticker + ".JK"
-                # Checking the correct tickers
+        
                 if ticker in companies_lookup:
                     checked_tickers.append(ticker)
 
