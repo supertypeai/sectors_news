@@ -1,5 +1,6 @@
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import WebDriverException
 from datetime import datetime
 
 import json
@@ -14,7 +15,29 @@ import shutil
 LOGGER = logging.getLogger(__name__)
 
 
-def get_chrome_info():
+def navigate_with_retry(driver, url: str, max_retries: int = 3) -> bool:
+    """
+    Tries to navigate to a URL. If the WAF resets the connection, 
+    waits and retries.
+    """
+    for attempt in range(max_retries):
+        try:
+            LOGGER.info(f"Navigating to {url} (Attempt {attempt + 1}/{max_retries})")
+            driver.get(url)
+            return True 
+        
+        except WebDriverException as error:
+            if "ERR_CONNECTION_RESET" in str(error) or "ERR_CONNECTION_CLOSED" in str(error):
+                LOGGER.warning(f"Connection reset by WAF. Sleeping 10s before retry")
+                time.sleep(10) 
+                continue
+            else:
+                raise error
+            
+    return False
+
+
+def get_chrome_info() -> tuple:
     """
     Detects the installed Google Chrome version AND path.
     Returns a tuple: (major_version, executable_path)
@@ -47,7 +70,7 @@ def get_chrome_info():
     return 143, None
 
 
-def extract_json_objects(text: str, target_key='"data":'):
+def extract_json_objects(text: str, target_key: str = '"data":'):
     """
     Generator that finds ALL occurrences of `target_key` and extracts 
     the valid JSON structure (Object or Array) immediately following it.
@@ -153,14 +176,21 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
 
     try:
         LOGGER.info("Priming session")
-        driver.get("https://bcasekuritas.co.id/")
+
+        if not navigate_with_retry(driver, "https://bcasekuritas.co.id/"):
+            LOGGER.error("Failed to load homepage after retries. Aborting.")
+            return []
+        
         time.sleep(random.uniform(3, 5))
 
         target_url = f"https://bcasekuritas.co.id/en/latest-news/news?page={page_num}"
-        LOGGER.info(f"Navigating to {target_url}")
-        driver.get(target_url)
-        time.sleep(8) 
         
+        if not navigate_with_retry(driver, target_url):
+            LOGGER.error("Failed to load news page after retries.")
+            return []
+        
+        time.sleep(8) 
+
         LOGGER.info("Scanning for valid News Data List")
         
         scripts = driver.find_elements(By.TAG_NAME, "script")
