@@ -9,7 +9,7 @@ import re
 
 class FinansialBisnisScraper(SeleniumScraper):
     def extract_news(self, url):
-        soup = self.fetch_news_with_selenium(url)
+        soup = self.fetch_news_with_selenium_undetected(url)
         
         article_container = soup.find("div", id="indeksListView")
 
@@ -30,9 +30,11 @@ class FinansialBisnisScraper(SeleniumScraper):
                 if link_element and title_element and date_element:
                     article_url = link_element.get('href')
                     title = title_element.get_text(strip=True)
+
                     # Get date and standardize
                     date = date_element.get_text(strip=True)
                     final_date = self.standardize_date(date)
+
                     if not final_date:
                         print(f"Failed parse date for url: {article_url}. Skipping")
                         continue
@@ -44,6 +46,8 @@ class FinansialBisnisScraper(SeleniumScraper):
                     }
                     self.articles.append(article_data)
         
+        print(f'\nraw snippet: {self.articles[:5]} \n')
+        print(f'total scraped source of finansial.bisnis: {len(self.articles)}')
         return self.articles
     
     def standardize_date(self, date: str) -> str | None:
@@ -97,13 +101,13 @@ class FinansialBisnisScraper(SeleniumScraper):
         return None
 
     def extract_news_pages(self, num_pages):
-        for i in range(1, num_pages+1):
-            self.extract_news(self.get_page(i))
+        for index in range(1, num_pages+1):
+            self.extract_news(self.get_page(index))
             time.sleep(1)
         return self.articles
    
     def get_page(self, page_num) -> str:
-        return f"https://www.bisnis.com/index?categoryId=5&page={page_num}"
+        return f"https://www.bisnis.com/index?categoryId=194&page={page_num}"  # id 194 category market
     
 
 def main():
