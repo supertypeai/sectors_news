@@ -141,50 +141,24 @@ class Scraper:
 
 
 class SeleniumScraper(Scraper):
-    _shared_driver = None     
-    _undetected_driver = None  
+    _driver_instance = None 
 
     def __init__(self):
         super().__init__()
-        self._driver = None 
-
+    
     @property
     def driver(self):
-        # If no driver is set, get the STANDARD one
-        if self._driver is None:
-            self._driver = self.get_shared_driver()
-        return self._driver
+        if SeleniumScraper._driver_instance is None:
+            self.setup_driver()
 
-    @driver.setter
-    def driver(self, value):
-        self._driver = value
+        return SeleniumScraper._driver_instance
 
-    def get_shared_driver(cls, is_headless: bool = True):
-        if cls._shared_driver is None:
-            chrome_options = Options()
-
-            if is_headless:
-                chrome_options.add_argument("--headless") 
-
-            chrome_options.add_argument("--no-sandbox")
-            chrome_options.add_argument("--disable-dev-shm-usage")
-            chrome_options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-            
-            service = ChromeService(ChromeDriverManager().install())
-            driver = webdriver.Chrome(service=service, options=chrome_options)
-
-        return driver 
-
-    def setup_driver_undetected(self):
-        if SeleniumScraper._undetected_driver is not None:
-            if self._driver == SeleniumScraper._undetected_driver:
-                return 
-            
-            LOGGER.info("Switching to existing Undetected Driver...")
-            self._driver = SeleniumScraper._undetected_driver
-            return
-
-        LOGGER.info("Initializing New Undetected Chrome Driver...")
+    def setup_driver(self):
+        """
+        Initializes the Undetected Chrome Driver.
+        Used for ALL scraping now.
+        """
+        LOGGER.info("Initializing Undetected Chrome Driver")
         options = uc.ChromeOptions()
         
         options.add_argument('--headless=new') 
@@ -193,7 +167,9 @@ class SeleniumScraper(Scraper):
         options.add_argument('--disable-gpu')
         
         options.add_argument('--window-size=1920,1080')
-        options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36')
+        options.add_argument(
+            '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        )
         options.add_argument('--disable-blink-features=AutomationControlled')
 
         chrome_version, chrome_path = get_chrome_info()
@@ -208,74 +184,44 @@ class SeleniumScraper(Scraper):
                 driver_executable_path=driver_path if platform.system() == "Linux" else None
             )
             
-            SeleniumScraper._undetected_driver = new_driver
+            SeleniumScraper._driver_instance = new_driver
             
-            self._driver = new_driver 
-            
-        except Exception as e:
-            LOGGER.error(f"Failed to initialize driver: {e}")
-            self._driver = None
+        except Exception as error:
+            LOGGER.error(f"Failed to initialize driver: {error}")
+            SeleniumScraper._driver_instance = None
 
-    def fetch_news_with_selenium_undetected(self, url: str):
-        self.setup_driver_undetected()
-            
-        if not self._driver: 
+    def fetch_news_with_selenium(self, url: str):
+        if not self.driver: 
             return BeautifulSoup()
 
         try:
             LOGGER.info(f"Navigating to {url}")
-            self._driver.get(url)
+            self.driver.get(url)
             time.sleep(5) 
 
-            html_content = self._driver.page_source
+            html_content = self.driver.page_source
             self.soup = BeautifulSoup(html_content, 'html.parser')
             return self.soup
         
         except Exception as error:
             LOGGER.error(f'Failed fetch news with selenium: {error}')  
             
-            # If undetected driver crashes, kill it so it restarts next time
             try:
-                if self._driver == SeleniumScraper._undetected_driver:
-                    SeleniumScraper._undetected_driver.quit()
-                    SeleniumScraper._undetected_driver = None
-            except: 
+                if SeleniumScraper._driver_instance:
+                    SeleniumScraper._driver_instance.quit()
+                    SeleniumScraper._driver_instance = None
+            except:
                 pass
             
             return BeautifulSoup()
 
-    def fetch_news_with_selenium(self, url: str):
-        try:
-            self.driver.get(url)
-            time.sleep(4)
-
-            html_content = self.driver.page_source
-            self.soup = BeautifulSoup(html_content, 'html.parser')
-
-            return self.soup
-
-        except Exception as error:
-            LOGGER.error(f'Failed fetch news with selenium: {error}')
-            return BeautifulSoup()
-        
     @classmethod
     def close_shared_driver(cls):
-        if cls._shared_driver:
-            LOGGER.info("Closing Standard WebDriver")
+        if cls._driver_instance:
+            LOGGER.info("Closing Shared WebDriver...")
             try: 
-                cls._shared_driver.quit()
+                cls._driver_instance.quit()
             except: 
                 pass
-            cls._shared_driver = None
-            
-        if cls._undetected_driver:
-            LOGGER.info("Closing Undetected WebDriver")
-            try: 
-                cls._undetected_driver.quit()
-            except: 
-                pass
-            cls._undetected_driver = None
-
-    def setup_driver(self, is_headless: bool = True):
-        return self.get_shared_driver(is_headless)
+            cls._driver_instance = None
 
