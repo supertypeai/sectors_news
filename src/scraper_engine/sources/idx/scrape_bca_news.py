@@ -3,10 +3,11 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 from datetime import datetime
 
+from scraper_engine.base.scraper import get_chrome_info
+
 import json
 import time
 import random
-import subprocess
 import platform
 import logging 
 import shutil 
@@ -35,39 +36,6 @@ def navigate_with_retry(driver, url: str, max_retries: int = 3) -> bool:
                 raise error
             
     return False
-
-
-def get_chrome_info() -> tuple:
-    """
-    Detects the installed Google Chrome version AND path.
-    Returns a tuple: (major_version, executable_path)
-    """
-    if platform.system() == "Linux":
-        try:
-            for binary in ["chrome", "google-chrome", "chromium", "chromium-browser"]:
-                binary_path = shutil.which(binary)
-                if not binary_path: 
-                    continue
-                
-                try:
-                    output = subprocess.check_output([binary_path, "--version"], text=True)
-                    if not output: continue
-                    
-                    version_str = output.strip().split()[-1] 
-                    major_version = int(version_str.split('.')[0])
-                    
-                    LOGGER.info(f"Detected {binary} at {binary_path} (Version: {major_version})")
-                    return major_version, binary_path
-                except:
-                    continue
-            return None, None
-        
-        except Exception as error:
-            LOGGER.error(f"Could not detect Chrome version: {error}")
-            return None, None
-    
-    # Windows fallback
-    return 143, None
 
 
 def extract_json_objects(text: str, target_key: str = '"data":'):

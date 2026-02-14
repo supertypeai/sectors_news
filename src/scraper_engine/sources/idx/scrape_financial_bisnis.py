@@ -5,11 +5,15 @@ from scraper_engine.base.scraper import SeleniumScraper
 import argparse
 import time
 import re 
+import logging 
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class FinansialBisnisScraper(SeleniumScraper):
     def extract_news(self, url):
-        soup = self.fetch_news_with_selenium_undetected(url)
+        soup = self.fetch_news_with_selenium(url)
         
         article_container = soup.find("div", id="indeksListView")
 
@@ -36,7 +40,7 @@ class FinansialBisnisScraper(SeleniumScraper):
                     final_date = self.standardize_date(date)
 
                     if not final_date:
-                        print(f"Failed parse date for url: {article_url}. Skipping")
+                        LOGGER.info(f"Failed parse date for url: {article_url}. Skipping")
                         continue
 
                     article_data = {
@@ -46,8 +50,7 @@ class FinansialBisnisScraper(SeleniumScraper):
                     }
                     self.articles.append(article_data)
         
-        print(f'\nraw snippet: {self.articles[:5]} \n')
-        print(f'total scraped source of finansial.bisnis: {len(self.articles)}')
+        LOGGER.info(f'total scraped source of finansial.bisnis: {len(self.articles)}')
         return self.articles
     
     def standardize_date(self, date: str) -> str | None:
@@ -69,7 +72,7 @@ class FinansialBisnisScraper(SeleniumScraper):
                 return self.parse_absolute_date(date)
             
         except (ValueError, AttributeError) as error:
-            print(f"Error parsing date '{date}': {error}")
+            LOGGER.error(f"Error parsing date finansial bisnis {date}: {error}")
             return None 
         
     def parse_absolute_date(self, date: str) -> str | None:

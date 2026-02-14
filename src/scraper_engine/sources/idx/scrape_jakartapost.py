@@ -1,11 +1,15 @@
-from datetime       import datetime
-from urllib.parse   import urljoin
+from datetime import datetime
+from urllib.parse import urljoin
 
 from scraper_engine.base.scraper import SeleniumScraper
 
 import argparse
 import time 
 import re
+import logging 
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class JakartaPost(SeleniumScraper):
@@ -16,6 +20,7 @@ class JakartaPost(SeleniumScraper):
             article_containers = soup.select("div.listNews")
             for article in article_containers:
                 premium_badge = article.select_one("span.premiumBadge")
+
                 if premium_badge:
                     continue 
 
@@ -32,15 +37,17 @@ class JakartaPost(SeleniumScraper):
                     
                     # Get date from url and standardize
                     date_match = re.search(r'/(\d{4}/\d{2}/\d{2})/', relative_url)
+
                     if date_match:
                         final_date = date_match.group(1).replace('/', '-')
                     else:
-                        print(f"[business/market] Could not find date in URL: {relative_url}. Skipping.")
+                        LOGGER.info(f"[business/market] Could not find date in URL: {relative_url}. Skipping.")
                         continue
                     
                     final_date = self.standardized_date(final_date)
+
                     if not final_date:
-                        print(f"[business/market] Failed parse date for url: {source}. Skipping")
+                        LOGGER.info(f"[business/market] Failed parse date for url: {source}. Skipping")
                         continue 
 
                     article_data = {
@@ -48,8 +55,10 @@ class JakartaPost(SeleniumScraper):
                         'source': source,
                         'timestamp': final_date,
                     }
+
                     self.articles.append(article_data)
 
+            LOGGER.info(f'total scraped source of jakarta post: {len(self.articles)}')
             return self.articles 
         
         else:
@@ -68,8 +77,9 @@ class JakartaPost(SeleniumScraper):
                     snippet_text = snippet_tag.get_text(strip=True)
                     date = snippet_text.split('...')[0].strip()
                     final_date = self.standardized_date(date)
+
                     if not final_date:
-                        print(f"[ivesment search] Failed parse date for url: {source}. Skipping")
+                        LOGGER.info(f"[ivesment search] Failed parse date for url: {source}. Skipping")
                         continue 
 
                     article_data = {
@@ -79,6 +89,7 @@ class JakartaPost(SeleniumScraper):
                     }
                     self.articles.append(article_data)
             
+            LOGGER.info(f'total scraped source of jakarta post: {len(self.articles)}')
             return self.articles
     
     def standardized_date(self, date: str):
@@ -101,14 +112,14 @@ class JakartaPost(SeleniumScraper):
                         try:
                             date_dt = datetime.strptime(date, '%b %d, %Y')
                             final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
-                        except ValueError as e:
-                            print(f"Error parse the date: {e}")
+                        except ValueError as error:
+                            LOGGER.error(f"Error parse the date: {error}")
                             return None
             
             return final_date
 
         except ValueError as error:
-            print(f"Error parse the date: {error}")
+            LOGGER.error(f"Error parse the date: {error}")
             return None 
 
     def extract_news_pages(self, num_pages: int):
@@ -123,6 +134,7 @@ class JakartaPost(SeleniumScraper):
                     url = f"{url_article}&gsc.page={page}"
                 self.extract_news(url)
                 time.sleep(1)
+
         return self.articles
     
 

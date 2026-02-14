@@ -4,6 +4,10 @@ from scraper_engine.base.scraper import Scraper
 
 import argparse
 import time
+import logging 
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class EmitenNews(Scraper):
@@ -14,7 +18,7 @@ class EmitenNews(Scraper):
         article_cards = wrapper.select("a.news-card-2.search-result-item")
        
         if not article_cards:
-            print("Found no article cards. Page structure may have changed or JS failed to load.")
+            LOGGER.info("Found no article cards. Page structure may have changed or JS failed to load.")
             return []
 
         for card in article_cards:
@@ -36,6 +40,8 @@ class EmitenNews(Scraper):
             }
 
             self.articles.append(article_data)
+        
+        LOGGER.info(f'total scraped source of asian emiten news: {len(self.articles)}')
         return self.articles
     
     def get_timestamp(self, article_url: str):
@@ -46,8 +52,9 @@ class EmitenNews(Scraper):
             raw_time_str = timestamp_tag.get_text(strip=True)
             date_part = raw_time_str.split(',')[0]
             return date_part
+        
         except Exception as error:
-            print(f"Error to get date part emitem news: {error}")
+            LOGGER.error(f"Error to get date part emitem news: {error}")
             return None 
     
     def standardize_date(self, date: str) -> str | None:
@@ -57,7 +64,7 @@ class EmitenNews(Scraper):
             return final_date
         
         except (ValueError, AttributeError) as error:
-            print(f"Error parsing date '{date}': {error}")
+            LOGGER.error(f"Error parsing date '{date}': {error}")
             return None 
 
     def extract_news_pages(self, num_pages: int):

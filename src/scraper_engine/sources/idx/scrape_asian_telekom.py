@@ -1,10 +1,14 @@
-from datetime       import datetime 
-from urllib.parse   import urljoin
+from datetime import datetime 
+from urllib.parse import urljoin
 
 from scraper_engine.base.scraper import Scraper
 
 import argparse
 import time
+import logging
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class AsianTelekom(Scraper):
@@ -33,8 +37,9 @@ class AsianTelekom(Scraper):
             # Visit the article link to get the date 
             date = self.get_article_date(article_link)
             final_date = self.standardize_date(date)
+
             if not final_date:
-                print(f"Failed parse date for url: {article_link}. Skipping")
+                LOGGER.info(f"Failed parse date for url: {article_link}. Skipping")
                 continue 
 
             article_data = {
@@ -44,6 +49,7 @@ class AsianTelekom(Scraper):
             }
             self.articles.append(article_data)
 
+        LOGGER.info(f'total scraped source of asian telekom: {len(self.articles)}')
         return self.articles
 
     def standardize_date(self, date: str) -> str | None:
@@ -51,12 +57,14 @@ class AsianTelekom(Scraper):
             date_dt = datetime.fromisoformat(date.replace('Z', '+00:00'))
             final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
             return final_date
+        
         except ValueError as error:
-            print(f"Error parsing date '{date}': {error}")
+            LOGGER.error(f"Error parsing date asian telekom {date}: {error}")
             return None 
 
     def get_article_date(self, article_url: str) -> str | None:
         soup = self.fetch_news(article_url)
+
         if not soup:
             return None
         
@@ -69,8 +77,8 @@ class AsianTelekom(Scraper):
             return None
 
     def extract_news_pages(self, num_pages):
-        for i in range(num_pages):
-            page_url = self.get_page(i)
+        for index in range(num_pages):
+            page_url = self.get_page(index)
             self.extract_news(page_url)
             time.sleep(1)
         return self.articles

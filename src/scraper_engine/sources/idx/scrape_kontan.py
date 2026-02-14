@@ -4,6 +4,10 @@ from scraper_engine.base.scraper import Scraper
 
 import argparse
 import re
+import logging
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class KontanScraper(Scraper):
@@ -16,6 +20,7 @@ class KontanScraper(Scraper):
             for article in articles:
                 # Find the 'a' tag within the 'h1' for the title and URL
                 title_element = article.select_one("h1 > a")
+
                 # Find the span for the date
                 date_element = article.select_one("span.font-gray")
 
@@ -26,8 +31,10 @@ class KontanScraper(Scraper):
                     
                     # Get date text and clean it by removing the leading '|' and spaces
                     date = date_element.get_text(strip=True).lstrip('| ')
+
                     # Standardize date
                     final_date = self.standardize_date(date)
+
                     if not final_date:
                         print(f"[Kontan] Failed parse date for url: {article_url} Skipping")
                         continue 
@@ -37,8 +44,10 @@ class KontanScraper(Scraper):
                         'source': article_url,
                         'timestamp': final_date
                     }
+
                     self.articles.append(article_data)
 
+        LOGGER.info(f'total scraped source of kontan: {len(self.articles)}')
         return self.articles
     
     def standardize_date(self, date: str): 
@@ -60,8 +69,8 @@ class KontanScraper(Scraper):
     def extract_news_pages(self, num_pages: int):
         # Page num params for kontan 10, 20, 30 
         num_pages *= 10
-        for i in range(10, num_pages+1, 10):
-            self.extract_news(self.get_page(i))
+        for index in range(10, num_pages+1, 10):
+            self.extract_news(self.get_page(index))
             # time.sleep(0.5)
         return self.articles
    

@@ -1,10 +1,14 @@
-from datetime     import datetime 
+from datetime import datetime 
 from urllib.parse import urljoin
 
 from scraper_engine.base.scraper import Scraper
 
 import argparse
 import time
+import logging
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class AntaraNewsScraper(Scraper):
@@ -14,6 +18,7 @@ class AntaraNewsScraper(Scraper):
         
         for card in article_cards:
             title_tag = card.select_one("h2.post_title a")
+
             if not title_tag:
                 continue
 
@@ -25,10 +30,12 @@ class AntaraNewsScraper(Scraper):
 
             # Get the timestamp for this article
             timestamp = self.get_article_timestamp(source)
+
             # Standardize the timestamp
             final_date = self.standardize_date(timestamp)
+
             if not final_date:
-                print(f"[Antara News] Failed parse date for url: {source} Skipping")
+                LOGGER.info(f"[Antara News] Failed parse date for url: {source} Skipping")
                 continue 
 
             self.articles.append({
@@ -37,6 +44,7 @@ class AntaraNewsScraper(Scraper):
                 'timestamp': final_date
             })
 
+        LOGGER.info(f'total scraped source of antara news: {len(self.articles)}')
         return self.articles
 
     def standardize_date(self, date: str) -> str: 
@@ -45,24 +53,28 @@ class AntaraNewsScraper(Scraper):
             timestamp_dt = datetime.strptime(timestamp_clean, "%B %d, %Y %H:%M")
             final_timestamp = timestamp_dt.strftime("%Y-%m-%d %H:%M:%S")
             return final_timestamp
+        
         except ValueError as error:
-            print(f"Error parsing date '{date}': {error}")
+            LOGGER.error(f"Error parsing date antara news {date}: {error}")
             return None  
 
     def get_article_timestamp(self, article_url: str) -> str:
         soup = self.fetch_news(article_url)
+
         if not soup:
             return None
 
         # Get article date
         date_span = soup.select_one("div.wrap__article-detail-info span")
+
         if date_span:
             return date_span.get_text(strip=True)
+        
         return None
 
     def extract_news_pages(self, num_pages: int):
-        for i in range(1, num_pages+1):
-            self.extract_news(self.get_page(i))
+        for index in range(1, num_pages+1):
+            self.extract_news(self.get_page(index))
             time.sleep(1)
         return self.articles
    
