@@ -8,8 +8,9 @@ from scraper_engine.base.scraper import SeleniumScraper
 # from scraper_engine.sources.idx.scrape_petromindo import PetromindoScraper
 # from scraper_engine.sources.idx.scrape_insight_kontan import InsightKontanScraper
 # from scraper_engine.sources.idx.scrape_mining import MiningScraper
-# from scraper_engine.sources.idx.scrape_financial_bisnis import FinansialBisnisScraper
+# from scraper_engine.sources.idx.scrape_idn_business_post import IndonesiaBusinessPost
 
+from scraper_engine.sources.idx.scrape_financial_bisnis import FinansialBisnisScraper
 from scraper_engine.sources.idx.scrape_icn import ICNScraper
 from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
 from scraper_engine.sources.idx.scrape_minerba import MinerbaScraper
@@ -18,7 +19,6 @@ from scraper_engine.sources.idx.scrape_idnminer import IdnMinerScraper
 from scraper_engine.sources.idx.scrape_jakartaglobe import JGScraper
 from scraper_engine.sources.idx.scrape_antaranews import AntaraNewsScraper
 from scraper_engine.sources.idx.scrape_asian_telekom import AsianTelekom
-from scraper_engine.sources.idx.scrape_idn_business_post import IndonesiaBusinessPost
 from scraper_engine.sources.idx.scrape_bca_news import run_scrape_bca_news
 from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
 from scraper_engine.sources.idx.scrape_kontan import KontanScraper
@@ -148,8 +148,8 @@ def main_idx(
         # petromindoscraper = PetromindoScraper()
         # insightkontanscraper = InsightKontanScraper()
         # miningscraper = MiningScraper()
-        # finansialbisinisscraper = FinansialBisnisScraper()
         # idnbusinesspostscraper = IndonesiaBusinessPost()
+        finansialbisinisscraper = FinansialBisnisScraper()
 
         icnscraper = ICNScraper()
         gapkiscraper = GapkiScraper()
@@ -167,11 +167,11 @@ def main_idx(
             scrapercollection = ScraperCollection()
             # scrapercollection.add_scraper(idnscraper)
             # scrapercollection.add_scraper(petromindoscraper)
-            # scrapercollection.add_scraper(finansialbisinisscraper)
             # scrapercollection.add_scraper(idnbusinesspostscraper)
             # scrapercollection.add_scraper(insightkontanscraper) 
             # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
+            scrapercollection.add_scraper(finansialbisinisscraper)
             
             scrapercollection.add_scraper(icnscraper)
             scrapercollection.add_scraper(gapkiscraper)
