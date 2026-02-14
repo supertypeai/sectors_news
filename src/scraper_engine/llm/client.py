@@ -35,8 +35,6 @@ class LLMCollection:
                 "gemini-2.5-flash": "google_genai",
                 "gemini-2.5-flash-lite": "google_genai",
                 "openai/gpt-oss-20b": "groq",
-                "qwen/qwen3-32b": "groq",
-                "deepseek-r1-distill-llama-70b": "groq",
                 "llama-3.3-70b-versatile": "groq",
                 "gpt-4.1-mini": "openai",
             }
