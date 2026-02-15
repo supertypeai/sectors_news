@@ -26,15 +26,6 @@ jobs:
         run: |
           uv sync
           uv pip install -e .  # Register 'src' as a package
-
-      - name: Setup NLTK data
-        run: |
-          uv run python -c "
-          import nltk
-          nltk.data.path.append('./nltk_data')
-          nltk.download('punkt_tab', download_dir='./nltk_data')
-          nltk.download('punkt', download_dir='./nltk_data')
-          "
           
       - name: Set up Google Chrome & ChromeDriver
         uses: browser-actions/setup-chrome@v1
