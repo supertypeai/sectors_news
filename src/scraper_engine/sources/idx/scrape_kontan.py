@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from scraper_engine.base.scraper import Scraper
+from scraper_engine.base.scraper import SeleniumScraper
 
 import argparse
 import re
@@ -10,9 +10,9 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-class KontanScraper(Scraper):
+class KontanScraper(SeleniumScraper):
     def extract_news(self, url):
-        soup = self.fetch_news(url)
+        soup = self.fetch_news_with_selenium(url)
 
         news_list = soup.find("div", class_="list-berita")
         if news_list:
@@ -63,22 +63,31 @@ class KontanScraper(Scraper):
             return result_date.strftime("%Y-%m-%d %H:%M:%S")
 
         except ValueError as error:
-            print(f"Error parse the date: {error}")
+            LOGGER.error(f"Error parse the date kontan: {error}")
             return None 
 
     def extract_news_pages(self, num_pages: int):
+        current_date = datetime.now()
+
+        base_url = (
+            f"https://www.kontan.co.id/search/indeks"
+            f"?kanal=investasi"
+            f"&tanggal={current_date.day}"
+            f"&bulan={current_date.month}"
+            f"&tahun={current_date.year}"
+            f"&pos=indeks"
+        )
         # Page num params for kontan 10, 20, 30 
-        num_pages *= 10
-        for index in range(10, num_pages+1, 10):
-            self.extract_news(self.get_page(index))
-            # time.sleep(0.5)
+        format_num_pages = num_pages * 10
+        for index in range(10, format_num_pages+1, 10):
+            # Bypass url for the first page to get all the articles
+            if index == 10: 
+                self.extract_news(base_url)
+            else: 
+                url = f"{base_url}&per_page={index}"
+                self.extract_news(url)
+        
         return self.articles
-   
-    def get_page(self, page_num: int):
-        year = datetime.now().year
-        month = datetime.now().month
-        day = datetime.now().day
-        return f"https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal={day}&bulan={month}&tahun={year}&pos=indeks&per_page={page_num}"
 
 
 def main():
@@ -104,6 +113,6 @@ def main():
 if __name__ == "__main__":
   '''
   How to run:
-  python -m models.scrape_kontan <page_number> <filename_saved> <--csv (optional)>
+  uv run -m src.scraper_engine.sources.idx.scrape_kontan <page_number> <filename_saved> <--csv (optional)>
   '''
   main()

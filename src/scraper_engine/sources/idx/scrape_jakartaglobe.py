@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from scraper_engine.base.scraper import Scraper
+from scraper_engine.base.scraper import SeleniumScraper
 
 import locale
 import re
@@ -13,9 +13,9 @@ locale.setlocale(locale.LC_TIME, "en_US.UTF-8")
 LOGGER = logging.getLogger(__name__)
 
 
-class JGScraper(Scraper):
+class JGScraper(SeleniumScraper):
     def extract_news(self, url):
-        soup = self.fetch_news_with_proxy(url)
+        soup = self.fetch_news_with_selenium(url)
 
         for item in soup.find_all(
             'div',
@@ -100,14 +100,21 @@ class JGScraper(Scraper):
         return None
 
     def extract_news_pages(self, num_pages):
-        for index in range(num_pages):
-            self.extract_news(self.get_page(index + 1))
-        return self.articles
-
+        # for index in range(num_pages):
+        #     self.extract_news(self.get_page(index + 1))
+        # return self.articles
+        
+        # Bypass page, only extract the first page, cause the url is broken with /page_number
+        return self.extract_news(self.get_page(num_pages))
+    
     def get_page(self, page_num):
+        # return (
+        #     f'https://jakartaglobe.id/business/newsindex/'
+        #     f'{page_num}'
+        # )
+
         return (
-            f'https://jakartaglobe.id/business/newsindex/'
-            f'{page_num}'
+            'https://jakartaglobe.id/business/newsindex'
         )
 
 
@@ -140,6 +147,6 @@ def main():
 if __name__ == "__main__":
     '''
     How to run:
-    python scrape_jakartaglobe.py <page_number> <filename_saved> <--csv (optional)>
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartaglobe <page_number> <filename_saved> <--csv (optional)>
     '''
     main()

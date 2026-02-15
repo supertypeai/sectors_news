@@ -1,7 +1,7 @@
 import argparse
 import dateparser
 
-from scraper_engine.base import Scraper
+from scraper_engine.base.scraper import SeleniumScraper
 
 import logging
 
@@ -9,9 +9,9 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-class ICNScraper(Scraper):
+class ICNScraper(SeleniumScraper):
     def extract_news(self, url):
-        soup = self.fetch_news(url)
+        soup = self.fetch_news_with_selenium(url)
         for item in soup.find_all('article'):
             div = item.find('div', class_='elementor-post__card')
             if div:
@@ -85,6 +85,6 @@ def main():
 if __name__ == "__main__":
     '''
     How to run:
-    python scrape_icn.py <page_number> <filename_saved> < --csv (optional) >
+    uv run -m scraper_engine.sources.idx.scrape_icn <page_number> <filename_saved> < --csv (optional) >
     '''
     main()
