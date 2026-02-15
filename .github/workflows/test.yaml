@@ -1,10 +1,45 @@
-name: Scrape TESTING
+name: Scrape Testing
 
 on:
   workflow_dispatch:
+    inputs:
+      scraper_module:
+        description: 'Select scraper to run (without .py)'
+        required: true
+        default: 'scrape_financial_bisnis'
+        type: choice
+        options:
+          - scrape_abaf
+          - scrape_antaranews
+          - scrape_asian_telekom
+          - scrape_bca_news
+          - scrape_emiten_news
+          - scrape_financial_bisnis
+          - scrape_gapki
+          - scrape_icn
+          - scrape_idn_business_post
+          - scrape_idnfinancials
+          - scrape_idnminer
+          - scrape_insight_kontan
+          - scrape_jakartaglobe
+          - scrape_jakartapost
+          - scrape_kontan
+          - scrape_minerba
+          - scrape_mining
+          - scrape_petromindo
+      page_number:
+        description: 'Page number'
+        required: true
+        default: '1'
+        type: string
+      output_name:
+        description: 'Output Name arg (e.g. "finan", "bca")'
+        required: true
+        default: 'manual_test'
+        type: string
 
 jobs:
-  batch_1_scrape_and_submit:
+  testing:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,13 +62,13 @@ jobs:
       - name: Set up Google Chrome & ChromeDriver
         uses: browser-actions/setup-chrome@v1
         with:
-          # installs the very latest Chrome snapshot (same as default)
           chrome-version: 'latest'
-          # also installs the matching ChromeDriver binary
           install-chromedriver: true
           
-      - name: Run scraping script for all news source
-        run: uv run -m scraper_engine.sources.idx.scrape_financial_bisnis 1 "finan"
+      - name: Run Selected Scraper
+        run: |
+          echo "Running module: ${{ inputs.scraper_module }} on page ${{ inputs.page_number }}"
+          uv run -m scraper_engine.sources.idx.${{ inputs.scraper_module }} ${{ inputs.page_number }} "${{ inputs.output_name }}"
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
@@ -48,5 +83,11 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
           PROXY: ${{ secrets.PROXY }}
-       
-     
+
+      - name: Upload Scraper Results
+        uses: actions/upload-artifact@v4
+        if: always() # Upload even if the script fails (to check partial data)
+        with:
+          name: scrape-result-${{ inputs.source_name }}
+          path: data/${{ inputs.source_name }}.*
+          retention-days: 1
