@@ -10,7 +10,7 @@ from scraper_engine.base.scraper import SeleniumScraper
 # from scraper_engine.sources.idx.scrape_mining import MiningScraper
 # from scraper_engine.sources.idx.scrape_idn_business_post import IndonesiaBusinessPost
 
-from scraper_engine.sources.idx.scrape_financial_bisnis import FinansialBisnisScraper
+from scraper_engine.sources.idx.scrape_bisnis_com import FinansialBisnisScraper
 from scraper_engine.sources.idx.scrape_icn import ICNScraper
 from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
 from scraper_engine.sources.idx.scrape_minerba import MinerbaScraper

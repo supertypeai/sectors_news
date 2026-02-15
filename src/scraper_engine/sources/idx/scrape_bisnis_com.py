@@ -136,6 +136,6 @@ def main():
 if __name__ == "__main__":
   '''
   How to run:
-  python -m models.scrape_financial_bisnis <page_number> <filename_saved> <--csv (optional)>
+  uv run -m src.scraper_engine.sources.idx.scrape_bisnis_com <page_number> <filename_saved> <--csv (optional)>
   '''
   main()

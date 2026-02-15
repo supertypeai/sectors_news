@@ -154,7 +154,7 @@ The scraper status indicates which news/data sources are currently functional an
 | 12 | IDN FINANCIALS             | Inactive | Cannot bypass Cloudflare to get rendered HTML |
 | 13 | PETROMINDO                 | Inactive | - |
 | 14 | INSIGHT KONTAN             | Inactive | Needs subscription to access the article |
-| 15 | FINANSIAL BISNIS           | Inactive | Failed to extract content on GitHub Actions, works locally |
+| 15 | BISNIS COM                 | Active   | - |
 | 16 | MINING.COM                 | Inactive | Source used for Sectors insider |
 | 17 | EMITENNEWS.COM             | Active   | - |
 | 18 | BCA NEWS                   | Active   | - |
