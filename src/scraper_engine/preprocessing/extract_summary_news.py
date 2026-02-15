@@ -1,5 +1,4 @@
 from bs4                            import BeautifulSoup
-from nltk.tokenize                  import sent_tokenize, word_tokenize
 from goose3                         import Goose
 from requests                       import Response, Session
 from langchain_core.output_parsers  import JsonOutputParser
@@ -12,10 +11,10 @@ from io                             import StringIO
 from scraper_engine.llm.client  import LLMCollection, invoke_llm
 from scraper_engine.llm.prompts import ClassifierPrompts, SummaryNews
 from scraper_engine.config.conf import PROXY
+from scraper_engine.base.scraper import SeleniumScraper 
 
 import requests
 import re
-import nltk
 import json 
 import cloudscraper
 import time 
@@ -27,11 +26,7 @@ import csv
 LOGGER = logging.getLogger(__name__)
 
 
-# NLTK download
-nltk.data.path.append("./nltk_data")
-
-
-USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 HEADERS = {
     "User-Agent": USER_AGENT,
     "Accept": "*/*",
@@ -82,14 +77,13 @@ def summarize_article(body: str, url: str) -> dict[str]:
             }
         )
 
-    # Prepare the input data for the LLM
     input_data = {"article": body}
     
     for llm in LLMCOLLECTION.get_llms():
         try:
             llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
             LOGGER.info(f'LLM used: {llm_used}')
-            # Create a summary chain that combines the system, prompt, and LLM
+            
             summary_chain = (
                 runnable_summary_system
                 | summary_prompt
@@ -213,7 +207,7 @@ def normalize_dot_case(body: str) -> str:
 
 def get_article_bca_news(url: str) -> str:
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        "User-Agent": USER_AGENT
     }
     
     try:
@@ -393,7 +387,29 @@ def get_article_body(url: str) -> str | None:
             f"[PROXY FAIL] Goose3 failed with error {error} for url {url}"
         )
 
-    # Fallback two if first attempt is completly failed
+    # Fallback selenium undected and goose no proxy
+    try:
+        LOGGER.info(f"[ATTEMPT 2] Fallback to Selenium Undetected for {url}")
+
+        scraper = SeleniumScraper()
+        soup = scraper.fetch_news_with_selenium(url)
+        
+        if soup:
+            raw_html = str(soup)
+            
+            g = Goose()
+            article = g.extract(raw_html=raw_html)
+            
+            if article.cleaned_text:
+                LOGGER.info(f"[SUCCESS] Extracted via Selenium+Goose: {url}")
+                return article.cleaned_text
+            else:
+                LOGGER.warning(f"[FAIL] Selenium fetched HTML, but Goose couldn't parse text.")
+
+    except Exception as error:
+        LOGGER.error(f"[ERROR] Selenium fallback failed completely: {error}")
+
+    # Fallback cloudscrapper
     try:
         LOGGER.info("[FALLBACK] Attempt 2: Trying with cloudscraper...")
 
@@ -409,19 +425,6 @@ def get_article_body(url: str) -> str | None:
     except Exception as error:
         LOGGER.error(f"[ERROR] Cloudscraper failed: {error}")
 
-    # Last fallback if first and second are failed
-    try:
-        LOGGER.info("[FALLBACK] Attempt 3: Trying with no PROXY...")
-
-        g = Goose()
-        article = g.extract(url=url)
-
-        LOGGER.info(f"[SUCCESS] Article inferenced from url {url} with no PROXY")
-        return article.cleaned_text
-    
-    except Exception as error:
-        LOGGER.error(f"[ERROR] Goose3 with no PROXY failed with error: {error}")
-    
     return None 
 
 
