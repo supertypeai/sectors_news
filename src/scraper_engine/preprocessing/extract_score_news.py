@@ -209,33 +209,33 @@ class ArticleScorer:
         else:
             return 1
 
-    def manual_score_source(self, source: str) -> int: 
-        """
-        Scores a source's credibility based on its domain.
+    # def manual_score_source(self, source: str) -> int: 
+    #     """
+    #     Scores a source's credibility based on its domain.
 
-        Args:
-            source_url: The full URL of the article source.
+    #     Args:
+    #         source_url: The full URL of the article source.
 
-        Returns:
-            An integer score from 0 to 10.
-        """
-        extract_domain = self._extract_domain_urlparse(source)
-        domain = extract_domain.lower().strip()
+    #     Returns:
+    #         An integer score from 0 to 10.
+    #     """
+    #     extract_domain = self._extract_domain_urlparse(source)
+    #     domain = extract_domain.lower().strip()
         
-        top_tier_sources = {"bloomberg.com", "reuters.com", "idx.co.id", "ojk.go.id"}
-        national_sources = {"kontan.co.id", "bisnis.com", "cnbcindonesia.com", "investor.id", "kompas.com", "detik.com"}
+    #     top_tier_sources = {"bloomberg.com", "reuters.com", "idx.co.id", "ojk.go.id"}
+    #     national_sources = {"kontan.co.id", "bisnis.com", "cnbcindonesia.com", "investor.id", "kompas.com", "detik.com"}
 
-        # Score 5: Top-tier, highly credible source
-        if any(keyword in domain for keyword in top_tier_sources):
-            return 5
+    #     # Score 5: Top-tier, highly credible source
+    #     if any(keyword in domain for keyword in top_tier_sources):
+    #         return 5
 
-        # Score 3: Well-established national news outlet
-        elif any(keyword in domain for keyword in national_sources):
-            return 3 
+    #     # Score 3: Well-established national news outlet
+    #     elif any(keyword in domain for keyword in national_sources):
+    #         return 3 
 
-        # Score 2: Unknown or unreliable source
-        else:
-            return 1
+    #     # Score 2: Unknown or unreliable source
+    #     else:
+    #         return 1
 
     def get_article_score(self, body: str, article_date: str, article_source: str, source_criteria: str) -> int:
         """
@@ -307,9 +307,10 @@ class ArticleScorer:
                 
                 # Final score adding with manual score time and source
                 score_timeliness = self.manual_score_time(article_date)
-                score_source_credibilty = self.manual_score_source(article_source)
+                # score_source_credibilty = self.manual_score_source(article_source)
                 result_score = result_score_raw.get('score', 0)
-                final_score = result_score + score_source_credibilty + score_timeliness
+                # final_score = result_score + score_source_credibilty + score_timeliness
+                final_score = result_score + score_timeliness
 
                 if 0 <= final_score <= 155:
                     return final_score
