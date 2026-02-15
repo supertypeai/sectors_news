@@ -88,6 +88,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always() # Upload even if the script fails (to check partial data)
         with:
-          name: scrape-result-${{ inputs.source_name }}
-          path: data/${{ inputs.source_name }}.*
+          name: scrape-result-${{ inputs.output_name }}
+          path: data/${{ inputs.output_name }}.*
           retention-days: 1
