@@ -79,7 +79,8 @@ class AntaraNewsScraper(Scraper):
         return self.articles
    
     def get_page(self, page_num: int) -> str:
-        return f"https://en.antaranews.com/business-investment/{page_num}"
+        # changed to ekonomi bursa category from /business-investment
+        return f"https://www.antaranews.com/ekonomi/bursa/{page_num}"
     
 
 def main():
