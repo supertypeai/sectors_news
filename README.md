@@ -151,7 +151,7 @@ The scraper status indicates which news/data sources are currently functional an
 | 9  | INDONESIA BUSINESS POST    | Inactive | Requires login to read the article |
 | 10 | THE JAKARTA POST           | Active   | - |
 | 11 | KONTAN                     | Active   | - |
-| 12 | IDN FINANCIALS             | Inactive | Cannot bypass Cloudflare to get rendered HTML |
+| 12 | IDN FINANCIALS             | Active   | - |
 | 13 | PETROMINDO                 | Inactive | - |
 | 14 | INSIGHT KONTAN             | Inactive | Needs subscription to access the article |
 | 15 | BISNIS COM                 | Active   | - |
@@ -199,7 +199,7 @@ Two scheduled workflows are defined:
   - Schedule: `0 3 * * *` (10:00 UTC+7, daily)
   - Runs SGX scraping, preprocessing, and submission
 
-Both workflows install dependencies with `uv`, set up NLTK data, run the pipeline, and commit results back to the repo.
+Both workflows install dependencies with `uv`, run the pipeline, and commit results back to the repo.
 
 ## Maintenance Scripts
 
