@@ -102,7 +102,7 @@ def build_sgx_ticker_index() -> dict[str, str]:
                 'name': item['name'],
                 'sub_sector': item['sub_sector']
             }
-        path = DATA_DIR / "sgx_companies.json"
+        path = DATA_DIR / "sgx/sgx_companies.json"
         with open(path, 'w') as file:
             json.dump(lookup, file, indent=4)
 
