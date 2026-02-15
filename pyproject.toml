@@ -1,7 +1,7 @@
 [project]
 name = "sectors-news"
 version = "0.1.0"
-description = "Add your description here"
+description = "Sectors news dependencies"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -18,7 +18,6 @@ dependencies = [
     "langchain",
     "langchain-openai",
     "langchain-google-genai",
-    "nltk==3.9.1",
     "goose3==3.1.19",
     "openai==1.93.3",
     "cloudscraper==1.2.71",
