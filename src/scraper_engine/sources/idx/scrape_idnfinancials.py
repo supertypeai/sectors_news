@@ -78,6 +78,7 @@ class IDNFinancialScraper(SeleniumScraper):
                 LOGGER.error(f"Error parsing item: {error}")
                 continue
         
+        LOGGER.info(f'total scraped source of idn financials: {len(self.articles)}')
         return self.articles
 
     def extract_news_pages(self, num_pages):

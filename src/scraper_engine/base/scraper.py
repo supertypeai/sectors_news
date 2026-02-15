@@ -1,9 +1,4 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
 import undetected_chromedriver as uc
-from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
 from scraper_engine.config.conf import PROXY
