@@ -44,8 +44,6 @@ def send_data_to_db(successful_articles: list, table_name: str):
         except Exception as error:
             error_message = str(error)
             LOGGER.error(f"Batch Submission Failed: {error_message}")
-    
-    return response
 
 
 def filter_article_to_process(
@@ -315,19 +313,11 @@ async def post_source(
                 index=False,
             )
 
-        response = send_data_to_db(
+        send_data_to_db(
             successful_articles,
             table_name,
         )
 
-        if 200 <= response.status_code < 300:
-            LOGGER.info(
-                f"Batch {batch}: COMPLETED SUCCESSFULLY"
-            )
-        else:
-            LOGGER.error(
-                f"Batch {batch}: FAILED during database submission"
-            )
     else:
         LOGGER.info(
             f"Batch {batch}: Completed, no articles met criteria"
