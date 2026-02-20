@@ -76,14 +76,13 @@ def filter_article_to_process(
                 seen_sources.add(source)
                 filter_duplicate_articles.append(article)
 
-        final_articles_to_process = []
+        final_articles_to_process = [
+            article
+            for article in filter_duplicate_articles
+            if article.get('source') not in all_articles_yesterday
+        ]
 
-        for article in filter_duplicate_articles:
-            source = article.get("source")
-            if source in all_articles_yesterday:
-                continue
-            final_articles_to_process.append(article)
-
+        LOGGER.info(f'Final articles to process: {len(final_articles_to_process)}')
         return final_articles_to_process
 
     except Exception as error:
