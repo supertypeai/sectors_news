@@ -30,8 +30,8 @@ jobs:
       - name: Set up Google Chrome & ChromeDriver
         uses: browser-actions/setup-chrome@v1
         with:
-          # installs the very latest Chrome snapshot (same as default)
-          chrome-version: 'latest'
+          # hardcode version to ensure bca works
+          chrome-version: '1586874'
           # also installs the matching ChromeDriver binary
           install-chromedriver: true
 

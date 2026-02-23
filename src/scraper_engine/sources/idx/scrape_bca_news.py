@@ -2,8 +2,10 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 from datetime import datetime
+from urllib.parse import urlparse
 
 from scraper_engine.base.scraper import get_chrome_info
+from scraper_engine.config.conf import PROXY
 
 import json
 import time
@@ -11,9 +13,85 @@ import random
 import platform
 import logging 
 import shutil 
+import os 
+import zipfile
+import tempfile
 
 
 LOGGER = logging.getLogger(__name__)
+
+
+def create_proxy_extension(proxy_url: str) -> str:
+    """
+    Parses a proxy URL and generates an extension ZIP.
+    """
+    parsed = urlparse(proxy_url)
+    
+    # Extract components
+    scheme = parsed.scheme or "http"
+    host = parsed.hostname
+    port = parsed.port
+    user = parsed.username
+    password = parsed.password
+
+    manifest_json = """
+    {
+        "version": "1.0.0",
+        "manifest_version": 2,
+        "name": "Proxy Auth Extension",
+        "permissions": [
+            "proxy",
+            "tabs",
+            "unlimitedStorage",
+            "storage",
+            "<all_urls>",
+            "webRequest",
+            "webRequestBlocking"
+        ],
+        "background": {
+            "scripts": ["background.js"]
+        },
+        "minimum_chrome_version": "22.0.0"
+    }
+    """
+
+    background_js = f"""
+    var proxy_config = {{
+        mode: "fixed_servers",
+        rules: {{
+            singleProxy: {{
+                scheme: "{scheme}",
+                host: "{host}",
+                port: parseInt({port})
+            }},
+            bypassList: ["localhost"]
+        }}
+    }};
+
+    chrome.proxy.settings.set({{value: proxy_config, scope: "regular"}}, function() {{}});
+
+    function handle_auth(details) {{
+        return {{
+            authCredentials: {{
+                username: "{user}",
+                password: "{password}"
+            }}
+        }};
+    }}
+
+    chrome.webRequest.onAuthRequired.addListener(
+        handle_auth,
+        {{urls: ["<all_urls>"]}},
+        ['blocking']
+    );
+    """
+
+    extension_path = os.path.join(tempfile.gettempdir(), f"proxy_auth_{host}_{port}.zip")
+    with zipfile.ZipFile(extension_path, 'w') as extension_zip:
+        extension_zip.writestr("manifest.json", manifest_json)
+        extension_zip.writestr("background.js", background_js)
+
+    return extension_path
 
 
 def navigate_with_retry(driver, url: str, max_retries: int = 3) -> bool:
@@ -123,6 +201,16 @@ def scrape_bca(page_num: int) -> list[dict[str, any]]:
     # Ignore SSL errors (Cause sometimes WAFs reset connections on SSL handshake)
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
+
+    if PROXY:
+        parsed_proxy = urlparse(PROXY)
+        if parsed_proxy.username and parsed_proxy.password:
+            # Proxies with Auth
+            extension_path = create_proxy_extension(PROXY)
+            options.add_extension(extension_path)
+        else:
+            # Proxies without Auth 
+            options.add_argument(f"--proxy-server={PROXY}")
 
     chrome_version, chrome_path = get_chrome_info()
     driver_path = shutil.which("chromedriver")
