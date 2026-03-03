@@ -27,7 +27,7 @@ from scraper_engine.sources.idx.scrape_emiten_news import EmitenNews
 from scraper_engine.sources.sgx.scrape_businesstimes import scrape_businesstimes 
 from scraper_engine.sources.sgx.scrape_straitstimes import scrape_straitsnews_sgx
 
-from .server import post_source
+from .processor import post_source
 from scraper_engine.database.client import SUPABASE_CLIENT
 
 import json
