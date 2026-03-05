@@ -395,82 +395,49 @@ def get_article_body(url: str) -> str | None:
     return None 
 
 
-def summarize_news(url, news_text: str) -> tuple[str, str]:
+def summarize_news(url: str, news_text: str) -> tuple[str, str] | None:
     try:
-        if len(news_text) > 100:
-            # Preprocess texts by just removing extra spaces
-            news_text = re.sub(r"\s+", " ", news_text)
-            if 'businesstimes' in url: 
-                table_text = extract_table_content(url) 
-                if table_text: 
-                    news_text = news_text + '\n' + table_text
+        if len(news_text) <= 100:
+            LOGGER.warning(f"Article text too short ({len(news_text)} chars) for {url}, retrying with cloudscraper.")
+            scraper = cloudscraper.create_scraper()
+            goose_extractor = Goose({"browser_user_agent": USER_AGENT, "http_session": scraper})
+            article = goose_extractor.extract(url=url)
 
-            LOGGER.info(f"Check full article content: {news_text[:550]}")
-
-            # Summarize the article and force to sleep 5s
-            response = summarize_article(news_text, url)
-            time.sleep(7)
-
-            if not response or not response.get("summary"):
-                LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
-                return None
-            
-            LOGGER.info(f"reason summary: {response.get('reasoning')}")
-            
-            raw_body = response.get("summary") 
-            cleaned_body = basic_cleaning_body(raw_body)
-            cleaned_body = clean_apostrophe_case(cleaned_body)
-            cleaned_body = normalize_company_abbreviations(cleaned_body)
-            cleaned_body = normalize_dot_case(cleaned_body)
-
-            raw_title = response.get("title")
-            cleaned_title = normalize_company_abbreviations(raw_title)
-
-            return cleaned_title, cleaned_body
-        
-        else:
-            LOGGER.warning(f"Scraper returned empty content for {url}. Trying with CloudScrapper.")
-            scraper = cloudscraper.create_scraper() 
-            g = Goose({'browser_user_agent': USER_AGENT, 'http_session': scraper})
-
-            article = g.extract(url=url)
-            if article.cleaned_text and len(article.cleaned_text) > 100:
-                LOGGER.info(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
-                news_text = article.cleaned_text
-
-                news_text = re.sub(r"\s+", " ", news_text)
-                if 'businesstimes' in url: 
-                    table_text = extract_table_content(url) 
-                    if table_text: 
-                        news_text = news_text + '\n' + table_text
-
-                LOGGER.info(f"Check full article content: {news_text[:550]}")
-
-                # Summarize the article and force to sleep 5s
-                response = summarize_article(news_text, url)
-                LOGGER.info(f'reason summary: {response['reasoning']}')
-
-                time.sleep(7)
-
-                if not response or not response.get("summary"):
-                    LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
-                    return None
-                
-                raw_body = response.get("summary") 
-                cleaned_body = basic_cleaning_body(raw_body)
-                cleaned_body = clean_apostrophe_case(cleaned_body)
-                cleaned_body = normalize_company_abbreviations(cleaned_body)
-                cleaned_body = normalize_dot_case(cleaned_body)
-
-                raw_title = response.get("title")
-                cleaned_title = normalize_company_abbreviations(raw_title)
-
-                return cleaned_title, cleaned_body
-            else:
-                LOGGER.error(f"Cloudscraper also returned empty content for {url} or length text < 100.")
+            if not article.cleaned_text or len(article.cleaned_text) <= 100:
+                LOGGER.error(f"Cloudscraper also returned insufficient content for {url}.")
                 return None
 
-    except Exception as error: 
-        LOGGER.error(f"An unexpected error occurred in summarize_news for {url}: {error}", exc_info=True)
+            news_text = article.cleaned_text
+
+        news_text = re.sub(r"\s+", " ", news_text)
+
+        if "businesstimes" in url:
+            table_text = extract_table_content(url)
+            if table_text:
+                news_text = news_text + "\n" + table_text
+
+        LOGGER.info(f"Article content preview: {news_text[:550]}")
+
+        response = summarize_article(news_text, url)
+        time.sleep(5)
+
+        if not response or not response.get("summary"):
+            LOGGER.error(f"Summarization failed or returned incomplete data for {url}.")
+            return None
+
+        LOGGER.info(f"Reasoning: {response.get('reasoning')}")
+
+        raw_body = response.get("summary")
+        cleaned_body = basic_cleaning_body(raw_body)
+        cleaned_body = clean_apostrophe_case(cleaned_body)
+        cleaned_body = normalize_company_abbreviations(cleaned_body)
+        cleaned_body = normalize_dot_case(cleaned_body)
+
+        raw_title = response.get("title")
+        cleaned_title = normalize_company_abbreviations(raw_title)
+
+        return cleaned_title, cleaned_body
+
+    except Exception as error:
+        LOGGER.error(f"Unexpected error in summarize_news for {url}: {error}", exc_info=True)
         return None
-
