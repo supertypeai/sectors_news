@@ -2,8 +2,13 @@ name: Scrape SGX News and Submit to Database
 
 on:
   schedule:
-    - cron: "0 3 * * *" # Runs at 10:00 AM UTC+7 every day
+    # - cron: "0 3 * * *" # Runs at 10:00 AM UTC+7 every day
+    - cron: "0 2 * * *" # 09:00 UTC+7
   workflow_dispatch:
+
+concurrency:
+  group: news-pipeline-main
+  cancel-in-progress: false
 
 jobs:
   batch_1_scrape_and_submit:
@@ -56,7 +61,7 @@ jobs:
           git add -A
           
           # Create Commit (if changes exist)
-          git diff-index --quiet HEAD || git commit -m "Updated scraped news articles"
+          git diff-index --quiet HEAD || git commit -m "chore(sgx): update scraped news data"
           
           # Rebase
           git pull --rebase origin main
