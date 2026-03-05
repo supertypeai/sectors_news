@@ -159,68 +159,6 @@ class ClassifierPrompts:
         """
     
     @staticmethod
-    def get_company_name_prompt_idx():
-        return """You are an expert at extracting information. 
-            Your task is to extract company name from a summarize article.
-        
-            Summarize Article:
-            {body}
-
-            Instruction:
-            - Look carefully 'Summarize Article' and find COMPANY NAME.
-            - Extract the exact company name based on 'Summarize Article' do not change it. 
-            - Extract all company name you can find.
-            - If there is no company name to extract, state 'No Company Found'.
-
-            Ensure to return the extracted company name as a following JSON format.
-            {format_instructions}
-        """
-    
-    @staticmethod
-    def get_company_name_prompt_sgx():
-        return """You are an expert at extracting information. 
-            Your task is to extract company name from a summarize article.
-
-            Full Company Information: 
-            {company_names}
-
-            Summarize Article:
-            {body}
-
-            Instruction:
-            1. PLease analyze carefully step by step both Full Company Information and Summarize Article!
-            2. Look carefully 'Summarize Article' and find COMPANY NAME even if they are ABBREVIATION (e.g Lonza, Prudential, Singapore Exchange, etc).
-               - Look carefully on detail data for each company in table too if they are present!
-            3. Extract the exact company name mentions based on 'Summarize Article' and Extract all company name you can find!
-            4. If the company mentions on abbreviation update to use the full name company
-               - Do not extract names that are part of an ETF or Index title unless they are mentioned as a standalone corporate entity (e.g do NOT extract "Lion-Phillip" from "Lion-Phillip S-REIT ETF")
-               - You must use 'Full Company Information' to get the full company name!
-               - If you can't match with the 'Full Company Information' it's fine still include it please
-            5. If there is no company name to extract, state 'No Company Found'.
-
-            Ensure to return the extracted company name as a following JSON format.
-            {format_instructions}
-        """
-    
-    @staticmethod
-    def get_ticker_prompt():
-        return """You are an expert at extracting information. 
-            Your task is to extract company name ticker from a summarize article.
-        
-            Summarize Article:
-            {body}
-
-            Instruction:
-            - Look carefully 'Summarize Article' and find company name ticker.
-            - Extract the exact ticker based on 'Summarize Article' do not change it. 
-            - Extract all ticker you can find.
-            - If there is no ticker to extract, state 'No Ticker Found'.
-
-            Ensure to return the extracted ticker as a following JSON format.
-            {format_instructions}
-        """
-    
-    @staticmethod
     def get_subsectors_prompt():
         return """You are an expert financial analyst specializing in classifying subsectors for financial articles.   
             Your task is to determine the correct subsector for the given 'Article Summary' using only option in the 'List of Available Subsectors'.  
@@ -303,52 +241,372 @@ class ClassifierPrompts:
             {format_instructions}
         """
     
+
+class ScoringPrompts:
     @staticmethod
-    def get_scoring_prompt():
-        return """You are an expert financial analyst specializing in evaluating article summaries. 
-            Your task is to assign a score to the given 'Article Summary' based strictly on the 'Scoring Criteria'.
+    def get_scoring_system_prompt_idx() -> str:
+        return """You are an expert financial news analyst specializing in
+            Indonesian capital markets and IDX-listed securities. Your task
+            is to score news articles based on their relevance, actionability,
+            and commercial value to investors tracking the IDX.
 
-            Scoring Criteria:
-            {criteria}
+            SCORING FRAMEWORK (0-100 base, up to 135 with bonuses):
 
-            Article Summary: 
-            {body}
+            TIER 0: Noise / Irrelevant (0-10)
+            No discernible connection to the Indonesian market, IDX companies,
+            or relevant economic factors. Generic, trivial, or off-topic.
 
-            Instructions:  
-            - Carefully read the criteria before evaluating the 'Article Summary'.  
-            - Base your judgment solely on how well the 'Article Summary' meets the 'Scoring Criteria'.  
-            - Be objective and concise in applying the criteria.  
+            TIER 1: General Context (11-40)
+            General background on the Indonesian economy, broad market sectors,
+            or global trends with weak or indirect IDX relevance. Lacks specific
+            company details or actionable events.
 
-            Ensure to return the article score in following JSON format.
-            {format_instructions} 
+            TIER 2: Notable Event (41-70)
+            Reports on a specific IDX-listed company or direct policy change
+            affecting a specific sector. Concrete events such as new projects,
+            strategic partnerships, management changes, or analyst rating updates.
+
+            TIER 3: Critical & Actionable (71-100)
+            Major market-moving event for a specific IDX-listed company.
+            High-impact events investors act on immediately:
+            - Merger / Acquisition
+            - Earnings report (beat or miss expectations)
+            - Dividend announcement with specific rates or dates
+            - Stock buyback or rights issue
+            - Major insider trading by executives
+            - Government contract awarded or major regulatory approval/rejection
+
+            PRIMARY BONUS (up to +5 points each):
+            - Dividend rate + cum date: +5
+            - Policy/bill passing (eyeball-catching): +5
+            - Insider trading (eyeball-catching): +5
+            - Acquisition/merger: +5
+            - New business plan, project, income source, partner, or contract: +5
+            - Earnings report: +5
+
+            SECONDARY BONUS (up to +2 points each):
+            - IDX performance vs US market: +2
+            - Rupiah performance: +2
+            - Net foreign buy/sell: +2
+            - Recommended stocks or stock watchlist: +2
+            - Global commodities prices: +2
+
+            A high quality article is:
+            1. Actionable
+            2. Commercially valuable
+            3. Involves big movement of money
+            4. Has potential for significant market cap changes in the industry
         """
-    
+
     @staticmethod
-    def get_summarize_prompt():
-        return """You are an expert financial analyst specializing in summarization article. 
-            Your task is to generate a clear title and a concise summary based strictly on the provided 'Article Content'.  
-            
+    def get_scoring_system_prompt_sgx() -> str:
+        return """You are an expert financial news analyst specializing in
+            Singapore capital markets and SGX-listed securities. Your task
+            is to score news articles based on their relevance, actionability,
+            and commercial value to investors tracking the SGX.
+
+            SCORING FRAMEWORK (0-100 base, up to 135 with bonuses):
+
+            TIER 0: Noise / Irrelevant (0-10)
+            No discernible connection to the Singapore market, SGX companies,
+            or relevant economic factors. Generic, trivial, or off-topic.
+
+            TIER 1: General Context (11-40)
+            General background on the Singapore economy, broad market sectors,
+            or global trends with weak or indirect SGX relevance. Lacks specific
+            company details or actionable events.
+
+            TIER 2: Notable Event (41-70)
+            Reports on a specific SGX-listed company or direct policy change
+            affecting a specific sector. Concrete events such as new projects,
+            strategic partnerships, management changes, or analyst rating updates.
+
+            TIER 3: Critical & Actionable (71-100)
+            Major market-moving event for a specific SGX-listed company.
+            High-impact events investors act on immediately:
+            - Merger / Acquisition
+            - Earnings report (beat or miss expectations)
+            - Dividend announcement with specific rates or dates
+            - Stock buyback or rights issue
+            - Major insider trading by executives
+            - Government contract awarded or major regulatory approval/rejection
+
+            PRIMARY BONUS (up to +5 points each):
+            - Dividend rate + cum date: +5
+            - Policy/bill passing (eyeball-catching): +5
+            - Insider trading (eyeball-catching): +5
+            - Acquisition/merger: +5
+            - New business plan, project, income source, partner, or contract: +5
+            - Earnings report: +5
+
+            SECONDARY BONUS (up to +2 points each):
+            - SGX performance vs US market: +2
+            - Singapore Dollar (SGD) performance: +2
+            - Net foreign buy/sell: +2
+            - Recommended stocks or stock watchlist: +2
+            - Global commodities prices: +2
+
+            A high quality article is:
+            1. Actionable
+            2. Commercially valuable
+            3. Involves big movement of money
+            4. Has potential for significant market cap changes in the industry
+        """
+
+    @staticmethod
+    def get_scoring_user_prompt() -> str:
+        return """Article to score:
+            {article}
+
+            Before scoring, reason through the following inside <thinking> tags.
+
+            <thinking>
+            1. TIER CLASSIFICATION: Which tier does this article fall into and why?
+            Be specific about what in the article determined the tier.
+
+            2. PRIMARY BONUSES: Which primary bonus criteria are present?
+            List each one found and the specific evidence from the article.
+
+            3. SECONDARY BONUSES: Which secondary bonus criteria are present?
+            List each one found and the specific evidence from the article.
+
+            4. FINAL SCORE: Base tier score + primary bonuses + secondary bonuses.
+            Show the arithmetic explicitly.
+            </thinking>
+
+            Return your score and reasoning in the following JSON format.
+            {format_instructions}
+        """
+        
+
+class SummarizationPrompts:
+    @staticmethod
+    def get_system_prompt():
+        return """You are an expert financial analyst. Your task is to generate
+            a title and summary from financial news articles.
+
+            CORE RULE: Center all output on companies directly impacted by the
+            news. A company is impacted if the article's financial analysis
+            centers on its performance, strategy, or a specific event directly
+            affecting it. Companies that merely triggered an event affecting
+            another company are catalysts, not subjects. Catalysts appear only
+            as supporting context.
+
+            COMPANY NAME FORMATTING:
+            - Write company names exactly as they appear in the article.
+            - Remove only trailing periods (e.g. "Tbk." becomes "Tbk") and
+            text inside parentheses that is a stock code or abbreviation
+            (e.g. "(ANTM)" or "(Persero)").
+            - Do not alter the rest of the name.
+
+            OUTPUT RULES:
+            - English only.
+            - Correct capitalization and natural punctuation.
+            - No invented information, no opinion, no filler phrases.
+        """
+
+    @staticmethod
+    def get_user_prompt():
+        return """
             Article Content:
             {article}
 
-            Instruction:
-            - Title:  
-                - Write a single-sentence title that accurately reflects the article, avoids exaggeration, and provides a clear general understanding.
-            - Summary: 
-                - Write a maximum of two sentences highlighting the key events, main points, and any relevant financial metrics.
-                - Company Mentions: 
-                    - Include in the summary if any company names mentioned in the article.
-                    - Please do not include any parantheses written in company name and just remove period ('.') if found in company name.
-                    - PRESERVE COMPANY NAMES exactly as written in the 'Article Content' (e.g PT Aspirasi Hidup Indonesia Tbk, PT Telemedia Komunikasi Pratama). 
-                - Look carefully the table that mentions most companies, you may extract some to stay relevance, if table PRESENT! 
-            - Relevance: Stay strictly grounded in the article content. Do not invent information or include unrelated topics.
-            - Conciseness: Keep the output factual, focused, and free of unnecessary detail.  
+            Before writing the title and summary, reason through the following
+            steps inside <thinking> tags. This reasoning will not appear in
+            the final output.
 
-            Note:
-            - Make sure the upper and lowercase letters are correct
-            - Use natural punctuations
-            - Return title and summary in english.
+            <thinking>
+            1. IDENTIFY IMPACTED COMPANIES: Which companies are the primary
+            subjects of this article's financial analysis? List them and
+            briefly state why each qualifies.
+
+            2. IDENTIFY CATALYSTS: Which companies or events triggered the
+            situation but are not themselves the focus of the analysis?
+            These will appear as supporting context only.
+
+            3. KEY METRICS: What are the critical financial figures, dates,
+            or ratios that must appear in the summary?
+
+            4. ARTICLE TYPE: Is this a broker recommendation report, a
+            corporate event article, or general market commentary? This
+            determines what to prioritize in the summary.
+            </thinking>
+
+            Now write the title and summary using your reasoning above.
+
+            TITLE:
+            - One sentence, factually accurate, no exaggeration.
+            - Must name the primarily impacted company if identifiable.
+
+            SUMMARY:
+            - Two to three sentences maximum.
+            - All primarily impacted companies MUST appear by name.
+            - Include critical financial metrics relevant to impacted companies.
+            - If a table is present, incorporate the most material data points
+            only if they directly support the core narrative.
+
+            Return title and summary in the following JSON format.
+            {format_instructions}
+        """
+
+
+class EntityExtractionPrompts:
+    @staticmethod
+    def system_prompt_idx():
+        return """
+            You are a Financial Data Extraction Expert. Extract only companies
+            that are PRIMARY SUBJECTS OF IMPACT in the article. Being mentioned
+            is not sufficient. Being the cause of news affecting another company
+            is not sufficient.
+
+            BEFORE ANYTHING: CATALYST TEST
+            For each company you consider, ask: is this company the subject of
+            the analysis, or the cause of an event whose effect on another
+            company is what the article analyzes? If it is the cause, exclude it.
+
+            STEP 1: SCAN FOR BROKER SECTIONS FIRST
+            Before classifying the article, scan every section independently
+            for explicit per-stock actionable data. A section qualifies as a
+            broker report only if it contains BOTH:
+            - A directional call on a specific named stock (buy/sell/hold/
+            accumulate/avoid/overweight/underweight)
+            - At least one of: target price, entry range, or stop-loss
+            attached to that specific stock
+            Thematic lists ("consider MEDC and RAJA for energy exposure")
+            without per-stock price levels do NOT qualify.
+            For qualifying sections: extract only the recommended stocks,
+            exclude the brokerage and analyst.
+            For non-qualifying sections: apply Step 2 and Step 3.
+
+            STEP 2: PRIMARY NARRATIVE SUBJECTS
+            Extract companies whose financial performance, strategy, or a
+            specific event directly affecting them is the core focus.
+            Ask: would removing this company eliminate the article's
+            central point? If no, exclude it.
+
+            STEP 3: ACTIVE DIRECT COUNTERPARTIES
+            Extract only if ALL are true:
+            - A new transaction or legal agreement is the active news event
+            - The counterparty is explicitly named in that transaction
+            - It passes the Catalyst Test above
             
-            Ensure to return the title and summary in the following JSON format.
+            Always exclude regardless of explicit naming:
+            - Existing shareholders exercising pre-existing rights
+            - Financial intermediaries in procedural roles (underwriters,
+            standby buyers, brokers)
+            - Subsidiaries receiving residual or routine capital injections
+            - Companies sanctioned/sued: extract them as primary subjects,
+            exclude the regulator
+            - Capital allocation target: extract only the primary destination
+            representing dominant use of proceeds, not residual recipients
+
+            STEP 4: ALWAYS EXCLUDE
+            - Stock indices, macroeconomic references, governments, countries
+            - Industry peers cited for comparison
+            - Companies appearing only in historical context
+            - Any company whose sole role is background economic context
+
+            OUTPUT: Extract exact company names as they appear in the text.
+            Do not extract ticker symbols unless no full name is present.
+            """
+    
+    @staticmethod
+    def user_prompt_idx():
+        return """
+            Article Text:
+            {body}
+
+            Instructions:
+            1. Process the 'Article Text' strictly through the 5-step sequence defined in your system prompt.
+            2. Provide a brief 'reasoning' detailing how you identified the primary subject and why you included or excluded other mentioned entities based on the steps.
+            3. If no company qualifies as a primary narrative subject or direct counterparty, output 'No Company Found' in the extraction list.
+            4. Remove the tickers for each company 
+
+            Ensure to return the extracted company names strictly in the following JSON format:
+            {format_instructions}
+            """
+
+    @staticmethod
+    def system_prompt_sgx():
+        return """
+            You are a company name extraction expert for SGX-listed securities.
+            Your task is to extract only companies that are PRIMARY SUBJECTS OF IMPACT
+            from a summarized financial article.
+
+            CORE RULE: A company is a primary subject of impact only if the article's
+            analysis centers on its performance, strategy, or a specific event directly
+            affecting it. Being mentioned, cited as an example, or used to illustrate
+            a broader point does not qualify.
+
+            ALWAYS EXCLUDE:
+            - Companies named only as illustrations of a policy, trend, or market
+            structure change, even if specific figures are attached to them.
+            - Stock indices, ETFs, and funds unless the fund itself is the subject.
+            - Do not extract individual holdings from an ETF or index title
+            (e.g. do NOT extract "Lion-Phillip" from "Lion-Phillip S-REIT ETF").
+            - Regulators, exchanges, and government bodies unless they are the
+            direct subject of a corporate event affecting them specifically.
+            - Industry peers cited for comparison or context.
+            - Companies appearing only in historical references.
+
+            COMPANY NAME RESOLUTION:
+            - If a company appears as an abbreviation, resolve it to the full name
+            using the provided company information.
+            - If no match is found in the provided company information, include the
+            name as it appears in the text.
+            - Write names exactly as they appear, do not invent or expand beyond
+            what is present.
+        """
+
+    @staticmethod
+    def user_prompt_sgx():
+        return """
+            Full Company Information:
+            {company_names}
+
+            Summarized Article:
+            {body}
+
+            Before extracting, reason through the following inside <thinking> tags.
+
+            <thinking>
+            1. CORE SUBJECT: What is this article fundamentally about? Is it a
+            corporate event, broker recommendation, regulatory action, or
+            market structure change?
+
+            2. IMPACTED COMPANIES: Which companies are directly acted upon or
+            directly benefit or suffer from the news event? List each and
+            state why it qualifies as impacted rather than illustrative.
+
+            3. ILLUSTRATIVE MENTIONS: Which companies are named only as examples
+            to demonstrate the effect of a broader point? These must be excluded.
+
+            4. NAME RESOLUTION: For any abbreviation or short name, identify the
+            full name from the provided company information.
+            </thinking>
+
+            Based on your reasoning above, extract only the companies that are
+            primary subjects of impact. If no company qualifies, return an empty list.
+
+            Ensure to return the extracted company names in the following JSON format.
+            {format_instructions}
+        """
+    
+    @staticmethod
+    def get_ticker_prompt():
+        return """
+            You are an expert at extracting information. 
+            Your task is to extract company name ticker from a summarize article.
+        
+            Summarize Article:
+            {body}
+
+            Instruction:
+            - Look carefully 'Summarize Article' and find company name ticker.
+            - Extract the exact ticker based on 'Summarize Article' do not change it. 
+            - Extract all ticker you can find.
+            - If there is no ticker to extract, state 'No Ticker Found'.
+
+            Ensure to return the extracted ticker as a following JSON format.
             {format_instructions}
         """

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 from scraper_engine.database.client import SUPABASE_CLIENT
-from scraper_engine.preprocessing.extract_summary_news import normalize_dot_case
+from scraper_engine.preprocessing.summarizer import normalize_dot_case
 
 import pytz
 import re 

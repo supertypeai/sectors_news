@@ -28,9 +28,13 @@ try:
     GROQ_API_KEY2 = get_required_env("GROQ_API_KEY2")
     GROQ_API_KEY3 = get_required_env("GROQ_API_KEY3")
     GROQ_API_KEY4 = get_required_env("GROQ_API_KEY4")
+    GROQ_API_KEY5 = get_required_env("GROQ_API_KEY5")
+    GROQ_API_KEY_DEV = get_required_env("GROQ_API_KEY_DEV")
+
     GEMINI_API_KEY = get_required_env("GEMINI_API_KEY")
     GEMINI_API_KEY2 = get_required_env("GEMINI_API_KEY2")
-    GROQ_API_KEY_DEV = get_required_env("GROQ_API_KEY_DEV")
+    GEMINI_API_KEY3 = get_required_env('GEMINI_API_KEY3')
+    
 
     PROXY = get_required_env('PROXY')
 
@@ -41,3 +45,41 @@ try:
 except ValueError as error:
     logger.critical(f"Configuration failed: {error}")
     raise
+
+
+MODEL_CONFIG = { 
+    'kimi-k2': {
+        'model': 'moonshotai/kimi-k2-instruct-0905',
+        'provider': 'groq', 
+        # 'key': GROQ_API_KEY
+    },
+    'gpt-oss-120b': {
+        'model': 'openai/gpt-oss-120b',
+        'provider': 'groq', 
+        # 'key': GROQ_API_KEY
+    },
+    'gpt-oss-20b': {
+        'model': 'openai/gpt-oss-20b',
+        'provider': 'groq', 
+        # 'key': GROQ_API_KEY
+    },
+    'gemini-2.5-flash': {
+        'model': 'gemini-2.5-flash',
+        'provider': 'google-genai', 
+        # 'key': GEMINI_API_KEY
+    },
+    'llama-3.3-70b': {
+        'model': 'llama-3.3-70b-versatile',
+        'provider': 'groq', 
+        # 'key': GROQ_API_KEY
+    }
+}
+
+ROTATE_STATUS_CODES = {401, 403, 429}
+ABORT_STATUS_CODES = {400, 422, 500, 502, 503, 504}
+
+ROTATE_KEYWORDS = ("rate limit", "too many requests", "authentication", "invalid api key")
+ABORT_KEYWORDS = (
+    "context length", "max token", "internal server",
+    "bad gateway", "service unavailable",
+)

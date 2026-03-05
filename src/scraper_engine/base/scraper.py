@@ -25,10 +25,12 @@ def get_chrome_info() -> tuple:
     Detects the installed Google Chrome version AND path.
     Returns a tuple: (major_version, executable_path)
     """
-    if platform.system() == "Linux":
+    operating_system = platform.system()
+    if operating_system == "Linux":
         try:
             for binary in ["chrome", "google-chrome", "chromium", "chromium-browser"]:
                 binary_path = shutil.which(binary)
+
                 if not binary_path: 
                     continue
                 
@@ -41,16 +43,28 @@ def get_chrome_info() -> tuple:
                     
                     LOGGER.info(f"Detected {binary} at {binary_path} (Version: {major_version})")
                     return major_version, binary_path
+                
                 except:
                     continue
+                
             return None, None
         
         except Exception as error:
             LOGGER.error(f"Could not detect Chrome version: {error}")
             return None, None
     
-    # Windows fallback
-    return 143, None
+    elif operating_system == "Windows":
+        try:
+            command = 'powershell -command "(Get-ItemProperty -Path Registry::HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon).version"'
+            output = subprocess.check_output(command, shell=True, text=True).strip()
+            
+            if output:
+                major_version = int(output.split('.')[0])
+                return major_version, None
+            
+        except subprocess.SubprocessError as process_error:
+            LOGGER.error(f"Failed to query Windows registry: {process_error}")
+            return None, None
 
 
 class Scraper:

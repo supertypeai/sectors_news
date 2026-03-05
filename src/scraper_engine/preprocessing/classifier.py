@@ -6,8 +6,9 @@ from supabase                       import Client
 from datetime                       import datetime
 from typing                         import List, Dict, Optional, Union, Tuple
 from groq                           import RateLimitError
+from pathlib                        import Path
 
-from scraper_engine.llm.client  import LLMCollection, invoke_llm_async, invoke_llm
+from scraper_engine.llm.client  import invoke_llm, get_llm
 from scraper_engine.llm.prompts import (
     ClassifierPrompts, 
     TagsClassification, 
@@ -24,6 +25,7 @@ from scraper_engine.database.client import SUPABASE_CLIENT
 import json
 import asyncio
 import logging 
+import time 
 
 
 LOGGER = logging.getLogger(__name__)
@@ -34,20 +36,16 @@ class NewsClassifier:
     A class to handle news article classification including tags, subsectors, tickers, and sentiment.
     """
     def __init__(self):
-        """Initialize the NewsClassifier with required dependencies."""
-        # Supabase setup
         self.supabase: Client = SUPABASE_CLIENT
 
-        # LLM setup
-        self.llm_collection = LLMCollection()
-
-        # Cache for loaded data
         self._subsectors_cache: Optional[Dict[str, str]] = None
         self._tags_cache: Optional[List[str]] = None
         self._company_cache: Optional[Dict[str, Dict[str, str]]] = None
         self._prompts_cache: Optional[Dict] = None
 
-        # Classifier prompts
+        self._company_cache_sgx: Optional[Dict[str, Dict[str, str]]] = None
+        self._sgx_cache_refreshed_on: Optional[str] = None
+
         self.prompts = ClassifierPrompts()
 
     def _extract_first_sentences(self, text: str, count: int = 2) -> str:
@@ -61,12 +59,6 @@ class NewsClassifier:
         return result 
 
     def _load_subsector_data(self) -> str:
-        """
-        Load subsector data from Supabase or cache.
-
-        Returns:
-            Dict[str, str]: Dictionary mapping subsector slugs to descriptions
-        """
         if self._subsectors_cache is not None:
             return self._subsectors_cache
 
@@ -79,10 +71,10 @@ class NewsClassifier:
 
             subsectors = {row["slug"]: row["description"] for row in response.data}
 
-            with open("./data/subsectors_data.json", "w") as file:
+            with open("./data/idx/subsectors_data.json", "w") as file:
                 json.dump(subsectors, file, indent=2)
         else:
-            with open("./data/subsectors_data.json", "r") as file:
+            with open("./data/idx/subsectors_data.json", "r") as file:
                 subsectors = json.load(file)
 
         # Extract only the first two sentences
@@ -97,8 +89,21 @@ class NewsClassifier:
             ]
         )
 
-        self._subsectors_cache = subsector_string
-        return subsector_string
+        result = (subsector_string, set(subsectors.keys()))
+        self._subsectors_cache = result
+        return result
+
+    def _load_subsector_data_sgx(self) -> str: 
+        with open("./data/sgx/subsectors_data_sgx.json", "r") as file:
+            subsectors = json.load(file) 
+
+        subsector_string = "\n".join(
+            [
+                f"{key}:{value}" for key, value in subsectors.items()
+            ]
+        )
+
+        return subsector_string, set(subsectors.keys())
 
     def _load_tag_data(self) -> tuple:
         """
@@ -176,33 +181,51 @@ class NewsClassifier:
         self._company_cache = company
         return company
     
-    def _load_sgx_company_data(self): 
-        with open("./data/sgx/sgx_companies.json", "r") as file:
+    def _load_sgx_company_data(self) -> Dict[str, Dict[str, str]]:
+        DATA_DIR = Path("data")
+        path = DATA_DIR / "sgx/sgx_companies.json"
+
+        today = datetime.today().strftime("%Y-%m-%d")
+        refresh_day = datetime.today().day in {1, 15}
+
+        if self._company_cache_sgx is not None:
+            if not refresh_day or self._sgx_cache_refreshed_on == today:
+                return self._company_cache_sgx
+
+        if refresh_day:
+            response = (
+                SUPABASE_CLIENT
+                .table("sgx_company_report")
+                .select("symbol", "name", "sub_sector", "sector")
+                .execute()
+            )
+            company = {
+                item["symbol"]: {
+                    "symbol": item["symbol"],
+                    "name": item["name"],
+                    "sub_sector": item["sub_sector"],
+                    "sector": item["sector"],
+                }
+                for item in response.data
+            }
+            with open(path, "w") as file:
+                json.dump(company, file, indent=4)
+            self._sgx_cache_refreshed_on = today
+
+        else:
+            with open(path, "r") as file:
                 company = json.load(file)
 
-        companies_name = []
-        for _, value in company.items(): 
-            company_name = value.get('name')
-            companies_name.append(company_name)
+        self._company_cache_sgx = company
+        return company
 
-        companies_name_str = ', '.join(companies_name)
-        return companies_name_str
-
-    async def _classify_data_async(
-        self, body: str, category: str, title: str = ""
-    ) -> Union[List[str], str]:
-        """
-        Asynchronously classify text using LLM based on the specified category.
-
-        Args:
-            body (str): Text to classify
-            category (str): Category to classify into (tags, subsectors, sentiment, dimension)
-            title (str): Article title (required for dimension category)
-
-        Returns:
-            Union[List[str], str]: Classification results
-        """
-        # Prompt template mapping
+    def _classify_data(
+        self, 
+        body: str, 
+        category: str, 
+        source_scraper: str, 
+        title: str = ""
+    ) -> Optional[Union[list[str], str, dict[str, Optional[int]]]]:
         prompt_methods = {
             "tags": self.prompts.get_tags_prompt(),
             "subsectors": self.prompts.get_subsectors_prompt(),
@@ -214,7 +237,10 @@ class NewsClassifier:
         tags, tags_string = self._load_tag_data()
         
         # Load subsector data
-        subsectors = self._load_subsector_data()
+        subsectors, _ = (
+            self._load_subsector_data_sgx() if source_scraper == "sgx"
+            else self._load_subsector_data()
+        )
 
         # Pydantic mapping 
         model_mapping = {
@@ -269,10 +295,12 @@ class NewsClassifier:
         else:
             input_data = {"body": body}
 
-        for llm in self.llm_collection.get_llms():
+        model_names = ['gpt-oss-120b', 'gemini-2.5-flash', 'gpt-oss-20b', 'llama-3.3-70b', 'kimi-k2']
+        for model in model_names:
             try:
-                llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
-                LOGGER.info(f'LLM used: {llm_used}')
+                llm = get_llm(model, temperature=0.4)
+                LOGGER.info(f'LLM used: {model}')
+
                 # Create chain with current LLM
                 classifier_chain = (
                     runnable_system
@@ -282,10 +310,10 @@ class NewsClassifier:
                 )
 
                 # Process with current LLM
-                result = await invoke_llm_async(classifier_chain, input_data)
+                result = invoke_llm(classifier_chain, input_data)
     
                 # Sleep 8s
-                await asyncio.sleep(8)
+                time.sleep(8)
 
                 if result is None : 
                     LOGGER.warning(f"API call failed for category: {category}. trying next LLM.")
@@ -328,147 +356,30 @@ class NewsClassifier:
                             "ownership": result.get("ownership", None),
                             "sustainability": result.get("sustainability", None),
                         }
-            
-            except RateLimitError as error:
-                error_message = str(error).lower()
-                if "tokens per day" in error_message or "tpd" in error_message:
-                    LOGGER.warning(f"LLM: {llm_used} hit its daily token limit. Moving to next LLM.")
-                    continue 
-
-            except json.JSONDecodeError as error:
-                LOGGER.error(f"[ERROR] LLM Failed classified returned malformed JSON: {error}")
-                continue
 
             except Exception as error:
                 LOGGER.error(f"[ERROR] LLM failed classified with error: {error}")
                 continue
             
-        # Return appropriate default if all LLMs fail
         LOGGER.error(f"All LLMs failed for category '{category}'.")
         return None
 
-    async def classify_article_async(
-        self, title: str, body: str
-    ) -> Tuple[List[str], List[str], str, str, Dict[str, Optional[int]]]:
-        """
-        Asynchronously classify an article's tags, subsector, sentiment, and dimensions.
-
-        Args:
-            title (str): Article title
-            body (str): Article content
-
-        Returns:
-            Tuple[List[str], List[str], str, str, Dict[str, Optional[int]]]:
-                (tags, subsector, sentiment, dimensions)
-        """
+    def classify_article(
+        self, title: str, body: str, source_scraper: str
+    ) -> Optional[tuple[list[str], str, dict[str, Optional[int]]]]:
         # Llama groq sensitive to ratelimit, so decided to not use .gather but sequential instead
-        tags = await self._classify_data_async(body, "tags", title)
-        subsector = await self._classify_data_async(body, "subsectors", title)
-        sentiment = await self._classify_data_async(body, "sentiment", title)
-        dimension = await self._classify_data_async(body, "dimension", title)
+        tags = self._classify_data(body, "tags", source_scraper, title)
+        # subsector = self._classify_data_async(body, "subsectors", title)
+        sentiment = self._classify_data(body, "sentiment", source_scraper, title)
+        dimension = self._classify_data(body, "dimension", source_scraper, title)
 
         # Check for ANY failure: either an unexpected Exception OR None signal
-        results = [tags, subsector, sentiment, dimension]
+        results = [tags, sentiment, dimension]
         if any(isinstance(res, Exception) or res is None for res in results):
             LOGGER.error("One or more classification steps failed. Failing entire article classification.")
             return None
 
-        return tags, subsector, sentiment, dimension
-
-    def extract_company_name(
-        self, body: str, 
-        title: str, 
-        is_sgx: bool = False,
-        is_ticker: bool = True
-    ) -> list[str]:
-        """
-        Extract company identifiers from article body and title.
-
-        Args:
-            body (str): Article body text.
-            title (str): Article title.
-            is_sgx (bool): Apply SGX-specific extraction rules if True.
-            is_ticker (bool): Prefer ticker symbols over company names if True.
-
-        Returns:
-            list[str]: Extracted company names or ticker symbols.
-        """
-        if is_ticker:
-            template = self.prompts.get_ticker_prompt()
-            company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameTickerExtraction)
-        else:
-            if is_sgx: 
-                template = self.prompts.get_company_name_prompt_sgx()
-                company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
-            else: 
-                template = self.prompts.get_company_name_prompt_idx()
-                company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
-
-        # Prepare for input
-        combined_text = f"{title} {body}"   
-        company_names_desc = self._load_sgx_company_data()
-        
-        # Prepare the prompt with the template and format instructions
-        company_prompt = PromptTemplate(
-            template=template, 
-            input_variables=["body", 'company_names'],
-            partial_variables={
-                "format_instructions": company_extraction_parser.get_format_instructions(), 
-                 "company_names": company_names_desc
-            }
-        )
-
-        # Create a runnable system that will handle the input
-        runnable_company_system = RunnableParallel(
-                {   
-                    "body": itemgetter("body")
-                }
-            )
-
-        input_data = {"body": combined_text}
-        
-        for llm in self.llm_collection.get_llms():
-            llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
-            LOGGER.info(f'LLM used: {llm_used}')
-
-            try:
-                summary_chain = (
-                    runnable_company_system
-                    | company_prompt
-                    | llm 
-                    | company_extraction_parser
-                )
-                
-                company_extracted = invoke_llm(summary_chain, input_data)
-                
-                if 'company' not in company_extracted or 'reason' not in company_extracted:
-                    LOGGER.warning("Output not complete, trying next LLM...")
-                    continue
-
-                LOGGER.info(f"[SUCCES] Company extracted for url")
-                
-                if is_ticker:
-                    return company_extracted.get('tickers')
-                else:
-                    LOGGER.info(f'reason company extraction: {company_extracted.get('reason')}')
-                    return company_extracted.get('company')
-
-            except RateLimitError as error:
-                error_message = str(error).lower()
-                if "tokens per day" in error_message or "tpd" in error_message:
-                    LOGGER.warning(f"LLM: {llm_used} hit its daily token limit. Moving to next LLM")
-                    continue 
-
-            except json.JSONDecodeError as error:
-                LOGGER.error(f"Failed to parse JSON response: {error}, trying next LLM...")
-                continue
-                
-            except Exception as error:
-                LOGGER.warning(f"LLM failed with error: {error}")
-                continue 
-
-        LOGGER.error("All LLMs failed to return a valid summary.")
-        return None
+        return tags, sentiment, dimension
 
 
 # Create a singleton instance
@@ -485,6 +396,16 @@ def load_company_data() -> Dict[str, Dict[str, str]]:
     return CLASSIFIER._load_company_data()
 
 
+def load_company_data_sgx() -> Dict[str, Dict[str, str]]:
+    """
+    Load company data sgx from Supabase or cache.
+
+    Returns:
+        Dict[str, Dict[str, str]]: Dictionary mapping company symbols to their details.
+    """
+    return CLASSIFIER._load_sgx_company_data()
+
+
 def load_sub_sectors_data() -> dict[str]:
     """
     Load subsector data from json.
@@ -492,4 +413,16 @@ def load_sub_sectors_data() -> dict[str]:
     Returns:
         dict[str]: Dictionary containing subsector data.
     """
-    return CLASSIFIER._load_subsector_data()
+    _, keys = CLASSIFIER._load_subsector_data()
+    return keys
+
+
+def load_sub_sectors_data_sgx() -> dict[str]:
+    """
+    Load subsector data sgx from json.
+
+    Returns:
+        dict[str]: Dictionary containing subsector data.
+    """
+    _, keys = CLASSIFIER._load_subsector_data_sgx()
+    return keys

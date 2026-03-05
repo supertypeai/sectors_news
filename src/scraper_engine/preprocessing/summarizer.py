@@ -2,14 +2,11 @@ from bs4                            import BeautifulSoup
 from goose3                         import Goose
 from requests                       import Response, Session
 from langchain_core.output_parsers  import JsonOutputParser
-from langchain.prompts              import PromptTemplate
-from langchain_core.runnables       import RunnableParallel
-from operator                       import itemgetter
-from groq                           import RateLimitError
+from langchain.prompts              import ChatPromptTemplate
 from io                             import StringIO
 
-from scraper_engine.llm.client  import LLMCollection, invoke_llm
-from scraper_engine.llm.prompts import ClassifierPrompts, SummaryNews
+from scraper_engine.llm.client  import get_llm, invoke_llm, TokenUsageLogger
+from scraper_engine.llm.prompts import SummarizationPrompts, SummaryNews
 from scraper_engine.config.conf import PROXY
 from scraper_engine.base.scraper import SeleniumScraper 
 
@@ -40,58 +37,38 @@ HEADERS = {
     "x-test": "true",
 }
 
-# Model Creation and prompts
-LLMCOLLECTION = LLMCollection()
-PROMPTS = ClassifierPrompts()
-
 
 def summarize_article(body: str, url: str) -> dict[str]:
-    """ 
-    Summarize engine for news articles using LLMs.
+    prompts = SummarizationPrompts()
 
-    Args:
-        body (str): The text of the article to be summarized.
-    
-    Returns:
-        dict[str]: A dictionary containing the title and body of the summary.
-    """
-    # Get the prompt template for summarization
-    template = PROMPTS.get_summarize_prompt()
+    user_prompt = prompts.get_user_prompt()
+    system_prompt = prompts.get_system_prompt() 
 
-    # Create a summary parser using the JsonOutputParser
     summary_parser = JsonOutputParser(pydantic_object=SummaryNews)
+    format_instructions = summary_parser.get_format_instructions()
     
-    # Prepare the prompt with the template and format instructions
-    summary_prompt = PromptTemplate(
-        template=template, 
-        input_variables=["article"],
-        partial_variables={
-            "format_instructions": summary_parser.get_format_instructions()
-        }
-    )
-
-    # Create a runnable system that will handle the article input
-    runnable_summary_system = RunnableParallel(
-            {   
-                "article": itemgetter("article")
-            }
-        )
-
-    input_data = {"article": body}
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", system_prompt),
+        ('user', user_prompt )
+    ])
     
-    for llm in LLMCOLLECTION.get_llms():
+    input_data = {
+        "article": body,
+        'format_instructions': format_instructions
+    }
+    
+    model_names = ['gpt-oss-120b', 'gemini-2.5-flash', 'gpt-oss-20b', 'llama-3.3-70b', 'kimi-k2']
+    for model in model_names:
         try:
-            llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
-            LOGGER.info(f'LLM used: {llm_used}')
+            llm = get_llm(model, temperature=0.15)
+            LOGGER.info(f"LLM used: {model}")
+
+            summary_chain = prompt | llm | summary_parser
             
-            summary_chain = (
-                runnable_summary_system
-                | summary_prompt
-                | llm 
-                | summary_parser
+            summary_result = summary_chain.invoke(
+                input_data, 
+                config={"callbacks": [TokenUsageLogger()]}
             )
-            
-            summary_result = invoke_llm(summary_chain, input_data)
             LOGGER.info(f"reason: {summary_result.get('reasoning')}")
 
             if summary_result is None:
@@ -104,16 +81,6 @@ def summarize_article(body: str, url: str) -> dict[str]:
             
             LOGGER.info(f"[SUCCES] Summarize for url: {url}")
             return summary_result
-
-        except RateLimitError as error:
-            error_message = str(error).lower()
-            if "tokens per day" in error_message or "tpd" in error_message:
-                LOGGER.warning(f"LLM: {llm_used} hit its daily token limit. Moving to next LLM")
-                continue 
-
-        except json.JSONDecodeError as error:
-            LOGGER.error(f"Failed to parse JSON response: {error}, trying next LLM...")
-            continue
             
         except Exception as error:
             LOGGER.warning(f"LLM failed with error: {error}")
@@ -428,21 +395,8 @@ def get_article_body(url: str) -> str | None:
     return None 
 
 
-def summarize_news(url: str) -> tuple[str, str]:
-    """ 
-    Main function to summarize a news article from a given URL.
-
-    Args:
-        url (str): The URL of the news article to be summarized.
-    
-    Returns:
-        tuple[str, str]: A tuple containing the title and body of the summarized article.
-    """
+def summarize_news(url, news_text: str) -> tuple[str, str]:
     try:
-        # Getting full article from the url
-        news_text = get_article_body(url) or ''
-        time.sleep(random.uniform(5, 12))
-
         if len(news_text) > 100:
             # Preprocess texts by just removing extra spaces
             news_text = re.sub(r"\s+", " ", news_text)
@@ -455,13 +409,13 @@ def summarize_news(url: str) -> tuple[str, str]:
 
             # Summarize the article and force to sleep 5s
             response = summarize_article(news_text, url)
-            LOGGER.info(f'reason summary: {response['reasoning']}')
-            
             time.sleep(7)
 
             if not response or not response.get("summary"):
                 LOGGER.error(f"Summarization LLM call failed or returned incomplete data for {url}.")
                 return None
+            
+            LOGGER.info(f"reason summary: {response.get('reasoning')}")
             
             raw_body = response.get("summary") 
             cleaned_body = basic_cleaning_body(raw_body)

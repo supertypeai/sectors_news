@@ -1,10 +1,16 @@
 from langchain.chat_models import init_chat_model
 from langchain_core.runnables import Runnable
+from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_core.messages import BaseMessage
+from langchain_core.outputs import ChatResult
+from langchain_core.callbacks import BaseCallbackHandler
 
 from scraper_engine.config.conf import (
-    GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, GROQ_API_KEY4, GROQ_API_KEY_DEV,
-    OPENAI_API_KEY, GEMINI_API_KEY, GEMINI_API_KEY2,
-    LLM_SEMAPHORE, LLM_SEMAPHORE_SYNC
+    GROQ_API_KEY1, GROQ_API_KEY2, 
+    GROQ_API_KEY3, GROQ_API_KEY4, GROQ_API_KEY5, GROQ_API_KEY_DEV,
+    GEMINI_API_KEY, GEMINI_API_KEY2, GEMINI_API_KEY3,
+    LLM_SEMAPHORE_SYNC, MODEL_CONFIG, ROTATE_KEYWORDS, 
+    ROTATE_STATUS_CODES, ABORT_KEYWORDS, ABORT_STATUS_CODES
 )
 
 import groq 
@@ -15,92 +21,20 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-class LLMCollection:
-    """
-    @brief Singleton class to manage a collection of LLM (Large Language Model) instances.
-    This class ensures that only one instance of the LLMCollection exists and provides methods to add and retrieve LLM instances.
-    """
-    _instance = None
-    
-    def __new__(cls):
-        """
-        @brief Creates a new instance of LLMCollection if it doesn't already exist.
-        @return The singleton instance of LLMCollection.
-        """
-        if cls._instance is None:
-            cls._instance = super(LLMCollection, cls).__new__(cls)
+class TokenUsageLogger(BaseCallbackHandler):
+    def on_llm_end(self, response, **kwargs):
+        token_usage = response.llm_output.get("token_usage", {}) if response.llm_output else {}
+        completion_details = token_usage.get("completion_tokens_details") or {}
 
-            model_providers = {
-                "openai/gpt-oss-120b": "groq",
-                "gemini-2.5-flash": "google_genai",
-                "gemini-2.5-flash-lite": "google_genai",
-                "openai/gpt-oss-20b": "groq",
-                "llama-3.3-70b-versatile": "groq",
-                "gpt-4.1-mini": "openai",
-            }
-
-            groq_api_keys = [
-                GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, 
-                GROQ_API_KEY_DEV, GROQ_API_KEY4
-            ]
-            
-            gemini_api_keys = [GEMINI_API_KEY, GEMINI_API_KEY2]
-
-            llms= []
-            for model, provider in model_providers.items():
-                if provider == 'groq':
-                    for groq_key in groq_api_keys:
-                        llms.append(
-                            init_chat_model(
-                                model,
-                                model_provider=provider,
-                                temperature=0.5,
-                                max_retries=3,
-                                api_key=groq_key,
-                            )
-                        )
-                
-                elif provider == 'openai':
-                     llms.append(
-                        init_chat_model(
-                            model,
-                            model_provider=provider,
-                            temperature=0.5,
-                            max_retries=3,
-                            api_key=OPENAI_API_KEY,
-                        )
-                    )
-                    
-                elif provider == 'google_genai':
-                    for gemini_key in gemini_api_keys:
-                        llms.append(
-                            init_chat_model(
-                                model,
-                                model_provider=provider,
-                                temperature=0.5,
-                                max_retries=3,
-                                api_key=gemini_key,
-                            )
-                        )
-
-
-            cls._instance._llms = llms 
-
-        return cls._instance
-
-    def add_llm(self, llm):
-        """
-        @brief Adds a new LLM instance to the collection.
-        @param llm The LLM instance to be added to the collection.
-        """
-        self._llms.append(llm)
-
-    def get_llms(self):
-        """
-        @brief Retrieves the list of LLM instances in the collection.
-        @return A list of LLM instances.
-        """
-        return self._llms
+        LOGGER.info(
+            "token usage: prompt=%d completion=%d reasoning=%d total=%d finish_reason=%s",
+            token_usage.get("prompt_tokens", 0),
+            token_usage.get("completion_tokens", 0),
+            completion_details.get("reasoning_tokens", 0),
+            token_usage.get("total_tokens", 0),
+            response.generations[0][0].generation_info.get("finish_reason", "unknown")
+            if response.generations else "unknown",
+        )
 
 
 def invoke_llm(chain: Runnable, input_data: dict):
@@ -123,33 +57,184 @@ def invoke_llm(chain: Runnable, input_data: dict):
             raise 
 
 
-async def invoke_llm_async(chain: Runnable, input_data: dict):
-    """
-    Wrapper function to invoke the LLM chain asynchronously.
-    This function uses an asyncio semaphore to limit the number of concurrent LLM calls.
+def extract_status_code(error: Exception) -> int | None:
+    status_code = getattr(error, "status_code", None)
+    if status_code is not None:
+        return int(status_code)
 
-    Args:
-        chain: The LLM chain to be invoked.
-        input_data: The input data to be processed by the LLM chain.
+    for token in str(error).split():
+        if token.isdigit() and len(token) == 3:
+            return int(token)
+
+    return None
+
+
+def classify_error(error: Exception) -> str:
+    """
+    Returns one of three actions:
+      'rotate' -> key-level problem, try the next key
+      'abort'  -> request-level or server-level problem, rotating will not help
+      'raise'  -> unexpected error, propagate immediately
+    """
+    status_code = extract_status_code(error)
+    error_message = str(error).lower()
+
+    if status_code in ROTATE_STATUS_CODES:
+        return "rotate"
+
+    if status_code in ABORT_STATUS_CODES:
+        return "abort"
+
+    if any(keyword in error_message for keyword in ROTATE_KEYWORDS):
+        return "rotate"
+
+    if any(keyword in error_message for keyword in ABORT_KEYWORDS):
+        return "abort"
+
+    return "raise"
+
+
+class KeyRotatingChatModel(BaseChatModel):
+    """
+    Wraps a pool of LLM clients initialised with different API keys for the
+    same model. On a key-level failure (429, 401, 403) it transparently
+    rotates to the next available key. On request-level or server-level
+    failures it raises immediately without wasting the remaining keys.
+    """
+    llm_pool: list[BaseChatModel]
+    model_name_identifier: str
+
+    class Config:
+        arbitrary_types_allowed = True
+
+    @property
+    def _llm_type(self) -> str:
+        return f"key-rotating-{self.model_name_identifier}"
+
+    def _generate(
+        self,
+        messages: list[BaseMessage],
+        stop: list[str] | None = None,
+        **kwargs: any,
+    ) -> ChatResult:
+        last_error: Exception | None = None
+
+        for index, llm_client in enumerate(self.llm_pool):
+            try:
+                return llm_client._generate(messages, stop=stop, **kwargs)
+            
+            except Exception as error:
+                action = classify_error(error)
+
+                if action == "rotate":
+                    LOGGER.warning(
+                        f"Key index {index} failed for '{self.model_name_identifier}' "
+                        f"(rotating to next key). Error: {error}"
+                    )
+                    last_error = error
+                    continue
+
+                if action == "abort":
+                    LOGGER.error(
+                        f"Non-recoverable error for '{self.model_name_identifier}', "
+                        f"aborting key rotation. Error: {error}"
+                    )
+                    raise
+
+                raise
+
+        raise RuntimeError(
+            f"All {len(self.llm_pool)} API keys exhausted for model "
+            f"'{self.model_name_identifier}'. Last error: {last_error}"
+        )
+
+    async def _agenerate(
+        self,
+        messages: list[BaseMessage],
+        stop: list[str] | None = None,
+        **kwargs: any,
+    ) -> ChatResult:
+        last_error: Exception | None = None
+
+        for index, llm_client in enumerate(self.llm_pool):
+            try:
+                return await llm_client._agenerate(messages, stop=stop, **kwargs)
+            
+            except Exception as error:
+                action = classify_error(error)
+
+                if action == "rotate":
+                    LOGGER.warning(
+                        f"Key index {index} failed for '{self.model_name_identifier}' "
+                        f"(async, rotating to next key). Error: {error}"
+                    )
+                    last_error = error
+                    continue
+
+                if action == "abort":
+                    LOGGER.error(
+                        f"Non-recoverable error for '{self.model_name_identifier}' "
+                        f"(async), aborting key rotation. Error: {error}"
+                    )
+                    raise
+
+                raise
+
+        raise RuntimeError(
+            f"All {len(self.llm_pool)} API keys exhausted for model "
+            f"'{self.model_name_identifier}'. Last error: {last_error}"
+        )
     
-    Returns:
-        The result of the LLM chain invocation, or None if the API call fails after all
-    """
-    async with LLM_SEMAPHORE:
+
+def get_llm(model_name: str, temperature: float = 0.5): 
+    config_model = MODEL_CONFIG.get(model_name)
+
+    if config_model is None:
+        available_models = ', '.join(MODEL_CONFIG.keys())
+        LOGGER.error(f"Unknown model name: '{model_name}'. Available models: {available_models}")
+        return None
+    
+    provider = config_model.get('provider')
+    
+    if provider == 'groq': 
+        api_keys = [
+                GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, 
+                GROQ_API_KEY4, GROQ_API_KEY5, GROQ_API_KEY_DEV, 
+            ]
+    elif provider == 'google-genai': 
+        api_keys = [GEMINI_API_KEY, GEMINI_API_KEY2, GEMINI_API_KEY3]
+
+    else:
+        LOGGER.error(f"Unsupported provider: '{provider}'")
+        return None
+    
+    api_keys = [key for key in api_keys if key]
+    
+    if not api_keys:
+        LOGGER.error(f"No valid API keys found for provider: '{provider}'")
+        return None
+    
+    llm_pool = []
+    
+    for api_key in api_keys:
         try:
-            return await chain.ainvoke(input_data)
-        
-        except (groq.APIError, groq.APITimeoutError, openai.APIError, openai.APITimeoutError) as error:
-            LOGGER.warning(f"API error occurred: {error}")
-            return None
+            initiate_model = init_chat_model(
+                config_model.get('model'),
+                model_provider=provider,
+                temperature=temperature,
+                max_retries=3,
+                api_key=api_key,
+                max_tokens=18000 
+            ) 
 
+            llm_pool.append(initiate_model)
+    
         except Exception as error:
-            LOGGER.warning(f"Unexpected error during LLM invocation: {error}")
-            return None
+            LOGGER.error(f'Error initialize llm: {error}')
+            continue 
+    
+    if not llm_pool:
+        LOGGER.error(f"No clients could be initialized for '{model_name}'")
+        return None
 
-
-# Example usage:
-# llm_collection = LLMCollection()
-# llm_collection.add_llm("LLM1")
-# llm_collection.add_llm("LLM2")
-# print(llm_collection.get_llms())
+    return KeyRotatingChatModel(llm_pool=llm_pool, model_name_identifier=model_name)
