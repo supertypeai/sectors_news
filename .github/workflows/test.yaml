@@ -15,18 +15,21 @@ on:
           - scrape_bca_news
           - scrape_emiten_news
           - scrape_bisnis_com
+          - scrape_bloomberg_technoz
           - scrape_gapki
           - scrape_icn
           - scrape_idn_business_post
           - scrape_idnfinancials
           - scrape_idnminer
           - scrape_insight_kontan
+          - scrape_investor_id
           - scrape_jakartaglobe
           - scrape_jakartapost
           - scrape_kontan
           - scrape_minerba
           - scrape_mining
           - scrape_petromindo
+
       page_number:
         description: 'Page number'
         required: true

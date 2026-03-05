@@ -158,6 +158,8 @@ The scraper status indicates which news/data sources are currently functional an
 | 16 | MINING.COM                 | Inactive | Source used for Sectors insider |
 | 17 | EMITENNEWS.COM             | Active   | - |
 | 18 | BCA NEWS                   | Active   | - |
+| 19 | BLOMBEERG TECHNOZ          | Active   | - |
+| 20 | INVESTASI ID               | Active   | - |
 
 ### SGX
 
