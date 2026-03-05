@@ -23,6 +23,8 @@ from scraper_engine.sources.idx.scrape_bca_news import run_scrape_bca_news
 from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
 from scraper_engine.sources.idx.scrape_kontan import KontanScraper
 from scraper_engine.sources.idx.scrape_emiten_news import EmitenNews
+from scraper_engine.sources.idx.scrape_investor_id import InvestorID
+from scraper_engine.sources.idx.scrape_bloomberg_technoz import BloombergTechnoz
 
 from scraper_engine.sources.sgx.scrape_businesstimes import scrape_businesstimes 
 from scraper_engine.sources.sgx.scrape_straitstimes import scrape_straitsnews_sgx
@@ -32,7 +34,6 @@ from scraper_engine.database.client import SUPABASE_CLIENT
 
 import json
 import os
-import asyncio
 import typer 
 import sys
 import logging
@@ -149,8 +150,10 @@ def main_idx(
         # insightkontanscraper = InsightKontanScraper()
         # miningscraper = MiningScraper()
         # idnbusinesspostscraper = IndonesiaBusinessPost()
-        finansialbisinisscraper = FinansialBisnisScraper()
 
+        finansialbisinisscraper = FinansialBisnisScraper()
+        bloombertechnoz = BloombergTechnoz()
+        investorid = InvestorID()
         icnscraper = ICNScraper()
         gapkiscraper = GapkiScraper()
         minerbascraper = MinerbaScraper()
@@ -171,8 +174,10 @@ def main_idx(
             # scrapercollection.add_scraper(insightkontanscraper) 
             # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
+
             scrapercollection.add_scraper(finansialbisinisscraper)
-            
+            scrapercollection.add_scraper(bloombertechnoz)
+            scrapercollection.add_scraper(investorid)
             scrapercollection.add_scraper(icnscraper)
             scrapercollection.add_scraper(gapkiscraper)
             scrapercollection.add_scraper(minerbascraper)
@@ -200,7 +205,7 @@ def main_idx(
         finally:
             SeleniumScraper.close_shared_driver()
 
-    asyncio.run(post_source(filename, batch, batch_size, table_name, source_scraper))
+    post_source(filename, batch, batch_size, table_name, source_scraper)
 
 
 @app.command(name="main_sgx")
@@ -232,7 +237,7 @@ def main_sgx(
         if csv:
             scrapercollection.write_csv(scrapercollection.articles, source_scraper, filename)
 
-    asyncio.run(post_source(filename, batch, batch_size, table_name, source_scraper, is_sgx=True))
+    post_source(filename, batch, batch_size, table_name, source_scraper)
 
 
 if __name__ == "__main__":

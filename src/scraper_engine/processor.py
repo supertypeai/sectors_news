@@ -1,4 +1,4 @@
-from scraper_engine.preprocessing.run_prepros_article import generate_article_async
+from scraper_engine.preprocessing.article_builder import generate_article
 from scraper_engine.database.client import SUPABASE_CLIENT
 from scraper_engine.base.scraper import SeleniumScraper
 
@@ -9,13 +9,12 @@ import json
 import os
 import shutil
 import traceback
-import asyncio
 import logging
 
 
 LOGGER = logging.getLogger(__name__)
 
-MININUM_SCORE = 60
+MININUM_SCORE = 65
 BATCH_SIZE = 5
 
 
@@ -204,13 +203,12 @@ def get_article_to_process(
         return []
 
 
-async def post_source(
+def post_source(
     jsonfile: str,
     batch: int,
     batch_size: int,
     table_name: str,
     source_scraper: str,
-    is_sgx: bool = False,
     is_check_csv: bool = False,
 ):
     """
@@ -243,26 +241,26 @@ async def post_source(
             LOGGER.info(f"Processing: {source_url}")
 
             try:
-                processed_article_object = await generate_article_async(
+                processed_article_object, status = generate_article(
                     article_data,
                     source_scraper,
-                    is_sgx,
+                    MININUM_SCORE
                 )
 
-                await asyncio.sleep(5)
+                if status == "low_score":
+                    LOGGER.info(f"Skipped due to low score: {source_url}")
+                    continue
+                
+                time.sleep(5)
 
-                if not processed_article_object:
-                    raise ValueError("generate_article returned None.")
+                if status != "ok" or not processed_article_object:
+                    LOGGER.error("Failed. Adding to retry queue.")
+                    failed_articles_queue.append(article_data)
+                    continue
 
                 processed_article = processed_article_object.to_dict()
-
-                if processed_article.get("score", 0) > MININUM_SCORE:
-                    successful_articles.append(processed_article)
-                else:
-                    LOGGER.info(
-                        f"Skipped due to low score: "
-                        f"{processed_article.get('score')}"
-                    )
+                LOGGER.info(f"succes article above threshold: {source_url}")
+                successful_articles.append(processed_article)
 
             except Exception as error:
                 LOGGER.error(f"Failed. Adding to retry queue. Reason: {error}")
@@ -273,21 +271,24 @@ async def post_source(
             LOGGER.info(f"Retrying for URL: {source_url}")
 
             try:
-                processed_article_object = await generate_article_async(
+                processed_article_object, status = generate_article(
                     article_data,
                     source_scraper,
-                    is_sgx,
+                    MININUM_SCORE
                 )
 
-                await asyncio.sleep(5)
+                time.sleep(5)
 
-                if not processed_article_object:
-                    raise ValueError("generate_article returned None.")
-
-                processed_article = processed_article_object.to_dict()
-
-                if processed_article.get("score", 0) > MININUM_SCORE:
+                if status == "ok" and processed_article_object:
+                    LOGGER.info(f"succes article retry above threshold: {source_url}")
+                    processed_article = processed_article_object.to_dict()
                     successful_articles.append(processed_article)
+
+                elif status == "low_score":
+                    LOGGER.info(f"Retry skipped due to low score: {source_url}")
+                
+                else:
+                    LOGGER.error(f"Failed on retry. Giving up on {source_url}")
 
             except Exception as error:
                 LOGGER.error(
