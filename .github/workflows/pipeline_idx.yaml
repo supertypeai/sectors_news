@@ -37,8 +37,17 @@ jobs:
 
       - name: Run scraping script for all news source
         run: |
-          uv run -m scraper_engine.pipeline main_idx --page-number 1 --batch 1
+          uv run -m scraper_engine.pipeline main_idx --page-number 1 --batch 1 --batch-size 30
+          sleep 20
+
+          uv run -m scraper_engine.pipeline main_idx --process-only --batch 2 --batch-size 30
+          sleep 20
+
+          uv run -m scraper_engine.pipeline main_idx --process-only --batch 3 --batch-size 30
+          sleep 20
+
           uv run -m scraper_engine.pipeline remove_outdated_news --table-name idx_news
+        
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
