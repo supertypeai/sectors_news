@@ -3,7 +3,7 @@ name: Scrape SGX News and Submit to Database
 on:
   schedule:
     # - cron: "0 3 * * *" # Runs at 10:00 AM UTC+7 every day
-    - cron: "0 2 * * *" # 09:00 UTC+7
+    - cron: "10 2 * * *" # 09:10 AM UTC+7
   workflow_dispatch:
 
 concurrency:
@@ -11,7 +11,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  batch_1_scrape_and_submit:
+  sgx_news_pipeline:
+    name: SGX News Pipeline
     runs-on: ubuntu-latest
 
     steps:
