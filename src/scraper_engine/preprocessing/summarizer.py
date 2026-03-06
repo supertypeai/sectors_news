@@ -38,58 +38,6 @@ HEADERS = {
 }
 
 
-def summarize_article(body: str, url: str) -> dict[str]:
-    prompts = SummarizationPrompts()
-
-    user_prompt = prompts.get_user_prompt()
-    system_prompt = prompts.get_system_prompt() 
-
-    summary_parser = JsonOutputParser(pydantic_object=SummaryNews)
-    format_instructions = summary_parser.get_format_instructions()
-    
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", system_prompt),
-        ('user', user_prompt )
-    ])
-    
-    input_data = {
-        "article": body,
-        'format_instructions': format_instructions
-    }
-    
-    model_names = ['gpt-oss-120b', 'gemini-2.5-flash', 'gpt-oss-20b', 'llama-3.3-70b', 'kimi-k2']
-    for model in model_names:
-        try:
-            llm = get_llm(model, temperature=0.15)
-            LOGGER.info(f"LLM used: {model}")
-
-            summary_chain = prompt | llm | summary_parser
-            
-            summary_result = summary_chain.invoke(
-                input_data, 
-                config={"callbacks": [TokenUsageLogger()]}
-            )
-            LOGGER.info(f"reason: {summary_result.get('reasoning')}")
-
-            if summary_result is None:
-                LOGGER.warning("API call failed after all retries, trying next LLM...")
-                continue
-
-            if not summary_result.get("title") or not summary_result.get("summary"):
-                LOGGER.info("[ERROR] LLM returned incomplete summary_result")
-                continue
-            
-            LOGGER.info(f"[SUCCES] Summarize for url: {url}")
-            return summary_result
-            
-        except Exception as error:
-            LOGGER.warning(f"LLM failed with error: {error}")
-            continue 
-
-    LOGGER.error("All LLMs failed to return a valid summary.")
-    return None
-
-
 def basic_cleaning_body(body: str) -> str:
     """ 
     Basic cleaning of the body text to remove any word 'ticker' mentions in parentheses.
@@ -170,6 +118,58 @@ def normalize_dot_case(body: str) -> str:
     body = re.sub(pattern_decimals, r"\1.\2", body)
     
     return body
+
+
+def summarize_article(body: str, url: str) -> dict[str]:
+    prompts = SummarizationPrompts()
+
+    user_prompt = prompts.get_user_prompt()
+    system_prompt = prompts.get_system_prompt() 
+
+    summary_parser = JsonOutputParser(pydantic_object=SummaryNews)
+    format_instructions = summary_parser.get_format_instructions()
+    
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", system_prompt),
+        ('user', user_prompt )
+    ])
+    
+    input_data = {
+        "article": body,
+        'format_instructions': format_instructions
+    }
+    
+    model_names = ['gpt-oss-120b', 'gemini-2.5-flash', 'gpt-oss-20b', 'llama-3.3-70b', 'kimi-k2']
+    for model in model_names:
+        try:
+            llm = get_llm(model, temperature=0.15)
+            LOGGER.info(f"LLM used: {model}")
+
+            summary_chain = prompt | llm | summary_parser
+            
+            summary_result = summary_chain.invoke(
+                input_data, 
+                config={"callbacks": [TokenUsageLogger()]}
+            )
+            LOGGER.info(f"reason: {summary_result.get('reasoning')}")
+
+            if summary_result is None:
+                LOGGER.warning("API call failed after all retries, trying next LLM...")
+                continue
+
+            if not summary_result.get("title") or not summary_result.get("summary"):
+                LOGGER.info("[ERROR] LLM returned incomplete summary_result")
+                continue
+            
+            LOGGER.info(f"[SUCCES] Summarize for url: {url}")
+            return summary_result
+            
+        except Exception as error:
+            LOGGER.warning(f"LLM failed with error: {error}")
+            continue 
+
+    LOGGER.error("All LLMs failed to return a valid summary.")
+    return None
 
 
 def get_article_bca_news(url: str) -> str:
@@ -261,30 +261,26 @@ def get_article_bloomberg_technoz_news(url: str) -> str:
 def get_article_investorid_news(html_content: str) -> str:
     soup = BeautifulSoup(html_content, "html.parser")
     
-    article_container = soup.find("div", class_="fsbody2 body-content")
+    article_container = soup.select_one("div.body-content")
     
     if not article_container:
-        LOGGER.info("[FAIL] Could not find the 'fsbody2 body-content' container.")
         return ""
-        
+
     paragraphs = article_container.find_all("p")
-    
     extracted_text_blocks = []
     
     for paragraph in paragraphs:
         paragraph_text = paragraph.get_text(strip=True)
-        
         if paragraph_text:
             extracted_text_blocks.append(paragraph_text)
             
     full_article_text = "\n\n".join(extracted_text_blocks)
-    
     return full_article_text
 
 
 def extract_table_content(url: str) -> str:
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        "User-Agent": USER_AGENT
     }
     res = requests.get(url, headers=headers)
     res.raise_for_status()
@@ -446,15 +442,19 @@ def get_article_body(url: str) -> str | None:
         if soup:
             raw_html = str(soup)
 
-            if 'investor.id/market/' in url:
-                article = get_article_investorid_news(raw_html)
-                return article 
+            if 'investor.id' in url:
+                extracted_article = get_article_investorid_news(raw_html)
+                if extracted_article:
+                    LOGGER.info(f"[SUCCESS] Extracted via custom Investor.id parser: {url}")
+                    return extracted_article
+                else:
+                    LOGGER.warning(f"[FAIL] Custom Investor.id parser returned empty for: {url}")
             
             g = Goose()
             article = g.extract(raw_html=raw_html)
             
             if article.cleaned_text:
-                LOGGER.info(f"[SUCCESS] Extracted via Selenium+Goose: {url}")
+                print(f"[SUCCESS] Extracted via Selenium+Goose: {url}")
                 return article.cleaned_text
             else:
                 LOGGER.warning(f"[FAIL] Selenium fetched HTML, but Goose couldn't parse text.")
