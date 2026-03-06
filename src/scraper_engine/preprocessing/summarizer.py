@@ -212,6 +212,52 @@ def get_article_bca_news(url: str) -> str:
         return ""
 
 
+def get_article_bloomberg_technoz_news(url: str) -> str:
+    extracted_text_blocks = []
+    
+    request_headers = {
+        "User-Agent": USER_AGENT
+    }
+
+    while url:
+        try:
+            response = requests.get(url, headers=request_headers, timeout=15)
+            if response.status_code != 200:
+                LOGGER.info(f"[FAIL] Server returned status code: {response.status_code} for URL: {url}")
+                break
+                
+            soup = BeautifulSoup(response.text, "html.parser")
+            article_container = soup.find("div", class_="detail-in")
+            
+            if article_container:
+                paragraphs = article_container.find_all("p")
+                
+                for paragraph in paragraphs:
+                    paragraph_text = paragraph.get_text(strip=True)
+                    if paragraph_text:
+                        extracted_text_blocks.append(paragraph_text)
+            else:
+                LOGGER.info(f"[FAIL] Could not find the 'detail-in' container on URL: {url}")
+                
+            # pagination logic: check if a next page exists
+            pager_container = soup.find("div", class_="pager")
+            if pager_container:
+                next_page_element = pager_container.find("a", class_="pager__next")
+
+                if next_page_element and next_page_element.get("href"):
+                    url = next_page_element.get("href")
+                    continue
+                    
+            url = None
+                
+        except requests.RequestException as network_error:
+            LOGGER.error(f"[FAIL] Network error occurred: {network_error}")
+            break
+            
+    full_article_text = "\n\n".join(extracted_text_blocks)
+    return full_article_text
+
+
 def extract_table_content(url: str) -> str:
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -289,10 +335,20 @@ def get_article_body(url: str) -> str | None:
         article =  get_article_bca_news(url) 
         
         if not article or len(article) < 100:
+            LOGGER.info(f'Bca news article return None due to return None')
             return None 
         
         return article 
     
+    if 'bloomberg' in url: 
+        article = get_article_bloomberg_technoz_news(url)
+        
+        if not article or len(article) < 100:
+            LOGGER.info(f'Bloomberg news article return None due to return None')
+            return None 
+        
+        return article 
+
     # First attempt try to get full article with goose3 proxy and soup as fallback
     try:
         proxy = PROXY
@@ -305,13 +361,15 @@ def get_article_body(url: str) -> str | None:
         # g = Goose({'http_proxies': proxy_support, 'https_proxies': proxy_support})
         goose_extractor = Goose({"http_session": session})
         article = goose_extractor.extract(url=url)
-        LOGGER.info(f"[SUCCESS] Article from url {url} inferenced")
 
         if article.cleaned_text:
+            LOGGER.info(f"[SUCCESS] Article from url {url} inferenced")
+            
             if 'www.straitstimes' in url:
                 texts = article.cleaned_text
                 texts = texts.replace("Sign up now: Get ST's newsletters delivered to your inbox", "")
                 return texts     
+
             return article.cleaned_text
         
         else:
@@ -360,10 +418,10 @@ def get_article_body(url: str) -> str | None:
 
         scraper = SeleniumScraper()
         soup = scraper.fetch_news_with_selenium(url)
-        
+
         if soup:
             raw_html = str(soup)
-            
+
             g = Goose()
             article = g.extract(raw_html=raw_html)
             

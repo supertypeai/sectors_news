@@ -230,6 +230,7 @@ def generate_article(data: dict, source_scraper: str, min_score: int) -> tuple[N
             return None, 'error'
 
         title, body, score_result = summary_score_result
+        LOGGER.info(f'Raw scoring result: {score_result}')
 
         if score_result < min_score: 
             LOGGER.info(f"Low score ({score_result}) for {source}. Skipping other LLM steps")
