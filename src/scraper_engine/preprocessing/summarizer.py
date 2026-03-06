@@ -258,6 +258,30 @@ def get_article_bloomberg_technoz_news(url: str) -> str:
     return full_article_text
 
 
+def get_article_investorid_news(html_content: str) -> str:
+    soup = BeautifulSoup(html_content, "html.parser")
+    
+    article_container = soup.find("div", class_="fsbody2 body-content")
+    
+    if not article_container:
+        LOGGER.info("[FAIL] Could not find the 'fsbody2 body-content' container.")
+        return ""
+        
+    paragraphs = article_container.find_all("p")
+    
+    extracted_text_blocks = []
+    
+    for paragraph in paragraphs:
+        paragraph_text = paragraph.get_text(strip=True)
+        
+        if paragraph_text:
+            extracted_text_blocks.append(paragraph_text)
+            
+    full_article_text = "\n\n".join(extracted_text_blocks)
+    
+    return full_article_text
+
+
 def extract_table_content(url: str) -> str:
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -364,7 +388,7 @@ def get_article_body(url: str) -> str | None:
 
         if article.cleaned_text:
             LOGGER.info(f"[SUCCESS] Article from url {url} inferenced")
-            
+
             if 'www.straitstimes' in url:
                 texts = article.cleaned_text
                 texts = texts.replace("Sign up now: Get ST's newsletters delivered to your inbox", "")
@@ -422,6 +446,10 @@ def get_article_body(url: str) -> str | None:
         if soup:
             raw_html = str(soup)
 
+            if 'investor.id/market/' in url:
+                article = get_article_investorid_news(raw_html)
+                return article 
+            
             g = Goose()
             article = g.extract(raw_html=raw_html)
             

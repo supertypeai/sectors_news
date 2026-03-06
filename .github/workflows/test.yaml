@@ -3,10 +3,19 @@ name: Scrape Testing
 on:
   workflow_dispatch:
     inputs:
-      scraper_module:
-        description: 'Select scraper to run (without .py)'
+      test_mode:
+        description: "What to run"
         required: true
-        default: 'scrape_financial_bisnis'
+        default: scraper
+        type: choice
+        options:
+          - scraper
+          - get_article_body
+
+      scraper_module:
+        description: "Select scraper to run (without .py)"
+        required: false
+        default: scrape_bisnis_com
         type: choice
         options:
           - scrape_abaf
@@ -31,14 +40,21 @@ on:
           - scrape_petromindo
 
       page_number:
-        description: 'Page number'
-        required: true
-        default: '1'
+        description: "Page number"
+        required: false
+        default: "1"
         type: string
+
       output_name:
         description: 'Output Name arg (e.g. "finan", "bca")'
-        required: true
-        default: 'manual_test'
+        required: false
+        default: "manual_test"
+        type: string
+
+      article_url:
+        description: "URL for get_article_body test"
+        required: false
+        default: ""
         type: string
 
 jobs:
@@ -48,7 +64,7 @@ jobs:
     steps:
       - name: Checkout repository content
         uses: actions/checkout@v4
-      
+
       - name: Install uv (Python package manager)
         uses: astral-sh/setup-uv@v2
 
@@ -65,10 +81,11 @@ jobs:
       - name: Set up Google Chrome & ChromeDriver
         uses: browser-actions/setup-chrome@v1
         with:
-          chrome-version: 'latest'
+          chrome-version: "latest"
           install-chromedriver: true
-          
+
       - name: Run Selected Scraper
+        if: ${{ inputs.test_mode == 'scraper' }}
         run: |
           echo "Running module: ${{ inputs.scraper_module }} on page ${{ inputs.page_number }}"
           uv run -m scraper_engine.sources.idx.${{ inputs.scraper_module }} ${{ inputs.page_number }} "${{ inputs.output_name }}"
@@ -89,10 +106,48 @@ jobs:
           GEMINI_API_KEY3: ${{ secrets.GEMINI_API_KEY3 }}
           PROXY: ${{ secrets.PROXY }}
 
-      - name: Upload Scraper Results
+      - name: Test get_article_body
+        if: ${{ inputs.test_mode == 'get_article_body' }}
+        run: |
+          mkdir -p data
+          uv run python - <<'PY'
+          from scraper_engine.preprocessing.summarizer import get_article_body
+
+          url = """${{ inputs.article_url }}""".strip()
+          if not url:
+              raise ValueError("article_url is required when test_mode=get_article_body")
+
+          article = get_article_body(url) or ""
+          with open("data/get_article_body_output.txt", "w", encoding="utf-8") as f:
+              f.write(article)
+
+          print(f"chars={len(article)}")
+          PY
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DB_KEY: ${{ secrets.DB_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GROQ_API_KEY1: ${{ secrets.GROQ_API_KEY1 }}
+          GROQ_API_KEY2: ${{ secrets.GROQ_API_KEY2 }}
+          GROQ_API_KEY_DEV: ${{ secrets.GROQ_API_KEY_DEV }}
+          GROQ_API_KEY3: ${{ secrets.GROQ_API_KEY3 }}
+          GROQ_API_KEY4: ${{ secrets.GROQ_API_KEY4 }}
+          GROQ_API_KEY5: ${{ secrets.GROQ_API_KEY5 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
+          GEMINI_API_KEY3: ${{ secrets.GEMINI_API_KEY3 }}
+          PROXY: ${{ secrets.PROXY }}
+
+      - name: Upload Test Results
         uses: actions/upload-artifact@v4
-        if: always() # Upload even if the script fails (to check partial data)
+        if: always()
         with:
-          name: scrape-result-${{ inputs.output_name }}
-          path: data/${{ inputs.output_name }}.*
+          name: test-result-${{ inputs.test_mode }}-${{ inputs.output_name }}
+          path: |
+            data/${{ inputs.output_name }}.*
+            data/get_article_body_output.txt
+            page.html
+          if-no-files-found: warn
           retention-days: 1
