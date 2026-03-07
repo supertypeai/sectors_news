@@ -5,17 +5,15 @@ from langchain_core.output_parsers  import JsonOutputParser
 from langchain.prompts              import ChatPromptTemplate
 from io                             import StringIO
 
-from scraper_engine.llm.client  import get_llm, invoke_llm, TokenUsageLogger
+from scraper_engine.llm.client  import get_llm, TokenUsageLogger
 from scraper_engine.llm.prompts import SummarizationPrompts, SummaryNews
 from scraper_engine.config.conf import PROXY
 from scraper_engine.base.scraper import SeleniumScraper 
 
 import requests
 import re
-import json 
 import cloudscraper
 import time 
-import random 
 import logging
 import csv
 
@@ -278,6 +276,46 @@ def get_article_investorid_news(html_content: str) -> str:
     return full_article_text
 
 
+def fetch_investor_id_with_unlocker(target_url: str) -> str:
+    proxy_configuration = {
+        "http": PROXY,
+        "https": PROXY
+    }
+    
+    headers = {
+        "User-Agent": USER_AGENT
+    }
+
+    try:
+        LOGGER.info(f"Routing {target_url} through proxy")
+        
+        response = requests.get(
+            target_url, 
+            proxies=proxy_configuration, 
+            headers=headers, 
+            verify=False, 
+            timeout=60 
+        )
+        
+        if response.status_code == 200:
+            LOGGER.info("[SUCCESS] Web Unlocker with proxy")
+            
+            extracted_text = get_article_investorid_news(response.text)
+            
+            return extracted_text
+        
+        elif response.status_code == 403:
+            LOGGER.error(f"[FAIL] Web Unlocker was blocked (403)")
+            return ""
+        else:
+            LOGGER.error(f"[FAIL] Target returned status code: {response.status_code}")
+            return ""
+            
+    except requests.exceptions.RequestException as network_error:
+        LOGGER.error(f"[FAIL] Request through Web Unlocker failed: {network_error}")
+        return ""
+    
+
 def extract_table_content(url: str) -> str:
     headers = {
         "User-Agent": USER_AGENT
@@ -448,14 +486,17 @@ def get_article_body(url: str) -> str | None:
 
             if 'investor.id' in url:
                 extracted_article = get_article_investorid_news(raw_html)
+
                 if extracted_article:
                     LOGGER.info(f"[SUCCESS] Extracted via custom Investor.id parser: {url}")
                     return extracted_article
                 else:
-                    LOGGER.warning(f"[FAIL] Custom Investor.id parser returned empty for: {url}")
-            
-            g = Goose()
-            article = g.extract(raw_html=raw_html)
+                    LOGGER.warning(f"[FAIL] Custom parser returned empty. Escalating to Web Unlocker for: {url}")
+                    unlocked_article_text = fetch_investor_id_with_unlocker(url)
+                    return unlocked_article_text 
+
+            goose_extractor = Goose()
+            article = goose_extractor.extract(raw_html=raw_html)
             
             if article.cleaned_text:
                 LOGGER.info(f"[SUCCESS] Extracted via Selenium+Goose: {url}")
