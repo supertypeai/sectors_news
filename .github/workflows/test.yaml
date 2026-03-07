@@ -121,7 +121,7 @@ jobs:
           with open("data/get_article_body_output.txt", "w", encoding="utf-8") as f:
               f.write(article)
 
-          print(f"chars={len(article)}")
+          print(f"raw article={article[:500]}")
           PY
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
