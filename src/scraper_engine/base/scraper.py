@@ -1,5 +1,6 @@
 import undetected_chromedriver as uc
 from bs4 import BeautifulSoup
+from selenium.common.exceptions import TimeoutException
 
 from scraper_engine.config.conf import PROXY
 
@@ -162,7 +163,7 @@ class SeleniumScraper(Scraper):
 
         return SeleniumScraper._driver_instance
 
-    def setup_driver(self):
+    def setup_driver(self, load_strategy: str = "normal", page_timeout: int = 120):
         """
         Initializes the Undetected Chrome Driver.
         Used for ALL scraping now.
@@ -181,6 +182,8 @@ class SeleniumScraper(Scraper):
         )
         options.add_argument('--disable-blink-features=AutomationControlled')
 
+        options.page_load_strategy = load_strategy
+
         chrome_version, chrome_path = get_chrome_info()
         driver_path = shutil.which("chromedriver")
 
@@ -193,6 +196,8 @@ class SeleniumScraper(Scraper):
                 driver_executable_path=driver_path if platform.system() == "Linux" else None
             )
             
+            new_driver.set_page_load_timeout(page_timeout)
+
             SeleniumScraper._driver_instance = new_driver
             
         except Exception as error:
@@ -212,17 +217,21 @@ class SeleniumScraper(Scraper):
             self.soup = BeautifulSoup(html_content, 'html.parser')
             return self.soup
         
+        except TimeoutException:
+            LOGGER.warning(f"Page load timed out for {url}. Attempting to salvage available DOM.")
+            try:
+                html_content = self.driver.page_source
+                self.soup = BeautifulSoup(html_content, 'html.parser')
+                return self.soup
+            except Exception as dom_error:
+                LOGGER.error(f"Failed to extract DOM after timeout: {dom_error}")
+                self.close_shared_driver()
+                return None
+
         except Exception as error:
             LOGGER.error(f'Failed fetch news with selenium: {error}')  
-            
-            try:
-                if SeleniumScraper._driver_instance:
-                    SeleniumScraper._driver_instance.quit()
-                    SeleniumScraper._driver_instance = None
-            except:
-                pass
-            
-            return BeautifulSoup()
+            self.close_shared_driver()
+            return None
 
     @classmethod
     def close_shared_driver(cls):

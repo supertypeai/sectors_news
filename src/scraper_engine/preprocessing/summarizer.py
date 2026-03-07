@@ -437,6 +437,10 @@ def get_article_body(url: str) -> str | None:
         LOGGER.info(f"[ATTEMPT 2] Fallback to Selenium Undetected for {url}")
 
         scraper = SeleniumScraper()
+
+        if "investor.id" in url: 
+            scraper.setup_driver(load_strategy="eager", page_timeout=30)
+
         soup = scraper.fetch_news_with_selenium(url)
 
         if soup:
@@ -454,7 +458,7 @@ def get_article_body(url: str) -> str | None:
             article = g.extract(raw_html=raw_html)
             
             if article.cleaned_text:
-                print(f"[SUCCESS] Extracted via Selenium+Goose: {url}")
+                LOGGER.info(f"[SUCCESS] Extracted via Selenium+Goose: {url}")
                 return article.cleaned_text
             else:
                 LOGGER.warning(f"[FAIL] Selenium fetched HTML, but Goose couldn't parse text.")
