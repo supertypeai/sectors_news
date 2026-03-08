@@ -2,12 +2,11 @@ import undetected_chromedriver as uc
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 
-from scraper_engine.config.conf import PROXY
+from scraper_engine.config.conf import PROXY, USER_AGENT
 
 import json
 import csv
-import ssl
-import urllib.request
+
 import requests
 import time
 import logging 
@@ -17,8 +16,6 @@ import shutil
 
 
 LOGGER = logging.getLogger(__name__)
-
-ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def get_chrome_info() -> tuple:
@@ -76,7 +73,6 @@ class Scraper:
     def __init__(self):
         self.articles = []
 
-    # Fetch news using requests but no proxy
     def fetch_news(self, url):
         try:
             response = requests.get(url)
@@ -87,37 +83,47 @@ class Scraper:
             LOGGER.error(f"Error fetching the URL: {e}")
             return BeautifulSoup()
 
-    # Fetch news using urllib.request with proxy
-    def fetch_news_with_proxy(self, url):
+    def fetch_news_with_proxy(self, target_url: str):
+        proxy_url = PROXY 
+
+        proxy_configuration = {
+            "http": proxy_url,
+            "https": proxy_url
+        }
+        
+        headers = {
+            "User-Agent": USER_AGENT
+        }
+
         try:
-            self.proxy = PROXY
-            # print("proxy", self.proxy)
-
-            proxy_support = urllib.request.ProxyHandler(
-                {'http': self.proxy, 'https': self.proxy}
+            LOGGER.info(f"Routing {target_url} through proxy")
+            response = requests.get(
+                target_url, 
+                proxies=proxy_configuration, 
+                headers=headers, 
+                verify=False, 
+                timeout=60 
             )
-            opener = urllib.request.build_opener(proxy_support)
-            urllib.request.install_opener(opener)
+            
+            if response.status_code == 200:
+                return response.text
+                
+            LOGGER.info(f"[FAIL] Web Unlocker returned status code: {response.status_code}")
+            return ""
+        
+        except requests.exceptions.RequestException as network_error:
+            LOGGER.error(f"[FAIL] Request through Web Unlocker failed: {network_error}")
+            return ""
 
-            with urllib.request.urlopen(url) as response:
-                data = response.read()
-                data = data.decode('utf-8')
-
-            self.soup = BeautifulSoup(data, 'html.parser')
-            return self.soup
-
-        except Exception as e:
-            LOGGER.error(f"Error fetching the URL: {e}")
-            return BeautifulSoup()
-
-    # Fetch news using requests post
     def fetch_news_with_post(self, url: str, payload: dict):
         try:
             response = requests.post(url, data=payload)
             data = response.json()
+
             html_content = data.get('html_items')
             self.soup = BeautifulSoup(html_content, 'html.parser')
             return self.soup
+        
         except Exception as error:
             LOGGER.error(f'Error fetching article IMA: {error}')
             return BeautifulSoup()
