@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup 
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import time
@@ -31,9 +31,11 @@ HEADERS = {
 }
 
 
-class InvestorID(SeleniumScraper):
+class InvestorID(Scraper):
     def extract_news(self, url):
-        soup = self.fetch_news_with_selenium(url)
+        raw_soup = self.fetch_news_with_proxy(url)
+        soup = BeautifulSoup(raw_soup, 'html.parser')
+        
         seen_urls = set()
 
         article_containers = soup.find_all('div', class_='row mb-4 position-relative')
@@ -60,7 +62,7 @@ class InvestorID(SeleniumScraper):
 
             if article_url:
                 publish_time = self.fetch_exact_timestamp(article_url)
-                print(f'time article: {publish_time}')
+                LOGGER.info(f'time article: {publish_time}')
 
             if not publish_time:
                 time_element = article_container.find('span', class_='text-muted small')
@@ -68,7 +70,7 @@ class InvestorID(SeleniumScraper):
                 if time_element:
                     relative_time_raw = time_element.get_text(strip=True)
                     publish_time = self.calculate_relative_timestamp(relative_time_raw)
-                    print(f'time relative: {publish_time}')
+                    LOGGER.info(f'time relative: {publish_time}')
 
             if not publish_time:
                 LOGGER.info(f"Failed to extract publish time for url: {article_url}. Skipping.")

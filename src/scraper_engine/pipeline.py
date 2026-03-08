@@ -4,12 +4,12 @@ from typing_extensions import Annotated
 from scraper_engine.base.scraper_collection import ScraperCollection
 from scraper_engine.base.scraper import SeleniumScraper
 
-# from scraper_engine.sources.idx.scrape_idnfinancials import IDNFinancialScraper
 # from scraper_engine.sources.idx.scrape_petromindo import PetromindoScraper
 # from scraper_engine.sources.idx.scrape_insight_kontan import InsightKontanScraper
 # from scraper_engine.sources.idx.scrape_mining import MiningScraper
 # from scraper_engine.sources.idx.scrape_idn_business_post import IndonesiaBusinessPost
 
+from scraper_engine.sources.idx.scrape_idnfinancials import IDNFinancialScraper
 from scraper_engine.sources.idx.scrape_bisnis_com import FinansialBisnisScraper
 from scraper_engine.sources.idx.scrape_icn import ICNScraper
 from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
@@ -145,12 +145,12 @@ def main_idx(
     """
     
     if not process_only:
-        # idnscraper = IDNFinancialScraper()
         # petromindoscraper = PetromindoScraper()
         # insightkontanscraper = InsightKontanScraper()
         # miningscraper = MiningScraper()
         # idnbusinesspostscraper = IndonesiaBusinessPost()
 
+        idnscraper = IDNFinancialScraper()
         finansialbisinisscraper = FinansialBisnisScraper()
         bloombertechnoz = BloombergTechnoz()
         investorid = InvestorID()
@@ -175,6 +175,7 @@ def main_idx(
             # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
 
+            scrapercollection.add_scraper(idnscraper)
             scrapercollection.add_scraper(finansialbisinisscraper)
             scrapercollection.add_scraper(bloombertechnoz)
             scrapercollection.add_scraper(investorid)

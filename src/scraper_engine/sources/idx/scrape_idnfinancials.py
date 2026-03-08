@@ -10,14 +10,12 @@ LOGGER = logging.getLogger(__name__)
 
 
 class IDNFinancialScraper(SeleniumScraper):
-    def extract_news(self, url):
+    def extract_news(self, url: str):
         soup = self.fetch_news_with_selenium(url)
         
         if not soup:
             LOGGER.error(f"Failed to fetch {url}")
             return []
-
-        articles = []
         
         news_container = soup.find('div', class_='side-news')
 
@@ -81,13 +79,13 @@ class IDNFinancialScraper(SeleniumScraper):
         LOGGER.info(f'total scraped source of idn financials: {len(self.articles)}')
         return self.articles
 
-    def extract_news_pages(self, num_pages):
+    def extract_news_pages(self, num_pages: int):
         for index in range(num_pages):
             self.extract_news(self.get_page(index))
 
         return self.articles
 
-    def get_page(self, page_num):
+    def get_page(self, page_num: int):
         return f'https://www.idnfinancials.com/search?q=idx&per_page={page_num}'
 
 
