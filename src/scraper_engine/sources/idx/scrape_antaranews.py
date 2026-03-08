@@ -14,32 +14,27 @@ LOGGER = logging.getLogger(__name__)
 class AntaraNewsScraper(Scraper):
     def extract_news(self, url: str):
         soup = self.fetch_news(url)
-        article_cards = soup.select("div.card__post.card__post-list")
+
+        article_cards = soup.select("div.card__post.card__post__transition")
         
         for card in article_cards:
-            title_tag = card.select_one("h2.post_title a")
-
-            if not title_tag:
-                continue
-
+            title_tag = card.select_one("h2.h5 a")
             title = title_tag.get_text(strip=True)
+
             source = title_tag.get('href')
             
-            # Ensure the URL is absolute
             source = urljoin(url, source)
 
-            # Get the timestamp for this article
             timestamp = self.get_article_timestamp(source)
 
-            # Standardize the timestamp
             final_date = self.standardize_date(timestamp)
 
             if not final_date:
-                LOGGER.info(f"[Antara News] Failed parse date for url: {source} Skipping")
+                print(f"[Antara News] Failed parse date for url: {source} Skipping")
                 continue 
 
             self.articles.append({
-                'title': title,
+                'title': title or None,
                 'source': source,
                 'timestamp': final_date
             })
@@ -47,16 +42,29 @@ class AntaraNewsScraper(Scraper):
         LOGGER.info(f'total scraped source of antara news: {len(self.articles)}')
         return self.articles
 
-    def standardize_date(self, date: str) -> str: 
-        try:
-            timestamp_clean = date.split(' GMT')[0]
-            timestamp_dt = datetime.strptime(timestamp_clean, "%B %d, %Y %H:%M")
-            final_timestamp = timestamp_dt.strftime("%Y-%m-%d %H:%M:%S")
-            return final_timestamp
+    def standardize_date(self, date: str) -> str:
+        idn_months = {
+            "Januari": "01", "Februari": "02", "Maret": "03",
+            "April": "04", "Mei": "05", "Juni": "06",
+            "Juli": "07", "Agustus": "08", "September": "09",
+            "Oktober": "10", "November": "11", "Desember": "12"
+        }
         
+        try:
+            date_without_day = date.split(", ", 1)[-1]
+            date_clean = date_without_day.split(" WIB")[0].strip()
+
+            for indonesian_month, month_number in idn_months.items():
+                if indonesian_month in date_clean:
+                    date_clean = date_clean.replace(indonesian_month, month_number)
+                    break
+
+            timestamp_dt = datetime.strptime(date_clean, "%d %m %Y %H:%M")
+            return timestamp_dt.strftime("%Y-%m-%d %H:%M:%S")
+
         except ValueError as error:
             LOGGER.error(f"Error parsing date antara news {date}: {error}")
-            return None  
+            return None
 
     def get_article_timestamp(self, article_url: str) -> str:
         soup = self.fetch_news(article_url)
@@ -106,6 +114,6 @@ def main():
 if __name__ == "__main__":
   '''
   How to run:
-  python -m models.scrape_antaranews <page_number> <filename_saved> <--csv (optional)>
+  uv run -m src.scraper_engine.sources.idx.scrape_antaranews <page_number> <filename_saved> <--csv (optional)>
   '''
   main()

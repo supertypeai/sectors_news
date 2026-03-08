@@ -7,7 +7,7 @@ from io                             import StringIO
 
 from scraper_engine.llm.client  import get_llm, TokenUsageLogger
 from scraper_engine.llm.prompts import SummarizationPrompts, SummaryNews
-from scraper_engine.config.conf import PROXY
+from scraper_engine.config.conf import PROXY, USER_AGENT, HEADERS
 from scraper_engine.base.scraper import SeleniumScraper 
 
 import requests
@@ -19,21 +19,6 @@ import csv
 
 
 LOGGER = logging.getLogger(__name__)
-
-
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-HEADERS = {
-    "User-Agent": USER_AGENT,
-    "Accept": "*/*",
-    "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Sec-Fetch-User": "?1",
-    "Cache-Control": "max-age=0",
-    "x-test": "true",
-}
 
 
 def basic_cleaning_body(body: str) -> str:
@@ -149,7 +134,6 @@ def summarize_article(body: str, url: str) -> dict[str]:
                 input_data, 
                 config={"callbacks": [TokenUsageLogger()]}
             )
-            LOGGER.info(f"reason: {summary_result.get('reasoning')}")
 
             if summary_result is None:
                 LOGGER.warning("API call failed after all retries, trying next LLM...")
