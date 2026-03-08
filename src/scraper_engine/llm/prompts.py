@@ -2,7 +2,6 @@ from pydantic import Field, BaseModel
 from typing   import List, Optional
 
 
-# Define Pydantic models for each classification type
 class ScoringNews(BaseModel):
     """
     Schema for scoring an article summary.
@@ -12,6 +11,10 @@ class ScoringNews(BaseModel):
     score: int = Field(
         description="Integer score for the article summary, evaluated strictly based on the given scoring criteria."
     )
+    reason: str = Field(
+        description='Explain reasoning why you assign the score'
+    )
+
 
 class SummaryNews(BaseModel):
     """
@@ -29,6 +32,7 @@ class SummaryNews(BaseModel):
         description="Explain why you wrote the company name that way, including your reasoning for the uppercase and lowercase letters, and why you summarized it in that form"
     )
 
+
 class TagsClassification(BaseModel):
     """
     Schema for classifying tags from a financial article.
@@ -39,8 +43,10 @@ class TagsClassification(BaseModel):
     )
     reason: str = Field(description="Your reason why you classified your each tags, clearly state your reason for each tags classified")
 
+
 class TickersClassification(BaseModel):
     tickers: List[str] = Field(description="List of stock tickers mentioned in the article")
+
 
 class CompanyNameExtraction(BaseModel):
     """
@@ -54,6 +60,7 @@ class CompanyNameExtraction(BaseModel):
         description="Explanation of why these companies were identified in the article"
     )
 
+
 class CompanyNameTickerExtraction(BaseModel):
     """
     Schema for extracting tickers mentioned in a summarized financial article.
@@ -62,6 +69,7 @@ class CompanyNameTickerExtraction(BaseModel):
     tickers: List[str] = Field(
         description="List of tickers extracted from summarize article"
     )
+
 
 class SubsectorClassification(BaseModel):
     """
@@ -72,6 +80,7 @@ class SubsectorClassification(BaseModel):
         description="Most relevant subsector chosen strictly from the 'List of Available Subsectors'"
     )
 
+
 class SentimentClassification(BaseModel):
     """
     Schema for classifying sentiment from a financial article.
@@ -81,6 +90,7 @@ class SentimentClassification(BaseModel):
     sentiment: str = Field(
         description="Sentiment of the article as one of: 'Bullish', 'Bearish', 'Neutral', 'Not Applicable."
     )
+
 
 class DimensionClassification(BaseModel):
     """
@@ -374,7 +384,7 @@ class ScoringPrompts:
             Show the arithmetic explicitly.
             </thinking>
 
-            Return your score and reasoning in the following JSON format.
+            Ensure return in the following JSON format.
             {format_instructions}
         """
         

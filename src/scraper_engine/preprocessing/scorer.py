@@ -111,14 +111,16 @@ class ArticleScorer:
             
                 scoring_chain = prompt | llm | scoring_parser
                 
-                result_score_raw = scoring_chain.invoke(input_data)
+                response = scoring_chain.invoke(input_data)
 
-                if result_score_raw is None:
+                if response is None:
                     LOGGER.warning("API call failed after all retries, trying next LLM...")
                     continue
                 
+                LOGGER.info(f'Reason scoring: {response.get('reason')}')
+
                 score_timeliness = self.manual_score_time(article_date)
-                result_score = result_score_raw.get('score', 0)
+                result_score = response.get('score', 0)
                 final_score = result_score + score_timeliness
 
                 if 0 <= final_score <= 155:
