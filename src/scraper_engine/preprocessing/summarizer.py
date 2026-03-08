@@ -154,16 +154,54 @@ def summarize_article(body: str, url: str) -> dict[str]:
     return None
 
 
+def fetch_article_with_proxy(target_url: str) -> str:
+    proxy_configuration = {
+        "http": PROXY,
+        "https": PROXY
+    }
+    
+    headers = {
+        "User-Agent": USER_AGENT
+    }
+
+    try:
+        LOGGER.info(f"Routing {target_url} through proxy")
+        
+        response = requests.get(
+            target_url, 
+            proxies=proxy_configuration, 
+            headers=headers, 
+            verify=False, 
+            timeout=60 
+        )
+        
+        if response.status_code == 200:
+            LOGGER.info("[SUCCESS] Web Unlocker with proxy")
+            return response.text
+        
+        elif response.status_code == 403:
+            LOGGER.error(f"[FAIL] Web Unlocker was blocked (403)")
+            return None
+        
+        else:
+            LOGGER.error(f"[FAIL] Target returned status code: {response.status_code}")
+            return None
+            
+    except requests.exceptions.RequestException as network_error:
+        LOGGER.error(f"[FAIL] Request through Web Unlocker failed: {network_error}")
+        return None
+
+
 def get_article_bca_news(url: str) -> str:
     headers = {
         "User-Agent": USER_AGENT
     }
     
     try:
-        r = requests.get(url, headers=headers)
-        r.raise_for_status()
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
         
-        soup = BeautifulSoup(r.text, 'html.parser')
+        soup = BeautifulSoup(response.text, 'html.parser')
         
         title_tag = soup.find('h1')
         title = title_tag.get_text(strip=True) if title_tag else None
@@ -179,6 +217,7 @@ def get_article_bca_news(url: str) -> str:
         text_parts = []
         for paragraph in paragraphs:
             text = paragraph.get_text(strip=True)
+
             # Basic noise filter
             if text and text != "@": 
                 text_parts.append(text)
@@ -240,7 +279,13 @@ def get_article_bloomberg_technoz_news(url: str) -> str:
     return full_article_text
 
 
-def get_article_investorid_news(html_content: str) -> str:
+def get_article_investorid_news(url: str) -> str:
+    html_content = fetch_article_with_proxy(url)
+
+    if not html_content:
+        LOGGER.info(f"[FAIL INVESTOR.ID] Proxy failed to retrieve HTML for {url}")
+        return ""
+
     soup = BeautifulSoup(html_content, "html.parser")
     
     article_container = soup.select_one("div.body-content")
@@ -260,45 +305,43 @@ def get_article_investorid_news(html_content: str) -> str:
     return full_article_text
 
 
-def fetch_investor_id_with_unlocker(target_url: str) -> str:
-    proxy_configuration = {
-        "http": PROXY,
-        "https": PROXY
-    }
+def get_article_kontan_news(url: str) -> str: 
+    html_content = fetch_article_with_proxy(url)
     
-    headers = {
-        "User-Agent": USER_AGENT
-    }
-
-    try:
-        LOGGER.info(f"Routing {target_url} through proxy")
-        
-        response = requests.get(
-            target_url, 
-            proxies=proxy_configuration, 
-            headers=headers, 
-            verify=False, 
-            timeout=60 
-        )
-        
-        if response.status_code == 200:
-            LOGGER.info("[SUCCESS] Web Unlocker with proxy")
-            
-            extracted_text = get_article_investorid_news(response.text)
-            
-            return extracted_text
-        
-        elif response.status_code == 403:
-            LOGGER.error(f"[FAIL] Web Unlocker was blocked (403)")
-            return ""
-        else:
-            LOGGER.error(f"[FAIL] Target returned status code: {response.status_code}")
-            return ""
-            
-    except requests.exceptions.RequestException as network_error:
-        LOGGER.error(f"[FAIL] Request through Web Unlocker failed: {network_error}")
+    if not html_content:
+        LOGGER.warning(f"[FAIL INVESTASI KONTAN] Proxy failed to retrieve HTML for {url}")
         return ""
+        
+    soup = BeautifulSoup(html_content, "html.parser")
+
+    article_container = soup.find('div', class_='tmpt-desk-kon')
     
+    if not article_container:
+        LOGGER.warning(f"[FAIL] Could not find 'tmpt-desk-kon' container for {url}")
+        return ""
+
+    for strong_tag in article_container.find_all('strong'):
+        if 'Baca Juga:' in strong_tag.get_text(strip=True):
+            parent_paragraph = strong_tag.find_parent('p')
+            if parent_paragraph:
+                parent_paragraph.decompose()
+
+    paragraphs = article_container.find_all('p')
+    extracted_text_blocks = []
+    
+    for paragraph in paragraphs:
+        paragraph_text = paragraph.get_text(strip=True)
+      
+        if paragraph_text:
+            extracted_text_blocks.append(paragraph_text)
+            
+    full_article_text = "\n\n".join(extracted_text_blocks)
+    
+    related_news_pattern = r'(?i)berita\s+terkait.*'
+    cleaned_article_text = re.sub(related_news_pattern, '', full_article_text, flags=re.DOTALL)
+    
+    return cleaned_article_text.strip()
+
 
 def extract_table_content(url: str) -> str:
     headers = {
@@ -363,151 +406,127 @@ def extract_table_content(url: str) -> str:
     return "\n".join(content_buffer)
 
 
-def get_article_body(url: str) -> str | None:
-    """ 
-    Extracts the body of an article from a given URL using Goose3.
-
-    Args:
-        url (str): The URL of the article to be extracted.
-    
-    Returns:
-        str: The cleaned text of the article body. If extraction fails, returns an empty string
-    """
-    if 'bcasekuritas.co.id' in url: 
-        article =  get_article_bca_news(url) 
-        
-        if not article or len(article) < 100:
-            LOGGER.info(f'Bca news article return None due to return None')
-            return None 
-        
-        return article 
-    
-    if 'bloomberg' in url: 
-        article = get_article_bloomberg_technoz_news(url)
-        
-        if not article or len(article) < 100:
-            LOGGER.info(f'Bloomberg news article return None due to return None')
-            return None 
-        
-        return article 
-
-    # First attempt try to get full article with goose3 proxy and soup as fallback
+def extract_via_custom_parser(url: str) -> str | None: 
     try:
-        proxy = PROXY
-        proxy_support = {"http": proxy, "https": proxy}
+        LOGGER.info(f'Attempting custom parser')
 
-        session = Session()
-        session.proxies.update(proxy_support)
-        session.headers.update(HEADERS)
-        
-        # g = Goose({'http_proxies': proxy_support, 'https_proxies': proxy_support})
-        goose_extractor = Goose({"http_session": session})
-        article = goose_extractor.extract(url=url)
+        parser = {
+            'bcasekuritas.co.id': get_article_bca_news, 
+            'bloomberg': get_article_bloomberg_technoz_news, 
+            'investor.id': get_article_investorid_news,
+            'investasi.kontan': get_article_kontan_news
+        }
 
-        if article.cleaned_text:
-            LOGGER.info(f"[SUCCESS] Article from url {url} inferenced")
+        for key, parser in parser.items(): 
+            if key in url: 
+                article = parser(url) 
 
-            if 'www.straitstimes' in url:
-                texts = article.cleaned_text
-                texts = texts.replace("Sign up now: Get ST's newsletters delivered to your inbox", "")
-                return texts     
+                if not article: 
+                    LOGGER.warning(f'[FAIL CUSTOM PARSER] Failed to extract {url}')
+                    return None 
+                
+                LOGGER.info(f'[SUCCESS] Extracted via custom parser: {url}')
+                return article
 
-            return article.cleaned_text
-        
-        else:
-            # If fail, get the HTML and extract the text
-            LOGGER.info("[REQUEST FAIL] Goose3 returned empty string, trying with soup")
-            response: Response = requests.get(url)
-            response.raise_for_status()
-
-            soup: BeautifulSoup = BeautifulSoup(response.content, "html.parser")
-
-            content = soup.find("div", class_="content")
-            if content and content.get_text(strip=True):
-                LOGGER.info(f"[SUCCESS] Article inferenced from url {url} using soup")
-                return content.get_text(strip=True)
-            
-            # Fallback specific for antara news 
-            content = soup.find("div", class_="wrap__article-detail")
-            if content and content.get_text(strip=True):
-                LOGGER.info(f"[SUCCESS] Article inferenced from url {url} using soup class (wrap__article-detail-content)")
-                return content.get_text(strip=True)
-            
-            # Fallback specific for investasi kontan news 
-            content = soup.find('div', class_='tmpt-desk-kon')
-            if content:
-                LOGGER.info(f"[SUCCESS] Article inferenced from url using soup class (tmpt-desk-kon)")
-                pattern = r'(?i)berita\s+terkait.*'
-
-                for strong_tag in content.find_all('strong'):
-                    if 'Baca Juga:' in strong_tag.get_text():
-                        p_tag = strong_tag.find_parent('p')
-                        if p_tag:
-                            p_tag.decompose()
-
-                text_content = content.get_text(strip=True)
-                cleaned_content = re.sub(pattern, '', text_content, flags=re.DOTALL)
-                return cleaned_content.strip()
-        
     except Exception as error:
-        LOGGER.error(
-            f"[PROXY FAIL] Goose3 failed with error {error} for url {url}"
+        LOGGER.error(f"[FAIL] Custom parser failed: {error}")
+        return None
+
+
+def extract_via_cloudscraper(url: str) -> str | None: 
+    try:
+        LOGGER.info(f"[TIER 1] Attempting fast extraction (No Proxy)")
+        scraper_session = cloudscraper.create_scraper() 
+        goose_extractor = Goose(
+            {'browser_user_agent': USER_AGENT, 'http_session': scraper_session}
         )
 
-    # Fallback selenium undected and goose no proxy
+        article_data = goose_extractor.extract(url=url)
+        
+        if article_data and article_data.cleaned_text:
+            LOGGER.info(f"[SUCCESS] Extracted via Cloudscraper + Goose: {url}")
+            extracted_text = article_data.cleaned_text
+            
+            if 'www.straitstimes' in url:
+                extracted_text = extracted_text.replace("Sign up now: Get ST's newsletters delivered to your inbox", "")
+                
+            return extracted_text
+            
+    except Exception as error:
+        LOGGER.error(f"[FAIL] Tier 1 Cloudscraper failed: {error}")
+        return None 
+
+
+def extract_via_selenium(url: str) -> str | None: 
     try:
-        LOGGER.info(f"[ATTEMPT 2] Fallback to Selenium Undetected for {url}")
+        LOGGER.info(f"[TIER 2] Attempting Selenium extraction (No Proxy)")
+        selenium_scraper = SeleniumScraper()
+        soup_result = selenium_scraper.fetch_news_with_selenium(url)
 
-        scraper = SeleniumScraper()
-
-        if "investor.id" in url: 
-            scraper.setup_driver(load_strategy="eager", page_timeout=30)
-
-        soup = scraper.fetch_news_with_selenium(url)
-
-        if soup:
-            raw_html = str(soup)
-
-            if 'investor.id' in url:
-                extracted_article = get_article_investorid_news(raw_html)
-
-                if extracted_article:
-                    LOGGER.info(f"[SUCCESS] Extracted via custom Investor.id parser: {url}")
-                    return extracted_article
-                else:
-                    LOGGER.warning(f"[FAIL] Custom parser returned empty. Escalating to Web Unlocker for: {url}")
-                    unlocked_article_text = fetch_investor_id_with_unlocker(url)
-                    return unlocked_article_text 
+        if soup_result:
+            raw_html_content = str(soup_result)
 
             goose_extractor = Goose()
-            article = goose_extractor.extract(raw_html=raw_html)
+            article_data = goose_extractor.extract(raw_html=raw_html_content)
             
-            if article.cleaned_text:
-                LOGGER.info(f"[SUCCESS] Extracted via Selenium+Goose: {url}")
-                return article.cleaned_text
-            else:
-                LOGGER.warning(f"[FAIL] Selenium fetched HTML, but Goose couldn't parse text.")
+            if article_data and article_data.cleaned_text:
+                LOGGER.info(f"[SUCCESS] Extracted via Selenium + Goose: {url}")
+                return article_data.cleaned_text
+                
+            LOGGER.info("[WARNING] Selenium DOM fetched, but Goose failed. Attempting Soup fallbacks.")
+            
+            content_container = soup_result.find("div", class_="content")
+            if content_container and content_container.get_text(strip=True):
+                LOGGER.info(f"[SUCCESS] Extracted via Selenium + Soup: {url}")
+                return content_container.get_text(strip=True)
+            
+            antara_container = soup_result.find("div", class_="wrap__article-detail")
+            if antara_container and antara_container.get_text(strip=True):
+                LOGGER.info(f"[SUCCESS] Extracted via Selenium + Soup: {url}")
+                return antara_container.get_text(strip=True)
 
     except Exception as error:
-        LOGGER.error(f"[ERROR] Selenium fallback failed completely: {error}")
+        LOGGER.error(f"[FAIL] Tier 2 Selenium fallback failed: {error}")    
+        return None 
 
-    # Fallback cloudscrapper
+
+def extract_via_proxy(url: str) -> str | None: 
     try:
-        LOGGER.info("[FALLBACK] Attempt 2: Trying with cloudscraper...")
-
-        scraper = cloudscraper.create_scraper() 
-        g = Goose({'browser_user_agent': USER_AGENT, 'http_session': scraper})
-
-        article = g.extract(url=url)
-        if article.cleaned_text:
-            LOGGER.info(f"[SUCCESS] Extracted using cloudscraper for url {url}.")
-
-            return article.cleaned_text
+        LOGGER.info(f"[TIER 3] Escalating to Proxy")
         
-    except Exception as error:
-        LOGGER.error(f"[ERROR] Cloudscraper failed: {error}")
+        raw_html_content = fetch_article_with_proxy(url)
 
-    return None 
+        if not raw_html_content:
+            LOGGER.warning(f"[FAIL] Proxy network request failed for {url}")
+            return None
+            
+        goose_extractor = Goose()
+        article_data = goose_extractor.extract(raw_html=raw_html_content)
+
+        if article_data and article_data.cleaned_text:
+            LOGGER.info(f"[SUCCESS] Extracted via Proxy + Goose: {url}")
+            return article_data.cleaned_text
+
+    except Exception as error:
+        LOGGER.error(f"[FAIL] Tier 3 Proxy extraction failed: {error}")
+        return None
+
+
+def get_article_body(url: str) -> str | None:
+    if extracted_text := extract_via_custom_parser(url):
+        return extracted_text 
+
+    if extracted_text := extract_via_cloudscraper(url):
+        return extracted_text 
+ 
+    if extracted_text := extract_via_selenium(url):
+        return extracted_text 
+
+    if extracted_text := extract_via_proxy(url):
+        return extracted_text 
+
+    LOGGER.info(f"[FATAL] All extraction tiers failed to retrieve body for: {url}")
+    return None
 
 
 def summarize_news(url: str, news_text: str) -> tuple[str, str] | None:
