@@ -203,8 +203,8 @@ class NewsClassifier:
                 item["symbol"]: {
                     "symbol": item["symbol"],
                     "name": item["name"],
-                    "sub_sector": item["sub_sector"],
-                    "sector": item["sector"],
+                    "sub_sector": item["sub_sector"].lower(),
+                    "sector": item["sector"].lower(),
                 }
                 for item in response.data
             }
