@@ -10,7 +10,8 @@ from scraper_engine.config.conf import (
     GROQ_API_KEY3, GROQ_API_KEY4, GROQ_API_KEY5, GROQ_API_KEY_DEV,
     GEMINI_API_KEY, GEMINI_API_KEY2, GEMINI_API_KEY3,
     LLM_SEMAPHORE_SYNC, MODEL_CONFIG, ROTATE_KEYWORDS, 
-    ROTATE_STATUS_CODES, ABORT_KEYWORDS, ABORT_STATUS_CODES
+    ROTATE_STATUS_CODES, ABORT_KEYWORDS, ABORT_STATUS_CODES, 
+    ROTATE_400_KEYWORDS
 )
 
 import groq 
@@ -79,6 +80,9 @@ def classify_error(error: Exception) -> str:
     status_code = extract_status_code(error)
     error_message = str(error).lower()
 
+    if status_code == 400 and any(keyword in error_message for keyword in ROTATE_400_KEYWORDS):
+        return "rotate"
+    
     if status_code in ROTATE_STATUS_CODES:
         return "rotate"
 

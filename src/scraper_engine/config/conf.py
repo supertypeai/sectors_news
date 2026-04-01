@@ -75,14 +75,19 @@ MODEL_CONFIG = {
     }
 }
 
-ROTATE_STATUS_CODES = {401, 403, 429}
+ROTATE_STATUS_CODES = {401, 403, 429, 413}
 ABORT_STATUS_CODES = {400, 422, 500, 502, 503, 504}
 
-ROTATE_KEYWORDS = ("rate limit", "too many requests", "authentication", "invalid api key")
+ROTATE_KEYWORDS = (
+    "rate limit", "too many requests", "authentication", "invalid api key", 
+    "request too large"
+)
+ROTATE_400_KEYWORDS = ("organization_restricted",)
 ABORT_KEYWORDS = (
     "context length", "max token", "internal server",
     "bad gateway", "service unavailable",
 )
+
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 HEADERS = {
