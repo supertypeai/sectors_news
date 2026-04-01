@@ -159,7 +159,7 @@ The scraper status indicates which news/data sources are currently functional an
 | 17 | EMITENNEWS.COM             | Active   | - |
 | 18 | BCA NEWS                   | Active   | - |
 | 19 | BLOMBEERG TECHNOZ          | Active   | - |
-| 20 | INVESTASI ID               | Active   | - |
+| 20 | INVESTOR ID                | Active   | - |
 
 ### SGX
 

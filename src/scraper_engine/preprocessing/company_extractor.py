@@ -73,9 +73,9 @@ def extract_company_name(
     
     model_names = ['gpt-oss-120b', 'gemini-2.5-flash', 'gpt-oss-20b', 'llama-3.3-70b', 'kimi-k2']
     for model in model_names:
+        LOGGER.info(f'LLM used: {model}')
+        
         llm = get_llm(model, temperature=0.4)
-        llm_used = getattr(llm, 'model_name', getattr(llm, 'model', 'unknown'))
-        LOGGER.info(f'LLM used: {llm_used}')
 
         try:
             chain = prompt | llm | company_extraction_parser
