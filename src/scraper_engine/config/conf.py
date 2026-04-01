@@ -97,3 +97,9 @@ HEADERS = {
     "Cache-Control": "max-age=0",
     "x-test": "true",
 }
+
+HEADERS_SCRAPER = {
+    'User-Agent': USER_AGENT,
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+}

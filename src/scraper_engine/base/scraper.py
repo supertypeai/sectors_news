@@ -1,8 +1,10 @@
 import undetected_chromedriver as uc
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
-from scraper_engine.config.conf import PROXY, USER_AGENT
+from scraper_engine.config.conf import PROXY, USER_AGENT, HEADERS_SCRAPER
 
 import json
 import csv
@@ -72,15 +74,20 @@ class Scraper:
 
     def __init__(self):
         self.articles = []
+        self.session = requests.Session()
+        retry = Retry(total=3, backoff_factor=2)
+        adapter = HTTPAdapter(max_retries=retry)
+        self.session.mount('http://', adapter)
+        self.session.mount('https://', adapter)
 
     def fetch_news(self, url):
         try:
-            response = requests.get(url)
+            response = self.session.get(url, headers=HEADERS_SCRAPER, timeout=10)
             self.soup = BeautifulSoup(response.content, 'html.parser')
             return self.soup
-        
-        except Exception as e:
-            LOGGER.error(f"Error fetching the URL: {e}")
+
+        except Exception as error:
+            LOGGER.error(f"Error fetching the URL: {error}")
             return BeautifulSoup()
 
     def fetch_news_with_proxy(self, target_url: str):
