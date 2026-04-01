@@ -255,57 +255,80 @@ class ClassifierPrompts:
 class ScoringPrompts:
     @staticmethod
     def get_scoring_system_prompt_idx() -> str:
-        return """You are an expert financial news analyst specializing in
+        return """
+            You are an expert financial news analyst specializing in
             Indonesian capital markets and IDX-listed securities. Your task
             is to score news articles based on their relevance, actionability,
             and commercial value to investors tracking the IDX.
 
-            SCORING FRAMEWORK (0-100 base, up to 135 with bonuses):
+            SCORING FRAMEWORK (0-100 base, up to 145 with bonuses):
 
-            TIER 0: Noise / Irrelevant (0-10)
-            No discernible connection to the Indonesian market, IDX companies,
-            or relevant economic factors. Generic, trivial, or off-topic.
+            TIER 0: Noise / Irrelevant (Score 0-10)
+            - Description: The news has no discernible connection to the Indonesian market,
+            specific IDX companies, or relevant economic factors.
+            It is generic, trivial, or completely off-topic.
+            - Example: "A foreign celebrity launched a new clothing line. The event was attended by many fans."
 
-            TIER 1: General Context (11-40)
-            General background on the Indonesian economy, broad market sectors,
-            or global trends with weak or indirect IDX relevance. Lacks specific
-            company details or actionable events.
+            TIER 1: General Context (Score 11-40)
+            - Description: The news provides general background information about the Indonesian economy,
+            a broad market sector, or global trends that have a weak or indirect link to the IDX.
+            It lacks specific company details or actionable events.
+            - Example: "The Indonesian central bank noted that inflation has remained stable for the past quarter.
+            Global commodity prices have seen slight fluctuations this week."
 
-            TIER 2: Notable Event (41-70)
-            Reports on a specific IDX-listed company or direct policy change
-            affecting a specific sector. Concrete events such as new projects,
-            strategic partnerships, management changes, or analyst rating updates.
+            TIER 2: Notable Event (Score 41-70)
+            - Description: The news reports on a specific IDX-listed company or a direct policy change
+            affecting a specific sector. It describes a concrete event like a new project,
+            a strategic partnership, management changes, or an analyst rating update.
+            This tier is for news that is clearly relevant and noteworthy for tracking.
+            - Example: "PT Aneka Tambang (ANTM) announced it is exploring a new partnership to develop
+            an EV battery ecosystem. The company's stock rose 2% on the news."
 
-            TIER 3: Critical & Actionable (71-100)
-            Major market-moving event for a specific IDX-listed company.
-            High-impact events investors act on immediately:
-            - Merger / Acquisition
-            - Earnings report (beat or miss expectations)
-            - Dividend announcement with specific rates or dates
-            - Stock buyback or rights issue
-            - Major insider trading by executives
-            - Government contract awarded or major regulatory approval/rejection
+            TIER 3: Critical & Actionable (Score 71-100)
+            - Description: The news reports on a major market-moving event for a specific IDX-listed company.
+            These are high-impact events that investors act on immediately.
+            - Keywords to look for:
+                - Merger or acquisition announcement
+                - Earnings report (beat or miss vs analyst expectations)
+                - Dividend announcement with specific rate and cum date
+                - Stock buyback or rights issue announcement
+                - CEO or board-level resignation or appointment
+                - Major regulatory approval or rejection directly affecting revenue
+                - Fraud, scandal, or force majeure directly affecting the company
+                - Government contract awarded with disclosed contract value
+            - Example: "PT GoTo Gojek Tokopedia (GOTO) reported a 30% revenue jump in its Q2 2025 earnings,
+            significantly beating forecasts. The company also announced a 1 trillion rupiah stock buyback
+            program to boost shareholder value."
 
-            PRIMARY BONUS (up to +5 points each):
-            - Dividend rate + cum date: +5
-            - Policy/bill passing (eyeball-catching): +5
-            - Insider trading (eyeball-catching): +5
-            - Acquisition/merger: +5
-            - New business plan, project, income source, partner, or contract: +5
-            - Earnings report: +5
+            PRIMARY BONUS (up to +5 points each, max 30):
+            - Dividend announcement with specific rate and cum date: +5
+            - Merger or acquisition with disclosed deal value: +5
+            - Earnings report with specific figures vs analyst expectations: +5
+            - Rights issue or stock buyback with specific terms: +5
+            - Major government contract with disclosed contract value: +5
+            - Insider trading by named executive with transaction value exceeding 1 billion rupiah: +5
 
-            SECONDARY BONUS (up to +2 points each):
-            - IDX performance vs US market: +2
-            - Rupiah performance: +2
-            - Net foreign buy/sell: +2
-            - Recommended stocks or stock watchlist: +2
-            - Global commodities prices: +2
+            SECONDARY BONUS (up to +2 points each, max 10):
+            - Recommended stocks or stock watchlist with specific tickers: +2
+            - Analyst rating upgrade or downgrade with target price: +2
+            - New business plan with projected revenue or investment size: +2
+            - Strategic partnership with disclosed financial terms: +2
+            - Regulatory decision with direct and named revenue impact: +2
 
-            A high quality article is:
-            1. Actionable
-            2. Commercially valuable
-            3. Involves big movement of money
-            4. Has potential for significant market cap changes in the industry
+            MACRO CONTEXT BONUS (up to +1 point each, max 5):
+            - IDX performance vs US market with specific index figures: +1
+            - Rupiah exchange rate movement with specific rate: +1
+            - Net foreign buy or sell with specific transaction value: +1
+            - Global commodities price movement affecting IDX sectors: +1
+            - BI rate decision or OJK policy with direct market impact: +1
+
+            A high quality news article is one that is:
+            1. Actionable for a retail or institutional investor today
+            2. Involves a specific named IDX-listed company
+            3. Contains quantified financial impact (revenue, profit, deal size)
+            4. Has potential for significant market cap movement in the industry
+        
+        You must check every bonus criterion independently and apply all that qualify. Do not skip the bonus section
         """
 
     @staticmethod
@@ -422,10 +445,9 @@ class SummarizationPrompts:
             {article}
 
             Before writing the title and summary, reason through the following
-            steps inside <thinking> tags. This reasoning will not appear in
+            steps. This reasoning will not appear in
             the final output.
 
-            <thinking>
             1. IDENTIFY IMPACTED COMPANIES: Which companies are the primary
             subjects of this article's financial analysis? List them and
             briefly state why each qualifies.
@@ -440,7 +462,6 @@ class SummarizationPrompts:
             4. ARTICLE TYPE: Is this a broker recommendation report, a
             corporate event article, or general market commentary? This
             determines what to prioritize in the summary.
-            </thinking>
 
             Now write the title and summary using your reasoning above.
 
