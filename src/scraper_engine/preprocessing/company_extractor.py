@@ -1,19 +1,11 @@
-from langchain.prompts              import PromptTemplate, ChatPromptTemplate
+from langchain.prompts              import ChatPromptTemplate
 from langchain_core.output_parsers  import JsonOutputParser
-from langchain_core.runnables       import RunnableParallel
-from operator                       import itemgetter
-from supabase                       import Client
-from datetime                       import datetime
-from typing                         import List, Dict, Optional, Union, Tuple
-from groq                           import RateLimitError
 
-from scraper_engine.llm.client  import get_llm, invoke_llm
-from scraper_engine.llm.prompts import EntityExtractionPrompts, CompanyNameExtraction, CompanyNameTickerExtraction
-
-from scraper_engine.database.client import SUPABASE_CLIENT
+from scraper_engine.llm.client  import get_llm
+from scraper_engine.llm.prompts import EntityExtractionPrompts, CompanyNameExtraction
+from scraper_engine.config.conf import MODEL_NAMES
 
 import json
-import asyncio
 import logging 
 
 
@@ -71,8 +63,7 @@ def extract_company_name(
             'format_instructions': format_instructions
         }
     
-    model_names = ['gpt-oss-120b', 'gemini-2.5-flash', 'gpt-oss-20b', 'llama-3.3-70b', 'kimi-k2']
-    for model in model_names:
+    for model in MODEL_NAMES:
         LOGGER.info(f'LLM used: {model}')
         
         llm = get_llm(model, temperature=0.4)

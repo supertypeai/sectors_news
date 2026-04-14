@@ -3,6 +3,7 @@ from langchain_core.output_parsers  import JsonOutputParser
 
 from scraper_engine.llm.client  import get_llm
 from scraper_engine.llm.prompts import ScoringNews, ScoringPrompts
+from scraper_engine.config.conf import MODEL_NAMES
 
 from datetime       import datetime, timedelta
 from typing         import Optional
@@ -103,8 +104,7 @@ class ArticleScorer:
             'format_instructions': format_instructions
         }
 
-        model_names = ['gpt-oss-120b', 'gemini-2.5-flash', 'gpt-oss-20b', 'llama-3.3-70b', 'kimi-k2']
-        for model in model_names:
+        for model in MODEL_NAMES:
             try:
                 llm = get_llm(model, temperature=0.4)
                 LOGGER.info(f"LLM used: {model}")

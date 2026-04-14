@@ -202,9 +202,11 @@ def get_llm(model_name: str, temperature: float = 0.5):
     
     if provider == 'groq': 
         api_keys = [
-                GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, 
-                GROQ_API_KEY4, GROQ_API_KEY5, GROQ_API_KEY_DEV, 
+                # GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, 
+                # GROQ_API_KEY4, GROQ_API_KEY5, 
+                GROQ_API_KEY_DEV, 
             ]
+        
     elif provider == 'google-genai': 
         api_keys = [GEMINI_API_KEY, GEMINI_API_KEY2, GEMINI_API_KEY3]
 

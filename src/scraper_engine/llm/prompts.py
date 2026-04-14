@@ -391,9 +391,8 @@ class ScoringPrompts:
         return """Article to score:
             {article}
 
-            Before scoring, reason through the following inside <thinking> tags.
+            Before scoring, reason through the following steps.
 
-            <thinking>
             1. TIER CLASSIFICATION: Which tier does this article fall into and why?
             Be specific about what in the article determined the tier.
 
@@ -405,7 +404,6 @@ class ScoringPrompts:
 
             4. FINAL SCORE: Base tier score + primary bonuses + secondary bonuses.
             Show the arithmetic explicitly.
-            </thinking>
 
             Ensure return in the following JSON format.
             {format_instructions}
@@ -598,9 +596,8 @@ class EntityExtractionPrompts:
             Summarized Article:
             {body}
 
-            Before extracting, reason through the following inside <thinking> tags.
+            Before extracting, reason through the following steps.
 
-            <thinking>
             1. CORE SUBJECT: What is this article fundamentally about? Is it a
             corporate event, broker recommendation, regulatory action, or
             market structure change?
@@ -614,7 +611,6 @@ class EntityExtractionPrompts:
 
             4. NAME RESOLUTION: For any abbreviation or short name, identify the
             full name from the provided company information.
-            </thinking>
 
             Based on your reasoning above, extract only the companies that are
             primary subjects of impact. If no company qualifies, return an empty list.
