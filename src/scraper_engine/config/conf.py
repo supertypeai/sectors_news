@@ -46,7 +46,7 @@ except ValueError as error:
     logger.critical(f"Configuration failed: {error}")
     raise
 
-MODEL_NAMES = ['gpt-oss-20b', 'gpt-oss-120b', 'gemini-2.5-flash', 'llama-3.3-70b', 'kimi-k2']
+MODEL_NAMES = ['gpt-oss-120b', 'gpt-oss-20b', 'gemini-2.5-flash', 'llama-3.3-70b', 'kimi-k2']
 
 MODEL_CONFIG = { 
     'kimi-k2': {
