@@ -37,7 +37,7 @@ jobs:
           uv sync
           uv pip install -e .
 
-      - name: Process batches 2-4 and cleanup
+      - name: Process batches 3-5 and cleanup
         run: |
           echo "=== B3 ==="
           uv run -m scraper_engine.pipeline main_idx --process-only --batch 3 --batch-size 30
