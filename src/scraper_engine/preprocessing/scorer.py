@@ -60,24 +60,19 @@ class ArticleScorer:
         
         current_time = datetime.now()
 
-        # scoring manual for timestamp 
         time_difference = current_time - publication_timestamp 
 
-        # Score 5: Very recent (published within the last 48 hours)
         if time_difference <= timedelta(hours=48):
-            return 5
+            return 3
     
-        # Score 3: Recent (published within the last week)
         elif time_difference <= timedelta(days=7):
-            return 3 
-
-        # Score 2: Somewhat recent (published within the last 2 weeks)
-        elif time_difference <= timedelta(days=14):
             return 2 
 
-        # Score 1: Outdated (more than 2 weeks old)
+        elif time_difference <= timedelta(days=14):
+            return 1 
+
         else:
-            return 1
+            return 0
 
     def get_article_score(self, body: str, article_date: str, article_source: str, source_scraper: str) -> int:
         if not body or len(body.strip()) < 10:
