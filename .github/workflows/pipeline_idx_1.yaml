@@ -1,24 +1,23 @@
-name: Scrape SGX News and Submit to Database 
+name: IDX News Pipeline - Part 1 (Scrape)
 
 on:
   schedule:
-    # - cron: "0 3 * * *" # Runs at 10:00 AM UTC+7 every day
-    - cron: "10 2 * * *" # 09:10 AM UTC+7
+    - cron: "10 3 * * *" # 10:10 AM UTC+7
   workflow_dispatch:
 
 concurrency:
-  group: sgx-pipeline
+  group: idx-pipeline
   cancel-in-progress: false
 
 jobs:
-  sgx_news_pipeline:
-    name: SGX News Pipeline
+  idx_scrape:
+    name: IDX Scrape & Batch 1 & 2
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository content
         uses: actions/checkout@v4
-      
+
       - name: Install uv (Python package manager)
         uses: astral-sh/setup-uv@v2
 
@@ -30,12 +29,22 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync
-          uv pip install -e .  # Register 'src' as a package
+          uv pip install -e .
 
-      - name: Run scraping script for all news source
-        run: | 
-          uv run -m scraper_engine.pipeline main_sgx --page-number 2 --batch 1
-          uv run -m scraper_engine.pipeline remove_outdated_news --table-name sgx_news
+      - name: Set up Google Chrome & ChromeDriver
+        uses: browser-actions/setup-chrome@v1
+        with:
+          # hardcode version to ensure bca works
+          chrome-version: '1586874'
+          install-chromedriver: true
+
+      - name: Run scraping and process batch 1
+        run: |
+          echo "=== B1 ==="
+          uv run -m scraper_engine.pipeline main_idx --page-number 1 --batch 1 --batch-size 30
+          echo "=== B2 ==="
+          uv run -m scraper_engine.pipeline main_idx --process-only --batch 2 --batch-size 30
+          sleep 20
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
@@ -57,16 +66,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # Stage changes
           git add -A
-          
-          # Create Commit (if changes exist)
-          git diff-index --quiet HEAD || git commit -m "chore(sgx): update scraped news data"
-          
-          # Rebase
+          git diff-index --quiet HEAD || git commit -m "chore(idx): update scraped news data [part 1]"
           git pull --rebase origin main
-          
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
