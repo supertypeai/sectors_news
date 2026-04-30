@@ -14,7 +14,7 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
-MININUM_SCORE = 65
+MININUM_SCORE = 63
 BATCH_SIZE = 5
 
 
