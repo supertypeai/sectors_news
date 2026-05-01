@@ -1,0 +1,143 @@
+from datetime import datetime
+
+from scraper_engine.base.scraper import Scraper
+
+import argparse
+import time
+import logging 
+
+
+LOGGER = logging.getLogger(__name__)
+
+
+class CNBCMarket(Scraper):
+    def fetch_article_list(self, url: str) -> tuple[list, bool]:
+        soup = self.fetch_news(url)
+
+        if not soup:
+            return [], False
+
+        article_items = soup.select("div.nhl-list article")
+
+        next_button = soup.select_one("a[rel='next']") or soup.find("a", string=lambda text: text and "Next" in text)
+        has_next_page = next_button is not None
+
+        return article_items, has_next_page
+
+    def fetch_article_timestamp(self, article_url: str) -> str:
+        soup = self.fetch_news(article_url)
+
+        if not soup:
+            return None
+
+        date_tag = soup.select_one("div.text-cm.text-gray")
+
+        if not date_tag:
+            return None
+
+        return self.parse_timestamp(date_tag.get_text(strip=True))
+
+    def parse_timestamp(self, raw_timestamp: str) -> str:
+        if not raw_timestamp:
+            return None
+
+        try:
+            parsed_date = datetime.strptime(raw_timestamp.strip(), "%d %B %Y %H:%M")
+            return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
+        
+        except ValueError:
+            return None
+
+    def parse_articles(self, article_items: list) -> list:
+        parsed_articles = []
+
+        for article_item in article_items:
+            anchor_tag = article_item.select_one("a")
+            source_url = anchor_tag["href"] if anchor_tag else None
+
+            title_tag = article_item.select_one("h2")
+            title = title_tag.get_text(strip=True) if title_tag else None
+
+            thumbnail_tag = article_item.select_one("img")
+            thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
+
+            published_at = None
+            if source_url:
+                published_at = self.fetch_article_timestamp(source_url)
+                time.sleep(0.5)
+
+            parsed_articles.append({
+                "title": title,
+                "source_url": source_url,
+                "thumbnail_url": thumbnail_url,
+                "timestamp": published_at,
+            })
+
+        return parsed_articles
+
+    def extract_news_pages(self, num_pages: int, date: str) -> list:
+        year = date[:4]
+        month = date[4:6]
+        day = date[6:]
+
+        base_url = f"https://www.cnbcindonesia.com/market/indeks/5?date={year}/{month}/{day}&tipe=artikel"
+        page_number = 1
+
+        while True:
+            full_url = f"{base_url}&page={page_number}" if page_number > 1 else base_url
+
+            article_items, has_next_page = self.fetch_article_list(full_url)
+
+            if not article_items:
+                LOGGER.info("[CNBC Market] No articles found on page %d, stopping.", page_number)
+                break
+
+            articles = self.parse_articles(article_items)
+            self.articles.extend(articles)
+            LOGGER.info("[CNBC Market] Page %d: %d articles collected.", page_number, len(articles))
+
+            if not has_next_page:
+                LOGGER.info("[CNBC Market] No next page, stopping.")
+                break
+
+            if num_pages is not None and page_number >= num_pages:
+                break
+
+            page_number += 1
+            time.sleep(1)
+
+        LOGGER.info("[CNBC Market] Total scraped: %d", len(self.articles))
+        return self.articles
+
+  
+def main():
+    scraper = CNBCMarket()
+
+    parser = argparse.ArgumentParser(description="Script for scraping data from cnbc market")
+
+    parser.add_argument("date", type=str)
+    parser.add_argument("filename", type=str, nargs="?", default="cnbcmarket")
+    parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
+    parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
+
+    args = parser.parse_args()
+
+    scraper.extract_news_pages(args.pages, args.date)
+    scraper.write_json(scraper.articles, args.filename)
+
+    if args.csv:
+        scraper.write_csv(scraper.articles, args.filename)
+
+
+if __name__ == "__main__":
+    """
+    How to run:
+    uv run -m src.scraper_engine.sources.idx.scrape_cnbc_market <date> [filename] [--pages N] [--csv]
+
+    Examples:
+    uv run -m src.scraper_engine.sources.idx.scrape_cnbc_market 20260427
+    uv run -m src.scraper_engine.sources.idx.scrape_cnbc_market 20260427 test_cnbc_market
+    uv run -m src.scraper_engine.sources.idx.scrape_cnbc_market 20260427 test_cnbc_market --pages 3 --csv
+    """
+    main()
+

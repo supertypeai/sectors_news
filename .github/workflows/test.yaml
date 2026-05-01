@@ -22,9 +22,12 @@ on:
           - scrape_antaranews
           - scrape_asian_telekom
           - scrape_bca_news
-          - scrape_emiten_news
           - scrape_bisnis_com
           - scrape_bloomberg_technoz
+          - scrape_cnbc_market
+          - scrape_cnn_ekonomi
+          - scrape_emiten_news
+          - scrape_finance_detik
           - scrape_gapki
           - scrape_icn
           - scrape_idn_business_post
@@ -34,13 +37,15 @@ on:
           - scrape_investor_id
           - scrape_jakartaglobe
           - scrape_jakartapost
+          - scrape_kompas
           - scrape_kontan
+          - scrape_kontan_keuangan
           - scrape_minerba
           - scrape_mining
           - scrape_petromindo
 
       page_number:
-        description: "Page number"
+        description: "Page number or date in YYYYMMDD format (for date-based scrapers: cnbc_market, cnn_ekonomi, finance_detik, kompas, kontan_investasi, kontan_keuangan)"
         required: false
         default: "1"
         type: string
