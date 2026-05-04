@@ -1,4 +1,5 @@
 from datetime import datetime
+from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import Scraper
 
@@ -12,7 +13,8 @@ LOGGER = logging.getLogger(__name__)
 
 class CNBCMarket(Scraper):
     def fetch_article_list(self, url: str) -> tuple[list, bool]:
-        soup = self.fetch_news(url)
+        raw = self.fetch_news_with_proxy(url)
+        soup = BeautifulSoup(raw, "html.parser")
 
         if not soup:
             return [], False
@@ -25,8 +27,9 @@ class CNBCMarket(Scraper):
         return article_items, has_next_page
 
     def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news(article_url)
-
+        raw = self.fetch_news_with_proxy(article_url)
+        soup = BeautifulSoup(raw, "html.parser")
+        
         if not soup:
             return None
 

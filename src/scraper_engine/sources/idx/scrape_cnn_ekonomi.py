@@ -1,6 +1,5 @@
 from datetime import datetime
-from pathlib import Path 
-from bs4 import Comment
+from bs4 import Comment, BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
 
@@ -14,10 +13,11 @@ LOGGER = logging.getLogger(__name__)
 
 class CNNEkonomi(Scraper):
     def fetch_article_list(self, url: str) -> tuple[list, bool]:
-        soup = self.fetch_news(url)
+        raw = self.fetch_news_with_proxy(url)
+        soup = BeautifulSoup(raw, "html.parser")
 
         if not soup:
-            return [], False
+            return []
 
         article_items = soup.select("article.flex-grow")
 
