@@ -1,8 +1,9 @@
-name: IDX News Pipeline - Part 1 (Scrape)
+name: IDX News Pipeline 
 
 on:
   schedule:
-    - cron: "10 3 * * *" # 10:10 AM UTC+7
+    - cron: "0 5 * * *"   # 12:00 PM UTC+7
+    - cron: "0 17 * * *"  # 12:00 AM UTC+7
   workflow_dispatch:
 
 concurrency:
@@ -10,8 +11,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  idx_scrape:
-    name: IDX Scrape & Batch 1 & 2
+  idx_pipeline:
+    name: IDX Scrape & Process
     runs-on: ubuntu-latest
 
     steps:
@@ -38,13 +39,25 @@ jobs:
           chrome-version: '1586874'
           install-chromedriver: true
 
-      - name: Run scraping and process batch 1
+      - name: Run scraping and process all batches
         run: |
+          BATCH_SIZE=30
           echo "=== B1 ==="
-          uv run -m scraper_engine.pipeline main_idx --page-number 1 --batch 1 --batch-size 30
+          uv run -m scraper_engine.pipeline main_idx --batch 1 --batch-size $BATCH_SIZE
           sleep 20
-          echo "=== B2 ==="
-          uv run -m scraper_engine.pipeline main_idx --process-only --batch 2 --batch-size 30
+
+          TOTAL=$(python3 -c "import json; print(len(json.load(open('./data/idx/pipeline_filtered.json'))))")
+          BATCHES=$(( (TOTAL + BATCH_SIZE - 1) / BATCH_SIZE ))
+          echo "Total articles: $TOTAL → $BATCHES batches needed"
+
+          for BATCH in $(seq 2 $BATCHES); do
+            echo "=== B${BATCH} ==="
+            uv run -m scraper_engine.pipeline main_idx --process-only --batch $BATCH --batch-size $BATCH_SIZE
+            sleep 20
+          done
+
+          echo "=== CLEANUP ==="
+          uv run -m scraper_engine.pipeline remove_outdated_news --table-name idx_news
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
@@ -67,7 +80,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git diff-index --quiet HEAD || git commit -m "chore(idx): update scraped news data [part 1]"
+          git diff-index --quiet HEAD || git commit -m "chore(idx): update scraped news data"
           git pull --rebase origin main
           git push
         env:
