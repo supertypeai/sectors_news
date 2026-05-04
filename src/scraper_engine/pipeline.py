@@ -11,14 +11,14 @@ from scraper_engine.base.scraper import SeleniumScraper
 # from scraper_engine.sources.idx.scrape_insight_kontan import InsightKontanScraper
 # from scraper_engine.sources.idx.scrape_mining import MiningScraper
 # from scraper_engine.sources.idx.scrape_idn_business_post import IndonesiaBusinessPost
-# from scraper_engine.sources.idx.scrape_icn import ICNScraper
-# from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
-# from scraper_engine.sources.idx.scrape_minerba import MinerbaScraper
 
+from scraper_engine.sources.idx.scrape_icn import ICNScraper
+from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
+from scraper_engine.sources.idx.scrape_minerba import MinerbaScraper
+from scraper_engine.sources.idx.scrape_idnminer import IdnMinerScraper
 from scraper_engine.sources.idx.scrape_idnfinancials import IDNFinancialScraper
 from scraper_engine.sources.idx.scrape_bisnis_com import BisnisMarket
 from scraper_engine.sources.idx.scrape_abaf import AbafScraper
-from scraper_engine.sources.idx.scrape_idnminer import IdnMinerScraper
 from scraper_engine.sources.idx.scrape_jakartaglobe import JakartaGlobe
 from scraper_engine.sources.idx.scrape_antaranews import AntaraNews
 from scraper_engine.sources.idx.scrape_asian_telekom import AsianTelecom
@@ -176,16 +176,16 @@ def main_idx(
         # insightkontanscraper = InsightKontanScraper()
         # miningscraper = MiningScraper()
         # idnbusinesspostscraper = IndonesiaBusinessPost()
+
         # icnscraper = ICNScraper()
         # gapkiscraper = GapkiScraper()
         # minerbascraper = MinerbaScraper()
-
+        # idnminerscraper = IdnMinerScraper()
         idnscraper = IDNFinancialScraper()
         finansialbisinisscraper = BisnisMarket()
         bloombertechnoz = BloombergTechnoz()
         investorid = InvestorID()
         abafscraper = AbafScraper()
-        idnminerscraper = IdnMinerScraper()
         jgscraper = JakartaGlobe()
         antaranewsscraper = AntaraNews()
         asiatelkomscraper = AsianTelecom()
@@ -206,16 +206,16 @@ def main_idx(
             # scrapercollection.add_scraper(idnbusinesspostscraper)
             # scrapercollection.add_scraper(insightkontanscraper) 
             # scrapercollection.add_scraper(miningscraper)
+
             # scrapercollection.add_scraper(icnscraper)
             # scrapercollection.add_scraper(gapkiscraper)
             # scrapercollection.add_scraper(minerbascraper)
-
+            # scrapercollection.add_scraper(idnminerscraper)
             scrapercollection.add_scraper(idnscraper)
             scrapercollection.add_scraper(finansialbisinisscraper)
             scrapercollection.add_scraper(bloombertechnoz)
             scrapercollection.add_scraper(investorid)
             scrapercollection.add_scraper(abafscraper)
-            scrapercollection.add_scraper(idnminerscraper)
             scrapercollection.add_scraper(jgscraper)
             scrapercollection.add_scraper(antaranewsscraper)
             scrapercollection.add_scraper(asiatelkomscraper)
@@ -229,7 +229,7 @@ def main_idx(
             scrapercollection.add_scraper(financedetik)
             scrapercollection.add_scraper(kontankeuangan)
 
-            scrapercollection.run_all(page_number, date)
+            scrapercollection.run_all(page_number, date, filter_from)
             
             all_articles = scrapercollection.articles
 
