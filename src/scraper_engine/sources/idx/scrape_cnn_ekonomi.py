@@ -60,8 +60,8 @@ class CNNEkonomi(Scraper):
 
             parsed_articles.append({
                 "title": title,
-                "source_url": source_url,
-                "thumbnail_url": thumbnail_url,
+                "source": source_url,
+                "thumbnail": thumbnail_url,
                 "timestamp": published_at,
             })
 

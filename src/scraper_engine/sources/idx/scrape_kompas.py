@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from scraper_engine.base.scraper import Scraper
+from scraper_engine.sources.idx.utils.constant import INDO_TO_ENG
 
 import argparse
 import time
@@ -24,9 +25,9 @@ class KompasMoney(Scraper):
 
         if not soup:
             return None
-
+        
         read_time_tag = soup.select_one("div.read__time")
-
+       
         if not read_time_tag:
             return None
 
@@ -36,14 +37,29 @@ class KompasMoney(Scraper):
             if text_node.strip() and "kompas.com" not in text_node.strip().lower()
         ).strip().strip(",").strip()
 
-        return self.parse_date(raw_text)
+        cleaned = self.parse_date(raw_text)
+    
+        return cleaned
 
     def parse_date(self, raw_date: str) -> str:
         if not raw_date:
             return None
         
         try:
-            cleaned_date = raw_date.replace("WIB", "").replace("WITA", "").replace("WIT", "").strip().strip(",").strip()
+            cleaned_date = (
+                raw_date.replace("WIB", "")
+                .replace("WITA", "")
+                .replace("WIT", "")
+                .strip()
+                .strip(",")
+                .strip()
+            )
+
+            for idn_month, eng_month in INDO_TO_ENG.items(): 
+                if idn_month in cleaned_date: 
+                    cleaned_date = cleaned_date.replace(idn_month, eng_month)
+                    break
+
             parsed_date = datetime.strptime(cleaned_date, "%d %B %Y, %H:%M")
             return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
         
@@ -68,10 +84,11 @@ class KompasMoney(Scraper):
                 published_at = self.fetch_article_timestamp(source_url)
                 time.sleep(0.5)
 
+            print(published_at)
             parsed_articles.append({
                 "title": title,
-                "source_url": source_url,
-                "thumbnail_url": thumbnail_url,
+                "source": source_url,
+                "thumbnail": thumbnail_url,
                 "timestamp": published_at,
             })
 
