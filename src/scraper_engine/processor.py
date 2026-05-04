@@ -2,6 +2,8 @@ from scraper_engine.preprocessing.article_builder import generate_article
 from scraper_engine.database.client import SUPABASE_CLIENT
 from scraper_engine.base.scraper import SeleniumScraper
 
+from datetime import datetime, timezone, timedelta
+
 import pandas as pd
 import time
 import requests
@@ -14,7 +16,9 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
-MININUM_SCORE = 63
+WIB = timezone(timedelta(hours=7))
+
+MININUM_SCORE = 60
 BATCH_SIZE = 5
 
 
@@ -43,6 +47,36 @@ def send_data_to_db(successful_articles: list, table_name: str):
         except Exception as error:
             error_message = str(error)
             LOGGER.error(f"Batch Submission Failed: {error_message}")
+
+
+def filter_articles_by_time(
+    articles: list[dict],
+    filter_from: datetime,
+) -> list[dict]:
+    """
+    Keeps only articles whose timestamp is >= filter_from (WIB).
+    Articles with unparseable timestamps are kept (fail-open).
+    """
+    filtered = []
+
+    for article in articles:
+        timestamp = article.get("timestamp")
+
+        if not timestamp:
+            filtered.append(article)
+            continue
+
+        try:
+            dt = datetime.fromisoformat(timestamp)
+            dt = dt.replace(tzinfo=WIB) if dt.tzinfo is None else dt.astimezone(WIB)
+
+            if dt >= filter_from:
+                filtered.append(article)
+
+        except (ValueError, TypeError):
+            filtered.append(article)
+
+    return filtered
 
 
 def filter_article_to_process(
@@ -96,6 +130,7 @@ def get_article_to_process(
     batch_size: int,
     table_name: str,
     source_scraper: str,
+    filter_from: datetime | None = None,
 ) -> list[dict[str]]:
     """
     Retrieves articles from JSON and filters out those already in the database.
@@ -109,6 +144,10 @@ def get_article_to_process(
 
             with open(f"./data/{source_scraper}/{jsonfile}.json", "r") as file_pipeline:
                 all_articles = json.load(file_pipeline)
+
+            if source_scraper == 'idx':
+                all_articles = filter_articles_by_time(all_articles, filter_from)
+                LOGGER.info(f"Total articles in time window: {len(all_articles)}")
 
             all_articles_yesterday = []
 
@@ -131,13 +170,12 @@ def get_article_to_process(
                     )
 
             try:
-                response = (
-                    SUPABASE_CLIENT
-                    .table(table_name)
-                    .select("source")
-                    .execute()
-                )
-                all_articles_db = response.data
+                query = SUPABASE_CLIENT.table(table_name).select("source")
+
+                if filter_from:
+                    query = query.gte("timestamp", filter_from.isoformat())
+
+                all_articles_db = query.execute().data
 
             except Exception as error:
                 LOGGER.error(f"Database Error: {error}")
@@ -171,9 +209,11 @@ def get_article_to_process(
             if os.path.exists(filtered_file):
                 with open(filtered_file, "r") as file:
                     final_articles_to_process = json.load(file)
+                
                 LOGGER.info(
                     f"Loaded {len(final_articles_to_process)} articles"
                 )
+
             else:
                 LOGGER.error(f"Filtered article file not found: {filtered_file}")
                 return []
@@ -209,6 +249,7 @@ def post_source(
     batch_size: int,
     table_name: str,
     source_scraper: str,
+    filter_from: datetime | None = None,
     is_check_csv: bool = False,
 ):
     """
@@ -225,6 +266,7 @@ def post_source(
         batch_size,
         table_name,
         source_scraper,
+        filter_from,
     )
 
     if not data_articles:

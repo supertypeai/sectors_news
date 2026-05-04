@@ -1,5 +1,8 @@
 from datetime import datetime, timezone, timedelta
-from typing_extensions import Annotated
+from typing_extensions import Annotated, Optional
+from pathlib import Path
+
+WIB = timezone(timedelta(hours=7))
 
 from scraper_engine.base.scraper_collection import ScraperCollection
 from scraper_engine.base.scraper import SeleniumScraper
@@ -8,23 +11,28 @@ from scraper_engine.base.scraper import SeleniumScraper
 # from scraper_engine.sources.idx.scrape_insight_kontan import InsightKontanScraper
 # from scraper_engine.sources.idx.scrape_mining import MiningScraper
 # from scraper_engine.sources.idx.scrape_idn_business_post import IndonesiaBusinessPost
+# from scraper_engine.sources.idx.scrape_icn import ICNScraper
+# from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
+# from scraper_engine.sources.idx.scrape_minerba import MinerbaScraper
 
 from scraper_engine.sources.idx.scrape_idnfinancials import IDNFinancialScraper
-from scraper_engine.sources.idx.scrape_bisnis_com import FinansialBisnisScraper
-from scraper_engine.sources.idx.scrape_icn import ICNScraper
-from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
-from scraper_engine.sources.idx.scrape_minerba import MinerbaScraper
+from scraper_engine.sources.idx.scrape_bisnis_com import BisnisMarket
 from scraper_engine.sources.idx.scrape_abaf import AbafScraper
 from scraper_engine.sources.idx.scrape_idnminer import IdnMinerScraper
-from scraper_engine.sources.idx.scrape_jakartaglobe import JGScraper
-from scraper_engine.sources.idx.scrape_antaranews import AntaraNewsScraper
-from scraper_engine.sources.idx.scrape_asian_telekom import AsianTelekom
-from scraper_engine.sources.idx.scrape_bca_news import run_scrape_bca_news
+from scraper_engine.sources.idx.scrape_jakartaglobe import JakartaGlobe
+from scraper_engine.sources.idx.scrape_antaranews import AntaraNews
+from scraper_engine.sources.idx.scrape_asian_telekom import AsianTelecom
+from scraper_engine.sources.idx.scrape_bca_news import BCANews
 from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
-from scraper_engine.sources.idx.scrape_kontan import KontanScraper
+from scraper_engine.sources.idx.scrape_kontan_investasi import KontanInvestasi
 from scraper_engine.sources.idx.scrape_emiten_news import EmitenNews
 from scraper_engine.sources.idx.scrape_investor_id import InvestorID
 from scraper_engine.sources.idx.scrape_bloomberg_technoz import BloombergTechnoz
+from scraper_engine.sources.idx.scrape_cnbc_market import CNBCMarket 
+from scraper_engine.sources.idx.scrape_cnn_ekonomi import CNNEkonomi
+from scraper_engine.sources.idx.scrape_kontan_keuangan import KontanKeuangan
+from scraper_engine.sources.idx.scrape_finance_detik import FinanceDetik
+from scraper_engine.sources.idx.scrape_kompas import KompasMoney
 
 from scraper_engine.sources.sgx.scrape_businesstimes import scrape_businesstimes 
 from scraper_engine.sources.sgx.scrape_straitstimes import scrape_straitsnews_sgx
@@ -131,7 +139,7 @@ def delete_outdated_news(
 
 @app.command(name="main_idx")
 def main_idx(
-    page_number: Annotated[int, typer.Option(help="Page number to scrape")] = 1,
+    page_number: Annotated[int | None, typer.Option(help="Page number to scrape")] = None,
     filename: Annotated[str, typer.Option(help="Output filename base")] = "pipeline",
     csv: Annotated[bool, typer.Option(help="Flag to write to CSV file")] = False,
     batch: Annotated[int, typer.Option(help="Batch number for processing")] = 1,
@@ -139,32 +147,57 @@ def main_idx(
     process_only: Annotated[bool, typer.Option(help="Only process, don't scrape")] = False,
     table_name: Annotated[str, typer.Option(help="Table name to push into db")] = 'idx_news',
     source_scraper: Annotated[str, typer.Option(help="Source scraper to define score prompt criteria")] = 'idx',
+    date:  Annotated[Optional[str], typer.Option(help="End date: YYYYMMDD")] = None,
 ):
     """
     Main function to run the scraper collection (IDX News) and post results.
     """
+    last_state_path = Path('data/last_state.json')
+
+    last_state = {}
+    try:
+        with last_state_path.open('r') as file:
+            last_state = json.load(file)
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
+
+    if date:
+        filter_from = datetime.strptime(date, "%Y%m%d").replace(tzinfo=WIB)
     
+    elif last_state.get("last_run_at"):
+        filter_from = datetime.fromisoformat(last_state["last_run_at"])
+    
+    else:
+        filter_from = datetime.now(WIB) - timedelta(days=1)
+
     if not process_only:
         # petromindoscraper = PetromindoScraper()
         # insightkontanscraper = InsightKontanScraper()
         # miningscraper = MiningScraper()
         # idnbusinesspostscraper = IndonesiaBusinessPost()
+        # icnscraper = ICNScraper()
+        # gapkiscraper = GapkiScraper()
+        # minerbascraper = MinerbaScraper()
 
         idnscraper = IDNFinancialScraper()
-        finansialbisinisscraper = FinansialBisnisScraper()
+        finansialbisinisscraper = BisnisMarket()
         bloombertechnoz = BloombergTechnoz()
         investorid = InvestorID()
-        icnscraper = ICNScraper()
-        gapkiscraper = GapkiScraper()
-        minerbascraper = MinerbaScraper()
         abafscraper = AbafScraper()
         idnminerscraper = IdnMinerScraper()
-        jgscraper = JGScraper()
-        antaranewsscraper = AntaraNewsScraper()
-        asiatelkomscraper = AsianTelekom()
+        jgscraper = JakartaGlobe()
+        antaranewsscraper = AntaraNews()
+        asiatelkomscraper = AsianTelecom()
         jakartapostscraper = JakartaPost()
-        kontanarticlescraper = KontanScraper()
+        kontanarticlescraper = KontanInvestasi()
         emitenscraper = EmitenNews()
+        bcanews = BCANews()
+        cnbcmarket = CNBCMarket()
+        cnnekonomi = CNNEkonomi()
+        kompasmoney = KompasMoney()
+        financedetik = FinanceDetik()
+        kontankeuangan = KontanKeuangan()
 
         try:
             scrapercollection = ScraperCollection()
@@ -172,16 +205,15 @@ def main_idx(
             # scrapercollection.add_scraper(petromindoscraper)
             # scrapercollection.add_scraper(idnbusinesspostscraper)
             # scrapercollection.add_scraper(insightkontanscraper) 
-            # Insider specific, should be filtered to go inside insider db
             # scrapercollection.add_scraper(miningscraper)
+            # scrapercollection.add_scraper(icnscraper)
+            # scrapercollection.add_scraper(gapkiscraper)
+            # scrapercollection.add_scraper(minerbascraper)
 
             scrapercollection.add_scraper(idnscraper)
             scrapercollection.add_scraper(finansialbisinisscraper)
             scrapercollection.add_scraper(bloombertechnoz)
             scrapercollection.add_scraper(investorid)
-            scrapercollection.add_scraper(icnscraper)
-            scrapercollection.add_scraper(gapkiscraper)
-            scrapercollection.add_scraper(minerbascraper)
             scrapercollection.add_scraper(abafscraper)
             scrapercollection.add_scraper(idnminerscraper)
             scrapercollection.add_scraper(jgscraper)
@@ -190,23 +222,29 @@ def main_idx(
             scrapercollection.add_scraper(jakartapostscraper)
             scrapercollection.add_scraper(kontanarticlescraper)
             scrapercollection.add_scraper(emitenscraper)
+            scrapercollection.add_scraper(bcanews)
+            scrapercollection.add_scraper(cnbcmarket)
+            scrapercollection.add_scraper(cnnekonomi)
+            scrapercollection.add_scraper(kompasmoney)
+            scrapercollection.add_scraper(financedetik)
+            scrapercollection.add_scraper(kontankeuangan)
 
-            # Special flow for BCA News (Undetected Driver)
-            parsed_bca_news = run_scrape_bca_news(page_number)
-
-            scrapercollection.run_all(page_number)
+            scrapercollection.run_all(page_number, date)
             
-            all_articles = scrapercollection.articles + parsed_bca_news
+            all_articles = scrapercollection.articles
 
             scrapercollection.write_json(all_articles, source_scraper, filename)
 
             if csv:
-                scrapercollection.write_csv(scrapercollection.articles, source_scraper, filename)
+                scrapercollection.write_csv(all_articles, source_scraper, filename)
 
         finally:
             SeleniumScraper.close_shared_driver()
 
-    post_source(filename, batch, batch_size, table_name, source_scraper)
+    post_source(filename, batch, batch_size, table_name, source_scraper, filter_from)
+
+    with last_state_path.open('w') as file:
+        json.dump({"last_run_at": datetime.now(WIB).isoformat()}, file)
 
 
 @app.command(name="main_sgx")
