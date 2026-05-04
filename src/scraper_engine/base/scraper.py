@@ -139,7 +139,7 @@ class Scraper:
     def extract_news(self):
         pass
 
-    def extract_news_pages(self, num_pages):
+    def extract_news_pages(self, num_pages, date):
         pass
 
     # Writer methods

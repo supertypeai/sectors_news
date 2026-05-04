@@ -6,8 +6,8 @@ import json
 import csv
 import logging
 
-WIB = timezone(timedelta(hours=7))
 
+WIB = timezone(timedelta(hours=7))
 
 LOGGER = logging.getLogger(__name__)
 
@@ -23,22 +23,32 @@ class ScraperCollection:
     def add_scraper(self, scraper) -> None:
         self.scrapers.append(scraper)
     
-    def run_all(self, num_page: int | None, date: str | None) -> list[dict]:
+    def run_all(self, num_page: int | None, date: str | None, filter_from: datetime | None) -> list[dict]:
+        today = datetime.now(WIB)
+        
         if date is None:
-            date = datetime.now(WIB).strftime("%Y%m%d")
+            date = today.strftime("%Y%m%d")
 
-        for scraper in self.scrapers:
-            try:
+        dates_to_scrape = [date]
+
+        if filter_from and filter_from.date() < today.date():
+            yesterday = (today - timedelta(days=1)).strftime("%Y%m%d")
+            dates_to_scrape.append(yesterday)
+
+        for date_to_scrape in dates_to_scrape:
+            for scraper in self.scrapers:
                 try:
-                    articles = scraper.extract_news_pages(num_page, date)
-                except TypeError:
-                    articles = scraper.extract_news_pages(num_page)
+                    try:
+                        articles = scraper.extract_news_pages(num_page, date_to_scrape)
+                        
+                    except TypeError:
+                        articles = scraper.extract_news_pages(num_page)
 
-                self.articles = [*self.articles, *articles]
+                    self.articles = [*self.articles, *articles]
 
-            except Exception as error:
-                LOGGER.error(f"Error in scraper {scraper.__class__.__name__}: {error}")
-                continue
+                except Exception as error:
+                    LOGGER.error(f"Error in scraper {scraper.__class__.__name__}: {error}")
+                    continue
 
         return self.articles
     
