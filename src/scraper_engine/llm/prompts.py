@@ -261,6 +261,24 @@ class ScoringPrompts:
             is to score news articles based on their relevance, actionability,
             and commercial value to investors tracking the IDX.
 
+            SCORING ON SUMMARIES — IMPORTANT:
+            This scoring is applied to article summaries, not full text. Summaries may
+            omit specific figures, dates, or financial terms present in the original
+            article. Apply the following rules:
+
+            1. If a summary clearly references an event type that belongs in Tier 3
+            (earnings report, acquisition, dividend, etc.) but lacks specific figures,
+            score at the lower bound of Tier 3 (71-75) rather than defaulting to Tier 2.
+
+            2. For bonuses, award the bonus if the summary clearly implies the qualifying
+            detail exists in the original article, even if the exact figure is not
+            stated. Example: "GOTO reported Q2 earnings significantly beating analyst
+            forecasts" qualifies for the earnings bonus even without the exact figure.
+
+            3. Do not penalize a summary for being a summary. Score based on the event
+            type and its implied significance, not on whether the summary contains the
+            exact numerical detail.
+
             SCORING FRAMEWORK (0-100 base, up to 145 with bonuses):
 
             TIER 0: Noise / Irrelevant (Score 0-10)
@@ -287,6 +305,9 @@ class ScoringPrompts:
             TIER 3: Critical & Actionable (Score 71-100)
             - Description: The news reports on a major market-moving event for a specific IDX-listed company.
             These are high-impact events that investors act on immediately.
+
+            CASE A — Company-specific event: A high-impact event directly affecting a named
+            IDX-listed company that investors act on immediately.
             - Keywords to look for:
                 - Merger or acquisition announcement
                 - Earnings report (beat or miss vs analyst expectations)
@@ -299,14 +320,37 @@ class ScoringPrompts:
             - Example: "PT GoTo Gojek Tokopedia (GOTO) reported a 30% revenue jump in its Q2 2025 earnings,
             significantly beating forecasts. The company also announced a 1 trillion rupiah stock buyback
             program to boost shareholder value."
+            
+            CASE B — Macro deviation event: A macro event that is a surprise deviation from
+            market consensus AND the article explicitly names at least one IDX-listed company
+            or ticker as directly impacted. Routine macro updates that confirm expectations
+            do not qualify for this case regardless of topic.
+            - Keywords to look for:
+                - Unexpected BI rate decision deviating from analyst consensus
+                - Emergency OJK regulation with immediate market consequences
+                - Rupiah in crisis territory with confirmed central bank intervention
+                - Sudden commodity price shock directly impacting a named IDX sector
+            - Example: "Bank Indonesia unexpectedly cut the benchmark rate by 50bps, against
+            analyst consensus of no change. Analysts immediately flagged PT Bank Central Asia
+            (BBCA) and PT Bank Rakyat Indonesia (BBRI) as primary beneficiaries due to
+            expected NIM compression relief."
 
             PRIMARY BONUS (up to +5 points each, max 30):
-            - Dividend announcement with specific rate and cum date: +5
-            - Merger or acquisition with disclosed deal value: +5
-            - Earnings report with specific figures vs analyst expectations: +5
-            - Rights issue or stock buyback with specific terms: +5
-            - Major government contract with disclosed contract value: +5
-            - Insider trading by named executive with transaction value exceeding 1 billion rupiah: +5
+            - Dividend announcement with rate and cum date, or summary clearly implying
+            these details exist in the source article: +5
+            - Merger or acquisition with deal value, or summary clearly implying a
+            disclosed deal value exists: +5
+            - Earnings report with figures vs analyst expectations, or summary clearly
+            implying such figures exist in the source article: +5
+            - Rights issue or stock buyback with terms, or summary clearly implying
+            specific terms exist: +5
+            - Major government contract with contract value, or summary clearly implying
+            a disclosed value exists: +5
+            - Insider trading by named executive with transaction value exceeding 1
+            billion rupiah: +5
+            - Surprise BI rate decision or emergency OJK regulation deviating from
+            consensus, with at least one named IDX-listed company or ticker explicitly
+            cited as directly impacted: +5
 
             SECONDARY BONUS (up to +2 points each, max 10):
             - Recommended stocks or stock watchlist with specific tickers: +2
@@ -320,7 +364,8 @@ class ScoringPrompts:
             - Rupiah exchange rate movement with specific rate: +1
             - Net foreign buy or sell with specific transaction value: +1
             - Global commodities price movement affecting IDX sectors: +1
-            - BI rate decision or OJK policy with direct market impact: +1
+            - Expected BI rate decision or routine OJK policy update with direct market
+            impact: +1
 
             A high quality news article is one that is:
             1. Actionable for a retail or institutional investor today
@@ -328,7 +373,8 @@ class ScoringPrompts:
             3. Contains quantified financial impact (revenue, profit, deal size)
             4. Has potential for significant market cap movement in the industry
         
-        You must check every bonus criterion independently and apply all that qualify. Do not skip the bonus section
+        You must check every bonus criterion independently and apply all that qualify. 
+        Do not skip the bonus section
         """
 
     @staticmethod
@@ -402,8 +448,11 @@ class ScoringPrompts:
             3. SECONDARY BONUSES: Which secondary bonus criteria are present?
             List each one found and the specific evidence from the article.
 
-            4. FINAL SCORE: Base tier score + primary bonuses + secondary bonuses.
-            Show the arithmetic explicitly.
+            4. MACRO CONTEXT BONUSES: Which macro context bonus criteria are present?
+            List each one found and the specific evidence from the article.
+
+            5. FINAL SCORE: Base tier score + primary bonuses + secondary bonuses
+            + macro context bonuses. Show the arithmetic explicitly.
 
             Ensure return in the following JSON format.
             {format_instructions}
@@ -537,7 +586,7 @@ class EntityExtractionPrompts:
 
             OUTPUT: Extract exact company names as they appear in the text.
             Do not extract ticker symbols unless no full name is present.
-            """
+        """
     
     @staticmethod
     def user_prompt_idx():
@@ -553,7 +602,7 @@ class EntityExtractionPrompts:
 
             Ensure to return the extracted company names strictly in the following JSON format:
             {format_instructions}
-            """
+        """
 
     @staticmethod
     def system_prompt_sgx():
