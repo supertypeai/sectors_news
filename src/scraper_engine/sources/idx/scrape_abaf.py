@@ -1,151 +1,141 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from scraper_engine.base import Scraper
 
-import locale
-import re
 import argparse
 import logging
+import time 
 
-
-locale.setlocale(locale.LC_TIME, "en_US.UTF-8")
 
 LOGGER = logging.getLogger(__name__)
 
 
 class AbafScraper(Scraper):
-    def extract_news(self, url):
+    def fetch_article_list(self, url: str) -> list:
         soup = self.fetch_news(url)
 
-        headline = soup.find(
-            'div',
-            class_='item--large with-border-bottom'
-        )
+        if not soup:
+            LOGGER.info("[ABAF] [FAIL] Failed to fetch HTML or timed out for %s", url)
+            return []
+
+        article_items = soup.find_all("div", class_="item with-border-bottom")
+        headline = soup.find("div", class_="item--large with-border-bottom")
+
         if headline:
-            item = headline.find('div').find('h2').find('a')
-            title = item.text.strip()
-            source = item['href'].strip()
-            timestamp = (
-                headline.find('div')
-                .find('div', class_='content-right')
-                .find('div', class_='item-details')
-                .find('div', class_='if-date')
-            )
-            if timestamp:
-                timestamp = timestamp.text.strip()
-                timestamp = self.convert_to_timestamp(timestamp)
-                self.articles.append(
-                    {
-                        'title': title,
-                        'source': source,
-                        'timestamp': timestamp
-                    }
-                )
-            else:
-                timestamp = datetime.now().strftime(
-                    "%Y-%m-%d %H:%M:%S"
-                )
-                self.articles.append(
-                    {
-                        'title': title,
-                        'source': source,
-                        'timestamp': timestamp
-                    }
-                )
+            article_items = [headline] + list(article_items)
 
-        for item in soup.find_all(
-            'div',
-            class_='item with-border-bottom'
-        ):
-            h2 = item.find('h2')
-            if h2 is not None:
-                header = h2.find('a')
-                title = header.text.strip()
-                source = header['href'].strip()
-                timestamp = (
-                    item.find('div')
-                    .find('div', class_='content-right')
-                    .find('div', class_='item-details')
-                    .find('div', class_='if-date')
-                )
-                if timestamp:
-                    timestamp = timestamp.text.strip()
-                    timestamp = self.convert_to_timestamp(timestamp)
-                    self.articles.append(
-                        {
-                            'title': title,
-                            'source': source,
-                            'timestamp': timestamp
-                        }
-                    )
-                else:
-                    timestamp = datetime.now().strftime(
-                        "%Y-%m-%d %H:%M:%S"
-                    )
-                    self.articles.append(
-                        {
-                            'title': title,
-                            'source': source,
-                            'timestamp': timestamp
-                        }
-                    )
+        return article_items
 
-        LOGGER.info(f'total scraped source of abaf: {len(self.articles)}')
-        return self.articles
+    def fetch_article_timestamp(self, article_url: str) -> str:
+        soup = self.fetch_news(article_url)
 
-    def convert_to_timestamp(self, time_str):
-        match = re.match(
-            r"(\d+)\s+(hour[s]?|day[s]?)\s+ago",
-            time_str
+        if not soup:
+            return None
+
+        time_tag = soup.select_one("div.nf-value time[datetime]")
+
+        if not time_tag:
+            return None
+
+        raw_datetime = time_tag.get("datetime")
+
+        try:
+            dt_obj = datetime.fromisoformat(raw_datetime)
+            return dt_obj.strftime("%Y-%m-%d %H:%M:%S")
+        
+        except (ValueError, TypeError):
+            return None
+
+    def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
+        parsed_articles = []
+        reached_older_date = False
+
+        target_datetime = datetime(
+            int(target_date[:4]),
+            int(target_date[4:6]),
+            int(target_date[6:]),
         )
-        if match:
-            value = int(match.group(1))
-            unit = match.group(2)
-            if 'hour' in unit:
-                timestamp = datetime.now() - timedelta(
-                    hours=value
-                )
-            elif 'day' in unit:
-                timestamp = datetime.now() - timedelta(
-                    days=value
-                )
-            return timestamp.strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
-        return None
 
-    def extract_news_pages(self, num_pages):
-        for i in range(num_pages):
-            self.extract_news(self.get_page(i))
+        for article_item in article_items:
+            anchor_tag = article_item.select_one("h2 a") or article_item.select_one("a")
+
+            if not anchor_tag:
+                continue
+
+            source_url = anchor_tag.get("href")
+            title = anchor_tag.get_text(strip=True)
+
+            if not source_url or not title:
+                continue
+
+            thumbnail_tag = article_item.select_one("img.progressivePlain-img")
+            thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
+
+            published_at = self.fetch_article_timestamp(source_url)
+
+            if not published_at:
+                LOGGER.info("[ABAF] Failed to parse date for url: %s. Skipping.", source_url)
+                continue
+
+            article_datetime = datetime.strptime(published_at[:10], "%Y-%m-%d")
+
+            if article_datetime < target_datetime:
+                reached_older_date = True
+                break
+
+            parsed_articles.append({
+                "title": title,
+                "source": source_url,
+                "thumbnail": thumbnail_url,
+                "timestamp": published_at,
+            })
+
+        return parsed_articles, reached_older_date
+
+    def extract_news_pages(self, num_pages: int, date: str) -> list:
+        page_number = 0
+
+        while True:
+            page_url = f"https://asianbankingandfinance.net/market/indonesia?page={page_number}"
+            print(page_url)
+
+            article_items = self.fetch_article_list(page_url)
+
+            if not article_items:
+                LOGGER.info("[ABAF] No articles found on page %d, stopping.", page_number)
+                break
+
+            articles, reached_older_date = self.parse_articles(article_items, date)
+
+            self.articles.extend(articles)
+            LOGGER.info("[ABAF] Page %d: %d articles collected.", page_number, len(articles))
+
+            if reached_older_date:
+                LOGGER.info("[ABAF] Reached articles older than %s, stopping.", date)
+                break
+
+            if num_pages is not None and page_number >= num_pages:
+                break
+
+            page_number += 1
+            time.sleep(1)
+
+        LOGGER.info("[ABAF] Total scraped: %d", len(self.articles))
         return self.articles
-
-    def get_page(self, page_num):
-        return (
-            f'https://asianbankingandfinance.net/'
-            f'market/indonesia?page={page_num}'
-        )
 
 
 def main():
     scraper = AbafScraper()
 
-    parser = argparse.ArgumentParser(
-        description="Script for scraping data from asianbankingandfinance"
-    )
-    parser.add_argument("page_number", type=int, default=1)
-    parser.add_argument("filename", type=str, default="abafarticles")
-    parser.add_argument(
-        "--csv",
-        action='store_true',
-        help="Flag to indicate write to csv file"
-    )
+    parser = argparse.ArgumentParser(description="Script for scraping data from Asian Banking and Finance")
+    parser.add_argument("date", type=str)
+    parser.add_argument("filename", type=str, nargs="?", default="abafarticles")
+    parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
+    parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
 
-    num_page = args.page_number
-
-    scraper.extract_news_pages(num_page)
-
+    scraper.extract_news_pages(args.pages, args.date)
     scraper.write_json(scraper.articles, args.filename)
 
     if args.csv:
@@ -155,6 +145,11 @@ def main():
 if __name__ == "__main__":
     '''
     How to run:
-    python scrape_abaf.py <page_number> <filename_saved> <--csv (optional)>
+    uv run -m src.scraper_engine.sources.idx.scrape_abaf <date> [filename] [--pages N] [--csv]
+
+    Examples:
+    uv run -m src.scraper_engine.sources.idx.scrape_abaf 20260427
+    uv run -m src.scraper_engine.sources.idx.scrape_abaf 20260430 test_abaf
+    uv run -m src.scraper_engine.sources.idx.scrape_abaf 20260427 test_abaf --pages 3 --csv
     '''
     main()

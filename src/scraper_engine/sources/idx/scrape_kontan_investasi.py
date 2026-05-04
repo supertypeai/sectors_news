@@ -1,21 +1,18 @@
 from datetime import datetime
-from pathlib import Path 
 from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
 
 import argparse
-import time
-import logging 
-import json 
-import random 
+import logging
+import time 
 
 
 LOGGER = logging.getLogger(__name__)
 
 
-class KontanKeuangan(Scraper):
+class KontanInvestasi(Scraper):
     def fetch_article_list(self, url: str) -> list:
         raw_html_content = self.fetch_news_with_proxy(url)
 
@@ -32,9 +29,8 @@ class KontanKeuangan(Scraper):
             return None
 
         soup = BeautifulSoup(raw_html_content, "html.parser")
-        
         date_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
-    
+
         if not date_tag:
             return None
 
@@ -66,7 +62,7 @@ class KontanKeuangan(Scraper):
             if len(parts) >= 4:
                 hour, minute = parts[3].split(":")
                 parsed_date = datetime(year, month, day, int(hour), int(minute))
-                
+
             else:
                 parsed_date = datetime(year, month, day)
 
@@ -100,7 +96,6 @@ class KontanKeuangan(Scraper):
                 "timestamp": published_at,
             })
 
-        print(f'total scraped source of kontan keuangan: {len(parsed_articles)}')
         return parsed_articles
 
     def extract_news_pages(self, num_pages: int, date: str) -> list:
@@ -110,14 +105,12 @@ class KontanKeuangan(Scraper):
         month = date[4:6]
         day = date[6:]
 
+        base_params = f"kanal=investasi&tanggal={day}&bulan={month}&tahun={year}&pos=indeks"
         page_number = 1
 
         while True:
-            base_params = f"kanal=keuangan&tanggal={day}&bulan={month}&tahun={year}&pos=indeks"
-
             if page_number == 1:
                 full_url = f"{base_url}?{base_params}"
-            
             else:
                 per_page_offset = page_number * 10
                 full_url = f"{base_url}?{base_params}&per_page={per_page_offset}"
@@ -125,13 +118,13 @@ class KontanKeuangan(Scraper):
             article_items = self.fetch_article_list(full_url)
 
             if not article_items:
-                LOGGER.info("[Kontan Keuangan] No articles found on page %d, stopping.", page_number)
+                LOGGER.info("[Kontan Investasi] No articles found on page %d, stopping.", page_number)
                 break
 
             articles = self.parse_articles(article_items)
 
             self.articles.extend(articles)
-            LOGGER.info("[Kontan Keuangan] Page %d: %d articles collected.", page_number, len(articles))
+            LOGGER.info("[Kontan Investasi] Page %d: %d articles collected.", page_number, len(articles))
 
             if num_pages is not None and page_number >= num_pages:
                 break
@@ -139,16 +132,16 @@ class KontanKeuangan(Scraper):
             page_number += 1
             time.sleep(1)
 
-        LOGGER.info("[Kontan Keuangan] Total scraped: %d", len(self.articles))
+        LOGGER.info("[Kontan Investasi] Total scraped: %d", len(self.articles))
         return self.articles
 
 
 def main():
-    scraper = KontanKeuangan()
+    scraper = KontanInvestasi()
 
-    parser = argparse.ArgumentParser(description="Script for scraping data from Kontan Keuangan")
+    parser = argparse.ArgumentParser(description="Script for scraping data from Kompas Money")
     parser.add_argument("date", type=str)
-    parser.add_argument("filename", type=str, nargs="?", default="kontankeuangan")
+    parser.add_argument("filename", type=str, nargs="?", default="kompasmoney")
     parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
     parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
@@ -164,11 +157,11 @@ def main():
 if __name__ == "__main__":
     """
     How to run:
-    uv run -m src.scraper_engine.sources.idx.scrape_kontan_keuangan <date> [filename] [--pages N] [--csv]
+    uv run -m src.scraper_engine.sources.idx.scrape_kontan_investasi <date> [filename] [--pages N] [--csv]
 
     Examples:
-    uv run -m src.scraper_engine.sources.idx.scrape_kontan_keuangan 20260427
-    uv run -m src.scraper_engine.sources.idx.scrape_kontan_keuangan 20260427 test_kontan_keuangan
-    uv run -m src.scraper_engine.sources.idx.scrape_kontan_keuangan 20260427 test_kontan_keuangan --pages 3 --csv
+    uv run -m src.scraper_engine.sources.idx.scrape_kontan_investasi 20260427
+    uv run -m src.scraper_engine.sources.idx.scrape_kontan_investasi 20260427 test_kontan_investasi
+    uv run -m src.scraper_engine.sources.idx.scrape_kontan_investasi 20260427 test_kompas --pages 3 --csv
     """
     main()

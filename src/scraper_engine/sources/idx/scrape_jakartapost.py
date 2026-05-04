@@ -13,154 +13,154 @@ LOGGER = logging.getLogger(__name__)
 
 
 class JakartaPost(SeleniumScraper):
-    def extract_news(self, url):
+    def fetch_article_list(self, url: str) -> list:
         soup = self.fetch_news_with_selenium(url)
-        
-        if 'business/markets' in url:
-            article_containers = soup.select("div.listNews")
-            for article in article_containers:
-                premium_badge = article.select_one("span.premiumBadge")
 
-                if premium_badge:
-                    continue 
+        if not soup:
+            LOGGER.info("[Jakarta Post] [FAIL] Failed to fetch HTML or timed out for %s", url)
+            return []
 
-                link_tag = article.select_one("a[href*='/business/']")
-                title_tag = article.select_one("h2.titleNews")
+        article_lists =  soup.select("div.listNews")
 
-                if link_tag and title_tag:
-                    title = title_tag.get_text(strip=True)
-                    
-                    # Joined with base url
-                    relative_url = link_tag.get('href')
-                    relative_url = re.sub(r"\.html-\d+$", ".html", relative_url)
-                    source = urljoin("https://www.thejakartapost.com", relative_url)
-                    
-                    # Get date from url and standardize
-                    date_match = re.search(r'/(\d{4}/\d{2}/\d{2})/', relative_url)
+        return article_lists
 
-                    if date_match:
-                        final_date = date_match.group(1).replace('/', '-')
-                    else:
-                        LOGGER.info(f"[business/market] Could not find date in URL: {relative_url}. Skipping.")
-                        continue
-                    
-                    final_date = self.standardized_date(final_date)
+    def fetch_article_timestamp(self, article_url: str) -> str:
+        soup = self.fetch_news_with_selenium(article_url)
 
-                    if not final_date:
-                        LOGGER.info(f"[business/market] Failed parse date for url: {source}. Skipping")
-                        continue 
+        if not soup:
+            return None
 
-                    article_data = {
-                        'title': title,
-                        'source': source,
-                        'timestamp': final_date,
-                    }
+        created_tags = soup.select("div.tjp-meta__content-item span.created")
 
-                    self.articles.append(article_data)
+        for created_tag in created_tags:
+            raw_text = created_tag.get_text(strip=True)
+            iso_match = re.search(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+\-]\d{2}:\d{2}", raw_text)
 
-            LOGGER.info(f'total scraped source of jakarta post: {len(self.articles)}')
-            return self.articles 
-        
-        else:
-            results = soup.find_all('div', class_='gsc-webResult gsc-result')
-
-            for result in results:
-                # Get title tag
-                title_tag = result.find('a', class_='gs-title')
-                # Find the snippet to get the date
-                snippet_tag = result.find('div', class_='gs-bidi-start-align gs-snippet')
-
-                if title_tag and snippet_tag:
-                    title = title_tag.get_text(strip=True)
-                    source = title_tag['href'] 
-                    
-                    snippet_text = snippet_tag.get_text(strip=True)
-                    date = snippet_text.split('...')[0].strip()
-                    final_date = self.standardized_date(date)
-
-                    if not final_date:
-                        LOGGER.info(f"[ivesment search] Failed parse date for url: {source}. Skipping")
-                        continue 
-
-                    article_data = {
-                        'title': title,
-                        'source': source,
-                        'timestamp': final_date
-                    }
-                    self.articles.append(article_data)
-            
-            LOGGER.info(f'total scraped source of jakarta post: {len(self.articles)}')
-            return self.articles
-    
-    def standardized_date(self, date: str):
-        try:
-            if '-' in date:
-                date_dt = datetime.strptime(date, "%Y-%m-%d")
-                final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
-            else:
-                # Parse Format "16 Aug 2016" (day month year)
+            if iso_match:
                 try:
-                    date_dt = datetime.strptime(date, '%d %b %Y')
-                    final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
+                    dt_obj = datetime.fromisoformat(iso_match.group())  
+                    return dt_obj.strftime("%Y-%m-%d %H:%M:%S")
+                
                 except ValueError:
-                    # Parse Format "16 Aug 2016" (day month year)
-                    try:
-                        date_dt = datetime.strptime(date, '%d %b %Y')
-                        final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
-                    except ValueError:
-                        # Parse Format "Jan 13, 2020" (month day, year)
-                        try:
-                            date_dt = datetime.strptime(date, '%b %d, %Y')
-                            final_date = date_dt.strftime("%Y-%m-%d %H:%M:%S")
-                        except ValueError as error:
-                            LOGGER.error(f"Error parse the date: {error}")
-                            return None
+                    continue
+
+        return None
+
+    def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
+        parsed_articles = []
+        reached_older_date = False
+
+        target_datetime = datetime(
+            int(target_date[:4]),
+            int(target_date[4:6]),
+            int(target_date[6:]),
+        )
+
+        for article_item in article_items:
+            premium_badge = article_item.select_one("span.premiumBadge")
+
+            if premium_badge:
+                continue
+
+            link_tag = article_item.select_one("a[href*='/business/']")
+            title_tag = article_item.select_one("h2.titleNews")
+
+            if not link_tag or not title_tag:
+                continue
+
+            title = title_tag.get_text(strip=True)
+            relative_url = link_tag.get("href")
+            relative_url = re.sub(r"\.html-\d+$", ".html", relative_url)
+            source_url = urljoin("https://www.thejakartapost.com", relative_url)
+
+            thumbnail_tag = article_item.select_one("img[data-src], img[src]")
             
-            return final_date
+            if not thumbnail_tag:
+                continue 
 
-        except ValueError as error:
-            LOGGER.error(f"Error parse the date: {error}")
-            return None 
+            thumbnail_url = thumbnail_tag.get("data-src") or thumbnail_tag.get("src")
+            
+            published_at = self.fetch_article_timestamp(source_url)
+            time.sleep(0.5)
 
-    def extract_news_pages(self, num_pages: int):
-        article_list = ['https://www.thejakartapost.com/business/markets']
-                        # 'https://www.thejakartapost.com/search?q=investment#gsc.tab=0&gsc.q=investment&gsc.sort=date'] 
-        
-        for url_article in article_list:
-            for page in range(1, num_pages+1):
-                if 'business/markets' in url_article:
-                    url = f"{url_article}?page={page}"
-                else:
-                    url = f"{url_article}&gsc.page={page}"
-                self.extract_news(url)
-                time.sleep(1)
+            if not published_at:
+                LOGGER.info("[Jakarta Post] Failed to parse date for url: %s. Skipping.", source_url)
+                continue
 
+            article_datetime = datetime.strptime(published_at[:10], "%Y-%m-%d")
+
+            if article_datetime < target_datetime:
+                reached_older_date = True
+                break
+
+            parsed_articles.append({
+                "title": title,
+                "source": source_url,
+                "thumbnail": thumbnail_url,
+                "timestamp": published_at,
+            })
+
+        return parsed_articles, reached_older_date
+
+    def extract_news_pages(self, num_pages: int, date: str) -> list:
+        base_url = "https://www.thejakartapost.com/business/markets"
+        page_number = 1
+
+        while True:
+            page_url = f"{base_url}?page={page_number}"
+            print(page_url)
+
+            article_items = self.fetch_article_list(page_url)
+
+            if not article_items:
+                LOGGER.info("[Jakarta Post] No articles found on page %d, stopping.", page_number)
+                break
+
+            articles, reached_older_date = self.parse_articles(article_items, date)
+
+            self.articles.extend(articles)
+            LOGGER.info("[Jakarta Post] Page %d: %d articles collected.", page_number, len(articles))
+
+            if reached_older_date:
+                LOGGER.info("[Jakarta Post] Reached articles older than %s, stopping.", date)
+                break
+
+            if num_pages is not None and page_number >= num_pages:
+                break
+
+            page_number += 1
+            time.sleep(1)
+
+        LOGGER.info("[Jakarta Post] Total scraped: %d", len(self.articles))
         return self.articles
-    
+
 
 def main():
-  scraper = JakartaPost()
+    scraper = JakartaPost()
 
-  parser = argparse.ArgumentParser(description="Script for scraping data from thejakartapost")
-  parser.add_argument("page_number", type=int, default=1)
-  parser.add_argument("filename", type=str, default="thejakartapost")
-  parser.add_argument("--csv", action='store_true', help="Flag to indicate write to csv file")
+    parser = argparse.ArgumentParser(description="Script for scraping data from The Jakarta Post")
+    parser.add_argument("date", type=str)
+    parser.add_argument("filename", type=str, nargs="?", default="jakartapost")
+    parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
+    parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
-  args = parser.parse_args()
+    args = parser.parse_args()
 
-  num_page = args.page_number
+    scraper.extract_news_pages(args.pages, args.date)
+    scraper.write_json(scraper.articles, args.filename)
 
-  scraper.extract_news_pages(num_page)
-    
-  scraper.write_json(scraper.articles, args.filename)
-
-  if args.csv:
-     scraper.write_csv(scraper.articles, args.filename)
+    if args.csv:
+        scraper.write_csv(scraper.articles, args.filename)
 
 
 if __name__ == "__main__":
-  '''
-  How to run:
-  python -m models.scrape_jakartapost <page_number> <filename_saved> <--csv (optional)>
-  '''
-  main()
+    '''
+    How to run:
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartapost <date> [filename] [--pages N] [--csv]
+
+    Examples:
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartapost 20260427
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartapost 20260427 test_jakarta_post
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartapost 20260427 test_jakarta_post --pages 3 --csv
+    '''
+    main()

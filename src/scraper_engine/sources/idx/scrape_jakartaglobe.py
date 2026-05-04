@@ -1,143 +1,134 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from scraper_engine.base.scraper import SeleniumScraper
 
-import locale
-import re
 import argparse
 import logging 
+import time 
 
-
-locale.setlocale(locale.LC_TIME, "en_US.UTF-8")
 
 LOGGER = logging.getLogger(__name__)
 
 
-class JGScraper(SeleniumScraper):
-    def extract_news(self, url):
+class JakartaGlobe(SeleniumScraper):
+    def fetch_article_list(self, url: str) -> list:
         soup = self.fetch_news_with_selenium(url)
 
-        for item in soup.find_all(
-            'div',
-            class_='row mb-4 position-relative'
-        ):
-            source = (
-                'https://jakartaglobe.id'
-                + item.find('div', class_='col-4')
-                .find('a')['href']
-                .strip()
-            )
-            title = (
-                item.find('div', class_='col-8 pt-l')
-                .find('h4')
-                .text.strip()
-            )
-            body = (
-                item.find('div', class_='col-8 pt-l')
-                .find(
-                    'span',
-                    class_='text-muted text-truncate-2-lines'
-                )
-                .text.strip()
-            )
-            timestamp = (
-                item.find('div', class_='col-8 pt-l')
-                .find(
-                    'span',
-                    class_='text-muted small'
-                )
-                .text.strip()
-            )
-            timestamp = self.convert_to_timestamp(timestamp)
+        if not soup:
+            LOGGER.info("[Jakarta Globe] [FAIL] Failed to fetch HTML or timed out for %s", url)
+            return []
 
-            self.articles.append(
-                {
-                    'title': title,
-                    'body': body,
-                    'source': source,
-                    'timestamp': timestamp
-                }
-            )
+        return soup.find_all("div", class_="row mb-4 position-relative")
 
-        LOGGER.info(f'total scraped source of jakarta globe: {len(self.articles)}')
-        return self.articles
+    def fetch_article_timestamp(self, article_url: str) -> str:
+        soup = self.fetch_news_with_selenium(article_url)
 
-    def convert_to_timestamp(self, time_str):
-        # Check if the string is in the absolute date format
+        if not soup:
+            return None
+
+        date_span = soup.select_one("div.col.small.pt-1 span.text-muted")
+
+        if not date_span:
+            return None
+
+        return self.parse_timestamp(date_span.get_text(strip=True))
+
+    def parse_timestamp(self, raw_timestamp: str) -> str:
+        if not raw_timestamp:
+            return None
+
         try:
-            absolute_time = datetime.strptime(
-                time_str,
-                "%b %d, %Y | %I:%M %p"
-            )
-            return absolute_time.strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
-        except ValueError:
-            pass
-
-        # Check if the string is in the relative time format
-        match = re.match(
-            r"(\d+)\s+(hour[s]?|day[s]?)\s+ago",
-            time_str
-        )
-        if match:
-            value = int(match.group(1))
-            unit = match.group(2)
-
-            if 'hour' in unit:
-                relative_time = datetime.now() - timedelta(
-                    hours=value
-                )
-            elif 'day' in unit:
-                relative_time = datetime.now() - timedelta(
-                    days=value
-                )
-
-            return relative_time.strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
-
-        return None
-
-    def extract_news_pages(self, num_pages):
-        # for index in range(num_pages):
-        #     self.extract_news(self.get_page(index + 1))
-        # return self.articles
+            cleaned = raw_timestamp.strip().replace("|", "").strip()
+            parsed_date = datetime.strptime(cleaned, "%B %d, %Y %I:%M %p")
+            return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
         
-        # Bypass page, only extract the first page, cause the url is broken with /page_number
-        return self.extract_news(self.get_page(num_pages))
-    
-    def get_page(self, page_num):
-        # return (
-        #     f'https://jakartaglobe.id/business/newsindex/'
-        #     f'{page_num}'
-        # )
+        except ValueError as error:
+            LOGGER.error("[Jakarta Globe] Error parsing date '%s': %s", raw_timestamp, error)
+            return None
 
-        return (
-            'https://jakartaglobe.id/business/newsindex'
+    def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
+        parsed_articles = []
+        reached_older_date = False
+
+        target_datetime = datetime(
+            int(target_date[:4]),
+            int(target_date[4:6]),
+            int(target_date[6:]),
         )
+
+        for article_item in article_items:
+            anchor_tag = article_item.select_one("div.col-4 a")
+
+            if not anchor_tag:
+                continue
+
+            relative_url = anchor_tag.get("href")
+            source_url = f"https://jakartaglobe.id{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
+
+            if not source_url:
+                continue
+
+            title_tag = article_item.select_one("div.col-8.pt-l h4")
+            title = title_tag.get_text(strip=True) if title_tag else None
+
+            thumbnail_tag = article_item.select_one("div.col-4 img.lazy")
+            thumbnail_url = thumbnail_tag.get("src") if thumbnail_tag else None
+
+            published_at = self.fetch_article_timestamp(source_url)
+            time.sleep(0.5)
+
+            if not published_at:
+                LOGGER.info("[Jakarta Globe] Failed to parse date for url: %s. Skipping.", source_url)
+                continue
+
+            article_datetime = datetime.strptime(published_at[:10], "%Y-%m-%d")
+
+            if article_datetime < target_datetime:
+                reached_older_date = True
+                break
+
+            parsed_articles.append({
+                "title": title,
+                "source": source_url,
+                "thumbnail": thumbnail_url,
+                "timestamp": published_at,
+            })
+
+        return parsed_articles, reached_older_date
+
+    def extract_news_pages(self, num_pages: int, date: str) -> list:
+        # Jakarta Globe pagination is broken on the site, single page only
+        page_url = "https://jakartaglobe.id/business/newsindex"
+
+        article_items = self.fetch_article_list(page_url)
+        
+        if not article_items:
+            LOGGER.info("[Jakarta Globe] No articles found, stopping.")
+            return self.articles
+
+        articles, reached_older_date = self.parse_articles(article_items, date)
+        self.articles.extend(articles)
+
+        if reached_older_date:
+            LOGGER.info("[Jakarta Globe] Reached articles older than %s, stopping.", date)
+
+        LOGGER.info("[Jakarta Globe] Total scraped: %d", len(self.articles))
+
+        return self.articles
 
 
 def main():
-    scraper = JGScraper()
+    scraper = JakartaGlobe()
 
-    parser = argparse.ArgumentParser(
-        description="Script for scraping data from jakartaglobe"
-    )
-    parser.add_argument("page_number", type=int, default=1)
-    parser.add_argument("filename", type=str, default="jgarticles")
-    parser.add_argument(
-        "--csv",
-        action='store_true',
-        help="Flag to indicate write to csv file"
-    )
+    parser = argparse.ArgumentParser(description="Script for scraping data from Jakarta Globe")
+    parser.add_argument("date", type=str)
+    parser.add_argument("filename", type=str, nargs="?", default="jakartaglobe")
+    parser.add_argument("--pages", type=int, default=None, help="Reserved for pipeline consistency, no effect")
+    parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
 
-    num_page = args.page_number
-
-    scraper.extract_news_pages(num_page)
-
+    scraper.extract_news_pages(args.pages, args.date)
     scraper.write_json(scraper.articles, args.filename)
 
     if args.csv:
@@ -147,6 +138,11 @@ def main():
 if __name__ == "__main__":
     '''
     How to run:
-    uv run -m src.scraper_engine.sources.idx.scrape_jakartaglobe <page_number> <filename_saved> <--csv (optional)>
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartaglobe <date> [filename] [--pages N] [--csv]
+
+    Examples:
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartaglobe 20260427
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartaglobe 20260427 test_jakartaglobe
+    uv run -m src.scraper_engine.sources.idx.scrape_jakartaglobe 20260427 test_jakartaglobe --pages 3 --csv
     '''
     main()

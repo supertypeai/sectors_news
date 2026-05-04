@@ -1,186 +1,201 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import Scraper
+from scraper_engine.config.conf import HEADERS
+from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
 
 import argparse
 import time
-import re 
 import logging 
 import requests 
 
 
 LOGGER = logging.getLogger(__name__)
 
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/122.0.0.0 Safari/537.36"
-    ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.5",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Connection": "keep-alive",
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Sec-Fetch-User": "?1",
-    "Cache-Control": "max-age=0",
-}
-
 
 class InvestorID(Scraper):
-    def extract_news(self, url):
-        raw_soup = self.fetch_news_with_proxy(url)
-        soup = BeautifulSoup(raw_soup, 'html.parser')
-        
-        seen_urls = set()
+    def fetch_article_list(self, url: str) -> list:
+        raw_html_content = self.fetch_news_with_proxy(url)
 
-        article_containers = soup.find_all('div', class_='row mb-4 position-relative')
+        if not raw_html_content:
+            LOGGER.info("[Investor ID] [FAIL] Failed to fetch HTML or timed out for %s", url)
+            return []
 
-        for article_container in article_containers:
-            link_element = article_container.find('a', class_='stretched-link')
-            
-            if not link_element:
-                continue
+        soup = BeautifulSoup(raw_html_content, "html.parser")
+        return soup.find_all("div", class_="row mb-4 position-relative")
 
-            article_url = link_element.get('href')
-            
-            # Convert relative path to absolute URL
-            if article_url and article_url.startswith('/'):
-                article_url = f"https://investor.id{article_url}"
-
-            if not article_url or article_url in seen_urls:
-                continue
-
-            title_element = article_container.find('h4', class_='my-3 text-truncate-2-lines')
-            article_title = title_element.get_text(strip=True) if title_element else ""
-
-            publish_time = ""
-
-            if article_url:
-                publish_time = self.fetch_exact_timestamp(article_url)
-                LOGGER.info(f'time article: {publish_time}')
-
-            if not publish_time:
-                time_element = article_container.find('span', class_='text-muted small')
-
-                if time_element:
-                    relative_time_raw = time_element.get_text(strip=True)
-                    publish_time = self.calculate_relative_timestamp(relative_time_raw)
-                    LOGGER.info(f'time relative: {publish_time}')
-
-            if not publish_time:
-                LOGGER.info(f"Failed to extract publish time for url: {article_url}. Skipping.")
-                continue
-
-            seen_urls.add(article_url)
-
-            if article_title and article_url:
-                extracted_article = {
-                    'title': article_title,
-                    'source': article_url,
-                    'timestamp': publish_time
-                }
-                
-                self.articles.append(extracted_article)
-
-        LOGGER.info(f'total scraped source of investor id: {len(self.articles)}')
-        return self.articles
-
-    def fetch_exact_timestamp(self, article_url: str) -> str:
+    def fetch_article_timestamp(self, article_url: str) -> str:
         session = requests.Session()
         response = session.get(article_url, headers=HEADERS, timeout=15)
-        response_text = response.text[:500]
+        soup = BeautifulSoup(response.text, "html.parser")
 
-        data_layer_match = re.search(r'"detail_published_date"\s*:\s*"([^"]+)"', response_text)
+        date_tag = soup.select_one("div.col.small.pt-1 span.text-muted")
 
-        if data_layer_match:
-            raw_time_string = data_layer_match.group(1)
-            
-            # Parses format: "Kamis, 5 Maret 2026 | 08:45 WIB"
-            time_match = re.search(r'(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})\s*\|\s*(\d{2}:\d{2})', raw_time_string)
-            
-            if time_match:
-                extracted_day = time_match.group(1)
-                extracted_month_string = time_match.group(2)
-                extracted_year = time_match.group(3)
-                extracted_time_string = time_match.group(4)
-                
-                indonesian_months_mapping = {
-                    "Januari": "01", "Februari": "02", "Maret": "03", "April": "04", 
-                    "Mei": "05", "Juni": "06", "Juli": "07", "Agustus": "08", 
-                    "September": "09", "Oktober": "10", "November": "11", "Desember": "12"
-                }
-                
-                month_number = indonesian_months_mapping.get(extracted_month_string)
-                
-                if month_number:
-                    # Construct the final strict format "%Y-%m-%d %H:%M:%S"
-                    formatted_timestamp = f"{extracted_year}-{month_number}-{extracted_day.zfill(2)} {extracted_time_string}:00"
-                    return formatted_timestamp
-                    
-        return ""
+        if not date_tag:
+            return None
 
-    def calculate_relative_timestamp(self, relative_time_string: str) -> str:
-        current_time = datetime.now()
-        
-        minutes_match = re.search(r'(\d+)\s+menit', relative_time_string)
-        if minutes_match:
-            extracted_minutes = int(minutes_match.group(1))
-            calculated_time = current_time - timedelta(minutes=extracted_minutes)
-            return calculated_time.strftime("%Y-%m-%d %H:%M:%S")
-            
-        hours_match = re.search(r'(\d+)\s+jam', relative_time_string)
-        if hours_match:
-            extracted_hours = int(hours_match.group(1))
-            calculated_time = current_time - timedelta(hours=extracted_hours)
-            return calculated_time.strftime("%Y-%m-%d %H:00:00")
+        return self.parse_timestamp(date_tag.get_text(strip=True))
 
-        days_match = re.search(r'(\d+)\s+hari', relative_time_string)
-        if days_match:
-            extracted_days = int(days_match.group(1))
-            calculated_time = current_time - timedelta(days=extracted_days)
-            return calculated_time.strftime("%Y-%m-%d 00:00:00")
-            
-        return ""
-    
-    def extract_news_pages(self, num_pages):
-        for index in range(1, num_pages+1):
-            self.extract_news(self.get_page(index))
+    def parse_timestamp(self, raw_timestamp: str) -> str:
+        if not raw_timestamp:
+            return None
+
+        try:
+            cleaned = raw_timestamp.strip()
+
+            for timezone_label in ["WIB", "WITA", "WIT"]:
+                cleaned = cleaned.replace(timezone_label, "")
+
+            date_parts = cleaned.split("|")
+
+            if len(date_parts) != 2:
+                return None
+
+            date_part = date_parts[0].strip()
+            time_part = date_parts[1].strip()
+
+            parts = date_part.split()
+            day = int(parts[0])
+            month = INDONESIAN_MONTHS.get(parts[1])
+            year = int(parts[2])
+
+            if not month:
+                return None
+
+            hour, minute = time_part.split(":")
+            parsed_date = datetime(year, month, day, int(hour), int(minute))
+            return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
+
+        except (ValueError, IndexError, AttributeError) as error:
+            LOGGER.error("[Investor ID] Error parsing date '%s': %s", raw_timestamp, error)
+            return None
+
+    def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
+        parsed_articles = []
+        seen_urls = set()
+        reached_older_date = False
+
+        target_datetime = datetime(
+            int(target_date[:4]),
+            int(target_date[4:6]),
+            int(target_date[6:]),
+        )
+
+        for article_item in article_items:
+            anchor_tag = article_item.find("a", class_="stretched-link")
+
+            if not anchor_tag:
+                continue
+
+            relative_url = anchor_tag.get("href")
+            source_url = f"https://investor.id{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
+
+            if not source_url or source_url in seen_urls:
+                continue
+
+            title_tag = article_item.find("h4", class_="my-3 text-truncate-2-lines")
+            title = title_tag.get_text(strip=True) if title_tag else None
+
+            thumbnail_tag = article_item.select_one("div.col-4 img.lazy")
+            thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
+
+            raw_date = ""
+            date_span = article_item.find("span", class_="text-muted small")
+            if date_span:
+                raw_date = date_span.get_text(strip=True)
+
+            published_at = None
+
+            if "menit yang lalu" in raw_date or "jam yang lalu" in raw_date or "hari yang lalu" in raw_date:
+                published_at = self.fetch_article_timestamp(source_url)
+                time.sleep(0.5)
+
+            else:
+                published_at = self.parse_timestamp(raw_date)
+
+            if not published_at:
+                LOGGER.info("[Investor ID] Failed to parse date for url: %s. Skipping.", source_url)
+                continue
+
+            article_datetime = datetime.strptime(published_at[:10], "%Y-%m-%d")
+
+            if article_datetime < target_datetime:
+                reached_older_date = True
+                break
+
+            if not title:
+                continue
+
+            seen_urls.add(source_url)
+            parsed_articles.append({
+                "title": title,
+                "source": source_url,
+                "thumbnail": thumbnail_url,
+                "timestamp": published_at,
+            })
+
+        return parsed_articles, reached_older_date
+
+    def extract_news_pages(self, num_pages: int, date: str) -> list:
+        page_number = 1
+
+        while True:
+            page_url = f"https://investor.id/stock/indeks/{page_number}"
+            print(page_url)
+
+            article_items = self.fetch_article_list(page_url)
+
+            if not article_items:
+                LOGGER.info("[Investor ID] No articles found on page %d, stopping.", page_number)
+                break
+
+            articles, reached_older_date = self.parse_articles(article_items, date)
+
+            self.articles.extend(articles)
+            LOGGER.info("[Investor ID] Page %d: %d articles collected.", page_number, len(articles))
+
+            if reached_older_date:
+                LOGGER.info("[Investor ID] Reached articles older than %s, stopping.", date)
+                break
+
+            if num_pages is not None and page_number >= num_pages:
+                break
+
+            page_number += 1
             time.sleep(1)
+
+        LOGGER.info("[Investor ID] Total scraped: %d", len(self.articles))
         return self.articles
-   
-    def get_page(self, page_num) -> str:
-        return f"https://investor.id/stock/indeks/{page_num}"  
-    
+
 
 def main():
-  scraper = InvestorID()
+    scraper = InvestorID()
 
-  parser = argparse.ArgumentParser(description="Script for scraping data from fianncialbisnis")
-  parser.add_argument("page_number", type=int, default=1)
-  parser.add_argument("filename", type=str, default="fianncialbisnis")
-  parser.add_argument("--csv", action='store_true', help="Flag to indicate write to csv file")
+    parser = argparse.ArgumentParser(description="Script for scraping data from Investor ID")
+    parser.add_argument("date", type=str)
+    parser.add_argument("filename", type=str, nargs="?", default="investorid")
+    parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
+    parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
-  args = parser.parse_args()
+    args = parser.parse_args()
 
-  num_page = args.page_number
+    scraper.extract_news_pages(args.pages, args.date)
+    scraper.write_json(scraper.articles, args.filename)
 
-  scraper.extract_news_pages(num_page)
-    
-  scraper.write_json(scraper.articles, args.filename)
-
-  if args.csv:
-     scraper.write_csv(scraper.articles, args.filename)
+    if args.csv:
+        scraper.write_csv(scraper.articles, args.filename)
 
 
 if __name__ == "__main__":
     '''
     How to run:
-    uv run -m src.scraper_engine.sources.idx.scrape_investor_id <page_number> <filename_saved> <--csv (optional)>
+    uv run -m src.scraper_engine.sources.idx.scrape_investor_id <date> [filename] [--pages N] [--csv]
+
+    Examples:
+    uv run -m src.scraper_engine.sources.idx.scrape_investor_id 20260427
+    uv run -m src.scraper_engine.sources.idx.scrape_investor_id 20260427 test_investor_id
+    uv run -m src.scraper_engine.sources.idx.scrape_investor_id 20260427 test_investor_id --pages 3 --csv
     '''
     main()
 

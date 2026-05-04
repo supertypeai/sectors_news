@@ -4,13 +4,14 @@ from scraper_engine.base.scraper import SeleniumScraper
 
 import logging 
 import argparse
+import re 
 
 
 LOGGER = logging.getLogger(__name__)
 
 
 class IDNFinancialScraper(SeleniumScraper):
-    def extract_news(self, url: str):
+    def fetch_article_list(self, url: str):
         soup = self.fetch_news_with_selenium(url)
         
         if not soup:
@@ -23,91 +24,116 @@ class IDNFinancialScraper(SeleniumScraper):
             LOGGER.warning("Could not find 'side-news' container. Layout might have changed or page is empty.")
             return []
 
-        # Items are in <ul class="list"> -> <li class="item">
-        items = news_container.find_all('li', class_='item')
+        article_items = news_container.find_all("li", class_="item")
+
+        return article_items 
+    
+    def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
+        parsed_articles = []
+        reached_older_date = False
+
+        target_datetime = datetime(
+            int(target_date[:4]),
+            int(target_date[4:6]),
+            int(target_date[6:]),
+        )
         
-        LOGGER.info(f"Found {len(items)} items on page.")
+        for article_item in article_items:
+            anchor_tag = article_item.find("a", class_="item-a")
 
-        for item in items:
-            try:
-                # Link & Title
-                # <a class="item-a d-flex" href="...">
-                link_tag = item.find('a', class_='item-a')
-
-                if not link_tag: 
-                    continue
-                
-                link = link_tag.get('href')
-                
-                # Title is inside <div class="title">
-                title_div = item.find('div', class_='title')
-                title = title_div.get_text(strip=True) if title_div else ""
-                
-                if not title or not link: 
-                    continue
-
-                # Timestamp
-                # <div class="date" data-date=">2026-02-13T12:38:18+07:00">
-                date_div = item.find('div', class_='date')
-                timestamp = None
-                
-                if date_div and date_div.has_attr('data-date'):
-                    # The data-date format in HTML is ">2026-02-13T12:38:18+07:00"
-                    raw_date = date_div['data-date'].replace('>', '').strip()
-                    
-                    try:
-                        dt_obj = datetime.fromisoformat(raw_date)
-                        timestamp = dt_obj.strftime("%Y-%m-%d %H:%M:%S")
-
-                    except ValueError:
-                        timestamp = raw_date
-                
-                if not timestamp and date_div:
-                    LOGGER.info('Timestamp and date_div not found, timestamp return None')
-                    return None 
-                
-                self.articles.append({
-                    'title': title,
-                    'source': link,
-                    'timestamp': timestamp
-                })
-                
-            except Exception as error:
-                LOGGER.error(f"Error parsing item: {error}")
+            if not anchor_tag:
                 continue
-        
-        LOGGER.info(f'total scraped source of idn financials: {len(self.articles)}')
+
+            source_url = anchor_tag.get("href")
+
+            title_tag = article_item.find("div", class_="title")
+            title = title_tag.get_text(strip=True) if title_tag else None
+
+            # thumbnail is in style="background-image:url('...')"
+            image_div = article_item.find("div", class_="image")
+            thumbnail_url = None
+
+            if image_div and image_div.get("style"):
+                match = re.search(r"url\('(.+?)'\)", image_div["style"])
+
+                if match:
+                    thumbnail_url = match.group(1)
+
+            # data-date format: ">2026-04-30T18:00:31+07:00"
+            date_div = article_item.find("div", class_="date")
+            published_at = None
+
+            if date_div and date_div.get("data-date"):
+                raw_date = date_div["data-date"].replace(">", "").strip()
+
+                try:
+                    dt_obj = datetime.fromisoformat(raw_date)
+                    article_date_naive = datetime(dt_obj.year, dt_obj.month, dt_obj.day)
+
+                    if article_date_naive < target_datetime:
+                        reached_older_date = True
+                        break
+
+                    published_at = dt_obj.strftime("%Y-%m-%d %H:%M:%S")
+
+                except ValueError:
+                    published_at = None
+
+            if not title or not source_url:
+                continue
+
+            parsed_articles.append({
+                "title": title,
+                "source": source_url,
+                "thumbnail": thumbnail_url,
+                "timestamp": published_at,
+            })
+
+        return parsed_articles, reached_older_date
+
+    def extract_news_pages(self, num_pages: int, date: str):
+        page_number = 1
+
+        while True:
+            page_url = f"https://www.idnfinancials.com/search?q=idx&per_page={page_number}"
+            print(page_url)
+
+            article_items = self.fetch_article_list(page_url)
+
+            if not article_items:
+                LOGGER.info("[IDN Financials] No articles found on page %d, stopping.", page_number)
+                break
+
+            articles, reached_older_date = self.parse_articles(article_items, date)
+            
+            self.articles.extend(articles)
+            LOGGER.info("[IDN Financials] Page %d: %d articles collected.", page_number, len(articles))
+
+            if reached_older_date:
+                LOGGER.info("[IDN Financials] Reached articles older than %s, stopping.", date)
+                break
+
+            if num_pages is not None and page_number >= num_pages:
+                break
+
+            page_number += 1
+
+        LOGGER.info("[IDN Financials] Total scraped: %d", len(self.articles))
         return self.articles
-
-    def extract_news_pages(self, num_pages: int):
-        for index in range(num_pages):
-            self.extract_news(self.get_page(index))
-
-        return self.articles
-
-    def get_page(self, page_num: int):
-        return f'https://www.idnfinancials.com/search?q=idx&per_page={page_num}'
-
-
+  
+      
 def main():
     scraper = IDNFinancialScraper()
 
-    parser = argparse.ArgumentParser(
-        description="Script for scraping data from idnfinancials"
-    )
-    parser.add_argument("page_number", type=int, default=1)
-    parser.add_argument("filename", type=str, default="idnarticles")
-    parser.add_argument(
-        "--csv",
-        action='store_true',
-        help="Flag to indicate write to csv file"
-    )
+    parser = argparse.ArgumentParser(description="Script for scraping data from IDN Financials")
+    parser.add_argument("date", type=str)
+    parser.add_argument("filename", type=str, nargs="?", default="idnfinancials")
+    parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
+    parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
-    num_page = args.page_number
 
-    scraper.extract_news_pages(num_page)
-
+    scraper.extract_news_pages(args.pages, args.date)
     scraper.write_json(scraper.articles, args.filename)
 
     if args.csv:
@@ -117,6 +143,11 @@ def main():
 if __name__ == "__main__":
     """
     How to run:
-    uv run -m src.scraper_engine.sources.idx.scrape_idnfinancials <page_number> <filename_saved> <--csv (optional)>
+    uv run -m src.scraper_engine.sources.idx.scrape_idnfinancials <date> [filename] [--pages N] [--csv]
+
+    Examples:
+    uv run -m src.scraper_engine.sources.idx.scrape_idnfinancials 20260427
+    uv run -m src.scraper_engine.sources.idx.scrape_idnfinancials 20260427 test_idnfinancials
+    uv run -m src.scraper_engine.sources.idx.scrape_idnfinancials 20260427 test_idnfinancials --pages 3 --csv
     """
     main()
