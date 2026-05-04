@@ -30,7 +30,7 @@ class BisnisMarket(SeleniumScraper):
         return articles_items
 
     def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news(article_url)
+        soup = self.fetch_news_with_selenium(article_url)
 
         if not soup:
             return None
