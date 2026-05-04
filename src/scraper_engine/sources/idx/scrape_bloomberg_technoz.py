@@ -118,7 +118,6 @@ class BloombergTechnoz(SeleniumScraper):
 
         # bloomberg technoz has no pagination, single page per date (num_pages only for inference pipeline)
         page_url = f"https://www.bloombergtechnoz.com/indeks/market/{formatted_date}"
-        print(page_url)
 
         article_items = self.fetch_article_list(page_url)
 

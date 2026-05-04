@@ -35,6 +35,7 @@ class BisnisMarket(SeleniumScraper):
         if not soup:
             return None
 
+        LOGGER.info("[Bisnis Market] Page source length: %d", len(str(soup)))
         date_tag = soup.select_one("div.detailsAttributeDates")
 
         if not date_tag:
