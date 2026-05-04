@@ -5,10 +5,18 @@ from rapidfuzz import fuzz, process
 from .models import News 
 from .summarizer import summarize_news, get_article_body
 from .scorer import get_article_score
-from scraper_engine.database.metadata import get_sectors_data, get_sectors_data_sgx, build_ticker_index, build_sgx_ticker_index
+from scraper_engine.database.metadata import (
+    get_sectors_data, 
+    get_sectors_data_sgx, 
+    build_ticker_index, 
+    build_sgx_ticker_index
+)
 from .classifier import (
-    load_company_data, NewsClassifier, 
-    load_sub_sectors_data, load_company_data_sgx, load_sub_sectors_data_sgx
+    load_company_data, 
+    NewsClassifier, 
+    load_sub_sectors_data, 
+    load_company_data_sgx, 
+    load_sub_sectors_data_sgx
 )
 from .company_extractor import extract_company_name 
 
@@ -247,16 +255,17 @@ def generate_article(data: dict, source_scraper: str, min_score: int) -> tuple[N
 
         # Assemble the final News object
         new_article = News(
-            title=title, 
-            body=body, 
+            title=title,
+            body=body,
             source=source,
             timestamp=timestamp.isoformat(),
             score=score_result,
-            tags=tags, 
-            tickers=[], 
-            sub_sector=[], 
+            tags=tags,
+            tickers=[],
+            sub_sector=[],
             sector="",
-            dimension=None
+            dimension=None,
+            thumbnail=data.get("thumbnail"),
         )
 
         # Post-processing
