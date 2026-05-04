@@ -17,7 +17,7 @@ class News:
     thumbnail: Optional[str] = None
 
     def to_dict(self) -> dict:
-        return {
+        result = {
             "title": self.title,
             "body": self.body,
             "source": self.source,
@@ -28,5 +28,9 @@ class News:
             "tickers": self.tickers,
             "dimension": self.dimension,
             "score": self.score,
-            "thumbnail": self.thumbnail,
         }
+
+        if self.thumbnail is not None:
+            result["thumbnail"] = self.thumbnail
+
+        return result
