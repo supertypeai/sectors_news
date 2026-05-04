@@ -5,9 +5,9 @@ from langchain_core.output_parsers  import JsonOutputParser
 from langchain.prompts              import ChatPromptTemplate
 from io                             import StringIO
 
-from scraper_engine.llm.client  import get_llm, TokenUsageLogger
-from scraper_engine.llm.prompts import SummarizationPrompts, SummaryNews
-from scraper_engine.config.conf import PROXY, USER_AGENT, HEADERS
+from scraper_engine.llm.client   import get_llm, TokenUsageLogger
+from scraper_engine.llm.prompts  import SummarizationPrompts, SummaryNews
+from scraper_engine.config.conf  import PROXY, USER_AGENT, HEADERS
 from scraper_engine.base.scraper import SeleniumScraper 
 
 import requests

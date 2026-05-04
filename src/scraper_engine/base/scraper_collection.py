@@ -1,7 +1,15 @@
 from .scraper import Scraper
 
+from datetime import datetime, timezone, timedelta
+
 import json
 import csv
+import logging
+
+WIB = timezone(timedelta(hours=7))
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class ScraperCollection:
@@ -12,17 +20,26 @@ class ScraperCollection:
         self.scrapers = []
         self.articles = []
     
-    def add_scraper(self, scraper):
+    def add_scraper(self, scraper) -> None:
         self.scrapers.append(scraper)
     
-    def run_all(self, num_page):
+    def run_all(self, num_page: int | None, date: str | None) -> list[dict]:
+        if date is None:
+            date = datetime.now(WIB).strftime("%Y%m%d")
+
         for scraper in self.scrapers:
             try:
-                articles = scraper.extract_news_pages(num_page)
+                try:
+                    articles = scraper.extract_news_pages(num_page, date)
+                except TypeError:
+                    articles = scraper.extract_news_pages(num_page)
+
                 self.articles = [*self.articles, *articles]
-            except Exception as e:
-                print(f"Error in scraper {scraper.__class__.__name__}: {e}")
+
+            except Exception as error:
+                LOGGER.error(f"Error in scraper {scraper.__class__.__name__}: {error}")
                 continue
+
         return self.articles
     
     # Writer methods
