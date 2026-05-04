@@ -26,9 +26,8 @@ class InvestorID(Scraper):
         return soup.find_all("div", class_="row mb-4 position-relative")
 
     def fetch_article_timestamp(self, article_url: str) -> str:
-        session = requests.Session()
-        response = session.get(article_url, headers=HEADERS, timeout=15)
-        soup = BeautifulSoup(response.text, "html.parser")
+        raw_html_content = self.fetch_news_with_proxy(article_url)
+        soup = BeautifulSoup(raw_html_content, "html.parser")
 
         date_tag = soup.select_one("div.col.small.pt-1 span.text-muted")
 
@@ -138,32 +137,37 @@ class InvestorID(Scraper):
         return parsed_articles, reached_older_date
 
     def extract_news_pages(self, num_pages: int, date: str) -> list:
-        page_number = 1
+        base_urls = [
+            "https://investor.id/stock/indeks/",
+            "https://investor.id/corporate-action/",
+        ]
 
-        while True:
-            page_url = f"https://investor.id/stock/indeks/{page_number}"
-            print(page_url)
+        for base_url in base_urls:
+            page_number = 1 
 
-            article_items = self.fetch_article_list(page_url)
+            while True:
+                page_url  = f'{base_url}{page_number}'
 
-            if not article_items:
-                LOGGER.info("[Investor ID] No articles found on page %d, stopping.", page_number)
-                break
+                article_items = self.fetch_article_list(page_url)
 
-            articles, reached_older_date = self.parse_articles(article_items, date)
+                if not article_items:
+                    LOGGER.info("[Investor ID] No articles found on page %d, stopping.", page_number)
+                    break
 
-            self.articles.extend(articles)
-            LOGGER.info("[Investor ID] Page %d: %d articles collected.", page_number, len(articles))
+                articles, reached_older_date = self.parse_articles(article_items, date)
 
-            if reached_older_date:
-                LOGGER.info("[Investor ID] Reached articles older than %s, stopping.", date)
-                break
+                self.articles.extend(articles)
+                LOGGER.info("[Investor ID] Page %d: %d articles collected.", page_number, len(articles))
 
-            if num_pages is not None and page_number >= num_pages:
-                break
+                if reached_older_date:
+                    LOGGER.info("[Investor ID] Reached articles older than %s, stopping.", date)
+                    break
 
-            page_number += 1
-            time.sleep(1)
+                if num_pages is not None and page_number >= num_pages:
+                    break
+
+                page_number += 1
+                time.sleep(1)
 
         LOGGER.info("[Investor ID] Total scraped: %d", len(self.articles))
         return self.articles
