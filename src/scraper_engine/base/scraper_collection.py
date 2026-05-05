@@ -37,6 +37,8 @@ class ScraperCollection:
 
         for date_to_scrape in dates_to_scrape:
             for scraper in self.scrapers:
+                scraper.articles = [] 
+                
                 try:
                     try:
                         articles = scraper.extract_news_pages(num_page, date_to_scrape)

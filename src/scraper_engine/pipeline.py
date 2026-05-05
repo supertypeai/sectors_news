@@ -229,6 +229,9 @@ def main_idx(
             scrapercollection.add_scraper(financedetik)
             scrapercollection.add_scraper(kontankeuangan)
 
+            with last_state_path.open('w') as file:
+                json.dump({"last_run_at": datetime.now(WIB).isoformat()}, file)
+
             scrapercollection.run_all(page_number, date, filter_from)
             
             all_articles = scrapercollection.articles
@@ -242,9 +245,6 @@ def main_idx(
             SeleniumScraper.close_shared_driver()
 
     post_source(filename, batch, batch_size, table_name, source_scraper, filter_from)
-
-    with last_state_path.open('w') as file:
-        json.dump({"last_run_at": datetime.now(WIB).isoformat()}, file)
 
 
 @app.command(name="main_sgx")
