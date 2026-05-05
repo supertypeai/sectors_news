@@ -83,8 +83,7 @@ class EmitenNews(Scraper):
 
         try:
             raw_text = timestamp_tag.get_text(strip=True)
-            date_part = raw_text.split(",")[0].strip()
-            return self.parse_timestamp(date_part)
+            return self.parse_timestamp(raw_text)
         
         except (AttributeError, IndexError) as error:
             LOGGER.error("[Emiten News] Error extracting timestamp: %s", error)
@@ -95,7 +94,14 @@ class EmitenNews(Scraper):
             return None
 
         try:
-            parsed_date = datetime.strptime(raw_timestamp, "%d/%m/%Y")
+            cleaned_timestamp = (
+                raw_timestamp.replace("WIB", "")
+                .replace("WITA", "")
+                .replace("WIT", "")
+                .strip()
+            )
+
+            parsed_date = datetime.strptime(cleaned_timestamp, "%d/%m/%Y, %H:%M")
             return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
         
         except (ValueError, AttributeError) as error:

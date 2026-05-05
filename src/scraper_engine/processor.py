@@ -146,6 +146,8 @@ def get_article_to_process(
                 all_articles = json.load(file_pipeline)
 
             if source_scraper == 'idx':
+                LOGGER.info(f"Total raw article scraped: {len(all_articles)}")
+                
                 all_articles = filter_articles_by_time(all_articles, filter_from)
                 LOGGER.info(f"Total articles in time window: {len(all_articles)}")
 

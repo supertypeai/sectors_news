@@ -139,7 +139,7 @@ class InvestorID(Scraper):
     def extract_news_pages(self, num_pages: int, date: str) -> list:
         base_urls = [
             "https://investor.id/stock/indeks/",
-            "https://investor.id/corporate-action/",
+            # "https://investor.id/corporate-action/",
         ]
 
         for base_url in base_urls:

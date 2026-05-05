@@ -6,6 +6,7 @@ from scraper_engine.sources.idx.utils.constant import INDO_TO_ENG
 import argparse
 import time
 import logging 
+import re 
 
 
 LOGGER = logging.getLogger(__name__)
@@ -56,8 +57,8 @@ class KompasMoney(Scraper):
             )
 
             for idn_month, eng_month in INDO_TO_ENG.items(): 
-                if idn_month in cleaned_date: 
-                    cleaned_date = cleaned_date.replace(idn_month, eng_month)
+                if idn_month.lower() in cleaned_date.lower():
+                    cleaned_date = re.sub(re.escape(idn_month), eng_month, cleaned_date, flags=re.IGNORECASE)
                     break
 
             parsed_date = datetime.strptime(cleaned_date, "%d %B %Y, %H:%M")
@@ -106,7 +107,6 @@ class KompasMoney(Scraper):
         while True:
             params = f'&date={year}-{month}-{day}&page={page}'
             full_url = base_url + params 
-            print(full_url)
             article_list = self.fetch_article_list(full_url)
 
             if not article_list:
