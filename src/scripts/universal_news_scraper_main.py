@@ -3,7 +3,7 @@ import ssl
 import os
 import sys
 import time
-from universal_news_scraper_scraper import (
+from scripts.universal_news_scraper_scraper import (
     handle_bloomberg,
     handle_cnbc,
     handle_cnn_edition,
