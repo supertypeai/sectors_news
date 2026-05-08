@@ -261,7 +261,7 @@ def generate_article(data: dict, source_scraper: str, min_score: int) -> tuple[N
             timestamp=timestamp.isoformat(),
             score=score_result,
             tags=tags,
-            tickers=[],
+            symbols=[],
             sub_sector=[],
             sector="",
             dimension=None,
@@ -277,7 +277,7 @@ def generate_article(data: dict, source_scraper: str, min_score: int) -> tuple[N
             dimension, 
             source_scraper
         )
-        new_article.tickers = post_process_result.get("tickers")
+        new_article.symbols = post_process_result.get("tickers")
         new_article.sub_sector = post_process_result.get("sub_sector")
         new_article.sector = post_process_result.get("sector")
         new_article.dimension = post_process_result.get("dimension")
