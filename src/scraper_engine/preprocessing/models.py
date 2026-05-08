@@ -11,7 +11,7 @@ class News:
     sector: str
     sub_sector: list
     tags: list
-    symbols: list
+    tickers: list
     dimension: Optional[dict]
     score: Optional[int]
     thumbnail: Optional[str] = None
@@ -25,7 +25,7 @@ class News:
             "sector": self.sector,
             "sub_sector": self.sub_sector,
             "tags": self.tags,
-            "symbols": self.symbols,
+            "tickers": self.tickers,
             "dimension": self.dimension,
             "score": self.score,
         }
