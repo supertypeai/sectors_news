@@ -91,6 +91,7 @@ def matching_company_name(
             scorer = fuzz.ratio
             cutoff = 95
             candidates = ticker_candidates
+
         else:
             normalized = normalized_funct(company)
             query = normalized
@@ -98,6 +99,7 @@ def matching_company_name(
             if len(normalized) < short_query_threshold:
                 scorer = fuzz.ratio
                 cutoff = 90
+
             else:
                 scorer = fuzz.token_set_ratio
                 cutoff = score_threshold
@@ -115,6 +117,7 @@ def matching_company_name(
             matched_key, score, _ = result
             ticker_found = candidates[matched_key]
             LOGGER.info(f"input: {query!r} -> matched: {matched_key!r} (score={score}) -> {ticker_found}")
+        
         else:
             LOGGER.info(f"input: {query!r} -> no match above threshold")
 
@@ -154,7 +157,6 @@ def post_processing(
 
     else: 
         company_extracted = extract_company_name(body, source_scraper) or []
-        LOGGER.info(f'raw company: {company_extracted}')
 
         if company_extracted: 
             matched_tickers = matching_company_name(company_extracted, source_scraper='idx')
@@ -202,22 +204,29 @@ def post_processing(
 
     return {
         "tickers": checked_tickers,
-        "sub_sector": sub_sector,
+        "sub_sector": list(dict.fromkeys(sub_sector)),
         "sector": sector,
         "dimension": dimension
     }
 
 
-def summarize_and_score(source: str, timestamp: datetime, source_scraper: str) -> tuple[str, str, int]:
+def summarize_and_score(
+    source: str, 
+    timestamp: datetime, 
+    source_scraper: str
+) -> tuple[str, str, int]:
     article = get_article_body(source)
+
     if not article:
         return None
 
     summary = summarize_news(news_text=article, url=source)
+
     if not summary:
         return None
 
     title, body = summary
+
     if not title or not body:
         return None
 
@@ -225,7 +234,11 @@ def summarize_and_score(source: str, timestamp: datetime, source_scraper: str) -
     return title, body, score
 
 
-def generate_article(data: dict, source_scraper: str, min_score: int) -> tuple[News | None, str]:
+def generate_article(
+    data: dict, 
+    source_scraper: str, 
+    min_score: int
+) -> tuple[News | None, str]:
     source = data.get("source").strip()
     timestamp_str = data.get("timestamp").strip().replace("T", " ")
     timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
