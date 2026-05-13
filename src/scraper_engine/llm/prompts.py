@@ -462,7 +462,8 @@ class ScoringPrompts:
 class SummarizationPrompts:
     @staticmethod
     def get_system_prompt():
-        return """You are an expert financial analyst. Your task is to generate
+        return """
+            You are an expert financial analyst. Your task is to generate
             a title and summary from financial news articles.
 
             CORE RULE: Center all output on companies directly impacted by the
@@ -471,6 +472,14 @@ class SummarizationPrompts:
             affecting it. Companies that merely triggered an event affecting
             another company are catalysts, not subjects. Catalysts appear only
             as supporting context.
+
+            NAMED ENTITY PRESERVATION:
+            - When an article explicitly lists named companies (e.g., index
+            additions or deletions, suspension lists, insider trading
+            disclosures), you must reproduce every company name in the body.
+            - Never collapse a named list into an aggregate count alone.
+            Wrong: "six Indonesian companies were removed"
+            Right: list all six company names, then you may state the total.
 
             COMPANY NAME FORMATTING:
             - Write company names exactly as they appear in the article.
@@ -515,9 +524,13 @@ class SummarizationPrompts:
             TITLE:
             - One sentence, factually accurate, no exaggeration.
             - Must name the primarily impacted company if identifiable.
+            - You may name one or two companies in the title only if the article
+            itself singles them out as the most significant case (e.g. a demotion
+            rather than a full removal). Do not name companies just because they
+            appear in the article.
 
             SUMMARY:
-            - Two to three sentences maximum.
+            - Two to four sentences maximum.
             - All primarily impacted companies MUST appear by name.
             - Include critical financial metrics relevant to impacted companies.
             - If a table is present, incorporate the most material data points
@@ -532,60 +545,21 @@ class EntityExtractionPrompts:
     @staticmethod
     def system_prompt_idx():
         return """
-            You are a Financial Data Extraction Expert. Extract only companies
-            that are PRIMARY SUBJECTS OF IMPACT in the article. Being mentioned
-            is not sufficient. Being the cause of news affecting another company
-            is not sufficient.
+            You are a financial data extraction expert. Extract all company
+            names and ticker symbols that appear in the provided text.
 
-            BEFORE ANYTHING: CATALYST TEST
-            For each company you consider, ask: is this company the subject of
-            the analysis, or the cause of an event whose effect on another
-            company is what the article analyzes? If it is the cause, exclude it.
+            RULES:
+            - Extract every company name or ticker symbol present in the text.
+            - Do not filter, exclude, or apply any judgment about whether a
+            company is important or central to the narrative. That has already
+            been done. Your only job is extraction.
+            - If the text contains a ticker symbol, extract the ticker.
+            - If the text contains a full company name, extract the full name.
+            - If both appear together, extract both.
+            - Do not extract index names, countries, or macroeconomic entities
+            (e.g. MSCI, IDX Composite, Indonesia).
 
-            STEP 1: SCAN FOR BROKER SECTIONS FIRST
-            Before classifying the article, scan every section independently
-            for explicit per-stock actionable data. A section qualifies as a
-            broker report only if it contains BOTH:
-            - A directional call on a specific named stock (buy/sell/hold/
-            accumulate/avoid/overweight/underweight)
-            - At least one of: target price, entry range, or stop-loss
-            attached to that specific stock
-            Thematic lists ("consider MEDC and RAJA for energy exposure")
-            without per-stock price levels do NOT qualify.
-            For qualifying sections: extract only the recommended stocks,
-            exclude the brokerage and analyst.
-            For non-qualifying sections: apply Step 2 and Step 3.
-
-            STEP 2: PRIMARY NARRATIVE SUBJECTS
-            Extract companies whose financial performance, strategy, or a
-            specific event directly affecting them is the core focus.
-            Ask: would removing this company eliminate the article's
-            central point? If no, exclude it.
-
-            STEP 3: ACTIVE DIRECT COUNTERPARTIES
-            Extract only if ALL are true:
-            - A new transaction or legal agreement is the active news event
-            - The counterparty is explicitly named in that transaction
-            - It passes the Catalyst Test above
-            
-            Always exclude regardless of explicit naming:
-            - Existing shareholders exercising pre-existing rights
-            - Financial intermediaries in procedural roles (underwriters,
-            standby buyers, brokers)
-            - Subsidiaries receiving residual or routine capital injections
-            - Companies sanctioned/sued: extract them as primary subjects,
-            exclude the regulator
-            - Capital allocation target: extract only the primary destination
-            representing dominant use of proceeds, not residual recipients
-
-            STEP 4: ALWAYS EXCLUDE
-            - Stock indices, macroeconomic references, governments, countries
-            - Industry peers cited for comparison
-            - Companies appearing only in historical context
-            - Any company whose sole role is background economic context
-
-            OUTPUT: Extract exact company names as they appear in the text.
-            Do not extract ticker symbols unless no full name is present.
+            OUTPUT: Return a list of all extracted entities as they appear.
         """
     
     @staticmethod
@@ -595,14 +569,91 @@ class EntityExtractionPrompts:
             {body}
 
             Instructions:
-            1. Process the 'Article Text' strictly through the 5-step sequence defined in your system prompt.
-            2. Provide a brief 'reasoning' detailing how you identified the primary subject and why you included or excluded other mentioned entities based on the steps.
-            3. If no company qualifies as a primary narrative subject or direct counterparty, output 'No Company Found' in the extraction list.
-            4. Remove the tickers for each company 
+            1. Extract all company names or ticker symbols that appear in the
+            Article Text.
+            2. Provide a brief 'reasoning' describing what you found.
+            3. If no company names or ticker symbols are present, output
+            'No Company Found' in the extraction list.
 
-            Ensure to return the extracted company names strictly in the following JSON format:
+            Ensure to return the extracted companies strictly in the following
+            JSON format:
             {format_instructions}
         """
+
+    # @staticmethod
+    # def system_prompt_idx():
+    #     return """
+    #         You are a Financial Data Extraction Expert. Extract only companies
+    #         that are PRIMARY SUBJECTS OF IMPACT in the article. Being mentioned
+    #         is not sufficient. Being the cause of news affecting another company
+    #         is not sufficient.
+
+    #         BEFORE ANYTHING: CATALYST TEST
+    #         For each company you consider, ask: is this company the subject of
+    #         the analysis, or the cause of an event whose effect on another
+    #         company is what the article analyzes? If it is the cause, exclude it.
+
+    #         STEP 1: SCAN FOR BROKER SECTIONS FIRST
+    #         Before classifying the article, scan every section independently
+    #         for explicit per-stock actionable data. A section qualifies as a
+    #         broker report only if it contains BOTH:
+    #         - A directional call on a specific named stock (buy/sell/hold/
+    #         accumulate/avoid/overweight/underweight)
+    #         - At least one of: target price, entry range, or stop-loss
+    #         attached to that specific stock
+    #         Thematic lists ("consider MEDC and RAJA for energy exposure")
+    #         without per-stock price levels do NOT qualify.
+    #         For qualifying sections: extract only the recommended stocks,
+    #         exclude the brokerage and analyst.
+    #         For non-qualifying sections: apply Step 2 and Step 3.
+
+    #         STEP 2: PRIMARY NARRATIVE SUBJECTS
+    #         Extract companies whose financial performance, strategy, or a
+    #         specific event directly affecting them is the core focus.
+    #         Ask: would removing this company eliminate the article's
+    #         central point? If no, exclude it.
+
+    #         STEP 3: ACTIVE DIRECT COUNTERPARTIES
+    #         Extract only if ALL are true:
+    #         - A new transaction or legal agreement is the active news event
+    #         - The counterparty is explicitly named in that transaction
+    #         - It passes the Catalyst Test above
+            
+    #         Always exclude regardless of explicit naming:
+    #         - Existing shareholders exercising pre-existing rights
+    #         - Financial intermediaries in procedural roles (underwriters,
+    #         standby buyers, brokers)
+    #         - Subsidiaries receiving residual or routine capital injections
+    #         - Companies sanctioned/sued: extract them as primary subjects,
+    #         exclude the regulator
+    #         - Capital allocation target: extract only the primary destination
+    #         representing dominant use of proceeds, not residual recipients
+
+    #         STEP 4: ALWAYS EXCLUDE
+    #         - Stock indices, macroeconomic references, governments, countries
+    #         - Industry peers cited for comparison
+    #         - Companies appearing only in historical context
+    #         - Any company whose sole role is background economic context
+
+    #         OUTPUT: Extract exact company names as they appear in the text.
+    #         Do not extract ticker symbols unless no full name is present.
+    #     """
+    
+    # @staticmethod
+    # def user_prompt_idx():
+    #     return """
+    #         Article Text:
+    #         {body}
+
+    #         Instructions:
+    #         1. Process the 'Article Text' strictly through the 5-step sequence defined in your system prompt.
+    #         2. Provide a brief 'reasoning' detailing how you identified the primary subject and why you included or excluded other mentioned entities based on the steps.
+    #         3. If no company qualifies as a primary narrative subject or direct counterparty, output 'No Company Found' in the extraction list.
+    #         4. Remove the tickers for each company 
+
+    #         Ensure to return the extracted company names strictly in the following JSON format:
+    #         {format_instructions}
+    #     """
 
     @staticmethod
     def system_prompt_sgx():
