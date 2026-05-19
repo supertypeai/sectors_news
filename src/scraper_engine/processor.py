@@ -18,7 +18,7 @@ LOGGER = logging.getLogger(__name__)
 
 WIB = timezone(timedelta(hours=7))
 
-MININUM_SCORE = 60
+MININUM_SCORE = 63
 BATCH_SIZE = 5
 
 

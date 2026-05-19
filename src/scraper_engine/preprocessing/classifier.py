@@ -6,6 +6,7 @@ from supabase                       import Client
 from datetime                       import datetime
 from typing                         import List, Dict, Optional, Union
 from pathlib                        import Path
+from langchain.prompts              import ChatPromptTemplate
 
 from scraper_engine.llm.client  import invoke_llm, get_llm
 from scraper_engine.llm.prompts import (
@@ -15,7 +16,7 @@ from scraper_engine.llm.prompts import (
     SentimentClassification, 
     DimensionClassification, 
 )
-from scraper_engine.config.conf import MODEL_NAMES
+from scraper_engine.config.conf     import MODEL_NAMES
 from scraper_engine.database.client import SUPABASE_CLIENT
 
 import json
@@ -219,12 +220,15 @@ class NewsClassifier:
         body: str, 
         category: str, 
         source_scraper: str, 
-        title: str = ""
+        title: str
     ) -> Optional[Union[list[str], str, dict[str, Optional[int]]]]:
         prompt_methods = {
             "tags": self.prompts.get_tags_prompt(),
             "subsectors": self.prompts.get_subsectors_prompt(),
-            "sentiment": self.prompts.get_sentiment_prompt(),
+            "sentiment": {
+                'system_prompt': self.prompts.get_sentiment_system_prompt(market=source_scraper),
+                'user_prompt': self.prompts.get_sentiment_user_prompt()
+            },
             "dimension": self.prompts.get_dimension_prompt()
         }
 
@@ -249,29 +253,43 @@ class NewsClassifier:
         classifier_parser = JsonOutputParser(pydantic_object=model_mapping.get(category))
         
         # Get prompt template
-        template = prompt_methods.get(category)
+        if category.lower() == 'sentiment': 
+            templates = prompt_methods.get(category)
+            system_prompt = templates.get('system_prompt')
+            user_prompt = templates.get('user_prompt')
+
+        else:
+            template = prompt_methods.get(category)
 
         # Get input variables based on category
         if category.lower() == 'dimension':
             input_variables = ["title", "body"]
+        
         else:
             input_variables = ['body']
 
-        # Create prompt with input variables and format instructions
-        prompt = PromptTemplate(
-            template=template, 
-            input_variables=input_variables,
-            partial_variables={
-                "format_instructions": classifier_parser.get_format_instructions()
-            }
-        )
+        if category.lower() == 'sentiment': 
+            prompt = ChatPromptTemplate.from_messages([
+                ("system", system_prompt),
+                ('user', user_prompt)
+            ])
 
-        # Add category-specific data to prompt
-        if category == "tags":
-            prompt = prompt.partial(tags=tags_string)
+        else:
+            # Create prompt with input variables and format instructions
+            prompt = PromptTemplate(
+                template=template, 
+                input_variables=input_variables,
+                partial_variables={
+                    "format_instructions": classifier_parser.get_format_instructions()
+                }
+            )
 
-        elif category == "subsectors":
-            prompt = prompt.partial(subsectors=subsectors)
+            # Add category-specific data to prompt
+            if category == "tags":
+                prompt = prompt.partial(tags=tags_string)
+
+            elif category == "subsectors":
+                prompt = prompt.partial(subsectors=subsectors)
 
         # Create runnable system based on category
         if category == "dimension":
@@ -279,6 +297,7 @@ class NewsClassifier:
                 "title": itemgetter("title"),
                 "body": itemgetter("body")
             })
+
         else:
             runnable_system = RunnableParallel({
                 "body": itemgetter("body")
@@ -286,7 +305,16 @@ class NewsClassifier:
         
         # Prepare input data
         if category == "dimension":
-            input_data = {"title": title, "body": body}
+            input_data = {
+                "title": title, "body": body
+            }
+        
+        elif category == 'sentiment': 
+            input_data = {
+                "body": body,
+                "format_instructions": classifier_parser.get_format_instructions()
+            }
+
         else:
             input_data = {"body": body}
 
@@ -296,17 +324,23 @@ class NewsClassifier:
                 LOGGER.info(f'LLM used: {model}')
 
                 # Create chain with current LLM
-                classifier_chain = (
-                    runnable_system
-                    | prompt 
-                    | llm 
-                    | classifier_parser
-                )
+                if category == 'sentiment': 
+                    classifier_chain = (
+                        prompt 
+                        | llm 
+                        | classifier_parser
+                    ) 
 
-                # Process with current LLM
-                result = invoke_llm(classifier_chain, input_data)
-    
-                # Sleep 8s
+                else:
+                    classifier_chain = (
+                        runnable_system
+                        | prompt 
+                        | llm 
+                        | classifier_parser
+                    )
+
+                result = classifier_chain.invoke(input_data)
+
                 time.sleep(8)
 
                 if result is None : 
@@ -320,48 +354,45 @@ class NewsClassifier:
 
                     seen = set()
                     check_tags = []
+
                     for tag in result_output:
                         if tag in tags and tag not in seen:
                             seen.add(tag)
                             check_tags.append(tag) 
+
                     return check_tags
                 
                 elif category == "subsectors":
                     sub_sector = result.get("subsector", "")
+
                     if len(sub_sector) >= 10:
                         continue 
+
                     return sub_sector
                 
                 elif category == "sentiment":
-                    return result.get("sentiment", "")
+                    LOGGER.info('Reason sentiment: %s', result.get('reasoning'))
+                    return result.get("sentiment", "Not Applicable")
                 
                 elif category == "dimension":
+                    result.pop("reasoning", None)
+
                     if isinstance(result, dict):
                         return result
-                    else:
-                        # Fallback if result is not a dict
-                        return {
-                            "valuation": result.get("valuation", None),
-                            "future": result.get("future", None),
-                            "technical": result.get("technical", None),
-                            "financials": result.get("financials", None),
-                            "dividend": result.get("dividend", None),
-                            "management": result.get("management", None),
-                            "ownership": result.get("ownership", None),
-                            "sustainability": result.get("sustainability", None),
-                        }
 
             except Exception as error:
-                LOGGER.error(f"[ERROR] LLM failed classified with error: {error}")
+                LOGGER.error(f"[ERROR] LLM failed classified with error: {error}", exc_info=True)
                 continue
             
         LOGGER.error(f"All LLMs failed for category '{category}'.")
         return None
 
     def classify_article(
-        self, title: str, body: str, source_scraper: str
-    ) -> Optional[tuple[list[str], str, dict[str, Optional[int]]]]:
-        # Llama groq sensitive to ratelimit, so decided to not use .gather but sequential instead
+        self, 
+        title: str, 
+        body: str, 
+        source_scraper: str
+    ) -> tuple[list[str], str, dict[str, Optional[int]]]:
         tags = self._classify_data(body, "tags", source_scraper, title)
         # subsector = self._classify_data_async(body, "subsectors", title)
         sentiment = self._classify_data(body, "sentiment", source_scraper, title)

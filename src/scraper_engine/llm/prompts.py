@@ -26,7 +26,15 @@ class SummaryNews(BaseModel):
         description="A single-sentence title that accurately reflects the article without exaggeration or misleading language."
     )
     summary: str = Field(
-        description="A concise maximum two-sentence summary that captures key events, main points, and any explicitly mentioned financial metrics."
+        description=""" 
+            "A summary of three to four sentences. Do not write fewer than "
+            "three sentences. Must include: all primarily impacted companies "
+            "by name, their organizational roles as stated in the article "
+            "(e.g. subsidiary of X, parent of Y), critical financial figures, "
+            "and any categorical breakdown that contextualizes those figures "
+            "(e.g. contribution types, revenue components). "
+            "No opinion, no filler phrases."
+        """
     )
     reasoning: str = Field(
         description="Explain why you wrote the company name that way, including your reasoning for the uppercase and lowercase letters, and why you summarized it in that form"
@@ -88,7 +96,26 @@ class SentimentClassification(BaseModel):
     or investor sentiment in the context of Indonesia's stock market.
     """
     sentiment: str = Field(
-        description="Sentiment of the article as one of: 'Bullish', 'Bearish', 'Neutral', 'Not Applicable."
+        description=(
+            "Sentiment classification from the perspective of an equity "
+            "investor on IDX or SGX. Must be exactly one of: Bullish, Bearish, "
+            "Neutral, Not Applicable. Base classification on investor "
+            "impact of the content. Return 'Not Applicable' only when "
+            "the summary contains no financial performance dimension "
+            "whatsoever."
+        )
+    )
+
+    reasoning: str = Field(
+        description=(
+            "Step-by-step explanation covering: "
+            "1. PERFORMANCE DIMENSION: whether a financial metric or "
+            "investor-relevant event is present and why. "
+            "2. INVESTOR SIGNALS: each material signal and its direction. "
+            "3. SIGNAL WEIGHT: which direction dominates and why. "
+            "4. CLASSIFICATION DECISION: the chosen category and the "
+            "exact evidence from the summary that determined it."
+        )
     )
 
 
@@ -106,6 +133,9 @@ class DimensionClassification(BaseModel):
     ownership: Optional[int] = Field(description="Ownership structure score (0-2)", default=0)
     sustainability: Optional[int] = Field(description="Sustainability score (0-2)", default=0)
 
+    reasoning: str = Field(
+        description='Reasoning why you assign each class with that specific number'
+    )
 
 class ClassifierPrompts: 
     """
@@ -147,28 +177,6 @@ class ClassifierPrompts:
         """
     
     @staticmethod
-    def get_tickers_prompt():
-        return """You are an expert financial analyst for classifying tickers for Indonesia Stock Market (IDX) summary article. 
-            Your task is to classifying tickers company from 'Article Content' based on 'List of Available Tickers'.
-            
-            List of Available Tickers:
-            {tickers}
-
-            Article Content:
-            {body}
-
-            Ticker Extraction Rules:
-            - Identify all tickers that are explicitly mentioned in the 'Article Content'.
-            - Do NOT modify, infer, or abbreviate ticker symbols.
-            - ENSURE to match company name mentioned in 'Article Content' with the correct tickers symbol provided in 'List of Available Tickers'.
-            - ENSURE to match ticker name mentioned in 'Article Content' with the correct tickers symbol provided in 'List of Available Tickers'.
-            - Extract all tickers you can found on 'Article Content'. 
-
-            Please Ensure to return the selected tickers as a following JSON FORMAT.
-            {format_instructions}
-        """
-    
-    @staticmethod
     def get_subsectors_prompt():
         return """You are an expert financial analyst specializing in classifying subsectors for financial articles.   
             Your task is to determine the correct subsector for the given 'Article Summary' using only option in the 'List of Available Subsectors'.  
@@ -191,27 +199,153 @@ class ClassifierPrompts:
         """
 
     @staticmethod
-    def get_sentiment_prompt():
-        return """You are an expert at classifying sentiment from an article about the Indonesian Stock Market (IDX). 
-        Your task is to classify sentiment as Bearish, Bullish, Neutral, or Not Applicable from 'Article Summarize' based on 'Sentiment Rules'.
+    def get_sentiment_system_prompt(market: str = "idx"):
+        market_context = {
+            "idx": """
+                Market Context: Indonesian Stock Exchange (IDX)
+                Regulatory body: OJK (Otoritas Jasa Keuangan)
+                Common article language: Indonesian and English
+                Key sector signals to watch:
+                - Commodity companies: production volume, export duties,
+                royalty payments, commodity price exposure
+                - State-owned enterprises (BUMN): profit figures,
+                state contribution amounts, privatization signals
+                - Conglomerates: subsidiary performance, holding
+                company earnings, cross-ownership changes
+                Not Applicable examples specific to IDX:
+                - PNBP filing notices with no accompanying metrics
+                - OJK compliance acknowledgments
+                - AGM scheduling with no resolutions affecting earnings
+            """,
+            "sgx": """
+                Market Context: Singapore Exchange (SGX)
+                Regulatory body: MAS (Monetary Authority of Singapore)
+                Common article language: English
+                Key sector signals to watch:
+                - REITs and property trusts: distribution per unit (DPU)
+                changes, net asset value (NAV), occupancy rates,
+                debt-to-asset ratio, acquisition or divestment of
+                properties
+                - Financial services: net interest margin, loan growth,
+                non-performing loan ratio, capital adequacy
+                - Manufacturing and logistics: order book, utilization
+                rates, contract wins or losses
+                Not Applicable examples specific to SGX:
+                - SGXNet mandatory form submissions with no metrics
+                - Board appointment confirmations with no strategic signal
+                - Annual report filing notices with no disclosed results
+            """
+        }
 
-        Article Summarize:
-        {body}
+        return f"""
+            You are an expert financial analyst specializing in Asian
+            equity markets, with deep knowledge of both the Indonesian
+            Stock Exchange (IDX) and the Singapore Exchange (SGX).
 
-        Note:
-        - Classification must only be based on explicit mentions of stock price movement or investor sentiment.
-        - If the article does not mention stock prices, stock trends, classify it as "Not Applicable".
+            Your task is to classify the investor sentiment of a financial
+            news summary. Classify from the perspective of an equity
+            investor making a buy, sell, or hold decision on the subject
+            company.
 
-        Sentiment Rules:
-        - "Bullish" → The article explicitly states that a stock/sector is rising, rallying, in an uptrend, or described as bullish.
-        - "Bearish" → The article explicitly states that a stock/sector is falling, declining, in a downtrend, or described as bearish.
-        - "Neutral" → The article explicitly states that a stock/sector is stable, flat, sideways, or described as neutral.
-        - "Not Applicable" → No explicit mention of stock price movement.
+            {market_context.get(market, market_context["idx"])}
 
-        Output:
-        Return the classified in the following JSON format:
-        {format_instructions}
-    """
+            CLASSIFICATION RULES:
+
+            Bullish:
+            The summary contains signals that a reasonable equity investor
+            would interpret as net positive for the company's earnings
+            trajectory, valuation, or market position. This includes:
+            - Profit, revenue, or distribution growth, especially above
+            prior period or market expectations
+            - New contracts, market share gains, or strategic expansions
+            - Dividend or distribution announcements or increases
+            - Index inclusion or credit rating upgrades
+            - Positive resolution of regulatory or legal issues
+            - Forward guidance raised above prior estimates
+            - For REITs specifically: DPU increase, occupancy rate
+            improvement, accretive acquisition
+            - Strategic announcements (planned IPOs, acquisitions under
+            negotiation, expansion targets) qualify as Bullish only
+            when the article presents them as credible and near-term.
+            Speculative or conditional announcements must be noted as
+            such in the reasoning and weighted accordingly against
+            any execution risk signals present in the same article.
+
+            Bearish:
+            The summary contains signals that a reasonable equity investor
+            would interpret as net negative. This includes:
+            - Profit, revenue, or distribution decline, especially below
+            expectations
+            - Margin compression without offsetting growth
+            - Dividend or distribution cuts or suspension
+            - Index exclusion, credit downgrades, or delisting risk
+            - Regulatory penalties, investigations, or sanctions
+            - Governance failures or material management instability
+            - Forward guidance lowered below prior estimates
+            - Material debt increase without corresponding growth
+            - For REITs specifically: DPU decrease, occupancy decline,
+            dilutive acquisition, NAV erosion
+
+            Neutral:
+            A financial performance dimension exists but produces no clear
+            directional signal. This includes:
+            - Results explicitly in line with prior period or consensus
+            - Growth in one metric fully offset by decline in another
+            - Credit rating affirmed with no change to outlook
+            - Guidance reaffirmed with no revision
+            - For REITs: DPU unchanged, occupancy stable
+
+            Not Applicable:
+            No financial performance dimension exists. The article is
+            purely procedural, structural, or administrative with no
+            metric that changes an investor's assessment of the company.
+
+            CRITICAL RULES:
+            - Base classification solely on what the summary explicitly
+            states. Do not infer beyond the content.
+            - Classify on investor impact, not on article tone or
+            language style.
+            - Do not default to Not Applicable when uncertain. If any
+            metric with a clear direction is present, classify
+            directionally.
+            - Do not use Neutral as a fallback for low confidence.
+            Neutral requires explicit evidence that signals cancel out
+            or are flat.
+            - A regulatory obligation is Not Applicable only if no
+            performance metric accompanies it. If a performance metric
+            is present, classify based on that metric.
+        """
+    
+    @staticmethod
+    def get_sentiment_user_prompt():
+        return """
+            Article Summary:
+            {body}
+
+            Before classifying, read carefully through the following steps.
+            This reasoning will not appear in the final output.
+
+            1. PERFORMANCE DIMENSION: Does this summary contain any
+            financial metric, corporate event, or forward signal that
+            affects an investor's view of the company's earnings
+            trajectory or valuation? If no, the classification is
+            Not Applicable. Stop here.
+
+            2. INVESTOR SIGNALS: List every explicit signal in the summary
+            that an equity investor would consider material. For each
+            signal state whether it is positive, negative, or flat.
+
+            3. SIGNAL WEIGHT: Which signals are most material to an
+            investment decision? Do positive signals clearly dominate,
+            do negative signals clearly dominate, or do they cancel out?
+
+            4. CLASSIFICATION DECISION: Based on steps 1 through 3, state
+            which category applies and quote the specific evidence from
+            the summary that determined it.
+
+            Return your classification in the following JSON format.
+            {format_instructions}
+        """
 
     @staticmethod
     def get_dimension_prompt():
@@ -488,6 +622,16 @@ class SummarizationPrompts:
             (e.g. "(ANTM)" or "(Persero)").
             - Do not alter the rest of the name.
 
+            ENTITY RELATIONSHIP ACCURACY:
+            - Before stating any organizational relationship between two
+            entities (parent, subsidiary, acquirer, target, issuer,
+            counterparty), identify the exact direction as stated in the
+            article text.
+            - Never infer or assume a direction. Use only what the article
+            explicitly states.
+            - If the article identifies Company A as a subsidiary of Company B,
+            do not reverse this in any sentence. State it as written.
+
             OUTPUT RULES:
             - English only.
             - Correct capitalization and natural punctuation.
@@ -515,7 +659,14 @@ class SummarizationPrompts:
             3. KEY METRICS: What are the critical financial figures, dates,
             or ratios that must appear in the summary?
 
-            4. ARTICLE TYPE: Is this a broker recommendation report, a
+            4. ENTITY RELATIONSHIPS: For each company identified in step 1,
+            state its organizational role exactly as the article describes it
+            (parent, subsidiary, acquirer, target, issuer, etc.). Copy the
+            relevant phrase from the article that establishes this role.
+            Verify the direction before writing any sentence that names two
+            related entities.
+
+            5. ARTICLE TYPE: Is this a broker recommendation report, a
             corporate event article, or general market commentary? This
             determines what to prioritize in the summary.
 
@@ -530,7 +681,8 @@ class SummarizationPrompts:
             appear in the article.
 
             SUMMARY:
-            - Two to four sentences maximum.
+            - Minimum three sentences, maximum four sentences. Do not write
+            fewer than three sentences regardless of article length.
             - All primarily impacted companies MUST appear by name.
             - Include critical financial metrics relevant to impacted companies.
             - If a table is present, incorporate the most material data points
