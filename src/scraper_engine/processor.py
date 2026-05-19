@@ -351,9 +351,14 @@ def post_source(
 
     if successful_articles:
         # temp: add symbols duplicate tickers 
-        for record in successful_articles: 
-            tickers_value = record.get('tickers')
-            record['symbols'] = tickers_value.copy()
+        if source_scraper == 'idx':
+            for record in successful_articles: 
+                tickers_value = record.get('tickers')
+                record['symbols'] = tickers_value.copy()
+        
+        else: 
+            for record in successful_articles:
+                record['symbols'] = record.pop('tickers', None)
 
         if is_check_csv:
             df = pd.DataFrame(successful_articles)
