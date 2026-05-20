@@ -2,10 +2,7 @@ name: IDX News Pipeline
 
 on:
   schedule:
-    - cron: "0 17 * * *"  # 12:00 AM WIB (UTC+7)
-    - cron: "0 23 * * *"  # 06:00 AM WIB
-    - cron: "0 5 * * *"   # 12:00 PM WIB
-    - cron: "0 11 * * *"  # 06:00 PM WIB
+    - cron: "0 */4 * * *" # every 4 hours UTC
   workflow_dispatch:
 
 concurrency:
