@@ -2,13 +2,11 @@ from datetime import datetime
 from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import Scraper
-from scraper_engine.config.conf import HEADERS
 from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
 
 import argparse
 import time
 import logging 
-import requests 
 
 
 LOGGER = logging.getLogger(__name__)
@@ -101,6 +99,7 @@ class InvestorID(Scraper):
 
             raw_date = ""
             date_span = article_item.find("span", class_="text-muted small")
+            
             if date_span:
                 raw_date = date_span.get_text(strip=True)
 
@@ -139,17 +138,17 @@ class InvestorID(Scraper):
     def extract_news_pages(self, num_pages: int, date: str) -> list:
         base_urls = [
             "https://investor.id/stock/indeks/",
-            # "https://investor.id/corporate-action/",
+            "https://investor.id/corporate-action/indeks/",
         ]
 
         for base_url in base_urls:
             page_number = 1 
 
             while True:
-                page_url  = f'{base_url}{page_number}'
+                page_url = f'{base_url}{page_number}'
 
                 article_items = self.fetch_article_list(page_url)
-
+                
                 if not article_items:
                     LOGGER.info("[Investor ID] No articles found on page %d, stopping.", page_number)
                     break
