@@ -45,7 +45,7 @@ jobs:
           uv run -m scraper_engine.pipeline main_sgx --batch 1 --batch-size $BATCH_SIZE
           sleep 20
 
-          TOTAL=$(python3 -c "import json; print(len(json.load(open('./data/sgx/pipeline_filtered.json'))))")
+          TOTAL=$(python3 -c "import json; print(len(json.load(open('./data/sgx/pipeline_sgx_filtered.json'))))")
           BATCHES=$(( (TOTAL + BATCH_SIZE - 1) / BATCH_SIZE ))
           echo "Total articles: $TOTAL → $BATCHES batches needed"
 
