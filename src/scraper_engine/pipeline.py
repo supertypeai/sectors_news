@@ -1,8 +1,7 @@
 from datetime import datetime, timezone, timedelta
 from typing_extensions import Annotated, Optional
 from pathlib import Path
-
-WIB = timezone(timedelta(hours=7))
+from zoneinfo import ZoneInfo
 
 from scraper_engine.base.scraper_collection import ScraperCollection
 from scraper_engine.base.scraper import SeleniumScraper
@@ -34,8 +33,10 @@ from scraper_engine.sources.idx.scrape_kontan_keuangan import KontanKeuangan
 from scraper_engine.sources.idx.scrape_finance_detik import FinanceDetik
 from scraper_engine.sources.idx.scrape_kompas import KompasMoney
 
-from scraper_engine.sources.sgx.scrape_businesstimes import scrape_businesstimes 
-from scraper_engine.sources.sgx.scrape_straitstimes import scrape_straitsnews_sgx
+from scraper_engine.sources.sgx.scrape_business_times import BusinessTimesSG 
+from scraper_engine.sources.sgx.scrape_straits_times import StraitsTimes
+from scraper_engine.sources.sgx.scrape_cna import ChannelNewsAsiaSG
+from scraper_engine.sources.sgx.scrape_sbr_sg import SBRSG
 
 from .processor import post_source
 from scraper_engine.database.client import SUPABASE_CLIENT
@@ -79,9 +80,10 @@ def main():
 @app.command(name="remove_outdated_news")
 def delete_outdated_news(
     table_name: Annotated[str, typer.Option(help="Table name to deletes outdated news")],
+    source_scraper: Annotated[str, typer.Option(help="Source scraper to define score prompt criteria")] = 'idx'
 ):
     """
-    Deletes news articles older than 120 days from the 'idx_news' table
+    Deletes news articles older than 120 days from the 'idx_news and sgx_news' table
     and saves (appends) the deleted items to a JSON file.
     """
     logger = logging.getLogger(__name__)
@@ -90,51 +92,55 @@ def delete_outdated_news(
         now = datetime.now(timezone.utc)
         cutoff = now - timedelta(days=120)
 
-        # 1. Fetch items older than 120 days
         response = (
             SUPABASE_CLIENT.table(table_name)
             .select("*")
             .lte("created_at", cutoff.isoformat())
             .execute()
         )
+
         items_to_delete = response.data or []
 
-        # ensure data directory exists
-        output_dir = "data"
-        os.makedirs(output_dir, exist_ok=True)
-        filename = os.path.join(output_dir, "outdated_news.json")
+        output_path = Path("data") / ("outdated_news.json" if source_scraper == "idx" else f"outdated_news_{source_scraper}.json")
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        if items_to_delete: 
+            existing = []
 
-        if items_to_delete:
-            # load existing records if file exists, else start fresh
-            if os.path.exists(filename):
-                with open(filename, "r") as f:
-                    existing = json.load(f)
-                # make sure it's a list
-                if not isinstance(existing, list):
-                    existing = []
-            else:
-                existing = []
+            if output_path.exists():
+                try:
+                    with output_path.open("r") as file:
+                        data = json.load(file)
+                        existing = data if isinstance(data, list) else []
 
-            # append new items and write back
+                except Exception as error:
+                    logger.warning(
+                        "Failed to read existing outdated file: %s. Starting fresh.", error
+                    )
+
             combined = existing + items_to_delete
-            with open(filename, "w") as f:
-                json.dump(combined, f, indent=4)
+
+            with output_path.open("w") as file:
+                json.dump(combined, file, indent=4)
 
             logger.info(
-                f"Appended {len(items_to_delete)} items—now {len(combined)} total—in {filename}"
+                "Appended %d items — now %d total — in %s",
+                len(items_to_delete),
+                len(combined),
+                output_path,
             )
 
-            # 3. Uncomment to actually delete when ready:
             SUPABASE_CLIENT.table(table_name).delete().lte(
                 "created_at", cutoff.isoformat()
             ).execute()
-        else:
-            logger.info("No outdated news items found for deletion.")
 
-        logger.info(f"Outdated news deletion run completed at: {now.isoformat()}")
+        else:
+            logger.info("No outdated articles found in %s.", table_name)
+
+        logger.info("Outdated news deletion completed at %s.", now.isoformat())
 
     except Exception as error:
-        logger.error(f"Failed to delete or export outdated news: {error}")
+        logger.error("Failed to delete or export outdated news: %s", error)
 
 
 @app.command(name="main_idx")
@@ -147,7 +153,7 @@ def main_idx(
     process_only: Annotated[bool, typer.Option(help="Only process, don't scrape")] = False,
     table_name: Annotated[str, typer.Option(help="Table name to push into db")] = 'idx_news',
     source_scraper: Annotated[str, typer.Option(help="Source scraper to define score prompt criteria")] = 'idx',
-    date:  Annotated[Optional[str], typer.Option(help="End date: YYYYMMDD")] = None,
+    date:  Annotated[Optional[str], typer.Option(help="End date: YYYYMMDD")] = None
 ):
     """
     Main function to run the scraper collection (IDX News) and post results.
@@ -161,15 +167,17 @@ def main_idx(
 
     except (FileNotFoundError, json.JSONDecodeError):
         pass
+    
+    wib = ZoneInfo("Asia/Jakarta")
 
     if date:
-        filter_from = datetime.strptime(date, "%Y%m%d").replace(tzinfo=WIB)
+        filter_from = datetime.strptime(date, "%Y%m%d").replace(tzinfo=wib)
     
     elif last_state.get("last_run_at"):
         filter_from = datetime.fromisoformat(last_state["last_run_at"])
     
     else:
-        filter_from = datetime.now(WIB) - timedelta(days=1)
+        filter_from = datetime.now(wib) - timedelta(days=1)
 
     if not process_only:
         # petromindoscraper = PetromindoScraper()
@@ -230,7 +238,7 @@ def main_idx(
             scrapercollection.add_scraper(kontankeuangan)
 
             with last_state_path.open('w') as file:
-                json.dump({"last_run_at": datetime.now(WIB).isoformat()}, file)
+                json.dump({"last_run_at": datetime.now(wib).isoformat()}, file)
 
             scrapercollection.run_all(page_number, date, filter_from)
             
@@ -257,26 +265,61 @@ def main_sgx(
     process_only: Annotated[bool, typer.Option(help="Only process, don't scrape")] = False,
     table_name: Annotated[str, typer.Option(help="Table name to push into db")] = 'sgx_news',
     source_scraper: Annotated[str, typer.Option(help="Source scraper to define score prompt criteria")] = 'sgx',
+    date:  Annotated[Optional[str], typer.Option(help="End date: YYYYMMDD")] = None
 ):
     """
     Main function to run the scraper collection (SGX News) and post results.
     """
+    last_state_path = Path('data/last_state_sgx.json')
+
+    last_state = {}
+    try:
+        with last_state_path.open('r') as file:
+            last_state = json.load(file)
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
     
+    sgt = ZoneInfo("Asia/Singapore")
+
+    if date:
+        filter_from = datetime.strptime(date, "%Y%m%d").replace(tzinfo=sgt)
+    
+    elif last_state.get("last_run_at"):
+        filter_from = datetime.fromisoformat(last_state["last_run_at"])
+    
+    else:
+        filter_from = datetime.now(sgt) - timedelta(days=1)
+
     if not process_only:
-        # just need to use the method write json and csv
-        scrapercollection = ScraperCollection()
+        businesstimesscraper = BusinessTimesSG()
+        straitstimesscraper = StraitsTimes()
+        channelnewsasiascraper = ChannelNewsAsiaSG()
+        sbrsg_scraper = SBRSG()
 
-        payload_business_times = scrape_businesstimes(page_number)
-        payload_straitsnews = scrape_straitsnews_sgx(page_number)
+        try:
+            scrapercollection = ScraperCollection()
+            scrapercollection.add_scraper(businesstimesscraper)
+            scrapercollection.add_scraper(straitstimesscraper)
+            scrapercollection.add_scraper(channelnewsasiascraper)
+            scrapercollection.add_scraper(sbrsg_scraper)
 
-        all_articles = payload_straitsnews + payload_business_times 
+            with last_state_path.open('w') as file:
+                json.dump({"last_run_at": datetime.now(sgt).isoformat()}, file)
 
-        scrapercollection.write_json(all_articles, source_scraper, filename)
-        
-        if csv:
-            scrapercollection.write_csv(scrapercollection.articles, source_scraper, filename)
+            scrapercollection.run_all(page_number, date, filter_from)
 
-    post_source(filename, batch, batch_size, table_name, source_scraper)
+            all_articles = scrapercollection.articles
+
+            scrapercollection.write_json(all_articles, source_scraper, filename)
+
+            if csv:
+                scrapercollection.write_csv(all_articles, source_scraper, filename)
+
+        finally:
+            SeleniumScraper.close_shared_driver()
+
+    post_source(filename, batch, batch_size, table_name, source_scraper, filter_from)
 
 
 if __name__ == "__main__":

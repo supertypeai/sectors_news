@@ -145,11 +145,10 @@ def get_article_to_process(
             with open(f"./data/{source_scraper}/{jsonfile}.json", "r") as file_pipeline:
                 all_articles = json.load(file_pipeline)
 
-            if source_scraper == 'idx':
-                LOGGER.info(f"Total raw article scraped: {len(all_articles)}")
-                
-                all_articles = filter_articles_by_time(all_articles, filter_from)
-                LOGGER.info(f"Total articles in time window: {len(all_articles)}")
+            LOGGER.info(f"Total raw article scraped: {len(all_articles)}")
+            
+            all_articles = filter_articles_by_time(all_articles, filter_from)
+            LOGGER.info(f"Total articles in time window: {len(all_articles)}")
 
             all_articles_yesterday = []
 
