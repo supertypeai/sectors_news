@@ -97,32 +97,39 @@ class SBRSG(Scraper):
         return parsed_articles, reached_older_date
 
     def extract_news_pages(self, num_pages: int, date: str) -> list:
-        base_url = "https://sbr.com.sg/stocks"
+        base_urls = [
+            "https://sbr.com.sg/stocks",
+            'https://sbr.com.sg/markets-investing',
+            'https://sbr.com.sg/economy',
+            'https://sbr.com.sg/markets',
+        ]
+
         page_number = 0
 
-        while True:
-            page_url = f"{base_url}?page={page_number}"
-          
-            article_items = self.fetch_article_list(page_url)
-           
-            if not article_items:
-                LOGGER.info("[SBR SG] No articles found on page %d, stopping.", page_number)
-                break
+        for base_url in base_urls:
+            while True:
+                page_url = f"{base_url}?page={page_number}"
+            
+                article_items = self.fetch_article_list(page_url)
+            
+                if not article_items:
+                    LOGGER.info("[SBR SG] No articles found on page %d, stopping.", page_number)
+                    break
 
-            articles, reached_older_date = self.parse_articles(article_items, date)
+                articles, reached_older_date = self.parse_articles(article_items, date)
 
-            self.articles.extend(articles)
-            LOGGER.info("[SBR SG] Page %d: %d articles collected.", page_number, len(articles))
+                self.articles.extend(articles)
+                LOGGER.info("[SBR SG] Page %d: %d articles collected.", page_number, len(articles))
 
-            if reached_older_date:
-                LOGGER.info("[SBR SG] Reached articles older than %s, stopping.", date)
-                break
+                if reached_older_date:
+                    LOGGER.info("[SBR SG] Reached articles older than %s, stopping.", date)
+                    break
 
-            if num_pages is not None and page_number >= num_pages:
-                break
+                if num_pages is not None and page_number >= num_pages:
+                    break
 
-            page_number += 1
-            time.sleep(1)
+                page_number += 1
+                time.sleep(1)
 
         LOGGER.info("[SBR SG] Total scraped: %d", len(self.articles))
         return self.articles

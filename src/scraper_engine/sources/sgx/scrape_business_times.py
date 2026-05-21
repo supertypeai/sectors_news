@@ -127,37 +127,41 @@ class BusinessTimesSG(SeleniumScraper):
             tzinfo=ZoneInfo("Asia/Singapore"),
         )
 
-        base_url = "https://www.businesstimes.com.sg/keywords/sgx"
+        base_urls = [
+            "https://www.businesstimes.com.sg/keywords/sgx",
+            'https://www.businesstimes.com.sg/singapore/economy-policy?ref=listing-menubar'
+        ]
 
-        soup = self.fetch_news_with_selenium(base_url)
+        for base_url in base_urls:
+            soup = self.fetch_news_with_selenium(base_url)
 
-        if soup is None:
-            LOGGER.error("[BT SG] Failed to load initial page, aborting.")
-            return self.articles
+            if soup is None:
+                LOGGER.error("[BT SG] Failed to load initial page, aborting.")
+                return self.articles
 
-        seen_urls = set()
-        scroll_count = 0
+            seen_urls = set()
+            scroll_count = 0
 
-        while True:
-            LOGGER.info("[BT SG] Scroll %d", scroll_count + 1)
-            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(4)
+            while True:
+                LOGGER.info("[BT SG] Scroll %d", scroll_count + 1)
+                self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(4)
 
-            current_soup = BeautifulSoup(self.driver.page_source, "html.parser")
-            articles, reached_older_date = self.parse_articles(
-                current_soup, target_datetime, seen_urls
-            )
-            self.articles.extend(articles)
+                current_soup = BeautifulSoup(self.driver.page_source, "html.parser")
+                articles, reached_older_date = self.parse_articles(
+                    current_soup, target_datetime, seen_urls
+                )
+                self.articles.extend(articles)
 
-            if reached_older_date:
-                LOGGER.info("[BT SG] Reached articles older than %s, stopping.", target_date)
-                break
+                if reached_older_date:
+                    LOGGER.info("[BT SG] Reached articles older than %s, stopping.", target_date)
+                    break
 
-            scroll_count += 1
+                scroll_count += 1
 
-            if num_pages is not None and scroll_count >= num_pages:
-                LOGGER.info("[BT SG] Reached page limit of %d, stopping.", num_pages)
-                break
+                if num_pages is not None and scroll_count >= num_pages:
+                    LOGGER.info("[BT SG] Reached page limit of %d, stopping.", num_pages)
+                    break
 
         LOGGER.info("[BT SG] Total scraped: %d", len(self.articles))
         return self.articles
@@ -186,12 +190,12 @@ def main():
 if __name__ == "__main__":
     """
     How to run:
-    uv run -m src.scraper_engine.sources.sgx.scrape_businesstimes <date> [filename] [--pages N] [--csv]
+    uv run -m src.scraper_engine.sources.sgx.scrape_business_times <date> [filename] [--pages N] [--csv]
 
     Examples:
-    uv run -m src.scraper_engine.sources.sgx.scrape_businesstimes 20260427
-    uv run -m src.scraper_engine.sources.sgx.scrape_businesstimes 20260427 test_scrape_bt
-    uv run -m src.scraper_engine.sources.sgx.scrape_businesstimes 20260427 test_scrape_bt --pages 5 --csv
+    uv run -m src.scraper_engine.sources.sgx.scrape_business_times 20260427
+    uv run -m src.scraper_engine.sources.sgx.scrape_business_times 20260427 test_scrape_bt
+    uv run -m src.scraper_engine.sources.sgx.scrape_business_times 20260427 test_scrape_bt --pages 5 --csv
     """
     main()
     
