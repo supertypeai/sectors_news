@@ -138,35 +138,42 @@ The scraper status indicates which news/data sources are currently functional an
 
 ### IDX
 
-| ID | Source                     | Status   | Reason |
-|---:|----------------------------|----------|--------|
-| 1  | INDONESIAN COAL AND NICKEL | Active   | - |
-| 2  | GAPKI                      | Active   | - |
-| 3  | MINERBA.ESDM               | Active   | - |
-| 4  | ASIAN BANKING AND FINANCE  | Active   | - |
-| 5  | INDONESIA MINER            | Active   | - |
-| 6  | JAKARTA GLOBE              | Active   | - |
-| 7  | ANTARA NEWS                | Active   | - |
-| 8  | ASIAN TELECOM              | Active   | - |
-| 9  | INDONESIA BUSINESS POST    | Inactive | Requires login to read the article |
-| 10 | THE JAKARTA POST           | Active   | - |
-| 11 | KONTAN                     | Active   | - |
-| 12 | IDN FINANCIALS             | Active   | - |
-| 13 | PETROMINDO                 | Inactive | - |
-| 14 | INSIGHT KONTAN             | Inactive | Needs subscription to access the article |
-| 15 | BISNIS COM                 | Active   | - |
-| 16 | MINING.COM                 | Inactive | Source used for Sectors insider |
-| 17 | EMITENNEWS.COM             | Active   | - |
-| 18 | BCA NEWS                   | Active   | - |
-| 19 | BLOMBEERG TECHNOZ          | Active   | - |
-| 20 | INVESTOR ID                | Active   | - |
+| ID | Source                                                                      | Status   | Reason |
+|---:|-----------------------------------------------------------------------------|----------|--------|
+| 1  | [Indonesian Coal and Nickel](https://www.indonesiancoalandnickel.com)       | Active   | - |
+| 2  | [GAPKI (Palm Oil Association)](https://gapki.id)                            | Active   | - |
+| 3  | [Minerba ESDM (Mining Ministry)](https://www.minerba.esdm.go.id)            | Active   | - |
+| 4  | [Asian Banking and Finance](https://asianbankingandfinance.net)              | Active   | - |
+| 5  | [Indonesia Miner](https://indonesiaminer.com)                               | Active   | - |
+| 6  | [Jakarta Globe](https://jakartaglobe.id)                                    | Active   | - |
+| 7  | [Antara News](https://www.antaranews.com)                                   | Active   | - |
+| 8  | [Asian Telecom](https://asiantelecom.com)                                   | Active   | - |
+| 9  | [The Jakarta Post](https://www.thejakartapost.com)                          | Active   | - |
+| 10 | [Kontan Investasi](https://www.kontan.co.id/search/indeks?kanal=investasi)  | Active   | - |
+| 11 | [Kontan Keuangan](https://www.kontan.co.id/search/indeks?kanal=keuangan)    | Active   | - |
+| 12 | [IDN Financials](https://www.idnfinancials.com)                             | Active   | - |
+| 13 | [Bisnis.com](https://www.bisnis.com)                                        | Active   | - |
+| 14 | [Bloomberg Technoz](https://www.bloombergtechnoz.com)                       | Active   | - |
+| 15 | [Investor.id](https://investor.id)                                          | Active   | - |
+| 16 | [Emiten News](https://emitennews.com)                                       | Active   | - |
+| 17 | [BCA Sekuritas News](https://bcasekuritas.co.id)                            | Active   | - |
+| 18 | [CNBC Indonesia Market](https://www.cnbcindonesia.com/market)               | Active   | - |
+| 19 | [CNN Indonesia Ekonomi](https://www.cnnindonesia.com/ekonomi)               | Active   | - |
+| 20 | [Kompas Money](https://indeks.kompas.com/?site=money)                       | Active   | - |
+| 21 | [Finance Detik](https://finance.detik.com/bursa-dan-valas)                  | Active   | - |
+| 22 | [Indonesia Business Post](https://indonesiabusinesspost.com)                | Inactive | Requires login to read the article |
+| 23 | [Petromindo](https://www.petromindo.com)                                    | Inactive | - |
+| 24 | [Insight Kontan](https://insight.kontan.co.id)                              | Inactive | Needs subscription to access the article |
+| 25 | [Mining.com](https://www.mining.com)                                        | Inactive | Source used for Sectors insider |
 
 ### SGX
 
-| ID | Source          | Status | Reason |
-|---:|-----------------|--------|--------|
-| 1  | BUSINESS TIMES  | Active | - |
-| 2  | STRAIT TIMES    | Active | - |
+| ID | Source                                                                      | Status | Reason |
+|---:|-----------------------------------------------------------------------------|--------|--------|
+| 1  | [Business Times](https://www.businesstimes.com.sg)                          | Active | - |
+| 2  | [The Straits Times](https://www.straitstimes.com)                           | Active | - |
+| 3  | [Channel NewsAsia (CNA)](https://www.channelnewsasia.com)                   | Active | - |
+| 4  | [Singapore Business Review (SBR)](https://sbr.com.sg)                      | Active | - |
 
 ## Data Outputs
 
