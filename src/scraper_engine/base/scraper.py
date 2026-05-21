@@ -217,14 +217,14 @@ class SeleniumScraper(Scraper):
             LOGGER.error(f"Failed to initialize driver: {error}")
             SeleniumScraper._driver_instance = None
 
-    def fetch_news_with_selenium(self, url: str):
+    def fetch_news_with_selenium(self, url: str, time_sleep: int = 5):
         if not self.driver: 
             return BeautifulSoup()
 
         try:
             LOGGER.info(f"Navigating to {url}")
             self.driver.get(url)
-            time.sleep(5) 
+            time.sleep(time_sleep) 
 
             html_content = self.driver.page_source
             self.soup = BeautifulSoup(html_content, 'html.parser')
