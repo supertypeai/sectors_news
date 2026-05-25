@@ -14,11 +14,6 @@ class GapkiScraper(SeleniumScraper):
     def fetch_article_list(self, url: str) -> list:
         soup = self.fetch_news_with_selenium(url, 40)
 
-        html_content = soup.prettify()
-
-        with open("page.html", "w", encoding="utf-8") as file:
-            file.write(html_content)
-
         if not soup:
             return []
 
