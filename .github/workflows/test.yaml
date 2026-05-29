@@ -38,14 +38,20 @@ on:
           - scrape_jakartaglobe
           - scrape_jakartapost
           - scrape_kompas
-          - scrape_kontan
+          - scrape_kontan_investasi 
           - scrape_kontan_keuangan
           - scrape_minerba
           - scrape_mining
           - scrape_petromindo
 
-      page_number:
-        description: "Page number or date in YYYYMMDD format (for date-based scrapers: cnbc_market, cnn_ekonomi, finance_detik, kompas, kontan_investasi, kontan_keuangan)"
+      date:
+        description: "Date in YYYYMMDD format (e.g. 20260529)"
+        required: false
+        default: "20260529"
+        type: string
+
+      pages:
+        description: "Number of pages to scrape (--pages N)"
         required: false
         default: "1"
         type: string
@@ -94,12 +100,12 @@ jobs:
       - name: Install Scrapling Browser Binaries
         run: |
           uv run scrapling install
-          
+
       - name: Run Selected Scraper
         if: ${{ inputs.test_mode == 'scraper' }}
         run: |
-          echo "Running module: ${{ inputs.scraper_module }} on page ${{ inputs.page_number }}"
-          uv run -m scraper_engine.sources.idx.${{ inputs.scraper_module }} ${{ inputs.page_number }} "${{ inputs.output_name }}"
+          echo "Running module: ${{ inputs.scraper_module }} on date ${{ inputs.date }}"
+          uv run -m scraper_engine.sources.idx.${{ inputs.scraper_module }} ${{ inputs.date }} "${{ inputs.output_name }}" --pages ${{ inputs.pages }}
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
