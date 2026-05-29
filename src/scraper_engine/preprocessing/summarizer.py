@@ -8,7 +8,7 @@ from io                             import StringIO
 from scraper_engine.llm.client   import get_llm, TokenUsageLogger
 from scraper_engine.llm.prompts  import SummarizationPrompts, SummaryNews
 from scraper_engine.config.conf  import PROXY, USER_AGENT, HEADERS
-from scraper_engine.base.scraper import SeleniumScraper 
+from scraper_engine.base.scraper import SeleniumScraper
 
 import requests
 import re
@@ -413,8 +413,8 @@ def extract_via_custom_parser(url: str) -> str | None:
         parser = {
             'bcasekuritas.co.id': get_article_bca_news, 
             'bloomberg': get_article_bloomberg_technoz_news, 
-            'investor.id': get_article_investorid_news,
-            'investasi.kontan': get_article_kontan_news
+            # 'investor.id': get_article_investorid_news,
+            # 'investasi.kontan': get_article_kontan_news
         }
 
         for key, parser in parser.items(): 
