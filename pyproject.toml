@@ -27,5 +27,6 @@ dependencies = [
     "selenium",
     "rapidfuzz",
     "undetected-chromedriver",
-    "typer"
+    "typer",
+    "scrapling[all]>=0.4.5",
 ]

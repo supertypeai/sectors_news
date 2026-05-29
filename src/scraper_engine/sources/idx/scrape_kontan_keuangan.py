@@ -1,5 +1,4 @@
 from datetime import datetime
-from pathlib import Path 
 from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import Scraper
@@ -8,8 +7,6 @@ from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
 import argparse
 import time
 import logging 
-import json 
-import random 
 
 
 LOGGER = logging.getLogger(__name__)
@@ -17,7 +14,7 @@ LOGGER = logging.getLogger(__name__)
 
 class KontanKeuangan(Scraper):
     def fetch_article_list(self, url: str) -> list:
-        raw_html_content = self.fetch_news_with_proxy(url)
+        raw_html_content = self.fetch_news_with_scrapling(url)
 
         if not raw_html_content:
             return []
@@ -26,7 +23,7 @@ class KontanKeuangan(Scraper):
         return soup.select("div.list-berita ul li")
 
     def fetch_article_timestamp(self, article_url: str) -> str:
-        raw_html_content = self.fetch_news_with_proxy(article_url)
+        raw_html_content = self.fetch_news_with_scrapling(article_url)
 
         if not raw_html_content:
             return None

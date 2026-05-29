@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from scrapling import Fetcher
 
 from scraper_engine.config.conf import PROXY, USER_AGENT, HEADERS_SCRAPER
 
@@ -90,6 +91,19 @@ class Scraper:
             LOGGER.error(f"Error fetching the URL: {error}")
             return BeautifulSoup()
 
+    def fetch_news_with_scrapling(self, url: str):
+        response = Fetcher.get(
+            url,
+            stealthy_headers=True,
+            impersonate="chrome",
+        )
+
+        if response.status != 200:
+            LOGGER.warning("Non-200 status %d for %s", response.status, url)
+            return None
+
+        return BeautifulSoup(bytes(response.body), "html.parser")
+    
     def fetch_news_with_proxy(self, target_url: str):
         proxy_url = PROXY 
 

@@ -91,6 +91,10 @@ jobs:
           # also installs the matching ChromeDriver binary
           install-chromedriver: true
 
+      - name: Install Scrapling Browser Binaries
+        run: |
+          uv run scrapling install
+          
       - name: Run Selected Scraper
         if: ${{ inputs.test_mode == 'scraper' }}
         run: |
