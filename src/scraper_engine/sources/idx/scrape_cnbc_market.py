@@ -1,11 +1,11 @@
-from datetime import datetime
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
+from scraper_engine.sources.idx.utils.time_parser import parse_relative_time
 
 import argparse
 import time
-import logging 
+import logging
 
 
 LOGGER = logging.getLogger(__name__)
@@ -26,31 +26,6 @@ class CNBCMarket(Scraper):
 
         return article_items, has_next_page
 
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        raw = self.fetch_news_with_proxy(article_url)
-        soup = BeautifulSoup(raw, "html.parser")
-        
-        if not soup:
-            return None
-
-        date_tag = soup.select_one("div.text-cm.text-gray")
-
-        if not date_tag:
-            return None
-
-        return self.parse_timestamp(date_tag.get_text(strip=True))
-
-    def parse_timestamp(self, raw_timestamp: str) -> str:
-        if not raw_timestamp:
-            return None
-
-        try:
-            parsed_date = datetime.strptime(raw_timestamp.strip(), "%d %B %Y %H:%M")
-            return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
-        
-        except ValueError:
-            return None
-
     def parse_articles(self, article_items: list) -> list:
         parsed_articles = []
 
@@ -64,10 +39,16 @@ class CNBCMarket(Scraper):
             thumbnail_tag = article_item.select_one("img")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
-            published_at = None
-            if source_url:
-                published_at = self.fetch_article_timestamp(source_url)
-                time.sleep(0.5)
+            raw_date = ""
+            date_tag = article_item.select_one("span.text-xs.text-gray")
+            
+            if date_tag:
+                raw_date = date_tag.get_text(strip=True)
+
+            published_at = parse_relative_time(raw_date)
+
+            if not published_at:
+                LOGGER.warning("[CNBC Market] Could not parse timestamp '%s' for %s", raw_date, source_url)
 
             parsed_articles.append({
                 "title": title,

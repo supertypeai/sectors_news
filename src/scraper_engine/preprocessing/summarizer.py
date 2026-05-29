@@ -414,7 +414,7 @@ def extract_via_custom_parser(url: str) -> str | None:
             'bcasekuritas.co.id': get_article_bca_news, 
             'bloomberg': get_article_bloomberg_technoz_news, 
             # 'investor.id': get_article_investorid_news,
-            # 'investasi.kontan': get_article_kontan_news
+            'investasi.kontan': get_article_kontan_news
         }
 
         for key, parser in parser.items(): 

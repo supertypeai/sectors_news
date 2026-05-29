@@ -174,7 +174,8 @@ def get_article_to_process(
                 query = SUPABASE_CLIENT.table(table_name).select("source")
 
                 if filter_from:
-                    query = query.gte("created_at", filter_from.isoformat())
+                    start_of_day = filter_from.replace(hour=0, minute=0, second=0, microsecond=0)
+                    query = query.gte("created_at", start_of_day.isoformat())
 
                 all_articles_db = query.execute().data
 

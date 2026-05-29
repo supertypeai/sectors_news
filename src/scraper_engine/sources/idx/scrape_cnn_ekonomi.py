@@ -1,7 +1,7 @@
-from datetime import datetime
-from bs4 import Comment, BeautifulSoup
+from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
+from scraper_engine.sources.idx.utils.time_parser import parse_relative_time
 
 import argparse
 import time
@@ -23,26 +23,6 @@ class CNNEkonomi(Scraper):
 
         return article_items
 
-    def parse_timestamp(self, article_item) -> str:
-        date_span = article_item.select_one("span.text-cnn_black_light3")
-
-        if not date_span:
-            return None
-
-        comment_node = date_span.find(string=lambda text: isinstance(text, Comment))
-
-        if not comment_node:
-            return None
-
-        raw_timestamp = comment_node.strip()
-
-        try:
-            parsed_date = datetime.strptime(raw_timestamp, "%Y-%m-%d %H:%M:%S")
-            return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
-        
-        except ValueError:
-            return None
-
     def parse_articles(self, article_items: list) -> list:
         parsed_articles = []
 
@@ -56,7 +36,16 @@ class CNNEkonomi(Scraper):
             thumbnail_tag = article_item.select_one("img")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
-            published_at = self.parse_timestamp(article_item)
+            raw_date = ""
+            date_tag = article_item.select_one("span.text-xs.text-cnn_black_light3")
+            
+            if date_tag:
+                raw_date = date_tag.get_text(strip=True)
+
+            published_at = parse_relative_time(raw_date)
+
+            if not published_at:
+                LOGGER.warning("[CNN Ekonomi] Could not parse timestamp '%s' for %s", raw_date, source_url)
 
             parsed_articles.append({
                 "title": title,
@@ -97,6 +86,7 @@ class CNNEkonomi(Scraper):
 
         LOGGER.info("[CNN Ekonomi] Total scraped: %d", len(self.articles))
         return self.articles
+  
   
 def main():
     scraper = CNNEkonomi()

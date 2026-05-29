@@ -1,8 +1,9 @@
 from datetime import datetime
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
+from scraper_engine.sources.idx.utils.time_parser import parse_relative_time
 
 import argparse
 import logging
@@ -22,26 +23,12 @@ class KontanInvestasi(Scraper):
         soup = BeautifulSoup(raw_html_content, "html.parser")
         return soup.select("div.list-berita ul li")
 
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        raw_html_content = self.fetch_news_with_proxy(article_url)
-
-        if not raw_html_content:
-            return None
-
-        soup = BeautifulSoup(raw_html_content, "html.parser")
-        date_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
-
-        if not date_tag:
-            return None
-
-        return self.parse_timestamp(date_tag.get_text(strip=True))
-
     def parse_timestamp(self, raw_timestamp: str) -> str:
         if not raw_timestamp:
             return None
 
         try:
-            cleaned = raw_timestamp.strip()
+            cleaned = raw_timestamp.strip().lstrip("|").strip()
 
             if "," in cleaned:
                 cleaned = cleaned.split(", ", 1)[-1]
@@ -64,7 +51,7 @@ class KontanInvestasi(Scraper):
                 parsed_date = datetime(year, month, day, int(hour), int(minute))
 
             else:
-                parsed_date = datetime(year, month, day)
+                parsed_date = datetime(year, month, day, 23, 59, 59)
 
             return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -84,10 +71,15 @@ class KontanInvestasi(Scraper):
             thumbnail_tag = article_item.select_one("div.pic img")
             thumbnail_url = thumbnail_tag["data-src"] if thumbnail_tag else None
 
-            published_at = None
-            if source_url:
-                published_at = self.fetch_article_timestamp(source_url)
-                time.sleep(0.5)
+            raw_date = ""
+            date_tag = article_item.select_one("span.font-gray")
+            if date_tag:
+                raw_date = date_tag.get_text(strip=True)
+
+            published_at = parse_relative_time(raw_date) or self.parse_timestamp(raw_date)
+
+            if not published_at:
+                LOGGER.warning("[Kontan Investasi] Could not parse timestamp '%s' for %s", raw_date, source_url)
 
             parsed_articles.append({
                 "title": title,

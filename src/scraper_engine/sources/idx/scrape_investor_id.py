@@ -1,8 +1,9 @@
 from datetime import datetime
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
+from scraper_engine.sources.idx.utils.time_parser import parse_relative_time
 
 import argparse
 import time
@@ -22,17 +23,6 @@ class InvestorID(Scraper):
 
         soup = BeautifulSoup(raw_html_content, "html.parser")
         return soup.find_all("div", class_="row mb-4 position-relative")
-
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        raw_html_content = self.fetch_news_with_proxy(article_url)
-        soup = BeautifulSoup(raw_html_content, "html.parser")
-
-        date_tag = soup.select_one("div.col.small.pt-1 span.text-muted")
-
-        if not date_tag:
-            return None
-
-        return self.parse_timestamp(date_tag.get_text(strip=True))
 
     def parse_timestamp(self, raw_timestamp: str) -> str:
         if not raw_timestamp:
@@ -103,14 +93,7 @@ class InvestorID(Scraper):
             if date_span:
                 raw_date = date_span.get_text(strip=True)
 
-            published_at = None
-
-            if "menit yang lalu" in raw_date or "jam yang lalu" in raw_date or "hari yang lalu" in raw_date:
-                published_at = self.fetch_article_timestamp(source_url)
-                time.sleep(0.5)
-
-            else:
-                published_at = self.parse_timestamp(raw_date)
+            published_at = parse_relative_time(raw_date) or self.parse_timestamp(raw_date)
 
             if not published_at:
                 LOGGER.info("[Investor ID] Failed to parse date for url: %s. Skipping.", source_url)

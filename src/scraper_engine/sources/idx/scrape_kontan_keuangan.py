@@ -1,8 +1,9 @@
 from datetime import datetime
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
+from scraper_engine.sources.idx.utils.time_parser import parse_relative_time
 
 import argparse
 import time
@@ -14,35 +15,24 @@ LOGGER = logging.getLogger(__name__)
 
 class KontanKeuangan(Scraper):
     def fetch_article_list(self, url: str) -> list:
-        raw_html_content = self.fetch_news_with_scrapling(url)
+        raw_html_content = self.fetch_news_with_proxy(url)
 
         if not raw_html_content:
             return []
 
         soup = BeautifulSoup(raw_html_content, "html.parser")
+
+        with open("kontan_keuangan.html", "w", encoding="utf-8") as file:
+            file.write(str(soup))
+
         return soup.select("div.list-berita ul li")
-
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        raw_html_content = self.fetch_news_with_scrapling(article_url)
-
-        if not raw_html_content:
-            return None
-
-        soup = BeautifulSoup(raw_html_content, "html.parser")
-        
-        date_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
-    
-        if not date_tag:
-            return None
-
-        return self.parse_timestamp(date_tag.get_text(strip=True))
 
     def parse_timestamp(self, raw_timestamp: str) -> str:
         if not raw_timestamp:
             return None
 
         try:
-            cleaned = raw_timestamp.strip()
+            cleaned = raw_timestamp.strip().lstrip("|").strip()
 
             if "," in cleaned:
                 cleaned = cleaned.split(", ", 1)[-1]
@@ -65,7 +55,7 @@ class KontanKeuangan(Scraper):
                 parsed_date = datetime(year, month, day, int(hour), int(minute))
                 
             else:
-                parsed_date = datetime(year, month, day)
+                parsed_date = datetime(year, month, day, 23, 59, 59)
 
             return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -85,10 +75,15 @@ class KontanKeuangan(Scraper):
             thumbnail_tag = article_item.select_one("div.pic img")
             thumbnail_url = thumbnail_tag["data-src"] if thumbnail_tag else None
 
-            published_at = None
-            if source_url:
-                published_at = self.fetch_article_timestamp(source_url)
-                time.sleep(0.5)
+            raw_date = ""
+            date_tag = article_item.select_one("span.font-gray")
+            if date_tag:
+                raw_date = date_tag.get_text(strip=True)
+
+            published_at = parse_relative_time(raw_date) or self.parse_timestamp(raw_date)
+
+            if not published_at:
+                LOGGER.warning("[Kontan Keuangan] Could not parse timestamp '%s' for %s", raw_date, source_url)
 
             parsed_articles.append({
                 "title": title,
@@ -97,7 +92,6 @@ class KontanKeuangan(Scraper):
                 "timestamp": published_at,
             })
 
-        print(f'total scraped source of kontan keuangan: {len(parsed_articles)}')
         return parsed_articles
 
     def extract_news_pages(self, num_pages: int, date: str) -> list:
@@ -120,7 +114,7 @@ class KontanKeuangan(Scraper):
                 full_url = f"{base_url}?{base_params}&per_page={per_page_offset}"
 
             article_items = self.fetch_article_list(full_url)
-
+            
             if not article_items:
                 LOGGER.info("[Kontan Keuangan] No articles found on page %d, stopping.", page_number)
                 break
