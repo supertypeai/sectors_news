@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: sgx-pipeline
+  group: news-data-pipeline
   cancel-in-progress: false
 
 jobs:
@@ -56,7 +56,7 @@ jobs:
           done
 
           echo "=== CLEANUP ==="
-          uv run -m scraper_engine.pipeline remove_outdated_news --table-name sgx_news
+          uv run -m scraper_engine.pipeline remove_outdated_news --table-name sgx_news --source-scraper sgx
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}

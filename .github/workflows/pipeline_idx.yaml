@@ -2,11 +2,11 @@ name: IDX News Pipeline
 
 on:
   schedule:
-    - cron: "0 */4 * * *" # every 4 hours UTC
+    - cron: "15 */4 * * *" # every 4 hours UTC (15 minutes later)
   workflow_dispatch:
 
 concurrency:
-  group: idx-pipeline
+  group: news-data-pipeline
   cancel-in-progress: false
 
 jobs:
