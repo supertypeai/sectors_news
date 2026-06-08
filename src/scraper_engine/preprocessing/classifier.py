@@ -8,8 +8,8 @@ from typing                         import List, Dict, Optional, Union
 from pathlib                        import Path
 from langchain.prompts              import ChatPromptTemplate
 
-from scraper_engine.llm.client  import invoke_llm, get_llm
-from scraper_engine.llm.prompts import (
+from scraper_engine.llm.client      import get_llm
+from scraper_engine.llm.prompts     import (
     ClassifierPrompts, 
     TagsClassification, 
     SubsectorClassification, 
@@ -22,6 +22,7 @@ from scraper_engine.database.client import SUPABASE_CLIENT
 import json
 import logging 
 import time 
+import re 
 
 
 LOGGER = logging.getLogger(__name__)
@@ -44,6 +45,28 @@ class NewsClassifier:
 
         self.prompts = ClassifierPrompts()
 
+    def convert_sub_sector_to_kebab(self, sub_sector: str, is_idx: bool = True) -> str:
+        if is_idx: 
+            return (
+                sub_sector
+                .replace("&", "")
+                .replace(",", "")
+                .replace("  ", " ")
+                .replace(" ", "-")
+                .lower()
+            )
+        
+        result = (
+            sub_sector
+            .replace("&", "")
+            .replace(",", "")
+            .replace("  ", " ")
+            .replace(" ", "-")
+            .lower()
+        )
+
+        return re.sub(r'-+', '-', result)
+
     def _extract_first_sentences(self, text: str, count: int = 2) -> str:
         parts = text.split('.')
 
@@ -54,7 +77,7 @@ class NewsClassifier:
         result = '. '.join(extracted) + '.'
         return result 
 
-    def _load_subsector_data(self) -> str:
+    def _load_subsector_data_idx(self) -> str:
         if self._subsectors_cache is not None:
             return self._subsectors_cache
 
@@ -69,6 +92,7 @@ class NewsClassifier:
 
             with open("./data/idx/subsectors_data.json", "w") as file:
                 json.dump(subsectors, file, indent=2)
+
         else:
             with open("./data/idx/subsectors_data.json", "r") as file:
                 subsectors = json.load(file)
@@ -89,17 +113,11 @@ class NewsClassifier:
         self._subsectors_cache = result
         return result
 
-    def _load_subsector_data_sgx(self) -> str: 
+    def _load_subsector_data_sgx(self) -> tuple: 
         with open("./data/sgx/subsectors_data_sgx.json", "r") as file:
             subsectors = json.load(file) 
 
-        subsector_string = "\n".join(
-            [
-                f"{key}:{value}" for key, value in subsectors.items()
-            ]
-        )
-
-        return subsector_string, set(subsectors.keys())
+        return subsectors
 
     def _load_tag_data(self) -> tuple:
         """
@@ -122,7 +140,7 @@ class NewsClassifier:
         self._tags_cache = (tags, full_tags)
         return tags, full_tags
 
-    def _load_company_data(self) -> Dict[str, Dict[str, str]]:
+    def _load_company_data_idx(self) -> Dict[str, Dict[str, str]]:
         """
         Load company data from Supabase or cache.
 
@@ -155,21 +173,15 @@ class NewsClassifier:
                 company[row["symbol"]] = {
                     "symbol": row["symbol"],
                     "name": row["company_name"],
-                    "sub_sector": subsector_data[row["sub_sector_id"]],
+                    "sub_sector": self.convert_sub_sector_to_kebab(
+                        subsector_data[row["sub_sector_id"]], 
+                        True
+                    ),
                 }
 
-            for attr in company:
-                company[attr]["sub_sector"] = (
-                    company[attr]["sub_sector"]
-                    .replace("&", "")
-                    .replace(",", "")
-                    .replace("  ", " ")
-                    .replace(" ", "-")
-                    .lower()
-                )
+            with open("./data/idx/companies.json", "w") as file:
+                json.dump(company, file, indent=2)
 
-            with open("./data/idx/companies.json", "w") as f:
-                json.dump(company, f, indent=2)
         else:
             with open("./data/idx/companies.json", "r") as f:
                 company = json.load(f)
@@ -177,7 +189,7 @@ class NewsClassifier:
         self._company_cache = company
         return company
     
-    def _load_sgx_company_data(self) -> Dict[str, Dict[str, str]]:
+    def _load_company_data_sgx(self) -> dict[str, dict[str, str]]:
         DATA_DIR = Path("data")
         path = DATA_DIR / "sgx/sgx_companies.json"
 
@@ -195,17 +207,24 @@ class NewsClassifier:
                 .select("symbol", "name", "sub_sector", "sector")
                 .execute()
             )
+
             company = {
                 item["symbol"]: {
                     "symbol": item["symbol"],
                     "name": item["name"],
-                    "sub_sector": item["sub_sector"].lower(),
-                    "sector": item["sector"].lower(),
+                    "sub_sector": self.convert_sub_sector_to_kebab(
+                        item["sub_sector"], False
+                    ),
+                    "sector": self.convert_sub_sector_to_kebab(
+                        item["sector"], False
+                    )
                 }
                 for item in response.data
             }
+
             with open(path, "w") as file:
                 json.dump(company, file, indent=4)
+
             self._sgx_cache_refreshed_on = today
 
         else:
@@ -236,10 +255,11 @@ class NewsClassifier:
         tags, tags_string = self._load_tag_data()
         
         # Load subsector data
-        subsectors, _ = (
-            self._load_subsector_data_sgx() if source_scraper == "sgx"
-            else self._load_subsector_data()
-        )
+        if source_scraper == 'sgx': 
+            subsectors = self._load_subsector_data_sgx() 
+
+        elif source_scraper == 'idx':
+            subsectors, _ = self._load_subsector_data_idx()
 
         # Pydantic mapping 
         model_mapping = {
@@ -316,7 +336,7 @@ class NewsClassifier:
             }
 
         else:
-            input_data = {"body": body}
+            input_data = {"body": title + body}
 
         for model in MODEL_NAMES:
             try:
@@ -364,9 +384,12 @@ class NewsClassifier:
                 
                 elif category == "subsectors":
                     sub_sector = result.get("subsector", "")
+                    reasoning = result.get('reasoning')
 
                     if len(sub_sector) >= 10:
                         continue 
+                    
+                    LOGGER.info('Reasoning subsector: %s', reasoning)
 
                     return sub_sector
                 
@@ -418,7 +441,7 @@ def load_company_data() -> Dict[str, Dict[str, str]]:
     Returns:
         Dict[str, Dict[str, str]]: Dictionary mapping company symbols to their details.
     """
-    return CLASSIFIER._load_company_data()
+    return CLASSIFIER._load_company_data_idx()
 
 
 def load_company_data_sgx() -> Dict[str, Dict[str, str]]:
@@ -428,7 +451,7 @@ def load_company_data_sgx() -> Dict[str, Dict[str, str]]:
     Returns:
         Dict[str, Dict[str, str]]: Dictionary mapping company symbols to their details.
     """
-    return CLASSIFIER._load_sgx_company_data()
+    return CLASSIFIER._load_company_data_sgx()
 
 
 def load_sub_sectors_data() -> dict[str]:
@@ -438,7 +461,7 @@ def load_sub_sectors_data() -> dict[str]:
     Returns:
         dict[str]: Dictionary containing subsector data.
     """
-    _, keys = CLASSIFIER._load_subsector_data()
+    _, keys = CLASSIFIER._load_subsector_data_idx()
     return keys
 
 
@@ -449,5 +472,5 @@ def load_sub_sectors_data_sgx() -> dict[str]:
     Returns:
         dict[str]: Dictionary containing subsector data.
     """
-    _, keys = CLASSIFIER._load_subsector_data_sgx()
-    return keys
+    sub_sectors = CLASSIFIER._load_subsector_data_sgx()
+    return sub_sectors

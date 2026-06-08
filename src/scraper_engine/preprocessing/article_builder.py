@@ -1,4 +1,3 @@
-from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from rapidfuzz import fuzz, process
 
@@ -28,7 +27,6 @@ LOGGER = logging.getLogger(__name__)
 
 
 CLASSIFIER = NewsClassifier()
-EXECUTOR = ThreadPoolExecutor(max_workers=4)
 COMPANY_DATA_IDX = load_company_data()
 COMPANY_DATA_SGX = load_company_data_sgx()
 SUBSECTOR_DATA = load_sub_sectors_data()
@@ -172,6 +170,12 @@ def post_processing(
             if ticker in companies_lookup
         ]
 
+    sub_sector = [
+        record 
+        for record in sub_sector 
+        if record and record != 'unknown'
+    ]
+    
     if not sub_sector: 
         sub_sector_llm = CLASSIFIER._classify_data(
             body=body,
@@ -192,11 +196,12 @@ def post_processing(
         for ticker in checked_tickers:
             company = companies_lookup.get(ticker, {})
             sector_extracted = company.get("sector")
+
             if sector_extracted:
                 sector = sector_extracted
                 break
 
-    if not sector:
+    if not sector or sector == 'unknown':
         for sub in sub_sector:
             if sub in sectors_data:
                 sector = sectors_data[sub]

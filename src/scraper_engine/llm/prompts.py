@@ -87,6 +87,9 @@ class SubsectorClassification(BaseModel):
     subsector: List[str] = Field(
         description="Most relevant subsector chosen strictly from the 'List of Available Subsectors'"
     )
+    reasoning: str = Field(
+        description="Explain the reasoning Why the subsector being assigned"
+    )
 
 
 class SentimentClassification(BaseModel):
@@ -190,6 +193,8 @@ class ClassifierPrompts:
             Instructions:
             - Read carefully both the 'List of Available Subsectors' and the 'Article Summary' before deciding. 
             - Classify subsector of 'Article Summary' based only on 'List of Available Subsectors'. 
+            - DO NOT infer the company's business from its name alone. A company named "X Holdings" is not necessarily in real estate or finance.
+            - Classify the subsector based on the PRIMARY COMPANY's core business, NOT based on the event type (legal cases, management changes, fraud charges, etc.).
             - DO NOT CREATE, MODIFY, or INFER new subsectors that are not explicitly provided on 'List of Available Subsectors'.
             - Identify ONE most relevant subsector based on the 'Article Summary'.
             - If multiple subsectors seem relevant, choose the most specific and dominant one.

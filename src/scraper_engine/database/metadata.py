@@ -1,7 +1,4 @@
-from datetime import datetime
 from pathlib import Path
-
-from .client import SUPABASE_CLIENT
 
 import json
 import re
@@ -33,37 +30,6 @@ def get_sectors_data_sgx() -> dict[str, any]:
     
     with open(path, "r", encoding="utf-8") as file:
         return json.load(file)
-    
-
-def update_top300() -> list[dict[str, any]]:
-    cache_path = DATA_DIR / "idx/top300.json"
-    
-    # Run update logic only on the 1st of the month
-    if datetime.today().day == 1:
-        logger.info("Fetching fresh Top 300 companies from Supabase...")
-        try:
-            response = SUPABASE_CLIENT.table('idx_company_report') \
-                .select('symbol') \
-                .order('market_cap_rank', desc=False) \
-                .limit(300) \
-                .execute()
-            
-            # Save to cache
-            with open(cache_path, 'w', encoding="utf-8") as f:
-                json.dump(response.data, f)
-            
-            return response.data
-        except Exception as e:
-            logger.error(f"Failed to fetch top 300: {e}")
-            # Fallback to cache if fetch fails
-            pass
-
-    # Load from cache
-    if cache_path.exists():
-        with open(cache_path, "r", encoding="utf-8") as file:
-            return json.load(file)
-    
-    return []
 
 
 def build_ticker_index() -> dict[str, str]:
