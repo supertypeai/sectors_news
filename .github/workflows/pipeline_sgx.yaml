@@ -74,6 +74,20 @@ jobs:
           GEMINI_API_KEY3: ${{ secrets.GEMINI_API_KEY3 }}
           PROXY: ${{ secrets.PROXY }}
 
+      - name: Save generated SGX data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sgx-generated-data-${{ github.run_id }}
+          path: |
+            data/sgx/pipeline_sgx.json
+            data/idx/pipeline_sgx_filtered.json
+            data/idx/pipeline_sgx_yesterday.json
+            data/last_state_sgx.json
+            data/outdated_news_sgx.json
+          if-no-files-found: warn
+          retention-days: 60
+
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"

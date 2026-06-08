@@ -74,6 +74,20 @@ jobs:
           GEMINI_API_KEY3: ${{ secrets.GEMINI_API_KEY3 }}
           PROXY: ${{ secrets.PROXY }}
 
+      - name: Save generated IDX data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: idx-generated-data-${{ github.run_id }}
+          path: |
+            data/idx/pipeline.json
+            data/idx/pipeline_filtered.json
+            data/idx/pipeline_yesterday.json
+            data/last_state.json
+            data/outdated_news.json
+          if-no-files-found: warn
+          retention-days: 60
+          
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
