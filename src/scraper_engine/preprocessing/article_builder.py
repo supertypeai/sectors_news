@@ -192,20 +192,11 @@ def post_processing(
     # Sectors data 
     sector = None 
     
-    if checked_tickers:
-        for ticker in checked_tickers:
-            company = companies_lookup.get(ticker, {})
-            sector_extracted = company.get("sector")
-
-            if sector_extracted:
-                sector = sector_extracted
-                break
-
-    if not sector or sector == 'unknown':
-        for sub in sub_sector:
-            if sub in sectors_data:
-                sector = sectors_data[sub]
-                break 
+    # Directly mapping trough sectors json 
+    for sub in sub_sector:
+        if sub in sectors_data:
+            sector = sectors_data[sub]
+            break 
 
     return {
         "tickers": checked_tickers,
