@@ -11,13 +11,13 @@ from scraper_engine.base.scraper import SeleniumScraper
 # from scraper_engine.sources.idx.scrape_mining import MiningScraper
 # from scraper_engine.sources.idx.scrape_idn_business_post import IndonesiaBusinessPost
 
-from scraper_engine.sources.idx import (
+from scraper_engine.sources.idx.registry import (
     ICNScraper, GapkiScraper, MinerbaScraper, IdnMinerScraper, IDNFinancialScraper,
     BisnisMarket, AbafScraper, JakartaGlobe, AntaraNews, AsianTelecom, BCANews,
     JakartaPost, KontanInvestasi, EmitenNews, InvestorID, BloombergTechnoz,
     CNBCMarket, CNNEkonomi, KontanKeuangan, FinanceDetik, KompasMoney,
 )
-from scraper_engine.sources.sgx import (
+from scraper_engine.sources.sgx.registry import (
     BusinessTimesSG, StraitsTimes, ChannelNewsAsiaSG, SBRSG,
     AsiaNews, EdgeProp, NextInsight, TheSmartInvestor, TheEdgeSingapore,
 )
