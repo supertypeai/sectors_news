@@ -12,6 +12,15 @@ on:
           - scraper
           - get_article_body
 
+      market:
+        description: "Market to scrape (idx or sgx)"
+        required: false
+        default: idx
+        type: choice
+        options:
+          - idx
+          - sgx
+
       scraper_module:
         description: "Select scraper to run (without .py)"
         required: false
@@ -38,11 +47,16 @@ on:
           - scrape_jakartaglobe
           - scrape_jakartapost
           - scrape_kompas
-          - scrape_kontan_investasi 
+          - scrape_kontan_investasi
           - scrape_kontan_keuangan
           - scrape_minerba
           - scrape_mining
           - scrape_petromindo
+          - scrape_asia_news
+          - scrape_edgeprop
+          - scrape_nextinsight
+          - scrape_smart_investor
+          - scrape_the_edge
 
       date:
         description: "Date in YYYYMMDD format (e.g. 20260529)"
@@ -104,8 +118,8 @@ jobs:
       - name: Run Selected Scraper
         if: ${{ inputs.test_mode == 'scraper' }}
         run: |
-          echo "Running module: ${{ inputs.scraper_module }} on date ${{ inputs.date }}"
-          uv run -m scraper_engine.sources.idx.${{ inputs.scraper_module }} ${{ inputs.date }} "${{ inputs.output_name }}" --pages ${{ inputs.pages }}
+          echo "Running module: ${{ inputs.market }}.${{ inputs.scraper_module }} on date ${{ inputs.date }}"
+          uv run -m scraper_engine.sources.${{ inputs.market }}.${{ inputs.scraper_module }} ${{ inputs.date }} "${{ inputs.output_name }}" --pages ${{ inputs.pages }}
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
