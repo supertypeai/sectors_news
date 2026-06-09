@@ -16,13 +16,23 @@ class TheEdgeSingapore(Scraper):
     BASE_URL = "https://www.theedgesingapore.com"
 
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news(url=url)
-        
+        soup = self.fetch_news_with_scrapling(url=url)
+
+        if not soup:
+            LOGGER.warning("[The Edge SG] Empty soup for %s", url)
+            return []
+
+        LOGGER.debug("[The Edge SG] Soup preview: %s", str(soup)[:300])
+
         article_items = soup.select("div[data-testid='teaser-type-1']")
+
+        if not article_items:
+            LOGGER.warning("[The Edge SG] No article items found. Soup preview: %s", str(soup)[:300])
+
         return article_items if article_items else []
 
     def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news(url=article_url)
+        soup = self.fetch_news_with_scrapling(url=article_url)
 
         time_tag = soup.select_one("time[datetime]")
 
