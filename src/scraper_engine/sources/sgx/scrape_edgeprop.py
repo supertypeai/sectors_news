@@ -16,58 +16,20 @@ class EdgeProp(SeleniumScraper):
     BASE_URL = "https://www.edgeprop.sg"
 
     def fetch_article_list(self, url: str) -> list:
-        if not self.driver:
+        html = self.fetch_news_with_proxy(url)
+
+        if not html:
+            LOGGER.warning("[EdgeProp SG] Empty response for %s", url)
             return []
 
-        intercept_script = """
-            window.__intercepted_responses = [];
-            const originalFetch = window.fetch;
-            window.fetch = function(...args) {
-                return originalFetch.apply(this, args).then(response => {
-                    const cloned = response.clone();
-                    if (typeof args[0] === 'string' && args[0].includes('/proxy/news')) {
-                        cloned.json().then(data => {
-                            window.__intercepted_responses.push(data);
-                        });
-                    }
-                    return response;
-                });
-            };
-        """
+        soup = BeautifulSoup(html, "html.parser")
+        article_items = soup.select("div.main-container")
 
-        self.driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-            "source": intercept_script
-        })
+        if not article_items:
+            LOGGER.warning("[EdgeProp SG] No article items found. Soup preview: %s", html[:300])
 
-        self.driver.get(url)
-        time.sleep(5)
+        return article_items if article_items else []
 
-        api_data = self.driver.execute_script("return window.__intercepted_responses;")
-
-        if api_data:
-            return api_data[0].get("response", {}).get('results')
-
-        LOGGER.warning("[EdgeProp SG] XHR interception failed, falling back to HTML parsing")
-        soup = BeautifulSoup(self.driver.page_source, "html.parser")
-
-        return soup.select("div.main-container")
-
-    def parse_timestamp(self, raw_timestamp: str) -> str:
-        if not raw_timestamp:
-            return None
-
-        try:
-            dt = datetime.fromisoformat(raw_timestamp)
-
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-
-            return dt.astimezone(ZoneInfo("Asia/Singapore"))
-
-        except (ValueError, AttributeError) as error:
-            LOGGER.error("[EdgeProp SG] Failed to parse timestamp '%s': %s", raw_timestamp, error)
-            return None
-        
     def fetch_article_content(self, article_url: str) -> tuple[datetime | None, str | None]:
         html = self.fetch_news_with_proxy(article_url)
 
@@ -76,7 +38,14 @@ class EdgeProp(SeleniumScraper):
 
         soup = BeautifulSoup(html, "html.parser")
 
+        time_tag = soup.select_one("time[datetime]")
+        published_at = self.parse_timestamp(time_tag.get("datetime")) if time_tag else None
+
         content_div = soup.select_one("#detail-content")
+
+        if not content_div:
+            LOGGER.warning("[EdgeProp SG] detail-content not found for %s", article_url)
+            return published_at, None
 
         for caption_block in content_div.select("div.caption-image"):
             caption_block.decompose()
@@ -93,7 +62,23 @@ class EdgeProp(SeleniumScraper):
 
         article_body = "\n\n".join(paragraphs) or None
 
-        return article_body
+        return published_at, article_body
+
+    def parse_timestamp(self, raw_timestamp: str) -> str:
+        if not raw_timestamp:
+            return None
+
+        try:
+            dt = datetime.fromisoformat(raw_timestamp)
+
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+
+            return dt.astimezone(ZoneInfo("Asia/Singapore"))
+
+        except (ValueError, AttributeError) as error:
+            LOGGER.error("[EdgeProp SG] Failed to parse timestamp '%s': %s", raw_timestamp, error)
+            return None
 
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
         parsed_articles = []
@@ -107,19 +92,27 @@ class EdgeProp(SeleniumScraper):
         )
 
         for article_item in article_items:
-            title = article_item.get('title')
-            relative_url = article_item.get('path')
-            source_url = f"{self.BASE_URL}{relative_url}" 
+            anchor_tag = article_item.select_one("div.article-container.hyperlink a")
  
-            if not source_url:
+            if not anchor_tag:
                 continue
  
-            thumbnail_url = article_item.get('thumbnail')
+            title_tag = anchor_tag.select_one("div.article-description")
+            title = title_tag.get_text(strip=True) if title_tag else None
+            relative_url = anchor_tag.get("href")
+            source_url = f"{self.BASE_URL}{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
+ 
+            if not title or not source_url:
+                continue
+ 
+            if article_item.select_one("img[alt='Premium']"):
+                LOGGER.info("[EdgeProp SG] Skipping premium article: %s", title)
+                continue
+ 
+            thumbnail_tag = article_item.select_one("div.left-container a img[src]")
+            thumbnail_url = thumbnail_tag.get("src") if thumbnail_tag else None
             
-            raw_time = article_item.get('created')
-            published_at = datetime.fromtimestamp(int(raw_time), tz=ZoneInfo("Asia/Singapore"))
-
-            article_body = self.fetch_article_content(source_url)
+            published_at, article_body = self.fetch_article_content(source_url)
             time.sleep(0.3)
  
             if not published_at:
@@ -129,13 +122,13 @@ class EdgeProp(SeleniumScraper):
             if published_at < target_datetime:
                 reached_older_date = True
                 break
-            
+ 
             parsed_articles.append({
                 "title": title,
                 "source": source_url,
                 "thumbnail": thumbnail_url,
                 "timestamp": published_at.strftime("%Y-%m-%d %H:%M:%S"),
-                "article": article_body
+                "article": article_body,
             })
  
         return parsed_articles, reached_older_date

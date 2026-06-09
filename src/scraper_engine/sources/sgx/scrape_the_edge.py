@@ -1,6 +1,7 @@
 from datetime import datetime, timezone 
 from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup 
+from goose3 import Goose 
 
 from scraper_engine.sources.utils.time_parser import parse_relative_time
 from scraper_engine.base.scraper import Scraper
@@ -33,6 +34,23 @@ class TheEdgeSingapore(Scraper):
             LOGGER.warning("[The Edge SG] No article items found. Soup preview: %s", str(soup)[:300])
 
         return article_items if article_items else []
+
+    def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
+        html = self.fetch_news_with_proxy(article_url)
+
+        if not html:
+            return None, None
+
+        soup = BeautifulSoup(html, "html.parser")
+
+        time_tag = soup.select_one("time[datetime]")
+        published_at = time_tag.get("datetime") if time_tag else None
+
+        goose_extractor = Goose()
+        article_data = goose_extractor.extract(raw_html=html.encode())
+        article_body = article_data.cleaned_text or None
+
+        return published_at, article_body
 
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
         parsed_articles = []
@@ -72,9 +90,7 @@ class TheEdgeSingapore(Scraper):
                     raw_src = img_tag.get("src")
                     thumbnail_url = f"{self.BASE_URL}{raw_src}" if raw_src and raw_src.startswith("/") else raw_src
 
-            meta_tag = article_item.select_one("div[data-testid='teaser-type-1-meta']")
-            raw_time = meta_tag.get_text(strip=True) if meta_tag else None
-            published_at = parse_relative_time(raw_time, tz=ZoneInfo("Asia/Singapore"))
+            published_at, article_body = self.fetch_article_content(source_url)
 
             if not published_at:
                 LOGGER.info("[The Edge SG] Failed to parse timestamp for %s. Skipping.", source_url)
@@ -91,6 +107,7 @@ class TheEdgeSingapore(Scraper):
                 "source": source_url,
                 "thumbnail": thumbnail_url,
                 "timestamp": published_at,
+                "article": article_body
             })
 
         return parsed_articles, reached_older_date
