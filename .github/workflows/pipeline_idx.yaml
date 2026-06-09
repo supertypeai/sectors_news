@@ -38,6 +38,10 @@ jobs:
           chrome-version: '1586874'
           install-chromedriver: true
 
+      - name: Install Scrapling Browser Binaries
+        run: |
+          uv run scrapling install
+          
       - name: Run scraping and process all batches
         run: |
           BATCH_SIZE=30
