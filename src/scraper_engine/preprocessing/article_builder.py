@@ -2,7 +2,8 @@ from datetime import datetime
 from rapidfuzz import fuzz, process
 
 from .models import News 
-from .summarizer import summarize_news, get_article_body
+from .article_fetcher import get_article_body
+from .summarizer import summarize_news
 from .scorer import get_article_score
 from scraper_engine.database.metadata import (
     get_sectors_data, 
@@ -209,9 +210,10 @@ def post_processing(
 def summarize_and_score(
     source: str, 
     timestamp: datetime, 
-    source_scraper: str
+    source_scraper: str,
+    prefetched_body: str | None = None,
 ) -> tuple[str, str, int]:
-    article = get_article_body(source)
+    article = prefetched_body or get_article_body(source)
 
     if not article:
         return None
@@ -241,7 +243,12 @@ def generate_article(
 
     try:
         # summarize and scoring 
-        summary_score_result = summarize_and_score(source, timestamp, source_scraper)
+        summary_score_result = summarize_and_score(
+            source, 
+            timestamp, 
+            source_scraper,
+            prefetched_body=data.get('article')
+        )
 
         if not summary_score_result:
             return None, 'error'

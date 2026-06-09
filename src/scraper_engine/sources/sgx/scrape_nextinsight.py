@@ -79,7 +79,7 @@ class NextInsight(SeleniumScraper):
             relative_url = title_tag.get("href") if title_tag else None
             source_url = f"{self.BASE_URL}{relative_url}" if relative_url else None
 
-            if not source_url or 'analyst say' in title.lower():
+            if not source_url or 'analysts say' in title.lower():
                 continue
 
             published_at, article_text = self.fetch_article_content(source_url)
