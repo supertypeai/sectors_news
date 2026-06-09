@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from scraper_engine.base.scraper import Scraper
-from scraper_engine.sources.idx.utils.constant import INDO_TO_ENG
+from scraper_engine.sources.utils.constant import INDO_TO_ENG
 
 import argparse
 import time

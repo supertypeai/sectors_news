@@ -2,8 +2,8 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
-from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
-from scraper_engine.sources.idx.utils.time_parser import parse_relative_time
+from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
+from scraper_engine.sources.utils.time_parser import parse_relative_time
 
 import argparse
 import time
@@ -21,9 +21,6 @@ class KontanKeuangan(Scraper):
             return []
 
         soup = BeautifulSoup(raw_html_content, "html.parser")
-
-        with open("kontan_keuangan.html", "w", encoding="utf-8") as file:
-            file.write(str(soup))
 
         return soup.select("div.list-berita ul li")
 

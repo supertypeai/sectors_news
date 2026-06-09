@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path 
 
 from scraper_engine.base.scraper import Scraper
-from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
+from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
 
 import argparse
 import time

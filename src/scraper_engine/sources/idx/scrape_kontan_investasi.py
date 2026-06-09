@@ -2,8 +2,8 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
-from scraper_engine.sources.idx.utils.constant import INDONESIAN_MONTHS
-from scraper_engine.sources.idx.utils.time_parser import parse_relative_time
+from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
+from scraper_engine.sources.utils.time_parser import parse_relative_time
 
 import argparse
 import logging
