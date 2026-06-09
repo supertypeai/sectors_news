@@ -119,7 +119,26 @@ jobs:
         if: ${{ inputs.test_mode == 'scraper' }}
         run: |
           echo "Running module: ${{ inputs.market }}.${{ inputs.scraper_module }} on date ${{ inputs.date }}"
-          uv run -m scraper_engine.sources.${{ inputs.market }}.${{ inputs.scraper_module }} ${{ inputs.date }} "${{ inputs.output_name }}" --pages ${{ inputs.pages }}
+          uv run python - <<'PY'
+          import logging, sys, runpy
+          logging.basicConfig(
+              level=logging.INFO,
+              format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
+              stream=sys.stdout,
+              force=True,
+          )
+          sys.argv = [
+              "${{ inputs.scraper_module }}",
+              "${{ inputs.date }}",
+              "${{ inputs.output_name }}",
+              "--pages", "${{ inputs.pages }}",
+          ]
+          runpy.run_module(
+              "scraper_engine.sources.${{ inputs.market }}.${{ inputs.scraper_module }}",
+              run_name="__main__",
+              alter_sys=True,
+          )
+          PY
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
@@ -136,6 +155,12 @@ jobs:
           GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
           GEMINI_API_KEY3: ${{ secrets.GEMINI_API_KEY3 }}
           PROXY: ${{ secrets.PROXY }}
+
+      - name: Show Scraper Output
+        if: ${{ inputs.test_mode == 'scraper' }}
+        run: |
+          echo "=== data/${{ inputs.output_name }}.json ==="
+          cat data/${{ inputs.output_name }}.json 2>/dev/null || echo "(no output file found)"
 
       - name: Test get_article_body
         if: ${{ inputs.test_mode == 'get_article_body' }}
