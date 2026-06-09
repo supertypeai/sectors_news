@@ -77,7 +77,7 @@ on:
         type: string
 
       article_url:
-        description: "URL for get_article_body test"
+        description: "One or more URLs for get_article_body test (comma or newline separated)"
         required: false
         default: ""
         type: string
@@ -167,17 +167,32 @@ jobs:
         run: |
           mkdir -p data
           uv run python - <<'PY'
+          import logging, sys
+          logging.basicConfig(
+              level=logging.INFO,
+              format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
+              stream=sys.stdout,
+              force=True,
+          )
+
+          import re
           from scraper_engine.preprocessing.article_fetcher import get_article_body
 
-          url = """${{ inputs.article_url }}""".strip()
-          if not url:
+          raw = """${{ inputs.article_url }}""".strip()
+          if not raw:
               raise ValueError("article_url is required when test_mode=get_article_body")
 
-          article = get_article_body(url) or ""
-          with open("data/get_article_body_output.txt", "w", encoding="utf-8") as f:
-              f.write(article)
+          urls = [u.strip() for u in re.split(r"[,\n]+", raw) if u.strip()]
 
-          print(f"raw article={article[:500]}")
+          for i, url in enumerate(urls):
+              print(f"\n=== [{i+1}/{len(urls)}] {url} ===")
+              article = get_article_body(url) or ""
+              slug = re.sub(r"[^\w]+", "_", url)[:60]
+              out_path = f"data/get_article_body_{i+1}_{slug}.txt"
+              with open(out_path, "w", encoding="utf-8") as f:
+                  f.write(article)
+              print(f"saved → {out_path}")
+              print(f"preview: {article[:500]}")
           PY
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -203,7 +218,7 @@ jobs:
           name: test-result-${{ inputs.test_mode }}-${{ inputs.output_name }}
           path: |
             data/${{ inputs.output_name }}.*
-            data/get_article_body_output.txt
+            data/get_article_body_*.txt
             page.html
           if-no-files-found: warn
           retention-days: 1

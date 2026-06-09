@@ -243,6 +243,7 @@ def get_article_edgeprop_news(url: str) -> str | None:
 
     return "\n\n".join(paragraphs)
 
+
 def extract_table_content(url: str) -> str:
     headers = {
         "User-Agent": USER_AGENT
