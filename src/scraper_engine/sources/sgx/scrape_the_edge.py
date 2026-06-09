@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup 
 
+from scraper_engine.sources.utils.time_parser import parse_relative_time
 from scraper_engine.base.scraper import Scraper
 
 import argparse 
@@ -16,7 +17,7 @@ class TheEdgeSingapore(Scraper):
     BASE_URL = "https://www.theedgesingapore.com"
 
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_scrapling(url=url)
+        soup = self.fetch_news_with_proxy(url=url)
 
         if not soup:
             LOGGER.warning("[The Edge SG] Empty soup for %s", url)
@@ -30,32 +31,6 @@ class TheEdgeSingapore(Scraper):
             LOGGER.warning("[The Edge SG] No article items found. Soup preview: %s", str(soup)[:300])
 
         return article_items if article_items else []
-
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news_with_scrapling(url=article_url)
-
-        time_tag = soup.select_one("time[datetime]")
-
-        if not time_tag:
-            return None
-
-        return self.parse_timestamp(time_tag.get("datetime"))
-
-    def parse_timestamp(self, raw_timestamp: str) -> str:
-        if not raw_timestamp:
-            return None
-
-        try:
-            dt = datetime.fromisoformat(raw_timestamp)
-
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-
-            return dt.astimezone(ZoneInfo("Asia/Singapore"))
-
-        except (ValueError, AttributeError) as error:
-            LOGGER.error("[The Edge SG] Failed to parse timestamp '%s': %s", raw_timestamp, error)
-            return None
 
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
         parsed_articles = []
@@ -95,14 +70,17 @@ class TheEdgeSingapore(Scraper):
                     raw_src = img_tag.get("src")
                     thumbnail_url = f"{self.BASE_URL}{raw_src}" if raw_src and raw_src.startswith("/") else raw_src
 
-            published_at = self.fetch_article_timestamp(source_url)
-            time.sleep(0.3)
+            meta_tag = article_item.select_one("div[data-testid='teaser-type-1-meta']")
+            raw_time = meta_tag.get_text(strip=True) if meta_tag else None
+            published_at = parse_relative_time(raw_time, tz=ZoneInfo("Asia/Singapore"))
 
             if not published_at:
                 LOGGER.info("[The Edge SG] Failed to parse timestamp for %s. Skipping.", source_url)
                 continue
+            
+            article_date = datetime.strptime(published_at[:10], "%Y-%m-%d").replace(tzinfo=ZoneInfo("Asia/Singapore"))
 
-            if published_at < target_datetime:
+            if article_date < target_datetime:
                 reached_older_date = True
                 break
 
@@ -110,7 +88,7 @@ class TheEdgeSingapore(Scraper):
                 "title": title,
                 "source": source_url,
                 "thumbnail": thumbnail_url,
-                "timestamp": published_at.strftime("%Y-%m-%d %H:%M:%S"),
+                "timestamp": published_at,
             })
 
         return parsed_articles, reached_older_date
