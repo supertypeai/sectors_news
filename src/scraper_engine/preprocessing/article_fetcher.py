@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from goose3 import Goose
 from io import StringIO
-from scrapling import Fetcher 
+from scrapling import Fetcher, DynamicFetcher
 
 from scraper_engine.config.conf import PROXY, USER_AGENT
 from scraper_engine.base.scraper import SeleniumScraper, Scraper
@@ -335,7 +335,7 @@ def extract_via_custom_parser(url: str) -> str | None:
         return None
 
 
-def extract_via_scrapling(url: str) -> str | None: 
+def extract_via_scrapling(url: str) -> str | None:
     try:
         LOGGER.info("[TIER 1] Attempting extraction via Scrapling")
         response = Fetcher.get(url, stealthy_headers=True, impersonate="chrome")
@@ -344,8 +344,16 @@ def extract_via_scrapling(url: str) -> str | None:
             LOGGER.warning("[TIER 1] Non-200 status %d for %s", response.status, url)
             return None
 
+        body = bytes(response.body)
+
+        if b"Please wait while your request is being verified" in body:
+            LOGGER.info("[TIER 1] Challenge page detected, falling back to DynamicFetcher")
+            
+            dynamic_response = DynamicFetcher.fetch(url, headless=True)
+            body = bytes(dynamic_response.body)
+
         goose_extractor = Goose({"browser_user_agent": USER_AGENT})
-        article_data = goose_extractor.extract(raw_html=response.body)
+        article_data = goose_extractor.extract(raw_html=body)
 
         return article_data.cleaned_text or None
 
@@ -397,11 +405,13 @@ def extract_via_selenium(url: str) -> str | None:
             LOGGER.info("[WARNING] Selenium DOM fetched, but Goose failed. Attempting Soup fallbacks.")
             
             content_container = soup_result.find("div", class_="content")
+            
             if content_container and content_container.get_text(strip=True):
                 LOGGER.info(f"[SUCCESS] Extracted via Selenium + Soup: {url}")
                 return content_container.get_text(strip=True)
             
             antara_container = soup_result.find("div", class_="wrap__article-detail")
+            
             if antara_container and antara_container.get_text(strip=True):
                 LOGGER.info(f"[SUCCESS] Extracted via Selenium + Soup: {url}")
                 return antara_container.get_text(strip=True)
