@@ -17,7 +17,17 @@ class EdgeProp(SeleniumScraper):
     def fetch_article_list(self, url: str) -> list:
         soup = self.fetch_news_with_selenium(url=url)
         
+        if not soup:
+            LOGGER.warning("[EdgeProp SG] Empty soup for %s", url)
+            return []
+
+        LOGGER.debug("[EdgeProp SG] Soup preview: %s", str(soup)[:300])
+
         article_items = soup.select("div.main-container")
+
+        if not article_items:
+            LOGGER.warning("[EdgeProp SG] No article items found. Soup preview: %s", str(soup)[:300])
+
         return article_items if article_items else []
 
     def fetch_article_timestamp(self, article_url: str) -> str:

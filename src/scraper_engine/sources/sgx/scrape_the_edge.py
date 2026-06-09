@@ -17,7 +17,7 @@ class TheEdgeSingapore(Scraper):
     BASE_URL = "https://www.theedgesingapore.com"
 
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_proxy(url=url)
+        soup = self.fetch_news_with_proxy(target_url=url)
 
         if not soup:
             LOGGER.warning("[The Edge SG] Empty soup for %s", url)

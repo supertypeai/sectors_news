@@ -13,8 +13,18 @@ LOGGER = logging.getLogger(__name__)
 
 class AsiaNews(SeleniumScraper):
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news(url=url)
+        soup = self.fetch_news_with_proxy(target_url=url)
+
+        if not soup:
+            LOGGER.warning("[AsiaNews] Empty soup for %s", url)
+            return []
+
+        LOGGER.debug("[AsiaNews] Soup preview: %s", str(soup)[:300])
+
         article_items = soup.select("article")
+
+        if not article_items:
+            LOGGER.warning("[AsiaNews] No article items found. Soup preview: %s", str(soup)[:300])
 
         return article_items if article_items else []
 
