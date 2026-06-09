@@ -115,16 +115,16 @@ class TheEdgeSingapore(Scraper):
             article_items = self.fetch_article_list(page_url)
 
             if not article_items:
-                LOGGER.info("[SBR SG] No articles found on page %d, stopping.", page_number)
+                LOGGER.info("[The Edge SG] No articles found on page %d, stopping.", page_number)
                 break
 
             articles, reached_older_date = self.parse_articles(article_items, date)
 
             self.articles.extend(articles)
-            LOGGER.info("[SBR SG] Page %d: %d articles collected.", page_number, len(articles))
+            LOGGER.info("[The Edge SG] Page %d: %d articles collected.", page_number, len(articles))
 
             if reached_older_date:
-                LOGGER.info("[SBR SG] Reached articles older than %s, stopping.", date)
+                LOGGER.info("[The Edge SG] Reached articles older than %s, stopping.", date)
                 break
 
             if num_pages is not None and page_number >= num_pages:
@@ -133,7 +133,7 @@ class TheEdgeSingapore(Scraper):
             page_number += 1
             time.sleep(1)
 
-        LOGGER.info("[SBR SG] Total scraped: %d", len(self.articles))
+        LOGGER.info("[The Edge SG] Total scraped: %d", len(self.articles))
         return self.articles
 
 

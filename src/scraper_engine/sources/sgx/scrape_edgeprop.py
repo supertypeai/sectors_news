@@ -43,7 +43,7 @@ class EdgeProp(SeleniumScraper):
             return dt.astimezone(ZoneInfo("Asia/Singapore"))
 
         except (ValueError, AttributeError) as error:
-            LOGGER.error("[The Edge SG] Failed to parse timestamp '%s': %s", raw_timestamp, error)
+            LOGGER.error("[EdgeProp SG] Failed to parse timestamp '%s': %s", raw_timestamp, error)
             return None
 
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:

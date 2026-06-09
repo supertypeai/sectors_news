@@ -39,7 +39,7 @@ class TheSmartInvestor(SeleniumScraper):
             return dt.astimezone(ZoneInfo("Asia/Singapore"))
 
         except (ValueError, AttributeError) as error:
-            LOGGER.error("[AsiaNews] Failed to parse timestamp '%s': %s", raw_timestamp, error)
+            LOGGER.error("[The Smart Investor] Failed to parse timestamp '%s': %s", raw_timestamp, error)
             return None
 
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
@@ -94,16 +94,16 @@ class TheSmartInvestor(SeleniumScraper):
             article_items = self.fetch_article_list(page_url)
 
             if not article_items:
-                LOGGER.info("[AsiaNews] No articles found on page %d, stopping.", page_number)
+                LOGGER.info("[The Smart Investor] No articles found on page %d, stopping.", page_number)
                 break
 
             articles, reached_older_date = self.parse_articles(article_items, date)
 
             self.articles.extend(articles)
-            LOGGER.info("[AsiaNews] Page %d: %d articles collected.", page_number, len(articles))
+            LOGGER.info("[The Smart Investor] Page %d: %d articles collected.", page_number, len(articles))
 
             if reached_older_date:
-                LOGGER.info("[AsiaNews] Reached articles older than %s, stopping.", date)
+                LOGGER.info("[The Smart Investor] Reached articles older than %s, stopping.", date)
                 break
 
             if num_pages is not None and page_number >= num_pages:
@@ -113,7 +113,7 @@ class TheSmartInvestor(SeleniumScraper):
             print(page_number)
             time.sleep(1)
 
-        LOGGER.info("[AsiaNews] Total scraped: %d", len(self.articles))
+        LOGGER.info("[The Smart Investor] Total scraped: %d", len(self.articles))
         return self.articles
 
 
