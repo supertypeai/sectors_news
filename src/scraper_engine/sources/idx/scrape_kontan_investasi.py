@@ -8,6 +8,7 @@ from scraper_engine.sources.utils.time_parser import parse_relative_time
 import argparse
 import logging
 import time 
+import re 
 
 
 LOGGER = logging.getLogger(__name__)
@@ -58,6 +59,50 @@ class KontanInvestasi(Scraper):
         except (ValueError, IndexError, AttributeError):
             return None
 
+    def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
+        try:
+            html = self.fetch_news_with_proxy(article_url)
+
+            if not html:
+                LOGGER.warning("[Kontan Investasi] Proxy failed for %s", article_url)
+                return None, None
+
+            soup = BeautifulSoup(html, "html.parser")
+
+            timestamp_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
+            raw_time = timestamp_tag.get_text(strip=True) if timestamp_tag else None
+            published_at = self.parse_timestamp(raw_time)
+
+            article_container = soup.find("div", class_="tmpt-desk-kon")
+
+            if not article_container:
+                LOGGER.warning("[Kontan Investasi] tmpt-desk-kon not found for %s", article_url)
+                return published_at, None
+
+            for strong_tag in article_container.find_all("strong"):
+                if "Baca Juga:" in strong_tag.get_text(strip=True):
+                    parent_paragraph = strong_tag.find_parent("p")
+
+                    if parent_paragraph:
+                        parent_paragraph.decompose()
+
+            paragraphs = article_container.find_all("p")
+
+            extracted_text_blocks = [
+                paragraph.get_text(strip=True)
+                for paragraph in paragraphs
+                if paragraph.get_text(strip=True)
+            ]
+
+            full_text = "\n\n".join(extracted_text_blocks)
+            article_body = re.sub(r"(?i)berita\s+terkait.*", "", full_text, flags=re.DOTALL).strip() or None
+
+            return published_at, article_body
+
+        except Exception as error:
+            LOGGER.error("[Kontan Investasi] Failed to fetch article content for %s: %s", article_url, error)
+            return None, None
+    
     def parse_articles(self, article_items: list) -> list:
         parsed_articles = []
 
@@ -71,21 +116,21 @@ class KontanInvestasi(Scraper):
             thumbnail_tag = article_item.select_one("div.pic img")
             thumbnail_url = thumbnail_tag["data-src"] if thumbnail_tag else None
 
-            raw_date = ""
-            date_tag = article_item.select_one("span.font-gray")
-            if date_tag:
-                raw_date = date_tag.get_text(strip=True)
-
-            published_at = parse_relative_time(raw_date) or self.parse_timestamp(raw_date)
+            published_at, article_body = self.fetch_article_content(source_url)
+            time.sleep(0.3)
 
             if not published_at:
-                LOGGER.warning("[Kontan Investasi] Could not parse timestamp '%s' for %s", raw_date, source_url)
+                LOGGER.warning(
+                    "[Kontan Investasi] Could not parse timestamp '%s' for %s", published_at, source_url
+                )
+                continue 
 
             parsed_articles.append({
                 "title": title,
                 "source": source_url,
                 "thumbnail": thumbnail_url,
                 "timestamp": published_at,
+                "article": article_body
             })
 
         return parsed_articles

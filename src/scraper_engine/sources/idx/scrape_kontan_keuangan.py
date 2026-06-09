@@ -1,5 +1,7 @@
 from datetime import datetime
 from bs4 import BeautifulSoup
+from scrapling.fetchers import Fetcher
+from goose3 import Goose
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
@@ -59,6 +61,31 @@ class KontanKeuangan(Scraper):
         except (ValueError, IndexError, AttributeError):
             return None
 
+    def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
+        try:
+            response = Fetcher.get(article_url, stealthy_headers=True, impersonate="chrome")
+
+            if response.status != 200:
+                LOGGER.warning("[Kontan Keuangan] Non-200 status %d for %s", response.status, article_url)
+                return None, None
+
+            body = bytes(response.body)
+            soup = BeautifulSoup(body, "html.parser")
+
+            timestamp_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
+            raw_time = timestamp_tag.get_text(strip=True) if timestamp_tag else None
+            published_at = self.parse_timestamp(raw_time)
+
+            goose_extractor = Goose()
+            article_data = goose_extractor.extract(raw_html=body)
+            article_body = article_data.cleaned_text or None
+
+            return published_at, article_body
+
+        except Exception as error:
+            LOGGER.error("[Kontan Keuangan] Failed to fetch article content for %s: %s", article_url, error)
+            return None, None
+    
     def parse_articles(self, article_items: list) -> list:
         parsed_articles = []
 
@@ -72,21 +99,21 @@ class KontanKeuangan(Scraper):
             thumbnail_tag = article_item.select_one("div.pic img")
             thumbnail_url = thumbnail_tag["data-src"] if thumbnail_tag else None
 
-            raw_date = ""
-            date_tag = article_item.select_one("span.font-gray")
-            if date_tag:
-                raw_date = date_tag.get_text(strip=True)
-
-            published_at = parse_relative_time(raw_date) or self.parse_timestamp(raw_date)
+            published_at, article_body = self.fetch_article_content(source_url)
+            time.sleep(0.3)
 
             if not published_at:
-                LOGGER.warning("[Kontan Keuangan] Could not parse timestamp '%s' for %s", raw_date, source_url)
+                LOGGER.warning(
+                    "[Kontan Keuangan] Could not parse timestamp '%s' for %s", published_at, source_url
+                )
+                continue 
 
             parsed_articles.append({
                 "title": title,
                 "source": source_url,
                 "thumbnail": thumbnail_url,
                 "timestamp": published_at,
+                "article": article_body,
             })
 
         return parsed_articles
