@@ -167,7 +167,7 @@ jobs:
         run: |
           mkdir -p data
           uv run python - <<'PY'
-          from scraper_engine.preprocessing.summarizer import get_article_body
+          from scraper_engine.preprocessing.article_fetcher import get_article_body
 
           url = """${{ inputs.article_url }}""".strip()
           if not url:
