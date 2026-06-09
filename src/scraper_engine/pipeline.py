@@ -11,38 +11,21 @@ from scraper_engine.base.scraper import SeleniumScraper
 # from scraper_engine.sources.idx.scrape_mining import MiningScraper
 # from scraper_engine.sources.idx.scrape_idn_business_post import IndonesiaBusinessPost
 
-from scraper_engine.sources.idx.scrape_icn import ICNScraper
-from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
-from scraper_engine.sources.idx.scrape_minerba import MinerbaScraper
-from scraper_engine.sources.idx.scrape_idnminer import IdnMinerScraper
-from scraper_engine.sources.idx.scrape_idnfinancials import IDNFinancialScraper
-from scraper_engine.sources.idx.scrape_bisnis_com import BisnisMarket
-from scraper_engine.sources.idx.scrape_abaf import AbafScraper
-from scraper_engine.sources.idx.scrape_jakartaglobe import JakartaGlobe
-from scraper_engine.sources.idx.scrape_antaranews import AntaraNews
-from scraper_engine.sources.idx.scrape_asian_telekom import AsianTelecom
-from scraper_engine.sources.idx.scrape_bca_news import BCANews
-from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
-from scraper_engine.sources.idx.scrape_kontan_investasi import KontanInvestasi
-from scraper_engine.sources.idx.scrape_emiten_news import EmitenNews
-from scraper_engine.sources.idx.scrape_investor_id import InvestorID
-from scraper_engine.sources.idx.scrape_bloomberg_technoz import BloombergTechnoz
-from scraper_engine.sources.idx.scrape_cnbc_market import CNBCMarket 
-from scraper_engine.sources.idx.scrape_cnn_ekonomi import CNNEkonomi
-from scraper_engine.sources.idx.scrape_kontan_keuangan import KontanKeuangan
-from scraper_engine.sources.idx.scrape_finance_detik import FinanceDetik
-from scraper_engine.sources.idx.scrape_kompas import KompasMoney
-
-from scraper_engine.sources.sgx.scrape_business_times import BusinessTimesSG 
-from scraper_engine.sources.sgx.scrape_straits_times import StraitsTimes
-from scraper_engine.sources.sgx.scrape_cna import ChannelNewsAsiaSG
-from scraper_engine.sources.sgx.scrape_sbr_sg import SBRSG
+from scraper_engine.sources.idx import (
+    ICNScraper, GapkiScraper, MinerbaScraper, IdnMinerScraper, IDNFinancialScraper,
+    BisnisMarket, AbafScraper, JakartaGlobe, AntaraNews, AsianTelecom, BCANews,
+    JakartaPost, KontanInvestasi, EmitenNews, InvestorID, BloombergTechnoz,
+    CNBCMarket, CNNEkonomi, KontanKeuangan, FinanceDetik, KompasMoney,
+)
+from scraper_engine.sources.sgx import (
+    BusinessTimesSG, StraitsTimes, ChannelNewsAsiaSG, SBRSG,
+    AsiaNews, EdgeProp, NextInsight, TheSmartInvestor, TheEdgeSingapore,
+)
 
 from .processor import post_source
 from scraper_engine.database.client import SUPABASE_CLIENT
 
 import json
-import os
 import typer 
 import sys
 import logging
@@ -295,6 +278,11 @@ def main_sgx(
         straitstimesscraper = StraitsTimes()
         channelnewsasiascraper = ChannelNewsAsiaSG()
         sbrsg_scraper = SBRSG()
+        asianewsscraper = AsiaNews()
+        edgepropscraper = EdgeProp()
+        nextinsightscraper = NextInsight()
+        smartinvestorscraper = TheSmartInvestor()
+        theedgescraper = TheEdgeSingapore()
 
         try:
             scrapercollection = ScraperCollection()
@@ -302,6 +290,11 @@ def main_sgx(
             scrapercollection.add_scraper(straitstimesscraper)
             scrapercollection.add_scraper(channelnewsasiascraper)
             scrapercollection.add_scraper(sbrsg_scraper)
+            scrapercollection.add_scraper(asianewsscraper)
+            scrapercollection.add_scraper(edgepropscraper)
+            scrapercollection.add_scraper(nextinsightscraper)
+            scrapercollection.add_scraper(smartinvestorscraper)
+            scrapercollection.add_scraper(theedgescraper)
 
             with last_state_path.open('w') as file:
                 json.dump({"last_run_at": datetime.now(sgt).isoformat()}, file)
