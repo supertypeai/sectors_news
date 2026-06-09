@@ -1,5 +1,6 @@
 from datetime import datetime, timezone 
 from zoneinfo import ZoneInfo
+from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import SeleniumScraper
 
@@ -15,33 +16,41 @@ class EdgeProp(SeleniumScraper):
     BASE_URL = "https://www.edgeprop.sg"
 
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(url, wait_selector="div.article-description")
-
-        with open('output.html', 'w') as file: 
-            file.write(soup.prettify())
-
-        if not soup:
-            LOGGER.warning("[EdgeProp SG] Empty soup for %s", url)
+        if not self.driver:
             return []
 
-        LOGGER.debug("[EdgeProp SG] Soup preview: %s", str(soup)[:300])
+        intercept_script = """
+            window.__intercepted_responses = [];
+            const originalFetch = window.fetch;
+            window.fetch = function(...args) {
+                return originalFetch.apply(this, args).then(response => {
+                    const cloned = response.clone();
+                    if (typeof args[0] === 'string' && args[0].includes('/proxy/news')) {
+                        cloned.json().then(data => {
+                            window.__intercepted_responses.push(data);
+                        });
+                    }
+                    return response;
+                });
+            };
+        """
 
-        article_items = soup.select("div.main-container")
+        self.driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+            "source": intercept_script
+        })
 
-        if not article_items:
-            LOGGER.warning("[EdgeProp SG] No article items found. Soup preview: %s", str(soup)[:300])
+        self.driver.get(url)
+        time.sleep(5)
 
-        return article_items if article_items else []
+        api_data = self.driver.execute_script("return window.__intercepted_responses;")
 
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news(url=article_url)
+        if api_data:
+            return api_data[0].get("response", {}).get('results')
 
-        time_tag = soup.select_one("time[datetime]")
+        LOGGER.warning("[EdgeProp SG] XHR interception failed, falling back to HTML parsing")
+        soup = BeautifulSoup(self.driver.page_source, "html.parser")
 
-        if not time_tag:
-            return None
-
-        return self.parse_timestamp(time_tag.get("datetime"))
+        return soup.select("div.main-container")
 
     def parse_timestamp(self, raw_timestamp: str) -> str:
         if not raw_timestamp:
@@ -58,6 +67,33 @@ class EdgeProp(SeleniumScraper):
         except (ValueError, AttributeError) as error:
             LOGGER.error("[EdgeProp SG] Failed to parse timestamp '%s': %s", raw_timestamp, error)
             return None
+        
+    def fetch_article_content(self, article_url: str) -> tuple[datetime | None, str | None]:
+        html = self.fetch_news_with_proxy(article_url)
+
+        if not html:
+            return None, None
+
+        soup = BeautifulSoup(html, "html.parser")
+
+        content_div = soup.select_one("#detail-content")
+
+        for caption_block in content_div.select("div.caption-image"):
+            caption_block.decompose()
+
+        paragraphs = []
+
+        for paragraph_div in content_div.select("div.truncated_textview_box"):
+            text = paragraph_div.get_text(separator=" ", strip=True)
+
+            if not text or text.lower().startswith("read also"):
+                continue
+
+            paragraphs.append(text)
+
+        article_body = "\n\n".join(paragraphs) or None
+
+        return article_body
 
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
         parsed_articles = []
@@ -71,27 +107,19 @@ class EdgeProp(SeleniumScraper):
         )
 
         for article_item in article_items:
-            anchor_tag = article_item.select_one("div.article-container.hyperlink a")
+            title = article_item.get('title')
+            relative_url = article_item.get('path')
+            source_url = f"{self.BASE_URL}{relative_url}" 
  
-            if not anchor_tag:
+            if not source_url:
                 continue
  
-            title_tag = anchor_tag.select_one("div.article-description")
-            title = title_tag.get_text(strip=True) if title_tag else None
-            relative_url = anchor_tag.get("href")
-            source_url = f"{self.BASE_URL}{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
- 
-            if not title or not source_url:
-                continue
- 
-            if article_item.select_one("img[alt='Premium']"):
-                LOGGER.info("[EdgeProp SG] Skipping premium article: %s", title)
-                continue
- 
-            thumbnail_tag = article_item.select_one("div.left-container a img[src]")
-            thumbnail_url = thumbnail_tag.get("src") if thumbnail_tag else None
+            thumbnail_url = article_item.get('thumbnail')
             
-            published_at = self.fetch_article_timestamp(source_url)
+            raw_time = article_item.get('created')
+            published_at = datetime.fromtimestamp(int(raw_time), tz=ZoneInfo("Asia/Singapore"))
+
+            article_body = self.fetch_article_content(source_url)
             time.sleep(0.3)
  
             if not published_at:
@@ -101,12 +129,13 @@ class EdgeProp(SeleniumScraper):
             if published_at < target_datetime:
                 reached_older_date = True
                 break
- 
+            
             parsed_articles.append({
                 "title": title,
                 "source": source_url,
                 "thumbnail": thumbnail_url,
                 "timestamp": published_at.strftime("%Y-%m-%d %H:%M:%S"),
+                "article": article_body
             })
  
         return parsed_articles, reached_older_date
