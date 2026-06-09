@@ -15,8 +15,11 @@ class EdgeProp(SeleniumScraper):
     BASE_URL = "https://www.edgeprop.sg"
 
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(url=url)
-        
+        soup = self.fetch_news_with_selenium(url, wait_selector="div.article-description")
+
+        with open('output.html', 'w') as file: 
+            file.write(soup.prettify())
+
         if not soup:
             LOGGER.warning("[EdgeProp SG] Empty soup for %s", url)
             return []
@@ -165,7 +168,7 @@ if __name__ == "__main__":
 
     Examples:
     uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260427
-    uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260427 test_scrape_edgeprop
+    uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260608 test_scrape_edgeprop
     uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260427 test_scrape_edgeprop --pages 3 --csv
     """
     main()

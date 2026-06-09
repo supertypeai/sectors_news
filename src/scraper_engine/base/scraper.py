@@ -1,4 +1,7 @@
 import undetected_chromedriver as uc
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 from requests.adapters import HTTPAdapter
@@ -231,17 +234,26 @@ class SeleniumScraper(Scraper):
             LOGGER.error(f"Failed to initialize driver: {error}")
             SeleniumScraper._driver_instance = None
 
-    def fetch_news_with_selenium(self, url: str, time_sleep: int = 5):
+    def fetch_news_with_selenium(self, url: str, wait_selector: str = None, time_sleep: int = 5):
         if not self.driver: 
             return BeautifulSoup()
 
         try:
             LOGGER.info(f"Navigating to {url}")
             self.driver.get(url)
-            time.sleep(time_sleep) 
+
+            if wait_selector:
+                WebDriverWait(self.driver, 30).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, wait_selector))
+                )
+
+            else:
+                time.sleep(time_sleep)
+            
 
             html_content = self.driver.page_source
             self.soup = BeautifulSoup(html_content, 'html.parser')
+
             return self.soup
         
         except TimeoutException:
@@ -250,6 +262,7 @@ class SeleniumScraper(Scraper):
                 html_content = self.driver.page_source
                 self.soup = BeautifulSoup(html_content, 'html.parser')
                 return self.soup
+            
             except Exception as dom_error:
                 LOGGER.error(f"Failed to extract DOM after timeout: {dom_error}")
                 self.close_shared_driver()
@@ -264,9 +277,12 @@ class SeleniumScraper(Scraper):
     def close_shared_driver(cls):
         if cls._driver_instance:
             LOGGER.info("Closing Shared WebDriver...")
+
             try: 
                 cls._driver_instance.quit()
+
             except: 
                 pass
+
             cls._driver_instance = None
 
