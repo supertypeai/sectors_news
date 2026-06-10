@@ -36,8 +36,27 @@ class SummaryNews(BaseModel):
             "No opinion, no filler phrases."
         """
     )
+    reasoning_company: str = Field(
+        description=""" 
+            For each company name appearing in the title and summary, explain:
+            (1) which parts of the full legal name were kept and which were removed, 
+            (2) why any parenthetical content was kept or removed, explicitly 
+            stating whether it is a stock code, abbreviation, or neither, 
+            (3) why the specific form was chosen over alternatives such as 
+            ticker codes or shortened forms."
+        """
+    )
     reasoning: str = Field(
-        description="Explain why you wrote the company name that way, including your reasoning for the uppercase and lowercase letters, and why you summarized it in that form"
+        description=""" 
+            Explain the decisions behind the title and summary: 
+            (1) Why and how you define the title?
+            (2) which companies were identified as impacted versus catalysts and why, 
+            (3) what article type was identified and how it shaped prioritization, 
+            (4) which financial metrics were included and why they are the most material, 
+            (5) what was explicitly excluded from the source article and why, 
+            (6) how sentence structure was chosen to stay within the three to four 
+            sentence limit without compressing unrelated facts into the same clause.
+        """
     )
 
 
@@ -145,59 +164,73 @@ class ClassifierPrompts:
     Centralized prompt templates for better readability and maintenance.
     """
     @staticmethod
-    def get_tags_prompt():
-        return """You are an expert at classifying tags from financial article. 
-            Your task is to classifying tags from 'Article Content' based on 'List of Available Tags'.
-            
-            List of Available Tags:
-            {tags}
-            
-            Article Content:
-            {body}
-            
-            Note:
-            - ONLY USE the tags listed on 'List of Available Tags'. 
-            - Carefully read each tag and reason its explanation before classify it for 'Article Content'.
-            - DO NOT create, modify, or infer new tags that are not explicitly provided.
-            - Classify STRICTLY based on actual relevance to the article content.
+    def get_system_tags_prompt() -> str:
+        return """
+            You are an expert at classifying tags from financial articles.
+            Your task is to classify tags from the provided article based on the List of Available Tags.
 
-            Tag Selection Rules:
-            - Identify AT MOST 5 relevant tags from the 'List of Available Tags'.
-            - Do not force 5 — if only 1, 2, 3, or 4 are relevant, select accordingly.
-    
+            Constraints:
+            - ONLY USE the tags listed in the List of Available Tags.
+            - DO NOT create, modify, or infer new tags not explicitly provided.
+            - Classify STRICTLY based on actual relevance to the article content.
+            - If uncertain, do not include the tag.
+            - Select AT MOST 5 relevant tags. Do not force 5 — if only 1, 2, 3, or 4 are relevant, select accordingly.
+
+            Tag Ordering Rule:
+            - Derive primary tags from the Article Title first. These represent the main highlight of the article.
+            - Then supplement with additional tags from the Article Body only if they are strongly and directly relevant.
+            - The final tag list must reflect this order: title-derived tags appear before body-derived tags.
+
             Specific Tagging Instructions:
             - `IPO` → Use ONLY for upcoming IPOs. DO NOT apply to past IPO mentions.
             - `IDX` → Use for news related to Indonesia Stock Exchange (Bursa Efek Indonesia).
-            - `IDX Composite` → Use only if the article discusses the price or performance of IDX/Indeks Harga Saham Gabungan.
-            - `Sharia Economy` → Use if the article mentions Sharia (Syariah) companies or economy.
+            - `IDX Composite` → Use only if the article discusses the price or performance of IDX/IHSG.
+            - `Sharia Economy` → Use if the article mentions Sharia companies or economy.
+        """
 
-            IMPORTANT:
-            - You must select tags ONLY if they are strongly and directly relevant to the article content.
-            - If uncertain, do not include the tag.
+    @staticmethod
+    def get_user_tags_prompt() -> str:
+        return """
+            List of Available Tags:
+            {tags}
 
-            Ensure to return the selected tags as a following JSON format.
+            Article Title:
+            {title}
+
+            Article Body:
+            {body}
+
+            Ensure the return in the following JSON format.
             {format_instructions}
         """
     
     @staticmethod
-    def get_subsectors_prompt():
-        return """You are an expert financial analyst specializing in classifying subsectors for financial articles.   
-            Your task is to determine the correct subsector for the given 'Article Summary' using only option in the 'List of Available Subsectors'.  
+    def get_system_subsectors_prompt() -> str:
+        return """
+            You are an expert financial analyst specializing in classifying subsectors for financial articles.
+            Your task is to determine the correct subsector for the given article summary using only options from the List of Available Subsectors.
 
+            Instructions:
+            - Read carefully both the List of Available Subsectors and the Article Summary before deciding.
+            - Classify the subsector based only on the List of Available Subsectors.
+            - DO NOT infer the company's business from its name alone. A company named "X Holdings" is not necessarily in real estate or finance.
+            - Classify the subsector based on the PRIMARY COMPANY's core business, NOT based on the event type (legal cases, management changes, fraud charges, etc.).
+            - DO NOT CREATE, MODIFY, or INFER new subsectors not explicitly provided in the List of Available Subsectors.
+            - Identify ONE most relevant subsector based on the Article Summary.
+            - If multiple subsectors seem relevant, choose the most specific and dominant one.
+        """
+
+    @staticmethod
+    def get_user_subsectors_prompt() -> str:
+        return """
             List of Available Subsectors:
             {subsectors}
 
+            Article Title:
+            {title}
+
             Article Summary:
             {body}
-
-            Instructions:
-            - Read carefully both the 'List of Available Subsectors' and the 'Article Summary' before deciding. 
-            - Classify subsector of 'Article Summary' based only on 'List of Available Subsectors'. 
-            - DO NOT infer the company's business from its name alone. A company named "X Holdings" is not necessarily in real estate or finance.
-            - Classify the subsector based on the PRIMARY COMPANY's core business, NOT based on the event type (legal cases, management changes, fraud charges, etc.).
-            - DO NOT CREATE, MODIFY, or INFER new subsectors that are not explicitly provided on 'List of Available Subsectors'.
-            - Identify ONE most relevant subsector based on the 'Article Summary'.
-            - If multiple subsectors seem relevant, choose the most specific and dominant one.
 
             Ensure to return the selected subsectors as a following JSON format.
             {format_instructions}
@@ -324,6 +357,9 @@ class ClassifierPrompts:
     @staticmethod
     def get_sentiment_user_prompt():
         return """
+            Article Title:
+            {title}
+            
             Article Summary:
             {body}
 
@@ -353,17 +389,12 @@ class ClassifierPrompts:
         """
 
     @staticmethod
-    def get_dimension_prompt():
-        return """You are an expert at classified for dimension from an article. 
-            Your task is to classified each dimension from 'Article Content' based on 'Dimension Classification Rule'.
+    def get_system_dimension_prompt() -> str:
+        return """
+            You are an expert at classifying dimensions from financial articles.
+            Your task is to classify each dimension from the article content based on the rules below.
 
-            Article Title:
-            {title}
-
-            Article Content:
-            {body}
-
-            List of Dimension News Classifications:
+            List of Dimension Classifications:
             - valuation, future, technical, financials, dividend, management, ownership, sustainability
 
             Dimension Classification Criteria:
@@ -371,7 +402,7 @@ class ClassifierPrompts:
             - future → Must contain forward-looking statements with specific timelines, numeric projections, official company guidance, or analyst revisions that change growth/earnings estimates by ≥5%.
             - technical → Must report abnormal trading volume (≥2× average) or price movement (±3% in one session) with clear technical patterns or significant support/resistance breakthroughs.
             - financials → Must discuss financial metric changes ≥5% year-over-year, unexpected earnings/revenue results, or material financial structure changes (debt, equity, assets).
-            - dividend → Must relate to dividend policy changes, dividend announcements, payout ratio changes ≥3%, or events affecting dividend sustainability (cash flow, earnings coverage).
+            - dividend → Must relate to dividend policy changes, dividend announcements, payout ratio changes ≥3%, or events affecting dividend sustainability.
             - management → Must cover C-suite/board changes, significant insider trading (> $1M), or major executive compensation/governance policy shifts.
             - ownership → Must report ownership changes exceeding 1% of outstanding shares, significant institutional investor actions, or material short interest changes (>20%).
             - sustainability → Must discuss quantifiable ESG impacts, formal sustainability initiatives with specific goals, or ESG rating changes from major agencies.
@@ -382,11 +413,21 @@ class ClassifierPrompts:
             - 1 → Slightly related.
             - 2 → Highly related.
 
-            - Special Conditions:
+            Special Conditions:
             - If the news mentions company financial sustainability, set sustainability = 0.
             - If the news mentions total dividend amount OR if another classification is highly related, set dividend = 0.
-         
-            Ensure to return the scores dimension as a following JSON format.
+        """
+
+    @staticmethod
+    def get_user_dimension_prompt() -> str:
+        return """
+            Article Title:
+            {title}
+
+            Article Content:
+            {body}
+
+             Ensure to return the scores dimension as a following JSON format.
             {format_instructions}
         """
     
@@ -686,6 +727,12 @@ class SummarizationPrompts:
             You are an expert financial analyst. Your task is to generate
             a title and summary from financial news articles.
 
+            ARTICLE FOCUS: Read the article title first. What is the
+            primary event or subject the publisher intends this article
+            to be about? Use this to anchor your prioritization in all
+            steps below. Content in the body that contradicts this focus
+            is supporting context, not the lead.
+
             CORE RULE: Center all output on companies directly impacted by the
             news. A company is impacted if the article's financial analysis
             centers on its performance, strategy, or a specific event directly
@@ -718,6 +765,17 @@ class SummarizationPrompts:
             - If the article identifies Company A as a subsidiary of Company B,
             do not reverse this in any sentence. State it as written.
 
+            MARKET MECHANISM ACCURACY:
+            - When the article describes a market event or exchange mechanism,
+            state only what the article explicitly says happened.
+            - Use descriptive verbs (reached, touched, closed at) not causal
+            verbs (triggered, caused, resulted in) unless the article
+            explicitly states causation.
+            - Translate all market mechanism terms fully to English, including
+            partially translated compound terms (e.g. "Auto Reject Bawah"
+            becomes "Auto Reject Bottom (ARB)", "Auto Reject Atas" becomes
+            "Auto Reject Top (ARA)", etc).
+
             OUTPUT RULES:
             - English only.
             - Correct capitalization and natural punctuation.
@@ -727,6 +785,9 @@ class SummarizationPrompts:
     @staticmethod
     def get_user_prompt():
         return """
+            Title Content: 
+            {title}
+
             Article Content:
             {article}
 
@@ -744,6 +805,12 @@ class SummarizationPrompts:
 
             3. KEY METRICS: What are the critical financial figures, dates,
             or ratios that must appear in the summary?
+
+            3b. MARKET MECHANISM VERIFICATION: If the article mentions any exchange
+            mechanism, price limit, or trading condition in the source language,
+            state exactly what the article says about it. Do not substitute a
+            more familiar English term if it changes the meaning. Translate
+            conservatively.
 
             4. ENTITY RELATIONSHIPS: For each company identified in step 1,
             state its organizational role exactly as the article describes it
@@ -765,14 +832,20 @@ class SummarizationPrompts:
             itself singles them out as the most significant case (e.g. a demotion
             rather than a full removal). Do not name companies just because they
             appear in the article.
+            - If the article title signals a dividend announcement as the primary
+            subject, format as: WHO is giving HOW MUCH dividend.
+            - Otherwise, align with whatever the article Title Content identifies as the
+            most significant event or finding.
 
             SUMMARY:
-            - Minimum three sentences, maximum four sentences. Do not write
+            - Minimum four sentences, maximum five sentences. Do not write
             fewer than three sentences regardless of article length.
             - All primarily impacted companies MUST appear by name.
             - Include critical financial metrics relevant to impacted companies.
             - If a table is present, incorporate the most material data points
             only if they directly support the core narrative.
+            - Do not combine unrelated facts into a single sentence to meet
+            the length constraint.
 
             Return title and summary in the following JSON format.
             {format_instructions}

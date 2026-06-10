@@ -58,6 +58,15 @@ def normalize_sgx_company_name(raw: str) -> str:
     return re.sub(r'\s+', ' ', name).strip().lower()
 
 
+def clean_article(article_text: str) -> str:
+    pattern = re.compile(r"^Baca juga:.*$", re.IGNORECASE | re.MULTILINE)
+    text_without_baca_juga = pattern.sub("", article_text)
+
+    cleaned_text = re.sub(r"\n{3,}", "\n\n", text_without_baca_juga)
+
+    return cleaned_text.strip()
+
+
 def matching_company_name(
     company_extracted: list[str],
     source_scraper: str,
@@ -211,14 +220,15 @@ def summarize_and_score(
     source: str, 
     timestamp: datetime, 
     source_scraper: str,
+    title: str,
     prefetched_body: str | None = None,
 ) -> tuple[str, str, int]:
-    article = prefetched_body or get_article_body(source)
+    article = prefetched_body or clean_article(get_article_body(source))
 
     if not article:
         return None
 
-    summary = summarize_news(news_text=article, url=source)
+    summary = summarize_news(news_text=article, url=source, title=title)
 
     if not summary:
         return None
@@ -247,6 +257,7 @@ def generate_article(
             source, 
             timestamp, 
             source_scraper,
+            title=data.get('title'),
             prefetched_body=data.get('article')
         )
 

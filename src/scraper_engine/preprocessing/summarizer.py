@@ -4,7 +4,7 @@ from langchain.prompts              import ChatPromptTemplate
 
 from scraper_engine.llm.client   import get_llm, TokenUsageLogger
 from scraper_engine.llm.prompts  import SummarizationPrompts, SummaryNews
-from scraper_engine.config.conf  import USER_AGENT
+from scraper_engine.config.conf  import USER_AGENT, MODEL_NAMES
 from .article_fetcher            import extract_table_content
 
 import re
@@ -98,7 +98,7 @@ def normalize_dot_case(body: str) -> str:
     return body
 
 
-def summarize_article(body: str, url: str) -> dict[str]:
+def summarize_article(title: str, body: str, url: str) -> dict[str]:
     prompts = SummarizationPrompts()
 
     user_prompt = prompts.get_user_prompt()
@@ -113,12 +113,12 @@ def summarize_article(body: str, url: str) -> dict[str]:
     ])
     
     input_data = {
+        "title": title,
         "article": body,
         'format_instructions': format_instructions
     }
     
-    model_names = ['gpt-oss-120b', 'gemini-2.5-flash', 'gpt-oss-20b', 'llama-3.3-70b', 'kimi-k2']
-    for model in model_names:
+    for model in MODEL_NAMES:
         try:
             llm = get_llm(model, temperature=0.15)
             LOGGER.info(f"LLM used: {model}")
@@ -149,7 +149,7 @@ def summarize_article(body: str, url: str) -> dict[str]:
     return None
 
 
-def summarize_news(url: str, news_text: str) -> tuple[str, str] | None:
+def summarize_news(url: str, news_text: str, title: str) -> tuple[str, str] | None:
     try:
         if len(news_text) <= 100:
             LOGGER.warning(f"Article text too short ({len(news_text)} chars) for {url}, retrying with cloudscraper.")
@@ -172,7 +172,7 @@ def summarize_news(url: str, news_text: str) -> tuple[str, str] | None:
 
         LOGGER.info(f"Article content preview: {news_text[:550]}")
 
-        response = summarize_article(news_text, url)
+        response = summarize_article(title, news_text, url)
         time.sleep(5)
 
         if not response or not response.get("summary"):
@@ -180,6 +180,7 @@ def summarize_news(url: str, news_text: str) -> tuple[str, str] | None:
             return None
 
         LOGGER.info(f"Reasoning: {response.get('reasoning')}")
+        LOGGER.info(f"Reasoning company name: {response.get('reasoning_company')}")
 
         raw_body = response.get("summary")
         cleaned_body = basic_cleaning_body(raw_body)

@@ -242,13 +242,22 @@ class NewsClassifier:
         title: str
     ) -> Optional[Union[list[str], str, dict[str, Optional[int]]]]:
         prompt_methods = {
-            "tags": self.prompts.get_tags_prompt(),
-            "subsectors": self.prompts.get_subsectors_prompt(),
+            "tags": {
+                'system_prompt': self.prompts.get_system_tags_prompt(),
+                'user_prompt': self.prompts.get_user_tags_prompt()
+            },
+            "subsectors": {
+                'system_prompt': self.prompts.get_system_subsectors_prompt(),
+                'user_prompt': self.prompts.get_user_subsectors_prompt()
+            },
             "sentiment": {
                 'system_prompt': self.prompts.get_sentiment_system_prompt(market=source_scraper),
                 'user_prompt': self.prompts.get_sentiment_user_prompt()
             },
-            "dimension": self.prompts.get_dimension_prompt()
+            "dimension": {
+                'system_prompt': self.prompts.get_system_dimension_prompt(),
+                'user_prompt': self.prompts.get_user_dimension_prompt()
+            }
         }
 
         # Load tag data
@@ -272,92 +281,46 @@ class NewsClassifier:
         # Create Parser
         classifier_parser = JsonOutputParser(pydantic_object=model_mapping.get(category))
         
-        # Get prompt template
-        if category.lower() == 'sentiment': 
-            templates = prompt_methods.get(category)
-            system_prompt = templates.get('system_prompt')
-            user_prompt = templates.get('user_prompt')
-
-        else:
-            template = prompt_methods.get(category)
-
-        # Get input variables based on category
-        if category.lower() == 'dimension':
-            input_variables = ["title", "body"]
+        # Get prompt template 
+        system_prompt = prompt_methods[category]['system_prompt']
+        user_prompt = prompt_methods[category]['user_prompt']
+      
+        prompt = ChatPromptTemplate.from_messages([
+            ("system", system_prompt),
+            ('user', user_prompt)
+        ])
         
-        else:
-            input_variables = ['body']
-
-        if category.lower() == 'sentiment': 
-            prompt = ChatPromptTemplate.from_messages([
-                ("system", system_prompt),
-                ('user', user_prompt)
-            ])
-
-        else:
-            # Create prompt with input variables and format instructions
-            prompt = PromptTemplate(
-                template=template, 
-                input_variables=input_variables,
-                partial_variables={
-                    "format_instructions": classifier_parser.get_format_instructions()
-                }
-            )
-
-            # Add category-specific data to prompt
-            if category == "tags":
-                prompt = prompt.partial(tags=tags_string)
-
-            elif category == "subsectors":
-                prompt = prompt.partial(subsectors=subsectors)
-
-        # Create runnable system based on category
-        if category == "dimension":
-            runnable_system = RunnableParallel({
-                "title": itemgetter("title"),
-                "body": itemgetter("body")
-            })
-
-        else:
-            runnable_system = RunnableParallel({
-                "body": itemgetter("body")
-            })
+        format_instructions = classifier_parser.get_format_instructions()
         
-        # Prepare input data
-        if category == "dimension":
+        if category == "tags":
             input_data = {
-                "title": title, "body": body
+                "title": title, 
+                "body": body, 
+                "tags": tags_string, 
+                "format_instructions": format_instructions
             }
         
-        elif category == 'sentiment': 
+        elif category == "subsectors":
             input_data = {
-                "body": body,
-                "format_instructions": classifier_parser.get_format_instructions()
+                "title": title, 
+                "body": body, 
+                "subsectors": subsectors, 
+                "format_instructions": format_instructions
             }
-
+        
         else:
-            input_data = {"body": title + body}
+            input_data = {
+                "title": title, 
+                "body": body, 
+                "format_instructions": format_instructions
+            }
 
         for model in MODEL_NAMES:
             try:
                 llm = get_llm(model, temperature=0.4)
                 LOGGER.info(f'LLM used: {model}')
 
-                # Create chain with current LLM
-                if category == 'sentiment': 
-                    classifier_chain = (
-                        prompt 
-                        | llm 
-                        | classifier_parser
-                    ) 
-
-                else:
-                    classifier_chain = (
-                        runnable_system
-                        | prompt 
-                        | llm 
-                        | classifier_parser
-                    )
+                classifier_chain = prompt | llm | classifier_parser
 
                 result = classifier_chain.invoke(input_data)
 
@@ -369,9 +332,13 @@ class NewsClassifier:
 
                 # Return based on category type             
                 if category == "tags":                      
-                    result_output = result.get("tags", [])  
-                    tags = [tag.get('name') for tag in tags]
+                    result_output = result.get("tags", [])
+                    reason = result.get('reason')
 
+                    LOGGER.info('reason tags: %s', reason)
+
+                    tags = [tag.get('name') for tag in tags]
+                    
                     seen = set()
                     check_tags = []
 

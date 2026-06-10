@@ -230,7 +230,7 @@ def get_llm(model_name: str, temperature: float = 0.5):
                 temperature=temperature,
                 max_retries=3,
                 api_key=api_key,
-                max_tokens=18000 
+                max_tokens=18000
             ) 
 
             llm_pool.append(initiate_model)
