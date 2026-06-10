@@ -102,6 +102,10 @@ class SBRSG(Scraper):
             'https://sbr.com.sg/markets-investing',
             'https://sbr.com.sg/economy',
             'https://sbr.com.sg/markets',
+            'https://sbr.com.sg/healthcare',
+            'https://sbr.com.sg/financial-services',
+            'https://sbr.com.sg/transport-logistics',
+            'https://sbr.com.sg/residential-property'
         ]
 
         page_number = 0
