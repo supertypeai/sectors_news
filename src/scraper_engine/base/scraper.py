@@ -8,7 +8,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from scrapling import Fetcher
 
-from scraper_engine.config.conf import PROXY, USER_AGENT, HEADERS_SCRAPER
+from scraper_engine.config.conf import PROXY, USER_AGENT, HEADERS_SCRAPER, CRAWLER_USER_AGENT
 
 import json
 import csv
@@ -115,9 +115,13 @@ class Scraper:
             "https": proxy_url
         }
         
-        headers = {
-            "User-Agent": USER_AGENT
-        }
+        if 'edgeprop' in target_url:
+            headers = CRAWLER_USER_AGENT
+        
+        else:
+            headers = {
+                "User-Agent": USER_AGENT
+            }
 
         try:
             LOGGER.info(f"Routing {target_url} through proxy")

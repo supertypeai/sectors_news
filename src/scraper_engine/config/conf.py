@@ -109,3 +109,9 @@ HEADERS_SCRAPER = {
     'Accept-Language': 'en-US,en;q=0.9',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 }
+
+CRAWLER_USER_AGENT = (
+    "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; "
+    "Googlebot/2.1; +http://www.google.com/bot.html) "
+    "Chrome/120.0.0.0 Safari/537.36"
+)
