@@ -106,7 +106,7 @@ class TheEdgeSingapore(Scraper):
                 "title": title,
                 "source": source_url,
                 "thumbnail": thumbnail_url,
-                "timestamp": published_at,
+                "timestamp": datetime.fromisoformat(published_at).strftime("%Y-%m-%d %H:%M:%S"),
                 "article": article_body
             })
 

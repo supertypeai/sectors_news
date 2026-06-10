@@ -116,7 +116,9 @@ class Scraper:
         }
         
         if 'edgeprop' in target_url:
-            headers = CRAWLER_USER_AGENT
+            headers = {
+                "User-Agent": CRAWLER_USER_AGENT
+            }
         
         else:
             headers = {
