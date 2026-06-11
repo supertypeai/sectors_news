@@ -847,6 +847,10 @@ class SummarizationPrompts:
             - Do not combine unrelated facts into a single sentence to meet
             the length constraint.
 
+            Note: 
+            - If the article is a news roundup (numbered list of unrelated stories),
+            do not summarize individual items as if they are the full article
+
             Return title and summary in the following JSON format.
             {format_instructions}
         """
