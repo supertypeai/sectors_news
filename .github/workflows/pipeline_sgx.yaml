@@ -96,16 +96,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # Stage changes
-          git add -A
-          
-          # Create Commit (if changes exist)
-          git diff-index --quiet HEAD || git commit -m "chore(sgx): update scraped news data"
-          
-          # Rebase
           git pull --rebase origin main
-          
+          git add -A
+          git diff-index --quiet HEAD || git commit -m "chore(sgx): update scraped news data"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
