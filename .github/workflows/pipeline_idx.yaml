@@ -96,9 +96,12 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull --rebase origin main
           git add -A
           git diff-index --quiet HEAD || git commit -m "chore(idx): update scraped news data"
-          git push
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break
+            echo "Push attempt $i failed, retrying..."
+            sleep 5
+          done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
