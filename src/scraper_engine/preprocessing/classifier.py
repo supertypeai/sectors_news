@@ -45,7 +45,7 @@ class NewsClassifier:
 
         self.prompts = ClassifierPrompts()
 
-    def convert_sub_sector_to_kebab(self, sub_sector: str, is_idx: bool = True) -> str:
+    def convert_to_kebab(self, sub_sector: str, is_idx: bool = True) -> str:
         if is_idx: 
             return (
                 sub_sector
@@ -205,6 +205,8 @@ class NewsClassifier:
                 SUPABASE_CLIENT
                 .table("sgx_company_report")
                 .select("symbol", "name", "sub_sector", "sector")
+                .eq('is_suspended', False)
+                .eq('is_active', True)
                 .execute()
             )
 
@@ -212,10 +214,10 @@ class NewsClassifier:
                 item["symbol"]: {
                     "symbol": item["symbol"],
                     "name": item["name"],
-                    "sub_sector": self.convert_sub_sector_to_kebab(
+                    "sub_sector": self.convert_to_kebab(
                         item["sub_sector"], False
                     ),
-                    "sector": self.convert_sub_sector_to_kebab(
+                    "sector": self.convert_to_kebab(
                         item["sector"], False
                     )
                 }
