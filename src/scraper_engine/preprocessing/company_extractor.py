@@ -89,6 +89,3 @@ def extract_company_name(
     LOGGER.error("All LLMs failed to return a valid summary.")
     return None
 
-
-if __name__ == "__main__":
-    pass 

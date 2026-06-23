@@ -874,6 +874,21 @@ class EntityExtractionPrompts:
             - Do not extract index names, countries, or macroeconomic entities
             (e.g. MSCI, IDX Composite, Indonesia).
 
+            IPO EXCEPTION (apply per event, not per article):
+            - For each IPO event described in the article, only extract the
+            company conducting that IPO (the issuer). Apply this restriction
+            only to the IPO portion — other corporate events in the same article
+            (e.g. tender offers, rights issues, acquisitions) follow the normal
+            extraction rules.
+            - Do NOT extract underwriters, securities firms, or banks mentioned
+            solely because they are underwriting an IPO, receiving debt
+            repayments from IPO proceeds, or acting in a supporting capacity for
+            that specific IPO.
+            - Do NOT extract subsidiaries of the IPO issuer mentioned only as
+            recipients of IPO proceeds.
+            - Do NOT extract shareholders or founders mentioned only in the
+            context of dilution or pre/post-IPO ownership structure.
+
             OUTPUT: Return a list of all extracted entities as they appear.
         """
     
@@ -884,10 +899,19 @@ class EntityExtractionPrompts:
             {body}
 
             Instructions:
-            1. Extract all company names or ticker symbols that appear in the
-            Article Text.
-            2. Provide a brief 'reasoning' describing what you found.
-            3. If no company names or ticker symbols are present, output
+            1. Identify how many distinct corporate events this article covers
+            (e.g. IPO, tender offer, rights issue, acquisition).
+            2. For each event, determine which companies are the primary subjects
+            and which are only supporting parties.
+            3. For any IPO event specifically: extract only the issuing company.
+            Exclude underwriters, banks receiving proceeds-based debt repayments,
+            subsidiaries receiving IPO funds, and shareholders mentioned only for
+            dilution context.
+            4. For all other event types: extract the primary company subject of
+            that event using normal rules.
+            5. Provide a 'reasoning' listing which companies were kept,
+            which were excluded, and why.
+            6. If no company names or ticker symbols are present, output
             'No Company Found' in the extraction list.
 
             Ensure to return the extracted companies strictly in the following
