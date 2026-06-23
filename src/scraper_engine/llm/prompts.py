@@ -502,9 +502,7 @@ class ScoringPrompts:
             program to boost shareholder value."
             
             CASE B — Macro deviation event: A macro event that is a surprise deviation from
-            market consensus AND the article explicitly names at least one IDX-listed company
-            or ticker as directly impacted. Routine macro updates that confirm expectations
-            do not qualify for this case regardless of topic.
+            market consensus.
             - Keywords to look for:
                 - Unexpected BI rate decision deviating from analyst consensus
                 - Emergency OJK regulation with immediate market consequences
@@ -636,9 +634,7 @@ class ScoringPrompts:
                 - REIT DPU revision or gearing ratio breach with disclosed figures
 
             CASE B — Macro deviation event: A macro event that is a surprise deviation
-            from market consensus AND the article explicitly names at least one SGX-listed
-            company or ticker as directly impacted. Routine macro updates that confirm
-            expectations do not qualify for this case regardless of topic.
+            from market consensus.
             Note: MAS adjusts monetary policy via SGD NEER slope and band on a scheduled
             semi-annual basis. Only unscheduled or out-of-consensus MAS adjustments
             qualify as surprise deviations.
