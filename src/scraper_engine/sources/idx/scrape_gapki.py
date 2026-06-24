@@ -6,13 +6,17 @@ import argparse
 import logging
 import time
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 LOGGER = logging.getLogger(__name__)
 
 
 class GapkiScraper(SeleniumScraper):
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(url, 40)
+        soup = self.fetch_news_with_selenium(url, time_sleep=40)
 
         if not soup:
             return []
