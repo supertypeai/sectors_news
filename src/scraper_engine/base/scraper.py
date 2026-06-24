@@ -19,56 +19,113 @@ import logging
 import platform
 import subprocess
 import shutil
+import os 
+import re 
 
 
 LOGGER = logging.getLogger(__name__)
 
+UC_CACHE_PATH = os.path.expanduser("~/.local/share/undetected_chromedriver/undetected_chromedriver")
+
 
 def get_chrome_info() -> tuple:
-    """
-    Detects the installed Google Chrome version AND path.
-    Returns a tuple: (major_version, executable_path)
-    """
     operating_system = platform.system()
+
     if operating_system == "Linux":
         try:
-            for binary in ["chrome", "google-chrome", "chromium", "chromium-browser"]:
+            for binary in [
+                "google-chrome", 
+                "google-chrome-stable", 
+                "chrome", 
+                "chromium", 
+                "chromium-browser"
+            ]:
                 binary_path = shutil.which(binary)
-
-                if not binary_path: 
-                    continue
                 
+                if not binary_path:
+                    continue
+
                 try:
-                    output = subprocess.check_output([binary_path, "--version"], text=True)
-                    if not output: continue
-                    
-                    version_str = output.strip().split()[-1] 
-                    major_version = int(version_str.split('.')[0])
-                    
+                    output = subprocess.check_output(
+                        [binary_path, "--version"],
+                        text=True,
+                        stderr=subprocess.DEVNULL,
+                        timeout=5,
+                    )
+
+                    version_match = re.search(r"(\d+)\.\d+\.\d+", output)
+
+                    if not version_match:
+                        LOGGER.warning(f"Could not parse version from {binary_path} output: {output.strip()!r}")
+                        continue
+
+                    major_version = int(version_match.group(1))
                     LOGGER.info(f"Detected {binary} at {binary_path} (Version: {major_version})")
+                    
                     return major_version, binary_path
                 
-                except:
+                except (subprocess.SubprocessError, subprocess.TimeoutExpired, ValueError) as detection_error:
+                    LOGGER.warning(f"Failed to detect version from {binary_path}: {detection_error}")
                     continue
-                
+            
             return None, None
         
         except Exception as error:
             LOGGER.error(f"Could not detect Chrome version: {error}")
             return None, None
-    
+
     elif operating_system == "Windows":
         try:
-            command = 'powershell -command "(Get-ItemProperty -Path Registry::HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon).version"'
+            command = (
+                "powershell -command "
+                '"(Get-ItemProperty -Path Registry::HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon).version"'
+            )
+            
             output = subprocess.check_output(command, shell=True, text=True).strip()
             
             if output:
-                major_version = int(output.split('.')[0])
+                major_version = int(output.split(".")[0])
                 return major_version, None
-            
+        
         except subprocess.SubprocessError as process_error:
             LOGGER.error(f"Failed to query Windows registry: {process_error}")
-            return None, None
+        
+        return None, None
+
+
+def clear_stale_chromedriver_cache(chrome_major_version: int) -> None:
+    if not os.path.exists(UC_CACHE_PATH):
+        return
+    
+    try:
+        cached_output = subprocess.check_output(
+            [UC_CACHE_PATH, "--version"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+            timeout=5,
+        )
+
+        version_match = re.search(r"(\d+)\.\d+\.\d+", cached_output)
+        
+        if version_match:
+            cached_major_version = int(version_match.group(1))
+
+            if cached_major_version != chrome_major_version:
+                LOGGER.warning(
+                    f"Cached chromedriver v{cached_major_version} != Chrome v{chrome_major_version}. "
+                    f"Removing stale cache at {UC_CACHE_PATH}."
+                )
+
+                os.remove(UC_CACHE_PATH)
+
+    except Exception as cache_error:
+        LOGGER.warning(f"Could not verify cached chromedriver, removing to be safe: {cache_error}")
+        
+        try:
+            os.remove(UC_CACHE_PATH)
+
+        except OSError:
+            pass
 
 
 class Scraper:
@@ -200,42 +257,43 @@ class SeleniumScraper(Scraper):
         return SeleniumScraper._driver_instance
 
     def setup_driver(self, load_strategy: str = "normal", page_timeout: int = 120):
-        """
-        Initializes the Undetected Chrome Driver.
-        Used for ALL scraping now.
-        """
         LOGGER.info("Initializing Undetected Chrome Driver")
-        options = uc.ChromeOptions()
-        
-        options.add_argument('--headless=new') 
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('--disable-gpu')
-        
-        options.add_argument('--window-size=1920,1080')
-        options.add_argument(
-            '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        )
-        options.add_argument('--disable-blink-features=AutomationControlled')
-
-        options.page_load_strategy = load_strategy
 
         chrome_version, chrome_path = get_chrome_info()
-        driver_path = shutil.which("chromedriver")
+
+        if chrome_version is None:
+            LOGGER.error("Chrome version detection failed entirely. Cannot initialize driver safely.")
+            SeleniumScraper._driver_instance = None
+            return
+
+        clear_stale_chromedriver_cache(chrome_version)
+
+        options = uc.ChromeOptions()
+        options.add_argument("--headless=new")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-setuid-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--window-size=1920,1080")
+        options.add_argument(
+            "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        )
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.page_load_strategy = load_strategy
 
         try:
             new_driver = uc.Chrome(
-                options=options, 
-                use_subprocess=True, 
+                options=options,
                 version_main=chrome_version,
-                browser_executable_path=chrome_path, 
-                driver_executable_path=driver_path if platform.system() == "Linux" else None
+                browser_executable_path=chrome_path,
             )
-            
-            new_driver.set_page_load_timeout(page_timeout)
 
+            new_driver.set_page_load_timeout(page_timeout)
             SeleniumScraper._driver_instance = new_driver
-            
+
+            LOGGER.info(f"Driver initialized successfully with Chrome v{chrome_version}")
+        
         except Exception as error:
             LOGGER.error(f"Failed to initialize driver: {error}")
             SeleniumScraper._driver_instance = None
@@ -256,7 +314,6 @@ class SeleniumScraper(Scraper):
             else:
                 time.sleep(time_sleep)
             
-
             html_content = self.driver.page_source
             self.soup = BeautifulSoup(html_content, 'html.parser')
 

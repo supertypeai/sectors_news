@@ -29,14 +29,13 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync
-          uv pip install -e .  # Register 'src' as a package
+          uv pip install -e .  
 
-      - name: Set up Google Chrome & ChromeDriver
+      - name: Set up Google Chrome
         uses: browser-actions/setup-chrome@v1
         with:
-          # hardcode version to ensure bca works
-          chrome-version: '1586874'
-          install-chromedriver: true
+          chrome-version: 'stable'
+          install-chromedriver: false
       
       - name: Install Scrapling Browser Binaries
         run: |
