@@ -527,8 +527,7 @@ class ScoringPrompts:
             - Insider trading by named executive with transaction value exceeding 1
             billion rupiah: +5
             - Surprise BI rate decision or emergency OJK regulation deviating from
-            consensus, with at least one named IDX-listed company or ticker explicitly
-            cited as directly impacted: +5
+            consensus: +5
 
             SECONDARY BONUS (up to +2 points each, max 10):
             - Recommended stocks or stock watchlist with specific tickers: +2
@@ -640,7 +639,7 @@ class ScoringPrompts:
             qualify as surprise deviations.
             - Keywords to look for:
                 - Unscheduled or surprise MAS monetary policy adjustment deviating from
-                analyst consensus, with at least one named SGX-listed company cited
+                analyst consensus
                 - Emergency MAS regulation with immediate market consequences
                 - SGD in extreme territory with confirmed MAS intervention
                 - Sudden commodity price shock directly impacting a named SGX-listed
@@ -660,8 +659,7 @@ class ScoringPrompts:
             - Insider trading by named director or substantial shareholder with transaction
             value exceeding SGD 100,000: +5
             - Surprise or unscheduled MAS monetary policy decision deviating from
-            consensus, with at least one named SGX-listed company or ticker explicitly
-            cited as directly impacted: +5
+            consensus: +5
 
             SECONDARY BONUS (up to +2 points each, max 10):
             - Recommended stocks or stock watchlist with specific tickers: +2
