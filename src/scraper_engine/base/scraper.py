@@ -256,6 +256,40 @@ class SeleniumScraper(Scraper):
 
         return SeleniumScraper._driver_instance
 
+    @classmethod
+    def _is_driver_alive(cls) -> bool:
+        """
+        Cheaply probe the shared session; a dead session raises here.
+        """
+        driver = cls._driver_instance
+
+        if driver is None:
+            return False
+
+        try:
+            # Lightweight command that fails fast if the session/process is gone.
+            _ = driver.current_url
+            return True
+
+        except Exception:
+            return False
+
+    def ensure_driver(self):
+        """
+        Return a healthy shared driver, rebuilding it if the previous one died.
+
+        This prevents one source's crash (which tears down the shared browser)
+        from poisoning every Selenium source that runs after it.
+        """
+        if not SeleniumScraper._is_driver_alive():
+            if SeleniumScraper._driver_instance is not None:
+                LOGGER.warning("Shared WebDriver session is dead. Rebuilding before use.")
+                self.close_shared_driver()
+
+            self.setup_driver()
+
+        return SeleniumScraper._driver_instance
+
     def setup_driver(self, load_strategy: str = "normal", page_timeout: int = 120):
         LOGGER.info("Initializing Undetected Chrome Driver")
 
@@ -298,42 +332,56 @@ class SeleniumScraper(Scraper):
             LOGGER.error(f"Failed to initialize driver: {error}")
             SeleniumScraper._driver_instance = None
 
-    def fetch_news_with_selenium(self, url: str, wait_selector: str = None, time_sleep: int = 5):
-        if not self.driver: 
+    def fetch_news_with_selenium(
+        self, 
+        url: str, 
+        wait_selector: str = None, 
+        time_sleep: int = 5, 
+        retry: bool = True
+    ):
+        driver = self.ensure_driver()
+
+        if not driver:
             return BeautifulSoup()
 
         try:
             LOGGER.info(f"Navigating to {url}")
-            self.driver.get(url)
+            driver.get(url)
 
             if wait_selector:
-                WebDriverWait(self.driver, 30).until(
+                WebDriverWait(driver, 30).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, wait_selector))
                 )
 
             else:
                 time.sleep(time_sleep)
-            
-            html_content = self.driver.page_source
+
+            html_content = driver.page_source
             self.soup = BeautifulSoup(html_content, 'html.parser')
 
             return self.soup
-        
+
         except TimeoutException:
             LOGGER.warning(f"Page load timed out for {url}. Attempting to salvage available DOM.")
             try:
-                html_content = self.driver.page_source
+                html_content = driver.page_source
                 self.soup = BeautifulSoup(html_content, 'html.parser')
                 return self.soup
-            
+
             except Exception as dom_error:
                 LOGGER.error(f"Failed to extract DOM after timeout: {dom_error}")
                 self.close_shared_driver()
                 return None
 
         except Exception as error:
-            LOGGER.error(f'Failed fetch news with selenium: {error}')  
+            LOGGER.error(f'Failed fetch news with selenium: {error}')
+            # The session is likely dead, tear it down so the next access rebuilds it.
             self.close_shared_driver()
+
+            if retry:
+                LOGGER.info(f"Rebuilding driver and retrying once for {url}")
+                return self.fetch_news_with_selenium(url, wait_selector, time_sleep, _retry=False)
+
             return None
 
     @classmethod
