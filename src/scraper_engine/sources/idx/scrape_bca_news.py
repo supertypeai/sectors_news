@@ -206,14 +206,14 @@ class BCANews(Scraper):
                 options.add_argument(f"--proxy-server={PROXY}")
 
         chrome_version, chrome_path = get_chrome_info()
-        driver_path = shutil.which("chromedriver")
+        # driver_path = shutil.which("chromedriver")
 
         return uc.Chrome(
             options=options,
             use_subprocess=True,
             version_main=chrome_version,
             browser_executable_path=chrome_path,
-            driver_executable_path=driver_path if platform.system() == "Linux" else None,
+            # driver_executable_path=driver_path if platform.system() == "Linux" else None,
         )
 
     def fetch_article_list(self, driver, page_number: int) -> list:
