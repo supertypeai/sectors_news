@@ -380,7 +380,12 @@ class SeleniumScraper(Scraper):
 
             if retry:
                 LOGGER.info(f"Rebuilding driver and retrying once for {url}")
-                return self.fetch_news_with_selenium(url, wait_selector, time_sleep, _retry=False)
+                return self.fetch_news_with_selenium(
+                    url, 
+                    wait_selector, 
+                    time_sleep, 
+                    retry=False
+                )
 
             return None
 
@@ -396,4 +401,3 @@ class SeleniumScraper(Scraper):
                 pass
 
             cls._driver_instance = None
-

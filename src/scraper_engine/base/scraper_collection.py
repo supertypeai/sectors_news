@@ -5,6 +5,7 @@ from datetime import datetime, timezone, timedelta
 import json
 import csv
 import logging
+import inspect 
 
 
 WIB = timezone(timedelta(hours=7))
@@ -39,11 +40,14 @@ class ScraperCollection:
             for scraper in self.scrapers:
                 scraper.articles = [] 
                 
+
                 try:
-                    try:
+                    extract_params = inspect.signature(scraper.extract_news_pages).parameters
+                    
+                    if "date" in extract_params or "target_date" in extract_params:
                         articles = scraper.extract_news_pages(num_page, date_to_scrape)
-                        
-                    except TypeError:
+                    
+                    else:
                         articles = scraper.extract_news_pages(num_page)
 
                     self.articles = [*self.articles, *articles]
