@@ -400,18 +400,37 @@ def extract_via_selenium(url: str) -> str | None:
             
             if article_data and article_data.cleaned_text:
                 LOGGER.info(f"[SUCCESS] Extracted via Selenium + Goose: {url}")
-                return article_data.cleaned_text
+                article_extracted = article_data.cleaned_text
                 
+                blocked_phrases = (
+                    "has banned the autonomous system",
+                    "error 1005",
+                    "cloudflare",
+                    "your ip address is in",
+                    "developers.cloudflare.com/support/troubleshooting",
+                )
+
+                if any(
+                    phrase in article_extracted.lower()
+                    for phrase in blocked_phrases
+                ):
+                    LOGGER.warning(
+                        "[BLOCKED] Selenium reached a Cloudflare block page."
+                    )
+                    
+                    return None
+
+                LOGGER.info(f"[SUCCESS] Extracted via Selenium + Goose: {url}")
+                return article_extracted
+
             LOGGER.info("[WARNING] Selenium DOM fetched, but Goose failed. Attempting Soup fallbacks.")
             
             content_container = soup_result.find("div", class_="content")
-            
             if content_container and content_container.get_text(strip=True):
                 LOGGER.info(f"[SUCCESS] Extracted via Selenium + Soup: {url}")
                 return content_container.get_text(strip=True)
             
             antara_container = soup_result.find("div", class_="wrap__article-detail")
-            
             if antara_container and antara_container.get_text(strip=True):
                 LOGGER.info(f"[SUCCESS] Extracted via Selenium + Soup: {url}")
                 return antara_container.get_text(strip=True)
