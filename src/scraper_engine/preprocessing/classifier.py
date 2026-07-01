@@ -203,7 +203,7 @@ class NewsClassifier:
         if refresh_day:
             response = (
                 SUPABASE_CLIENT
-                .table("sgx_company_report")
+                .table("sgx_companies")
                 .select("symbol", "name", "sub_sector", "sector")
                 .eq('is_suspended', False)
                 .eq('is_active', True)
