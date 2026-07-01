@@ -785,65 +785,66 @@ class SummarizationPrompts:
             Article Content:
             {article}
 
-            Before writing the title and summary, reason through the following
-            steps. This reasoning will not appear in
-            the final output.
+            Before writing the output, reason privately through the following.
 
-            1. IDENTIFY IMPACTED COMPANIES: Which companies are the primary
-            subjects of this article's financial analysis? List them and
-            briefly state why each qualifies.
+            1.
+            Classify the article type.
 
-            2. IDENTIFY CATALYSTS: Which companies or events triggered the
-            situation but are not themselves the focus of the analysis?
-            These will appear as supporting context only.
+            2.
+            State the primary topic implied by the ORIGINAL TITLE.
+            Do NOT use the article body yet.
 
-            3. KEY METRICS: What are the critical financial figures, dates,
-            or ratios that must appear in the summary?
+            3.
+            After reading the body, identify:
+            - supporting evidence
+            - financial metrics
+            - contextual information
 
-            3b. MARKET MECHANISM VERIFICATION: If the article mentions any exchange
-            mechanism, price limit, or trading condition in the source language,
-            state exactly what the article says about it. Do not substitute a
-            more familiar English term if it changes the meaning. Translate
-            conservatively.
+            4.
+            Identify the impacted companies.
+            Explain briefly why each company is directly affected.
 
-            4. ENTITY RELATIONSHIPS: For each company identified in step 1,
+            5.
+            Identify catalysts that are NOT primary subjects.
+
+            6.
+            Extract critical financial metrics, dates, and ratios.
+
+            7. ENTITY RELATIONSHIPS: For each company identified in step 1,
             state its organizational role exactly as the article describes it
             (parent, subsidiary, acquirer, target, issuer, etc.). Copy the
             relevant phrase from the article that establishes this role.
             Verify the direction before writing any sentence that names two
             related entities.
 
-            5. ARTICLE TYPE: Is this a broker recommendation report, a
-            corporate event article, or general market commentary? This
-            determines what to prioritize in the summary.
+            8.
+            If market mechanisms are mentioned, reproduce them faithfully.
 
             Now write the title and summary using your reasoning above.
 
             TITLE:
-            - One sentence, factually accurate, no exaggeration.
-            - Must name the primarily impacted company if identifiable.
-            - You may name one or two companies in the title only if the article
-            itself singles them out as the most significant case (e.g. a demotion
-            rather than a full removal). Do not name companies just because they
-            appear in the article.
-            - If the article title signals a dividend announcement as the primary
-            subject, format as: WHO is giving HOW MUCH dividend.
-            - Otherwise, align with whatever the article Title Content identifies as the
-            most significant event or finding.
+            - One sentence.
+            - Preserve the original article's purpose.
+            - For Opinion, Editorial, Educational, Interview, and Market Commentary articles:
+            - Preserve the original narrative focus.
+            - Do NOT replace it with the largest financial statistic.
+            - Do NOT rewrite it into a conventional financial news headline.
+            - For Breaking News, Corporate Announcements, Earnings, and Broker Reports:
+            - Write a factual financial headline centered on the primary event.
+            - Name the primary impacted company whenever appropriate.
 
             SUMMARY:
-            - Minimum four sentences, maximum five sentences. Do not write
-            fewer than three sentences regardless of article length.
-            - All primarily impacted companies MUST appear by name.
-            - Include critical financial metrics relevant to impacted companies.
-            - If a table is present, incorporate the most material data points
-            only if they directly support the core narrative.
-            - Do not combine unrelated facts into a single sentence to meet
-            the length constraint.
+            - Four to five sentences.
+            - Begin by explaining the article's primary topic.
+            - Then provide the supporting facts.
+            - Include important financial metrics only when they support the main story.
+            - Do not let supporting evidence become the central narrative.
+            - Mention all directly impacted companies.
+            - If the article is educational or opinion-based, 
+              preserve the author's thesis rather than only summarizing numerical outcomes.
 
             Note: 
-            - If the article is a news roundup (numbered list of unrelated stories),
-            do not summarize individual items as if they are the full article
+            - If the article is a news roundup, summarize the collection rather than treating one item as the entire article.
 
             Return title and summary in the following JSON format.
             {format_instructions}
