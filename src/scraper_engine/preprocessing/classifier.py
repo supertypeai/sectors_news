@@ -173,7 +173,7 @@ class NewsClassifier:
                 company[row["symbol"]] = {
                     "symbol": row["symbol"],
                     "name": row["company_name"],
-                    "sub_sector": self.convert_sub_sector_to_kebab(
+                    "sub_sector": self.convert_to_kebab(
                         subsector_data[row["sub_sector_id"]], 
                         True
                     ),
