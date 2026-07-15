@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 */4 * * *" # every 4 hours UTC
   workflow_dispatch:
+    inputs:
+      process_only:
+        description: "Resume: skip scraping and process the committed work-list (use after a processing crash)"
+        type: boolean
+        default: false
 
 concurrency:
   group: news-data-pipeline
@@ -43,26 +48,11 @@ jobs:
         run: |
           uv run scrapling install
           
-      - name: Run scraping and process all batches
+      - name: Scrape and build work-list (ingestion)
+        if: ${{ !inputs.process_only }}
         run: |
-          BATCH_SIZE=30
-          echo "=== B1 ==="
-          uv run -m scraper_engine.pipeline main_sgx --batch 1 --batch-size $BATCH_SIZE
-          sleep 20
-
-          TOTAL=$(python3 -c "import json; print(len(json.load(open('./data/sgx/pipeline_sgx_filtered.json'))))")
-          BATCHES=$(( (TOTAL + BATCH_SIZE - 1) / BATCH_SIZE ))
-          echo "Total articles: $TOTAL → $BATCHES batches needed"
-
-          for BATCH in $(seq 2 $BATCHES); do
-            echo "=== B${BATCH} ==="
-            uv run -m scraper_engine.pipeline main_sgx --process-only --batch $BATCH --batch-size $BATCH_SIZE
-            sleep 20
-          done
-
-          echo "=== CLEANUP ==="
-          uv run -m scraper_engine.pipeline remove_outdated_news --table-name sgx_news --source-scraper sgx
-        env:
+          uv run -m scraper_engine.pipeline main_sgx --scrape-only
+        env: &pipeline_env
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DB_KEY: ${{ secrets.DB_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -78,6 +68,40 @@ jobs:
           GEMINI_API_KEY2: ${{ secrets.GEMINI_API_KEY2 }}
           GEMINI_API_KEY3: ${{ secrets.GEMINI_API_KEY3 }}
           PROXY: ${{ secrets.PROXY }}
+
+      # Checkpoint the ingestion result BEFORE processing, so a runner crash
+      # mid-processing never forces a re-scrape. A re-run resumes from here.
+      - name: Checkpoint ingestion data
+        if: ${{ success() && !inputs.process_only }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/sgx/pipeline_sgx.json data/sgx/pipeline_sgx_filtered.json data/sgx/pipeline_sgx_yesterday.json data/last_state_sgx.json
+          git diff-index --quiet HEAD || git commit -m "chore(sgx): checkpoint ingested articles"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break
+            echo "Push attempt $i failed, retrying..."
+            sleep 5
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Process all batches
+        run: |
+          BATCH_SIZE=30
+          TOTAL=$(python3 -c "import json; print(len(json.load(open('./data/sgx/pipeline_sgx_filtered.json'))))")
+          BATCHES=$(( (TOTAL + BATCH_SIZE - 1) / BATCH_SIZE ))
+          echo "Total articles: $TOTAL → $BATCHES batches needed"
+
+          for BATCH in $(seq 1 $BATCHES); do
+            echo "=== B${BATCH} ==="
+            uv run -m scraper_engine.pipeline main_sgx --process-only --batch $BATCH --batch-size $BATCH_SIZE
+            sleep 20
+          done
+
+          echo "=== CLEANUP ==="
+          uv run -m scraper_engine.pipeline remove_outdated_news --table-name sgx_news --source-scraper sgx
+        env: *pipeline_env
 
       - name: Save generated SGX data
         if: always()

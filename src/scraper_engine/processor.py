@@ -6,7 +6,6 @@ from datetime import datetime, timezone, timedelta
 
 import pandas as pd
 import time
-import requests
 import json
 import os
 import shutil
@@ -18,35 +17,24 @@ LOGGER = logging.getLogger(__name__)
 
 WIB = timezone(timedelta(hours=7))
 
-MININUM_SCORE = 63
-BATCH_SIZE = 5
+MININUM_SCORE = 65
 
 
 def send_data_to_db(successful_articles: list, table_name: str):
-    """
-    Insert processed articles into the specified database table.
-    """
-    for index in range(0, len(successful_articles), BATCH_SIZE):
-        batch_to_submit = successful_articles[index:index + BATCH_SIZE]
-
-        LOGGER.info(
-            f"Submitting batch {index // BATCH_SIZE + 1} "
-            f"with {len(batch_to_submit)} articles..."
+    LOGGER.info(f"Submitting {len(successful_articles)} articles")
+    
+    try:
+        response = (
+            SUPABASE_CLIENT
+            .table(table_name)
+            .insert(successful_articles)
+            .execute()
         )
-
-        try:
-            response = (
-                SUPABASE_CLIENT
-                .table(table_name)
-                .insert(batch_to_submit)
-                .execute()
-            )
-
-            LOGGER.info(f"Batch Submission Success. Inserted {len(response.data)} rows.")
         
-        except Exception as error:
-            error_message = str(error)
-            LOGGER.error(f"Batch Submission Failed: {error_message}")
+        LOGGER.info(f"Submission Success. Inserted {len(response.data)} rows.")
+    
+    except Exception as error:
+        LOGGER.error(f"Submission Failed: {error}")
 
 
 def filter_articles_by_time(
@@ -79,8 +67,37 @@ def filter_articles_by_time(
     return filtered
 
 
+def get_existing_sources(
+    table_name: str,
+    filter_from: datetime | None = None,
+) -> set:
+    """
+    Return the set of article `source` URLs already present in the table.
+    Used both when building the work-list and as a per-batch resume check.
+    """
+    try:
+        query = (
+            SUPABASE_CLIENT
+            .table(table_name)
+            .select("source")
+        )
+
+        if filter_from:
+            start_of_day = filter_from.replace(hour=0, minute=0, second=0, microsecond=0)
+            query = query.gte("created_at", start_of_day.isoformat())
+
+        return {
+            row.get("source") 
+            for row in query.execute().data
+        }
+
+    except Exception as error:
+        LOGGER.error(f"Database Error: {error}")
+        return set()
+
+
 def filter_article_to_process(
-    all_articles_db: list[dict],
+    existing_links: set,
     all_articles: list[dict[str]],
     all_articles_yesterday: list[str],
 ) -> list[dict[str]]:
@@ -89,10 +106,6 @@ def filter_article_to_process(
     and yesterday’s processed articles.
     """
     try:
-        existing_links = {
-            db_article.get("source") for db_article in all_articles_db
-        }
-
         articles_to_process = [
             article
             for article in all_articles
@@ -124,6 +137,69 @@ def filter_article_to_process(
         return []
 
 
+def build_filtered_article(
+    jsonfile: str,
+    table_name: str,
+    source_scraper: str,
+    filter_from: datetime | None = None,
+): 
+    filtered_file = f"./data/{source_scraper}/{jsonfile}_filtered.json"
+    yesterday_file = f"./data/{source_scraper}/{jsonfile}_yesterday.json"
+
+    LOGGER.info("Performing filtering against database")
+
+    with open(f"./data/{source_scraper}/{jsonfile}.json", "r") as file_pipeline:
+        all_articles = json.load(file_pipeline)
+
+    LOGGER.info(f"Total raw article scraped: {len(all_articles)}")
+    
+    all_articles = filter_articles_by_time(all_articles, filter_from)
+    
+    LOGGER.info(f"Total articles in time window: {len(all_articles)}")
+
+    all_articles_yesterday = []
+
+    if os.path.exists(yesterday_file):
+        try:
+            with open(yesterday_file, "r") as file_pipeline_yesterday:
+                data = json.load(file_pipeline_yesterday)
+
+                if isinstance(data, list):
+                    all_articles_yesterday = [
+                        item.get("source")
+                        if isinstance(item, dict)
+                        else item
+                        for item in data
+                    ]
+
+        except Exception as error:
+            LOGGER.warning(
+                f"Failed to read yesterday file: {error}. Starting fresh"
+            )
+
+    existing_links = get_existing_sources(table_name, filter_from)
+
+    LOGGER.info(f"Total article scraped {len(all_articles)}")
+
+    final_articles_to_process = filter_article_to_process(
+        existing_links,
+        all_articles,
+        all_articles_yesterday,
+    )
+
+    shutil.copy(
+        f"./data/{source_scraper}/{jsonfile}.json",
+        yesterday_file,
+    )
+
+    with open(filtered_file, "w") as file:
+        json.dump(final_articles_to_process, file, indent=2)
+
+    LOGGER.info(
+        f"Saved filtered article list to {filtered_file}"
+    ) 
+
+
 def get_article_to_process(
     jsonfile: str,
     batch: int,
@@ -136,113 +212,58 @@ def get_article_to_process(
     Retrieves articles from JSON and filters out those already in the database.
     """
     filtered_file = f"./data/{source_scraper}/{jsonfile}_filtered.json"
-    yesterday_file = f"./data/{source_scraper}/{jsonfile}_yesterday.json"
+
+    if not os.path.exists(filtered_file):
+        LOGGER.error(f"Filtered article file not found: {filtered_file}")
+        return []
 
     try:
-        if batch == 1:
-            LOGGER.info("Batch 1: Performing fresh filtering against database")
+        with open(filtered_file, "r") as file:
+            final_articles_to_process = json.load(file)
 
-            with open(f"./data/{source_scraper}/{jsonfile}.json", "r") as file_pipeline:
-                all_articles = json.load(file_pipeline)
+    except (json.JSONDecodeError, OSError) as error:
+        LOGGER.error(f"Failed to read filtered file {filtered_file}: {error}")
+        return []
 
-            LOGGER.info(f"Total raw article scraped: {len(all_articles)}")
-            
-            all_articles = filter_articles_by_time(all_articles, filter_from)
-            LOGGER.info(f"Total articles in time window: {len(all_articles)}")
+    LOGGER.info(f"Loaded {len(final_articles_to_process)} articles from work-list")
 
-            all_articles_yesterday = []
+    total_articles = len(final_articles_to_process)
+    max_needed_batches = (total_articles + batch_size - 1) // batch_size
 
-            if os.path.exists(yesterday_file):
-                try:
-                    with open(yesterday_file, "r") as file_pipeline_yesterday:
-                        data = json.load(file_pipeline_yesterday)
-
-                        if isinstance(data, list):
-                            all_articles_yesterday = [
-                                item.get("source")
-                                if isinstance(item, dict)
-                                else item
-                                for item in data
-                            ]
-
-                except Exception as error:
-                    LOGGER.warning(
-                        f"Failed to read yesterday file: {error}. Starting fresh"
-                    )
-
-            try:
-                query = SUPABASE_CLIENT.table(table_name).select("source")
-
-                if filter_from:
-                    start_of_day = filter_from.replace(hour=0, minute=0, second=0, microsecond=0)
-                    query = query.gte("created_at", start_of_day.isoformat())
-
-                all_articles_db = query.execute().data
-
-            except Exception as error:
-                LOGGER.error(f"Database Error: {error}")
-                all_articles_db = []
-
-            LOGGER.info(f"Total article scraped {len(all_articles)}")
-
-            final_articles_to_process = filter_article_to_process(
-                all_articles_db,
-                all_articles,
-                all_articles_yesterday,
-            )
-
-            shutil.copy(
-                f"./data/{source_scraper}/{jsonfile}.json",
-                yesterday_file,
-            )
-
-            with open(filtered_file, "w") as file:
-                json.dump(final_articles_to_process, file, indent=2)
-
-            LOGGER.info(
-                f"Saved filtered article list to {filtered_file}"
-            )
-
-        else:
-            LOGGER.info(
-                f"Batch {batch}: Using pre-filtered article list from batch 1"
-            )
-
-            if os.path.exists(filtered_file):
-                with open(filtered_file, "r") as file:
-                    final_articles_to_process = json.load(file)
-                
-                LOGGER.info(
-                    f"Loaded {len(final_articles_to_process)} articles"
-                )
-
-            else:
-                LOGGER.error(f"Filtered article file not found: {filtered_file}")
-                return []
-
-        total_articles = len(final_articles_to_process)
-        max_needed_batches = (total_articles + batch_size - 1) // batch_size
-
-        if batch > max_needed_batches:
-            LOGGER.info(
-                f"Batch {batch} not needed. "
-                f"Only {max_needed_batches} batches required"
-            )
-            return []
-
-        start_idx = (batch - 1) * batch_size
-        end_idx = min(start_idx + batch_size, total_articles)
-
+    if batch > max_needed_batches:
         LOGGER.info(
-            f"Batch {batch}/{max_needed_batches}: "
-            f"Processing articles {start_idx} to {end_idx - 1}"
+            f"Batch {batch} not needed. "
+            f"Only {max_needed_batches} batches required"
+        )
+        return []
+
+    start_idx = (batch - 1) * batch_size
+    end_idx = min(start_idx + batch_size, total_articles)
+    batch_slice = final_articles_to_process[start_idx:end_idx]
+
+    LOGGER.info(
+        f"Batch {batch}/{max_needed_batches}: "
+        f"articles {start_idx} to {end_idx - 1}"
+    )
+
+    # resume-safety: the DB is the checkpoint. Skip any article already
+    # inserted, so a re-run (after a crashed batch) processes only what's left.
+    existing_sources = get_existing_sources(table_name, filter_from)
+    
+    remaining = [
+        article
+        for article in batch_slice
+        if article.get("source") not in existing_sources
+    ]
+
+    skipped = len(batch_slice) - len(remaining)
+
+    if skipped:
+        LOGGER.info(
+            f"Batch {batch}: skipping {skipped} already-processed article(s)"
         )
 
-        return final_articles_to_process[start_idx:end_idx]
-
-    except (FileNotFoundError, requests.RequestException, KeyError) as error:
-        LOGGER.error(f"Failed during setup phase: {error}")
-        return []
+    return remaining
 
 
 def post_source(
@@ -323,16 +344,16 @@ def post_source(
 
                 time.sleep(5)
 
-                if status == "ok" and processed_article_object:
-                    LOGGER.info(f"succes article retry above threshold: {source_url}")
-                    processed_article = processed_article_object.to_dict()
-                    successful_articles.append(processed_article)
-
-                elif status == "low_score":
+                if status == "low_score":
                     LOGGER.info(f"Retry skipped due to low score: {source_url}")
-                
-                else:
+                    continue
+
+                if status != "ok" or not processed_article_object:
                     LOGGER.error(f"Failed on retry. Giving up on {source_url}")
+                    continue
+
+                LOGGER.info(f"succes article retry above threshold: {source_url}")
+                successful_articles.append(processed_article_object.to_dict())
 
             except Exception as error:
                 LOGGER.error(
@@ -345,10 +366,31 @@ def post_source(
 
     end_time = time.time()
     final_time = (end_time - start_time) / 60
+    
     LOGGER.info(
         f"Total processing time: {final_time} seconds"
     )
 
+    run_sending_data(
+        batch=batch, 
+        successful_articles=successful_articles, 
+        source_scraper=source_scraper, 
+        table_name=table_name, 
+        is_check_csv=is_check_csv
+    )
+
+
+def filter_top_200(articles: list):
+    pass 
+
+
+def run_sending_data(
+    batch: int,
+    successful_articles: list, 
+    source_scraper: str,
+    table_name: str,  
+    is_check_csv: bool
+):
     if successful_articles:
         # temp: add symbols duplicate tickers 
         if source_scraper == 'idx':
@@ -359,6 +401,9 @@ def post_source(
         else: 
             for record in successful_articles:
                 record['symbols'] = record.pop('tickers', None)
+
+            # flow to filter out any companies outside top 200 by mcap
+
 
         if is_check_csv:
             df = pd.DataFrame(successful_articles)

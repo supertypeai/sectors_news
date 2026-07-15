@@ -22,7 +22,7 @@ from scraper_engine.sources.sgx.registry import (
     AsiaNews, EdgeProp, NextInsight, TheSmartInvestor, TheEdgeSingapore,
 )
 
-from .processor import post_source
+from .processor import post_source, build_filtered_article
 from scraper_engine.database.client import SUPABASE_CLIENT
 
 import json
@@ -133,6 +133,7 @@ def main_idx(
     csv: Annotated[bool, typer.Option(help="Flag to write to CSV file")] = False,
     batch: Annotated[int, typer.Option(help="Batch number for processing")] = 1,
     batch_size: Annotated[int, typer.Option(help="Batch size for processing")] = 75,
+    scrape_only: Annotated[bool, typer.Option(help="Only scraping, don't process")] = False,
     process_only: Annotated[bool, typer.Option(help="Only process, don't scrape")] = False,
     table_name: Annotated[str, typer.Option(help="Table name to push into db")] = 'idx_news',
     source_scraper: Annotated[str, typer.Option(help="Source scraper to define score prompt criteria")] = 'idx',
@@ -234,7 +235,34 @@ def main_idx(
         finally:
             SeleniumScraper.close_shared_driver()
 
-    post_source(filename, batch, batch_size, table_name, source_scraper, filter_from)
+    # scrape-only: the work-list is built and committed nothing to process yet
+    if scrape_only:
+        build_filtered_article(
+            filename,
+            table_name,
+            source_scraper,
+            filter_from,
+        )
+        return
+
+    # full run (no flags): we just scraped, so build the work list before
+    # processing. process-only skips this and reuses the committed work-list
+    if not process_only:
+        build_filtered_article(
+            filename,
+            table_name,
+            source_scraper,
+            filter_from,
+        )
+
+    post_source(
+        filename,
+        batch,
+        batch_size,
+        table_name,
+        source_scraper,
+        filter_from,
+    )
 
 
 @app.command(name="main_sgx")
@@ -244,6 +272,7 @@ def main_sgx(
     csv: Annotated[bool, typer.Option(help="Flag to write to CSV file")] = False,
     batch: Annotated[int, typer.Option(help="Batch number for processing")] = 1,
     batch_size: Annotated[int, typer.Option(help="Batch size for processing")] = 75,
+    scrape_only: Annotated[bool, typer.Option(help="Only scraping, don't process")] = False,
     process_only: Annotated[bool, typer.Option(help="Only process, don't scrape")] = False,
     table_name: Annotated[str, typer.Option(help="Table name to push into db")] = 'sgx_news',
     source_scraper: Annotated[str, typer.Option(help="Source scraper to define score prompt criteria")] = 'sgx',
@@ -311,7 +340,34 @@ def main_sgx(
         finally:
             SeleniumScraper.close_shared_driver()
 
-    post_source(filename, batch, batch_size, table_name, source_scraper, filter_from)
+    # scrape-only: the work-list is built and committed nothing to process yet
+    if scrape_only:
+        build_filtered_article(
+            filename,
+            table_name,
+            source_scraper,
+            filter_from,
+        )
+        return
+
+    # full run (no flags): we just scraped, so build the work-list before
+    # processing. process-only skips this and reuses the committed work-list
+    if not process_only:
+        build_filtered_article(
+            filename,
+            table_name,
+            source_scraper,
+            filter_from,
+        )
+
+    post_source(
+        filename, 
+        batch, 
+        batch_size, 
+        table_name, 
+        source_scraper, 
+        filter_from
+    )
 
 
 if __name__ == "__main__":
