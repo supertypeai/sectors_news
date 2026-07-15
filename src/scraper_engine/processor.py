@@ -381,7 +381,48 @@ def post_source(
 
 
 def filter_top_200(articles: list):
-    pass 
+    response = (
+        SUPABASE_CLIENT
+        .table('sgx_company_report')
+        .select('symbol, market_cap')
+        .order('market_cap', desc=True)
+        .limit(200)
+        .execute()
+    )
+
+    record_db = response.data 
+
+    symbols_db = {
+        record['symbol'] 
+        for record in record_db
+    }
+
+    final_articles = []
+
+    for record in articles: 
+        symbols = record.get('symbols') or []
+
+        if not symbols:
+            # keep general/untagged news
+            final_articles.append(record)   
+            continue
+
+        contain_top_200 = False 
+
+        for symbol in symbols: 
+            if symbol in symbols_db: 
+                contain_top_200 = True 
+                break 
+
+        if not contain_top_200: 
+            LOGGER.info(
+                f'Skipping article, all symbols not in top 200: {record['source']}'
+            )
+            continue 
+        
+        final_articles.append(record)
+
+    return final_articles
 
 
 def run_sending_data(
@@ -402,8 +443,9 @@ def run_sending_data(
             for record in successful_articles:
                 record['symbols'] = record.pop('tickers', None)
 
-            # flow to filter out any companies outside top 200 by mcap
-
+            # flow to filter out if article
+            # contains all symbols outside top 200 by mcap
+            successful_articles = filter_top_200(successful_articles)
 
         if is_check_csv:
             df = pd.DataFrame(successful_articles)
