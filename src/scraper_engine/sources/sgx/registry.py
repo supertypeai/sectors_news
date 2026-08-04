@@ -7,6 +7,7 @@ from scraper_engine.sources.sgx.scrape_edgeprop import EdgeProp
 from scraper_engine.sources.sgx.scrape_nextinsight import NextInsight
 from scraper_engine.sources.sgx.scrape_smart_investor import TheSmartInvestor
 from scraper_engine.sources.sgx.scrape_the_edge import TheEdgeSingapore
+from scraper_engine.sources.sgx.scrape_the_edge_reits import TheEdgeReits
 
 __all__ = [
     "BusinessTimesSG",
@@ -18,4 +19,5 @@ __all__ = [
     "NextInsight",
     "TheSmartInvestor",
     "TheEdgeSingapore",
+    "TheEdgeReits"
 ]

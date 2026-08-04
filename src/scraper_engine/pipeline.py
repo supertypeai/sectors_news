@@ -20,6 +20,7 @@ from scraper_engine.sources.idx.registry import (
 from scraper_engine.sources.sgx.registry import (
     BusinessTimesSG, StraitsTimes, ChannelNewsAsiaSG, SBRSG,
     AsiaNews, EdgeProp, NextInsight, TheSmartInvestor, TheEdgeSingapore,
+    TheEdgeReits
 )
 
 from .processor import post_source, build_filtered_article
@@ -312,6 +313,7 @@ def main_sgx(
         nextinsightscraper = NextInsight()
         smartinvestorscraper = TheSmartInvestor()
         theedgescraper = TheEdgeSingapore()
+        the_edge_reits_scraper = TheEdgeReits()
 
         try:
             scrapercollection = ScraperCollection()
@@ -324,6 +326,7 @@ def main_sgx(
             scrapercollection.add_scraper(nextinsightscraper)
             scrapercollection.add_scraper(smartinvestorscraper)
             scrapercollection.add_scraper(theedgescraper)
+            scrapercollection.add_scraper(the_edge_reits_scraper)
 
             with last_state_path.open('w') as file:
                 json.dump({"last_run_at": datetime.now(sgt).isoformat()}, file)
