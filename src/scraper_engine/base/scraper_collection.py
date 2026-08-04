@@ -40,12 +40,16 @@ class ScraperCollection:
             for scraper in self.scrapers:
                 scraper.articles = [] 
                 
-
                 try:
-                    extract_params = inspect.signature(scraper.extract_news_pages).parameters
+                    extract_params = inspect.signature(
+                        scraper.extract_news_pages
+                    ).parameters
                     
                     if "date" in extract_params or "target_date" in extract_params:
-                        articles = scraper.extract_news_pages(num_page, date_to_scrape)
+                        articles = scraper.extract_news_pages(
+                            num_page, 
+                            date_to_scrape
+                        )
                     
                     else:
                         articles = scraper.extract_news_pages(num_page)

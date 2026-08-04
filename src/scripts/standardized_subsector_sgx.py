@@ -1,7 +1,6 @@
 from pathlib import Path 
 
 from scraper_engine.database.client import SUPABASE_CLIENT
-from scraper_engine.preprocessing.classifier import CLASSIFIER, load_sub_sectors_data_sgx
 from scraper_engine.database.metadata import (
     get_sectors_data_sgx, 
 )
@@ -393,4 +392,3 @@ if __name__ == '__main__':
     # upsert_data(payload)
 
 # uv run -m scripts.standardized_subsector_sgx
-

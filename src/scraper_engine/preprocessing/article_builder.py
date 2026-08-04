@@ -9,62 +9,25 @@ from scraper_engine.database.metadata import (
     get_sectors_data, 
     get_sectors_data_sgx, 
     build_ticker_index, 
-    build_sgx_ticker_index
+    build_sgx_ticker_index,
+    load_company_data_idx,
+    load_company_data_sgx,
+    load_subsector_data_idx,
+    load_subsector_data_sgx,
 )
-from .classifier import (
-    load_company_data, 
-    NewsClassifier, 
-    load_sub_sectors_data, 
-    load_company_data_sgx, 
-    load_sub_sectors_data_sgx
-)
+from .classifier import NewsClassifier
 from .company_extractor import extract_company_name 
+from .utils.article_helpers import (
+    clean_article,
+    is_raw_ticker,
+    normalize_idx_company_name,
+    normalize_sgx_company_name,
+)
 
-import re
 import logging
 
 
 LOGGER = logging.getLogger(__name__)
-
-
-CLASSIFIER = NewsClassifier()
-COMPANY_DATA_IDX = load_company_data()
-COMPANY_DATA_SGX = load_company_data_sgx()
-SUBSECTOR_DATA = load_sub_sectors_data()
-SUBSECTOR_DATA_SGX = load_sub_sectors_data_sgx()
-TICKER_INDEX = build_ticker_index()
-TICKER_INDEX_SGX = build_sgx_ticker_index()
-SECTORS_DATA = get_sectors_data()
-SECTORS_DATA_SGX = get_sectors_data_sgx()
-
-
-def is_raw_ticker(text: str) -> bool:
-    cleaned = text.strip()
-    return bool(re.match(r'^[A-Z]{2,6}$', cleaned))
-
-
-def normalize_idx_company_name(raw: str) -> str:
-    name = re.sub(r'^\s*PT\s+', '', raw, flags=re.IGNORECASE)
-    name = re.sub(r'\s*Tbk\.?$', '', name, flags=re.IGNORECASE)
-    name = re.sub(r'\s*\(Persero\)\s*', ' ', name, flags=re.IGNORECASE)
-    return re.sub(r'\s+', ' ', name).strip().lower()
-
-
-def normalize_sgx_company_name(raw: str) -> str:
-    name = re.sub(r'\s*Ltd\.?$', '', raw, flags=re.IGNORECASE)
-    name = re.sub(r'\s*Limited\.?$', '', name, flags=re.IGNORECASE)
-    name = re.sub(r'\s*Pte\.?$', '', name, flags=re.IGNORECASE)
-    name = re.sub(r'\s*Bhd\.?$', '', name, flags=re.IGNORECASE)
-    return re.sub(r'\s+', ' ', name).strip().lower()
-
-
-def clean_article(article_text: str) -> str:
-    pattern = re.compile(r"^Baca juga:.*$", re.IGNORECASE | re.MULTILINE)
-    text_without_baca_juga = pattern.sub("", article_text)
-
-    cleaned_text = re.sub(r"\n{3,}", "\n\n", text_without_baca_juga)
-
-    return cleaned_text.strip()
 
 
 def matching_company_name(
@@ -76,7 +39,11 @@ def matching_company_name(
     seen = set()
     matched = []
     
-    ticker_index = TICKER_INDEX_SGX if source_scraper == 'sgx' else TICKER_INDEX
+    ticker_index = (
+        build_sgx_ticker_index()
+        if source_scraper == 'sgx'
+        else build_ticker_index()
+    )
     min_key_length = 5 if source_scraper == 'idx' else 2 
     normalized_funct = normalize_sgx_company_name if source_scraper == 'sgx' else normalize_idx_company_name
 
@@ -142,11 +109,18 @@ def post_processing(
     body: str, 
     title: str,
     dimension: dict, 
-    source_scraper: str
+    source_scraper: str,
+    classifier: NewsClassifier
 ) -> dict[str, any]:
-    companies_lookup = COMPANY_DATA_SGX if source_scraper == "sgx" else COMPANY_DATA_IDX
-    sectors_data = SECTORS_DATA_SGX if source_scraper == "sgx" else SECTORS_DATA
-    valid_subsectors = SUBSECTOR_DATA_SGX if source_scraper == "sgx" else SUBSECTOR_DATA
+    if source_scraper == "sgx":
+        companies_lookup = load_company_data_sgx()
+        sectors_data = get_sectors_data_sgx()
+        valid_subsectors = load_subsector_data_sgx()
+
+    else:
+        companies_lookup = load_company_data_idx()
+        sectors_data = get_sectors_data()
+        _, valid_subsectors = load_subsector_data_idx()
 
     # Sentiment added to tag
     if sentiment != 'Not Applicable':
@@ -187,7 +161,7 @@ def post_processing(
     ]
     
     if not sub_sector: 
-        sub_sector_llm = CLASSIFIER._classify_data(
+        sub_sector_llm = classifier._classify_data(
             body=body,
             category="subsectors",
             source_scraper=source_scraper,
@@ -228,7 +202,12 @@ def summarize_and_score(
     if not article:
         return None
 
-    summary = summarize_news(news_text=article, url=source, title=title)
+    summary = summarize_news(
+        news_text=article,
+        url=source,
+        title=title,
+        source_scraper=source_scraper,
+    )
 
     if not summary:
         return None
@@ -238,7 +217,14 @@ def summarize_and_score(
     if not title or not body:
         return None
 
-    score = get_article_score(body, timestamp, source, source_scraper)
+    scoring_content = f"Title: {title}\n\nSummary: {body}"
+    
+    score = get_article_score(
+        scoring_content, 
+        timestamp,
+        source_scraper,
+    )
+
     return title, body, score
 
 
@@ -272,7 +258,13 @@ def generate_article(
             return None, "low_score" 
 
         # Classify
-        classification_results = CLASSIFIER.classify_article(title, body, source_scraper)
+        classifier = NewsClassifier()
+
+        classification_results = classifier.classify_article(
+            title, 
+            body, 
+            source_scraper
+        )
 
         if not classification_results:
             LOGGER.error(f"Classification failed for {source}, failing article.")
@@ -302,8 +294,10 @@ def generate_article(
             body, 
             title, 
             dimension, 
-            source_scraper
+            source_scraper,
+            classifier
         )
+
         new_article.tickers = post_process_result.get("tickers")
         new_article.sub_sector = post_process_result.get("sub_sector")
         new_article.sector = post_process_result.get("sector")

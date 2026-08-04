@@ -1,11 +1,11 @@
-from langchain.prompts              import ChatPromptTemplate
-from langchain_core.output_parsers  import JsonOutputParser
+from langchain.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
 
-from scraper_engine.llm.client  import get_llm
+from scraper_engine.llm.client import get_llm
 from scraper_engine.llm.prompts import EntityExtractionPrompts, CompanyNameExtraction
 from scraper_engine.config.conf import MODEL_NAMES
+from scraper_engine.database.metadata import load_company_data_sgx
 
-import json
 import logging 
 
 
@@ -13,15 +13,16 @@ LOGGER = logging.getLogger(__name__)
 
 
 def load_sgx_company_data(): 
-    with open("./data/sgx/sgx_companies.json", "r") as file:
-            company = json.load(file)
+    company = load_company_data_sgx()
 
     companies_name = []
+
     for _, value in company.items(): 
         company_name = value.get('name')
         companies_name.append(company_name)
 
     companies_name_str = ', '.join(companies_name)
+
     return companies_name_str
 
 

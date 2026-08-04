@@ -6,6 +6,12 @@ from scraper_engine.llm.client   import get_llm, TokenUsageLogger
 from scraper_engine.llm.prompts  import SummarizationPrompts, SummaryNews
 from scraper_engine.config.conf  import USER_AGENT, MODEL_NAMES
 from .article_fetcher            import extract_table_content
+from .utils.article_helpers      import (
+    basic_cleaning_body,
+    clean_apostrophe_case,
+    normalize_company_abbreviations,
+    normalize_dot_case,
+)
 
 import re
 import cloudscraper
@@ -16,93 +22,16 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-def basic_cleaning_body(body: str) -> str:
-    """ 
-    Basic cleaning of the body text to remove any word 'ticker' mentions in parentheses.
-
-    Args:
-        body (str): The body text to be cleaned.
-    
-    Returns:
-        str: The cleaned body text.
-    """
-    body = re.sub(r'\([^)]*ticker[^)]*\)', '', body, flags=re.IGNORECASE)
-    body = re.sub(r'\s+', ' ', body)
-    body = body.strip()
-    return body
-
-
-def clean_apostrophe_case(body: str) -> str:
-    """
-    Finds an apostrophe followed by any uppercase letter
-    at the end of a word and converts that letter to lowercase.
-    
-    Handles both straight (') and smart (’) quotes.
-    
-    Args:
-        body (str): The body text to be cleaned.
-    
-    Returns:
-        str: The cleaned body text.
-    """
-    pattern = r"(’|')([A-Z])\b"
-    
-    def replacer(match):
-        quote = match.group(1) 
-        letter = match.group(2).lower()
-        return quote + letter
-        
-    return re.sub(pattern, replacer, body)
-
-
-def normalize_company_abbreviations(body: str) -> str:
-    """
-    Safely finds all "Pt." or "Pt" abbreviations and capitalizes them to "PT".
-    This is safe to run on a whole paragraph.
-
-    Args:
-        body (str): The body text to be cleaned.
-    
-    Returns:
-        str: The cleaned body text.
-    """
-    # Fix "Pt." -> "PT" (case-insensitive)
-    cleaned_body = re.sub(r"\bPt\.?\b", "PT", body, flags=re.IGNORECASE)
-    
-    # Fix "tbk" -> "Tbk" (case-insensitive)
-    cleaned_body = re.sub(r"\bTbk\b", "Tbk", cleaned_body, flags=re.IGNORECASE)
-    
-    return cleaned_body
-
-
-def normalize_dot_case(body: str) -> str:
-    """
-    Finds Indonesian-style thousands separators (dots) 
-    and converts them to English-style (commas) to match
-    the standard (e.g., 54.110.800 -> 54,110,800).
-    
-    Args:
-        body (str): The body text to be cleaned.
-    
-    Returns:
-        str: The cleaned body text.
-    """
-    pattern_thousands = r"(\d)\.(\d{3})(?!%)"
-    
-    while re.search(pattern_thousands, body):
-        body = re.sub(pattern_thousands, r"\1,\2", body)
-
-    pattern_decimals = r"(\d),(\d{1,2})(?![\d,])"
-    body = re.sub(pattern_decimals, r"\1.\2", body)
-    
-    return body
-
-
-def summarize_article(title: str, body: str, url: str) -> dict[str]:
+def summarize_article(
+    title: str,
+    body: str,
+    url: str,
+    source_scraper: str = "idx",
+) -> dict[str]:
     prompts = SummarizationPrompts()
 
     user_prompt = prompts.get_user_prompt()
-    system_prompt = prompts.get_system_prompt() 
+    system_prompt = prompts.get_system_prompt(source_scraper)
 
     summary_parser = JsonOutputParser(pydantic_object=SummaryNews)
     format_instructions = summary_parser.get_format_instructions()
@@ -149,7 +78,12 @@ def summarize_article(title: str, body: str, url: str) -> dict[str]:
     return None
 
 
-def summarize_news(url: str, news_text: str, title: str) -> tuple[str, str] | None:
+def summarize_news(
+    url: str,
+    news_text: str,
+    title: str,
+    source_scraper: str = "idx",
+) -> tuple[str, str] | None:
     try:
         if len(news_text) <= 100:
             LOGGER.warning(f"Article text too short ({len(news_text)} chars) for {url}, retrying with cloudscraper.")
@@ -172,7 +106,7 @@ def summarize_news(url: str, news_text: str, title: str) -> tuple[str, str] | No
 
         LOGGER.info(f"Article content preview: {news_text[:550]}")
 
-        response = summarize_article(title, news_text, url)
+        response = summarize_article(title, news_text, url, source_scraper)
         time.sleep(5)
 
         if not response or not response.get("summary"):

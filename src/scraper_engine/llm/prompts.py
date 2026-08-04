@@ -581,6 +581,47 @@ class ScoringPrompts:
             type and its implied significance, not on whether the summary contains the
             exact numerical detail.
 
+            SGX REIT AND PROPERTY COVERAGE — IMPORTANT:
+            Property as a topic is neither automatically relevant nor automatically
+            irrelevant. Do not exclude or cap an article at Tier 1 merely because it
+            comes from a property publication or discusses real estate.
+
+            A property article can qualify through either of these paths:
+
+            A. COMPANY-SPECIFIC RELEVANCE
+            - A named SGX-listed REIT, property trust, business trust, or property company
+            - The manager or sponsor of an SGX-listed trust, when the event directly
+            affects that listed trust
+            - A property or portfolio asset explicitly identified as owned, acquired,
+            divested, developed, redeveloped, valued, financed, or leased by an SGX-listed
+            security
+
+            B. MATERIAL PROPERTY-SECTOR RELEVANCE
+            A named SGX security is not required when the article provides a concrete,
+            investor-relevant signal for property sectors represented on the SGX. This
+            includes quantified changes or material policy developments involving:
+            - Office, retail, industrial, logistics, hospitality, data-centre, healthcare,
+            or other income-producing property rents, occupancy, vacancy, supply, demand,
+            valuations, capitalisation rates, transaction volumes, or financing costs
+            - Residential market prices, volumes, land supply, cooling measures, or other
+            broad developments with material implications for listed property developers
+            - Government land sales, zoning, tax, financing, or regulatory changes that
+            materially affect property owners, landlords, developers, or tenants
+
+            Apply the normal tier framework to both paths. Concrete company or sector
+            developments generally belong in Tier 2. Material acquisitions, divestments,
+            redevelopments, valuation changes, major tenant events, financing changes,
+            policy shocks, or large sector-wide operational changes may qualify for
+            Tier 3. Do not cap a material sector article at Tier 1 only because it does
+            not name a specific REIT or company. A quantified, material Path B signal
+            should normally score in the upper Tier 2 range (65-70), while weaker or
+            unquantified background remains Tier 1. Do not infer a specific ticker.
+
+            Keep generic property content in Tier 0 or Tier 1 when it lacks a material
+            investor signal. Examples include one-off individual home-sale records,
+            home-buying advice, agent profiles, architecture or lifestyle features, and
+            promotional property content without meaningful market data or policy impact.
+
             SCORING FRAMEWORK (0-100 base, up to 145 with bonuses):
 
             TIER 0: Noise / Irrelevant (Score 0-10)
@@ -716,8 +757,8 @@ class ScoringPrompts:
 
 class SummarizationPrompts:
     @staticmethod
-    def get_system_prompt():
-        return """
+    def get_system_prompt(market: str = "idx") -> str:
+        shared_prompt = """
             You are an expert financial analyst. Your task is to generate
             a title and summary from financial news articles.
 
@@ -775,6 +816,28 @@ class SummarizationPrompts:
             - Correct capitalization and natural punctuation.
             - No invented information, no opinion, no filler phrases.
         """
+
+        if market.lower() != "sgx":
+            return shared_prompt
+
+        sgx_prompt = """
+            SGX-SPECIFIC GUIDANCE:
+            - Preserve named SGX-listed companies, REITs, property trusts, and business
+            trusts exactly as the article identifies them.
+            - Preserve the exact relationship between a trust, its manager, its sponsor,
+            and any portfolio asset. Never treat these entities as interchangeable.
+            - For REIT and property coverage, retain material DPU, net property income,
+            distributable income, gearing, occupancy, WALE, NAV, valuation,
+            capitalisation-rate, rent, supply, demand, financing-cost, transaction-volume,
+            land-bid, footfall, and hotel revenue-per-available-room information.
+            - A named REIT is not required when the article reports a material property-
+            sector signal. Preserve the geography, property segment, quantified movement,
+            reporting period, and policy impact so the SGX scorer can evaluate it.
+            - Never invent a REIT, trust, listed company, ticker, or ownership relationship
+            when the article does not state one.
+            """
+
+        return f"{shared_prompt}\n{sgx_prompt}"
 
     @staticmethod
     def get_user_prompt():
