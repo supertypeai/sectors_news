@@ -244,6 +244,39 @@ def get_article_edgeprop_news(url: str) -> str | None:
     return "\n\n".join(paragraphs)
 
 
+def get_article_sgx_market_update(url: str) -> str | None:
+    selenium_scraper = SeleniumScraper()
+
+    soup = selenium_scraper.fetch_news_with_selenium(
+        url,
+        wait_selector="article#page-container .template-article-section",
+    )
+
+    if not soup:
+        LOGGER.warning("[SGX] Failed to render market update: %s", url)
+        return None
+
+    article_container = soup.select_one(
+        "article#page-container .template-article-section"
+    )
+
+    if not article_container:
+        LOGGER.warning("[SGX] Article container not found for %s", url)
+        return None
+
+    article_text = article_container.get_text(separator="\n", strip=True)
+
+    if "latest browser technologies" in article_text.lower():
+        LOGGER.warning("[SGX] Browser compatibility page received for %s", url)
+        return None
+
+    if not article_text:
+        LOGGER.warning("[SGX] Article container is empty for %s", url)
+        return None
+
+    return article_text
+
+
 def extract_table_content(url: str) -> str:
     headers = {
         "User-Agent": USER_AGENT
@@ -317,6 +350,7 @@ def extract_via_custom_parser(url: str) -> str | None:
             # 'investor.id': get_article_investorid_news,
             'investasi.kontan': get_article_kontan_news,
             'edgeprop': get_article_edgeprop_news, 
+            'sgx.com/research-education/market-updates/': get_article_sgx_market_update,
         }
 
         for key, parser in parser.items(): 

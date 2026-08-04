@@ -20,7 +20,7 @@ from scraper_engine.sources.idx.registry import (
 from scraper_engine.sources.sgx.registry import (
     BusinessTimesSG, StraitsTimes, ChannelNewsAsiaSG, SBRSG,
     AsiaNews, EdgeProp, NextInsight, TheSmartInvestor, TheEdgeSingapore,
-    TheEdgeReits
+    TheEdgeReits, SGXMarketUpdates, SmallCapAsia
 )
 
 from .processor import post_source, build_filtered_article
@@ -268,7 +268,7 @@ def main_idx(
 
 @app.command(name="main_sgx")
 def main_sgx(
-    page_number: Annotated[int, typer.Option(help="Page number to scrape")] = 1,
+    page_number: Annotated[int | None, typer.Option(help="Page number to scrape")] = None,
     filename: Annotated[str, typer.Option(help="Output filename base")] = "pipeline_sgx",
     csv: Annotated[bool, typer.Option(help="Flag to write to CSV file")] = False,
     batch: Annotated[int, typer.Option(help="Batch number for processing")] = 1,
@@ -314,6 +314,8 @@ def main_sgx(
         smartinvestorscraper = TheSmartInvestor()
         theedgescraper = TheEdgeSingapore()
         the_edge_reits_scraper = TheEdgeReits()
+        sgx_market_updates = SGXMarketUpdates()
+        smallcapasia_scraper = SmallCapAsia()
 
         try:
             scrapercollection = ScraperCollection()
@@ -327,6 +329,8 @@ def main_sgx(
             scrapercollection.add_scraper(smartinvestorscraper)
             scrapercollection.add_scraper(theedgescraper)
             scrapercollection.add_scraper(the_edge_reits_scraper)
+            scrapercollection.add_scraper(sgx_market_updates)
+            scrapercollection.add_scraper(smallcapasia_scraper)
 
             with last_state_path.open('w') as file:
                 json.dump({"last_run_at": datetime.now(sgt).isoformat()}, file)
