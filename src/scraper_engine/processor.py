@@ -48,6 +48,16 @@ def filter_articles_by_time(
     filtered = []
 
     for article in articles:
+        source_url = article.get("source", "")
+
+        # SGX Market Updates expose a publication date but no time of day
+        if (
+            "research-education/market-updates/" in source_url
+            or "smallcapasia.com/" in source_url
+        ):
+            filtered.append(article)
+            continue
+
         timestamp = article.get("timestamp")
 
         if not timestamp:
@@ -390,7 +400,14 @@ def filter_top_200(articles: list):
         .execute()
     )
 
-    record_db = response.data 
+    response_reit = (
+        SUPABASE_CLIENT
+        .table('sgx_reit_profile')
+        .select('symbol')
+        .execute()
+    )
+
+    record_db = response.data + response_reit.data 
 
     symbols_db = {
         record['symbol'] 
