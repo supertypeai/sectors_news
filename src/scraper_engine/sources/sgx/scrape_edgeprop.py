@@ -1,10 +1,12 @@
 from datetime import datetime, timezone 
+from urllib.parse import quote, urlparse
 from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import SeleniumScraper
 
 import argparse 
+import json
 import logging 
 import time 
 
@@ -16,19 +18,34 @@ class EdgeProp(SeleniumScraper):
     BASE_URL = "https://www.edgeprop.sg"
 
     def fetch_article_list(self, url: str) -> list:
-        html = self.fetch_news_with_proxy(url)
+        search_query = urlparse(url).query
 
-        if not html:
+        api_url = (
+            f"{self.BASE_URL}/tep-solr/api/articles/getArticles.php"
+            f"?keywordsearchfor=title,body,author&withtotal=true&{search_query}"
+        )
+
+        proxy_url = f"{self.BASE_URL}/proxy/news?url={quote(api_url, safe='')}"
+        response_text = self.fetch_news_with_proxy(proxy_url)
+
+        if not response_text:
             LOGGER.warning("[EdgeProp SG] Empty response for %s", url)
             return []
 
-        soup = BeautifulSoup(html, "html.parser")
-        article_items = soup.select("div.main-container")
+        try:
+            response_data = json.loads(response_text)
+            
+        except json.JSONDecodeError as error:
+            LOGGER.warning("[EdgeProp SG] Invalid article-list response for %s: %s", url, error)
+            return []
 
-        if not article_items:
-            LOGGER.warning("[EdgeProp SG] No article items found. Soup preview: %s", html[:300])
+        article_items = response_data.get("response", {}).get("results", [])
 
-        return article_items if article_items else []
+        if not isinstance(article_items, list):
+            LOGGER.warning("[EdgeProp SG] Unexpected article-list response for %s", url)
+            return []
+
+        return article_items
 
     def fetch_article_content(self, article_url: str) -> tuple[datetime | None, str | None]:
         html = self.fetch_news_with_proxy(article_url)
@@ -92,25 +109,22 @@ class EdgeProp(SeleniumScraper):
         )
 
         for article_item in article_items:
-            anchor_tag = article_item.select_one("div.article-container.hyperlink a")
- 
-            if not anchor_tag:
-                continue
- 
-            title_tag = anchor_tag.select_one("div.article-description")
-            title = title_tag.get_text(strip=True) if title_tag else None
-            relative_url = anchor_tag.get("href")
-            source_url = f"{self.BASE_URL}{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
+            title = article_item.get("title")
+            relative_url = article_item.get("path")
+
+            if relative_url and not relative_url.startswith("/"):
+                relative_url = f"/{relative_url}"
+
+            source_url = f"{self.BASE_URL}{relative_url}" if relative_url else None
  
             if not title or not source_url:
                 continue
  
-            if article_item.select_one("img[alt='Premium']"):
+            if article_item.get("special_feature"):
                 LOGGER.info("[EdgeProp SG] Skipping premium article: %s", title)
                 continue
  
-            thumbnail_tag = article_item.select_one("div.left-container a img[src]")
-            thumbnail_url = thumbnail_tag.get("src") if thumbnail_tag else None
+            thumbnail_url = article_item.get("thumbnail")
             
             published_at, article_body = self.fetch_article_content(source_url)
             time.sleep(0.3)
@@ -190,8 +204,8 @@ if __name__ == "__main__":
 
     Examples:
     uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260427
-    uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260608 test_scrape_edgeprop
-    uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260427 test_scrape_edgeprop --pages 3 --csv
+    uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260608 scrape_edgeprop
+    uv run -m src.scraper_engine.sources.sgx.scrape_edgeprop 20260427 scrape_edgeprop --pages 3 --csv
     """
     main()
     
