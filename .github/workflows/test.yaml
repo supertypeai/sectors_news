@@ -55,8 +55,11 @@ on:
           - scrape_asia_news
           - scrape_edgeprop
           - scrape_nextinsight
+          - scrape_sgx_market
+          - scrape_smallcapasia
           - scrape_smart_investor
           - scrape_the_edge
+          - scrape_the_edge_reits
 
       date:
         description: "Date in YYYYMMDD format (e.g. 20260529)"

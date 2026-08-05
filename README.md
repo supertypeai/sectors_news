@@ -174,6 +174,14 @@ The scraper status indicates which news/data sources are currently functional an
 | 2  | [The Straits Times](https://www.straitstimes.com)                           | Active | - |
 | 3  | [Channel NewsAsia (CNA)](https://www.channelnewsasia.com)                   | Active | - |
 | 4  | [Singapore Business Review (SBR)](https://sbr.com.sg)                      | Active | - |
+| 5  | [Asia News Network](https://asianews.network/tag/singapore/)                 | Active | - |
+| 6  | [EdgeProp Singapore](https://www.edgeprop.sg)                                | Active | - |
+| 7  | [NextInsight](https://nextinsight.net)                                        | Active | - |
+| 8  | [The Smart Investor](https://thesmartinvestor.com.sg)                        | Active | - |
+| 9  | [The Edge Singapore](https://www.theedgesingapore.com)                       | Active | - |
+| 10 | [SGX Market Updates](https://www.sgx.com/research-education/market-updates)   | Active | - |
+| 11 | [SmallCapAsia](https://www.smallcapasia.com/market/singapore/)                | Active | - |
+| 12 | [The Edge Singapore REITs Report](https://www.theedgesingapore.com/edgecollective/REITs-Report) | Active | - |
 
 ## Data Outputs
 
@@ -217,4 +225,3 @@ Both workflows install dependencies with `uv`, run the pipeline, and commit resu
 
 - `update_existing_tags.py`  
   Re-tags existing records in Supabase using LLM prompts.
-
