@@ -137,6 +137,8 @@ class SGXMarketUpdates(SeleniumScraper):
 
             self.articles.append(payload)
 
+        LOGGER.info("[SGXMarketUpdates] Total scraped: %d", len(self.articles))
+        
         return self.articles
 
 
