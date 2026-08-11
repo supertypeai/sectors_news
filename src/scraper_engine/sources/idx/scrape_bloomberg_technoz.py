@@ -98,9 +98,8 @@ class BloombergTechnoz(SeleniumScraper):
                 LOGGER.info("[Bloomberg Technoz] Failed to extract timestamp for url: %s. Skipping.", source_url)
                 continue
 
-            print(published_at)
-
             seen_urls.add(source_url)
+
             parsed_articles.append({
                 "title": title,
                 "source": source_url,
@@ -127,7 +126,6 @@ class BloombergTechnoz(SeleniumScraper):
 
         articles = self.parse_articles(article_items)
         LOGGER.info("[Bloomberg Technoz] Date %s: %d articles collected.", date, len(articles))
-        print(len(articles))
 
         self.articles.extend(articles)
         LOGGER.info("[Bloomberg Technoz] Total scraped: %d", len(self.articles))

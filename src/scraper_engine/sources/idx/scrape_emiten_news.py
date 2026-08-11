@@ -115,7 +115,6 @@ class EmitenNews(Scraper):
 
         while True:
             page_url = f"{base_url}/{offset}"
-            print(page_url)
 
             article_items = self.fetch_article_list(page_url)
 

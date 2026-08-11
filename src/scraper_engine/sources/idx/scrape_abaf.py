@@ -97,7 +97,6 @@ class AbafScraper(Scraper):
 
         while True:
             page_url = f"https://asianbankingandfinance.net/market/indonesia?page={page_number}"
-            print(page_url)
 
             article_items = self.fetch_article_list(page_url)
 

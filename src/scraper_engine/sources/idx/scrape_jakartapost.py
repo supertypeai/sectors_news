@@ -117,8 +117,7 @@ class JakartaPost(SeleniumScraper):
 
         while True:
             page_url = f"{base_url}?page={page_number}"
-            print(page_url)
-
+            
             article_items = self.fetch_article_list(page_url)
 
             if not article_items:

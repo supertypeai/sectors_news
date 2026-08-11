@@ -72,7 +72,6 @@ class BisnisMarket(SeleniumScraper):
                 LOGGER.info("[Bisnis Market] Failed to parse date for url: %s. Skipping.", source_url)
                 continue
             
-            print(published_at)
             parsed_articles.append({
                 "title": title,
                 "source": source_url,

@@ -81,11 +81,11 @@ class KompasMoney(Scraper):
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
             published_at = None
+
             if source_url:
                 published_at = self.fetch_article_timestamp(source_url)
                 time.sleep(0.5)
 
-            print(published_at)
             parsed_articles.append({
                 "title": title,
                 "source": source_url,
