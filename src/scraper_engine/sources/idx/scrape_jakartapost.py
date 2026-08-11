@@ -24,27 +24,36 @@ class JakartaPost(SeleniumScraper):
 
         return article_lists
 
-    def fetch_article_timestamp(self, article_url: str) -> str:
+    def fetch_article_timestamp(self, article_url: str) -> str | None:
         soup = self.fetch_news_with_selenium(article_url)
 
         if not soup:
             return None
 
-        created_tags = soup.select("div.tjp-meta__content-item span.created")
+        published_at_tag = soup.select_one(
+            "meta[name='published-at'], meta[name='datePublished']"
+        )
 
-        for created_tag in created_tags:
-            raw_text = created_tag.get_text(strip=True)
-            iso_match = re.search(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+\-]\d{2}:\d{2}", raw_text)
+        if not published_at_tag:
+            return None
 
-            if iso_match:
-                try:
-                    dt_obj = datetime.fromisoformat(iso_match.group())  
-                    return dt_obj.strftime("%Y-%m-%d %H:%M:%S")
-                
-                except ValueError:
-                    continue
+        published_at = published_at_tag.get("content")
 
-        return None
+        if not published_at:
+            return None
+
+        try:
+            published_datetime = datetime.fromisoformat(published_at)
+            
+        except ValueError:
+            LOGGER.warning(
+                "[Jakarta Post] Invalid published timestamp for %s: %s",
+                article_url,
+                published_at,
+            )
+            return None
+
+        return published_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
         parsed_articles = []
