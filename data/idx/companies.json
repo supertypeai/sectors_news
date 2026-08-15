@@ -14,15 +14,15 @@
     "name": "PT Mitra Energi Persada Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "DATA.JK": {
-    "symbol": "DATA.JK",
-    "name": "PT Remala Abadi Tbk",
-    "sub_sector": "telecommunication"
-  },
   "RANC.JK": {
     "symbol": "RANC.JK",
     "name": "Supra Boga Lestari Tbk",
     "sub_sector": "food-staples-retailing"
+  },
+  "AADI.JK": {
+    "symbol": "AADI.JK",
+    "name": "PT Adaro Andalan Indonesia Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "PNGO.JK": {
     "symbol": "PNGO.JK",
@@ -64,6 +64,11 @@
     "name": "Reliance Sekuritas Indonesia Tbk",
     "sub_sector": "investment-service"
   },
+  "ABBA.JK": {
+    "symbol": "ABBA.JK",
+    "name": "Mahaka Media Tbk",
+    "sub_sector": "media-entertainment"
+  },
   "PADI.JK": {
     "symbol": "PADI.JK",
     "name": "Minna Padi Investama Sekuritas Tbk",
@@ -79,6 +84,11 @@
     "name": "Steady Safe Tbk",
     "sub_sector": "transportation"
   },
+  "ABMM.JK": {
+    "symbol": "ABMM.JK",
+    "name": "ABM Investama Tbk",
+    "sub_sector": "oil-gas-coal"
+  },
   "MKTR.JK": {
     "symbol": "MKTR.JK",
     "name": "PT Menthobi Karyatama Raya Tbk",
@@ -93,6 +103,11 @@
     "symbol": "SGRO.JK",
     "name": "PT Prime Agri Resources Tbk",
     "sub_sector": "food-beverage"
+  },
+  "ADHI.JK": {
+    "symbol": "ADHI.JK",
+    "name": "PT Adhi Karya (Persero) Tbk.",
+    "sub_sector": "heavy-constructions-civil-engineering"
   },
   "PANS.JK": {
     "symbol": "PANS.JK",
@@ -119,25 +134,25 @@
     "name": "PT Mandala Multifinance Tbk",
     "sub_sector": "financing-service"
   },
-  "JELI.JK": {
-    "symbol": "JELI.JK",
-    "name": "PT Niramas Utama Tbk",
-    "sub_sector": "food-beverage"
+  "EMMI.JK": {
+    "symbol": "EMMI.JK",
+    "name": "PT Esa Medika Mandiri Tbk",
+    "sub_sector": "healthcare-equipment-providers"
   },
   "PLAN.JK": {
     "symbol": "PLAN.JK",
     "name": "PT Planet Properindo Jaya Tbk",
     "sub_sector": "consumer-services"
   },
-  "EMMI.JK": {
-    "symbol": "EMMI.JK",
-    "name": "PT Esa Medika Mandiri Tbk",
-    "sub_sector": "healthcare-equipment-providers"
-  },
   "PDPP.JK": {
     "symbol": "PDPP.JK",
     "name": "PT Primadaya Plastisindo Tbk",
     "sub_sector": "basic-materials"
+  },
+  "AGRO.JK": {
+    "symbol": "AGRO.JK",
+    "name": "PT Bank Raya Indonesia Tbk",
+    "sub_sector": "banks"
   },
   "SSMS.JK": {
     "symbol": "SSMS.JK",
@@ -154,20 +169,15 @@
     "name": "PT MDTV Media Technologies Tbk",
     "sub_sector": "media-entertainment"
   },
-  "BPFI.JK": {
-    "symbol": "BPFI.JK",
-    "name": "PT Woori Finance Indonesia Tbk",
-    "sub_sector": "financing-service"
+  "JECX.JK": {
+    "symbol": "JECX.JK",
+    "name": "PT Nitrasanata Dharma Tbk",
+    "sub_sector": "healthcare-equipment-providers"
   },
   "SSTM.JK": {
     "symbol": "SSTM.JK",
     "name": "Sunson Textile Manufacturer Tbk",
     "sub_sector": "apparel-luxury-goods"
-  },
-  "JECX.JK": {
-    "symbol": "JECX.JK",
-    "name": "PT Nitrasanata Dharma Tbk",
-    "sub_sector": "healthcare-equipment-providers"
   },
   "TLDN.JK": {
     "symbol": "TLDN.JK",
@@ -183,11 +193,6 @@
     "symbol": "PORT.JK",
     "name": "PT Nusantara Pelabuhan Handal Tbk",
     "sub_sector": "transportation-infrastructure"
-  },
-  "KBLM.JK": {
-    "symbol": "KBLM.JK",
-    "name": "Kabelindo Murni Tbk",
-    "sub_sector": "industrial-goods"
   },
   "KRYA.JK": {
     "symbol": "KRYA.JK",
@@ -209,10 +214,20 @@
     "name": "Wismilak Inti Makmur Tbk",
     "sub_sector": "tobacco"
   },
+  "AGRS.JK": {
+    "symbol": "AGRS.JK",
+    "name": "PT Bank IBK Indonesia Tbk.",
+    "sub_sector": "banks"
+  },
   "PTSN.JK": {
     "symbol": "PTSN.JK",
     "name": "Sat Nusapersada Tbk",
     "sub_sector": "technology-hardware-equipment"
+  },
+  "AKRA.JK": {
+    "symbol": "AKRA.JK",
+    "name": "PT AKR Corporindo Tbk.",
+    "sub_sector": "oil-gas-coal"
   },
   "PACK.JK": {
     "symbol": "PACK.JK",
@@ -234,20 +249,25 @@
     "name": "PT Prodia Widyahusada Tbk",
     "sub_sector": "healthcare-equipment-providers"
   },
+  "AMIN.JK": {
+    "symbol": "AMIN.JK",
+    "name": "PT Ateliers Mecaniques D Indonesie Tbk.",
+    "sub_sector": "industrial-goods"
+  },
   "TFAS.JK": {
     "symbol": "TFAS.JK",
     "name": "PT Telefast Indonesia Tbk",
     "sub_sector": "software-it-services"
   },
+  "APII.JK": {
+    "symbol": "APII.JK",
+    "name": "PT Arita Prima Indonesia Tbk.",
+    "sub_sector": "industrial-goods"
+  },
   "PJHB.JK": {
     "symbol": "PJHB.JK",
     "name": "PT Pelayaran Jaya Hidup Baru Tbk",
     "sub_sector": "logistics-deliveries"
-  },
-  "BACH.JK": {
-    "symbol": "BACH.JK",
-    "name": "PT Bach Multi Global Tbk",
-    "sub_sector": "industrial-services"
   },
   "PYFA.JK": {
     "symbol": "PYFA.JK",
@@ -258,6 +278,11 @@
     "symbol": "TPMA.JK",
     "name": "Trans Power Marine Tbk",
     "sub_sector": "oil-gas-coal"
+  },
+  "ARCI.JK": {
+    "symbol": "ARCI.JK",
+    "name": "PT Archi Indonesia Tbk",
+    "sub_sector": "basic-materials"
   },
   "NICE.JK": {
     "symbol": "NICE.JK",
@@ -274,20 +299,20 @@
     "name": "PT Waskita Beton Precast Tbk",
     "sub_sector": "basic-materials"
   },
-  "DMAS.JK": {
-    "symbol": "DMAS.JK",
-    "name": "PT Puradelta Lestari Tbk",
-    "sub_sector": "properties-real-estate"
+  "ASJT.JK": {
+    "symbol": "ASJT.JK",
+    "name": "Asuransi Jasa Tania Tbk",
+    "sub_sector": "insurance"
   },
   "RBMS.JK": {
     "symbol": "RBMS.JK",
     "name": "Ristia Bintang Mahkotasejati Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "CUAN.JK": {
-    "symbol": "CUAN.JK",
-    "name": "PT Petrindo Jaya Kreasi Tbk",
-    "sub_sector": "oil-gas-coal"
+  "ASLC.JK": {
+    "symbol": "ASLC.JK",
+    "name": "PT Autopedia Sukses Lestari Tbk",
+    "sub_sector": "retailing"
   },
   "UANG.JK": {
     "symbol": "UANG.JK",
@@ -299,20 +324,20 @@
     "name": "PT Pollux Properties Indonesia Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "UNIQ.JK": {
-    "symbol": "UNIQ.JK",
-    "name": "PT Ulima Nitra Tbk",
-    "sub_sector": "oil-gas-coal"
-  },
-  "DCII.JK": {
-    "symbol": "DCII.JK",
-    "name": "PT DCI Indonesia Tbk",
+  "ATIC.JK": {
+    "symbol": "ATIC.JK",
+    "name": "PT Anabatic Technologies Tbk",
     "sub_sector": "software-it-services"
   },
   "DPNS.JK": {
     "symbol": "DPNS.JK",
     "name": "Duta Pertiwi Nusantara Tbk",
     "sub_sector": "basic-materials"
+  },
+  "UNIQ.JK": {
+    "symbol": "UNIQ.JK",
+    "name": "PT Ulima Nitra Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "VKTR.JK": {
     "symbol": "VKTR.JK",
@@ -323,11 +348,6 @@
     "symbol": "WAPO.JK",
     "name": "Wahana Pronatural Tbk",
     "sub_sector": "food-beverage"
-  },
-  "DWGL.JK": {
-    "symbol": "DWGL.JK",
-    "name": "PT Dwi Guna Laksana Tbk",
-    "sub_sector": "oil-gas-coal"
   },
   "YULE.JK": {
     "symbol": "YULE.JK",
@@ -349,11 +369,6 @@
     "name": "PT Widodo Makmur Unggas Tbk",
     "sub_sector": "food-beverage"
   },
-  "DEPO.JK": {
-    "symbol": "DEPO.JK",
-    "name": "PT Caturkarda Depo Bangunan Tbk",
-    "sub_sector": "retailing"
-  },
   "ECII.JK": {
     "symbol": "ECII.JK",
     "name": "PT Electronic City Indonesia Tbk",
@@ -364,10 +379,10 @@
     "name": "Ricky Putra Globalindo Tbk",
     "sub_sector": "apparel-luxury-goods"
   },
-  "GGRM.JK": {
-    "symbol": "GGRM.JK",
-    "name": "Gudang Garam Tbk",
-    "sub_sector": "tobacco"
+  "AXIO.JK": {
+    "symbol": "AXIO.JK",
+    "name": "PT Tera Data Indonusa Tbk",
+    "sub_sector": "technology-hardware-equipment"
   },
   "PART.JK": {
     "symbol": "PART.JK",
@@ -384,15 +399,15 @@
     "name": "PT Wijaya Karya Bangunan Gedung Tbk",
     "sub_sector": "heavy-constructions-civil-engineering"
   },
-  "ITIC.JK": {
-    "symbol": "ITIC.JK",
-    "name": "PT Indonesian Tobacco Tbk",
-    "sub_sector": "tobacco"
+  "BACH.JK": {
+    "symbol": "BACH.JK",
+    "name": "PT Bach Multi Global Tbk",
+    "sub_sector": "industrial-services"
   },
-  "DGNS.JK": {
-    "symbol": "DGNS.JK",
-    "name": "PT Diagnos Laboratorium Utama Tbk",
-    "sub_sector": "healthcare-equipment-providers"
+  "BANK.JK": {
+    "symbol": "BANK.JK",
+    "name": "PT Bank Aladin Syariah Tbk",
+    "sub_sector": "banks"
   },
   "WMPP.JK": {
     "symbol": "WMPP.JK",
@@ -403,6 +418,11 @@
     "symbol": "ISAT.JK",
     "name": "PT Indosat Tbk",
     "sub_sector": "telecommunication"
+  },
+  "BBMD.JK": {
+    "symbol": "BBMD.JK",
+    "name": "PT Bank Mestika Dharma Tbk.",
+    "sub_sector": "banks"
   },
   "MINE.JK": {
     "symbol": "MINE.JK",
@@ -429,6 +449,11 @@
     "name": "PT Kota Satu Properti Tbk",
     "sub_sector": "properties-real-estate"
   },
+  "BCAP.JK": {
+    "symbol": "BCAP.JK",
+    "name": "MNC Kapital Indonesia Tbk",
+    "sub_sector": "holding-investment-companies"
+  },
   "PGAS.JK": {
     "symbol": "PGAS.JK",
     "name": "PT Perusahaan Gas Negara Tbk",
@@ -439,14 +464,19 @@
     "name": "Radiant Utama Interinsco Tbk",
     "sub_sector": "oil-gas-coal"
   },
+  "BDMN.JK": {
+    "symbol": "BDMN.JK",
+    "name": "PT Bank Danamon Indonesia Tbk",
+    "sub_sector": "banks"
+  },
   "INTP.JK": {
     "symbol": "INTP.JK",
     "name": "Indocement Tunggal Prakarsa Tbk",
     "sub_sector": "basic-materials"
   },
-  "DGWG.JK": {
-    "symbol": "DGWG.JK",
-    "name": "PT Delta Giri Wacana Tbk",
+  "BEBS.JK": {
+    "symbol": "BEBS.JK",
+    "name": "PT Berkah Beton Sadaya Tbk",
     "sub_sector": "basic-materials"
   },
   "KRAH.JK": {
@@ -459,9 +489,14 @@
     "name": "Petrosea Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "DILD.JK": {
-    "symbol": "DILD.JK",
-    "name": "Intiland Development Tbk",
+  "BGTG.JK": {
+    "symbol": "BGTG.JK",
+    "name": "PT Bank Ganesha Tbk.",
+    "sub_sector": "banks"
+  },
+  "BKDP.JK": {
+    "symbol": "BKDP.JK",
+    "name": "Bukit Darmo Property Tbk",
     "sub_sector": "properties-real-estate"
   },
   "RAJA.JK": {
@@ -474,6 +509,11 @@
     "name": "Perdana Karya Perkasa Tbk",
     "sub_sector": "oil-gas-coal"
   },
+  "ADCP.JK": {
+    "symbol": "ADCP.JK",
+    "name": "PT Adhi Commuter Properti Tbk",
+    "sub_sector": "properties-real-estate"
+  },
   "YOII.JK": {
     "symbol": "YOII.JK",
     "name": "PT Asuransi Digital Bersama Tbk",
@@ -483,11 +523,6 @@
     "symbol": "EPAC.JK",
     "name": "PT Megalestari Epack Sentosaraya Tbk",
     "sub_sector": "basic-materials"
-  },
-  "ADCP.JK": {
-    "symbol": "ADCP.JK",
-    "name": "PT Adhi Commuter Properti Tbk",
-    "sub_sector": "properties-real-estate"
   },
   "SGER.JK": {
     "symbol": "SGER.JK",
@@ -499,25 +534,35 @@
     "name": "PT Sarana Mitra Luas Tbk",
     "sub_sector": "industrial-goods"
   },
-  "DIVA.JK": {
-    "symbol": "DIVA.JK",
-    "name": "PT Distribusi Voucher Nusantara Tbk",
-    "sub_sector": "software-it-services"
-  },
   "TINS.JK": {
     "symbol": "TINS.JK",
     "name": "PT Timah Tbk",
     "sub_sector": "basic-materials"
+  },
+  "BNII.JK": {
+    "symbol": "BNII.JK",
+    "name": "PT Bank Maybank Indonesia Tbk",
+    "sub_sector": "banks"
+  },
+  "BPFI.JK": {
+    "symbol": "BPFI.JK",
+    "name": "PT Woori Finance Indonesia Tbk",
+    "sub_sector": "financing-service"
   },
   "SCNP.JK": {
     "symbol": "SCNP.JK",
     "name": "PT Selaras Citra Nusantara Perkasa Tbk",
     "sub_sector": "household-goods"
   },
-  "CSMI.JK": {
-    "symbol": "CSMI.JK",
-    "name": "PT Cipta Selera Murni Tbk.",
-    "sub_sector": "consumer-services"
+  "BPTR.JK": {
+    "symbol": "BPTR.JK",
+    "name": "PT Batavia Prosperindo Trans Tbk.",
+    "sub_sector": "transportation"
+  },
+  "BTPS.JK": {
+    "symbol": "BTPS.JK",
+    "name": "PT Bank BTPN Syariah Tbk.",
+    "sub_sector": "banks"
   },
   "ZATA.JK": {
     "symbol": "ZATA.JK",
@@ -529,14 +574,14 @@
     "name": "PT Bank Woori Saudara Indonesia 1906 Tbk",
     "sub_sector": "banks"
   },
-  "DKFT.JK": {
-    "symbol": "DKFT.JK",
-    "name": "Central Omega Resources Tbk",
-    "sub_sector": "basic-materials"
+  "BUDI.JK": {
+    "symbol": "BUDI.JK",
+    "name": "PT Budi Starch & Sweetener Tbk.",
+    "sub_sector": "food-beverage"
   },
-  "DOID.JK": {
-    "symbol": "DOID.JK",
-    "name": "PT BUMA Internasional Grup Tbk",
+  "BUMI.JK": {
+    "symbol": "BUMI.JK",
+    "name": "Bumi Resources Tbk",
     "sub_sector": "oil-gas-coal"
   },
   "SNLK.JK": {
@@ -544,25 +589,25 @@
     "name": "PT Sunter Lakeside Hotel Tbk",
     "sub_sector": "consumer-services"
   },
+  "CEKA.JK": {
+    "symbol": "CEKA.JK",
+    "name": "PT Wilmar Cahaya Indonesia Tbk.",
+    "sub_sector": "food-beverage"
+  },
   "ZBRA.JK": {
     "symbol": "ZBRA.JK",
     "name": "PT Dosni Roha Indonesia Tbk",
     "sub_sector": "multi-sector-holdings"
   },
-  "DOSS.JK": {
-    "symbol": "DOSS.JK",
-    "name": "PT Global Sukses Digital Tbk",
-    "sub_sector": "leisure-goods"
-  },
-  "ABBA.JK": {
-    "symbol": "ABBA.JK",
-    "name": "Mahaka Media Tbk",
-    "sub_sector": "media-entertainment"
-  },
   "ACRO.JK": {
     "symbol": "ACRO.JK",
     "name": "PT Samcro Hyosung Adilestari Tbk.",
     "sub_sector": "apparel-luxury-goods"
+  },
+  "DOSS.JK": {
+    "symbol": "DOSS.JK",
+    "name": "PT Global Sukses Digital Tbk",
+    "sub_sector": "leisure-goods"
   },
   "APEX.JK": {
     "symbol": "APEX.JK",
@@ -574,6 +619,11 @@
     "name": "Asuransi Bina Dana Arta Tbk",
     "sub_sector": "insurance"
   },
+  "CSMI.JK": {
+    "symbol": "CSMI.JK",
+    "name": "PT Cipta Selera Murni Tbk.",
+    "sub_sector": "consumer-services"
+  },
   "EDGE.JK": {
     "symbol": "EDGE.JK",
     "name": "PT Indointernet Tbk",
@@ -584,45 +634,40 @@
     "name": "Tanah Laut Tbk",
     "sub_sector": "industrial-services"
   },
+  "CUAN.JK": {
+    "symbol": "CUAN.JK",
+    "name": "PT Petrindo Jaya Kreasi Tbk",
+    "sub_sector": "oil-gas-coal"
+  },
   "SMBR.JK": {
     "symbol": "SMBR.JK",
     "name": "PT Semen Baturaja Tbk",
     "sub_sector": "basic-materials"
   },
-  "ABMM.JK": {
-    "symbol": "ABMM.JK",
-    "name": "ABM Investama Tbk",
-    "sub_sector": "oil-gas-coal"
-  },
-  "EAST.JK": {
-    "symbol": "EAST.JK",
-    "name": "PT Eastparc Hotel Tbk",
-    "sub_sector": "consumer-services"
-  },
-  "CANI.JK": {
-    "symbol": "CANI.JK",
-    "name": "PT Capitol Nusantara Indonesia Tbk.",
-    "sub_sector": "oil-gas-coal"
+  "DEPO.JK": {
+    "symbol": "DEPO.JK",
+    "name": "PT Caturkarda Depo Bangunan Tbk",
+    "sub_sector": "retailing"
   },
   "SKYB.JK": {
     "symbol": "SKYB.JK",
     "name": "PT Northcliff Citranusa Indonesia Tbk",
     "sub_sector": "software-it-services"
   },
-  "AADI.JK": {
-    "symbol": "AADI.JK",
-    "name": "PT Adaro Andalan Indonesia Tbk",
+  "CANI.JK": {
+    "symbol": "CANI.JK",
+    "name": "PT Capitol Nusantara Indonesia Tbk.",
     "sub_sector": "oil-gas-coal"
-  },
-  "ELPI.JK": {
-    "symbol": "ELPI.JK",
-    "name": "PT Pelayaran Nasional Ekalya Purnamasari Tbk",
-    "sub_sector": "logistics-deliveries"
   },
   "LOPI.JK": {
     "symbol": "LOPI.JK",
     "name": "PT Logisticsplus International Tbk",
     "sub_sector": "logistics-deliveries"
+  },
+  "DATA.JK": {
+    "symbol": "DATA.JK",
+    "name": "PT Remala Abadi Tbk",
+    "sub_sector": "telecommunication"
   },
   "SMAR.JK": {
     "symbol": "SMAR.JK",
@@ -634,6 +679,16 @@
     "name": "Indo Straits Tbk",
     "sub_sector": "oil-gas-coal"
   },
+  "DCII.JK": {
+    "symbol": "DCII.JK",
+    "name": "PT DCI Indonesia Tbk",
+    "sub_sector": "software-it-services"
+  },
+  "AALI.JK": {
+    "symbol": "AALI.JK",
+    "name": "Astra Agro Lestari Tbk",
+    "sub_sector": "food-beverage"
+  },
   "KIAS.JK": {
     "symbol": "KIAS.JK",
     "name": "Keramika Indonesia Assosiasi Tbk",
@@ -644,15 +699,10 @@
     "name": "PT Asia Sejahtera Mina Tbk",
     "sub_sector": "food-beverage"
   },
-  "AALI.JK": {
-    "symbol": "AALI.JK",
-    "name": "Astra Agro Lestari Tbk",
-    "sub_sector": "food-beverage"
-  },
-  "INAF.JK": {
-    "symbol": "INAF.JK",
-    "name": "Indofarma Tbk",
-    "sub_sector": "pharmaceuticals-health-care-research"
+  "DGNS.JK": {
+    "symbol": "DGNS.JK",
+    "name": "PT Diagnos Laboratorium Utama Tbk",
+    "sub_sector": "healthcare-equipment-providers"
   },
   "TEBE.JK": {
     "symbol": "TEBE.JK",
@@ -669,11 +719,6 @@
     "name": "PT Ashmore Asset Management Indonesia Tbk.",
     "sub_sector": "investment-service"
   },
-  "ADHI.JK": {
-    "symbol": "ADHI.JK",
-    "name": "PT Adhi Karya (Persero) Tbk.",
-    "sub_sector": "heavy-constructions-civil-engineering"
-  },
   "SRSN.JK": {
     "symbol": "SRSN.JK",
     "name": "Indo Acidatama Tbk",
@@ -688,6 +733,11 @@
     "symbol": "BBSI.JK",
     "name": "PT Krom Bank Indonesia Tbk",
     "sub_sector": "banks"
+  },
+  "DGWG.JK": {
+    "symbol": "DGWG.JK",
+    "name": "PT Delta Giri Wacana Tbk",
+    "sub_sector": "basic-materials"
   },
   "ADMR.JK": {
     "symbol": "ADMR.JK",
@@ -704,29 +754,24 @@
     "name": "PT Makmur Berkah Amanda Tbk.",
     "sub_sector": "properties-real-estate"
   },
-  "AKRA.JK": {
-    "symbol": "AKRA.JK",
-    "name": "PT AKR Corporindo Tbk.",
-    "sub_sector": "oil-gas-coal"
-  },
-  "APLI.JK": {
-    "symbol": "APLI.JK",
-    "name": "Asiaplast Industries Tbk",
-    "sub_sector": "basic-materials"
+  "DILD.JK": {
+    "symbol": "DILD.JK",
+    "name": "Intiland Development Tbk",
+    "sub_sector": "properties-real-estate"
   },
   "FPNI.JK": {
     "symbol": "FPNI.JK",
     "name": "PT Lotte Chemical Titan Tbk",
     "sub_sector": "basic-materials"
   },
-  "FUTR.JK": {
-    "symbol": "FUTR.JK",
-    "name": "PT Futura Energi Global Tbk",
-    "sub_sector": "media-entertainment"
-  },
   "SQMI.JK": {
     "symbol": "SQMI.JK",
     "name": "Wilton Makmur Indonesia Tbk",
+    "sub_sector": "basic-materials"
+  },
+  "APLI.JK": {
+    "symbol": "APLI.JK",
+    "name": "Asiaplast Industries Tbk",
     "sub_sector": "basic-materials"
   },
   "BBTN.JK": {
@@ -734,20 +779,25 @@
     "name": "PT Bank Tabungan Negara (Persero) Tbk",
     "sub_sector": "banks"
   },
-  "APII.JK": {
-    "symbol": "APII.JK",
-    "name": "PT Arita Prima Indonesia Tbk.",
-    "sub_sector": "industrial-goods"
+  "ASSA.JK": {
+    "symbol": "ASSA.JK",
+    "name": "Adi Sarana Armada Tbk",
+    "sub_sector": "transportation"
   },
   "EMDE.JK": {
     "symbol": "EMDE.JK",
     "name": "Megapolitan Developments Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "ASSA.JK": {
-    "symbol": "ASSA.JK",
-    "name": "Adi Sarana Armada Tbk",
-    "sub_sector": "transportation"
+  "BEER.JK": {
+    "symbol": "BEER.JK",
+    "name": "PT Jobubu Jarum Minahasa Tbk",
+    "sub_sector": "food-beverage"
+  },
+  "ENZO.JK": {
+    "symbol": "ENZO.JK",
+    "name": "PT Morenzo Abadi Perkasa Tbk",
+    "sub_sector": "food-beverage"
   },
   "ASDM.JK": {
     "symbol": "ASDM.JK",
@@ -757,26 +807,6 @@
   "BMSR.JK": {
     "symbol": "BMSR.JK",
     "name": "Bintang Mitra Semestaraya Tbk",
-    "sub_sector": "basic-materials"
-  },
-  "ENZO.JK": {
-    "symbol": "ENZO.JK",
-    "name": "PT Morenzo Abadi Perkasa Tbk",
-    "sub_sector": "food-beverage"
-  },
-  "AMIN.JK": {
-    "symbol": "AMIN.JK",
-    "name": "PT Ateliers Mecaniques D Indonesie Tbk.",
-    "sub_sector": "industrial-goods"
-  },
-  "BEER.JK": {
-    "symbol": "BEER.JK",
-    "name": "PT Jobubu Jarum Minahasa Tbk",
-    "sub_sector": "food-beverage"
-  },
-  "ARCI.JK": {
-    "symbol": "ARCI.JK",
-    "name": "PT Archi Indonesia Tbk",
     "sub_sector": "basic-materials"
   },
   "ASHA.JK": {
@@ -789,124 +819,109 @@
     "name": "PT Sinar Eka Selaras Tbk",
     "sub_sector": "retailing"
   },
-  "BDMN.JK": {
-    "symbol": "BDMN.JK",
-    "name": "PT Bank Danamon Indonesia Tbk",
-    "sub_sector": "banks"
-  },
   "ARGO.JK": {
     "symbol": "ARGO.JK",
     "name": "Argo Pantes Tbk",
     "sub_sector": "apparel-luxury-goods"
   },
-  "ASJT.JK": {
-    "symbol": "ASJT.JK",
-    "name": "Asuransi Jasa Tania Tbk",
-    "sub_sector": "insurance"
+  "DIVA.JK": {
+    "symbol": "DIVA.JK",
+    "name": "PT Distribusi Voucher Nusantara Tbk",
+    "sub_sector": "software-it-services"
   },
-  "ERTX.JK": {
-    "symbol": "ERTX.JK",
-    "name": "Eratex Djaja Tbk",
-    "sub_sector": "apparel-luxury-goods"
+  "DMAS.JK": {
+    "symbol": "DMAS.JK",
+    "name": "PT Puradelta Lestari Tbk",
+    "sub_sector": "properties-real-estate"
   },
   "TOWR.JK": {
     "symbol": "TOWR.JK",
     "name": "Sarana Menara Nusantara Tbk",
     "sub_sector": "telecommunication"
   },
-  "ASLC.JK": {
-    "symbol": "ASLC.JK",
-    "name": "PT Autopedia Sukses Lestari Tbk",
-    "sub_sector": "retailing"
+  "DKFT.JK": {
+    "symbol": "DKFT.JK",
+    "name": "Central Omega Resources Tbk",
+    "sub_sector": "basic-materials"
   },
-  "ESTA.JK": {
-    "symbol": "ESTA.JK",
-    "name": "PT Esta Multi Usaha Tbk",
-    "sub_sector": "consumer-services"
-  },
-  "AXIO.JK": {
-    "symbol": "AXIO.JK",
-    "name": "PT Tera Data Indonusa Tbk",
-    "sub_sector": "technology-hardware-equipment"
-  },
-  "ESTI.JK": {
-    "symbol": "ESTI.JK",
-    "name": "Ever Shine Textile Industry Tbk",
-    "sub_sector": "apparel-luxury-goods"
-  },
-  "GSMF.JK": {
-    "symbol": "GSMF.JK",
-    "name": "Equity Development Investment Tbk",
-    "sub_sector": "holding-investment-companies"
+  "DOID.JK": {
+    "symbol": "DOID.JK",
+    "name": "PT BUMA Internasional Grup Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "KARW.JK": {
     "symbol": "KARW.JK",
     "name": "Meratus Jasa Prima Tbk",
     "sub_sector": "transportation-infrastructure"
   },
-  "ASLI.JK": {
-    "symbol": "ASLI.JK",
-    "name": "PT Asri Karya Lestari Tbk.",
-    "sub_sector": "heavy-constructions-civil-engineering"
+  "DWGL.JK": {
+    "symbol": "DWGL.JK",
+    "name": "PT Dwi Guna Laksana Tbk",
+    "sub_sector": "oil-gas-coal"
+  },
+  "EAST.JK": {
+    "symbol": "EAST.JK",
+    "name": "PT Eastparc Hotel Tbk",
+    "sub_sector": "consumer-services"
+  },
+  "GSMF.JK": {
+    "symbol": "GSMF.JK",
+    "name": "Equity Development Investment Tbk",
+    "sub_sector": "holding-investment-companies"
   },
   "TUGU.JK": {
     "symbol": "TUGU.JK",
     "name": "PT Asuransi Tugu Pratama Indonesia Tbk",
     "sub_sector": "insurance"
   },
-  "FAST.JK": {
-    "symbol": "FAST.JK",
-    "name": "PT Fast Food Indonesia Tbk",
-    "sub_sector": "consumer-services"
+  "ASLI.JK": {
+    "symbol": "ASLI.JK",
+    "name": "PT Asri Karya Lestari Tbk.",
+    "sub_sector": "heavy-constructions-civil-engineering"
   },
   "BRIS.JK": {
     "symbol": "BRIS.JK",
     "name": "PT Bank Syariah Indonesia Tbk",
     "sub_sector": "banks"
   },
-  "FIRE.JK": {
-    "symbol": "FIRE.JK",
-    "name": "PT Alfa Energi Investama Tbk",
-    "sub_sector": "oil-gas-coal"
-  },
-  "ATIC.JK": {
-    "symbol": "ATIC.JK",
-    "name": "PT Anabatic Technologies Tbk",
-    "sub_sector": "software-it-services"
+  "ELPI.JK": {
+    "symbol": "ELPI.JK",
+    "name": "PT Pelayaran Nasional Ekalya Purnamasari Tbk",
+    "sub_sector": "logistics-deliveries"
   },
   "CASA.JK": {
     "symbol": "CASA.JK",
     "name": "PT Capital Financial Indonesia Tbk",
     "sub_sector": "holding-investment-companies"
   },
-  "ZINC.JK": {
-    "symbol": "ZINC.JK",
-    "name": "PT Kapuas Prima Coal Tbk",
-    "sub_sector": "basic-materials"
+  "FIRE.JK": {
+    "symbol": "FIRE.JK",
+    "name": "PT Alfa Energi Investama Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "BALI.JK": {
     "symbol": "BALI.JK",
     "name": "PT Bali Towerindo Sentra Tbk.",
     "sub_sector": "telecommunication"
   },
-  "BKDP.JK": {
-    "symbol": "BKDP.JK",
-    "name": "Bukit Darmo Property Tbk",
-    "sub_sector": "properties-real-estate"
+  "ZINC.JK": {
+    "symbol": "ZINC.JK",
+    "name": "PT Kapuas Prima Coal Tbk",
+    "sub_sector": "basic-materials"
+  },
+  "EMTK.JK": {
+    "symbol": "EMTK.JK",
+    "name": "Elang Mahkota Teknologi Tbk",
+    "sub_sector": "software-it-services"
+  },
+  "ESTA.JK": {
+    "symbol": "ESTA.JK",
+    "name": "PT Esta Multi Usaha Tbk",
+    "sub_sector": "consumer-services"
   },
   "SURE.JK": {
     "symbol": "SURE.JK",
     "name": "PT Super Energy Tbk",
-    "sub_sector": "oil-gas-coal"
-  },
-  "FISH.JK": {
-    "symbol": "FISH.JK",
-    "name": "FKS Multi Agro Tbk",
-    "sub_sector": "food-beverage"
-  },
-  "BUMI.JK": {
-    "symbol": "BUMI.JK",
-    "name": "Bumi Resources Tbk",
     "sub_sector": "oil-gas-coal"
   },
   "COIN.JK": {
@@ -914,55 +929,50 @@
     "name": "PT Indokripto Koin Semesta Tbk",
     "sub_sector": "holding-investment-companies"
   },
-  "AREA.JK": {
-    "symbol": "AREA.JK",
-    "name": "PT Dunia Virtual Online Tbk",
-    "sub_sector": "software-it-services"
+  "FISH.JK": {
+    "symbol": "FISH.JK",
+    "name": "FKS Multi Agro Tbk",
+    "sub_sector": "food-beverage"
   },
   "CPIN.JK": {
     "symbol": "CPIN.JK",
     "name": "Charoen Pokphand Indonesia Tbk",
     "sub_sector": "food-beverage"
   },
-  "AGRO.JK": {
-    "symbol": "AGRO.JK",
-    "name": "PT Bank Raya Indonesia Tbk",
-    "sub_sector": "banks"
+  "AREA.JK": {
+    "symbol": "AREA.JK",
+    "name": "PT Dunia Virtual Online Tbk",
+    "sub_sector": "software-it-services"
   },
   "FLMC.JK": {
     "symbol": "FLMC.JK",
     "name": "PT Falmaco Nonwoven Industri Tbk",
     "sub_sector": "nondurable-household-products"
   },
-  "BBCA.JK": {
-    "symbol": "BBCA.JK",
-    "name": "PT Bank Central Asia Tbk.",
-    "sub_sector": "banks"
-  },
   "AYLS.JK": {
     "symbol": "AYLS.JK",
     "name": "PT Agro Yasa Lestari Tbk",
     "sub_sector": "basic-materials"
   },
-  "FORE.JK": {
-    "symbol": "FORE.JK",
-    "name": "PT Fore Kopi Indonesia Tbk",
-    "sub_sector": "food-beverage"
+  "ERTX.JK": {
+    "symbol": "ERTX.JK",
+    "name": "Eratex Djaja Tbk",
+    "sub_sector": "apparel-luxury-goods"
+  },
+  "BBCA.JK": {
+    "symbol": "BBCA.JK",
+    "name": "PT Bank Central Asia Tbk.",
+    "sub_sector": "banks"
+  },
+  "ESTI.JK": {
+    "symbol": "ESTI.JK",
+    "name": "Ever Shine Textile Industry Tbk",
+    "sub_sector": "apparel-luxury-goods"
   },
   "MAMI.JK": {
     "symbol": "MAMI.JK",
     "name": "Mas Murni Indonesia Tbk",
     "sub_sector": "consumer-services"
-  },
-  "BBMD.JK": {
-    "symbol": "BBMD.JK",
-    "name": "PT Bank Mestika Dharma Tbk.",
-    "sub_sector": "banks"
-  },
-  "BEBS.JK": {
-    "symbol": "BEBS.JK",
-    "name": "PT Berkah Beton Sadaya Tbk",
-    "sub_sector": "basic-materials"
   },
   "GDYR.JK": {
     "symbol": "GDYR.JK",
@@ -979,45 +989,25 @@
     "name": "PT Tunas Alfin Tbk",
     "sub_sector": "basic-materials"
   },
-  "BBNI.JK": {
-    "symbol": "BBNI.JK",
-    "name": "PT Bank Negara Indonesia (Persero) Tbk",
-    "sub_sector": "banks"
-  },
   "SAGE.JK": {
     "symbol": "SAGE.JK",
     "name": "PT Saptausaha Gemilangindah Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "GEMA.JK": {
-    "symbol": "GEMA.JK",
-    "name": "Gema Grahasarana Tbk",
-    "sub_sector": "household-goods"
-  },
-  "BBRI.JK": {
-    "symbol": "BBRI.JK",
-    "name": "PT Bank Rakyat Indonesia (Persero) Tbk",
+  "BBNI.JK": {
+    "symbol": "BBNI.JK",
+    "name": "PT Bank Negara Indonesia (Persero) Tbk",
     "sub_sector": "banks"
-  },
-  "FOOD.JK": {
-    "symbol": "FOOD.JK",
-    "name": "PT Sentra Food Indonesia Tbk",
-    "sub_sector": "food-beverage"
   },
   "GEMS.JK": {
     "symbol": "GEMS.JK",
     "name": "Golden Energy Mines Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "BCAP.JK": {
-    "symbol": "BCAP.JK",
-    "name": "MNC Kapital Indonesia Tbk",
-    "sub_sector": "holding-investment-companies"
-  },
-  "GHON.JK": {
-    "symbol": "GHON.JK",
-    "name": "PT Gihon Telekomunikasi Indonesia Tbk",
-    "sub_sector": "telecommunication"
+  "BBRI.JK": {
+    "symbol": "BBRI.JK",
+    "name": "PT Bank Rakyat Indonesia (Persero) Tbk",
+    "sub_sector": "banks"
   },
   "DSNG.JK": {
     "symbol": "DSNG.JK",
@@ -1029,15 +1019,30 @@
     "name": "PT Jayamas Medica Industri Tbk",
     "sub_sector": "healthcare-equipment-providers"
   },
+  "BELI.JK": {
+    "symbol": "BELI.JK",
+    "name": "PT Global Digital Niaga Tbk",
+    "sub_sector": "software-it-services"
+  },
+  "FAST.JK": {
+    "symbol": "FAST.JK",
+    "name": "PT Fast Food Indonesia Tbk",
+    "sub_sector": "consumer-services"
+  },
   "BKSL.JK": {
     "symbol": "BKSL.JK",
     "name": "Sentul City Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "BELI.JK": {
-    "symbol": "BELI.JK",
-    "name": "PT Global Digital Niaga Tbk",
-    "sub_sector": "software-it-services"
+  "FOOD.JK": {
+    "symbol": "FOOD.JK",
+    "name": "PT Sentra Food Indonesia Tbk",
+    "sub_sector": "food-beverage"
+  },
+  "EMAS.JK": {
+    "symbol": "EMAS.JK",
+    "name": "PT Merdeka Gold Resources Tbk",
+    "sub_sector": "basic-materials"
   },
   "GPRA.JK": {
     "symbol": "GPRA.JK",
@@ -1049,65 +1054,50 @@
     "name": "Bank Artha Graha Internasional Tbk",
     "sub_sector": "banks"
   },
-  "EMAS.JK": {
-    "symbol": "EMAS.JK",
-    "name": "PT Merdeka Gold Resources Tbk",
-    "sub_sector": "basic-materials"
-  },
-  "BANK.JK": {
-    "symbol": "BANK.JK",
-    "name": "PT Bank Aladin Syariah Tbk",
-    "sub_sector": "banks"
-  },
-  "GRPH.JK": {
-    "symbol": "GRPH.JK",
-    "name": "PT Griptha Putra Persada Tbk",
-    "sub_sector": "consumer-services"
-  },
-  "TARA.JK": {
-    "symbol": "TARA.JK",
-    "name": "PT Agung Semesta Sejahtera Tbk",
-    "sub_sector": "properties-real-estate"
+  "FORE.JK": {
+    "symbol": "FORE.JK",
+    "name": "PT Fore Kopi Indonesia Tbk",
+    "sub_sector": "food-beverage"
   },
   "GOTO.JK": {
     "symbol": "GOTO.JK",
     "name": "PT GoTo Gojek Tokopedia Tbk",
     "sub_sector": "software-it-services"
   },
-  "GTBO.JK": {
-    "symbol": "GTBO.JK",
-    "name": "Garda Tujuh Buana Tbk",
-    "sub_sector": "oil-gas-coal"
+  "TARA.JK": {
+    "symbol": "TARA.JK",
+    "name": "PT Agung Semesta Sejahtera Tbk",
+    "sub_sector": "properties-real-estate"
+  },
+  "GRPH.JK": {
+    "symbol": "GRPH.JK",
+    "name": "PT Griptha Putra Persada Tbk",
+    "sub_sector": "consumer-services"
   },
   "BIKA.JK": {
     "symbol": "BIKA.JK",
     "name": "PT Binakarya Jaya Abadi Tbk.",
     "sub_sector": "properties-real-estate"
   },
-  "BNII.JK": {
-    "symbol": "BNII.JK",
-    "name": "PT Bank Maybank Indonesia Tbk",
-    "sub_sector": "banks"
+  "FUTR.JK": {
+    "symbol": "FUTR.JK",
+    "name": "PT Futura Energi Global Tbk",
+    "sub_sector": "media-entertainment"
+  },
+  "GMFI.JK": {
+    "symbol": "GMFI.JK",
+    "name": "PT Garuda Maintenance Facility Aero Asia Tbk",
+    "sub_sector": "transportation-infrastructure"
   },
   "MIKA.JK": {
     "symbol": "MIKA.JK",
     "name": "PT Mitra Keluarga Karyasehat Tbk",
     "sub_sector": "healthcare-equipment-providers"
   },
-  "AGRS.JK": {
-    "symbol": "AGRS.JK",
-    "name": "PT Bank IBK Indonesia Tbk.",
-    "sub_sector": "banks"
-  },
   "BIMA.JK": {
     "symbol": "BIMA.JK",
     "name": "Primarindo Asia Infrastructure Tbk",
     "sub_sector": "apparel-luxury-goods"
-  },
-  "GWSA.JK": {
-    "symbol": "GWSA.JK",
-    "name": "PT Greenwood Sejahtera Tbk",
-    "sub_sector": "consumer-services"
   },
   "PCAR.JK": {
     "symbol": "PCAR.JK",
@@ -1119,39 +1109,24 @@
     "name": "Bentoel International Investama Tbk",
     "sub_sector": "tobacco"
   },
-  "GZCO.JK": {
-    "symbol": "GZCO.JK",
-    "name": "Gozco Plantations Tbk",
-    "sub_sector": "food-beverage"
-  },
   "AWAN.JK": {
     "symbol": "AWAN.JK",
     "name": "PT Era Digital Media Tbk",
     "sub_sector": "software-it-services"
-  },
-  "HAIS.JK": {
-    "symbol": "HAIS.JK",
-    "name": "PT Hasnur Internasional Shipping Tbk",
-    "sub_sector": "logistics-deliveries"
-  },
-  "INPP.JK": {
-    "symbol": "INPP.JK",
-    "name": "Indonesian Paradise Property Tbk",
-    "sub_sector": "properties-real-estate"
-  },
-  "INTA.JK": {
-    "symbol": "INTA.JK",
-    "name": "Intraco Penta Tbk",
-    "sub_sector": "industrial-goods"
   },
   "PANI.JK": {
     "symbol": "PANI.JK",
     "name": "PT Pantai Indah Kapuk Dua Tbk.",
     "sub_sector": "properties-real-estate"
   },
-  "HBAT.JK": {
-    "symbol": "HBAT.JK",
-    "name": "PT Minahasa Membangun Hebat Tbk",
+  "INPP.JK": {
+    "symbol": "INPP.JK",
+    "name": "Indonesian Paradise Property Tbk",
+    "sub_sector": "properties-real-estate"
+  },
+  "ATAP.JK": {
+    "symbol": "ATAP.JK",
+    "name": "PT Trimitra Prawara Goldland Tbk",
     "sub_sector": "properties-real-estate"
   },
   "IPPE.JK": {
@@ -1159,75 +1134,60 @@
     "name": "PT Indo Pureco Pratama Tbk",
     "sub_sector": "food-beverage"
   },
-  "ATAP.JK": {
-    "symbol": "ATAP.JK",
-    "name": "PT Trimitra Prawara Goldland Tbk",
-    "sub_sector": "properties-real-estate"
-  },
-  "HGII.JK": {
-    "symbol": "HGII.JK",
-    "name": "PT Hero Global Investment Tbk",
-    "sub_sector": "utilities"
+  "JARR.JK": {
+    "symbol": "JARR.JK",
+    "name": "PT Jhonlin Agro Raya Tbk",
+    "sub_sector": "food-beverage"
   },
   "BATR.JK": {
     "symbol": "BATR.JK",
     "name": "PT Benteng Api Technic Tbk",
     "sub_sector": "basic-materials"
   },
-  "JARR.JK": {
-    "symbol": "JARR.JK",
-    "name": "PT Jhonlin Agro Raya Tbk",
-    "sub_sector": "food-beverage"
-  },
   "ELSA.JK": {
     "symbol": "ELSA.JK",
     "name": "Elnusa Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "HITS.JK": {
-    "symbol": "HITS.JK",
-    "name": "Humpuss Intermoda Transportasi Tbk",
-    "sub_sector": "oil-gas-coal"
-  },
-  "BLOG.JK": {
-    "symbol": "BLOG.JK",
-    "name": "PT Trimitra Trans Persada Tbk",
-    "sub_sector": "logistics-deliveries"
-  },
-  "EMTK.JK": {
-    "symbol": "EMTK.JK",
-    "name": "Elang Mahkota Teknologi Tbk",
-    "sub_sector": "software-it-services"
+  "GEMA.JK": {
+    "symbol": "GEMA.JK",
+    "name": "Gema Grahasarana Tbk",
+    "sub_sector": "household-goods"
   },
   "HOPE.JK": {
     "symbol": "HOPE.JK",
     "name": "PT Harapan Duta Pertiwi Tbk",
     "sub_sector": "industrial-goods"
   },
-  "IBOS.JK": {
-    "symbol": "IBOS.JK",
-    "name": "PT Indo Boga Sukses Tbk",
-    "sub_sector": "food-beverage"
-  },
-  "BIPP.JK": {
-    "symbol": "BIPP.JK",
-    "name": "Bhuwanatala Indah Permai Tbk",
-    "sub_sector": "properties-real-estate"
+  "BLOG.JK": {
+    "symbol": "BLOG.JK",
+    "name": "PT Trimitra Trans Persada Tbk",
+    "sub_sector": "logistics-deliveries"
   },
   "FINN.JK": {
     "symbol": "FINN.JK",
     "name": "PT First Indo American Leasing Tbk",
     "sub_sector": "financing-service"
   },
-  "BPTR.JK": {
-    "symbol": "BPTR.JK",
-    "name": "PT Batavia Prosperindo Trans Tbk.",
-    "sub_sector": "transportation"
+  "GGRM.JK": {
+    "symbol": "GGRM.JK",
+    "name": "Gudang Garam Tbk",
+    "sub_sector": "tobacco"
   },
   "TURI.JK": {
     "symbol": "TURI.JK",
     "name": "Tunas Ridean Tbk",
     "sub_sector": "retailing"
+  },
+  "BIPP.JK": {
+    "symbol": "BIPP.JK",
+    "name": "Bhuwanatala Indah Permai Tbk",
+    "sub_sector": "properties-real-estate"
+  },
+  "GHON.JK": {
+    "symbol": "GHON.JK",
+    "name": "PT Gihon Telekomunikasi Indonesia Tbk",
+    "sub_sector": "telecommunication"
   },
   "IMJS.JK": {
     "symbol": "IMJS.JK",
@@ -1239,20 +1199,10 @@
     "name": "PT Indo-Rama Synthetics Tbk",
     "sub_sector": "apparel-luxury-goods"
   },
-  "BGTG.JK": {
-    "symbol": "BGTG.JK",
-    "name": "PT Bank Ganesha Tbk.",
-    "sub_sector": "banks"
-  },
   "IPAC.JK": {
     "symbol": "IPAC.JK",
     "name": "PT Era Graharealty Tbk",
     "sub_sector": "properties-real-estate"
-  },
-  "JIHD.JK": {
-    "symbol": "JIHD.JK",
-    "name": "Jakarta International Hotels & Development Tbk",
-    "sub_sector": "consumer-services"
   },
   "BJBR.JK": {
     "symbol": "BJBR.JK",
@@ -1264,10 +1214,10 @@
     "name": "Erajaya Swasembada Tbk",
     "sub_sector": "retailing"
   },
-  "IPOL.JK": {
-    "symbol": "IPOL.JK",
-    "name": "Indopoly Swakarsa Industry Tbk",
-    "sub_sector": "basic-materials"
+  "JIHD.JK": {
+    "symbol": "JIHD.JK",
+    "name": "Jakarta International Hotels & Development Tbk",
+    "sub_sector": "consumer-services"
   },
   "BOBA.JK": {
     "symbol": "BOBA.JK",
@@ -1279,14 +1229,9 @@
     "name": "PT Barito Renewables Energy Tbk.",
     "sub_sector": "utilities"
   },
-  "CRAB.JK": {
-    "symbol": "CRAB.JK",
-    "name": "PT Toba Surimi Industries Tbk",
-    "sub_sector": "food-beverage"
-  },
-  "KAQI.JK": {
-    "symbol": "KAQI.JK",
-    "name": "PT Jantra Grupo Indonesia Tbk",
+  "GJTL.JK": {
+    "symbol": "GJTL.JK",
+    "name": "Gajah Tunggal Tbk",
     "sub_sector": "automobiles-components"
   },
   "SFAN.JK": {
@@ -1299,15 +1244,20 @@
     "name": "PT Raja Roti Cemerlang Tbk",
     "sub_sector": "food-beverage"
   },
+  "CRAB.JK": {
+    "symbol": "CRAB.JK",
+    "name": "PT Toba Surimi Industries Tbk",
+    "sub_sector": "food-beverage"
+  },
+  "GTBO.JK": {
+    "symbol": "GTBO.JK",
+    "name": "Garda Tujuh Buana Tbk",
+    "sub_sector": "oil-gas-coal"
+  },
   "KBRI.JK": {
     "symbol": "KBRI.JK",
     "name": "Kertas Basuki Rachmat Indonesia Tbk",
     "sub_sector": "basic-materials"
-  },
-  "IRSX.JK": {
-    "symbol": "IRSX.JK",
-    "name": "PT Folago Global Nusantara Tbk",
-    "sub_sector": "software-it-services"
   },
   "MTEL.JK": {
     "symbol": "MTEL.JK",
@@ -1319,25 +1269,20 @@
     "name": "PT Temas Tbk",
     "sub_sector": "logistics-deliveries"
   },
-  "BSDE.JK": {
-    "symbol": "BSDE.JK",
-    "name": "PT Bumi Serpong Damai Tbk",
-    "sub_sector": "properties-real-estate"
-  },
-  "GJTL.JK": {
-    "symbol": "GJTL.JK",
-    "name": "Gajah Tunggal Tbk",
-    "sub_sector": "automobiles-components"
+  "GWSA.JK": {
+    "symbol": "GWSA.JK",
+    "name": "PT Greenwood Sejahtera Tbk",
+    "sub_sector": "consumer-services"
   },
   "CARS.JK": {
     "symbol": "CARS.JK",
     "name": "PT Industri dan Perdagangan Bintraco Dharma Tbk",
     "sub_sector": "retailing"
   },
-  "ITMG.JK": {
-    "symbol": "ITMG.JK",
-    "name": "Indo Tambangraya Megah Tbk",
-    "sub_sector": "oil-gas-coal"
+  "BSDE.JK": {
+    "symbol": "BSDE.JK",
+    "name": "PT Bumi Serpong Damai Tbk",
+    "sub_sector": "properties-real-estate"
   },
   "MDIY.JK": {
     "symbol": "MDIY.JK",
@@ -1349,105 +1294,100 @@
     "name": "Astra Otoparts Tbk",
     "sub_sector": "automobiles-components"
   },
+  "GZCO.JK": {
+    "symbol": "GZCO.JK",
+    "name": "Gozco Plantations Tbk",
+    "sub_sector": "food-beverage"
+  },
+  "HAIS.JK": {
+    "symbol": "HAIS.JK",
+    "name": "PT Hasnur Internasional Shipping Tbk",
+    "sub_sector": "logistics-deliveries"
+  },
+  "HBAT.JK": {
+    "symbol": "HBAT.JK",
+    "name": "PT Minahasa Membangun Hebat Tbk",
+    "sub_sector": "properties-real-estate"
+  },
   "BRNA.JK": {
     "symbol": "BRNA.JK",
     "name": "Berlina Tbk",
     "sub_sector": "basic-materials"
-  },
-  "BTPS.JK": {
-    "symbol": "BTPS.JK",
-    "name": "PT Bank BTPN Syariah Tbk.",
-    "sub_sector": "banks"
-  },
-  "JAST.JK": {
-    "symbol": "JAST.JK",
-    "name": "PT Jasnita Telekomindo Tbk",
-    "sub_sector": "telecommunication"
   },
   "TOPS.JK": {
     "symbol": "TOPS.JK",
     "name": "PT Totalindo Eka Persada Tbk",
     "sub_sector": "heavy-constructions-civil-engineering"
   },
+  "HGII.JK": {
+    "symbol": "HGII.JK",
+    "name": "PT Hero Global Investment Tbk",
+    "sub_sector": "utilities"
+  },
   "BRPT.JK": {
     "symbol": "BRPT.JK",
     "name": "Barito Pacific Tbk",
     "sub_sector": "basic-materials"
-  },
-  "JAWA.JK": {
-    "symbol": "JAWA.JK",
-    "name": "Jaya Agra Wattie Tbk",
-    "sub_sector": "food-beverage"
   },
   "PIPA.JK": {
     "symbol": "PIPA.JK",
     "name": "PT Multi Makmur Lemindo Tbk",
     "sub_sector": "industrial-goods"
   },
-  "HMSP.JK": {
-    "symbol": "HMSP.JK",
-    "name": "HM Sampoerna Tbk",
-    "sub_sector": "tobacco"
+  "HITS.JK": {
+    "symbol": "HITS.JK",
+    "name": "Humpuss Intermoda Transportasi Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "JSKY.JK": {
     "symbol": "JSKY.JK",
     "name": "PT Sky Energy Indonesia Tbk",
     "sub_sector": "alternative-energy"
   },
-  "JTPE.JK": {
-    "symbol": "JTPE.JK",
-    "name": "Jasuindo Tiga Perkasa Tbk",
-    "sub_sector": "industrial-services"
+  "HMSP.JK": {
+    "symbol": "HMSP.JK",
+    "name": "HM Sampoerna Tbk",
+    "sub_sector": "tobacco"
   },
-  "BEST.JK": {
-    "symbol": "BEST.JK",
-    "name": "Bekasi Fajar Industrial Estate Tbk",
-    "sub_sector": "properties-real-estate"
+  "IDPR.JK": {
+    "symbol": "IDPR.JK",
+    "name": "PT Indonesia Pondasi Raya Tbk",
+    "sub_sector": "heavy-constructions-civil-engineering"
   },
   "KEEN.JK": {
     "symbol": "KEEN.JK",
     "name": "PT Kencana Energi Lestari Tbk",
     "sub_sector": "utilities"
   },
+  "BEST.JK": {
+    "symbol": "BEST.JK",
+    "name": "Bekasi Fajar Industrial Estate Tbk",
+    "sub_sector": "properties-real-estate"
+  },
   "GLVA.JK": {
     "symbol": "GLVA.JK",
     "name": "PT Galva Technologies Tbk",
     "sub_sector": "technology-hardware-equipment"
   },
-  "KETR.JK": {
-    "symbol": "KETR.JK",
-    "name": "PT Ketrosden Triasmitra Tbk",
-    "sub_sector": "telecommunication"
+  "IBOS.JK": {
+    "symbol": "IBOS.JK",
+    "name": "PT Indo Boga Sukses Tbk",
+    "sub_sector": "food-beverage"
   },
   "TDPM.JK": {
     "symbol": "TDPM.JK",
     "name": "PT Tianrong Chemicals Industry Tbk",
     "sub_sector": "basic-materials"
   },
-  "BUDI.JK": {
-    "symbol": "BUDI.JK",
-    "name": "PT Budi Starch & Sweetener Tbk.",
-    "sub_sector": "food-beverage"
-  },
   "CASS.JK": {
     "symbol": "CASS.JK",
     "name": "Cahaya Aero Services Tbk",
     "sub_sector": "transportation-infrastructure"
   },
-  "CEKA.JK": {
-    "symbol": "CEKA.JK",
-    "name": "PT Wilmar Cahaya Indonesia Tbk.",
-    "sub_sector": "food-beverage"
-  },
   "FREN.JK": {
     "symbol": "FREN.JK",
     "name": "PT Smartfren Telecom Tbk",
     "sub_sector": "telecommunication"
-  },
-  "KIJA.JK": {
-    "symbol": "KIJA.JK",
-    "name": "Kawasan Industri Jababeka Tbk",
-    "sub_sector": "properties-real-estate"
   },
   "BSIM.JK": {
     "symbol": "BSIM.JK",
@@ -1464,25 +1404,45 @@
     "name": "Bank of India Indonesia Tbk",
     "sub_sector": "banks"
   },
+  "IFII.JK": {
+    "symbol": "IFII.JK",
+    "name": "PT Indonesia Fibreboard Industry Tbk",
+    "sub_sector": "basic-materials"
+  },
   "SMRU.JK": {
     "symbol": "SMRU.JK",
     "name": "SMR Utama Tbk",
     "sub_sector": "oil-gas-coal"
-  },
-  "CLAY.JK": {
-    "symbol": "CLAY.JK",
-    "name": "PT Citra Putra Realty Tbk",
-    "sub_sector": "consumer-services"
   },
   "TRIN.JK": {
     "symbol": "TRIN.JK",
     "name": "PT Perintis Triniti Properti Tbk",
     "sub_sector": "properties-real-estate"
   },
+  "CLAY.JK": {
+    "symbol": "CLAY.JK",
+    "name": "PT Citra Putra Realty Tbk",
+    "sub_sector": "consumer-services"
+  },
+  "INAF.JK": {
+    "symbol": "INAF.JK",
+    "name": "Indofarma Tbk",
+    "sub_sector": "pharmaceuticals-health-care-research"
+  },
+  "INTA.JK": {
+    "symbol": "INTA.JK",
+    "name": "Intraco Penta Tbk",
+    "sub_sector": "industrial-goods"
+  },
   "BTEL.JK": {
     "symbol": "BTEL.JK",
     "name": "Bakrie Telecom Tbk",
     "sub_sector": "telecommunication"
+  },
+  "IPOL.JK": {
+    "symbol": "IPOL.JK",
+    "name": "Indopoly Swakarsa Industry Tbk",
+    "sub_sector": "basic-materials"
   },
   "PWON.JK": {
     "symbol": "PWON.JK",
@@ -1509,30 +1469,35 @@
     "name": "PT Kokoh Exa Nusantara",
     "sub_sector": "properties-real-estate"
   },
-  "POLI.JK": {
-    "symbol": "POLI.JK",
-    "name": "PT Pollux Hotels Group Tbk",
-    "sub_sector": "properties-real-estate"
+  "IRSX.JK": {
+    "symbol": "IRSX.JK",
+    "name": "PT Folago Global Nusantara Tbk",
+    "sub_sector": "software-it-services"
   },
   "BUKK.JK": {
     "symbol": "BUKK.JK",
     "name": "Bukaka Teknik Utama Tbk",
     "sub_sector": "heavy-constructions-civil-engineering"
   },
+  "POLI.JK": {
+    "symbol": "POLI.JK",
+    "name": "PT Pollux Hotels Group Tbk",
+    "sub_sector": "properties-real-estate"
+  },
   "KOBX.JK": {
     "symbol": "KOBX.JK",
     "name": "Kobexindo Tractors Tbk",
     "sub_sector": "industrial-goods"
   },
-  "TRUK.JK": {
-    "symbol": "TRUK.JK",
-    "name": "PT Guna Timur Raya Tbk",
-    "sub_sector": "logistics-deliveries"
-  },
   "CMNP.JK": {
     "symbol": "CMNP.JK",
     "name": "Citra Marga Nusaphala Persada Tbk",
     "sub_sector": "transportation-infrastructure"
+  },
+  "TRUK.JK": {
+    "symbol": "TRUK.JK",
+    "name": "PT Guna Timur Raya Tbk",
+    "sub_sector": "logistics-deliveries"
   },
   "SMRA.JK": {
     "symbol": "SMRA.JK",
@@ -1564,10 +1529,10 @@
     "name": "Ratu Prabu Energi Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "IFII.JK": {
-    "symbol": "IFII.JK",
-    "name": "PT Indonesia Fibreboard Industry Tbk",
-    "sub_sector": "basic-materials"
+  "ITIC.JK": {
+    "symbol": "ITIC.JK",
+    "name": "PT Indonesian Tobacco Tbk",
+    "sub_sector": "tobacco"
   },
   "PTPW.JK": {
     "symbol": "PTPW.JK",
@@ -1579,20 +1544,35 @@
     "name": "Krakatau Steel (Persero) Tbk",
     "sub_sector": "basic-materials"
   },
-  "CHEM.JK": {
-    "symbol": "CHEM.JK",
-    "name": "PT Chemstar Indonesia Tbk",
-    "sub_sector": "basic-materials"
+  "ITMG.JK": {
+    "symbol": "ITMG.JK",
+    "name": "Indo Tambangraya Megah Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "LAJU.JK": {
     "symbol": "LAJU.JK",
     "name": "PT Jasa Berdikari Logistics Tbk",
     "sub_sector": "logistics-deliveries"
   },
+  "CHEM.JK": {
+    "symbol": "CHEM.JK",
+    "name": "PT Chemstar Indonesia Tbk",
+    "sub_sector": "basic-materials"
+  },
   "LMAX.JK": {
     "symbol": "LMAX.JK",
     "name": "PT Lupromax Pelumas Indonesia Tbk",
     "sub_sector": "automobiles-components"
+  },
+  "JAST.JK": {
+    "symbol": "JAST.JK",
+    "name": "PT Jasnita Telekomindo Tbk",
+    "sub_sector": "telecommunication"
+  },
+  "JAWA.JK": {
+    "symbol": "JAWA.JK",
+    "name": "Jaya Agra Wattie Tbk",
+    "sub_sector": "food-beverage"
   },
   "LMPI.JK": {
     "symbol": "LMPI.JK",
@@ -1609,11 +1589,6 @@
     "name": "Wicaksana Overseas International Tbk",
     "sub_sector": "food-staples-retailing"
   },
-  "GMFI.JK": {
-    "symbol": "GMFI.JK",
-    "name": "PT Garuda Maintenance Facility Aero Asia Tbk",
-    "sub_sector": "transportation-infrastructure"
-  },
   "CSRA.JK": {
     "symbol": "CSRA.JK",
     "name": "PT Cisadane Sawit Raya Tbk.",
@@ -1629,11 +1604,6 @@
     "name": "Sidomulyo Selaras Tbk",
     "sub_sector": "logistics-deliveries"
   },
-  "JAYA.JK": {
-    "symbol": "JAYA.JK",
-    "name": "PT Armada Berjaya Trans Tbk",
-    "sub_sector": "logistics-deliveries"
-  },
   "MASB.JK": {
     "symbol": "MASB.JK",
     "name": "PT Bank Multiarta Sentosa Tbk",
@@ -1643,6 +1613,11 @@
     "symbol": "BAPA.JK",
     "name": "Bekasi Asri Pemula Tbk",
     "sub_sector": "properties-real-estate"
+  },
+  "JAYA.JK": {
+    "symbol": "JAYA.JK",
+    "name": "PT Armada Berjaya Trans Tbk",
+    "sub_sector": "logistics-deliveries"
   },
   "KKES.JK": {
     "symbol": "KKES.JK",
@@ -1659,6 +1634,11 @@
     "name": "PT Cisarua Mountain Dairy Tbk",
     "sub_sector": "food-beverage"
   },
+  "JELI.JK": {
+    "symbol": "JELI.JK",
+    "name": "PT Niramas Utama Tbk",
+    "sub_sector": "food-beverage"
+  },
   "KLIN.JK": {
     "symbol": "KLIN.JK",
     "name": "PT Klinko Karya Imaji Tbk",
@@ -1669,20 +1649,30 @@
     "name": "PT Abadi Lestari Indonesia Tbk",
     "sub_sector": "food-beverage"
   },
+  "JTPE.JK": {
+    "symbol": "JTPE.JK",
+    "name": "Jasuindo Tiga Perkasa Tbk",
+    "sub_sector": "industrial-services"
+  },
+  "KAQI.JK": {
+    "symbol": "KAQI.JK",
+    "name": "PT Jantra Grupo Indonesia Tbk",
+    "sub_sector": "automobiles-components"
+  },
   "SINI.JK": {
     "symbol": "SINI.JK",
     "name": "PT Singaraja Putra Tbk",
     "sub_sector": "industrial-goods"
   },
-  "FORU.JK": {
-    "symbol": "FORU.JK",
-    "name": "Fortune Indonesia Tbk",
-    "sub_sector": "media-entertainment"
-  },
   "KMDS.JK": {
     "symbol": "KMDS.JK",
     "name": "PT Kurniamitra Duta Sentosa Tbk",
     "sub_sector": "food-staples-retailing"
+  },
+  "FORU.JK": {
+    "symbol": "FORU.JK",
+    "name": "Fortune Indonesia Tbk",
+    "sub_sector": "media-entertainment"
   },
   "SKLT.JK": {
     "symbol": "SKLT.JK",
@@ -1693,6 +1683,21 @@
     "symbol": "HALO.JK",
     "name": "PT Haloni Jane Tbk",
     "sub_sector": "healthcare-equipment-providers"
+  },
+  "KBLM.JK": {
+    "symbol": "KBLM.JK",
+    "name": "Kabelindo Murni Tbk",
+    "sub_sector": "industrial-goods"
+  },
+  "KETR.JK": {
+    "symbol": "KETR.JK",
+    "name": "PT Ketrosden Triasmitra Tbk",
+    "sub_sector": "telecommunication"
+  },
+  "KICI.JK": {
+    "symbol": "KICI.JK",
+    "name": "Kedaung Indah Can Tbk",
+    "sub_sector": "household-goods"
   },
   "RUNS.JK": {
     "symbol": "RUNS.JK",
@@ -1714,15 +1719,15 @@
     "name": "PT Solusi Bangun Indonesia Tbk",
     "sub_sector": "basic-materials"
   },
+  "KIJA.JK": {
+    "symbol": "KIJA.JK",
+    "name": "Kawasan Industri Jababeka Tbk",
+    "sub_sector": "properties-real-estate"
+  },
   "SMDR.JK": {
     "symbol": "SMDR.JK",
     "name": "Samudera Indonesia Tbk",
     "sub_sector": "logistics-deliveries"
-  },
-  "KICI.JK": {
-    "symbol": "KICI.JK",
-    "name": "Kedaung Indah Can Tbk",
-    "sub_sector": "household-goods"
   },
   "BAIK.JK": {
     "symbol": "BAIK.JK",
@@ -1789,15 +1794,15 @@
     "name": "Martina Berto Tbk",
     "sub_sector": "nondurable-household-products"
   },
-  "CITY.JK": {
-    "symbol": "CITY.JK",
-    "name": "PT Natura City Developments Tbk.",
-    "sub_sector": "properties-real-estate"
-  },
   "MBMA.JK": {
     "symbol": "MBMA.JK",
     "name": "PT Merdeka Battery Materials Tbk",
     "sub_sector": "basic-materials"
+  },
+  "CITY.JK": {
+    "symbol": "CITY.JK",
+    "name": "PT Natura City Developments Tbk.",
+    "sub_sector": "properties-real-estate"
   },
   "MCAS.JK": {
     "symbol": "MCAS.JK",
@@ -1829,15 +1834,15 @@
     "name": "PT Terregra Asia Energy",
     "sub_sector": "utilities"
   },
-  "FASW.JK": {
-    "symbol": "FASW.JK",
-    "name": "Fajar Surya Wisesa Tbk",
-    "sub_sector": "basic-materials"
-  },
   "TRIO.JK": {
     "symbol": "TRIO.JK",
     "name": "Trikomsel Oke Tbk",
     "sub_sector": "retailing"
+  },
+  "FASW.JK": {
+    "symbol": "FASW.JK",
+    "name": "Fajar Surya Wisesa Tbk",
+    "sub_sector": "basic-materials"
   },
   "TGUK.JK": {
     "symbol": "TGUK.JK",
@@ -1848,11 +1853,6 @@
     "symbol": "CMNT.JK",
     "name": "PT Cemindo Gemilang Tbk",
     "sub_sector": "basic-materials"
-  },
-  "IDPR.JK": {
-    "symbol": "IDPR.JK",
-    "name": "PT Indonesia Pondasi Raya Tbk",
-    "sub_sector": "heavy-constructions-civil-engineering"
   },
   "SEMA.JK": {
     "symbol": "SEMA.JK",
@@ -1919,15 +1919,15 @@
     "name": "Bank Mega Tbk",
     "sub_sector": "banks"
   },
-  "AKSI.JK": {
-    "symbol": "AKSI.JK",
-    "name": "PT Mineral Sumberdaya Mandiri Tbk",
-    "sub_sector": "logistics-deliveries"
-  },
   "TOOL.JK": {
     "symbol": "TOOL.JK",
     "name": "PT Rohartindo Nusantara Luas Tbk",
     "sub_sector": "retailing"
+  },
+  "AKSI.JK": {
+    "symbol": "AKSI.JK",
+    "name": "PT Mineral Sumberdaya Mandiri Tbk",
+    "sub_sector": "logistics-deliveries"
   },
   "MMLP.JK": {
     "symbol": "MMLP.JK",
@@ -1939,15 +1939,15 @@
     "name": "Surya Toto Indonesia Tbk",
     "sub_sector": "industrial-goods"
   },
-  "IKAI.JK": {
-    "symbol": "IKAI.JK",
-    "name": "Intikeramik Alamasri Industri Tbk",
-    "sub_sector": "industrial-goods"
-  },
   "MERI.JK": {
     "symbol": "MERI.JK",
     "name": "PT Merry Riana Edukasi Tbk",
     "sub_sector": "consumer-services"
+  },
+  "IKAI.JK": {
+    "symbol": "IKAI.JK",
+    "name": "Intikeramik Alamasri Industri Tbk",
+    "sub_sector": "industrial-goods"
   },
   "TRGU.JK": {
     "symbol": "TRGU.JK",
@@ -1979,20 +1979,15 @@
     "name": "PT Vastland Indonesia Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "IKPM.JK": {
-    "symbol": "IKPM.JK",
-    "name": "PT Ikapharmindo Putramas Tbk",
-    "sub_sector": "pharmaceuticals-health-care-research"
-  },
   "VOKS.JK": {
     "symbol": "VOKS.JK",
     "name": "Voksel Electric Tbk",
     "sub_sector": "industrial-goods"
   },
-  "DKHH.JK": {
-    "symbol": "DKHH.JK",
-    "name": "PT Cipta Sarana Medika Tbk",
-    "sub_sector": "healthcare-equipment-providers"
+  "IKPM.JK": {
+    "symbol": "IKPM.JK",
+    "name": "PT Ikapharmindo Putramas Tbk",
+    "sub_sector": "pharmaceuticals-health-care-research"
   },
   "DNET.JK": {
     "symbol": "DNET.JK",
@@ -2008,6 +2003,11 @@
     "symbol": "MSJA.JK",
     "name": "PT Multi Spunindo Jaya Tbk",
     "sub_sector": "nondurable-household-products"
+  },
+  "DKHH.JK": {
+    "symbol": "DKHH.JK",
+    "name": "PT Cipta Sarana Medika Tbk",
+    "sub_sector": "healthcare-equipment-providers"
   },
   "MICE.JK": {
     "symbol": "MICE.JK",
@@ -2059,15 +2059,15 @@
     "name": "United Tractors Tbk",
     "sub_sector": "industrial-goods"
   },
-  "INDO.JK": {
-    "symbol": "INDO.JK",
-    "name": "PT Royalindo Investa Wijaya Tbk",
-    "sub_sector": "properties-real-estate"
-  },
   "UNIT.JK": {
     "symbol": "UNIT.JK",
     "name": "Nusantara Inti Corpora Tbk",
     "sub_sector": "apparel-luxury-goods"
+  },
+  "INDO.JK": {
+    "symbol": "INDO.JK",
+    "name": "PT Royalindo Investa Wijaya Tbk",
+    "sub_sector": "properties-real-estate"
   },
   "TCID.JK": {
     "symbol": "TCID.JK",
@@ -2094,11 +2094,6 @@
     "name": "Samindo Resources Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "DPUM.JK": {
-    "symbol": "DPUM.JK",
-    "name": "PT Dua Putra Utama Makmur Tbk",
-    "sub_sector": "food-beverage"
-  },
   "IBST.JK": {
     "symbol": "IBST.JK",
     "name": "Inti Bangun Sejahtera Tbk",
@@ -2109,20 +2104,25 @@
     "name": "Mulia Industrindo Tbk",
     "sub_sector": "industrial-goods"
   },
+  "DPUM.JK": {
+    "symbol": "DPUM.JK",
+    "name": "PT Dua Putra Utama Makmur Tbk",
+    "sub_sector": "food-beverage"
+  },
   "NUSA.JK": {
     "symbol": "NUSA.JK",
     "name": "PT Sinergi Megah Internusa Tbk",
     "sub_sector": "consumer-services"
   },
-  "ELTY.JK": {
-    "symbol": "ELTY.JK",
-    "name": "Bakrieland Development Tbk",
-    "sub_sector": "properties-real-estate"
-  },
   "UNVR.JK": {
     "symbol": "UNVR.JK",
     "name": "Unilever Indonesia Tbk",
     "sub_sector": "nondurable-household-products"
+  },
+  "ELTY.JK": {
+    "symbol": "ELTY.JK",
+    "name": "Bakrieland Development Tbk",
+    "sub_sector": "properties-real-estate"
   },
   "GIAA.JK": {
     "symbol": "GIAA.JK",
@@ -2154,15 +2154,15 @@
     "name": "Ancora Indonesia Resources Tbk",
     "sub_sector": "basic-materials"
   },
-  "OILS.JK": {
-    "symbol": "OILS.JK",
-    "name": "PT Indo Oil Perkasa Tbk",
-    "sub_sector": "food-beverage"
-  },
   "COAL.JK": {
     "symbol": "COAL.JK",
     "name": "PT Black Diamond Resources Tbk",
     "sub_sector": "oil-gas-coal"
+  },
+  "OILS.JK": {
+    "symbol": "OILS.JK",
+    "name": "PT Indo Oil Perkasa Tbk",
+    "sub_sector": "food-beverage"
   },
   "OLIV.JK": {
     "symbol": "OLIV.JK",
@@ -2194,15 +2194,15 @@
     "name": "PT MNC Digital Entertainment Tbk",
     "sub_sector": "media-entertainment"
   },
-  "CNTX.JK": {
-    "symbol": "CNTX.JK",
-    "name": "PT Century Textile Industry Tbk",
-    "sub_sector": "apparel-luxury-goods"
-  },
   "GMTD.JK": {
     "symbol": "GMTD.JK",
     "name": "Gowa Makassar Tourism Development Tbk",
     "sub_sector": "properties-real-estate"
+  },
+  "CNTX.JK": {
+    "symbol": "CNTX.JK",
+    "name": "PT Century Textile Industry Tbk",
+    "sub_sector": "apparel-luxury-goods"
   },
   "MPRO.JK": {
     "symbol": "MPRO.JK",
@@ -2279,15 +2279,15 @@
     "name": "City Retail Developments Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "DNAR.JK": {
-    "symbol": "DNAR.JK",
-    "name": "PT Bank Oke Indonesia Tbk",
-    "sub_sector": "banks"
-  },
   "LAND.JK": {
     "symbol": "LAND.JK",
     "name": "PT Trimitra Propertindo Tbk",
     "sub_sector": "properties-real-estate"
+  },
+  "DNAR.JK": {
+    "symbol": "DNAR.JK",
+    "name": "PT Bank Oke Indonesia Tbk",
+    "sub_sector": "banks"
   },
   "NINE.JK": {
     "symbol": "NINE.JK",
@@ -2314,15 +2314,15 @@
     "name": "PT Nusa Raya Cipta Tbk",
     "sub_sector": "heavy-constructions-civil-engineering"
   },
-  "DUTI.JK": {
-    "symbol": "DUTI.JK",
-    "name": "Duta Pertiwi Tbk",
-    "sub_sector": "properties-real-estate"
-  },
   "MDIA.JK": {
     "symbol": "MDIA.JK",
     "name": "PT Intermedia Capital Tbk",
     "sub_sector": "media-entertainment"
+  },
+  "DUTI.JK": {
+    "symbol": "DUTI.JK",
+    "name": "Duta Pertiwi Tbk",
+    "sub_sector": "properties-real-estate"
   },
   "DAAZ.JK": {
     "symbol": "DAAZ.JK",
@@ -2434,15 +2434,15 @@
     "name": "PT IMC Pelita Logistik Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "JSMR.JK": {
-    "symbol": "JSMR.JK",
-    "name": "PT Jasa Marga Tbk",
-    "sub_sector": "transportation-infrastructure"
-  },
   "HDIT.JK": {
     "symbol": "HDIT.JK",
     "name": "PT Hensel Davest Indonesia Tbk",
     "sub_sector": "software-it-services"
+  },
+  "JSMR.JK": {
+    "symbol": "JSMR.JK",
+    "name": "PT Jasa Marga Tbk",
+    "sub_sector": "transportation-infrastructure"
   },
   "PRDL.JK": {
     "symbol": "PRDL.JK",
@@ -2529,15 +2529,15 @@
     "name": "Pudjiadi & Sons Tbk",
     "sub_sector": "consumer-services"
   },
-  "BFIN.JK": {
-    "symbol": "BFIN.JK",
-    "name": "BFI Finance Indonesia Tbk",
-    "sub_sector": "financing-service"
-  },
   "LMAS.JK": {
     "symbol": "LMAS.JK",
     "name": "Limas Indonesia Makmur Tbk",
     "sub_sector": "software-it-services"
+  },
+  "BFIN.JK": {
+    "symbol": "BFIN.JK",
+    "name": "BFI Finance Indonesia Tbk",
+    "sub_sector": "financing-service"
   },
   "BJTM.JK": {
     "symbol": "BJTM.JK",
@@ -2569,15 +2569,15 @@
     "name": "PT Kentanix Supra International Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "KEJU.JK": {
-    "symbol": "KEJU.JK",
-    "name": "PT Mulia Boga Raya Tbk",
-    "sub_sector": "food-beverage"
-  },
   "LCKM.JK": {
     "symbol": "LCKM.JK",
     "name": "PT LCK Global Kedaton Tbk",
     "sub_sector": "telecommunication"
+  },
+  "KEJU.JK": {
+    "symbol": "KEJU.JK",
+    "name": "PT Mulia Boga Raya Tbk",
+    "sub_sector": "food-beverage"
   },
   "MDKA.JK": {
     "symbol": "MDKA.JK",
@@ -2919,40 +2919,40 @@
     "name": "Eterindo Wahanatama Tbk",
     "sub_sector": "basic-materials"
   },
-  "SPMA.JK": {
-    "symbol": "SPMA.JK",
-    "name": "Suparma Tbk",
-    "sub_sector": "basic-materials"
-  },
   "ENRG.JK": {
     "symbol": "ENRG.JK",
     "name": "Energi Mega Persada Tbk",
     "sub_sector": "oil-gas-coal"
+  },
+  "SPMA.JK": {
+    "symbol": "SPMA.JK",
+    "name": "Suparma Tbk",
+    "sub_sector": "basic-materials"
   },
   "BPII.JK": {
     "symbol": "BPII.JK",
     "name": "PT Batavia Prosperindo Internasional Tbk.",
     "sub_sector": "holding-investment-companies"
   },
-  "APLN.JK": {
-    "symbol": "APLN.JK",
-    "name": "PT Agung Podomoro Land Tbk.",
-    "sub_sector": "properties-real-estate"
-  },
   "AMMN.JK": {
     "symbol": "AMMN.JK",
     "name": "PT Amman Mineral Internasional Tbk.",
     "sub_sector": "basic-materials"
   },
-  "HEAL.JK": {
-    "symbol": "HEAL.JK",
-    "name": "PT Medikaloka Hermina Tbk",
-    "sub_sector": "healthcare-equipment-providers"
+  "APLN.JK": {
+    "symbol": "APLN.JK",
+    "name": "PT Agung Podomoro Land Tbk.",
+    "sub_sector": "properties-real-estate"
   },
   "BABP.JK": {
     "symbol": "BABP.JK",
     "name": "PT Bank MNC Internasional Tbk.",
     "sub_sector": "banks"
+  },
+  "HEAL.JK": {
+    "symbol": "HEAL.JK",
+    "name": "PT Medikaloka Hermina Tbk",
+    "sub_sector": "healthcare-equipment-providers"
   },
   "POOL.JK": {
     "symbol": "POOL.JK",
@@ -2964,35 +2964,35 @@
     "name": "Selamat Sempurna Tbk",
     "sub_sector": "automobiles-components"
   },
-  "WTON.JK": {
-    "symbol": "WTON.JK",
-    "name": "Wijaya Karya Beton",
-    "sub_sector": "basic-materials"
-  },
   "ARNA.JK": {
     "symbol": "ARNA.JK",
     "name": "Arwana Citramulia Tbk",
     "sub_sector": "industrial-goods"
   },
-  "ICBP.JK": {
-    "symbol": "ICBP.JK",
-    "name": "Indofood CBP Sukses Makmur Tbk",
-    "sub_sector": "food-beverage"
+  "WTON.JK": {
+    "symbol": "WTON.JK",
+    "name": "Wijaya Karya Beton",
+    "sub_sector": "basic-materials"
   },
   "BACA.JK": {
     "symbol": "BACA.JK",
     "name": "PT Bank Capital Indonesia Tbk",
     "sub_sector": "banks"
   },
-  "WINS.JK": {
-    "symbol": "WINS.JK",
-    "name": "Wintermar Offshore Marine Tbk",
-    "sub_sector": "oil-gas-coal"
+  "ICBP.JK": {
+    "symbol": "ICBP.JK",
+    "name": "Indofood CBP Sukses Makmur Tbk",
+    "sub_sector": "food-beverage"
   },
   "ASII.JK": {
     "symbol": "ASII.JK",
     "name": "Astra International Tbk",
     "sub_sector": "multi-sector-holdings"
+  },
+  "WINS.JK": {
+    "symbol": "WINS.JK",
+    "name": "Wintermar Offshore Marine Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "INKP.JK": {
     "symbol": "INKP.JK",
@@ -3039,15 +3039,15 @@
     "name": "Pioneerindo Gourmet International Tbk",
     "sub_sector": "consumer-services"
   },
-  "JPFA.JK": {
-    "symbol": "JPFA.JK",
-    "name": "JAPFA Comfeed Indonesia Tbk",
-    "sub_sector": "food-beverage"
-  },
   "BAJA.JK": {
     "symbol": "BAJA.JK",
     "name": "Saranacentral Bajatama Tbk",
     "sub_sector": "basic-materials"
+  },
+  "JPFA.JK": {
+    "symbol": "JPFA.JK",
+    "name": "JAPFA Comfeed Indonesia Tbk",
+    "sub_sector": "food-beverage"
   },
   "WIFI.JK": {
     "symbol": "WIFI.JK",
@@ -3134,25 +3134,25 @@
     "name": "PT Supreme Cable Manufacturing & Commerce Tbk",
     "sub_sector": "industrial-goods"
   },
-  "PGEO.JK": {
-    "symbol": "PGEO.JK",
-    "name": "PT Pertamina Geothermal Energy Tbk",
-    "sub_sector": "utilities"
-  },
   "ADMG.JK": {
     "symbol": "ADMG.JK",
     "name": "Polychem Indonesia Tbk",
     "sub_sector": "basic-materials"
   },
-  "DMND.JK": {
-    "symbol": "DMND.JK",
-    "name": "PT Diamond Food Indonesia Tbk",
-    "sub_sector": "food-staples-retailing"
+  "PGEO.JK": {
+    "symbol": "PGEO.JK",
+    "name": "PT Pertamina Geothermal Energy Tbk",
+    "sub_sector": "utilities"
   },
   "KKGI.JK": {
     "symbol": "KKGI.JK",
     "name": "Resource Alam Indonesia Tbk",
     "sub_sector": "oil-gas-coal"
+  },
+  "DMND.JK": {
+    "symbol": "DMND.JK",
+    "name": "PT Diamond Food Indonesia Tbk",
+    "sub_sector": "food-staples-retailing"
   },
   "BMHS.JK": {
     "symbol": "BMHS.JK",
@@ -3164,25 +3164,25 @@
     "name": "PT Xolare RCR Energy Tbk",
     "sub_sector": "basic-materials"
   },
-  "AMRT.JK": {
-    "symbol": "AMRT.JK",
-    "name": "PT Sumber Alfaria Trijaya Tbk.",
-    "sub_sector": "food-staples-retailing"
-  },
   "LEAD.JK": {
     "symbol": "LEAD.JK",
     "name": "PT Logindo Samudramakmur Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "RATU.JK": {
-    "symbol": "RATU.JK",
-    "name": "PT Raharja Energi Cepu Tbk",
-    "sub_sector": "oil-gas-coal"
+  "AMRT.JK": {
+    "symbol": "AMRT.JK",
+    "name": "PT Sumber Alfaria Trijaya Tbk.",
+    "sub_sector": "food-staples-retailing"
   },
   "BNLI.JK": {
     "symbol": "BNLI.JK",
     "name": "Bank Permata Tbk",
     "sub_sector": "banks"
+  },
+  "RATU.JK": {
+    "symbol": "RATU.JK",
+    "name": "PT Raharja Energi Cepu Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "BOSS.JK": {
     "symbol": "BOSS.JK",
@@ -3324,15 +3324,15 @@
     "name": "PT Diastika Biotekindo Tbk",
     "sub_sector": "healthcare-equipment-providers"
   },
-  "WIKA.JK": {
-    "symbol": "WIKA.JK",
-    "name": "PT Wijaya Karya (Persero) Tbk",
-    "sub_sector": "heavy-constructions-civil-engineering"
-  },
   "CLPI.JK": {
     "symbol": "CLPI.JK",
     "name": "Colorpak Indonesia Tbk",
     "sub_sector": "basic-materials"
+  },
+  "WIKA.JK": {
+    "symbol": "WIKA.JK",
+    "name": "PT Wijaya Karya (Persero) Tbk",
+    "sub_sector": "heavy-constructions-civil-engineering"
   },
   "ASMI.JK": {
     "symbol": "ASMI.JK",
@@ -3354,15 +3354,15 @@
     "name": "PT Bhakti Multi Artha Tbk.",
     "sub_sector": "insurance"
   },
-  "YUPI.JK": {
-    "symbol": "YUPI.JK",
-    "name": "PT Yupi Indo Jelly Gum Tbk",
-    "sub_sector": "food-beverage"
-  },
   "BINO.JK": {
     "symbol": "BINO.JK",
     "name": "PT Perma Plasindo Tbk",
     "sub_sector": "industrial-services"
+  },
+  "YUPI.JK": {
+    "symbol": "YUPI.JK",
+    "name": "PT Yupi Indo Jelly Gum Tbk",
+    "sub_sector": "food-beverage"
   },
   "CASH.JK": {
     "symbol": "CASH.JK",
@@ -3374,15 +3374,15 @@
     "name": "PT Gaya Abadi Sempurna Tbk",
     "sub_sector": "retailing"
   },
-  "ZYRX.JK": {
-    "symbol": "ZYRX.JK",
-    "name": "PT Zyrexindo Mandiri Buana Tbk",
-    "sub_sector": "technology-hardware-equipment"
-  },
   "CBPE.JK": {
     "symbol": "CBPE.JK",
     "name": "PT Citra Buana Prasida Tbk",
     "sub_sector": "properties-real-estate"
+  },
+  "ZYRX.JK": {
+    "symbol": "ZYRX.JK",
+    "name": "PT Zyrexindo Mandiri Buana Tbk",
+    "sub_sector": "technology-hardware-equipment"
   },
   "CENT.JK": {
     "symbol": "CENT.JK",
@@ -3464,15 +3464,15 @@
     "name": "Paninvest Tbk",
     "sub_sector": "insurance"
   },
-  "CMPP.JK": {
-    "symbol": "CMPP.JK",
-    "name": "PT AirAsia Indonesia Tbk",
-    "sub_sector": "transportation"
-  },
   "BNBR.JK": {
     "symbol": "BNBR.JK",
     "name": "Bakrie & Brothers Tbk",
     "sub_sector": "multi-sector-holdings"
+  },
+  "CMPP.JK": {
+    "symbol": "CMPP.JK",
+    "name": "PT AirAsia Indonesia Tbk",
+    "sub_sector": "transportation"
   },
   "BNBA.JK": {
     "symbol": "BNBA.JK",
@@ -3559,15 +3559,15 @@
     "name": "Sugih Energy Tbk",
     "sub_sector": "oil-gas-coal"
   },
-  "JSPT.JK": {
-    "symbol": "JSPT.JK",
-    "name": "Jakarta Setiabudi Internasional Tbk",
-    "sub_sector": "consumer-services"
-  },
   "TOBA.JK": {
     "symbol": "TOBA.JK",
     "name": "PT TBS Energi Utama Tbk",
     "sub_sector": "oil-gas-coal"
+  },
+  "JSPT.JK": {
+    "symbol": "JSPT.JK",
+    "name": "Jakarta Setiabudi Internasional Tbk",
+    "sub_sector": "consumer-services"
   },
   "ISEA.JK": {
     "symbol": "ISEA.JK",
@@ -3724,15 +3724,15 @@
     "name": "Plaza Indonesia Realty Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "BIKE.JK": {
-    "symbol": "BIKE.JK",
-    "name": "PT Sepeda Bersama Indonesia Tbk",
-    "sub_sector": "leisure-goods"
-  },
   "ADES.JK": {
     "symbol": "ADES.JK",
     "name": "Akasha Wira International Tbk",
     "sub_sector": "food-beverage"
+  },
+  "BIKE.JK": {
+    "symbol": "BIKE.JK",
+    "name": "PT Sepeda Bersama Indonesia Tbk",
+    "sub_sector": "leisure-goods"
   },
   "BOGA.JK": {
     "symbol": "BOGA.JK",
@@ -3799,15 +3799,15 @@
     "name": "PT Dharma Polimetal Tbk",
     "sub_sector": "automobiles-components"
   },
-  "INRU.JK": {
-    "symbol": "INRU.JK",
-    "name": "Toba Pulp Lestari Tbk",
-    "sub_sector": "basic-materials"
-  },
   "MTMH.JK": {
     "symbol": "MTMH.JK",
     "name": "PT Murni Sadar Tbk",
     "sub_sector": "healthcare-equipment-providers"
+  },
+  "INRU.JK": {
+    "symbol": "INRU.JK",
+    "name": "Toba Pulp Lestari Tbk",
+    "sub_sector": "basic-materials"
   },
   "LION.JK": {
     "symbol": "LION.JK",
@@ -3849,15 +3849,15 @@
     "name": "PT Tripar Multivision Plus Tbk",
     "sub_sector": "media-entertainment"
   },
-  "TMPO.JK": {
-    "symbol": "TMPO.JK",
-    "name": "Tempo Inti Media Tbk",
-    "sub_sector": "media-entertainment"
-  },
   "ARTO.JK": {
     "symbol": "ARTO.JK",
     "name": "PT Bank Jago Tbk.",
     "sub_sector": "banks"
+  },
+  "TMPO.JK": {
+    "symbol": "TMPO.JK",
+    "name": "Tempo Inti Media Tbk",
+    "sub_sector": "media-entertainment"
   },
   "DEAL.JK": {
     "symbol": "DEAL.JK",
@@ -3894,15 +3894,15 @@
     "name": "PT HK Metals Utama Tbk",
     "sub_sector": "basic-materials"
   },
-  "PTBA.JK": {
-    "symbol": "PTBA.JK",
-    "name": "Bukit Asam Tbk",
-    "sub_sector": "oil-gas-coal"
-  },
   "AMFG.JK": {
     "symbol": "AMFG.JK",
     "name": "Asahimas Flat Glass Tbk",
     "sub_sector": "industrial-goods"
+  },
+  "PTBA.JK": {
+    "symbol": "PTBA.JK",
+    "name": "Bukit Asam Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "HOME.JK": {
     "symbol": "HOME.JK",
@@ -3939,15 +3939,15 @@
     "name": "PT Trinitan Metals and Minerals Tbk",
     "sub_sector": "basic-materials"
   },
-  "HRUM.JK": {
-    "symbol": "HRUM.JK",
-    "name": "Harum Energy Tbk",
-    "sub_sector": "oil-gas-coal"
-  },
   "BELL.JK": {
     "symbol": "BELL.JK",
     "name": "PT Trisula Textile Industries Tbk",
     "sub_sector": "apparel-luxury-goods"
+  },
+  "HRUM.JK": {
+    "symbol": "HRUM.JK",
+    "name": "Harum Energy Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "KPAL.JK": {
     "symbol": "KPAL.JK",
@@ -3984,15 +3984,15 @@
     "name": "PT Graha Layar Prima Tbk.",
     "sub_sector": "consumer-services"
   },
-  "INTD.JK": {
-    "symbol": "INTD.JK",
-    "name": "Inter-Delta Tbk",
-    "sub_sector": "basic-materials"
-  },
   "LPPS.JK": {
     "symbol": "LPPS.JK",
     "name": "PT Lenox Pasifik Investama Tbk",
     "sub_sector": "holding-investment-companies"
+  },
+  "INTD.JK": {
+    "symbol": "INTD.JK",
+    "name": "Inter-Delta Tbk",
+    "sub_sector": "basic-materials"
   },
   "TPIA.JK": {
     "symbol": "TPIA.JK",
@@ -4004,15 +4004,15 @@
     "name": "Sumi Indo Kabel Tbk",
     "sub_sector": "industrial-goods"
   },
-  "DGIK.JK": {
-    "symbol": "DGIK.JK",
-    "name": "Nusa Konstruksi Enjiniring  Tbk",
-    "sub_sector": "heavy-constructions-civil-engineering"
-  },
   "MGRO.JK": {
     "symbol": "MGRO.JK",
     "name": "PT Mahkota Group Tbk",
     "sub_sector": "food-beverage"
+  },
+  "DGIK.JK": {
+    "symbol": "DGIK.JK",
+    "name": "Nusa Konstruksi Enjiniring  Tbk",
+    "sub_sector": "heavy-constructions-civil-engineering"
   },
   "LMSH.JK": {
     "symbol": "LMSH.JK",
@@ -4154,15 +4154,15 @@
     "name": "ESSA Industries Indonesia Tbk",
     "sub_sector": "basic-materials"
   },
-  "GDST.JK": {
-    "symbol": "GDST.JK",
-    "name": "Gunawan Dianjaya Steel Tbk",
-    "sub_sector": "basic-materials"
-  },
   "KUAS.JK": {
     "symbol": "KUAS.JK",
     "name": "PT Ace Oldfields Tbk",
     "sub_sector": "industrial-goods"
+  },
+  "GDST.JK": {
+    "symbol": "GDST.JK",
+    "name": "Gunawan Dianjaya Steel Tbk",
+    "sub_sector": "basic-materials"
   },
   "INPS.JK": {
     "symbol": "INPS.JK",
@@ -4189,25 +4189,25 @@
     "name": "PT Jaya Sukses Makmur Sentosa Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "INDY.JK": {
-    "symbol": "INDY.JK",
-    "name": "Indika Energy Tbk",
-    "sub_sector": "oil-gas-coal"
-  },
   "IFSH.JK": {
     "symbol": "IFSH.JK",
     "name": "PT Ifishdeco Tbk",
     "sub_sector": "basic-materials"
   },
-  "IPTV.JK": {
-    "symbol": "IPTV.JK",
-    "name": "PT MNC Vision Networks Tbk",
-    "sub_sector": "media-entertainment"
+  "INDY.JK": {
+    "symbol": "INDY.JK",
+    "name": "Indika Energy Tbk",
+    "sub_sector": "oil-gas-coal"
   },
   "LPKR.JK": {
     "symbol": "LPKR.JK",
     "name": "Lippo Karawaci Tbk",
     "sub_sector": "properties-real-estate"
+  },
+  "IPTV.JK": {
+    "symbol": "IPTV.JK",
+    "name": "PT MNC Vision Networks Tbk",
+    "sub_sector": "media-entertainment"
   },
   "ASPI.JK": {
     "symbol": "ASPI.JK",
@@ -4269,15 +4269,15 @@
     "name": "PT Allo Bank Indonesia Tbk",
     "sub_sector": "banks"
   },
-  "HRTA.JK": {
-    "symbol": "HRTA.JK",
-    "name": "PT Hartadinata Abadi Tbk",
-    "sub_sector": "apparel-luxury-goods"
-  },
   "HOKI.JK": {
     "symbol": "HOKI.JK",
     "name": "PT Buyung Poetra Sembada Tbk",
     "sub_sector": "food-beverage"
+  },
+  "HRTA.JK": {
+    "symbol": "HRTA.JK",
+    "name": "PT Hartadinata Abadi Tbk",
+    "sub_sector": "apparel-luxury-goods"
   },
   "MAIN.JK": {
     "symbol": "MAIN.JK",
@@ -4324,15 +4324,15 @@
     "name": "PT Malacca Trust Wuwungan Insurance Tbk",
     "sub_sector": "insurance"
   },
-  "IPCM.JK": {
-    "symbol": "IPCM.JK",
-    "name": "PT Jasa Armada Indonesia Tbk",
-    "sub_sector": "transportation-infrastructure"
-  },
   "NICK.JK": {
     "symbol": "NICK.JK",
     "name": "PT Charnic Capital Tbk",
     "sub_sector": "holding-investment-companies"
+  },
+  "IPCM.JK": {
+    "symbol": "IPCM.JK",
+    "name": "PT Jasa Armada Indonesia Tbk",
+    "sub_sector": "transportation-infrastructure"
   },
   "RDTX.JK": {
     "symbol": "RDTX.JK",
@@ -4389,15 +4389,15 @@
     "name": "Express Transindo Utama Tbk",
     "sub_sector": "transportation"
   },
-  "FUJI.JK": {
-    "symbol": "FUJI.JK",
-    "name": "PT Fuji Finance Indonesia Tbk",
-    "sub_sector": "financing-service"
-  },
   "MEDS.JK": {
     "symbol": "MEDS.JK",
     "name": "PT Hetzer Medical Indonesia Tbk",
     "sub_sector": "healthcare-equipment-providers"
+  },
+  "FUJI.JK": {
+    "symbol": "FUJI.JK",
+    "name": "PT Fuji Finance Indonesia Tbk",
+    "sub_sector": "financing-service"
   },
   "JGLE.JK": {
     "symbol": "JGLE.JK",
@@ -4414,25 +4414,25 @@
     "name": "PT Waskita Karya (Persero) Tbk",
     "sub_sector": "heavy-constructions-civil-engineering"
   },
-  "ZONE.JK": {
-    "symbol": "ZONE.JK",
-    "name": "PT Mega Perintis Tbk",
-    "sub_sector": "retailing"
-  },
   "ASRI.JK": {
     "symbol": "ASRI.JK",
     "name": "Alam Sutera Realty Tbk",
     "sub_sector": "properties-real-estate"
   },
-  "IDEA.JK": {
-    "symbol": "IDEA.JK",
-    "name": "PT Idea Indonesia Akademi Tbk",
-    "sub_sector": "consumer-services"
+  "ZONE.JK": {
+    "symbol": "ZONE.JK",
+    "name": "PT Mega Perintis Tbk",
+    "sub_sector": "retailing"
   },
   "MBSS.JK": {
     "symbol": "MBSS.JK",
     "name": "Mitrabahtera Segara Sejati Tbk",
     "sub_sector": "oil-gas-coal"
+  },
+  "IDEA.JK": {
+    "symbol": "IDEA.JK",
+    "name": "PT Idea Indonesia Akademi Tbk",
+    "sub_sector": "consumer-services"
   },
   "BMTR.JK": {
     "symbol": "BMTR.JK",
@@ -4464,25 +4464,25 @@
     "name": "PT Trimegah Karya Pratama Tbk",
     "sub_sector": "software-it-services"
   },
-  "VICI.JK": {
-    "symbol": "VICI.JK",
-    "name": "PT Victoria Care Indonesia Tbk",
-    "sub_sector": "nondurable-household-products"
-  },
   "BULL.JK": {
     "symbol": "BULL.JK",
     "name": "PT Buana Lintas Lautan Tbk.",
     "sub_sector": "oil-gas-coal"
   },
-  "GLOB.JK": {
-    "symbol": "GLOB.JK",
-    "name": "PT Globe Kita Terang Tbk",
-    "sub_sector": "retailing"
+  "VICI.JK": {
+    "symbol": "VICI.JK",
+    "name": "PT Victoria Care Indonesia Tbk",
+    "sub_sector": "nondurable-household-products"
   },
   "MAPB.JK": {
     "symbol": "MAPB.JK",
     "name": "PT MAP Boga Adiperkasa Tbk",
     "sub_sector": "consumer-services"
+  },
+  "GLOB.JK": {
+    "symbol": "GLOB.JK",
+    "name": "PT Globe Kita Terang Tbk",
+    "sub_sector": "retailing"
   },
   "KDTN.JK": {
     "symbol": "KDTN.JK",
@@ -4514,15 +4514,15 @@
     "name": "Panorama Sentrawisata Tbk",
     "sub_sector": "consumer-services"
   },
-  "HERO.JK": {
-    "symbol": "HERO.JK",
-    "name": "Hero Supermarket Tbk",
-    "sub_sector": "food-staples-retailing"
-  },
   "KOIN.JK": {
     "symbol": "KOIN.JK",
     "name": "Kokoh Inti Arebama Tbk",
     "sub_sector": "industrial-goods"
+  },
+  "HERO.JK": {
+    "symbol": "HERO.JK",
+    "name": "Hero Supermarket Tbk",
+    "sub_sector": "food-staples-retailing"
   },
   "BTPN.JK": {
     "symbol": "BTPN.JK",
@@ -4534,15 +4534,15 @@
     "name": "PT Steel Pipe Industry of Indonesia Tbk",
     "sub_sector": "basic-materials"
   },
-  "INCO.JK": {
-    "symbol": "INCO.JK",
-    "name": "Vale Indonesia Tbk",
-    "sub_sector": "basic-materials"
-  },
   "ENVY.JK": {
     "symbol": "ENVY.JK",
     "name": "PT Envy Technologies Indonesia Tbk",
     "sub_sector": "software-it-services"
+  },
+  "INCO.JK": {
+    "symbol": "INCO.JK",
+    "name": "Vale Indonesia Tbk",
+    "sub_sector": "basic-materials"
   },
   "BBSS.JK": {
     "symbol": "BBSS.JK",
@@ -4629,15 +4629,15 @@
     "name": "PT Djasa Ubersakti Tbk",
     "sub_sector": "heavy-constructions-civil-engineering"
   },
-  "ANTM.JK": {
-    "symbol": "ANTM.JK",
-    "name": "Aneka Tambang Tbk.",
-    "sub_sector": "basic-materials"
-  },
   "OASA.JK": {
     "symbol": "OASA.JK",
     "name": "PT Maharaksa Biru Energi Tbk",
     "sub_sector": "telecommunication"
+  },
+  "ANTM.JK": {
+    "symbol": "ANTM.JK",
+    "name": "Aneka Tambang Tbk.",
+    "sub_sector": "basic-materials"
   },
   "CAKK.JK": {
     "symbol": "CAKK.JK",
