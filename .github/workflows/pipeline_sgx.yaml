@@ -23,6 +23,9 @@ jobs:
     steps:
       - name: Checkout repository content
         uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
       
       - name: Install uv (Python package manager)
         uses: astral-sh/setup-uv@v3
@@ -79,11 +82,8 @@ jobs:
           git config --local user.name "GitHub Action"
           git add data/sgx/pipeline_sgx.json data/sgx/pipeline_sgx_filtered.json data/sgx/pipeline_sgx_yesterday.json data/last_state_sgx.json
           git diff-index --quiet HEAD || git commit -m "chore(sgx): checkpoint ingested articles"
-          for i in 1 2 3; do
-            git pull --rebase origin main && git push && break
-            echo "Push attempt $i failed, retrying..."
-            sleep 5
-          done
+          git pull --rebase origin main
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -111,8 +111,8 @@ jobs:
           name: sgx-generated-data-${{ github.run_id }}
           path: |
             data/sgx/pipeline_sgx.json
-            data/idx/pipeline_sgx_filtered.json
-            data/idx/pipeline_sgx_yesterday.json
+            data/sgx/pipeline_sgx_filtered.json
+            data/sgx/pipeline_sgx_yesterday.json
             data/last_state_sgx.json
             data/outdated_news_sgx.json
           if-no-files-found: warn
@@ -124,10 +124,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -A
           git diff-index --quiet HEAD || git commit -m "chore(sgx): update scraped news data"
-          for i in 1 2 3; do
-            git pull --rebase origin main && git push && break
-            echo "Push attempt $i failed, retrying..."
-            sleep 5
-          done
+          git pull --rebase origin main
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
