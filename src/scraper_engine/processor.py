@@ -18,6 +18,7 @@ LOGGER = logging.getLogger(__name__)
 WIB = timezone(timedelta(hours=7))
 
 MININUM_SCORE = 65
+SGX_SYMBOL_SUFFIX = ".SI"
 
 
 def send_data_to_db(successful_articles: list, table_name: str):
@@ -442,6 +443,16 @@ def filter_top_200(articles: list):
     return final_articles
 
 
+def add_sgx_suffix(symbols: list[str] | None) -> list[str]:
+    if not symbols:
+        return symbols if symbols is not None else []
+
+    return [
+        symbol if symbol.upper().endswith(SGX_SYMBOL_SUFFIX) else f"{symbol}{SGX_SYMBOL_SUFFIX}"
+        for symbol in symbols
+    ]
+
+
 def run_sending_data(
     batch: int,
     successful_articles: list, 
@@ -463,6 +474,10 @@ def run_sending_data(
             # flow to filter out if article
             # contains all symbols outside top 200 by mcap
             successful_articles = filter_top_200(successful_articles)
+
+            # sgx symbols are stored with the .SI suffix
+            for record in successful_articles:
+                record['symbols'] = add_sgx_suffix(record.get('symbols'))
 
         if is_check_csv:
             df = pd.DataFrame(successful_articles)
