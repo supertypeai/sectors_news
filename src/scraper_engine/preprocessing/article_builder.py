@@ -268,24 +268,9 @@ def generate_article(
 
         if not classification_results:
             LOGGER.error(f"Classification failed for {source}, failing article.")
-            return None, 'error'
+            return None, "error"
         
         tags, sentiment, dimension = classification_results
-
-        # Assemble the final News object
-        new_article = News(
-            title=title,
-            body=body,
-            source=source,
-            timestamp=timestamp.isoformat(),
-            score=score_result,
-            tags=tags,
-            tickers=[],
-            sub_sector=[],
-            sector="",
-            dimension=None,
-            thumbnail=data.get("thumbnail"),
-        )
 
         # Post-processing
         post_process_result = post_processing(
@@ -298,18 +283,32 @@ def generate_article(
             classifier
         )
 
-        new_article.tickers = post_process_result.get("tickers")
-        new_article.sub_sector = post_process_result.get("sub_sector")
-        new_article.sector = post_process_result.get("sector")
-        new_article.dimension = post_process_result.get("dimension")
+        # Assemble the final News object. Incomplete data returns None
+        new_article = News.try_create(
+            title=title,
+            body=body,
+            source=source,
+            timestamp=timestamp.isoformat(),
+            sector=post_process_result.get("sector"),
+            sub_sector=post_process_result.get("sub_sector"),
+            tags=tags,
+            tickers=post_process_result.get("tickers"),
+            dimension=post_process_result.get("dimension"),
+            score=score_result,
+            thumbnail=data.get("thumbnail"),
+        )
+
+        if new_article is None:
+            LOGGER.error("Invalid News data for %s. Retrying article.", source)
+            return None, "error"
         
-        return new_article, 'ok'
+        return new_article, "ok"
 
     except Exception as error: 
         LOGGER.error(
             f"[ERROR] A critical, unexpected error occurred in generate_article_async for {source}: {error}",
             exc_info=True
         )
-        return None, 'error'
+        return None, "error"
 
  

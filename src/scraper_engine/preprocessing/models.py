@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -12,9 +11,53 @@ class News:
     sub_sector: list
     tags: list
     tickers: list
-    dimension: Optional[dict]
-    score: Optional[int]
-    thumbnail: Optional[str] = None
+    dimension: dict
+    score: int
+    thumbnail: str | None = None
+
+    @classmethod
+    def try_create(
+        cls,
+        *,
+        title: str,
+        body: str,
+        source: str,
+        timestamp: str,
+        sector: str | None,
+        sub_sector: list[str],
+        tags: list[str],
+        tickers: list[str],
+        dimension: dict | None,
+        score: int | None,
+        thumbnail: str | None = None,
+    ) -> "News | None":
+        if (
+            not title
+            or not body
+            or not source
+            or not timestamp
+            or not sector
+            or not sub_sector
+            or not tags
+            or not tickers
+            or not dimension
+            or score is None
+        ):
+            return None
+
+        return cls(
+            title=title,
+            body=body,
+            source=source,
+            timestamp=timestamp,
+            sector=sector,
+            sub_sector=sub_sector,
+            tags=tags,
+            tickers=tickers,
+            dimension=dimension,
+            score=score,
+            thumbnail=thumbnail,
+        )
 
     def to_dict(self) -> dict:
         result = {
