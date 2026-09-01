@@ -55,8 +55,19 @@ write_env_file() {
     local key value missing=0
     for key in "${SECRETS[@]}"; do
         value="$(grep -E "^${key}=" "$source_env" | head -n1 | cut -d= -f2-)"
+
+        # Trim surrounding whitespace before unquoting, the way python-dotenv
+        # does. Without this a stray trailing space in .env reaches the
+        # container intact and an API key becomes an "Illegal header value" —
+        # while everything keeps working locally, because load_dotenv() strips
+        # it. That asymmetry is the whole reason this is here.
+        value="${value#"${value%%[![:space:]]*}"}"
+        value="${value%"${value##*[![:space:]]}"}"
+
         value="${value%\"}"; value="${value#\"}"
         value="${value%\'}"; value="${value#\'}"
+        value="${value#"${value%%[![:space:]]*}"}"
+        value="${value%"${value##*[![:space:]]}"}"
 
         if [[ -z "$value" ]]; then
             echo "  ! ${key} is empty or absent in ${source_env}" >&2
