@@ -1,8 +1,16 @@
 name: SGX News Pipeline 
 
 on:
-  schedule:
-    - cron: "0 */4 * * *" # every 4 hours UTC
+  # Superseded by Cloud Run. This pipeline now runs as
+  # sectors-news-sgx-job / sectors-news-sgx-4hourly in datasheet-398802 (us-central1),
+  # on this same cron. See deployments/README.md.
+  #
+  # Do not re-enable without first pausing the Cloud Scheduler job: the two
+  # keep separate watermarks (git here, a GCS bucket there), so both would
+  # scrape the same window, both pay for the same LLM calls, and both race
+  # to insert. workflow_dispatch is left on as a manual escape hatch.
+  # schedule:
+    # - cron: "0 */4 * * *" # every 4 hours UTC
   workflow_dispatch:
     inputs:
       process_only:
