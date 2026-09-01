@@ -246,7 +246,10 @@ def get_llm(
                 "temperature": temperature,
                 "max_retries": max_retries,
                 "api_key": api_key,
-                "max_tokens": 16000 if model_name == "nvidia-nemotron-3-ultra" else 25000,
+                # Per-model, because providers cap this differently and going
+                # over is a hard 400: qwen/qwen3.8-27b refuses anything above
+                # 16384. MODEL_CONFIG carries the limit where it differs.
+                "max_tokens": config_model.get("max_tokens", 25000),
             }
 
             if provider == "openrouter":
