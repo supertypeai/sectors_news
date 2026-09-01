@@ -1,6 +1,6 @@
 from langchain_core.output_parsers import JsonOutputParser
 from typing import Optional, Union
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 
 from scraper_engine.llm.client import get_llm
 from scraper_engine.llm.prompts import (
