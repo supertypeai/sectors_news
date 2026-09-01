@@ -4,7 +4,8 @@ from langchain.prompts              import ChatPromptTemplate
 
 from scraper_engine.llm.client   import get_llm, TokenUsageLogger
 from scraper_engine.llm.prompts  import SummarizationPrompts, SummaryNews
-from scraper_engine.config.conf  import USER_AGENT, MODEL_NAMES
+from scraper_engine.config.conf  import USER_AGENT
+from scraper_engine.llm.constant import MODEL_NAMES
 from .article_fetcher            import extract_table_content
 from .utils.article_helpers      import (
     basic_cleaning_body,

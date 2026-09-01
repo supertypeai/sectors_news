@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 from scraper_engine.llm.client import get_llm
 from scraper_engine.llm.prompts import ScoringNews, ScoringPrompts
-from scraper_engine.config.conf import MODEL_NAMES
+from scraper_engine.llm.constant import MODEL_NAMES
 
 import logging
 

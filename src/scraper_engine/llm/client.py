@@ -6,16 +6,18 @@ from langchain_core.outputs import ChatResult
 from langchain_core.callbacks import BaseCallbackHandler
 
 from scraper_engine.config.conf import (
-    GROQ_API_KEY1, GROQ_API_KEY2, 
-    GROQ_API_KEY3, GROQ_API_KEY4, GROQ_API_KEY5, GROQ_API_KEY_DEV,
-    GEMINI_API_KEY, GEMINI_API_KEY2, GEMINI_API_KEY3,
-    LLM_SEMAPHORE_SYNC, MODEL_CONFIG, ROTATE_KEYWORDS, 
-    ROTATE_STATUS_CODES, ABORT_KEYWORDS, ABORT_STATUS_CODES, 
-    ROTATE_400_KEYWORDS
+    GROQ_API_KEY_DEV,
+    OPENROUTER_API_KEY,
+)
+from scraper_engine.llm.constant import (
+    ABORT_KEYWORDS,
+    ABORT_STATUS_CODES,
+    MODEL_CONFIG,
+    ROTATE_400_KEYWORDS,
+    ROTATE_KEYWORDS,
+    ROTATE_STATUS_CODES,
 )
 
-import groq 
-import openai
 import logging 
 
 
@@ -24,38 +26,50 @@ LOGGER = logging.getLogger(__name__)
 
 class TokenUsageLogger(BaseCallbackHandler):
     def on_llm_end(self, response, **kwargs):
-        token_usage = response.llm_output.get("token_usage", {}) if response.llm_output else {}
-        completion_details = token_usage.get("completion_tokens_details") or {}
+        llm_output = response.llm_output or {}
+        token_usage = llm_output.get("token_usage") or {}
 
-        LOGGER.info(
-            "token usage: prompt=%d completion=%d reasoning=%d total=%d finish_reason=%s",
-            token_usage.get("prompt_tokens", 0),
-            token_usage.get("completion_tokens", 0),
-            completion_details.get("reasoning_tokens", 0),
-            token_usage.get("total_tokens", 0),
-            response.generations[0][0].generation_info.get("finish_reason", "unknown")
-            if response.generations else "unknown",
+        if not token_usage and response.generations:
+            generation = response.generations[0][0]
+            message = getattr(generation, "message", None)
+            token_usage = getattr(message, "usage_metadata", None) or {}
+
+        completion_details = token_usage.get("completion_tokens_details") or {}
+        output_details = token_usage.get("output_token_details") or {}
+
+        prompt_tokens = token_usage.get(
+            "prompt_tokens",
+            token_usage.get("input_tokens", 0),
         )
 
+        completion_tokens = token_usage.get(
+            "completion_tokens",
+            token_usage.get("output_tokens", 0),
+        )
 
-def invoke_llm(chain: Runnable, input_data: dict):
-    """
-    Wrapper function to invoke the LLM chain synchronously. 
-    This function uses a semaphore to limit the number of concurrent LLM calls.
+        reasoning_tokens = completion_details.get(
+            "reasoning_tokens",
+            output_details.get("reasoning", 0),
+        )
 
-    Args:
-        chain: The LLM chain to be invoked.
-        input_data: The input data to be processed by the LLM chain.
-    
-    Returns:
-        The result of the LLM chain invocation, or None if the API call fails after all
-    """
-    with LLM_SEMAPHORE_SYNC:
-        try:
-            return chain.invoke(input_data)
-        
-        except (groq.APIError, groq.APITimeoutError, openai.APIError, openai.APITimeoutError) as error:
-            raise 
+        total_tokens = token_usage.get("total_tokens", 0)
+
+        generation_info = (
+            response.generations[0][0].generation_info
+            if response.generations
+            else {}
+        ) or {}
+
+        LOGGER.info(
+            "token usage: model=%s prompt=%d completion=%d reasoning=%d "
+            "total=%d finish_reason=%s",
+            llm_output.get("model_name", "unknown"),
+            prompt_tokens,
+            completion_tokens,
+            reasoning_tokens,
+            total_tokens,
+            generation_info.get("finish_reason", "unknown"),
+        )
 
 
 def extract_status_code(error: Exception) -> int | None:
@@ -190,31 +204,35 @@ class KeyRotatingChatModel(BaseChatModel):
         )
     
 
-def get_llm(model_name: str, temperature: float = 0.5): 
+def get_llm(
+    model_name: str,
+    temperature: float = 0.5,
+    effort: str = "high",
+    max_retries: int = 3,
+):
     config_model = MODEL_CONFIG.get(model_name)
 
     if config_model is None:
         available_models = ', '.join(MODEL_CONFIG.keys())
-        LOGGER.error(f"Unknown model name: '{model_name}'. Available models: {available_models}")
+        LOGGER.error(
+            "Unknown model name: %s. Available models: %s",
+            model_name,
+            available_models
+        )
         return None
     
     provider = config_model.get('provider')
-    
-    if provider == 'groq': 
-        api_keys = [
-                # GROQ_API_KEY1, GROQ_API_KEY2, GROQ_API_KEY3, 
-                # GROQ_API_KEY4, GROQ_API_KEY5, 
-                GROQ_API_KEY_DEV, 
-            ]
-        
-    elif provider == 'google-genai': 
-        api_keys = [GEMINI_API_KEY, GEMINI_API_KEY2, GEMINI_API_KEY3]
 
-    else:
-        LOGGER.error(f"Unsupported provider: '{provider}'")
-        return None
-    
-    api_keys = [key for key in api_keys if key]
+    provider_keys = {
+        'groq': [GROQ_API_KEY_DEV],
+        'openrouter': [OPENROUTER_API_KEY],
+    }
+
+    api_keys = [
+        key
+        for key in provider_keys.get(provider, [])
+        if key
+    ]
     
     if not api_keys:
         LOGGER.error(f"No valid API keys found for provider: '{provider}'")
@@ -224,13 +242,25 @@ def get_llm(model_name: str, temperature: float = 0.5):
     
     for api_key in api_keys:
         try:
+            model_parameters = {
+                "temperature": temperature,
+                "max_retries": max_retries,
+                "api_key": api_key,
+                "max_tokens": 16000 if model_name == "nvidia-nemotron-3-ultra" else 25000,
+            }
+
+            if provider == "openrouter":
+                model_parameters["reasoning"] = {
+                    "effort": effort,
+                }
+
+            elif provider == "groq" and effort != "none":
+                model_parameters["reasoning_effort"] = effort
+
             initiate_model = init_chat_model(
                 config_model.get('model'),
                 model_provider=provider,
-                temperature=temperature,
-                max_retries=3,
-                api_key=api_key,
-                max_tokens=18000
+                **model_parameters,
             ) 
 
             llm_pool.append(initiate_model)
@@ -243,4 +273,8 @@ def get_llm(model_name: str, temperature: float = 0.5):
         LOGGER.error(f"No clients could be initialized for '{model_name}'")
         return None
 
-    return KeyRotatingChatModel(llm_pool=llm_pool, model_name_identifier=model_name)
+    return KeyRotatingChatModel(
+        llm_pool=llm_pool,
+        model_name_identifier=model_name,
+        callbacks=[TokenUsageLogger()],
+    )

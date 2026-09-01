@@ -3,7 +3,7 @@ from langchain_core.output_parsers import JsonOutputParser
 
 from scraper_engine.llm.client import get_llm
 from scraper_engine.llm.prompts import EntityExtractionPrompts, CompanyNameExtraction
-from scraper_engine.config.conf import MODEL_NAMES
+from scraper_engine.llm.constant import MODEL_NAMES
 from scraper_engine.database.metadata import load_company_data_sgx
 
 import logging 
@@ -89,4 +89,3 @@ def extract_company_name(
 
     LOGGER.error("All LLMs failed to return a valid summary.")
     return None
-

@@ -10,7 +10,7 @@ from scraper_engine.llm.prompts import (
     SentimentClassification, 
     DimensionClassification, 
 )
-from scraper_engine.config.conf import MODEL_NAMES
+from scraper_engine.llm.constant import MODEL_NAMES
 from scraper_engine.database.metadata import (
     load_subsector_data_idx as load_subsector_data_idx_from_metadata,
     load_subsector_data_sgx as load_subsector_data_sgx_from_metadata,
