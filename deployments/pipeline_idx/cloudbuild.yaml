@@ -1,0 +1,19 @@
+# Builds from the repo root so src/, data/ and deployments/common/ are in the
+# context. `gcloud builds submit --tag` cannot do this: it requires the
+# Dockerfile at the root of the context, and this one lives in the deployment
+# directory alongside the scripts that use it. Hence an explicit build step.
+#
+# E2_HIGHCPU_8: the image installs Chromium, Chrome and the whole scraping
+# dependency tree. The default machine builds it, slowly.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --file=deployments/pipeline_idx/Dockerfile
+      - --tag=${_IMAGE}
+      - .
+images:
+  - ${_IMAGE}
+options:
+  machineType: E2_HIGHCPU_8
+timeout: 2400s

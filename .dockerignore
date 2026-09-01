@@ -1,0 +1,31 @@
+# Build context filter for a root-context `docker build`, i.e. the local
+# equivalent of what /.gcloudignore does for `gcloud builds submit`.
+#
+#   docker build -f deployments/pipeline_idx/Dockerfile .
+#
+# Cloud Build never reads this file and local docker never reads .gcloudignore,
+# so the two have to be kept roughly in step by hand. Keep them that way: the
+# point of a local build is that it reproduces the deployed one. If you exclude
+# something here, ask whether .gcloudignore needs it too, and vice versa.
+
+.git/
+.github/
+
+# Secrets. See the note in /.gcloudignore — load_dotenv(override=True) means a
+# stray .env in the image would win over the secrets Cloud Run mounts.
+.env
+.env.*
+
+.venv/
+**/.venv/
+
+# Not needed to build or run either job.
+src/scripts/
+nltk_data/
+*.egg-info/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.DS_Store
+
+# data/ is deliberately NOT excluded — see the matching note in /.gcloudignore.

@@ -1,0 +1,34 @@
+# Upload filter for `gcloud builds submit` run from the REPO ROOT.
+#
+# Both deployments/pipeline_idx and deployments/pipeline_sgx build from here.
+#
+# Without a .gcloudignore, gcloud falls back to .gitignore — which would send
+# the 684 MB .venv/ and 71 MB .git/ to Cloud Build on every submit, and would
+# not exclude .env at all because .gitignore's entries are not a security list.
+
+.git/
+.github/
+
+# Secrets. The jobs read theirs from Secret Manager; nothing here should ever
+# reach a build. .env in particular would be baked into the image, and
+# scraper_engine.config.conf calls load_dotenv(override=True) — a stray .env in
+# the image would silently take precedence over the mounted secrets.
+.env
+.env.*
+
+.venv/
+**/.venv/
+
+# Not needed to build or run either job.
+src/scripts/
+nltk_data/
+*.egg-info/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.DS_Store
+
+# data/ is deliberately NOT excluded. It is the first-run seed for the GCS state
+# tree, and scraper_engine.database.metadata reads companies.json,
+# sectors_data.json, subsectors_data.json and unique_tags.json out of it on every
+# run. Keep the matching note in /.dockerignore in step with this one.
