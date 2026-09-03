@@ -326,6 +326,10 @@ def post_source(
                 if status == "low_score":
                     LOGGER.info(f"Skipped due to low score: {source_url}")
                     continue
+
+                if status == "no_retry":
+                    LOGGER.info(f"Skipped because article body is unavailable: {source_url}")
+                    continue
                 
                 time.sleep(5)
 
@@ -357,6 +361,10 @@ def post_source(
 
                 if status == "low_score":
                     LOGGER.info(f"Retry skipped due to low score: {source_url}")
+                    continue
+
+                if status == "no_retry":
+                    LOGGER.info(f"Retry skipped because article body is unavailable: {source_url}")
                     continue
 
                 if status != "ok" or not processed_article_object:

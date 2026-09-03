@@ -195,15 +195,10 @@ def summarize_and_score(
     timestamp: datetime, 
     source_scraper: str,
     title: str,
-    prefetched_body: str | None = None,
+    prefetched_body: str,
 ) -> tuple[str, str, int]:
-    article = prefetched_body or clean_article(get_article_body(source))
-
-    if not article:
-        return None
-
     summary = summarize_news(
-        news_text=article,
+        news_text=prefetched_body,
         url=source,
         title=title,
         source_scraper=source_scraper,
@@ -238,13 +233,28 @@ def generate_article(
     timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
 
     try:
-        # summarize and scoring 
+        prefetched_body = data.get("article")
+
+        if not prefetched_body:
+            prefetched_body = get_article_body(source)
+
+            if not prefetched_body:
+                LOGGER.info("Skipped article with unavailable body: %s", source)
+                return None, "no_retry"
+
+            prefetched_body = clean_article(prefetched_body)
+
+            if not prefetched_body:
+                LOGGER.info("Skipped article with empty body after cleaning: %s", source)
+                return None, "no_retry"
+
+        # summarize and scoring
         summary_score_result = summarize_and_score(
-            source, 
-            timestamp, 
+            source,
+            timestamp,
             source_scraper,
-            title=data.get('title'),
-            prefetched_body=data.get('article')
+            title=data.get("title"),
+            prefetched_body=prefetched_body,
         )
 
         if not summary_score_result:
