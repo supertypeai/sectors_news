@@ -8,7 +8,9 @@ container:
     # Chrome dies partway through a page on the container default of 64 MiB,
     # and Dagu's container config has no shm_size.
     - /dev/shm:/dev/shm
+    - /srv/runners/tokens/sectors_news:/run/secrets:ro
   env:
+    - GIT_CONFIG_VALUE_1: '!f() { test "$1" = get && echo username=x-access-token && echo password="$(cat /run/secrets/token)"; }; f'
     - MARKET: sgx
     - PIPELINE_COMMAND: main_sgx
     - TABLE_NAME: sgx_news
@@ -61,6 +63,8 @@ steps:
     retry_policy:
       limit: 3
       interval_sec: 30
+      backoff: true
+      max_interval_sec: 120
     run: bash .dagu/steps/commit.sh checkpoint
 
   # If this fails, do not re-run the DAG — the watermark advanced at scrape
@@ -75,4 +79,6 @@ steps:
     retry_policy:
       limit: 3
       interval_sec: 30
+      backoff: true
+      max_interval_sec: 120
     run: bash .dagu/steps/commit.sh publish
