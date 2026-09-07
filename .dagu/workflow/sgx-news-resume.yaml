@@ -1,0 +1,62 @@
+description: SGX news resume — process the committed work-list, no scrape
+
+# The workflow's `process_only` input. Run this by hand when
+# sgx-news-pipeline got past `checkpoint` and then died; it checks out main,
+# which is the checkpoint commit, and processes from there.
+
+container:
+  image: sectors-news-runtime:latest
+  pull_policy: never
+  working_dir: /workspace
+  volumes:
+    # Chrome dies partway through a page on the container default of 64 MiB,
+    # and Dagu's container config has no shm_size.
+    - /dev/shm:/dev/shm
+  env:
+    - MARKET: sgx
+    - PIPELINE_COMMAND: main_sgx
+    - TABLE_NAME: sgx_news
+    - WORK_LIST: data/sgx/pipeline_sgx_filtered.json
+    - CLEANUP_ARGS: "--source-scraper sgx"
+    - BATCH_SIZE: "30"
+    - BATCH_PAUSE_SECONDS: "20"
+    - GIT_AUTHOR_NAME: plumbersai[bot]
+    - GIT_AUTHOR_EMAIL: 325179815+plumbersai[bot]@users.noreply.github.com
+    - GIT_COMMITTER_NAME: plumbersai[bot]
+    - GIT_COMMITTER_EMAIL: 325179815+plumbersai[bot]@users.noreply.github.com
+
+secrets:
+  - SUPABASE_URL
+  - SUPABASE_KEY
+  - OPENROUTER_API_KEY
+  - GROQ_API_KEY_DEV
+  - PROXY
+
+queue: news-data-pipeline
+timeout_sec: 10800
+hist_retention_days: 30
+
+steps:
+  - id: checkout
+    retry_policy:
+      limit: 3
+      interval_sec: 30
+    run: >-
+      bash -c 'set -e;
+      git clone --branch "$GIT_BRANCH" "$GIT_REMOTE" .;
+      git reset --hard "$GIT_SHA"'
+
+  - id: preflight
+    depends: [checkout]
+    run: bash .dagu/steps/preflight.sh
+
+  - id: process
+    depends: [preflight]
+    run: bash .dagu/steps/process.sh
+
+  - id: publish
+    depends: [process]
+    retry_policy:
+      limit: 3
+      interval_sec: 30
+    run: bash .dagu/steps/commit.sh publish
