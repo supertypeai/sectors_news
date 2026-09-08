@@ -57,7 +57,7 @@ deliberately not an always-run step: a failed run has to leave the checkpoint
 standing as the resume point rather than bury it under whatever half-state the
 crash produced.
 
-So `data/` in this repository is live again, written by `plumbersai[bot]` every
+So `data/` in this repository is live again, written by `sectors-scheduled-runner[bot]` every
 four hours. `deployments/README.md` calls it only a seed; that is true of the
 Cloud Run jobs and no longer true of these.
 
@@ -91,7 +91,30 @@ docker build -f .dagu/Dockerfile -t sectors-news-runtime:latest .
 ```
 
 `pull_policy: never` in every workflow — the tag is local, and nothing will go
-looking for it in a registry.
+looking for it in a registry. Which also means a missing image is fatal rather
+than self-healing: the DAG fails at container creation, in 0s, with every step
+unstarted and `No such image` in the run log.
+
+That is not hypothetical. `docker image prune -a` removes every image *not
+currently referenced by a container*, and Dagu tears its container down after
+each run — so between runs this image is unreferenced and a prune will take it,
+however recently it ran. A `--filter until=<age>` does not save it either: that
+filters on image *creation* time, which never changes, so the image is spared
+only until it first crosses the threshold and is eligible on every prune after.
+A scheduled Docker cleanup (Coolify and Dokploy both ship one) is enough to lose
+it.
+
+So a container is kept whose only job is to reference the image:
+
+```bash
+docker run -d --name sectors-news-runtime-pin --restart always \
+    --entrypoint sleep sectors-news-runtime:latest infinity
+```
+
+It costs a blocked `sleep` process — no CPU, well under a megabyte, no copy of
+the image. It has to be *running*: a stopped container would pin the image too,
+but the `docker container prune` these cleanups run first would remove it and
+re-expose the image.
 
 The image carries **no application code**. `src/` and `data/` come from the
 checkout in `/workspace` and `PYTHONPATH` points there, so a code or data change
@@ -99,6 +122,18 @@ ships by pushing to `main`. **Only a dependency change needs a rebuild**, and
 `preflight.sh` will not let you forget: it compares the `uv.lock` baked into the
 image against the one just checked out and fails the run, before it scrapes, if
 they differ. Rebuild while no run is active; the next run picks it up.
+
+Rebuilding is four commands, not one, because a container references an image by
+**ID**, not by tag. Left alone, the pin goes on holding the *old* image — which
+keeps 3 GB alive forever and leaves the new one unpinned, exactly backwards:
+
+```bash
+docker build -f .dagu/Dockerfile -t sectors-news-runtime:latest .
+docker rm -f sectors-news-runtime-pin
+docker run -d --name sectors-news-runtime-pin --restart always \
+    --entrypoint sleep sectors-news-runtime:latest infinity
+docker image prune -f          # reclaims the old image, now unreferenced
+```
 
 ## What the host needs
 

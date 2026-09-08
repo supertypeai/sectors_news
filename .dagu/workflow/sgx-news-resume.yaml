@@ -22,10 +22,10 @@ container:
     - CLEANUP_ARGS: "--source-scraper sgx"
     - BATCH_SIZE: "30"
     - BATCH_PAUSE_SECONDS: "20"
-    - GIT_AUTHOR_NAME: plumbersai[bot]
-    - GIT_AUTHOR_EMAIL: 325179815+plumbersai[bot]@users.noreply.github.com
-    - GIT_COMMITTER_NAME: plumbersai[bot]
-    - GIT_COMMITTER_EMAIL: 325179815+plumbersai[bot]@users.noreply.github.com
+    - GIT_AUTHOR_NAME: sectors-scheduled-runner[bot]
+    - GIT_AUTHOR_EMAIL: 325983009+sectors-scheduled-runner[bot]@users.noreply.github.com
+    - GIT_COMMITTER_NAME: sectors-scheduled-runner[bot]
+    - GIT_COMMITTER_EMAIL: 325983009+sectors-scheduled-runner[bot]@users.noreply.github.com
 
 secrets:
   - SUPABASE_URL
@@ -35,7 +35,7 @@ secrets:
   - PROXY
 
 queue: news-data-pipeline
-timeout_sec: 10800
+timeout_sec: 21600
 hist_retention_days: 30
 
 steps:
