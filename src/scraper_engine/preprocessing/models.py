@@ -34,14 +34,6 @@ class News:
         if (
             not title
             or not body
-            or not source
-            or not timestamp
-            or not sector
-            or not sub_sector
-            or not tags
-            or not tickers
-            or not dimension
-            or score is None
         ):
             return None
 
