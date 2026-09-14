@@ -8,23 +8,27 @@ from .scorer import get_article_score
 from scraper_engine.database.metadata import (
     get_sectors_data, 
     get_sectors_data_sgx, 
-    build_ticker_index, 
-    build_sgx_ticker_index,
     load_company_data_idx,
     load_company_data_sgx,
     load_subsector_data_idx,
     load_subsector_data_sgx,
 )
-from .classifier import NewsClassifier
-from .company_extractor import extract_company_name 
-from .utils.article_helpers import (
-    clean_article,
+from scraper_engine.utils.symbol_helpers import (
+    build_idx_ticker_index,
+    build_sgx_ticker_index,
     is_raw_ticker,
     normalize_idx_company_name,
     normalize_sgx_company_name,
 )
+from .classifier import classify_data, classify_article
+from .company_extractor import extract_company_name 
+from scraper_engine.llm.client import TokenUsageLogger
+from scraper_engine.utils.article_helpers import (
+    clean_article,
+)
 
 import logging
+import asyncio
 
 
 LOGGER = logging.getLogger(__name__)
@@ -33,8 +37,7 @@ LOGGER = logging.getLogger(__name__)
 def matching_company_name(
     company_extracted: list[str],
     source_scraper: str,
-    score_threshold: int = 85,
-    short_query_threshold: int = 6,
+    score_threshold: int = 90,
 ) -> list[str]:
     seen = set()
     matched = []
@@ -42,10 +45,16 @@ def matching_company_name(
     ticker_index = (
         build_sgx_ticker_index()
         if source_scraper == 'sgx'
-        else build_ticker_index()
+        else build_idx_ticker_index()
     )
+
     min_key_length = 5 if source_scraper == 'idx' else 2 
-    normalized_funct = normalize_sgx_company_name if source_scraper == 'sgx' else normalize_idx_company_name
+
+    normalized_funct = (
+        normalize_sgx_company_name 
+        if source_scraper == 'sgx' 
+        else normalize_idx_company_name
+    ) 
 
     name_candidates = {
         key: value
@@ -59,25 +68,27 @@ def matching_company_name(
     }
 
     for company in company_extracted:
+        company_name = company.get("company_name") 
+        ticker_hint = company.get("ticker_hint")
+
         ticker_found = None
 
-        if is_raw_ticker(company):
-            query = company.lower().strip()
+        if ticker_hint and is_raw_ticker(ticker_hint):
+            query = ticker_hint.lower().strip()
+
             scorer = fuzz.ratio
             cutoff = 95
             candidates = ticker_candidates
 
         else:
-            normalized = normalized_funct(company)
+            if not company_name: 
+                continue 
+
+            normalized = normalized_funct(company_name)
             query = normalized
 
-            if len(normalized) < short_query_threshold:
-                scorer = fuzz.ratio
-                cutoff = 90
-
-            else:
-                scorer = fuzz.token_set_ratio
-                cutoff = score_threshold
+            scorer = fuzz.ratio
+            cutoff = score_threshold
 
             candidates = name_candidates
 
@@ -91,16 +102,47 @@ def matching_company_name(
         if result:
             matched_key, score, _ = result
             ticker_found = candidates[matched_key]
-            LOGGER.info(f"input: {query!r} -> matched: {matched_key!r} (score={score}) -> {ticker_found}")
+            LOGGER.info(
+                "input: %s -> matched: %s (score=%s) -> %s",
+                query,
+                matched_key,
+                score,
+                ticker_found,
+            )
         
         else:
-            LOGGER.info(f"input: {query!r} -> no match above threshold")
+            LOGGER.info("input: %s -> no match above threshold", query)
 
         if ticker_found and ticker_found not in seen:
             seen.add(ticker_found)
             matched.append(ticker_found)
 
     return matched
+
+
+def get_symbol_extracted(
+    body: str, 
+    title: str,
+    source_scraper: str,
+    token_usage_logger: TokenUsageLogger | None = None,
+) -> list[str]:
+    checked_tickers = []
+
+    company_extracted = extract_company_name(
+        title=title, 
+        body=body, 
+        source_scraper=source_scraper,
+        token_usage_logger=token_usage_logger,
+    )
+
+    if company_extracted:
+        matched_tickers = matching_company_name(
+            company_extracted,
+            source_scraper=source_scraper
+        ) 
+        checked_tickers = list(matched_tickers)
+
+    return checked_tickers
 
 
 def post_processing(
@@ -110,7 +152,8 @@ def post_processing(
     title: str,
     dimension: dict, 
     source_scraper: str,
-    classifier: NewsClassifier
+    checked_tickers: list[str],
+    token_usage_logger: TokenUsageLogger | None = None,
 ) -> dict[str, any]:
     if source_scraper == "sgx":
         companies_lookup = load_company_data_sgx()
@@ -126,24 +169,6 @@ def post_processing(
     if sentiment != 'Not Applicable':
         tags.append(sentiment)
         
-    # Get tickers 
-    checked_tickers = []
-
-    if source_scraper == 'sgx':
-        company_extracted = extract_company_name(body, source_scraper)
-        LOGGER.info(f'raw company: {company_extracted}')
-
-        if company_extracted:
-            matched_tickers = matching_company_name(company_extracted, source_scraper='sgx') 
-            checked_tickers = list(matched_tickers)
-
-    else: 
-        company_extracted = extract_company_name(body, source_scraper) or []
-
-        if company_extracted: 
-            matched_tickers = matching_company_name(company_extracted, source_scraper='idx')
-            checked_tickers = list(matched_tickers)
-
     # Sub sector
     sub_sector = []
 
@@ -161,11 +186,14 @@ def post_processing(
     ]
     
     if not sub_sector: 
-        sub_sector_llm = classifier._classify_data(
-            body=body,
-            category="subsectors",
-            source_scraper=source_scraper,
-            title=title,
+        sub_sector_llm = asyncio.run(
+            classify_data(
+                body=body,
+                category="subsectors",
+                source_scraper=source_scraper,
+                title=title,
+                token_usage_logger=token_usage_logger,
+            )
         )
 
         sub_sector = [sub_sector_llm[0].lower()] if (
@@ -196,12 +224,14 @@ def summarize_and_score(
     source_scraper: str,
     title: str,
     prefetched_body: str,
+    token_usage_logger: TokenUsageLogger | None = None,
 ) -> tuple[str, str, int]:
     summary = summarize_news(
         news_text=prefetched_body,
         url=source,
         title=title,
         source_scraper=source_scraper,
+        token_usage_logger=token_usage_logger,
     )
 
     if not summary:
@@ -216,8 +246,9 @@ def summarize_and_score(
     
     score = get_article_score(
         scoring_content, 
-        timestamp,
+        timestamp, 
         source_scraper,
+        token_usage_logger=token_usage_logger,
     )
 
     return title, body, score
@@ -226,7 +257,9 @@ def summarize_and_score(
 def generate_article(
     data: dict, 
     source_scraper: str, 
-    min_score: int
+    min_score: int,
+    top_200_symbols_sgx: set[str],
+    token_usage_logger: TokenUsageLogger | None = None,
 ) -> tuple[News | None, str]:
     source = data.get("source").strip()
     timestamp_str = data.get("timestamp").strip().replace("T", " ")
@@ -239,13 +272,19 @@ def generate_article(
             prefetched_body = get_article_body(source)
 
             if not prefetched_body:
-                LOGGER.info("Skipped article with unavailable body: %s", source)
+                LOGGER.info(
+                    "Skipped article with unavailable body: %s", 
+                    source
+                )
                 return None, "no_retry"
 
             prefetched_body = clean_article(prefetched_body)
 
             if not prefetched_body:
-                LOGGER.info("Skipped article with empty body after cleaning: %s", source)
+                LOGGER.info(
+                    "Skipped article with empty body after cleaning: %s", 
+                    source
+                )
                 return None, "no_retry"
 
         # summarize and scoring
@@ -255,29 +294,58 @@ def generate_article(
             source_scraper,
             title=data.get("title"),
             prefetched_body=prefetched_body,
+            token_usage_logger=token_usage_logger,
         )
 
         if not summary_score_result:
             return None, 'error'
 
         title, body, score_result = summary_score_result
-        LOGGER.info(f'Raw scoring result: {score_result}')
+        LOGGER.info("Raw scoring result: %d", score_result)
 
         if score_result < min_score: 
-            LOGGER.info(f"Low score ({score_result}) for {source}. Skipping other LLM steps")
+            LOGGER.info(
+                "Low score (%s) for %s. Skipping other LLM steps",
+                score_result,
+                source,
+            )
             return None, "low_score" 
 
-        # Classify
-        classifier = NewsClassifier()
+        # get symbol extracted and filter top200 only for sgx 
+        symbols_extracted = get_symbol_extracted(
+            body=body, 
+            title=title, 
+            source_scraper=source_scraper,
+            token_usage_logger=token_usage_logger,
+        )
 
-        classification_results = classifier.classify_article(
-            title, 
-            body, 
-            source_scraper
+        if source_scraper == "sgx" and symbols_extracted: 
+            has_top_200_symbol = any(
+                symbol in top_200_symbols_sgx
+                for symbol in symbols_extracted
+            )
+
+            if not has_top_200_symbol:
+                LOGGER.info(
+                    "Skipping SGX article; no symbol is in the top 200."
+                )
+                return None, "not_top_200"
+
+        # Classify
+        classification_results = asyncio.run(
+            classify_article(
+                title,
+                body,
+                source_scraper,
+                token_usage_logger,
+            )
         )
 
         if not classification_results:
-            LOGGER.error(f"Classification failed for {source}, failing article.")
+            LOGGER.error(
+                "Classification failed for %s, failing article.",
+                source,
+            )
             return None, "error"
         
         tags, sentiment, dimension = classification_results
@@ -290,7 +358,8 @@ def generate_article(
             title, 
             dimension, 
             source_scraper,
-            classifier
+            symbols_extracted,
+            token_usage_logger,
         )
 
         # Assemble the final News object. Incomplete data returns None
@@ -302,21 +371,25 @@ def generate_article(
             sector=post_process_result.get("sector"),
             sub_sector=post_process_result.get("sub_sector"),
             tags=tags,
-            tickers=post_process_result.get("tickers"),
+            tickers=symbols_extracted,
             dimension=post_process_result.get("dimension"),
             score=score_result,
             thumbnail=data.get("thumbnail"),
         )
 
         if new_article is None:
-            LOGGER.error("Invalid News data for %s. Retrying article.", source)
+            LOGGER.error(
+                "Invalid News data for %s. Retrying article.", 
+                source
+            )
             return None, "error"
         
         return new_article, "ok"
 
     except Exception as error: 
         LOGGER.error(
-            f"[ERROR] A critical, unexpected error occurred in generate_article_async for {source}: {error}",
+            "[ERROR] A critical, unexpected error occurred in generate_article_async: %s",
+            error,
             exc_info=True
         )
         return None, "error"

@@ -26,7 +26,7 @@ try:
     PROXY = get_required_env('PROXY')
 
 except ValueError as error:
-    logger.critical(f"Configuration failed: {error}")
+    logger.critical("Configuration failed: %s", error)
     raise
 
 

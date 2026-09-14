@@ -1,26 +1,6 @@
 import re
 
 
-def is_raw_ticker(text: str) -> bool:
-    cleaned = text.strip()
-    return bool(re.match(r"^[A-Z]{2,6}$", cleaned))
-
-
-def normalize_idx_company_name(raw: str) -> str:
-    name = re.sub(r"^\s*PT\s+", "", raw, flags=re.IGNORECASE)
-    name = re.sub(r"\s*Tbk\.?$", "", name, flags=re.IGNORECASE)
-    name = re.sub(r"\s*\(Persero\)\s*", " ", name, flags=re.IGNORECASE)
-    return re.sub(r"\s+", " ", name).strip().lower()
-
-
-def normalize_sgx_company_name(raw: str) -> str:
-    name = re.sub(r"\s*Ltd\.?$", "", raw, flags=re.IGNORECASE)
-    name = re.sub(r"\s*Limited\.?$", "", name, flags=re.IGNORECASE)
-    name = re.sub(r"\s*Pte\.?$", "", name, flags=re.IGNORECASE)
-    name = re.sub(r"\s*Bhd\.?$", "", name, flags=re.IGNORECASE)
-    return re.sub(r"\s+", " ", name).strip().lower()
-
-
 def clean_article(article_text: str) -> str:
     pattern = re.compile(r"^Baca juga:.*$", re.IGNORECASE | re.MULTILINE)
     text_without_baca_juga = pattern.sub("", article_text)

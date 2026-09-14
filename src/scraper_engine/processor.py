@@ -1,13 +1,19 @@
 from scraper_engine.preprocessing.article_builder import generate_article
 from scraper_engine.database.client import SUPABASE_CLIENT
 from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.llm.client import TokenUsageLogger
+from scraper_engine.utils.json_helpers import read_json, write_json
+from scraper_engine.utils.symbol_helpers import (
+    add_sgx_suffix,
+    get_top_200_symbols,
+)
 
 from datetime import datetime, timezone, timedelta
+from json import JSONDecodeError
+from pathlib import Path
 
 import pandas as pd
 import time
-import json
-import os
 import shutil
 import traceback
 import logging
@@ -18,11 +24,10 @@ LOGGER = logging.getLogger(__name__)
 WIB = timezone(timedelta(hours=7))
 
 MININUM_SCORE = 65
-SGX_SYMBOL_SUFFIX = ".SI"
 
 
 def send_data_to_db(successful_articles: list, table_name: str):
-    LOGGER.info(f"Submitting {len(successful_articles)} articles")
+    LOGGER.info("Submitting %d articles", len(successful_articles))
     
     try:
         response = (
@@ -32,10 +37,13 @@ def send_data_to_db(successful_articles: list, table_name: str):
             .execute()
         )
         
-        LOGGER.info(f"Submission Success. Inserted {len(response.data)} rows.")
+        LOGGER.info(
+            "Submission Success. Inserted %d rows.",
+            len(response.data),
+        )
     
     except Exception as error:
-        LOGGER.error(f"Submission Failed: {error}")
+        LOGGER.error("Submission Failed: %s", error)
 
 
 def filter_articles_by_time(
@@ -103,7 +111,7 @@ def get_existing_sources(
         }
 
     except Exception as error:
-        LOGGER.error(f"Database Error: {error}")
+        LOGGER.error("Database Error: %s", error)
         return set()
 
 
@@ -139,12 +147,15 @@ def filter_article_to_process(
             if article.get('source') not in all_articles_yesterday
         ]
 
-        LOGGER.info(f'Final articles to process: {len(final_articles_to_process)}')
+        LOGGER.info(
+            "Final articles to process: %d",
+            len(final_articles_to_process),
+        )
         return final_articles_to_process
 
     except Exception as error:
-        LOGGER.error(f"Error in filtering articles: {error}")
-        LOGGER.error(f"Traceback: {traceback.format_exc()}")
+        LOGGER.error("Error in filtering articles: %s", error)
+        LOGGER.error("Traceback: %s", traceback.format_exc())
         return []
 
 
@@ -154,43 +165,44 @@ def build_filtered_article(
     source_scraper: str,
     filter_from: datetime | None = None,
 ): 
-    filtered_file = f"./data/{source_scraper}/{jsonfile}_filtered.json"
-    yesterday_file = f"./data/{source_scraper}/{jsonfile}_yesterday.json"
+    data_directory = Path("data") / source_scraper
+    source_file = data_directory / f"{jsonfile}.json"
+    filtered_file = data_directory / f"{jsonfile}_filtered.json"
+    yesterday_file = data_directory / f"{jsonfile}_yesterday.json"
 
     LOGGER.info("Performing filtering against database")
 
-    with open(f"./data/{source_scraper}/{jsonfile}.json", "r") as file_pipeline:
-        all_articles = json.load(file_pipeline)
+    all_articles = read_json(source_file)
 
-    LOGGER.info(f"Total raw article scraped: {len(all_articles)}")
+    LOGGER.info("Total raw article scraped: %d", len(all_articles))
     
     all_articles = filter_articles_by_time(all_articles, filter_from)
     
-    LOGGER.info(f"Total articles in time window: {len(all_articles)}")
+    LOGGER.info("Total articles in time window: %d", len(all_articles))
 
     all_articles_yesterday = []
 
-    if os.path.exists(yesterday_file):
+    if yesterday_file.exists():
         try:
-            with open(yesterday_file, "r") as file_pipeline_yesterday:
-                data = json.load(file_pipeline_yesterday)
+            data = read_json(yesterday_file)
 
-                if isinstance(data, list):
-                    all_articles_yesterday = [
-                        item.get("source")
-                        if isinstance(item, dict)
-                        else item
-                        for item in data
-                    ]
+            if isinstance(data, list):
+                all_articles_yesterday = [
+                    item.get("source")
+                    if isinstance(item, dict)
+                    else item
+                    for item in data
+                ]
 
         except Exception as error:
             LOGGER.warning(
-                f"Failed to read yesterday file: {error}. Starting fresh"
+                "Failed to read yesterday file: %s. Starting fresh",
+                error,
             )
 
     existing_links = get_existing_sources(table_name, filter_from)
 
-    LOGGER.info(f"Total article scraped {len(all_articles)}")
+    LOGGER.info("Total article scraped %d", len(all_articles))
 
     final_articles_to_process = filter_article_to_process(
         existing_links,
@@ -198,17 +210,10 @@ def build_filtered_article(
         all_articles_yesterday,
     )
 
-    shutil.copy(
-        f"./data/{source_scraper}/{jsonfile}.json",
-        yesterday_file,
-    )
+    shutil.copy(source_file, yesterday_file)
+    write_json(filtered_file, final_articles_to_process)
 
-    with open(filtered_file, "w") as file:
-        json.dump(final_articles_to_process, file, indent=2)
-
-    LOGGER.info(
-        f"Saved filtered article list to {filtered_file}"
-    ) 
+    LOGGER.info("Saved filtered article list to %s", filtered_file)
 
 
 def get_article_to_process(
@@ -222,29 +227,40 @@ def get_article_to_process(
     """
     Retrieves articles from JSON and filters out those already in the database.
     """
-    filtered_file = f"./data/{source_scraper}/{jsonfile}_filtered.json"
+    filtered_file = (
+        Path("data")
+        / source_scraper
+        / f"{jsonfile}_filtered.json"
+    )
 
-    if not os.path.exists(filtered_file):
-        LOGGER.error(f"Filtered article file not found: {filtered_file}")
+    if not filtered_file.exists():
+        LOGGER.error("Filtered article file not found: %s", filtered_file)
         return []
 
     try:
-        with open(filtered_file, "r") as file:
-            final_articles_to_process = json.load(file)
+        final_articles_to_process = read_json(filtered_file)
 
-    except (json.JSONDecodeError, OSError) as error:
-        LOGGER.error(f"Failed to read filtered file {filtered_file}: {error}")
+    except (JSONDecodeError, OSError) as error:
+        LOGGER.error(
+            "Failed to read filtered file %s: %s",
+            filtered_file,
+            error,
+        )
         return []
 
-    LOGGER.info(f"Loaded {len(final_articles_to_process)} articles from work-list")
+    LOGGER.info(
+        "Loaded %d articles from work-list",
+        len(final_articles_to_process),
+    )
 
     total_articles = len(final_articles_to_process)
     max_needed_batches = (total_articles + batch_size - 1) // batch_size
 
     if batch > max_needed_batches:
         LOGGER.info(
-            f"Batch {batch} not needed. "
-            f"Only {max_needed_batches} batches required"
+            "Batch %d not needed. Only %d batches required",
+            batch,
+            max_needed_batches,
         )
         return []
 
@@ -253,8 +269,11 @@ def get_article_to_process(
     batch_slice = final_articles_to_process[start_idx:end_idx]
 
     LOGGER.info(
-        f"Batch {batch}/{max_needed_batches}: "
-        f"articles {start_idx} to {end_idx - 1}"
+        "Batch %d/%d: articles %d to %d",
+        batch,
+        max_needed_batches,
+        start_idx,
+        end_idx - 1,
     )
 
     # resume-safety: the DB is the checkpoint. Skip any article already
@@ -271,10 +290,59 @@ def get_article_to_process(
 
     if skipped:
         LOGGER.info(
-            f"Batch {batch}: skipping {skipped} already-processed article(s)"
+            "Batch %d: skipping %d already-processed article(s)",
+            batch,
+            skipped,
         )
 
     return remaining
+
+
+def process_article(
+    article_data: dict,
+    source_scraper: str,
+    top_200_symbols_sgx: set[str],
+    token_usage_logger: TokenUsageLogger,
+) -> tuple[dict | None, str]:
+    try:
+        article_object, status = generate_article(
+            data=article_data,
+            source_scraper=source_scraper,
+            min_score=MININUM_SCORE,
+            top_200_symbols_sgx=top_200_symbols_sgx,
+            token_usage_logger=token_usage_logger,
+        )
+
+        time.sleep(1)
+
+        # skipped 
+        if status in {"low_score", "no_retry", "not_top_200"}:
+            return None, status
+
+        # get into queue failed retry
+        if status != "ok" or not article_object:
+            return None, "error"
+
+        return article_object.to_dict(), "ok"
+
+    except Exception as error:
+        LOGGER.error("Article processing failed: %s", error)
+        return None, "error"
+
+
+def log_total_llm_cost(token_usage_logger: TokenUsageLogger) -> None:
+    total_cost = sum(
+        cost
+        for cost in token_usage_logger.request_costs
+        if cost is not None
+    )
+
+    LOGGER.info(
+        "Total reported cost: $%.8f USD | completed requests: %d | missing cost: %d",
+        total_cost,
+        len(token_usage_logger.request_costs),
+        token_usage_logger.request_costs.count(None),
+    )
 
 
 def post_source(
@@ -293,6 +361,7 @@ def post_source(
     failed_articles_queue = []
 
     start_time = time.time()
+    token_usage_logger = TokenUsageLogger()
 
     data_articles = get_article_to_process(
         jsonfile,
@@ -304,81 +373,76 @@ def post_source(
     )
 
     if not data_articles:
-        LOGGER.info(f"Batch {batch}: No articles to process.")
+        LOGGER.info("Batch %d: No articles to process.", batch)
+        log_total_llm_cost(token_usage_logger)
         return
 
     LOGGER.info(
-        f"Batch {batch}: Processing {len(data_articles)} articles"
+        "Batch %d: Processing %d articles",
+        batch,
+        len(data_articles),
     )
     
     try: 
-        for article_data in data_articles:
+        # only need this when processing sgx news 
+        top_200_symbols_sgx = set()
+        if source_scraper == "sgx":
+            top_200_symbols_sgx = get_top_200_symbols()
+
+        for index, article_data in enumerate(
+            data_articles, 
+            start=1
+        ):
             source_url = article_data.get("source")
-            LOGGER.info(f"Processing: {source_url}")
 
-            try:
-                processed_article_object, status = generate_article(
-                    article_data,
-                    source_scraper,
-                    MININUM_SCORE
-                )
+            LOGGER.info(
+                "Processing %d/%d | source: %s", 
+                index, 
+                len(data_articles), 
+                source_url 
+            )
 
-                if status == "low_score":
-                    LOGGER.info(f"Skipped due to low score: {source_url}")
-                    continue
+            processed_article, status = process_article(
+                article_data=article_data,
+                source_scraper=source_scraper,
+                top_200_symbols_sgx=top_200_symbols_sgx,
+                token_usage_logger=token_usage_logger,
+            )
 
-                if status == "no_retry":
-                    LOGGER.info(f"Skipped because article body is unavailable: {source_url}")
-                    continue
-                
-                time.sleep(5)
-
-                if status != "ok" or not processed_article_object:
-                    LOGGER.error("Failed. Adding to retry queue.")
-                    failed_articles_queue.append(article_data)
-                    continue
-
-                processed_article = processed_article_object.to_dict()
-                LOGGER.info(f"succes article above threshold: {source_url}")
-                successful_articles.append(processed_article)
-
-            except Exception as error:
-                LOGGER.error(f"Failed. Adding to retry queue. Reason: {error}")
+            if status == "error":
                 failed_articles_queue.append(article_data)
 
-        for article_data in failed_articles_queue:
+            elif processed_article:
+                successful_articles.append(processed_article)
+
+            time.sleep(1)
+
+        # process the failed in queue lists 
+        for index, article_data in enumerate(
+            failed_articles_queue, 
+            start=1
+        ):
             source_url = article_data.get("source")
-            LOGGER.info(f"Retrying for URL: {source_url}")
 
-            try:
-                processed_article_object, status = generate_article(
-                    article_data,
-                    source_scraper,
-                    MININUM_SCORE
-                )
+            LOGGER.info(
+                "Processing Failed Retry %d/%d | source: %s", 
+                index, 
+                len(failed_articles_queue), 
+                source_url  
+            )
 
-                time.sleep(5)
+            processed_article, status = process_article(
+                article_data=article_data,
+                source_scraper=source_scraper,
+                top_200_symbols_sgx=top_200_symbols_sgx,
+                token_usage_logger=token_usage_logger,
+            )
 
-                if status == "low_score":
-                    LOGGER.info(f"Retry skipped due to low score: {source_url}")
-                    continue
+            if processed_article:
+                successful_articles.append(processed_article)
 
-                if status == "no_retry":
-                    LOGGER.info(f"Retry skipped because article body is unavailable: {source_url}")
-                    continue
+            time.sleep(1)
 
-                if status != "ok" or not processed_article_object:
-                    LOGGER.error(f"Failed on retry. Giving up on {source_url}")
-                    continue
-
-                LOGGER.info(f"succes article retry above threshold: {source_url}")
-                successful_articles.append(processed_article_object.to_dict())
-
-            except Exception as error:
-                LOGGER.error(
-                    f"Failed on retry. Giving up on {source_url}: {error}"
-                )
-    
     finally:
         LOGGER.info("All processing done. Closing Shared WebDriver.")
         SeleniumScraper.close_shared_driver()
@@ -387,8 +451,11 @@ def post_source(
     final_time = (end_time - start_time) / 60
     
     LOGGER.info(
-        f"Total processing time: {final_time} seconds"
+        "Total processing time: %d minute", 
+        final_time
     )
+
+    log_total_llm_cost(token_usage_logger)
 
     run_sending_data(
         batch=batch, 
@@ -397,68 +464,6 @@ def post_source(
         table_name=table_name, 
         is_check_csv=is_check_csv
     )
-
-
-def filter_top_200(articles: list):
-    response = (
-        SUPABASE_CLIENT
-        .table('sgx_company_report')
-        .select('symbol, market_cap')
-        .order('market_cap', desc=True)
-        .limit(200)
-        .execute()
-    )
-
-    response_reit = (
-        SUPABASE_CLIENT
-        .table('sgx_reit_profile')
-        .select('symbol')
-        .execute()
-    )
-
-    record_db = response.data + response_reit.data 
-
-    symbols_db = {
-        record['symbol'] 
-        for record in record_db
-    }
-
-    final_articles = []
-
-    for record in articles: 
-        symbols = record.get('symbols') or []
-
-        if not symbols:
-            # keep general/untagged news
-            final_articles.append(record)   
-            continue
-
-        contain_top_200 = False 
-
-        for symbol in symbols: 
-            if symbol in symbols_db: 
-                contain_top_200 = True 
-                break 
-
-        if not contain_top_200: 
-            LOGGER.info(
-                f'Skipping article, all symbols not in top 200: {record['source']}'
-            )
-            continue 
-        
-        final_articles.append(record)
-
-    return final_articles
-
-
-def add_sgx_suffix(symbols: list[str] | None) -> list[str]:
-    if not symbols:
-        return symbols if symbols is not None else []
-
-    return [
-        symbol if symbol.upper().endswith(SGX_SYMBOL_SUFFIX) else f"{symbol}{SGX_SYMBOL_SUFFIX}"
-        for symbol in symbols
-    ]
 
 
 def run_sending_data(
@@ -479,10 +484,6 @@ def run_sending_data(
             for record in successful_articles:
                 record['symbols'] = record.pop('tickers', None)
 
-            # flow to filter out if article
-            # contains all symbols outside top 200 by mcap
-            successful_articles = filter_top_200(successful_articles)
-
             # sgx symbols are stored with the .SI suffix
             for record in successful_articles:
                 record['symbols'] = add_sgx_suffix(record.get('symbols'))
@@ -501,5 +502,6 @@ def run_sending_data(
 
     else:
         LOGGER.info(
-            f"Batch {batch}: Completed, no articles met criteria"
+            "Batch %d: Completed, no articles met criteria",
+            batch,
         )

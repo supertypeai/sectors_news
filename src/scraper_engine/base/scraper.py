@@ -8,10 +8,16 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from scrapling import Fetcher
 
-from scraper_engine.config.conf import PROXY, USER_AGENT, HEADERS_SCRAPER, CRAWLER_USER_AGENT
-
-import json
-import csv
+from scraper_engine.config.conf import (
+    PROXY, 
+    USER_AGENT, 
+    HEADERS_SCRAPER, 
+    CRAWLER_USER_AGENT
+)
+from scraper_engine.utils.json_helpers import (
+    write_csv as write_csv_file,
+    write_json as write_json_file,
+)
 
 import requests
 import time
@@ -21,11 +27,14 @@ import subprocess
 import shutil
 import os 
 import re 
+from pathlib import Path
 
 
 LOGGER = logging.getLogger(__name__)
 
-UC_CACHE_PATH = os.path.expanduser("~/.local/share/undetected_chromedriver/undetected_chromedriver")
+UC_CACHE_PATH = os.path.expanduser(
+    "~/.local/share/undetected_chromedriver/undetected_chromedriver"
+)
 
 
 def get_chrome_info() -> tuple:
@@ -56,22 +65,35 @@ def get_chrome_info() -> tuple:
                     version_match = re.search(r"(\d+)\.\d+\.\d+", output)
 
                     if not version_match:
-                        LOGGER.warning(f"Could not parse version from {binary_path} output: {output.strip()!r}")
+                        LOGGER.warning(
+                            "Could not parse version from %s output: %r",
+                            binary_path,
+                            output.strip(),
+                        )
                         continue
 
                     major_version = int(version_match.group(1))
-                    LOGGER.info(f"Detected {binary} at {binary_path} (Version: {major_version})")
+                    LOGGER.info(
+                        "Detected %s at %s (Version: %s)",
+                        binary,
+                        binary_path,
+                        major_version,
+                    )
                     
                     return major_version, binary_path
                 
                 except (subprocess.SubprocessError, subprocess.TimeoutExpired, ValueError) as detection_error:
-                    LOGGER.warning(f"Failed to detect version from {binary_path}: {detection_error}")
+                    LOGGER.warning(
+                        "Failed to detect version from %s: %s",
+                        binary_path,
+                        detection_error,
+                    )
                     continue
             
             return None, None
         
         except Exception as error:
-            LOGGER.error(f"Could not detect Chrome version: {error}")
+            LOGGER.error("Could not detect Chrome version: %s", error)
             return None, None
 
     elif operating_system == "Windows":
@@ -88,7 +110,10 @@ def get_chrome_info() -> tuple:
                 return major_version, None
         
         except subprocess.SubprocessError as process_error:
-            LOGGER.error(f"Failed to query Windows registry: {process_error}")
+            LOGGER.error(
+                "Failed to query Windows registry: %s",
+                process_error,
+            )
         
         return None, None
 
@@ -112,14 +137,20 @@ def clear_stale_chromedriver_cache(chrome_major_version: int) -> None:
 
             if cached_major_version != chrome_major_version:
                 LOGGER.warning(
-                    f"Cached chromedriver v{cached_major_version} != Chrome v{chrome_major_version}. "
-                    f"Removing stale cache at {UC_CACHE_PATH}."
+                    "Cached chromedriver v%s != Chrome v%s. "
+                    "Removing stale cache at %s.",
+                    cached_major_version,
+                    chrome_major_version,
+                    UC_CACHE_PATH,
                 )
 
                 os.remove(UC_CACHE_PATH)
 
     except Exception as cache_error:
-        LOGGER.warning(f"Could not verify cached chromedriver, removing to be safe: {cache_error}")
+        LOGGER.warning(
+            "Could not verify cached chromedriver, removing to be safe: %s",
+            cache_error,
+        )
         
         try:
             os.remove(UC_CACHE_PATH)
@@ -148,7 +179,7 @@ class Scraper:
             return self.soup
 
         except Exception as error:
-            LOGGER.error(f"Error fetching the URL: {error}")
+            LOGGER.error("Error fetching the URL: %s", error)
             return BeautifulSoup()
 
     def fetch_news_with_scrapling(self, url: str):
@@ -183,7 +214,7 @@ class Scraper:
             }
 
         try:
-            LOGGER.info(f"Routing {target_url} through proxy")
+            LOGGER.info("Routing %s through proxy", target_url)
             response = requests.get(
                 target_url, 
                 proxies=proxy_configuration, 
@@ -195,11 +226,17 @@ class Scraper:
             if response.status_code == 200:
                 return response.text
                 
-            LOGGER.info(f"[FAIL] Web Unlocker returned status code: {response.status_code}")
+            LOGGER.info(
+                "[FAIL] Web Unlocker returned status code: %s",
+                response.status_code,
+            )
             return ""
         
         except requests.exceptions.RequestException as network_error:
-            LOGGER.error(f"[FAIL] Request through Web Unlocker failed: {network_error}")
+            LOGGER.error(
+                "[FAIL] Request through Web Unlocker failed: %s",
+                network_error,
+            )
             return ""
 
     def fetch_news_with_post(self, url: str, payload: dict):
@@ -212,7 +249,7 @@ class Scraper:
             return self.soup
         
         except Exception as error:
-            LOGGER.error(f'Error fetching article IMA: {error}')
+            LOGGER.error("Error fetching article IMA: %s", error)
             return BeautifulSoup()
 
     # Will be overridden by subclass
@@ -224,23 +261,16 @@ class Scraper:
 
     # Writer methods
     def write_json(self, jsontext, filename):
-        with open(f'./data/{filename}.json', 'w') as f:
-            json.dump(jsontext, f, indent=4)
+        json_path = Path("data") / f"{filename}.json"
+        write_json_file(json_path, jsontext, indent=4)
 
     def write_file_soup(self, filetext, filename):
         with open(f'./data/{filename}.txt', 'w', encoding='utf-8') as f:
             f.write(filetext.prettify())
 
     def write_csv(self, data, filename):
-        with open(f'./data/{filename}.csv', 'w', newline='', encoding='utf-8') as csv_file:
-
-            csv_writer = csv.writer(csv_file)
-
-            header = data[0].keys()
-            csv_writer.writerow(header)
-
-            for item in data:
-                csv_writer.writerow(item.values())
+        csv_path = Path("data") / f"{filename}.csv"
+        write_csv_file(csv_path, data)
 
 
 class SeleniumScraper(Scraper):
@@ -283,7 +313,9 @@ class SeleniumScraper(Scraper):
         """
         if not SeleniumScraper._is_driver_alive():
             if SeleniumScraper._driver_instance is not None:
-                LOGGER.warning("Shared WebDriver session is dead. Rebuilding before use.")
+                LOGGER.warning(
+                    "Shared WebDriver session is dead. Rebuilding before use."
+                )
                 self.close_shared_driver()
 
             self.setup_driver()
@@ -296,7 +328,10 @@ class SeleniumScraper(Scraper):
         chrome_version, chrome_path = get_chrome_info()
 
         if chrome_version is None:
-            LOGGER.error("Chrome version detection failed entirely. Cannot initialize driver safely.")
+            LOGGER.error(
+                "Chrome version detection failed entirely. " \
+                "Cannot initialize driver safely."
+            )
             SeleniumScraper._driver_instance = None
             return
 
@@ -326,10 +361,13 @@ class SeleniumScraper(Scraper):
             new_driver.set_page_load_timeout(page_timeout)
             SeleniumScraper._driver_instance = new_driver
 
-            LOGGER.info(f"Driver initialized successfully with Chrome v{chrome_version}")
+            LOGGER.info(
+                "Driver initialized successfully with Chrome v%s",
+                chrome_version,
+            )
         
         except Exception as error:
-            LOGGER.error(f"Failed to initialize driver: {error}")
+            LOGGER.error("Failed to initialize driver: %s", error)
             SeleniumScraper._driver_instance = None
 
     def fetch_news_with_selenium(
@@ -345,7 +383,7 @@ class SeleniumScraper(Scraper):
             return BeautifulSoup()
 
         try:
-            LOGGER.info(f"Navigating to {url}")
+            LOGGER.info("Navigating to %s", url)
             driver.get(url)
 
             if wait_selector:
@@ -362,24 +400,33 @@ class SeleniumScraper(Scraper):
             return self.soup
 
         except TimeoutException:
-            LOGGER.warning(f"Page load timed out for {url}. Attempting to salvage available DOM.")
+            LOGGER.warning(
+                "Page load timed out for %s. Attempting to salvage available DOM.",
+                url,
+            )
             try:
                 html_content = driver.page_source
                 self.soup = BeautifulSoup(html_content, 'html.parser')
                 return self.soup
 
             except Exception as dom_error:
-                LOGGER.error(f"Failed to extract DOM after timeout: {dom_error}")
+                LOGGER.error(
+                    "Failed to extract DOM after timeout: %s",
+                    dom_error,
+                )
                 self.close_shared_driver()
                 return None
 
         except Exception as error:
-            LOGGER.error(f'Failed fetch news with selenium: {error}')
+            LOGGER.error("Failed fetch news with selenium: %s", error)
             # The session is likely dead, tear it down so the next access rebuilds it.
             self.close_shared_driver()
 
             if retry:
-                LOGGER.info(f"Rebuilding driver and retrying once for {url}")
+                LOGGER.info(
+                    "Rebuilding driver and retrying once for %s",
+                    url,
+                )
                 return self.fetch_news_with_selenium(
                     url, 
                     wait_selector, 

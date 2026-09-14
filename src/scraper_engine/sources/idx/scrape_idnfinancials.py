@@ -15,7 +15,7 @@ class IDNFinancialScraper(SeleniumScraper):
         soup = self.fetch_news_with_selenium(url)
 
         if not soup:
-            LOGGER.error(f"Failed to fetch {url}")
+            LOGGER.error("Failed to fetch %s", url)
             return []
 
         news_container = soup.find('div', class_='news')

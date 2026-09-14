@@ -1,11 +1,14 @@
 from .scraper import Scraper
+from scraper_engine.utils.json_helpers import (
+    write_csv as write_csv_file,
+    write_json as write_json_file,
+)
 
 from datetime import datetime, timezone, timedelta
 
-import json
-import csv
 import logging
 import inspect 
+from pathlib import Path
 
 
 WIB = timezone(timedelta(hours=7))
@@ -24,7 +27,12 @@ class ScraperCollection:
     def add_scraper(self, scraper) -> None:
         self.scrapers.append(scraper)
     
-    def run_all(self, num_page: int | None, date: str | None, filter_from: datetime | None) -> list[dict]:
+    def run_all(
+        self, 
+        num_page: int | None, 
+        date: str | None, 
+        filter_from: datetime | None
+    ) -> list[dict]:
         today = datetime.now(WIB)
         
         if date is None:
@@ -55,28 +63,22 @@ class ScraperCollection:
                         articles = scraper.extract_news_pages(num_page)
 
                     self.articles = [*self.articles, *articles]
-
+                
                 except Exception as error:
-                    LOGGER.error(f"Error in scraper {scraper.__class__.__name__}: {error}")
+                    LOGGER.error(
+                        "Error in scraper %s: %s",
+                        scraper.__class__.__name__,
+                        error,
+                    )
                     continue
 
         return self.articles
     
     # Writer methods
     def write_json(self, jsontext, source: str, filename: str):
-        with open(f'./data/{source}/{filename}.json', 'w') as f:
-            json.dump(jsontext, f, indent=4)
-
-    def write_file_soup(self, filetext, filename):
-        with open(f'./data/{filename}.txt', 'w', encoding='utf-8') as f:
-            f.write(filetext.prettify())
+        json_path = Path("data") / source / f"{filename}.json"
+        write_json_file(json_path, jsontext, indent=4)
 
     def write_csv(self, data, source: str, filename: str):
-        with open(f'./data/{source}/{filename}.csv', 'w', newline='', encoding='utf-8') as csv_file:
-            csv_writer = csv.writer(csv_file)
-                
-            header = data[0].keys()
-            csv_writer.writerow(header)
-
-            for item in data:
-                csv_writer.writerow(item.values())
+        csv_path = Path("data") / source / f"{filename}.csv"
+        write_csv_file(csv_path, data)

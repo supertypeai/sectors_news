@@ -1,5 +1,4 @@
 from langchain.chat_models import init_chat_model
-from langchain_core.runnables import Runnable
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import BaseMessage
 from langchain_core.outputs import ChatResult
@@ -23,8 +22,22 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
+# manually calculate cost for groq 
+# openrouter can directly return the cost 
+MODEL_TOKEN_PRICING = {
+    "openai/gpt-oss-120b": {
+        "input": 0.15,
+        "cached_input": 0.075,
+        "output": 0.60,
+    },
+}
+
 
 class TokenUsageLogger(BaseCallbackHandler):
+    def __init__(self):
+        super().__init__()
+        self.request_costs = []
+
     def on_llm_end(self, response, **kwargs):
         llm_output = response.llm_output or {}
         token_usage = llm_output.get("token_usage") or {}
@@ -60,10 +73,35 @@ class TokenUsageLogger(BaseCallbackHandler):
             else {}
         ) or {}
 
+        message = response.generations[0][0].message
+        model_name = llm_output.get("model_name", "unknown")
+        cost = message.response_metadata.get("cost")
+
+        if cost is None:
+            pricing = MODEL_TOKEN_PRICING.get(model_name)
+            prompt_tokens_details = token_usage.get("prompt_tokens_details") or {}
+            cached_prompt_tokens = prompt_tokens_details.get("cached_tokens", 0)
+            billable_prompt_tokens = max(
+                prompt_tokens - cached_prompt_tokens,
+                0,
+            )
+
+            if pricing:
+                cost = (
+                    billable_prompt_tokens / 1_000_000 * pricing["input"]
+                    + cached_prompt_tokens / 1_000_000 * pricing["cached_input"]
+                    + completion_tokens / 1_000_000 * pricing["output"]
+                )
+
+        self.request_costs.append(cost)
+
+        if cost is not None:
+            LOGGER.info("request cost: $%.8f USD", cost)
+            
         LOGGER.info(
             "token usage: model=%s prompt=%d completion=%d reasoning=%d "
             "total=%d finish_reason=%s",
-            llm_output.get("model_name", "unknown"),
+            model_name,
             prompt_tokens,
             completion_tokens,
             reasoning_tokens,
@@ -146,16 +184,21 @@ class KeyRotatingChatModel(BaseChatModel):
 
                 if action == "rotate":
                     LOGGER.warning(
-                        f"Key index {index} failed for '{self.model_name_identifier}' "
-                        f"(rotating to next key). Error: {error}"
+                        "Key index %s failed for '%s' "
+                        "(rotating to next key). Error: %s",
+                        index,
+                        self.model_name_identifier,
+                        error,
                     )
                     last_error = error
                     continue
 
                 if action == "abort":
                     LOGGER.error(
-                        f"Non-recoverable error for '{self.model_name_identifier}', "
-                        f"aborting key rotation. Error: {error}"
+                        "Non-recoverable error for '%s', "
+                        "aborting key rotation. Error: %s",
+                        self.model_name_identifier,
+                        error,
                     )
                     raise
 
@@ -183,16 +226,21 @@ class KeyRotatingChatModel(BaseChatModel):
 
                 if action == "rotate":
                     LOGGER.warning(
-                        f"Key index {index} failed for '{self.model_name_identifier}' "
-                        f"(async, rotating to next key). Error: {error}"
+                        "Key index %s failed for '%s' "
+                        "(async, rotating to next key). Error: %s",
+                        index,
+                        self.model_name_identifier,
+                        error,
                     )
                     last_error = error
                     continue
 
                 if action == "abort":
                     LOGGER.error(
-                        f"Non-recoverable error for '{self.model_name_identifier}' "
-                        f"(async), aborting key rotation. Error: {error}"
+                        "Non-recoverable error for '%s' "
+                        "(async), aborting key rotation. Error: %s",
+                        self.model_name_identifier,
+                        error,
                     )
                     raise
 
@@ -209,6 +257,7 @@ def get_llm(
     temperature: float = 0.5,
     effort: str = "high",
     max_retries: int = 3,
+    token_usage_logger: TokenUsageLogger | None = None,
 ):
     config_model = MODEL_CONFIG.get(model_name)
 
@@ -220,9 +269,10 @@ def get_llm(
             available_models
         )
         return None
-    
-    provider = config_model.get('provider')
 
+    max_tokens = config_model.get("max_tokens")
+    provider = config_model.get('provider')
+    
     provider_keys = {
         'groq': [GROQ_API_KEY_DEV],
         'openrouter': [OPENROUTER_API_KEY],
@@ -235,7 +285,7 @@ def get_llm(
     ]
     
     if not api_keys:
-        LOGGER.error(f"No valid API keys found for provider: '{provider}'")
+        LOGGER.error("No valid API keys found for provider: '%s'", provider)
         return None
     
     llm_pool = []
@@ -246,19 +296,28 @@ def get_llm(
                 "temperature": temperature,
                 "max_retries": max_retries,
                 "api_key": api_key,
-                "max_tokens": config_model.get("max_tokens", 25000),
+                "max_tokens": max_tokens if max_tokens else 80000,
+                "timeout": 180
             }
 
+            model_id = config_model["model"]
+
             if provider == "openrouter":
+                if not model_id.endswith(":nitro"):
+                    model_id = f"{model_id}:nitro"
+
                 model_parameters["reasoning"] = {
                     "effort": effort,
                 }
-
+                model_parameters["openrouter_provider"] = {
+                    "sort": "latency",
+                }
+                
             elif provider == "groq" and effort != "none":
                 model_parameters["reasoning_effort"] = effort
 
             initiate_model = init_chat_model(
-                config_model.get('model'),
+                model_id,
                 model_provider=provider,
                 **model_parameters,
             ) 
@@ -266,15 +325,18 @@ def get_llm(
             llm_pool.append(initiate_model)
     
         except Exception as error:
-            LOGGER.error(f'Error initialize llm: {error}')
+            LOGGER.error("Error initialize llm: %s", error)
             continue 
     
     if not llm_pool:
-        LOGGER.error(f"No clients could be initialized for '{model_name}'")
+        LOGGER.error(
+            "No clients could be initialized for '%s'",
+            model_name,
+        )
         return None
 
     return KeyRotatingChatModel(
         llm_pool=llm_pool,
         model_name_identifier=model_name,
-        callbacks=[TokenUsageLogger()],
+        callbacks=[token_usage_logger or TokenUsageLogger()],
     )

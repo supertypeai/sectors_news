@@ -1,5 +1,6 @@
 MODEL_NAMES = [
     "gpt-oss-120b",
+    "deepsek-v4-flash",
     "gpt-oss-20b",
     "nvidia-nemotron-3-ultra",
 ]
@@ -8,6 +9,11 @@ MODEL_CONFIG = {
     "gpt-oss-120b": {
         "model": "openai/gpt-oss-120b",
         "provider": "groq",
+        "max_tokens": 65536
+    },
+    "deepsek-v4-flash": {
+        "model": "deepseek/deepseek-v4-flash-0731",
+        "provider": "openrouter",
     },
     "gpt-oss-20b": {
         "model": "openai/gpt-oss-20b",
@@ -18,6 +24,10 @@ MODEL_CONFIG = {
         "provider": "openrouter",
         "max_tokens": 16000,
     },
+    "glm-5.3-flash": {
+        "model": "z-ai/glm-5.3-flash",
+        "provider": "openrouter"
+    }
 }
 
 ROTATE_STATUS_CODES = {401, 403, 429, 413}

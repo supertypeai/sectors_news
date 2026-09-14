@@ -1,10 +1,11 @@
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import JsonOutputParser
-
-from scraper_engine.llm.client import get_llm
-from scraper_engine.llm.prompts import EntityExtractionPrompts, CompanyNameExtraction
-from scraper_engine.llm.constant import MODEL_NAMES
+from scraper_engine.llm.prompt_definitions import (
+    EntityExtractionPrompts,
+    CompanyNameExtraction,
+)
 from scraper_engine.database.metadata import load_company_data_sgx
+from scraper_engine.llm.caller import invoke_structured_llm
+from scraper_engine.llm.client import TokenUsageLogger
+from scraper_engine.llm.constant import MODEL_NAMES
 
 import logging 
 
@@ -27,65 +28,49 @@ def load_sgx_company_data():
 
 
 def extract_company_name(
+    title: str, 
     body: str, 
-    source_scraper: str
-) -> list[str]:
+    source_scraper: str,
+    effort: str = "medium",
+    models: list[str] =  MODEL_NAMES,
+    token_usage_logger: TokenUsageLogger | None = None
+) -> dict:
     prompts = EntityExtractionPrompts()
 
-    if source_scraper == 'sgx': 
+    if source_scraper == "sgx": 
         user_prompt = prompts.user_prompt_sgx()
         system_prompt = prompts.system_prompt_sgx()
-      
-    else: 
-        user_prompt = prompts.user_prompt_idx()
-        system_prompt = prompts.system_prompt_idx()
+        company_names_desc = load_sgx_company_data()
         
-    company_extraction_parser = JsonOutputParser(pydantic_object=CompanyNameExtraction)
-    format_instructions = company_extraction_parser.get_format_instructions()
-
-    # combined_text = f"{title} {body}"   
-    company_names_desc = load_sgx_company_data()
-
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", system_prompt),
-        ('user', user_prompt )
-    ])
-
-    if source_scraper == 'sgx': 
         input_data = {
-            'body': body,
-            'company_names': company_names_desc,
-            'format_instructions': format_instructions
+            "title": title, 
+            "body": body,
+            "company_names": company_names_desc
         } 
 
-    else: 
+    elif source_scraper == "idx": 
+        user_prompt = prompts.user_prompt_idx()
+        system_prompt = prompts.system_prompt_idx()
+
         input_data = {
-            'body': body,
-            'format_instructions': format_instructions
+            "title": title,
+            "body": body
         }
-    
-    for model in MODEL_NAMES:
-        LOGGER.info(f'LLM used: {model}')
-        
-        llm = get_llm(model, temperature=0.4)
 
-        try:
-            chain = prompt | llm | company_extraction_parser
-            
-            company_extracted = chain.invoke(input_data)
-            
-            if 'company' not in company_extracted or 'reason' not in company_extracted:
-                LOGGER.warning("Output not complete, trying next LLM...")
-                continue
+    result = invoke_structured_llm(
+        pydantic_output=CompanyNameExtraction,
+        system_prompt=system_prompt,
+        user_prompt=user_prompt,
+        log_name="Company extraction",
+        input_data=input_data,
+        models=models,
+        effort=effort,
+        is_log_raw_response=True,
+        token_usage_logger=token_usage_logger,
+    )
 
-            LOGGER.info(f"[SUCCES] Company extracted for url")
-            
-            LOGGER.info(f"reason company extraction: {company_extracted.get('reason')}")
-            return company_extracted.get('company')
-            
-        except Exception as error:
-            LOGGER.warning(f"LLM failed with error: {error}")
-            continue 
-
-    LOGGER.error("All LLMs failed to return a valid summary.")
-    return None
+    LOGGER.info(
+        "[Company Extraction] Reasoning: %s", 
+        result.get("explanation")
+    )
+    return result.get("companies")

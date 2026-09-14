@@ -25,8 +25,9 @@ from scraper_engine.sources.sgx.registry import (
 
 from .processor import post_source, build_filtered_article
 from scraper_engine.database.client import SUPABASE_CLIENT
+from scraper_engine.utils.json_helpers import read_json, write_json
 
-import json
+from json import JSONDecodeError
 import typer 
 import sys
 import logging
@@ -93,9 +94,8 @@ def delete_outdated_news(
 
             if output_path.exists():
                 try:
-                    with output_path.open("r") as file:
-                        data = json.load(file)
-                        existing = data if isinstance(data, list) else []
+                    data = read_json(output_path)
+                    existing = data if isinstance(data, list) else []
 
                 except Exception as error:
                     logger.warning(
@@ -104,8 +104,7 @@ def delete_outdated_news(
 
             combined = existing + items_to_delete
 
-            with output_path.open("w") as file:
-                json.dump(combined, file, indent=4)
+            write_json(output_path, combined, indent=4)
 
             logger.info(
                 "Appended %d items — now %d total — in %s",
@@ -147,10 +146,9 @@ def main_idx(
 
     last_state = {}
     try:
-        with last_state_path.open('r') as file:
-            last_state = json.load(file)
+        last_state = read_json(last_state_path)
 
-    except (FileNotFoundError, json.JSONDecodeError):
+    except (FileNotFoundError, JSONDecodeError):
         pass
     
     wib = ZoneInfo("Asia/Jakarta")
@@ -199,30 +197,32 @@ def main_idx(
             # scrapercollection.add_scraper(insightkontanscraper) 
             # scrapercollection.add_scraper(miningscraper)
 
-            scrapercollection.add_scraper(icnscraper)
-            scrapercollection.add_scraper(gapkiscraper)
-            scrapercollection.add_scraper(minerbascraper)
-            scrapercollection.add_scraper(idnminerscraper)
-            scrapercollection.add_scraper(idnscraper)
-            scrapercollection.add_scraper(finansialbisinisscraper)
-            scrapercollection.add_scraper(bloombertechnoz)
-            scrapercollection.add_scraper(investorid)
-            scrapercollection.add_scraper(abafscraper)
-            scrapercollection.add_scraper(jgscraper)
-            scrapercollection.add_scraper(antaranewsscraper)
-            scrapercollection.add_scraper(asiatelkomscraper)
-            scrapercollection.add_scraper(jakartapostscraper)
-            scrapercollection.add_scraper(kontanarticlescraper)
+            # scrapercollection.add_scraper(icnscraper)
+            # scrapercollection.add_scraper(gapkiscraper)
+            # scrapercollection.add_scraper(minerbascraper)
+            # scrapercollection.add_scraper(idnminerscraper)
+            # scrapercollection.add_scraper(idnscraper)
+            # scrapercollection.add_scraper(finansialbisinisscraper)
+            # scrapercollection.add_scraper(bloombertechnoz)
+            # scrapercollection.add_scraper(investorid)
+            # scrapercollection.add_scraper(abafscraper)
+            # scrapercollection.add_scraper(jgscraper)
+            # scrapercollection.add_scraper(antaranewsscraper)
+            # scrapercollection.add_scraper(asiatelkomscraper)
+            # scrapercollection.add_scraper(jakartapostscraper)
+            # scrapercollection.add_scraper(kontanarticlescraper)
             scrapercollection.add_scraper(emitenscraper)
-            scrapercollection.add_scraper(bcanews)
-            scrapercollection.add_scraper(cnbcmarket)
-            scrapercollection.add_scraper(cnnekonomi)
-            scrapercollection.add_scraper(kompasmoney)
-            scrapercollection.add_scraper(financedetik)
-            scrapercollection.add_scraper(kontankeuangan)
+            # scrapercollection.add_scraper(bcanews)
+            # scrapercollection.add_scraper(cnbcmarket)
+            # scrapercollection.add_scraper(cnnekonomi)
+            # scrapercollection.add_scraper(kompasmoney)
+            # scrapercollection.add_scraper(financedetik)
+            # scrapercollection.add_scraper(kontankeuangan)
 
-            with last_state_path.open('w') as file:
-                json.dump({"last_run_at": datetime.now(wib).isoformat()}, file)
+            write_json(
+                last_state_path,
+                {"last_run_at": datetime.now(wib).isoformat()},
+            )
 
             scrapercollection.run_all(page_number, date, filter_from)
             
@@ -286,10 +286,9 @@ def main_sgx(
 
     last_state = {}
     try:
-        with last_state_path.open('r') as file:
-            last_state = json.load(file)
+        last_state = read_json(last_state_path)
 
-    except (FileNotFoundError, json.JSONDecodeError):
+    except (FileNotFoundError, JSONDecodeError):
         pass
     
     sgt = ZoneInfo("Asia/Singapore")
@@ -332,8 +331,10 @@ def main_sgx(
             scrapercollection.add_scraper(sgx_market_updates)
             scrapercollection.add_scraper(smallcapasia_scraper)
 
-            with last_state_path.open('w') as file:
-                json.dump({"last_run_at": datetime.now(sgt).isoformat()}, file)
+            write_json(
+                last_state_path,
+                {"last_run_at": datetime.now(sgt).isoformat()},
+            )
 
             scrapercollection.run_all(page_number, date, filter_from)
 

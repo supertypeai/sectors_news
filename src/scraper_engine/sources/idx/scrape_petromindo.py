@@ -52,7 +52,10 @@ class PetromindoScraper(Scraper):
                     }
                 )
         
-        LOGGER.info(f'total scraped source of petromindo: {len(self.articles)}')
+        LOGGER.info(
+            "total scraped source of petromindo: %d",
+            len(self.articles),
+        )
         return self.articles
 
     def extract_news_pages(self, num_pages):

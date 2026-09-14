@@ -104,13 +104,20 @@ class BCANews(Scraper):
         """
         for attempt in range(max_retries):
             try:
-                LOGGER.info(f"Navigating to {url} (Attempt {attempt + 1}/{max_retries})")
+                LOGGER.info(
+                    "Navigating to %s (Attempt %d/%d)",
+                    url,
+                    attempt + 1,
+                    max_retries,
+                )
                 driver.get(url)
                 return True 
             
             except WebDriverException as error:
                 if "ERR_CONNECTION_RESET" in str(error) or "ERR_CONNECTION_CLOSED" in str(error):
-                    LOGGER.warning(f"Connection reset by WAF. Sleeping 10s before retry")
+                    LOGGER.warning(
+                        "Connection reset by WAF. Sleeping 10s before retry"
+                    )
                     time.sleep(10) 
                     continue
 

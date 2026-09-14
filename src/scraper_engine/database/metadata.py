@@ -2,114 +2,34 @@ from datetime import datetime
 from pathlib import Path
 
 from scraper_engine.database.client import SUPABASE_CLIENT
-
-import json
+from scraper_engine.utils.json_helpers import read_json, write_json
 import re
 import logging
 
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 DATA_DIR = Path("data")
-
-
-def open_json(path: str | Path) -> dict | list:
-    json_path = Path(path)
-
-    with json_path.open("r", encoding="utf-8") as file:
-        return json.load(file)
-
-
-def write_json(path: str | Path, payload: dict | list) -> None:
-    json_path = Path(path)
-
-    with json_path.open("w", encoding="utf-8") as file:
-        json.dump(payload, file, indent=2)
 
 
 def get_sectors_data() -> dict[str, any]:
     path = DATA_DIR / "idx/sectors_data.json"
     
     if not path.exists():
-        logger.warning(f"{path} not found. Returning empty sectors.")
+        LOGGER.warning("%s not found. Returning empty sectors.", path)
         return {}
     
-    return open_json(path)
+    return read_json(path)
 
 
 def get_sectors_data_sgx() -> dict[str, any]:
     path = DATA_DIR / "sgx/sectors_data_sgx.json"
     
     if not path.exists():
-        logger.warning(f"{path} not found. Returning empty sectors.")
-        return {}
-    
-    return open_json(path)
-
-
-def build_ticker_index() -> dict[str, str]:
-    path = DATA_DIR / "idx/companies.json"
-    if not path.exists():
+        LOGGER.warning("%s not found. Returning empty sectors.", path)
         return {}
 
-    companies_data = open_json(path)
-
-    ticker_index = {}
-    short_name_threshold = 6  # characters after normalization
-
-    for entry in companies_data.values():
-        symbol = entry.get('symbol', '').strip()
-        raw_name = entry.get('name', '')
-
-        if not symbol or not raw_name:
-            continue
-
-        clean_name = re.sub(r'^\s*PT\s+', '', raw_name, flags=re.IGNORECASE)
-        clean_name = re.sub(r'\s*Tbk\.?$', '', clean_name, flags=re.IGNORECASE)
-        clean_name = re.sub(r'\s*\(Persero\)\s*', ' ', clean_name, flags=re.IGNORECASE)
-        normalized_name = re.sub(r'\s+', ' ', clean_name).strip().lower()
-
-        ticker_index[normalized_name] = symbol
-
-        # If name normalizes to something very short, also index by ticker code
-        # so "timah" -> dead end, but "tins" -> TINS.JK works via ticker path
-        if len(normalized_name) < short_name_threshold:
-            ticker_code = symbol.lower().replace('.jk', '').strip()
-            ticker_index[ticker_code] = symbol
-            print(f"short name warning: {raw_name!r} normalizes to {normalized_name!r}, "
-                  f"added ticker key {ticker_code!r} -> {symbol}")
-
-    return ticker_index
-
-
-def build_sgx_ticker_index() -> dict[str, str]:
-    path = DATA_DIR / "sgx/sgx_companies.json"
-
-    companies_data = open_json(path)
-
-    ticker_index = {}
-    short_name_threshold = 5
-
-    for entry in companies_data.values():
-        symbol = entry.get('symbol', '').strip()
-        raw_name = entry.get('name', '')
-
-        if not symbol or not raw_name:
-            continue
-
-        clean_name = re.sub(r'\s*Ltd\.?$', '', raw_name, flags=re.IGNORECASE)
-        clean_name = re.sub(r'\s*Limited\.?$', '', clean_name, flags=re.IGNORECASE)
-        clean_name = re.sub(r'\s*Pte\.?$', '', clean_name, flags=re.IGNORECASE)
-        normalized_name = clean_name.strip().lower()
-
-        ticker_index[normalized_name] = symbol
-
-        if len(normalized_name) < short_name_threshold:
-            ticker_index[normalized_name] = symbol
-            print(f"short name warning: {raw_name!r} normalizes to "
-                  f"{normalized_name!r}, keeping as-is -> {symbol}")
-
-    return ticker_index
+    return read_json(path)
 
 
 def convert_to_kebab(sub_sector: str, is_idx: bool = True) -> str:
@@ -134,6 +54,7 @@ def convert_to_kebab(sub_sector: str, is_idx: bool = True) -> str:
 
     return re.sub(r'-+', '-', result)
 
+
 def extract_first_sentences(text: str, count: int = 2) -> str:
     parts = text.split('.')
 
@@ -144,6 +65,7 @@ def extract_first_sentences(text: str, count: int = 2) -> str:
     result = '. '.join(extracted) + '.'
 
     return result 
+
 
 def load_subsector_data_idx() -> tuple[str, set[str]]:
     path = DATA_DIR / "idx/subsectors_data.json"
@@ -160,7 +82,7 @@ def load_subsector_data_idx() -> tuple[str, set[str]]:
 
         write_json(path, subsectors)
 
-    subsectors = open_json(path)
+    subsectors = read_json(path)
 
     # Extract only the first two sentences
     subsector_clean = {}
@@ -179,11 +101,13 @@ def load_subsector_data_idx() -> tuple[str, set[str]]:
 
     return result
 
+
 def load_subsector_data_sgx() -> dict:
-    return open_json(DATA_DIR / "sgx/subsectors_data_sgx.json")
+    return read_json(DATA_DIR / "sgx/subsectors_data_sgx.json")
+
 
 def load_tag_data() -> tuple[list, str]:
-    tag_data = open_json(DATA_DIR / "unique_tags.json")
+    tag_data = read_json(DATA_DIR / "unique_tags.json")
     tags = tag_data.get("tags", [])
     
     full_tags = '\n\n'.join(
@@ -192,6 +116,7 @@ def load_tag_data() -> tuple[list, str]:
     )
     
     return tags, full_tags
+
 
 def load_company_data_idx() -> dict[str, dict[str, str]]:
     path = DATA_DIR / "idx/companies.json"
@@ -228,7 +153,8 @@ def load_company_data_idx() -> dict[str, dict[str, str]]:
 
         write_json(path, company)
 
-    return open_json(path)
+    return read_json(path)
+
     
 def load_company_data_sgx() -> dict[str, dict[str, str]]:
     path = DATA_DIR / "sgx/sgx_companies.json"
@@ -261,6 +187,6 @@ def load_company_data_sgx() -> dict[str, dict[str, str]]:
 
         write_json(path, company)
 
-    return open_json(path)
+    return read_json(path)
 
 
