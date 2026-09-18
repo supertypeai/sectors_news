@@ -2,15 +2,15 @@
 
 The two news pipelines as [Dagu](https://dagu.sh) DAGs, deployed by
 [runners](https://github.com/supertypeai/runners) — the app that reads
-`.dagu/workflow/<name>.yaml` out of this repository, composes each into a DAG
+`.dagu/workflows/<name>.yaml` out of this repository, composes each into a DAG
 and registers it over Dagu's REST API.
 
 | File | DAG | Schedule (UTC) | Replaces |
 | --- | --- | --- | --- |
-| `workflow/idx-news-pipeline.yaml` | `sectors_news--idx-news-pipeline` | `15 */4 * * *` | `.github/workflows/pipeline_idx.yaml` |
-| `workflow/sgx-news-pipeline.yaml` | `sectors_news--sgx-news-pipeline` | `0 */4 * * *` | `.github/workflows/pipeline_sgx.yaml` |
-| `workflow/idx-news-resume.yaml` | `sectors_news--idx-news-resume` | manual | that workflow's `process_only` input |
-| `workflow/sgx-news-resume.yaml` | `sectors_news--sgx-news-resume` | manual | the same, for SGX |
+| `workflows/idx-news-pipeline.yaml` | `sectors_news--idx-news-pipeline` | `15 */4 * * *` | `.github/workflows/pipeline_idx.yaml` |
+| `workflows/sgx-news-pipeline.yaml` | `sectors_news--sgx-news-pipeline` | `0 */4 * * *` | `.github/workflows/pipeline_sgx.yaml` |
+| `workflows/idx-news-resume.yaml` | `sectors_news--idx-news-resume` | manual | that workflow's `process_only` input |
+| `workflows/sgx-news-resume.yaml` | `sectors_news--sgx-news-resume` | manual | the same, for SGX |
 
 ```
 .dagu/
@@ -18,7 +18,7 @@ and registers it over Dagu's REST API.
 ├── steps/
 │   ├── preflight.sh
 │   └── process.sh
-└── workflow/<name>.yaml    configuration: which command, which files, which table
+└── workflows/<name>.yaml   configuration: which command, which files, which table
 ```
 
 Checking out and committing are runners' own commands, `runners clone` and
