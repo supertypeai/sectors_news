@@ -2,25 +2,28 @@
 
 The two news pipelines as [Dagu](https://dagu.sh) DAGs, deployed by
 [runners](https://github.com/supertypeai/runners) — the app that reads
-`.dagu/<name>/workflow.yaml` out of this repository, composes each into a DAG
+`.dagu/workflow/<name>.yaml` out of this repository, composes each into a DAG
 and registers it over Dagu's REST API.
 
-| Directory | DAG | Schedule (UTC) | Replaces |
+| File | DAG | Schedule (UTC) | Replaces |
 | --- | --- | --- | --- |
-| `idx-news-pipeline/` | `sectors_news--idx-news-pipeline` | `15 */4 * * *` | `.github/workflows/pipeline_idx.yaml` |
-| `sgx-news-pipeline/` | `sectors_news--sgx-news-pipeline` | `0 */4 * * *` | `.github/workflows/pipeline_sgx.yaml` |
-| `idx-news-resume/` | `sectors_news--idx-news-resume` | manual | that workflow's `process_only` input |
-| `sgx-news-resume/` | `sectors_news--sgx-news-resume` | manual | the same, for SGX |
+| `workflow/idx-news-pipeline.yaml` | `sectors_news--idx-news-pipeline` | `15 */4 * * *` | `.github/workflows/pipeline_idx.yaml` |
+| `workflow/sgx-news-pipeline.yaml` | `sectors_news--sgx-news-pipeline` | `0 */4 * * *` | `.github/workflows/pipeline_sgx.yaml` |
+| `workflow/idx-news-resume.yaml` | `sectors_news--idx-news-resume` | manual | that workflow's `process_only` input |
+| `workflow/sgx-news-resume.yaml` | `sectors_news--sgx-news-resume` | manual | the same, for SGX |
 
 ```
 .dagu/
 ├── Dockerfile              the runtime image — dependencies and browsers, no code
 ├── steps/
 │   ├── preflight.sh
-│   ├── commit.sh           checkpoint | publish
 │   └── process.sh
-└── <name>/workflow.yaml    configuration: which command, which files, which table
+└── workflow/<name>.yaml    configuration: which command, which files, which table
 ```
+
+Checking out and committing are runners' own commands, `runners clone` and
+`runners push`; see its Guide page. The steps that are this repository's
+business live in `steps/`.
 
 Each `workflow.yaml` is configuration and nothing else — the YAML spelling of
 `runner.Pipeline` in `deployments/common/runner.py`.
@@ -161,8 +164,8 @@ queues:
 ```
 
 Without it the two may overlap, which costs nothing but a rebase — the schedules
-are 15 minutes apart, the markets write disjoint files, and `commit.sh` retries
-a lost race five times.
+are 15 minutes apart, the markets write disjoint files, and `runners push`
+retries a lost race five times.
 
 ## Two things Dagu 2.16 forces
 

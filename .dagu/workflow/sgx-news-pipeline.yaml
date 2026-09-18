@@ -15,18 +15,9 @@ container:
     - PIPELINE_COMMAND: main_sgx
     - TABLE_NAME: sgx_news
     - WORK_LIST: data/sgx/pipeline_sgx_filtered.json
-    - CHECKPOINT_FILES: >-
-        data/sgx/pipeline_sgx.json
-        data/sgx/pipeline_sgx_filtered.json
-        data/sgx/pipeline_sgx_yesterday.json
-        data/last_state_sgx.json
     - CLEANUP_ARGS: "--source-scraper sgx"
     - BATCH_SIZE: "30"
     - BATCH_PAUSE_SECONDS: "20"
-    - GIT_AUTHOR_NAME: sectors-scheduled-runner[bot]
-    - GIT_AUTHOR_EMAIL: 325983009+sectors-scheduled-runner[bot]@users.noreply.github.com
-    - GIT_COMMITTER_NAME: sectors-scheduled-runner[bot]
-    - GIT_COMMITTER_EMAIL: 325983009+sectors-scheduled-runner[bot]@users.noreply.github.com
 
 secrets:
   - SUPABASE_URL
@@ -42,13 +33,7 @@ hist_retention_days: 30
 
 steps:
   - id: checkout
-    retry_policy:
-      limit: 3
-      interval_sec: 30
-    run: >-
-      bash -c 'set -e;
-      git clone --branch "$GIT_BRANCH" "$GIT_REMOTE" .;
-      git reset --hard "$GIT_SHA"'
+    run: runners clone
 
   - id: preflight
     depends: [checkout]
@@ -60,12 +45,12 @@ steps:
 
   - id: checkpoint
     depends: [scrape]
-    retry_policy:
-      limit: 3
-      interval_sec: 30
-      backoff: true
-      max_interval_sec: 120
-    run: bash .dagu/steps/commit.sh checkpoint
+    run: >-
+      runners push -m "chore(sgx): checkpoint ingested articles"
+      data/sgx/pipeline_sgx.json
+      data/sgx/pipeline_sgx_filtered.json
+      data/sgx/pipeline_sgx_yesterday.json
+      data/last_state_sgx.json
 
   # If this fails, do not re-run the DAG — the watermark advanced at scrape
   # time, so a second scrape overwrites the work-list with an empty list.
@@ -76,9 +61,5 @@ steps:
 
   - id: publish
     depends: [process]
-    retry_policy:
-      limit: 3
-      interval_sec: 30
-      backoff: true
-      max_interval_sec: 120
-    run: bash .dagu/steps/commit.sh publish
+    run: >-
+      runners push -m "chore(sgx): update scraped news data"
