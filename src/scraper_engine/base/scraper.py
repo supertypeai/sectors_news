@@ -82,7 +82,11 @@ def get_chrome_info() -> tuple:
                     
                     return major_version, binary_path
                 
-                except (subprocess.SubprocessError, subprocess.TimeoutExpired, ValueError) as detection_error:
+                except (
+                    subprocess.SubprocessError, 
+                    subprocess.TimeoutExpired, 
+                    ValueError
+                ) as detection_error:
                     LOGGER.warning(
                         "Failed to detect version from %s: %s",
                         binary_path,
@@ -103,7 +107,11 @@ def get_chrome_info() -> tuple:
                 '"(Get-ItemProperty -Path Registry::HKEY_CURRENT_USER\\Software\\Google\\Chrome\\BLBeacon).version"'
             )
             
-            output = subprocess.check_output(command, shell=True, text=True).strip()
+            output = subprocess.check_output(
+                command, 
+                shell=True, 
+                text=True
+            ).strip()
             
             if output:
                 major_version = int(output.split(".")[0])
@@ -174,7 +182,11 @@ class Scraper:
 
     def fetch_news(self, url):
         try:
-            response = self.session.get(url, headers=HEADERS_SCRAPER, timeout=10)
+            response = self.session.get(
+                url, 
+                headers=HEADERS_SCRAPER, 
+                timeout=10
+            )
             self.soup = BeautifulSoup(response.content, 'html.parser')
             return self.soup
 
@@ -322,7 +334,11 @@ class SeleniumScraper(Scraper):
 
         return SeleniumScraper._driver_instance
 
-    def setup_driver(self, load_strategy: str = "normal", page_timeout: int = 120):
+    def setup_driver(
+        self, 
+        load_strategy: str = "normal", 
+        page_timeout: int = 240
+    ):
         LOGGER.info("Initializing Undetected Chrome Driver")
 
         chrome_version, chrome_path = get_chrome_info()
@@ -388,7 +404,9 @@ class SeleniumScraper(Scraper):
 
             if wait_selector:
                 WebDriverWait(driver, 30).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, wait_selector))
+                    EC.presence_of_element_located(
+                        (By.CSS_SELECTOR, wait_selector)
+                    )
                 )
 
             else:

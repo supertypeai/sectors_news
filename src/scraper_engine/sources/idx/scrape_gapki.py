@@ -6,10 +6,6 @@ import argparse
 import logging
 import time
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
 
 LOGGER = logging.getLogger(__name__)
 
@@ -34,7 +30,7 @@ class GapkiScraper(SeleniumScraper):
         if not meta_list:
             return None
 
-        time_tag = meta_list.select_one("time.updated[datetime]")
+        time_tag = meta_list.select_one("time[datetime]")
 
         if not time_tag:
             return None
