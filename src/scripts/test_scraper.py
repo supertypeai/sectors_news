@@ -4,6 +4,13 @@ from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.scrape_investor_id import InvestorID
 from scraper_engine.sources.idx.scrape_kontan_investasi import KontanInvestasi
 from scraper_engine.sources.idx.scrape_bisnis_com import BisnisMarket
+from scraper_engine.sources.idx.scrape_bloomberg_technoz import BloombergTechnoz
+from scraper_engine.sources.idx.scrape_gapki import GapkiScraper
+from scraper_engine.sources.idx.scrape_idnfinancials import IDNFinancialScraper
+from scraper_engine.sources.idx.scrape_icn import ICNScraper
+from scraper_engine.sources.idx.scrape_jakartaglobe import JakartaGlobe
+from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
+from scraper_engine.sources.sgx.scrape_the_edge_reits import TheEdgeReits
 from scraper_engine.config.conf import BRIGHTDATA_API_KEY, BRIGHTDATA_ZONE
 
 import logging
@@ -125,6 +132,9 @@ def test_scrapers():
 def fetch_with_scrapling_adapter(
     self,
     url: str,
+    wait_selector: str | None = None,
+    time_sleep: int = 5,
+    retry: bool = True,
 ):
     scraper = Scraper()
     return scraper.fetch_news_with_scrapling(url)
@@ -143,11 +153,43 @@ def test_bisnis():
         date="20260921",
     )
 
-    print("articles:", len(articles))
+    LOGGER.info("articles:", len(articles))
 
     if articles:
-        print(articles[0])
+        LOGGER.info(articles[0])
+
+
+def test_switch__scrapling():
+    target_date = "20260921"
+    scraper_definitions = [
+        ("Bisnis Market", BisnisMarket),
+        ("Bloomberg Technoz", BloombergTechnoz),
+        # ("GAPKI", GapkiScraper),
+        ("IDN Financials", IDNFinancialScraper),
+        ("ICN", ICNScraper),
+        ("Jakarta Globe", JakartaGlobe),
+        ("Jakarta Post", JakartaPost),
+        ("The Edge REITs", TheEdgeReits),
+    ]
+
+    for scraper_name, scraper_class in scraper_definitions:
+        scraper = scraper_class()
+
+        scraper.fetch_news_with_selenium = MethodType(
+            fetch_with_scrapling_adapter,
+            scraper,
+        )
+    
+        articles = scraper.extract_news_pages(
+            num_pages=1,
+            date=target_date,
+        )
+
+        LOGGER.info(f"{scraper_name} articles:", len(articles))
+
+        if articles:
+            LOGGER.info(f"{scraper_name} sample:", articles[0])
 
 
 if __name__ == "__main__":
-    test_bisnis()
+    test_switch__scrapling()
