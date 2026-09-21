@@ -106,7 +106,6 @@ class KontanInvestasi(Scraper):
     def parse_articles(
         self,
         article_items: list,
-        is_use_proxy: bool = True,
     ) -> list:
         parsed_articles = []
 
@@ -122,7 +121,6 @@ class KontanInvestasi(Scraper):
 
             published_at, article_body = self.fetch_article_content(
                 article_url=source_url,
-                is_use_proxy=is_use_proxy,
             )
             time.sleep(0.3)
 
@@ -146,7 +144,6 @@ class KontanInvestasi(Scraper):
         self,
         num_pages: int,
         date: str,
-        is_use_proxy: bool = True,
     ) -> list:
         base_url = "https://www.kontan.co.id/search/indeks"
 
@@ -166,7 +163,6 @@ class KontanInvestasi(Scraper):
 
             article_items = self.fetch_article_list(
                 url=full_url,
-                is_use_proxy=is_use_proxy,
             )
 
             if not article_items:
@@ -175,7 +171,6 @@ class KontanInvestasi(Scraper):
 
             articles = self.parse_articles(
                 article_items=article_items,
-                is_use_proxy=is_use_proxy,
             )
 
             self.articles.extend(articles)
