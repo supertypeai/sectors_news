@@ -16,6 +16,8 @@ secrets:
   - OPENROUTER_API_KEY
   - GROQ_API_KEY_DEV
   - PROXY
+  - BRIGHTDATA_API_KEY
+  - BRIGHTDATA_ZONE
 
 queue: news-data-pipeline
 timeout_sec: 3600
