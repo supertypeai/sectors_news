@@ -11,17 +11,47 @@ LOGGER = logging.getLogger(__name__)
 
 
 class JakartaGlobe(SeleniumScraper):
+    def setup_driver(self):
+        super().setup_driver(load_strategy="none")
+
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(url)
+        soup = self.fetch_news_with_selenium(
+            url,
+            wait_selector="div.row.mb-4.position-relative",
+        )
 
         if not soup:
             LOGGER.info("[Jakarta Globe] [FAIL] Failed to fetch HTML or timed out for %s", url)
             return []
 
-        return soup.find_all("div", class_="row mb-4 position-relative")
+        article_items = soup.select("div.row.mb-4.position-relative")
+
+        if not article_items:
+            driver = self.driver
+            LOGGER.warning(
+                "[Jakarta Globe] No article containers matched. "
+                "title=%r current_url=%s html_length=%d selector=%s",
+                driver.title,
+                driver.current_url,
+                len(str(soup)),
+                "div.row.mb-4.position-relative",
+            )
+
+        else:
+            LOGGER.info(
+                "[Jakarta Globe] Found %d article containers on %s",
+                len(article_items),
+                url,
+            )
+
+        return article_items
 
     def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news_with_selenium(article_url)
+        soup = self.fetch_news_with_selenium(
+            article_url,
+            wait_selector="div.col.small.pt-1 span.text-muted",
+            retry=False,
+        )
 
         if not soup:
             return None
@@ -97,22 +127,43 @@ class JakartaGlobe(SeleniumScraper):
         return parsed_articles, reached_older_date
 
     def extract_news_pages(self, num_pages: int, date: str) -> list:
-        # Jakarta Globe pagination is broken on the site, single page only
         page_url = "https://jakartaglobe.id/business/newsindex"
 
-        article_items = self.fetch_article_list(page_url)
-        
-        if not article_items:
-            LOGGER.info("[Jakarta Globe] No articles found, stopping.")
-            return self.articles
+        index = 1 
 
-        articles, reached_older_date = self.parse_articles(article_items, date)
-        self.articles.extend(articles)
+        while True:
+            url = page_url + f"/{index}"
 
-        if reached_older_date:
-            LOGGER.info("[Jakarta Globe] Reached articles older than %s, stopping.", date)
+            article_items = self.fetch_article_list(url)
+            
+            if not article_items:
+                LOGGER.info(
+                    "[Jakarta Globe] No articles found, stopping."
+                )
+                return self.articles
 
-        LOGGER.info("[Jakarta Globe] Total scraped: %d", len(self.articles))
+            articles, reached_older_date = self.parse_articles(
+                article_items, 
+                date
+            )
+            self.articles.extend(articles)
+
+            if reached_older_date:
+                LOGGER.info(
+                    "[Jakarta Globe] Reached articles older than %s, stopping.", 
+                    date
+                )
+                break 
+
+            LOGGER.info(
+                "[Jakarta Globe] Total scraped: %d", 
+                len(self.articles)
+            )
+
+            if num_pages is not None and index >= num_pages: 
+                break 
+
+            index += 1 
 
         return self.articles
 
@@ -123,7 +174,7 @@ def main():
     parser = argparse.ArgumentParser(description="Script for scraping data from Jakarta Globe")
     parser.add_argument("date", type=str)
     parser.add_argument("filename", type=str, nargs="?", default="jakartaglobe")
-    parser.add_argument("--pages", type=int, default=None, help="Reserved for pipeline consistency, no effect")
+    parser.add_argument("--pages", type=int, default=None, help="Reserved for pipeline consistency")
     parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
