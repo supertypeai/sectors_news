@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import logging
@@ -10,9 +10,9 @@ import time
 LOGGER = logging.getLogger(__name__)
 
 
-class GapkiScraper(SeleniumScraper):
+class GapkiScraper(Scraper):
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(url, time_sleep=40)
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             return []
@@ -20,7 +20,7 @@ class GapkiScraper(SeleniumScraper):
         return soup.find_all("article", class_="post")
 
     def fetch_article_timestamp(self, article_url: str) -> datetime | None:
-        soup = self.fetch_news_with_selenium(article_url)
+        soup = self.fetch_news_with_scrapling(article_url)
 
         if not soup:
             return None

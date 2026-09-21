@@ -5,11 +5,10 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
-from scraper_engine.base.scraper import Scraper, SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import logging
-import time
 import json 
 import requests
 
@@ -17,7 +16,7 @@ import requests
 LOGGER = logging.getLogger(__name__)
 
 
-class SGXMarketUpdates(SeleniumScraper):
+class SGXMarketUpdates(Scraper):
     SGX_TIMEZONE = ZoneInfo("Asia/Singapore")
 
     def build_sgx_market_updates_url(

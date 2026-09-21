@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import logging
@@ -11,9 +11,9 @@ import dateparser
 LOGGER = logging.getLogger(__name__)
 
 
-class ICNScraper(SeleniumScraper):
+class ICNScraper(Scraper):
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(url)
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             return []

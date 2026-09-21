@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 from scraper_engine.config.conf import HEADERS
 
 import argparse
@@ -14,7 +14,7 @@ import requests
 LOGGER = logging.getLogger(__name__)
 
 
-class TheSmartInvestor(SeleniumScraper):
+class TheSmartInvestor(Scraper):
     def fetch_article_list(self, url: str) -> list:
         response = requests.get(
             url=url, 

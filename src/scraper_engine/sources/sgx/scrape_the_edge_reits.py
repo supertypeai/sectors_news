@@ -3,7 +3,7 @@ from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 from goose3 import Goose
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import logging
@@ -13,16 +13,12 @@ import time
 LOGGER = logging.getLogger(__name__)
 
 
-class TheEdgeReits(SeleniumScraper):
+class TheEdgeReits(Scraper):
     BASE_URL = "https://www.theedgesingapore.com"
     SECTION_URL = f"{BASE_URL}/edgecollective/REITs-Report"
 
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(
-            url,
-            wait_selector="article a[href]",
-            time_sleep=2,
-        )
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             LOGGER.warning("[The Edge REITs] Empty response for %s", url)
@@ -39,11 +35,7 @@ class TheEdgeReits(SeleniumScraper):
         self,
         article_url: str,
     ) -> tuple[datetime | None, str | None]:
-        soup = self.fetch_news_with_selenium(
-            article_url,
-            wait_selector="time[datetime]",
-            time_sleep=2,
-        )
+        soup = self.fetch_news_with_scrapling(article_url)
 
         if not soup:
             return None, None
@@ -128,7 +120,7 @@ class TheEdgeReits(SeleniumScraper):
         return parsed_articles, reached_older_date
 
     # Keep _num_pages for ScraperCollection compatibility, only the latest page is scraped
-    def extract_news_pages(self, _num_pages: int | None, date: str) -> list:
+    def extract_news_pages(self, num_pages: int | None, date: str) -> list:
         article_items = self.fetch_article_list(self.SECTION_URL)
 
         if not article_items:
@@ -163,15 +155,11 @@ def main():
 
     args = parser.parse_args()
 
-    try:
-        scraper.extract_news_pages(None, args.date)
-        scraper.write_json(scraper.articles, args.filename)
+    scraper.extract_news_pages(None, args.date)
+    scraper.write_json(scraper.articles, args.filename)
 
-        if args.csv:
-            scraper.write_csv(scraper.articles, args.filename)
-
-    finally:
-        scraper.close_shared_driver()
+    if args.csv:
+        scraper.write_csv(scraper.articles, args.filename)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 from datetime import datetime
 from urllib.parse import urljoin
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import time 
@@ -12,9 +12,9 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-class JakartaPost(SeleniumScraper):
+class JakartaPost(Scraper):
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(url)
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             LOGGER.info("[Jakarta Post] [FAIL] Failed to fetch HTML or timed out for %s", url)
@@ -25,7 +25,7 @@ class JakartaPost(SeleniumScraper):
         return article_lists
 
     def fetch_article_timestamp(self, article_url: str) -> str | None:
-        soup = self.fetch_news_with_selenium(article_url)
+        soup = self.fetch_news_with_scrapling(article_url)
 
         if not soup:
             return None

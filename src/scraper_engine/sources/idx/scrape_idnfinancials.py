@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import logging 
 import argparse
@@ -10,9 +10,9 @@ import re
 LOGGER = logging.getLogger(__name__)
 
 
-class IDNFinancialScraper(SeleniumScraper):
+class IDNFinancialScraper(Scraper):
     def fetch_article_list(self, url: str):
-        soup = self.fetch_news_with_selenium(url)
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             LOGGER.error("Failed to fetch %s", url)

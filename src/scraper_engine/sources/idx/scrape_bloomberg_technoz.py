@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import time
@@ -10,9 +10,9 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-class BloombergTechnoz(SeleniumScraper):
+class BloombergTechnoz(Scraper):
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(url)
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             LOGGER.info("[Bloomberg Technoz] [FAIL] Failed to fetch HTML or timed out for %s", url)
@@ -29,7 +29,7 @@ class BloombergTechnoz(SeleniumScraper):
         return article_list 
     
     def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news_with_selenium(article_url)
+        soup = self.fetch_news_with_scrapling(article_url)
 
         if not soup:
             return None
@@ -144,15 +144,11 @@ def main():
 
     args = parser.parse_args()
 
-    try:
-        scraper.extract_news_pages(args.pages, args.date)
-        scraper.write_json(scraper.articles, args.filename)
+    scraper.extract_news_pages(args.pages, args.date)
+    scraper.write_json(scraper.articles, args.filename)
 
-        if args.csv:
-            scraper.write_csv(scraper.articles, args.filename)
-
-    finally: 
-        SeleniumScraper.close_shared_driver()
+    if args.csv:
+        scraper.write_csv(scraper.articles, args.filename)
 
 if __name__ == "__main__":
     """
