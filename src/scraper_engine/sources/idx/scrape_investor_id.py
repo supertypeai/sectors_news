@@ -17,22 +17,8 @@ class InvestorID(Scraper):
     def fetch_article_list(
         self, 
         url: str, 
-        is_use_proxy: bool = True
     ) -> list:
-        if is_use_proxy:
-            raw_html_content = self.fetch_news_with_proxy(url)
-
-            if not raw_html_content:
-                LOGGER.info(
-                    "[Investor ID] [FAIL] Failed to fetch HTML or timed out for %s", 
-                    url
-                )
-                return []
-            
-            soup = BeautifulSoup(raw_html_content, "html.parser")
-
-        else: 
-            soup = self.fetch_news_with_scrapling(url)
+        soup = self.fetch_news_with_web_unlocker(url)
 
         if not soup:
             return []
@@ -142,7 +128,6 @@ class InvestorID(Scraper):
         self, 
         num_pages: int, 
         date: str,
-        is_use_proxy: bool = True
     ) -> list:
         base_urls = [
             "https://investor.id/stock/indeks/",
@@ -157,7 +142,6 @@ class InvestorID(Scraper):
 
                 article_items = self.fetch_article_list(
                     url=page_url,
-                    is_use_proxy=is_use_proxy
                 )
                 
                 if not article_items:
@@ -195,7 +179,7 @@ def main():
 
     args = parser.parse_args()
 
-    scraper.extract_news_pages(args.pages, args.date, args.is_proxy)
+    scraper.extract_news_pages(args.pages, args.date)
     scraper.write_json(scraper.articles, args.filename)
 
     if args.csv:

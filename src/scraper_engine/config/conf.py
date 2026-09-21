@@ -23,7 +23,10 @@ try:
 
     OPENROUTER_API_KEY = get_required_env("OPENROUTER_API_KEY")
     GROQ_API_KEY_DEV = get_required_env("GROQ_API_KEY_DEV")
+
     PROXY = get_required_env('PROXY')
+    BRIGHTDATA_API_KEY = get_required_env("BRIGHTDATA_API_KEY")
+    BRIGHTDATA_ZONE = get_required_env("BRIGHTDATA_ZONE")
 
 except ValueError as error:
     logger.critical("Configuration failed: %s", error)

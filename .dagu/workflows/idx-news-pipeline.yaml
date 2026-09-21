@@ -25,6 +25,8 @@ secrets:
   - OPENROUTER_API_KEY
   - GROQ_API_KEY_DEV
   - PROXY
+  - BRIGHTDATA_API_KEY
+  - BRIGHTDATA_ZONE
 
 schedule: "15 */4 * * *"
 queue: news-data-pipeline

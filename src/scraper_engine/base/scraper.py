@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 
-from scrapling import Fetcher
 from scrapling.fetchers import FetcherSession
 
 from pathlib import Path
@@ -16,7 +15,9 @@ from scraper_engine.config.conf import (
     PROXY, 
     USER_AGENT, 
     HEADERS_SCRAPER, 
-    CRAWLER_USER_AGENT
+    CRAWLER_USER_AGENT,
+    BRIGHTDATA_API_KEY, 
+    BRIGHTDATA_ZONE
 )
 from scraper_engine.utils.json_helpers import (
     write_csv as write_csv_file,
@@ -300,6 +301,49 @@ class Scraper:
         finally:
             self.scrapling_session = None
             self.scrapling_session_manager = None
+
+    def fetch_news_with_web_unlocker(
+        self,
+        target_url: str,
+    ):
+        try:
+            response = requests.post(
+                "https://api.brightdata.com/request",
+                headers={
+                    "Authorization": (
+                        f"Bearer {BRIGHTDATA_API_KEY}"
+                    ),
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "zone": BRIGHTDATA_ZONE,
+                    "url": target_url,
+                    "format": "raw",
+                    "method": "GET",
+                },
+                timeout=60,
+            )
+
+            if response.status_code != 200:
+                LOGGER.warning(
+                    "Web Unlocker returned status %d for %s",
+                    response.status_code,
+                    target_url,
+                )
+                return None
+
+            return BeautifulSoup(
+                response.text,
+                "html.parser",
+            )
+
+        except requests.exceptions.RequestException as error:
+            LOGGER.error(
+                "Web Unlocker request failed for %s: %s",
+                target_url,
+                error,
+            )
+            return None
     
     def fetch_news_with_proxy(self, target_url: str):
         proxy_url = PROXY 

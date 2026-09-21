@@ -1,9 +1,7 @@
 from datetime import datetime
-from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
-from scraper_engine.sources.utils.time_parser import parse_relative_time
 
 import argparse
 import logging
@@ -18,18 +16,8 @@ class KontanInvestasi(Scraper):
     def fetch_article_list(
         self,
         url: str,
-        is_use_proxy: bool = True,
     ) -> list:
-        if is_use_proxy:
-            raw_html_content = self.fetch_news_with_proxy(url)
-
-            if not raw_html_content:
-                return []
-
-            soup = BeautifulSoup(raw_html_content, "html.parser")
-
-        else:
-            soup = self.fetch_news_with_scrapling(url)
+        soup = self.fetch_news_with_web_unlocker(url)
 
         if not soup:
             return []
@@ -74,23 +62,12 @@ class KontanInvestasi(Scraper):
     def fetch_article_content(
         self,
         article_url: str,
-        is_use_proxy: bool = True,
     ) -> tuple[str | None, str | None]:
         try:
-            if is_use_proxy:
-                html = self.fetch_news_with_proxy(article_url)
+            soup = self.fetch_news_with_web_unlocker(article_url)
 
-                if not html:
-                    LOGGER.warning("[Kontan Investasi] Proxy failed for %s", article_url)
-                    return None, None
-
-                soup = BeautifulSoup(html, "html.parser")
-
-            else:
-                soup = self.fetch_news_with_scrapling(article_url)
-
-                if not soup:
-                    return None, None
+            if not soup:
+                return None, None
 
             timestamp_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
             raw_time = timestamp_tag.get_text(strip=True) if timestamp_tag else None
