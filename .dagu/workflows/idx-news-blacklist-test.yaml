@@ -1,0 +1,34 @@
+description: IDX news — test sources that previously blocked the runner IP
+
+container:
+  image: sectors-news-runtime:latest
+  pull_policy: never
+  working_dir: /workspace
+  volumes:
+    - /dev/shm:/dev/shm
+    - /srv/runners/tokens/sectors_news:/run/secrets:ro
+  env:
+    - MARKET: idx
+
+secrets:
+  - SUPABASE_URL
+  - SUPABASE_KEY
+  - OPENROUTER_API_KEY
+  - GROQ_API_KEY_DEV
+  - PROXY
+
+queue: news-data-pipeline
+timeout_sec: 3600
+hist_retention_days: 30
+
+steps:
+  - id: checkout
+    run: runners clone
+
+  - id: preflight
+    depends: [checkout]
+    run: bash .dagu/steps/preflight.sh
+
+  - id: test_blacklisted_sources
+    depends: [preflight]
+    run: python -m src.scripts.test_scraper

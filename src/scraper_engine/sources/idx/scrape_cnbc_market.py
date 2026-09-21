@@ -12,9 +12,17 @@ LOGGER = logging.getLogger(__name__)
 
 
 class CNBCMarket(Scraper):
-    def fetch_article_list(self, url: str) -> tuple[list, bool]:
-        raw = self.fetch_news_with_proxy(url)
-        soup = BeautifulSoup(raw, "html.parser")
+    def fetch_article_list(
+        self,
+        url: str,
+        is_use_proxy: bool = True,
+    ) -> tuple[list, bool]:
+        if is_use_proxy:
+            raw = self.fetch_news_with_proxy(url)
+            soup = BeautifulSoup(raw, "html.parser")
+
+        else:
+            soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             return [], False
@@ -59,7 +67,12 @@ class CNBCMarket(Scraper):
 
         return parsed_articles
 
-    def extract_news_pages(self, num_pages: int, date: str) -> list:
+    def extract_news_pages(
+        self,
+        num_pages: int,
+        date: str,
+        is_use_proxy: bool = True,
+    ) -> list:
         year = date[:4]
         month = date[4:6]
         day = date[6:]
@@ -70,7 +83,10 @@ class CNBCMarket(Scraper):
         while True:
             full_url = f"{base_url}&page={page_number}" if page_number > 1 else base_url
 
-            article_items, has_next_page = self.fetch_article_list(full_url)
+            article_items, has_next_page = self.fetch_article_list(
+                url=full_url,
+                is_use_proxy=is_use_proxy,
+            )
 
             if not article_items:
                 LOGGER.info("[CNBC Market] No articles found on page %d, stopping.", page_number)
@@ -101,12 +117,13 @@ def main():
 
     parser.add_argument("date", type=str)
     parser.add_argument("filename", type=str, nargs="?", default="cnbcmarket")
+    parser.add_argument("--is_proxy", type=bool, default=True, help="is use proxy")
     parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
     parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
 
-    scraper.extract_news_pages(args.pages, args.date)
+    scraper.extract_news_pages(args.pages, args.date, args.is_proxy)
     scraper.write_json(scraper.articles, args.filename)
 
     if args.csv:
@@ -124,4 +141,3 @@ if __name__ == "__main__":
     uv run -m src.scraper_engine.sources.idx.scrape_cnbc_market 20260427 test_cnbc_market --pages 3 --csv
     """
     main()
-

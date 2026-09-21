@@ -16,13 +16,24 @@ LOGGER = logging.getLogger(__name__)
 
 
 class KontanKeuangan(Scraper):
-    def fetch_article_list(self, url: str) -> list:
-        raw_html_content = self.fetch_news_with_proxy(url)
+    def fetch_article_list(
+        self,
+        url: str,
+        is_use_proxy: bool = True,
+    ) -> list:
+        if is_use_proxy:
+            raw_html_content = self.fetch_news_with_proxy(url)
 
-        if not raw_html_content:
+            if not raw_html_content:
+                return []
+
+            soup = BeautifulSoup(raw_html_content, "html.parser")
+
+        else:
+            soup = self.fetch_news_with_scrapling(url)
+
+        if not soup:
             return []
-
-        soup = BeautifulSoup(raw_html_content, "html.parser")
 
         return soup.select("div.list-berita ul li")
 
@@ -63,10 +74,18 @@ class KontanKeuangan(Scraper):
 
     def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
         try:
-            response = Fetcher.get(article_url, stealthy_headers=True, impersonate="chrome")
+            response = Fetcher.get(
+                article_url, 
+                stealthy_headers=True, 
+                impersonate="chrome"
+            )
 
             if response.status != 200:
-                LOGGER.warning("[Kontan Keuangan] Non-200 status %d for %s", response.status, article_url)
+                LOGGER.warning(
+                    "[Kontan Keuangan] Non-200 status %d for %s", 
+                    response.status, 
+                    article_url
+                )
                 return None, None
 
             body = bytes(response.body)
@@ -118,7 +137,12 @@ class KontanKeuangan(Scraper):
 
         return parsed_articles
 
-    def extract_news_pages(self, num_pages: int, date: str) -> list:
+    def extract_news_pages(
+        self,
+        num_pages: int,
+        date: str,
+        is_use_proxy: bool = True,
+    ) -> list:
         base_url = "https://www.kontan.co.id/search/indeks"
 
         year = date[:4]
@@ -137,7 +161,10 @@ class KontanKeuangan(Scraper):
                 per_page_offset = page_number * 10
                 full_url = f"{base_url}?{base_params}&per_page={per_page_offset}"
 
-            article_items = self.fetch_article_list(full_url)
+            article_items = self.fetch_article_list(
+                url=full_url,
+                is_use_proxy=is_use_proxy,
+            )
             
             if not article_items:
                 LOGGER.info("[Kontan Keuangan] No articles found on page %d, stopping.", page_number)
@@ -164,12 +191,13 @@ def main():
     parser = argparse.ArgumentParser(description="Script for scraping data from Kontan Keuangan")
     parser.add_argument("date", type=str)
     parser.add_argument("filename", type=str, nargs="?", default="kontankeuangan")
+    parser.add_argument("--is_proxy", type=bool, default=True, help="is use proxy")
     parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
     parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
 
-    scraper.extract_news_pages(args.pages, args.date)
+    scraper.extract_news_pages(args.pages, args.date, args.is_proxy)
     scraper.write_json(scraper.articles, args.filename)
 
     if args.csv:

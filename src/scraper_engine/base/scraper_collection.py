@@ -31,7 +31,8 @@ class ScraperCollection:
         self, 
         num_page: int | None, 
         date: str | None, 
-        filter_from: datetime | None
+        filter_from: datetime | None,
+        is_use_proxy: bool = True
     ) -> list[dict]:
         today = datetime.now(WIB)
         
@@ -54,10 +55,17 @@ class ScraperCollection:
                     ).parameters
                     
                     if "date" in extract_params or "target_date" in extract_params:
-                        articles = scraper.extract_news_pages(
-                            num_page, 
-                            date_to_scrape
-                        )
+                        if "is_use_proxy" in extract_params:
+                            articles = scraper.extract_news_pages(
+                                num_page,
+                                date_to_scrape,
+                                is_use_proxy=is_use_proxy,
+                            )
+                        else:
+                            articles = scraper.extract_news_pages(
+                                num_page,
+                                date_to_scrape,
+                            )
                     
                     else:
                         articles = scraper.extract_news_pages(num_page)

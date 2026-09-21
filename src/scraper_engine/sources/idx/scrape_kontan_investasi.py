@@ -15,13 +15,25 @@ LOGGER = logging.getLogger(__name__)
 
 
 class KontanInvestasi(Scraper):
-    def fetch_article_list(self, url: str) -> list:
-        raw_html_content = self.fetch_news_with_proxy(url)
+    def fetch_article_list(
+        self,
+        url: str,
+        is_use_proxy: bool = True,
+    ) -> list:
+        if is_use_proxy:
+            raw_html_content = self.fetch_news_with_proxy(url)
 
-        if not raw_html_content:
+            if not raw_html_content:
+                return []
+
+            soup = BeautifulSoup(raw_html_content, "html.parser")
+
+        else:
+            soup = self.fetch_news_with_scrapling(url)
+
+        if not soup:
             return []
 
-        soup = BeautifulSoup(raw_html_content, "html.parser")
         return soup.select("div.list-berita ul li")
 
     def parse_timestamp(self, raw_timestamp: str) -> str:
@@ -59,15 +71,26 @@ class KontanInvestasi(Scraper):
         except (ValueError, IndexError, AttributeError):
             return None
 
-    def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
+    def fetch_article_content(
+        self,
+        article_url: str,
+        is_use_proxy: bool = True,
+    ) -> tuple[str | None, str | None]:
         try:
-            html = self.fetch_news_with_proxy(article_url)
+            if is_use_proxy:
+                html = self.fetch_news_with_proxy(article_url)
 
-            if not html:
-                LOGGER.warning("[Kontan Investasi] Proxy failed for %s", article_url)
-                return None, None
+                if not html:
+                    LOGGER.warning("[Kontan Investasi] Proxy failed for %s", article_url)
+                    return None, None
 
-            soup = BeautifulSoup(html, "html.parser")
+                soup = BeautifulSoup(html, "html.parser")
+
+            else:
+                soup = self.fetch_news_with_scrapling(article_url)
+
+                if not soup:
+                    return None, None
 
             timestamp_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
             raw_time = timestamp_tag.get_text(strip=True) if timestamp_tag else None
@@ -103,7 +126,11 @@ class KontanInvestasi(Scraper):
             LOGGER.error("[Kontan Investasi] Failed to fetch article content for %s: %s", article_url, error)
             return None, None
     
-    def parse_articles(self, article_items: list) -> list:
+    def parse_articles(
+        self,
+        article_items: list,
+        is_use_proxy: bool = True,
+    ) -> list:
         parsed_articles = []
 
         for article_item in article_items:
@@ -116,7 +143,10 @@ class KontanInvestasi(Scraper):
             thumbnail_tag = article_item.select_one("div.pic img")
             thumbnail_url = thumbnail_tag["data-src"] if thumbnail_tag else None
 
-            published_at, article_body = self.fetch_article_content(source_url)
+            published_at, article_body = self.fetch_article_content(
+                article_url=source_url,
+                is_use_proxy=is_use_proxy,
+            )
             time.sleep(0.3)
 
             if not published_at:
@@ -135,7 +165,12 @@ class KontanInvestasi(Scraper):
 
         return parsed_articles
 
-    def extract_news_pages(self, num_pages: int, date: str) -> list:
+    def extract_news_pages(
+        self,
+        num_pages: int,
+        date: str,
+        is_use_proxy: bool = True,
+    ) -> list:
         base_url = "https://www.kontan.co.id/search/indeks"
 
         year = date[:4]
@@ -152,13 +187,19 @@ class KontanInvestasi(Scraper):
                 per_page_offset = page_number * 10
                 full_url = f"{base_url}?{base_params}&per_page={per_page_offset}"
 
-            article_items = self.fetch_article_list(full_url)
+            article_items = self.fetch_article_list(
+                url=full_url,
+                is_use_proxy=is_use_proxy,
+            )
 
             if not article_items:
                 LOGGER.info("[Kontan Investasi] No articles found on page %d, stopping.", page_number)
                 break
 
-            articles = self.parse_articles(article_items)
+            articles = self.parse_articles(
+                article_items=article_items,
+                is_use_proxy=is_use_proxy,
+            )
 
             self.articles.extend(articles)
             LOGGER.info("[Kontan Investasi] Page %d: %d articles collected.", page_number, len(articles))
@@ -179,12 +220,13 @@ def main():
     parser = argparse.ArgumentParser(description="Script for scraping data from Kompas Money")
     parser.add_argument("date", type=str)
     parser.add_argument("filename", type=str, nargs="?", default="kompasmoney")
+    parser.add_argument("--is_proxy", type=bool, default=True, help="is use proxy")
     parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
     parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
 
-    scraper.extract_news_pages(args.pages, args.date)
+    scraper.extract_news_pages(args.pages, args.date, args.is_proxy)
     scraper.write_json(scraper.articles, args.filename)
 
     if args.csv:

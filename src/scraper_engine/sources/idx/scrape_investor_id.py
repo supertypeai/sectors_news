@@ -14,14 +14,29 @@ LOGGER = logging.getLogger(__name__)
 
 
 class InvestorID(Scraper):
-    def fetch_article_list(self, url: str) -> list:
-        raw_html_content = self.fetch_news_with_proxy(url)
+    def fetch_article_list(
+        self, 
+        url: str, 
+        is_use_proxy: bool = True
+    ) -> list:
+        if is_use_proxy:
+            raw_html_content = self.fetch_news_with_proxy(url)
 
-        if not raw_html_content:
-            LOGGER.info("[Investor ID] [FAIL] Failed to fetch HTML or timed out for %s", url)
+            if not raw_html_content:
+                LOGGER.info(
+                    "[Investor ID] [FAIL] Failed to fetch HTML or timed out for %s", 
+                    url
+                )
+                return []
+            
+            soup = BeautifulSoup(raw_html_content, "html.parser")
+
+        else: 
+            soup = self.fetch_news_with_scrapling(url)
+
+        if not soup:
             return []
 
-        soup = BeautifulSoup(raw_html_content, "html.parser")
         return soup.find_all("div", class_="row mb-4 position-relative")
 
     def parse_timestamp(self, raw_timestamp: str) -> str:
@@ -55,7 +70,11 @@ class InvestorID(Scraper):
             return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
 
         except (ValueError, IndexError, AttributeError) as error:
-            LOGGER.error("[Investor ID] Error parsing date '%s': %s", raw_timestamp, error)
+            LOGGER.error(
+                "[Investor ID] Error parsing date '%s': %s", 
+                raw_timestamp, 
+                error
+            )
             return None
 
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
@@ -109,6 +128,7 @@ class InvestorID(Scraper):
                 continue
 
             seen_urls.add(source_url)
+
             parsed_articles.append({
                 "title": title,
                 "source": source_url,
@@ -118,7 +138,12 @@ class InvestorID(Scraper):
 
         return parsed_articles, reached_older_date
 
-    def extract_news_pages(self, num_pages: int, date: str) -> list:
+    def extract_news_pages(
+        self, 
+        num_pages: int, 
+        date: str,
+        is_use_proxy: bool = True
+    ) -> list:
         base_urls = [
             "https://investor.id/stock/indeks/",
             "https://investor.id/corporate-action/indeks/",
@@ -130,7 +155,10 @@ class InvestorID(Scraper):
             while True:
                 page_url = f'{base_url}{page_number}'
 
-                article_items = self.fetch_article_list(page_url)
+                article_items = self.fetch_article_list(
+                    url=page_url,
+                    is_use_proxy=is_use_proxy
+                )
                 
                 if not article_items:
                     LOGGER.info("[Investor ID] No articles found on page %d, stopping.", page_number)
@@ -161,12 +189,13 @@ def main():
     parser = argparse.ArgumentParser(description="Script for scraping data from Investor ID")
     parser.add_argument("date", type=str)
     parser.add_argument("filename", type=str, nargs="?", default="investorid")
+    parser.add_argument("--is_proxy", type=bool, default=True, help="is use proxy")
     parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
     parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
 
-    scraper.extract_news_pages(args.pages, args.date)
+    scraper.extract_news_pages(args.pages, args.date, args.is_proxy)
     scraper.write_json(scraper.articles, args.filename)
 
     if args.csv:
@@ -184,4 +213,3 @@ if __name__ == "__main__":
     uv run -m src.scraper_engine.sources.idx.scrape_investor_id 20260427 test_investor_id --pages 3 --csv
     '''
     main()
-

@@ -374,7 +374,7 @@ class SeleniumScraper(Scraper):
                 browser_executable_path=chrome_path,
             )
 
-            new_driver.set_page_load_timeout(page_timeout)
+            new_driver.set_page_load_timeout(page_timeout + 30)
             SeleniumScraper._driver_instance = new_driver
 
             LOGGER.info(
