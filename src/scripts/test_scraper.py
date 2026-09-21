@@ -61,6 +61,7 @@ def run_scraper(
     with StealthySession(
         headless=True,
         real_chrome=True,
+        executable_path="/usr/local/bin/google-chrome",
         block_webrtc=True,
     ) as session:
         LOGGER.info(
