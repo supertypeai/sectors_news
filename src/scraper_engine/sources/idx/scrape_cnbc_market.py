@@ -15,14 +15,8 @@ class CNBCMarket(Scraper):
     def fetch_article_list(
         self,
         url: str,
-        is_use_proxy: bool = True,
     ) -> tuple[list, bool]:
-        if is_use_proxy:
-            raw = self.fetch_news_with_proxy(url)
-            soup = BeautifulSoup(raw, "html.parser")
-
-        else:
-            soup = self.fetch_news_with_scrapling(url)
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             return [], False
@@ -71,7 +65,6 @@ class CNBCMarket(Scraper):
         self,
         num_pages: int,
         date: str,
-        is_use_proxy: bool = True,
     ) -> list:
         year = date[:4]
         month = date[4:6]
@@ -85,7 +78,6 @@ class CNBCMarket(Scraper):
 
             article_items, has_next_page = self.fetch_article_list(
                 url=full_url,
-                is_use_proxy=is_use_proxy,
             )
 
             if not article_items:

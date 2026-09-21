@@ -5,7 +5,6 @@ from goose3 import Goose
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
-from scraper_engine.sources.utils.time_parser import parse_relative_time
 
 import argparse
 import time
@@ -19,18 +18,8 @@ class KontanKeuangan(Scraper):
     def fetch_article_list(
         self,
         url: str,
-        is_use_proxy: bool = True,
     ) -> list:
-        if is_use_proxy:
-            raw_html_content = self.fetch_news_with_proxy(url)
-
-            if not raw_html_content:
-                return []
-
-            soup = BeautifulSoup(raw_html_content, "html.parser")
-
-        else:
-            soup = self.fetch_news_with_scrapling(url)
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             return []
@@ -141,7 +130,6 @@ class KontanKeuangan(Scraper):
         self,
         num_pages: int,
         date: str,
-        is_use_proxy: bool = True,
     ) -> list:
         base_url = "https://www.kontan.co.id/search/indeks"
 
@@ -163,7 +151,6 @@ class KontanKeuangan(Scraper):
 
             article_items = self.fetch_article_list(
                 url=full_url,
-                is_use_proxy=is_use_proxy,
             )
             
             if not article_items:

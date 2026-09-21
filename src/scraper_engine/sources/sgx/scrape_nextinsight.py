@@ -1,8 +1,7 @@
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
-from bs4 import BeautifulSoup
 
-from scraper_engine.base.scraper import Scraper, SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import logging
@@ -12,26 +11,25 @@ import time
 LOGGER = logging.getLogger(__name__)
 
 
-class NextInsight(SeleniumScraper):
+class NextInsight(Scraper):
     BASE_URL = "https://nextinsight.net"
     ARCHIVE_URL = "https://nextinsight.net/story-archive-mainmenu-60/949-2026"
 
     def fetch_article_list(self, url: str) -> list:
-        raw_html_content = self.fetch_news_with_proxy(target_url=url)
+        soup = self.fetch_news_with_scrapling(url)
 
-        soup = BeautifulSoup(raw_html_content, "html.parser")
+        if not soup:
+            return []
 
         article_items = soup.select("tr.cat-list-row0, tr.cat-list-row1")
         
         return article_items if article_items else []
 
     def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
-        html = self.fetch_news_with_proxy(article_url)
+        soup = self.fetch_news_with_scrapling(article_url)
 
-        if not html:
+        if not soup:
             return None, None
-
-        soup = BeautifulSoup(html, "html.parser")
 
         time_tag = soup.select_one("dd.published time[datetime]")
         published_at = self.parse_timestamp(time_tag.get("datetime")) if time_tag else None

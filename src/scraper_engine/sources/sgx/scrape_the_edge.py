@@ -1,9 +1,8 @@
-from datetime import datetime, timezone 
+from datetime import datetime 
 from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup 
 from goose3 import Goose 
 
-from scraper_engine.sources.utils.time_parser import parse_relative_time
 from scraper_engine.base.scraper import Scraper
 
 import argparse 
@@ -18,9 +17,7 @@ class TheEdgeSingapore(Scraper):
     BASE_URL = "https://www.theedgesingapore.com"
 
     def fetch_article_list(self, url: str) -> list:
-        raw_html_content = self.fetch_news_with_proxy(target_url=url)
-
-        soup = BeautifulSoup(raw_html_content, "html.parser")
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             LOGGER.warning("[The Edge SG] Empty soup for %s", url)
@@ -36,18 +33,16 @@ class TheEdgeSingapore(Scraper):
         return article_items if article_items else []
 
     def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
-        html = self.fetch_news_with_proxy(article_url)
+        soup = self.fetch_news_with_scrapling(article_url)
 
-        if not html:
+        if not soup:
             return None, None
-
-        soup = BeautifulSoup(html, "html.parser")
 
         time_tag = soup.select_one("time[datetime]")
         published_at = time_tag.get("datetime") if time_tag else None
 
         goose_extractor = Goose()
-        article_data = goose_extractor.extract(raw_html=html.encode())
+        article_data = goose_extractor.extract(raw_html=str(soup).encode())
         article_body = article_data.cleaned_text or None
 
         return published_at, article_body

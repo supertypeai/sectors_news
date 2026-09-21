@@ -1,12 +1,16 @@
-import undetected_chromedriver as uc
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
+
+from scrapling import Fetcher
+from scrapling.fetchers import FetcherSession
+
+from pathlib import Path
+
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-from scrapling import Fetcher
 
 from scraper_engine.config.conf import (
     PROXY, 
@@ -19,6 +23,7 @@ from scraper_engine.utils.json_helpers import (
     write_json as write_json_file,
 )
 
+import undetected_chromedriver as uc
 import requests
 import time
 import logging 
@@ -27,7 +32,6 @@ import subprocess
 import shutil
 import os 
 import re 
-from pathlib import Path
 
 
 LOGGER = logging.getLogger(__name__)
@@ -166,7 +170,6 @@ def clear_stale_chromedriver_cache(chrome_major_version: int) -> None:
         except OSError:
             pass
 
-
 class Scraper:
     soup: BeautifulSoup
     articles: list
@@ -174,38 +177,129 @@ class Scraper:
 
     def __init__(self):
         self.articles = []
+
         self.session = requests.Session()
-        retry = Retry(total=3, backoff_factor=2)
-        adapter = HTTPAdapter(max_retries=retry)
-        self.session.mount('http://', adapter)
-        self.session.mount('https://', adapter)
+
+        retry = Retry(
+            total=3,
+            backoff_factor=2,
+        )
+
+        adapter = HTTPAdapter(
+            max_retries=retry,
+        )
+
+        self.session.mount(
+            "http://",
+            adapter,
+        )
+
+        self.session.mount(
+            "https://",
+            adapter,
+        )
+
+        self.scrapling_session_manager = None
+        self.scrapling_session = None
 
     def fetch_news(self, url):
         try:
             response = self.session.get(
-                url, 
-                headers=HEADERS_SCRAPER, 
-                timeout=10
+                url,
+                headers=HEADERS_SCRAPER,
+                timeout=10,
             )
-            self.soup = BeautifulSoup(response.content, 'html.parser')
+
+            self.soup = BeautifulSoup(
+                response.content,
+                "html.parser",
+            )
+
             return self.soup
 
         except Exception as error:
-            LOGGER.error("Error fetching the URL: %s", error)
+            LOGGER.error(
+                "Error fetching the URL: %s",
+                error,
+            )
             return BeautifulSoup()
 
-    def fetch_news_with_scrapling(self, url: str):
-        response = Fetcher.get(
-            url,
-            stealthy_headers=True,
-            impersonate="chrome",
-        )
+    def _get_scrapling_session(self):
+        if self.scrapling_session is None:
+            LOGGER.info(
+                "Initializing Scrapling FetcherSession for %s",
+                self.__class__.__name__,
+            )
 
-        if response.status != 200:
-            LOGGER.warning("Non-200 status %d for %s", response.status, url)
+            self.scrapling_session_manager = FetcherSession(
+                impersonate="chrome",
+                stealthy_headers=True,
+                timeout=30,
+                retries=3,
+            )
+
+            self.scrapling_session = (
+                self.scrapling_session_manager.__enter__()
+            )
+
+        return self.scrapling_session
+
+    def fetch_news_with_scrapling(
+        self,
+        url: str,
+    ):
+        try:
+            scrapling_session = self._get_scrapling_session()
+
+            response = scrapling_session.get(url)
+
+            if response.status != 200:
+                LOGGER.warning(
+                    "Non-200 status %d for %s",
+                    response.status,
+                    url,
+                )
+                return None
+
+            return BeautifulSoup(
+                bytes(response.body),
+                "html.parser",
+            )
+
+        except Exception as error:
+            LOGGER.error(
+                "Scrapling request failed for %s: %s",
+                url,
+                error,
+            )
             return None
 
-        return BeautifulSoup(bytes(response.body), "html.parser")
+    def close_scrapling_session(self) -> None:
+        if self.scrapling_session_manager is None:
+            return
+
+        LOGGER.info(
+            "Closing Scrapling FetcherSession for %s",
+            self.__class__.__name__,
+        )
+
+        try:
+            self.scrapling_session_manager.__exit__(
+                None,
+                None,
+                None,
+            )
+
+        except Exception as error:
+            LOGGER.warning(
+                "Failed to close Scrapling session for %s: %s",
+                self.__class__.__name__,
+                error,
+            )
+
+        finally:
+            self.scrapling_session = None
+            self.scrapling_session_manager = None
     
     def fetch_news_with_proxy(self, target_url: str):
         proxy_url = PROXY 

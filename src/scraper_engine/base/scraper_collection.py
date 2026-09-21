@@ -81,7 +81,11 @@ class ScraperCollection:
                     continue
 
         return self.articles
-    
+
+    def close_scrapling_sessions(self) -> None:
+        for scraper in self.scrapers:
+            scraper.close_scrapling_session()
+            
     # Writer methods
     def write_json(self, jsontext, source: str, filename: str):
         json_path = Path("data") / source / f"{filename}.json"

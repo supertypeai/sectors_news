@@ -190,8 +190,9 @@ def main_idx(
         financedetik = FinanceDetik()
         kontankeuangan = KontanKeuangan()
 
+        scrapercollection = ScraperCollection()
+
         try:
-            scrapercollection = ScraperCollection()
             # scrapercollection.add_scraper(petromindoscraper)
             # scrapercollection.add_scraper(idnbusinesspostscraper)
             # scrapercollection.add_scraper(insightkontanscraper) 
@@ -234,6 +235,7 @@ def main_idx(
                 scrapercollection.write_csv(all_articles, source_scraper, filename)
 
         finally:
+            scrapercollection.close_scrapling_sessions()
             SeleniumScraper.close_shared_driver()
 
     # scrape-only: the work-list is built and committed nothing to process yet
@@ -316,8 +318,9 @@ def main_sgx(
         sgx_market_updates = SGXMarketUpdates()
         smallcapasia_scraper = SmallCapAsia()
 
+        scrapercollection = ScraperCollection()
+
         try:
-            scrapercollection = ScraperCollection()
             scrapercollection.add_scraper(businesstimesscraper)
             scrapercollection.add_scraper(straitstimesscraper)
             scrapercollection.add_scraper(channelnewsasiascraper)
@@ -346,6 +349,7 @@ def main_sgx(
                 scrapercollection.write_csv(all_articles, source_scraper, filename)
 
         finally:
+            scrapercollection.close_scrapling_sessions()
             SeleniumScraper.close_shared_driver()
 
     # scrape-only: the work-list is built and committed nothing to process yet

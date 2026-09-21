@@ -15,14 +15,8 @@ class CNNEkonomi(Scraper):
     def fetch_article_list(
         self,
         url: str,
-        is_use_proxy: bool = True,
     ) -> tuple[list, bool]:
-        if is_use_proxy:
-            raw = self.fetch_news_with_proxy(url)
-            soup = BeautifulSoup(raw, "html.parser")
-
-        else:
-            soup = self.fetch_news_with_scrapling(url)
+        soup = self.fetch_news_with_scrapling(url)
 
         if not soup:
             return []
@@ -68,7 +62,6 @@ class CNNEkonomi(Scraper):
         self,
         num_pages: int,
         date: str,
-        is_use_proxy: bool = True,
     ) -> list:
         base_url = "https://www.cnnindonesia.com/ekonomi/indeks/5"
 
@@ -83,7 +76,6 @@ class CNNEkonomi(Scraper):
 
             article_items = self.fetch_article_list(
                 url=full_url,
-                is_use_proxy=is_use_proxy,
             )
 
             if not article_items:

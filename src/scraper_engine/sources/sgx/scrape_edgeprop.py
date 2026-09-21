@@ -1,7 +1,6 @@
 from datetime import datetime, timezone 
 from urllib.parse import quote, urlparse
 from zoneinfo import ZoneInfo
-from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import SeleniumScraper
 
@@ -26,14 +25,14 @@ class EdgeProp(SeleniumScraper):
         )
 
         proxy_url = f"{self.BASE_URL}/proxy/news?url={quote(api_url, safe='')}"
-        response_text = self.fetch_news_with_proxy(proxy_url)
+        response_soup = self.fetch_news_with_scrapling(proxy_url)
 
-        if not response_text:
+        if not response_soup:
             LOGGER.warning("[EdgeProp SG] Empty response for %s", url)
             return []
 
         try:
-            response_data = json.loads(response_text)
+            response_data = json.loads(str(response_soup))
             
         except json.JSONDecodeError as error:
             LOGGER.warning("[EdgeProp SG] Invalid article-list response for %s: %s", url, error)
@@ -48,12 +47,10 @@ class EdgeProp(SeleniumScraper):
         return article_items
 
     def fetch_article_content(self, article_url: str) -> tuple[datetime | None, str | None]:
-        html = self.fetch_news_with_proxy(article_url)
+        soup = self.fetch_news_with_scrapling(article_url)
 
-        if not html:
+        if not soup:
             return None, None
-
-        soup = BeautifulSoup(html, "html.parser")
 
         time_tag = soup.select_one("time[datetime]")
         published_at = self.parse_timestamp(time_tag.get("datetime")) if time_tag else None

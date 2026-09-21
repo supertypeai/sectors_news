@@ -1,6 +1,5 @@
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
-from bs4 import BeautifulSoup 
 
 from scraper_engine.base.scraper import SeleniumScraper
 
@@ -14,9 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 class AsiaNews(SeleniumScraper):
     def fetch_article_list(self, url: str) -> list:
-        raw_html_content = self.fetch_news_with_proxy(target_url=url)
-
-        soup = BeautifulSoup(raw_html_content, "html.parser")
+        soup = self.fetch_news_with_scrapling(url)
         
         if not soup:
             LOGGER.warning("[AsiaNews] Empty soup for %s", url)
