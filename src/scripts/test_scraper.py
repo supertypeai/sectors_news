@@ -1,15 +1,14 @@
 from types import MethodType
-from dotenv import load_dotenv
 
+from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.scrape_investor_id import InvestorID
 from scraper_engine.sources.idx.scrape_kontan_investasi import KontanInvestasi
+from scraper_engine.sources.idx.scrape_bisnis_com import BisnisMarket
+from scraper_engine.config.conf import BRIGHTDATA_API_KEY, BRIGHTDATA_ZONE
 
 import logging
-import os
-import requests
+import requests 
 
-
-load_dotenv()
 
 LOGGER = logging.getLogger(__name__)
 
@@ -18,11 +17,6 @@ def fetch_with_web_unlocker(
     self,
     target_url: str,
 ):
-    api_key = os.getenv("BRIGHTDATA_API_KEY")
-    zone = os.getenv(
-        "BRIGHTDATA_ZONE",
-    )
-
     LOGGER.info(
         "[WEB UNLOCKER TEST] Fetching %s",
         target_url,
@@ -32,11 +26,11 @@ def fetch_with_web_unlocker(
         response = requests.post(
             "https://api.brightdata.com/request",
             headers={
-                "Authorization": f"Bearer {api_key}",
+                "Authorization": f"Bearer {BRIGHTDATA_API_KEY}",
                 "Content-Type": "application/json",
             },
             json={
-                "zone": zone,
+                "zone": BRIGHTDATA_ZONE,
                 "url": target_url,
                 "format": "raw",
                 "method": "GET",
@@ -128,5 +122,32 @@ def test_scrapers():
         )
 
 
+def fetch_with_scrapling_adapter(
+    self,
+    url: str,
+):
+    scraper = Scraper()
+    return scraper.fetch_news_with_scrapling(url)
+
+
+def test_bisnis():
+    scraper = BisnisMarket()
+
+    scraper.fetch_news_with_selenium = MethodType(
+        fetch_with_scrapling_adapter,
+        scraper,
+    )
+
+    articles = scraper.extract_news_pages(
+        num_pages=1,
+        date="20260921",
+    )
+
+    print("articles:", len(articles))
+
+    if articles:
+        print(articles[0])
+
+
 if __name__ == "__main__":
-    test_scrapers()
+    test_bisnis()

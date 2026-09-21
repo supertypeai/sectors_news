@@ -171,6 +171,7 @@ def clear_stale_chromedriver_cache(chrome_major_version: int) -> None:
         except OSError:
             pass
 
+
 class Scraper:
     soup: BeautifulSoup
     articles: list
