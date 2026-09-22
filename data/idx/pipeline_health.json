@@ -1,0 +1,457 @@
+[
+    {
+        "source": "ICNScraper",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 0.022097880532965065,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "GapkiScraper",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 1.533582087167694,
+        "requests": 1,
+        "successful_requests": 0,
+        "failed_requests": 1,
+        "http_statuses": [],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://gapki.id/en/news/category/recent-news/page/1",
+                "status": null,
+                "reason": "Timeout",
+                "message": "Failed to perform, curl: (28) Operation timed out after 30002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+            }
+        ]
+    },
+    {
+        "source": "MinerbaScraper",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 0.018773098051315173,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "IdnMinerScraper",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 0.038261992499853174,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "IDNFinancialScraper",
+        "date": "20260922",
+        "articles_found": 14,
+        "duration_minutes": 0.0070888889002768945,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BisnisMarket",
+        "date": "20260922",
+        "articles_found": 17,
+        "duration_minutes": 0.45151742301726094,
+        "requests": 36,
+        "successful_requests": 36,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BloombergTechnoz",
+        "date": "20260922",
+        "articles_found": 18,
+        "duration_minutes": 0.20734066136647017,
+        "requests": 19,
+        "successful_requests": 19,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "InvestorID",
+        "date": "20260922",
+        "articles_found": 26,
+        "duration_minutes": 1.590326474199537,
+        "requests": 3,
+        "successful_requests": 3,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "AbafScraper",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 0.0103621049997552,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "JakartaGlobe",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 0.5257563909496336,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "AntaraNews",
+        "date": "20260922",
+        "articles_found": 2,
+        "duration_minutes": 0.03574203940030808,
+        "requests": 4,
+        "successful_requests": 4,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "AsianTelecom",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 0.037624144084596384,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "JakartaPost",
+        "date": "20260922",
+        "articles_found": 1,
+        "duration_minutes": 0.06691907598287798,
+        "requests": 3,
+        "successful_requests": 3,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "KontanInvestasi",
+        "date": "20260922",
+        "articles_found": 33,
+        "duration_minutes": 25.693112019767675,
+        "requests": 45,
+        "successful_requests": 37,
+        "failed_requests": 8,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/rupiah-dibuka-melemah-ke-rp-17876-per-dolar-as-hari-ini-229-paling-lemah-di-asia",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/daftar-harga-emas-antam-hari-ini-229-turun-rp-1000-jadi-rp-2627000-per-gram",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/cermati-rekomendasi-saham-pilihan-hari-ini-229-ihsg-masih-rawan-koreksi",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/saham-visi-naik-555-ytd-raffi-ahmad-dan-nagita-slavina-tegaskan-tak-akan-jual-saham",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/harga-saham-rp-330-investor-dapat-dividen-dengan-yield-6-cek-jadwal-pembayarannya",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/wall-street-reli-indeks-nasdaq-catat-rekor-penutupan-tertinggi-optimisme-ai-bangkit",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/berpeluang-menguat-cermati-rekomendasi-saham-tpia",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/harga-salah-satu-saham-prajogo-pangestu-bangkit-usai-tren-melemah-pilih-beli-jual",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            }
+        ]
+    },
+    {
+        "source": "EmitenNews",
+        "date": "20260922",
+        "articles_found": 10,
+        "duration_minutes": 0.15252592358350134,
+        "requests": 13,
+        "successful_requests": 13,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BCANews",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 0.26589224388396054,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "CNBCMarket",
+        "date": "20260922",
+        "articles_found": 10,
+        "duration_minutes": 0.006906427683619162,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "CNNEkonomi",
+        "date": "20260922",
+        "articles_found": 15,
+        "duration_minutes": 0.04444200315047055,
+        "requests": 3,
+        "successful_requests": 3,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "KompasMoney",
+        "date": "20260922",
+        "articles_found": 0,
+        "duration_minutes": 0.011541550800514718,
+        "requests": 1,
+        "successful_requests": 0,
+        "failed_requests": 1,
+        "http_statuses": [
+            202
+        ],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://indeks.kompas.com/?site=money&date=2026-09-22&page=1",
+                "status": 202,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 202"
+            }
+        ]
+    },
+    {
+        "source": "FinanceDetik",
+        "date": "20260922",
+        "articles_found": 4,
+        "duration_minutes": 0.0631585281167645,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "KontanKeuangan",
+        "date": "20260922",
+        "articles_found": 8,
+        "duration_minutes": 0.0978734781674575,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    }
+]
