@@ -229,10 +229,24 @@ def main_idx(
             
             all_articles = scrapercollection.articles
 
-            scrapercollection.write_json(all_articles, source_scraper, filename)
+            scrapercollection.write_json(
+                scrapercollection.scraper_results,
+                source_scraper,
+                f"{filename}_health",
+            )
+
+            scrapercollection.write_json(
+                all_articles,
+                source_scraper,
+                filename,
+            )
 
             if csv:
-                scrapercollection.write_csv(all_articles, source_scraper, filename)
+                scrapercollection.write_csv(
+                    all_articles,
+                    source_scraper,
+                    filename,
+                )
 
         finally:
             scrapercollection.close_scrapling_sessions()
@@ -343,10 +357,24 @@ def main_sgx(
 
             all_articles = scrapercollection.articles
 
-            scrapercollection.write_json(all_articles, source_scraper, filename)
+            scrapercollection.write_json(
+                scrapercollection.scraper_results,
+                source_scraper,
+                f"{filename}_health",
+            )
+
+            scrapercollection.write_json(
+                all_articles,
+                source_scraper,
+                filename,
+            )
 
             if csv:
-                scrapercollection.write_csv(all_articles, source_scraper, filename)
+                scrapercollection.write_csv(
+                    all_articles,
+                    source_scraper,
+                    filename,
+                )
 
         finally:
             scrapercollection.close_scrapling_sessions()

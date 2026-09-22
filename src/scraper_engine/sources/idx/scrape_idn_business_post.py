@@ -10,6 +10,10 @@ import time
 class IndonesiaBusinessPost(Scraper):
     def extract_news(self, url):
         soup = self.fetch_news(url)
+
+        if soup is None:
+            return self.articles
+
         article_cards = soup.select("div.card-box")
 
         for card in article_cards:

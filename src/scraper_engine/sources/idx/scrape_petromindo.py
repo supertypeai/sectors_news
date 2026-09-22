@@ -21,6 +21,10 @@ class PetromindoScraper(Scraper):
 
     def extract_news(self, category, url):
         soup = self.fetch_news(url)
+        
+        if soup is None:
+            return self.articles
+
         for item in soup.find_all('article'):
             div = item.find('div', class_='highlight-content')
             if div:

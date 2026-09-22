@@ -18,6 +18,9 @@ class SmallCapAsia(Scraper):
 
     def fetch_article_list(self, url: str) -> list:
         soup = self.fetch_news(url)
+        if soup is None:
+            return []
+
         listing_container = soup.select_one(".elementor-element-7fff712.main-loop")
 
         if not listing_container:
@@ -46,6 +49,9 @@ class SmallCapAsia(Scraper):
 
     def fetch_article_content(self, article_url: str) -> str | None:
         soup = self.fetch_news(article_url)
+        if soup is None:
+            return None
+
         content_container = soup.select_one(".elementor-widget-theme-post-content")
 
         if not content_container:

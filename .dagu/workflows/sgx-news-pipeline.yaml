@@ -50,6 +50,7 @@ steps:
     run: >-
       runners push -m "chore(sgx): checkpoint ingested articles"
       data/sgx/pipeline_sgx.json
+      data/sgx/pipeline_sgx_health.json
       data/sgx/pipeline_sgx_filtered.json
       data/sgx/pipeline_sgx_yesterday.json
       data/last_state_sgx.json

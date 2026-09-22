@@ -16,6 +16,9 @@ class FinanceDetik(Scraper):
     def fetch_article_list(self, url: str):
         soup = self.fetch_news(url)
 
+        if soup is None:
+            return []
+
         article_items = soup.find_all("article", class_="list-content__item")
         
         return article_items 
@@ -135,4 +138,3 @@ if __name__ == "__main__":
     uv run -m src.scraper_engine.sources.idx.scrape_finance_detik 20260427 test_kompas --pages 3 --csv
     """
     main()
-

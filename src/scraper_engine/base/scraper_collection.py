@@ -1,14 +1,16 @@
+from copy import deepcopy
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+
 from .scraper import Scraper
 from scraper_engine.utils.json_helpers import (
     write_csv as write_csv_file,
     write_json as write_json_file,
 )
 
-from datetime import datetime, timezone, timedelta
-
 import logging
 import inspect 
-from pathlib import Path
+import time
 
 
 WIB = timezone(timedelta(hours=7))
@@ -19,10 +21,12 @@ LOGGER = logging.getLogger(__name__)
 class ScraperCollection:
     scrapers: list[Scraper]
     articles: list
+    scraper_results: list[dict]
   
     def __init__(self):
         self.scrapers = []
         self.articles = []
+        self.scraper_results = []
     
     def add_scraper(self, scraper) -> None:
         self.scrapers.append(scraper)
@@ -34,6 +38,7 @@ class ScraperCollection:
         filter_from: datetime | None,
     ) -> list[dict]:
         today = datetime.now(WIB)
+        self.scraper_results = []
         
         if date is None:
             date = today.strftime("%Y%m%d")
@@ -42,11 +47,16 @@ class ScraperCollection:
 
         if filter_from and filter_from.date() < today.date():
             yesterday = (today - timedelta(days=1)).strftime("%Y%m%d")
-            dates_to_scrape.append(yesterday)
+            if yesterday not in dates_to_scrape:
+                dates_to_scrape.append(yesterday)
 
         for date_to_scrape in dates_to_scrape:
             for scraper in self.scrapers:
                 scraper.articles = [] 
+                scraper.reset_health()
+                scraper_articles = []
+
+                start_time = time.perf_counter()
                 
                 try:
                     extract_params = inspect.signature(
@@ -54,15 +64,15 @@ class ScraperCollection:
                     ).parameters
                     
                     if "date" in extract_params or "target_date" in extract_params:
-                        articles = scraper.extract_news_pages(
+                        scraper_articles = scraper.extract_news_pages(
                             num_page,
                             date_to_scrape,
                         )
                     
                     else:
-                        articles = scraper.extract_news_pages(num_page)
+                        scraper_articles = scraper.extract_news_pages(num_page)
 
-                    self.articles = [*self.articles, *articles]
+                    self.articles.extend(scraper_articles)
                 
                 except Exception as error:
                     LOGGER.error(
@@ -70,7 +80,24 @@ class ScraperCollection:
                         scraper.__class__.__name__,
                         error,
                     )
-                    continue
+
+                duration_minutes = (
+                    time.perf_counter() - start_time
+                ) / 60
+
+                scraper_result = {
+                    "source": scraper.__class__.__name__,
+                    "date": date_to_scrape,
+                    "articles_found": (
+                        len(scraper_articles)
+                        if scraper_articles is not None
+                        else 0
+                    ),
+                    "duration_minutes": duration_minutes,
+                    **deepcopy(scraper.health),
+                }
+
+                self.scraper_results.append(scraper_result)
 
         return self.articles
 

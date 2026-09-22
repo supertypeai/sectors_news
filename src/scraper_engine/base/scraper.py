@@ -203,8 +203,51 @@ class Scraper:
 
         self.scrapling_session_manager = None
         self.scrapling_session = None
+        self.reset_health()
+
+    def reset_health(self) -> None:
+        self.health = {
+            "requests": 0,
+            "successful_requests": 0,
+            "failed_requests": 0,
+            "http_statuses": [],
+            "failures": [],
+        }
+
+    def record_request_success(
+        self,
+        status_code: int | None = None,
+    ) -> None:
+        self.health["requests"] += 1
+        self.health["successful_requests"] += 1
+
+        if status_code is not None:
+            self.health["http_statuses"].append(status_code)
+
+    def record_request_failure(
+        self,
+        url: str,
+        reason: str,
+        status_code: int | None = None,
+        message: str | None = None,
+    ) -> None:
+        self.health["requests"] += 1
+        self.health["failed_requests"] += 1
+
+        if status_code is not None:
+            self.health["http_statuses"].append(status_code)
+
+        self.health["failures"].append({
+            "stage": "fetch",
+            "url": url,
+            "status": status_code,
+            "reason": reason,
+            "message": message,
+        })
 
     def fetch_news(self, url):
+        response = None
+
         try:
             response = self.session.get(
                 url,
@@ -212,9 +255,27 @@ class Scraper:
                 timeout=10,
             )
 
+            if response.status_code != 200:
+                LOGGER.warning(
+                    "Non-200 status %d for %s",
+                    response.status_code,
+                    url,
+                )
+                self.record_request_failure(
+                    url=url,
+                    reason="HTTPStatusError",
+                    status_code=response.status_code,
+                    message=f"Received status code {response.status_code}",
+                )
+                return None
+
             self.soup = BeautifulSoup(
                 response.content,
                 "html.parser",
+            )
+
+            self.record_request_success(
+                status_code=response.status_code,
             )
 
             return self.soup
@@ -224,7 +285,17 @@ class Scraper:
                 "Error fetching the URL: %s",
                 error,
             )
-            return BeautifulSoup()
+            self.record_request_failure(
+                url=url,
+                reason=type(error).__name__,
+                status_code=(
+                    response.status_code
+                    if response is not None
+                    else None
+                ),
+                message=str(error),
+            )
+            return None
 
     def _get_scrapling_session(self):
         if self.scrapling_session is None:
@@ -250,6 +321,8 @@ class Scraper:
         self,
         url: str,
     ):
+        response = None
+
         try:
             scrapling_session = self._get_scrapling_session()
 
@@ -261,18 +334,40 @@ class Scraper:
                     response.status,
                     url,
                 )
+                self.record_request_failure(
+                    url=url,
+                    reason="HTTPStatusError",
+                    status_code=response.status,
+                    message=f"Received status code {response.status}",
+                )
                 return None
 
-            return BeautifulSoup(
+            soup = BeautifulSoup(
                 bytes(response.body),
                 "html.parser",
             )
+
+            self.record_request_success(
+                status_code=response.status,
+            )
+
+            return soup
 
         except Exception as error:
             LOGGER.error(
                 "Scrapling request failed for %s: %s",
                 url,
                 error,
+            )
+            self.record_request_failure(
+                url=url,
+                reason=type(error).__name__,
+                status_code=(
+                    response.status
+                    if response is not None
+                    else None
+                ),
+                message=str(error),
             )
             return None
 
@@ -307,6 +402,8 @@ class Scraper:
         self,
         target_url: str,
     ):
+        response = None
+
         try:
             response = requests.post(
                 "https://api.brightdata.com/request",
@@ -331,18 +428,40 @@ class Scraper:
                     response.status_code,
                     target_url,
                 )
+                self.record_request_failure(
+                    url=target_url,
+                    reason="HTTPStatusError",
+                    status_code=response.status_code,
+                    message=f"Received status code {response.status_code}",
+                )
                 return None
 
-            return BeautifulSoup(
+            soup = BeautifulSoup(
                 response.text,
                 "html.parser",
             )
 
-        except requests.exceptions.RequestException as error:
+            self.record_request_success(
+                status_code=response.status_code,
+            )
+
+            return soup
+
+        except Exception as error:
             LOGGER.error(
                 "Web Unlocker request failed for %s: %s",
                 target_url,
                 error,
+            )
+            self.record_request_failure(
+                url=target_url,
+                reason=type(error).__name__,
+                status_code=(
+                    response.status_code
+                    if response is not None
+                    else None
+                ),
+                message=str(error),
             )
             return None
     
@@ -364,6 +483,8 @@ class Scraper:
                 "User-Agent": USER_AGENT
             }
 
+        response = None
+
         try:
             LOGGER.info("Routing %s through proxy", target_url)
             response = requests.get(
@@ -374,34 +495,41 @@ class Scraper:
                 timeout=60 
             )
             
-            if response.status_code == 200:
-                return response.text
-                
-            LOGGER.info(
-                "[FAIL] Web Unlocker returned status code: %s",
-                response.status_code,
+            if response.status_code != 200:
+                LOGGER.info(
+                    "[FAIL] Web Unlocker returned status code: %s",
+                    response.status_code,
+                )
+                self.record_request_failure(
+                    url=target_url,
+                    reason="HTTPStatusError",
+                    status_code=response.status_code,
+                    message=f"Received status code {response.status_code}",
+                )
+                return ""
+
+            self.record_request_success(
+                status_code=response.status_code,
             )
-            return ""
+            
+            return response.text
         
-        except requests.exceptions.RequestException as network_error:
+        except Exception as network_error:
             LOGGER.error(
                 "[FAIL] Request through Web Unlocker failed: %s",
                 network_error,
             )
+            self.record_request_failure(
+                url=target_url,
+                reason=type(network_error).__name__,
+                status_code=(
+                    response.status_code
+                    if response is not None
+                    else None
+                ),
+                message=str(network_error),
+            )
             return ""
-
-    def fetch_news_with_post(self, url: str, payload: dict):
-        try:
-            response = requests.post(url, data=payload)
-            data = response.json()
-
-            html_content = data.get('html_items')
-            self.soup = BeautifulSoup(html_content, 'html.parser')
-            return self.soup
-        
-        except Exception as error:
-            LOGGER.error("Error fetching article IMA: %s", error)
-            return BeautifulSoup()
 
     # Will be overridden by subclass
     def extract_news(self):
@@ -532,12 +660,19 @@ class SeleniumScraper(Scraper):
         time_sleep: int = 5, 
         retry: bool = True
     ):
-        driver = self.ensure_driver()
-
-        if not driver:
-            return BeautifulSoup()
+        driver = None
 
         try:
+            driver = self.ensure_driver()
+
+            if not driver:
+                self.record_request_failure(
+                    url=url,
+                    reason="DriverUnavailable",
+                    message="Selenium driver is not available",
+                )
+                return None
+
             LOGGER.info("Navigating to %s", url)
             driver.get(url)
 
@@ -554,6 +689,8 @@ class SeleniumScraper(Scraper):
             html_content = driver.page_source
             self.soup = BeautifulSoup(html_content, 'html.parser')
 
+            self.record_request_success()
+
             return self.soup
 
         except TimeoutException:
@@ -564,6 +701,7 @@ class SeleniumScraper(Scraper):
             try:
                 html_content = driver.page_source
                 self.soup = BeautifulSoup(html_content, 'html.parser')
+                self.record_request_success()
                 return self.soup
 
             except Exception as dom_error:
@@ -571,7 +709,14 @@ class SeleniumScraper(Scraper):
                     "Failed to extract DOM after timeout: %s",
                     dom_error,
                 )
+
+                self.record_request_failure(
+                    url=url,
+                    reason=type(dom_error).__name__,
+                    message=str(dom_error),
+                )
                 self.close_shared_driver()
+
                 return None
 
         except Exception as error:
@@ -590,6 +735,12 @@ class SeleniumScraper(Scraper):
                     time_sleep, 
                     retry=False
                 )
+
+            self.record_request_failure(
+                url=url,
+                reason=type(error).__name__,
+                message=str(error),
+            )
 
             return None
 

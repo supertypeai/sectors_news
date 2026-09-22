@@ -60,4 +60,3 @@ if __name__ == "__main__":
   python scrape_kontan.py <page_number> <filename_saved> <--csv (optional)>
   '''
   main()
-  

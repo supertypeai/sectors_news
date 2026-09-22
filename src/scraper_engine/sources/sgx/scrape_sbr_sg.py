@@ -14,6 +14,8 @@ LOGGER = logging.getLogger(__name__)
 class SBRSG(Scraper):
     def fetch_article_list(self, url: str) -> list:
         soup = self.fetch_news(url=url)
+        if soup is None:
+            return []
 
         taxonomy_view = soup.select_one("div.view-id-taxonomy_term")
 
@@ -29,6 +31,8 @@ class SBRSG(Scraper):
 
     def fetch_article_timestamp(self, article_url: str) -> str:
         soup = self.fetch_news(url=article_url)
+        if soup is None:
+            return None
 
         time_tag = soup.select_one("time[pubdate][datetime]")
 

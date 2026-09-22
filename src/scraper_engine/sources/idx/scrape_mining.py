@@ -11,6 +11,10 @@ from scraper_engine.base.scraper import Scraper
 class MiningScraper(Scraper):
     def extract_news(self, url):
         soup = self.fetch_news(url)
+
+        if soup is None:
+            return self.articles
+
         # Scrape articles with class 'post'
         for item in soup.find_all("article", class_="post"):
             # Title and source (URL)

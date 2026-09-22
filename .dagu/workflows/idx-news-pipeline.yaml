@@ -50,6 +50,7 @@ steps:
     run: >-
       runners push -m "chore(idx): checkpoint ingested articles"
       data/idx/pipeline.json
+      data/idx/pipeline_health.json
       data/idx/pipeline_filtered.json
       data/idx/pipeline_yesterday.json
       data/last_state.json

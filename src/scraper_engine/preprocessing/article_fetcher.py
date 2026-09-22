@@ -235,6 +235,9 @@ def get_article_edgeprop_news(url: str) -> str | None:
     scraper = Scraper()
     soup = scraper.fetch_news(url)
 
+    if soup is None:
+        return None
+
     content_div = soup.select_one("#detail-content")
 
     if not content_div:
