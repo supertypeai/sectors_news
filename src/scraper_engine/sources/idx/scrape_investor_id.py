@@ -1,9 +1,9 @@
 from datetime import datetime
 from bs4 import BeautifulSoup
+from goose3 import Goose
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
-from scraper_engine.sources.utils.time_parser import parse_relative_time
 
 import argparse
 import time
@@ -24,6 +24,27 @@ class InvestorID(Scraper):
             return []
 
         return soup.find_all("div", class_="row mb-4 position-relative")
+
+    def fetch_article_content(
+        self,
+        article_url: str,
+    ) -> tuple[str | None, str | None]:
+        soup = self.fetch_news_with_web_unlocker(article_url)
+
+        if not soup:
+            return None, None
+
+        date_span = soup.select_one("div.col.small.pt-1 span.text-muted")
+        raw_timestamp = date_span.get_text(strip=True) if date_span else None
+        published_at = self.parse_timestamp(raw_timestamp)
+
+        goose_extractor = Goose()
+        article_data = goose_extractor.extract(
+            raw_html=str(soup).encode("utf-8"),
+        )
+        article_body = article_data.cleaned_text or None
+
+        return published_at, article_body
 
     def parse_timestamp(self, raw_timestamp: str) -> str:
         if not raw_timestamp:
@@ -92,13 +113,8 @@ class InvestorID(Scraper):
             thumbnail_tag = article_item.select_one("div.col-4 img.lazy")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
-            raw_date = ""
-            date_span = article_item.find("span", class_="text-muted small")
-            
-            if date_span:
-                raw_date = date_span.get_text(strip=True)
-
-            published_at = parse_relative_time(raw_date) or self.parse_timestamp(raw_date)
+            published_at, article_body = self.fetch_article_content(source_url)
+            time.sleep(0.5)
 
             if not published_at:
                 LOGGER.info("[Investor ID] Failed to parse date for url: %s. Skipping.", source_url)
@@ -120,6 +136,7 @@ class InvestorID(Scraper):
                 "source": source_url,
                 "thumbnail": thumbnail_url,
                 "timestamp": published_at,
+                "article": article_body,
             })
 
         return parsed_articles, reached_older_date

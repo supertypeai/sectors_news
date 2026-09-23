@@ -157,35 +157,6 @@ def get_article_bloomberg_technoz_news(url: str) -> str:
     return full_article_text
 
 
-def get_article_investorid_news(url: str) -> str:
-    html_content = fetch_article_with_proxy(url)
-
-    if not html_content:
-        LOGGER.info(
-            "[FAIL INVESTOR.ID] Proxy failed to retrieve HTML for %s",
-            url,
-        )
-        return ""
-
-    soup = BeautifulSoup(html_content, "html.parser")
-    
-    article_container = soup.select_one("div.body-content")
-    
-    if not article_container:
-        return ""
-
-    paragraphs = article_container.find_all("p")
-    extracted_text_blocks = []
-    
-    for paragraph in paragraphs:
-        paragraph_text = paragraph.get_text(strip=True)
-        if paragraph_text:
-            extracted_text_blocks.append(paragraph_text)
-            
-    full_article_text = "\n\n".join(extracted_text_blocks)
-    return full_article_text
-
-
 def get_article_kontan_news(url: str) -> str: 
     html_content = fetch_article_with_proxy(url)
     
@@ -373,12 +344,11 @@ def extract_via_custom_parser(url: str) -> str | None:
         LOGGER.info("Attempting custom parser")
 
         parser = {
-            'bcasekuritas.co.id': get_article_bca_news, 
-            'bloomberg': get_article_bloomberg_technoz_news, 
-            # 'investor.id': get_article_investorid_news,
-            'investasi.kontan': get_article_kontan_news,
-            'edgeprop': get_article_edgeprop_news, 
-            'sgx.com/research-education/market-updates/': get_article_sgx_market_update,
+            "bcasekuritas.co.id": get_article_bca_news, 
+            "bloomberg": get_article_bloomberg_technoz_news, 
+            "investasi.kontan": get_article_kontan_news,
+            "edgeprop": get_article_edgeprop_news, 
+            "sgx.com/research-education/market-updates/": get_article_sgx_market_update,
         }
 
         for key, parser in parser.items(): 
@@ -526,32 +496,62 @@ def extract_via_selenium(url: str) -> str | None:
         return None 
 
 
-def extract_via_proxy(url: str) -> str | None: 
+def extract_via_proxy(url: str) -> str | None:
     try:
         LOGGER.info("[TIER 3] Escalating to Proxy")
-        
         raw_html_content = fetch_article_with_proxy(url)
 
-        if not raw_html_content:
+        if raw_html_content:
+            goose_extractor = Goose()
+            article_data = goose_extractor.extract(raw_html=raw_html_content)
+
+            if article_data and article_data.cleaned_text:
+                LOGGER.info(
+                    "[SUCCESS] Extracted via Proxy + Goose: %s",
+                    url,
+                )
+                return article_data.cleaned_text
+
+        LOGGER.warning(
+            "[FAIL] Proxy returned no article text for %s",
+            url,
+        )
+
+    except Exception as error:
+        LOGGER.error("[FAIL] Tier 3 Proxy extraction failed: %s", error)
+
+    try:
+        LOGGER.info("[TIER 3] Falling back to Web Unlocker")
+        article_soup = Scraper().fetch_news_with_web_unlocker(url)
+
+        if not article_soup:
             LOGGER.warning(
-                "[FAIL] Proxy network request failed for %s",
+                "[FAIL] Web Unlocker request failed for %s",
                 url,
             )
             return None
-            
+
         goose_extractor = Goose()
-        article_data = goose_extractor.extract(raw_html=raw_html_content)
+        article_data = goose_extractor.extract(
+            raw_html=str(article_soup).encode("utf-8"),
+        )
 
         if article_data and article_data.cleaned_text:
             LOGGER.info(
-                "[SUCCESS] Extracted via Proxy + Goose: %s",
+                "[SUCCESS] Extracted via Web Unlocker + Goose: %s",
                 url,
             )
             return article_data.cleaned_text
 
+        LOGGER.warning(
+            "[FAIL] Web Unlocker returned no article text for %s",
+            url,
+        )
+
     except Exception as error:
-        LOGGER.error("[FAIL] Tier 3 Proxy extraction failed: %s", error)
-        return None
+        LOGGER.error("[FAIL] Tier 3 Web Unlocker extraction failed: %s", error)
+
+    return None
 
 
 def get_article_body(url: str) -> str | None:

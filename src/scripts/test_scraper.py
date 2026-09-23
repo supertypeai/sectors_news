@@ -109,12 +109,12 @@ def test_switch__scrapling():
             LOGGER.info(f"{scraper_name} sample:", articles[0])
 
 
-def test_jakarta_globe_web_unlocker():
+def test_jakarta_globe_and_investor_id():
     scraper = JakartaGlobe()
 
     articles = scraper.extract_news_pages(
         num_pages=1,
-        date="20260921",
+        date="20260923",
     )
 
     LOGGER.info(
@@ -127,6 +127,25 @@ def test_jakarta_globe_web_unlocker():
             "Jakarta Globe sample: %s",
             articles[0],
         )
+
+    investorid = InvestorID()
+
+    articles_investor = investorid.extract_news_pages(
+        num_pages=1,
+        date="20260923",
+    )
+
+    LOGGER.info(
+        "Investor ID articles: %d",
+        len(articles_investor),
+    )
+
+    if articles_investor:
+        LOGGER.info(
+            "Investor ID sample: %s",
+            articles_investor[0],
+        )
+
 
 
 def test_investorid_article_fetcher(urls: list[str]):
@@ -149,10 +168,10 @@ if __name__ == "__main__":
     )
 
     # test_switch__scrapling()
-    test_jakarta_globe_web_unlocker()
+    test_jakarta_globe_and_investor_id()
 
-    urls = [
-        "https://investor.id/market/455147/memperbesar-peluangnormalisasi-treatment-msci",
-        "https://jakartaglobe.id/business/two-years-into-prabowo-presidency-economists-question-quality-of-economic-growth"
-    ]
-    test_investorid_article_fetcher(urls=urls)
+    # urls = [
+    #     "https://investor.id/market/455147/memperbesar-peluangnormalisasi-treatment-msci",
+    #     "https://jakartaglobe.id/business/two-years-into-prabowo-presidency-economists-question-quality-of-economic-growth"
+    # ]
+    # test_investorid_article_fetcher(urls=urls)
