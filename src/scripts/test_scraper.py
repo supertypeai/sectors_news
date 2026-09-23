@@ -1,4 +1,5 @@
 from types import MethodType
+from urllib.parse import urlparse
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.scrape_investor_id import InvestorID
@@ -12,6 +13,7 @@ from scraper_engine.sources.idx.scrape_jakartaglobe import JakartaGlobe
 from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
 from scraper_engine.sources.sgx.scrape_the_edge_reits import TheEdgeReits
 from scraper_engine.config.conf import BRIGHTDATA_API_KEY, BRIGHTDATA_ZONE
+from scraper_engine.preprocessing.article_fetcher import get_article_body
 
 import logging
 import requests 
@@ -20,75 +22,11 @@ import requests
 LOGGER = logging.getLogger(__name__)
 
 
-def fetch_with_web_unlocker(
-    self,
-    target_url: str,
-):
-    LOGGER.info(
-        "[WEB UNLOCKER TEST] Fetching %s",
-        target_url,
-    )
-
-    try:
-        response = requests.post(
-            "https://api.brightdata.com/request",
-            headers={
-                "Authorization": f"Bearer {BRIGHTDATA_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            json={
-                "zone": BRIGHTDATA_ZONE,
-                "url": target_url,
-                "format": "raw",
-                "method": "GET",
-            },
-            timeout=60,
-        )
-
-        LOGGER.info(
-            "[WEB UNLOCKER TEST] status=%d url=%s",
-            response.status_code,
-            target_url,
-        )
-
-        if response.status_code != 200:
-            LOGGER.warning(
-                "[WEB UNLOCKER TEST] Failed body=%s",
-                response.text[:500],
-            )
-            return ""
-
-        return response.text
-
-    except requests.exceptions.RequestException as error:
-        LOGGER.error(
-            "[WEB UNLOCKER TEST] Request failed for %s: %s",
-            target_url,
-            error,
-        )
-        return ""
-
-
 def test_scrapers():
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
-    )
-
     target_date = "20260921"
 
     investor_id = InvestorID()
     kontan_investasi = KontanInvestasi()
-
-    investor_id.fetch_news_with_proxy = MethodType(
-        fetch_with_web_unlocker,
-        investor_id,
-    )
-
-    kontan_investasi.fetch_news_with_proxy = MethodType(
-        fetch_with_web_unlocker,
-        kontan_investasi,
-    )
 
     LOGGER.info("=== Testing Investor ID ===")
 
@@ -140,25 +78,6 @@ def fetch_with_scrapling_adapter(
     return scraper.fetch_news_with_scrapling(url)
 
 
-def test_bisnis():
-    scraper = BisnisMarket()
-
-    scraper.fetch_news_with_selenium = MethodType(
-        fetch_with_scrapling_adapter,
-        scraper,
-    )
-
-    articles = scraper.extract_news_pages(
-        num_pages=1,
-        date="20260921",
-    )
-
-    LOGGER.info("articles:", len(articles))
-
-    if articles:
-        LOGGER.info(articles[0])
-
-
 def test_switch__scrapling():
     target_date = "20260921"
     scraper_definitions = [
@@ -167,7 +86,6 @@ def test_switch__scrapling():
         # ("GAPKI", GapkiScraper),
         ("IDN Financials", IDNFinancialScraper),
         ("ICN", ICNScraper),
-        ("Jakarta Globe", JakartaGlobe),
         ("Jakarta Post", JakartaPost),
         ("The Edge REITs", TheEdgeReits),
     ]
@@ -191,5 +109,50 @@ def test_switch__scrapling():
             LOGGER.info(f"{scraper_name} sample:", articles[0])
 
 
+def test_jakarta_globe_web_unlocker():
+    scraper = JakartaGlobe()
+
+    articles = scraper.extract_news_pages(
+        num_pages=1,
+        date="20260921",
+    )
+
+    LOGGER.info(
+        "Jakarta Globe articles: %d",
+        len(articles),
+    )
+
+    if articles:
+        LOGGER.info(
+            "Jakarta Globe sample: %s",
+            articles[0],
+        )
+
+
+def test_investorid_article_fetcher(urls: list[str]):
+    for url in urls:
+        domain = urlparse(url).netloc
+
+        article = get_article_body(
+            url=url
+        )
+
+        LOGGER.info(
+            "\nCheck domain: %s | text: %s", domain, article[:500]
+        )
+
+
 if __name__ == "__main__":
-    test_switch__scrapling()
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
+    )
+
+    # test_switch__scrapling()
+    test_jakarta_globe_web_unlocker()
+
+    urls = [
+        "https://investor.id/market/455147/memperbesar-peluangnormalisasi-treatment-msci",
+        "https://jakartaglobe.id/business/two-years-into-prabowo-presidency-economists-question-quality-of-economic-growth"
+    ]
+    test_investorid_article_fetcher(urls=urls)

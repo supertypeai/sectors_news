@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import logging 
@@ -10,15 +10,9 @@ import time
 LOGGER = logging.getLogger(__name__)
 
 
-class JakartaGlobe(SeleniumScraper):
-    def setup_driver(self):
-        super().setup_driver(load_strategy="none")
-
+class JakartaGlobe(Scraper):
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_selenium(
-            url,
-            wait_selector="div.row.mb-4.position-relative",
-        )
+        soup = self.fetch_news_with_web_unlocker(url)
 
         if not soup:
             LOGGER.info("[Jakarta Globe] [FAIL] Failed to fetch HTML or timed out for %s", url)
@@ -27,12 +21,16 @@ class JakartaGlobe(SeleniumScraper):
         article_items = soup.select("div.row.mb-4.position-relative")
 
         if not article_items:
-            driver = self.driver
+            page_title = (
+                soup.title.get_text(strip=True)
+                if soup.title
+                else None
+            )
             LOGGER.warning(
                 "[Jakarta Globe] No article containers matched. "
                 "title=%r current_url=%s html_length=%d selector=%s",
-                driver.title,
-                driver.current_url,
+                page_title,
+                url,
                 len(str(soup)),
                 "div.row.mb-4.position-relative",
             )
@@ -47,11 +45,7 @@ class JakartaGlobe(SeleniumScraper):
         return article_items
 
     def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news_with_selenium(
-            article_url,
-            wait_selector="div.col.small.pt-1 span.text-muted",
-            retry=False,
-        )
+        soup = self.fetch_news(article_url)
 
         if not soup:
             return None
