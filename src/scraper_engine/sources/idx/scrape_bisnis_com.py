@@ -118,52 +118,63 @@ class BisnisMarket(Scraper):
             return None
 
     def extract_news_pages(self, num_pages: int, date: str) -> list:
-        base_url = 'https://www.bisnis.com/index?categoryId=194&type=indeks&'
+        market_url = "https://www.bisnis.com/index?categoryId=194&type=indeks&"
+        finance_url = "https://www.bisnis.com/index?categoryId=5&date=&type=indeks&"
 
         year = date[:4]
         month = date[4:6]
         day = date[6:]
         formatted_date = f"{year}-{month}-{day}"
 
-        page_number = 1
         seen_urls = set()
-        
-        while True:
-            params = f"date={formatted_date}&page={page_number}"
-            page_url = base_url + params
-            
-            article_items = self.fetch_article_list(page_url)
 
-            if not article_items:
-                LOGGER.info("[Bisnis Market] No articles found on page %d, stopping.", page_number)
-                break
+        for url in [market_url, finance_url]:
+            page_number = 1
 
-            articles = self.parse_articles(article_items)
+            while True:
+                params = f"date={formatted_date}&page={page_number}"
+                page_url = url + params
+                
+                article_items = self.fetch_article_list(page_url)
 
-            new_articles = [
-                article for article in articles 
-                if article.get('source') not in seen_urls
-            ]
+                if not article_items:
+                    LOGGER.info(
+                        "[Bisnis Market] No articles found on page %d, stopping.", 
+                        page_number
+                    )
+                    break
 
-            if not new_articles:
-                LOGGER.info("[Bisnis Market] Page %d returned duplicate articles, stopping.", page_number)
-                break
+                articles = self.parse_articles(article_items)
 
-            for article in articles: 
-                seen_urls.add(article.get('source'))
+                new_articles = [
+                    article for article in articles 
+                    if article.get('source') not in seen_urls
+                ]
 
-            self.articles.extend(new_articles)
-            LOGGER.info("[Bisnis Market] Page %d: %d articles collected.", page_number, len(new_articles))
+                if not new_articles:
+                    LOGGER.info("[Bisnis Market] Page %d returned duplicate articles, stopping.", page_number)
+                    break
 
-            if num_pages is not None and page_number >= num_pages:
-                break
+                for article in articles: 
+                    seen_urls.add(article.get('source'))
 
-            page_number += 1
-            time.sleep(1)
+                self.articles.extend(new_articles)
+
+                LOGGER.info(
+                    "[Bisnis Market] Page %d: %d articles collected.", 
+                    page_number, 
+                    len(new_articles)
+                )
+
+                if num_pages is not None and page_number >= num_pages:
+                    break
+
+                page_number += 1
+                time.sleep(1)
 
         LOGGER.info("[Bisnis Market] Total scraped: %d", len(self.articles))
         return self.articles
-    
+
 
 def main():
     scraper = BisnisMarket()
