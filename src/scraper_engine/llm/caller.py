@@ -1,13 +1,13 @@
-import asyncio
-import logging
-import time
-
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, ValidationError
 
 from .client import TokenUsageLogger, get_llm
+
+import asyncio
+import logging
+import time
 
 
 LOGGER = logging.getLogger(__name__)
@@ -158,6 +158,7 @@ def invoke_structured_llm(
                     pydantic_output=pydantic_output,
                     model=model,
                 )
+                
                 if validated_extraction is not None:
                     return validated_extraction
 
@@ -230,6 +231,7 @@ async def invoke_structured_llm_async(
                     pydantic_output=pydantic_output,
                     model=model,
                 )
+                
                 if validated_extraction is not None:
                     return validated_extraction
 

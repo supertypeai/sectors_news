@@ -1,9 +1,9 @@
-from scraper_engine.llm.prompt_definitions import (
+from scraper_engine.llm.prompt_definitions.entity_extraction import (
     EntityExtractionPrompts,
     CompanyNameExtraction,
 )
 from scraper_engine.database.metadata import load_company_data_sgx
-from scraper_engine.llm.caller import invoke_structured_llm
+from scraper_engine.llm.caller import invoke_structured_llm_async
 from scraper_engine.llm.client import TokenUsageLogger
 from scraper_engine.llm.constant import MODEL_NAMES
 
@@ -27,14 +27,14 @@ def load_sgx_company_data():
     return companies_name_str
 
 
-def extract_company_name(
+async def extract_company_name(
     title: str, 
     body: str, 
     source_scraper: str,
-    effort: str = "medium",
+    effort: str = "low",
     models: list[str] =  MODEL_NAMES,
     token_usage_logger: TokenUsageLogger | None = None
-) -> dict:
+) -> list[dict]:
     prompts = EntityExtractionPrompts()
 
     if source_scraper == "sgx": 
@@ -57,7 +57,7 @@ def extract_company_name(
             "body": body
         }
 
-    result = invoke_structured_llm(
+    result = await invoke_structured_llm_async(
         pydantic_output=CompanyNameExtraction,
         system_prompt=system_prompt,
         user_prompt=user_prompt,
@@ -69,8 +69,9 @@ def extract_company_name(
         token_usage_logger=token_usage_logger,
     )
 
-    LOGGER.info(
-        "[Company Extraction] Reasoning: %s", 
-        result.get("explanation")
-    )
+    # LOGGER.info(
+    #     "[Company Extraction] Reasoning: %s", 
+    #     result.get("explanation")
+    # )
+
     return result.get("companies")

@@ -392,7 +392,7 @@ def extract_via_scrapling(url: str) -> str | None:
 
         goose_extractor = Goose({"browser_user_agent": USER_AGENT})
         article_data = goose_extractor.extract(raw_html=body)
-
+        
         return article_data.cleaned_text or None
 
     except Exception as error:

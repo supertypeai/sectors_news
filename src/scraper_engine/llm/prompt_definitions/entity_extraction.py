@@ -32,13 +32,13 @@ class CompanyNameExtraction(BaseModel):
         )
     )
 
-    explanation: str = Field(
-        description=(
-            "Concise debugging explanation of why companies were included and why "
-            "notable company mentions were excluded. Describe their role and the "
-            "relevance decision without extended reasoning."
-        )
-    )
+    # explanation: str = Field(
+    #     description=(
+    #         "Concise debugging explanation of why companies were included and why "
+    #         "notable company mentions were excluded. Describe their role and the "
+    #         "relevance decision without extended reasoning."
+    #     )
+    # )
 
 
 class EntityExtractionPrompts:

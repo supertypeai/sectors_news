@@ -1,5 +1,6 @@
 MODEL_NAMES = [
     "gpt-oss-120b",
+    "glm-5.3-flash",
     "deepsek-v4-flash",
     "gpt-oss-20b",
     "nvidia-nemotron-3-ultra",
@@ -27,7 +28,15 @@ MODEL_CONFIG = {
     "glm-5.3-flash": {
         "model": "z-ai/glm-5.3-flash",
         "provider": "openrouter"
-    }
+    },
+    "qwen3.8-flash": {
+        "model": "qwen/qwen3.8-flash", 
+        "provider": "openrouter"
+    },
+    "inkling-small": {
+        "model": "thinkingmachines/inkling-small", 
+        "provider": "openrouter"
+    },
 }
 
 ROTATE_STATUS_CODES = {401, 403, 429, 413}

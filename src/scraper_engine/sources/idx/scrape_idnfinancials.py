@@ -60,7 +60,7 @@ class IDNFinancialScraper(Scraper):
             
             thumbnail_url = None
             if image_div and image_div.get('style'):
-                match = re.search(r'url\("(.+?)"\)', image_div['style'])
+                match = re.search(r"url\(['\"](.+?)['\"]\)", image_div['style'])
                 
                 if match:
                     thumbnail_url = match.group(1)

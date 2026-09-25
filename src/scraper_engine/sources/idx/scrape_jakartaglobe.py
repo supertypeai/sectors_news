@@ -51,16 +51,29 @@ class JakartaGlobe(Scraper):
     ) -> tuple[str | None, str | None]:
         soup = self.fetch_news_with_web_unlocker(article_url)
 
-        if not soup:
+        if soup is None:
             return None, None
 
-        date_span = soup.select_one("div.col.small.pt-1 span.text-muted")
-        raw_timestamp = date_span.get_text(strip=True) if date_span else None
+        raw_html = str(soup)
+
+        if not raw_html.strip():
+            LOGGER.warning(
+                "[Jakarta Globe] Empty HTML for url: %s. Skipping.",
+                article_url,
+            )
+            return None, None
+
+        date_span = soup.select_one(
+            "div.col.small.pt-1 span.text-muted"
+        )
+        raw_timestamp = date_span.get_text(
+            strip=True
+        ) if date_span else None
         published_at = self.parse_timestamp(raw_timestamp)
 
         goose_extractor = Goose()
         article_data = goose_extractor.extract(
-            raw_html=str(soup).encode("utf-8"),
+            raw_html=raw_html,
         )
         article_body = article_data.cleaned_text or None
 

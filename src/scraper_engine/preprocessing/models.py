@@ -12,6 +12,7 @@ class News:
     tags: list
     tickers: list
     dimension: dict
+    structured_body: dict 
     score: int
     thumbnail: str | None = None
 
@@ -27,6 +28,7 @@ class News:
         sub_sector: list[str],
         tags: list[str],
         tickers: list[str],
+        structured_body: dict | None,
         dimension: dict | None,
         score: int | None,
         thumbnail: str | None = None,
@@ -47,6 +49,7 @@ class News:
             tags=tags,
             tickers=tickers,
             dimension=dimension,
+            structured_body=structured_body,
             score=score,
             thumbnail=thumbnail,
         )
@@ -62,6 +65,7 @@ class News:
             "tags": self.tags,
             "tickers": self.tickers,
             "dimension": self.dimension,
+            "structured_body": self.structured_body,
             "score": self.score,
         }
 

@@ -1,8 +1,8 @@
 from goose3 import Goose
 
-from scraper_engine.llm.caller import invoke_structured_llm
+from scraper_engine.llm.caller import invoke_structured_llm_async
 from scraper_engine.llm.client import TokenUsageLogger
-from scraper_engine.llm.prompt_definitions import SummarizationPrompts, SummaryNews
+from scraper_engine.llm.prompt_definitions.summarization import SummarizationPrompts, SummaryNews
 from scraper_engine.config.conf import USER_AGENT
 from scraper_engine.llm.constant import MODEL_NAMES
 from .article_fetcher import extract_table_content
@@ -30,11 +30,11 @@ def cleaning_summary(raw_body: str):
     return cleaned_body
 
 
-def summarize_article(
+async def summarize_article(
     title: str,
     body: str,
-    url: str,
     source_scraper: str = "idx",
+    models: list[str] = MODEL_NAMES,
     token_usage_logger: TokenUsageLogger | None = None,
 ) -> dict[str]:
     prompts = SummarizationPrompts()
@@ -52,15 +52,15 @@ def summarize_article(
         "article": body,
     }
 
-    summary_result = invoke_structured_llm(
+    summary_result = await invoke_structured_llm_async(
         pydantic_output=SummaryNews,
         system_prompt=system_prompt,
         user_prompt=user_prompt,
         log_name="Summarization",
         input_data=input_data,
-        models=MODEL_NAMES,
+        models=models,
         temperature=0.35,
-        effort="high",
+        effort="medium",
         token_usage_logger=token_usage_logger,
     )
 
@@ -68,19 +68,15 @@ def summarize_article(
         LOGGER.warning("Summarization caller returned no result.")
         return None
 
-    if not summary_result.get("title") or not summary_result.get("summary"):
-        LOGGER.info("[ERROR] LLM returned incomplete summary_result")
-        return None
-
-    LOGGER.info("[SUCCES] Summarize for url: %s", url)
     return summary_result
 
 
-def summarize_news(
+async def summarize_news(
     url: str,
     news_text: str,
     title: str,
     source_scraper: str = "idx",
+    models: list[str] = MODEL_NAMES,
     token_usage_logger: TokenUsageLogger | None = None,
 ) -> tuple[str, str] | None:
     try:
@@ -114,29 +110,15 @@ def summarize_news(
 
         LOGGER.info("Article content preview: %s", news_text[:550])
 
-        response = summarize_article(
-            title, 
-            news_text, 
-            url, 
-            source_scraper,
-            token_usage_logger,
+        response = await summarize_article(
+            title=title, 
+            body=news_text, 
+            source_scraper=source_scraper,
+            models=models,
+            token_usage_logger=token_usage_logger,
         )
 
-        if not response or not response.get("summary"):
-            LOGGER.error(
-                "Summarization failed or returned incomplete data for %s.", 
-                url
-            )
-            return None
-
-        LOGGER.info(
-            "Reasoning: %s", response.get("explanation")
-        )
-        LOGGER.info(
-            "Reasoning company name: %s", response.get("explanation_company")
-        )
-
-        raw_body = response.get("summary")
+        raw_body = response.get("body")
         cleaned_body = cleaning_summary(raw_body)
 
         raw_title = response.get("title")

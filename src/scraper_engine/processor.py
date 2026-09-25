@@ -1,29 +1,32 @@
-from scraper_engine.preprocessing.article_builder import generate_article
+from datetime import datetime, timezone, timedelta
+from json import JSONDecodeError
+from pathlib import Path
+
+from scraper_engine.preprocessing.article_builder import filter_valid_articles, enrich_articles
 from scraper_engine.database.client import SUPABASE_CLIENT
 from scraper_engine.base.scraper import SeleniumScraper
 from scraper_engine.llm.client import TokenUsageLogger
+from scraper_engine.preprocessing.models import News
+from scraper_engine.preprocessing.deduplication import run_dedup_articles
 from scraper_engine.utils.json_helpers import read_json, write_json
 from scraper_engine.utils.symbol_helpers import (
     add_sgx_suffix,
     get_top_200_symbols,
 )
 
-from datetime import datetime, timezone, timedelta
-from json import JSONDecodeError
-from pathlib import Path
-
 import pandas as pd
 import time
 import shutil
 import traceback
 import logging
+import asyncio
 
 
 LOGGER = logging.getLogger(__name__)
 
 WIB = timezone(timedelta(hours=7))
 
-MININUM_SCORE = 65
+MININUM_SCORE = 60
 
 
 def send_data_to_db(successful_articles: list, table_name: str):
@@ -102,7 +105,12 @@ def get_existing_sources(
         )
 
         if filter_from:
-            start_of_day = filter_from.replace(hour=0, minute=0, second=0, microsecond=0)
+            start_of_day = filter_from.replace(
+                hour=0, 
+                minute=0, 
+                second=0, 
+                microsecond=0
+            )
             query = query.gte("created_at", start_of_day.isoformat())
 
         return {
@@ -298,38 +306,6 @@ def get_article_to_process(
     return remaining
 
 
-def process_article(
-    article_data: dict,
-    source_scraper: str,
-    top_200_symbols_sgx: set[str],
-    token_usage_logger: TokenUsageLogger,
-) -> tuple[dict | None, str]:
-    try:
-        article_object, status = generate_article(
-            data=article_data,
-            source_scraper=source_scraper,
-            min_score=MININUM_SCORE,
-            top_200_symbols_sgx=top_200_symbols_sgx,
-            token_usage_logger=token_usage_logger,
-        )
-
-        time.sleep(1)
-
-        # skipped 
-        if status in {"low_score", "no_retry", "not_top_200"}:
-            return None, status
-
-        # get into queue failed retry
-        if status != "ok" or not article_object:
-            return None, "error"
-
-        return article_object.to_dict(), "ok"
-
-    except Exception as error:
-        LOGGER.error("Article processing failed: %s", error)
-        return None, "error"
-
-
 def log_total_llm_cost(token_usage_logger: TokenUsageLogger) -> None:
     total_cost = sum(
         cost
@@ -345,7 +321,174 @@ def log_total_llm_cost(token_usage_logger: TokenUsageLogger) -> None:
     )
 
 
-def post_source(
+async def filter_one_article(
+    article_data: dict,
+    index: int,
+    total_articles: int,
+    semaphore: asyncio.Semaphore,
+    source_scraper: str,
+    token_usage_logger: TokenUsageLogger,
+) -> tuple[dict | None, str]:
+    async with semaphore:
+        source_url = article_data.get("source")
+
+        LOGGER.info(
+            "Processing %d/%d | source: %s",
+            index,
+            total_articles,
+            source_url,
+        )
+
+        return await filter_valid_articles(
+            data=article_data,
+            source_scraper=source_scraper,
+            min_score=MININUM_SCORE,
+            token_usage_logger=token_usage_logger,
+        )
+
+
+async def filter_article_batch(
+    data_articles: list[dict],
+    source_scraper: str,
+    token_usage_logger: TokenUsageLogger,
+) -> list[tuple[dict | None, str]]:
+    semaphore = asyncio.Semaphore(5)
+
+    tasks = [
+        filter_one_article(
+            article_data=article_data,
+            index=index,
+            total_articles=len(data_articles),
+            semaphore=semaphore,
+            source_scraper=source_scraper,
+            token_usage_logger=token_usage_logger,
+        )
+        for index, article_data in enumerate(data_articles, start=1)
+    ]
+
+    return await asyncio.gather(*tasks)
+
+
+async def enrich_one_article(
+    article: dict,
+    semaphore: asyncio.Semaphore,
+    source_scraper: str,
+    top_200_symbols_sgx: set[str] | None,
+    token_usage_logger: TokenUsageLogger,
+) -> tuple[News | None, str]:
+    async with semaphore:
+        return await enrich_articles(
+            article_uniques=article,
+            source_scraper=source_scraper,
+            top_200_symbols_sgx=top_200_symbols_sgx,
+            token_usage_logger=token_usage_logger,
+        )
+
+
+async def enrich_article_batch(
+    unique_articles: list[dict],
+    source_scraper: str,
+    top_200_symbols_sgx: set[str] | None,
+    token_usage_logger: TokenUsageLogger,
+) -> list[tuple[News | None, str]]:
+    semaphore = asyncio.Semaphore(5)
+
+    tasks = [
+        enrich_one_article(
+            article=article,
+            semaphore=semaphore,
+            source_scraper=source_scraper,
+            top_200_symbols_sgx=top_200_symbols_sgx,
+            token_usage_logger=token_usage_logger,
+        )
+        for article in unique_articles
+    ]
+
+    return await asyncio.gather(*tasks)
+
+
+async def process_article_batch(
+    data_articles: list[dict],
+    source_scraper: str,
+    top_200_symbols_sgx: set[str] | None,
+    token_usage_logger: TokenUsageLogger,
+) -> list[dict]:
+    # Phase 1: summary -> scoring
+    filter_results = await filter_article_batch(
+        data_articles=data_articles,
+        source_scraper=source_scraper,
+        token_usage_logger=token_usage_logger,
+    )
+
+    survivor_articles = []
+
+    for article_data, (survivor_article, status) in zip(
+        data_articles,
+        filter_results,
+    ):
+        source_url = article_data.get("source")
+
+        if status == "ok" and survivor_article:
+            survivor_articles.append(survivor_article)
+            continue
+
+        LOGGER.info(
+            "Skipping source: %s | status: %s",
+            source_url,
+            status,
+        )
+
+    if not survivor_articles:
+        return []
+
+    # Dedup articles
+    if len(survivor_articles) > 1:
+        unique_articles = run_dedup_articles(
+            survived_articles=survivor_articles,
+            token_usage_logger=token_usage_logger,
+        )
+
+    else:
+        unique_articles = survivor_articles
+
+    LOGGER.info(
+        "Deduplication complete: %d survivors -> %d unique articles",
+        len(survivor_articles),
+        len(unique_articles),
+    )
+
+    if not unique_articles:
+        return []
+
+    # Phase 2: enrichment 
+    enrichment_results = await enrich_article_batch(
+        unique_articles=unique_articles,
+        source_scraper=source_scraper,
+        top_200_symbols_sgx=top_200_symbols_sgx,
+        token_usage_logger=token_usage_logger,
+    )
+
+    final_articles = []
+
+    for article, status in enrichment_results:
+        if status == "ok" and article is not None:
+            final_articles.append(article.to_dict())
+            continue
+        
+        LOGGER.info(
+            "Skipping article after enrichment | status: %s",
+            status,
+        )
+
+    LOGGER.info(
+        "Batch complete: %d final articles",
+        len(final_articles),
+    )
+
+    return final_articles
+   
+
+async def post_source(
     jsonfile: str,
     batch: int,
     batch_size: int,
@@ -357,9 +500,6 @@ def post_source(
     """
     Load articles, process selected batch, and post to database.
     """
-    successful_articles = []
-    failed_articles_queue = []
-
     start_time = time.time()
     token_usage_logger = TokenUsageLogger()
 
@@ -383,66 +523,20 @@ def post_source(
         len(data_articles),
     )
     
-    try: 
-        # only need this when processing sgx news 
-        top_200_symbols_sgx = set()
+    try:
+        # only need this when processing sgx news
+        top_200_symbols_sgx = None 
+
         if source_scraper == "sgx":
             top_200_symbols_sgx = get_top_200_symbols()
 
-        for index, article_data in enumerate(
-            data_articles, 
-            start=1
-        ):
-            source_url = article_data.get("source")
-
-            LOGGER.info(
-                "Processing %d/%d | source: %s", 
-                index, 
-                len(data_articles), 
-                source_url 
-            )
-
-            processed_article, status = process_article(
-                article_data=article_data,
-                source_scraper=source_scraper,
-                top_200_symbols_sgx=top_200_symbols_sgx,
-                token_usage_logger=token_usage_logger,
-            )
-
-            if status == "error":
-                failed_articles_queue.append(article_data)
-
-            elif processed_article:
-                successful_articles.append(processed_article)
-
-            time.sleep(1)
-
-        # process the failed in queue lists 
-        for index, article_data in enumerate(
-            failed_articles_queue, 
-            start=1
-        ):
-            source_url = article_data.get("source")
-
-            LOGGER.info(
-                "Processing Failed Retry %d/%d | source: %s", 
-                index, 
-                len(failed_articles_queue), 
-                source_url  
-            )
-
-            processed_article, status = process_article(
-                article_data=article_data,
-                source_scraper=source_scraper,
-                top_200_symbols_sgx=top_200_symbols_sgx,
-                token_usage_logger=token_usage_logger,
-            )
-
-            if processed_article:
-                successful_articles.append(processed_article)
-
-            time.sleep(1)
-
+        successful_articles = await process_article_batch(
+            data_articles=data_articles,
+            source_scraper=source_scraper,
+            top_200_symbols_sgx=top_200_symbols_sgx,
+            token_usage_logger=token_usage_logger,
+         )
+        
     finally:
         LOGGER.info("All processing done. Closing Shared WebDriver.")
         SeleniumScraper.close_shared_driver()

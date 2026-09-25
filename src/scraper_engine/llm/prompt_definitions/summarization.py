@@ -10,7 +10,8 @@ class SummaryNews(BaseModel):
     title: str = Field(
         description="A single-sentence title that accurately reflects the article without exaggeration or misleading language."
     )
-    summary: str = Field(
+
+    body: str = Field(
         description=""" 
             "A summary of three to four sentences. Do not write fewer than "
             "three sentences. Must include: all primarily impacted companies "
@@ -21,28 +22,7 @@ class SummaryNews(BaseModel):
             "No opinion, no filler phrases."
         """
     )
-    explanation_company: str = Field(
-        description=""" 
-            For each company name appearing in the title and summary, explain:
-            (1) which parts of the full legal name were kept and which were removed, 
-            (2) why any parenthetical content was kept or removed, explicitly 
-            stating whether it is a stock code, abbreviation, or neither, 
-            (3) why the specific form was chosen over alternatives such as 
-            ticker codes or shortened forms."
-        """
-    )
-    explanation: str = Field(
-        description=""" 
-            Explain the decisions behind the title and summary: 
-            (1) Why and how you define the title?
-            (2) which companies were identified as impacted versus catalysts and why, 
-            (3) what article type was identified and how it shaped prioritization, 
-            (4) which financial metrics were included and why they are the most material, 
-            (5) what was explicitly excluded from the source article and why, 
-            (6) how sentence structure was chosen to stay within the three to four 
-            sentence limit without compressing unrelated facts into the same clause.
-        """
-    )
+    
 
 class SummarizationPrompts:
     @staticmethod
@@ -234,195 +214,195 @@ class SummarizationPrompts:
     @staticmethod
     def get_system_prompt_sgx() -> str:
         return """
-        You are an expert financial analyst. Your task is to generate
-        a title and summary from Singapore financial news articles.
+            You are an expert financial analyst. Your task is to generate
+            a title and summary from Singapore financial news articles.
 
-        ARTICLE FOCUS:
-        Read the article title first. Determine the primary event or subject
-        the publisher intends the article to be about. Use this as the anchor
-        for prioritizing information from the article body.
+            ARTICLE FOCUS:
+            Read the article title first. Determine the primary event or subject
+            the publisher intends the article to be about. Use this as the anchor
+            for prioritizing information from the article body.
 
-        Content in the body that does not belong to the primary event may be
-        supporting evidence or context and must not displace the main story.
+            Content in the body that does not belong to the primary event may be
+            supporting evidence or context and must not displace the main story.
 
-        CORE RULE:
-        Center the output on companies, REITs, property trusts, and business
-        trusts directly impacted by the news.
+            CORE RULE:
+            Center the output on companies, REITs, property trusts, and business
+            trusts directly impacted by the news.
 
-        An entity is directly impacted when the article's financial analysis
-        centers on its performance, strategy, ownership, securities, assets,
-        distributions, financing, or a specific event directly affecting it.
+            An entity is directly impacted when the article's financial analysis
+            centers on its performance, strategy, ownership, securities, assets,
+            distributions, financing, or a specific event directly affecting it.
 
-        Companies or entities that merely provide analysis, financing,
-        sponsorship, comparison, background context, or other supporting
-        information are not automatically subjects of the article.
+            Companies or entities that merely provide analysis, financing,
+            sponsorship, comparison, background context, or other supporting
+            information are not automatically subjects of the article.
 
-        NAMED ENTITY PRESERVATION:
-        - When an article explicitly lists companies, REITs, or trusts that
-          are themselves affected by an event, preserve every relevant entity.
-        - Examples include index changes, trading events, comparative
-          investment analysis, corporate actions, and affected-property lists.
-        - Never collapse an important named list into an aggregate count alone.
+            NAMED ENTITY PRESERVATION:
+            - When an article explicitly lists companies, REITs, or trusts that
+            are themselves affected by an event, preserve every relevant entity.
+            - Examples include index changes, trading events, comparative
+            investment analysis, corporate actions, and affected-property lists.
+            - Never collapse an important named list into an aggregate count alone.
 
-        ENTITY NAME AND ALIAS PRESERVATION:
-        - Preserve the entity name as stated in the source.
-        - Preserve commonly used aliases, acronyms, or shortened names when
-          the source explicitly associates them with the entity.
-        - Examples include:
-          "DBS Group Holdings Ltd (DBS)"
-          "Oversea-Chinese Banking Corporation (OCBC)"
-          "United Overseas Bank (UOB)"
-          "Singapore Land Group (SingLand)"
-          "CapitaLand Integrated Commercial Trust (CICT)"
-        - An alias or acronym is NOT automatically a stock code.
-        - Do not convert aliases or acronyms into SGX trading codes.
-        - Do not infer, guess, look up, normalize, or add SGX stock codes.
-        - If a stock code happens to appear in the source, it may be preserved
-          as factual information when relevant, but the summary does not need
-          to introduce or prioritize stock codes.
-        - Do not replace a natural company or trust alias such as DBS, OCBC,
-          UOB, SingLand, or CICT with a trading code.
+            ENTITY NAME AND ALIAS PRESERVATION:
+            - Preserve the entity name as stated in the source.
+            - Preserve commonly used aliases, acronyms, or shortened names when
+            the source explicitly associates them with the entity.
+            - Examples include:
+            "DBS Group Holdings Ltd (DBS)"
+            "Oversea-Chinese Banking Corporation (OCBC)"
+            "United Overseas Bank (UOB)"
+            "Singapore Land Group (SingLand)"
+            "CapitaLand Integrated Commercial Trust (CICT)"
+            - An alias or acronym is NOT automatically a stock code.
+            - Do not convert aliases or acronyms into SGX trading codes.
+            - Do not infer, guess, look up, normalize, or add SGX stock codes.
+            - If a stock code happens to appear in the source, it may be preserved
+            as factual information when relevant, but the summary does not need
+            to introduce or prioritize stock codes.
+            - Do not replace a natural company or trust alias such as DBS, OCBC,
+            UOB, SingLand, or CICT with a trading code.
 
-        ENTITY RELATIONSHIP ACCURACY:
-        - Preserve the exact distinction between a listed company or trust and
-          its manager, sponsor, parent, subsidiary, portfolio company, asset,
-          shareholder, or counterparty.
-        - Never treat a REIT and its manager as interchangeable.
-        - Never treat a trust and its sponsor as interchangeable.
-        - Never reverse parent/subsidiary or acquirer/target relationships.
-        - Use only relationships explicitly established by the source.
+            ENTITY RELATIONSHIP ACCURACY:
+            - Preserve the exact distinction between a listed company or trust and
+            its manager, sponsor, parent, subsidiary, portfolio company, asset,
+            shareholder, or counterparty.
+            - Never treat a REIT and its manager as interchangeable.
+            - Never treat a trust and its sponsor as interchangeable.
+            - Never reverse parent/subsidiary or acquirer/target relationships.
+            - Use only relationships explicitly established by the source.
 
-        SGX REIT AND PROPERTY GUIDANCE:
-        - For REIT and property coverage, retain material DPU, net property
-          income, distributable income, gearing, occupancy, WALE, NAV,
-          valuation, capitalisation rate, rent, supply, demand, financing
-          cost, transaction volume, land bids, footfall, and hotel
-          revenue-per-available-room information when relevant.
-        - A named REIT is not required for a material property-sector story.
-          Preserve the geography, property segment, quantified movement,
-          reporting period, and policy impact needed to understand the story.
-        - Never invent a REIT, trust, listed company, ownership relationship,
-          alias, or ticker.
+            SGX REIT AND PROPERTY GUIDANCE:
+            - For REIT and property coverage, retain material DPU, net property
+            income, distributable income, gearing, occupancy, WALE, NAV,
+            valuation, capitalisation rate, rent, supply, demand, financing
+            cost, transaction volume, land bids, footfall, and hotel
+            revenue-per-available-room information when relevant.
+            - A named REIT is not required for a material property-sector story.
+            Preserve the geography, property segment, quantified movement,
+            reporting period, and policy impact needed to understand the story.
+            - Never invent a REIT, trust, listed company, ownership relationship,
+            alias, or ticker.
 
-        MARKET MECHANISM ACCURACY:
-        - State only what the source explicitly says happened.
-        - Do not introduce causal language unless causation is stated in the
-          source.
+            MARKET MECHANISM ACCURACY:
+            - State only what the source explicitly says happened.
+            - Do not introduce causal language unless causation is stated in the
+            source.
 
-        OUTPUT RULES:
-        - English only.
-        - Correct capitalization and natural punctuation.
-        - No invented information.
-        - No opinion.
-        - No filler.
+            OUTPUT RULES:
+            - English only.
+            - Correct capitalization and natural punctuation.
+            - No invented information.
+            - No opinion.
+            - No filler.
         """
 
     @staticmethod
     def get_user_prompt_sgx() -> str:
         return """
-        Title Content:
-        {title}
+            Title Content:
+            {title}
 
-        Article Content:
-        {article}
+            Article Content:
+            {article}
 
-        Before writing the output, reason privately through the following.
+            Before writing the output, reason privately through the following.
 
-        1.
-        Classify the article type.
+            1.
+            Classify the article type.
 
-        2.
-        Determine the primary topic implied by the ORIGINAL TITLE.
-        Do not use the article body yet.
+            2.
+            Determine the primary topic implied by the ORIGINAL TITLE.
+            Do not use the article body yet.
 
-        3.
-        After reading the body, identify:
-        - supporting evidence
-        - financial metrics
-        - contextual information
+            3.
+            After reading the body, identify:
+            - supporting evidence
+            - financial metrics
+            - contextual information
 
-        4.
-        Identify the directly impacted companies, REITs, property trusts,
-        or business trusts.
+            4.
+            Identify the directly impacted companies, REITs, property trusts,
+            or business trusts.
 
-        Determine why each entity is directly affected by the main event.
+            Determine why each entity is directly affected by the main event.
 
-        5.
-        Identify supporting entities that are NOT primary subjects, including
-        managers, sponsors, shareholders, parents, subsidiaries, analysts,
-        counterparties, or portfolio assets when they are only contextual.
+            5.
+            Identify supporting entities that are NOT primary subjects, including
+            managers, sponsors, shareholders, parents, subsidiaries, analysts,
+            counterparties, or portfolio assets when they are only contextual.
 
-        6.
-        Extract critical financial metrics, dates, percentages, distributions,
-        ratios, and other figures relevant to the main story.
+            6.
+            Extract critical financial metrics, dates, percentages, distributions,
+            ratios, and other figures relevant to the main story.
 
-        7.
-        ENTITY RELATIONSHIPS:
-        Verify the exact role of each relevant entity as stated in the source.
+            7.
+            ENTITY RELATIONSHIPS:
+            Verify the exact role of each relevant entity as stated in the source.
 
-        Distinguish carefully between:
-        - listed entity and manager
-        - trust and sponsor
-        - parent and subsidiary
-        - acquirer and target
-        - company and portfolio asset
-        - shareholder and investee
+            Distinguish carefully between:
+            - listed entity and manager
+            - trust and sponsor
+            - parent and subsidiary
+            - acquirer and target
+            - company and portfolio asset
+            - shareholder and investee
 
-        Never infer or reverse these relationships.
+            Never infer or reverse these relationships.
 
-        8.
-        ENTITY ALIASES:
-        - Preserve aliases, acronyms, and shortened names explicitly associated
-          with an entity in the source.
-        - Examples include DBS, OCBC, UOB, SingLand, and CICT.
-        - Treat these as entity aliases unless the source explicitly says
-          otherwise.
-        - Do not infer an SGX trading code from an alias.
-        - Do not add a trading code from external knowledge.
-        - Prefer the natural entity name or source-provided alias used by the
-          article rather than introducing a stock code.
+            8.
+            ENTITY ALIASES:
+            - Preserve aliases, acronyms, and shortened names explicitly associated
+            with an entity in the source.
+            - Examples include DBS, OCBC, UOB, SingLand, and CICT.
+            - Treat these as entity aliases unless the source explicitly says
+            otherwise.
+            - Do not infer an SGX trading code from an alias.
+            - Do not add a trading code from external knowledge.
+            - Prefer the natural entity name or source-provided alias used by the
+            article rather than introducing a stock code.
 
-        9.
-        If market mechanisms are mentioned, reproduce them faithfully.
+            9.
+            If market mechanisms are mentioned, reproduce them faithfully.
 
-        Now write the title and summary.
+            Now write the title and summary.
 
-        TITLE:
-        - One sentence.
-        - Preserve the original article's purpose.
-        - For Opinion, Editorial, Educational, Interview, Comparative
-          Investment Analysis, and Market Commentary articles:
-          - Preserve the original narrative focus.
-          - Do not replace it with the largest financial statistic.
-          - Do not turn it into a conventional breaking-news headline.
-        - For Breaking News, Corporate Announcements, Earnings, and Broker
-          Reports:
-          - Write a factual financial headline centered on the primary event.
-          - Name the primary impacted entity whenever appropriate.
-        - Prefer natural company or trust names and source-provided aliases
-          rather than SGX trading codes.
+            TITLE:
+            - One sentence.
+            - Preserve the original article's purpose.
+            - For Opinion, Editorial, Educational, Interview, Comparative
+            Investment Analysis, and Market Commentary articles:
+            - Preserve the original narrative focus.
+            - Do not replace it with the largest financial statistic.
+            - Do not turn it into a conventional breaking-news headline.
+            - For Breaking News, Corporate Announcements, Earnings, and Broker
+            Reports:
+            - Write a factual financial headline centered on the primary event.
+            - Name the primary impacted entity whenever appropriate.
+            - Prefer natural company or trust names and source-provided aliases
+            rather than SGX trading codes.
 
-        SUMMARY:
-        - Four to five sentences.
-        - Begin with the article's primary topic.
-        - Then provide supporting facts.
-        - Include important financial metrics only when they support the main
-          story.
-        - Do not let supporting evidence become the central narrative.
-        - Mention all directly impacted entities.
-        - Preserve useful aliases or acronyms explicitly provided by the
-          source.
-        - Do not introduce SGX stock codes from external knowledge.
-        - Preserve exact distinctions between listed entities, managers,
-          sponsors, subsidiaries, parents, and assets.
-        - For educational, opinion, or comparative-analysis articles,
-          preserve the author's thesis rather than reducing the article to
-          numerical outcomes.
+            SUMMARY:
+            - Four to five sentences.
+            - Begin with the article's primary topic.
+            - Then provide supporting facts.
+            - Include important financial metrics only when they support the main
+            story.
+            - Do not let supporting evidence become the central narrative.
+            - Mention all directly impacted entities.
+            - Preserve useful aliases or acronyms explicitly provided by the
+            source.
+            - Do not introduce SGX stock codes from external knowledge.
+            - Preserve exact distinctions between listed entities, managers,
+            sponsors, subsidiaries, parents, and assets.
+            - For educational, opinion, or comparative-analysis articles,
+            preserve the author's thesis rather than reducing the article to
+            numerical outcomes.
 
-        NOTE:
-        - If the article is a news roundup, summarize the collection rather
-          than treating one item as the entire article.
+            NOTE:
+            - If the article is a news roundup, summarize the collection rather
+            than treating one item as the entire article.
 
-        Return title and summary in the following JSON format:
-        {format_instructions}
+            Return title and summary in the following JSON format:
+            {format_instructions}
         """

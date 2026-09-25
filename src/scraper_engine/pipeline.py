@@ -2,6 +2,7 @@ from datetime import datetime, timezone, timedelta
 from typing_extensions import Annotated, Optional
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from json import JSONDecodeError
 
 from scraper_engine.base.scraper_collection import ScraperCollection
 from scraper_engine.base.scraper import SeleniumScraper
@@ -27,10 +28,10 @@ from .processor import post_source, build_filtered_article
 from scraper_engine.database.client import SUPABASE_CLIENT
 from scraper_engine.utils.json_helpers import read_json, write_json
 
-from json import JSONDecodeError
 import typer 
 import sys
 import logging
+import asyncio
 
 
 def setup_logging():
@@ -272,13 +273,15 @@ def main_idx(
             filter_from,
         )
 
-    post_source(
-        filename,
-        batch,
-        batch_size,
-        table_name,
-        source_scraper,
-        filter_from,
+    asyncio.run(
+        post_source(
+            filename,
+            batch,
+            batch_size,
+            table_name,
+            source_scraper,
+            filter_from,
+        )
     )
 
 
@@ -400,13 +403,15 @@ def main_sgx(
             filter_from,
         )
 
-    post_source(
-        filename, 
-        batch, 
-        batch_size, 
-        table_name, 
-        source_scraper, 
-        filter_from
+    asyncio.run(
+        post_source(
+            filename,
+            batch,
+            batch_size,
+            table_name,
+            source_scraper,
+            filter_from,
+        )
     )
 
 

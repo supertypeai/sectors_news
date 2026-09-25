@@ -312,6 +312,7 @@ def get_llm(
                 model_parameters["openrouter_provider"] = {
                     "sort": "latency",
                 }
+                model_parameters["timeout"] = 180_000
                 
             elif provider == "groq" and effort != "none":
                 model_parameters["reasoning_effort"] = effort
