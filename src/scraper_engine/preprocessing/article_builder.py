@@ -384,20 +384,20 @@ async def enrich_articles(
     score_result = article_uniques["score"]
     thumbnail = article_uniques["thumbnail"]
 
-    # structured_body = await get_structure_summary(
-    #     title=title,
-    #     article=prefetched_body,
-    #     source=source,
-    #     timestamp=timestamp,
-    #     token_usage_logger=token_usage_logger,
-    # )
+    structured_body = await get_structure_summary(
+        title=title,
+        article=prefetched_body,
+        source=source,
+        timestamp=timestamp,
+        token_usage_logger=token_usage_logger,
+    )
 
-    # structured_body_str = format_structure_body(
-    #     structured_body=structured_body,
-    # )
+    structured_body_str = format_structure_body(
+        structured_body=structured_body,
+    )
 
     symbols_extracted = await get_symbol_extracted(
-        body=body,
+        body=structured_body_str,
         title=title,
         source_scraper=source_scraper,
         token_usage_logger=token_usage_logger,
@@ -425,7 +425,7 @@ async def enrich_articles(
 
     classification_results = await classify_data(
         title=title,
-        body=body,
+        body=structured_body_str,
         category="classification",
         source_scraper=source_scraper,
         token_usage_logger=token_usage_logger,
@@ -445,7 +445,7 @@ async def enrich_articles(
     post_process_result = await post_processing(
         sentiment,
         tags,
-        body,
+        structured_body_str,
         title,
         dimension,
         source_scraper,
@@ -462,7 +462,7 @@ async def enrich_articles(
         sub_sector=post_process_result.get("sub_sector"),
         tags=tags,
         tickers=symbols_extracted,
-        structured_body=None,
+        structured_body=structured_body,
         dimension=post_process_result.get("dimension"),
         score=score_result,
         thumbnail=thumbnail,

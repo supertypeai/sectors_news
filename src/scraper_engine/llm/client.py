@@ -274,8 +274,8 @@ def get_llm(
     provider = config_model.get('provider')
     
     provider_keys = {
-        'groq': [GROQ_API_KEY_DEV],
-        'openrouter': [OPENROUTER_API_KEY],
+        "groq": [GROQ_API_KEY_DEV],
+        "openrouter": [OPENROUTER_API_KEY],
     }
 
     api_keys = [

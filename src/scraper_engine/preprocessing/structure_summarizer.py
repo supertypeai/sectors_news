@@ -13,7 +13,7 @@ async def get_structure_summary(
     article: str, 
     source: str, 
     timestamp: str, 
-    models: list[str] = MODEL_NAMES,
+    models: list[str] = ["glm-5.3-flash", "gpt-oss-120b"],
     effort: str = "high",
     token_usage_logger: TokenUsageLogger | None = None,
 ):

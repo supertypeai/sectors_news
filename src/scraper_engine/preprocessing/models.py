@@ -24,13 +24,13 @@ class News:
         body: str,
         source: str,
         timestamp: str,
-        sector: str | None,
+        sector: str,
         sub_sector: list[str],
         tags: list[str],
         tickers: list[str],
-        structured_body: dict | None,
-        dimension: dict | None,
-        score: int | None,
+        structured_body: dict,
+        dimension: dict,
+        score: int,
         thumbnail: str | None = None,
     ) -> "News | None":
         if (
