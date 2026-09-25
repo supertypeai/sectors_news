@@ -1,14 +1,13 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from bs4 import BeautifulSoup
+
+from scraper_engine.base.scraper import SeleniumScraper
+
+import requests
 import time
 import argparse
 import logging
-
-from datetime import datetime
-from zoneinfo import ZoneInfo
-
-from bs4 import BeautifulSoup
-import requests
-
-from scraper_engine.base.scraper import SeleniumScraper
 
 
 LOGGER = logging.getLogger(__name__)

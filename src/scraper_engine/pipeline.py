@@ -41,7 +41,7 @@ def setup_logging():
         format='%(asctime)s [%(levelname)s] %(name)s - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S',
         handlers=[
-            logging.StreamHandler(sys.stdout)
+            logging.StreamHandler(sys.stdout),
             # logging.FileHandler("scraper.log") 
         ]
     )
@@ -226,8 +226,14 @@ def main_idx(
                 {"last_run_at": datetime.now(wib).isoformat()},
             )
 
-            scrapercollection.run_all(page_number, date, filter_from)
-            
+            asyncio.run(
+                scrapercollection.run_all(
+                    num_page=page_number, 
+                    date=date, 
+                    filter_from=filter_from
+                )
+            )
+
             all_articles = scrapercollection.articles
 
             scrapercollection.write_json(
@@ -356,8 +362,14 @@ def main_sgx(
                 {"last_run_at": datetime.now(sgt).isoformat()},
             )
 
-            scrapercollection.run_all(page_number, date, filter_from)
-
+            asyncio.run(
+                scrapercollection.run_all(
+                    num_page=page_number, 
+                    date=date, 
+                    filter_from=filter_from
+                )
+            )
+            
             all_articles = scrapercollection.articles
 
             scrapercollection.write_json(

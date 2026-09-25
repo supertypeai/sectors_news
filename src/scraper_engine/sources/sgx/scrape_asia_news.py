@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse
 import logging
@@ -11,7 +11,7 @@ import time
 LOGGER = logging.getLogger(__name__)
 
 
-class AsiaNews(SeleniumScraper):
+class AsiaNews(Scraper):
     def fetch_article_list(self, url: str) -> list:
         soup = self.fetch_news_with_scrapling(url)
         

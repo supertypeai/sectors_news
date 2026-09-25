@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from urllib.parse import quote, urlparse
 from zoneinfo import ZoneInfo
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
 import argparse 
 import json
@@ -13,7 +13,7 @@ import time
 LOGGER = logging.getLogger(__name__)
 
 
-class EdgeProp(SeleniumScraper):
+class EdgeProp(Scraper):
     BASE_URL = "https://www.edgeprop.sg"
 
     def fetch_article_list(self, url: str) -> list:
