@@ -14,6 +14,7 @@ from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
 from scraper_engine.sources.sgx.scrape_the_edge_reits import TheEdgeReits
 from scraper_engine.config.conf import BRIGHTDATA_API_KEY, BRIGHTDATA_ZONE
 from scraper_engine.preprocessing.article_fetcher import get_article_body
+from scraper_engine.sources.idx.scrape_kompas import KompasMoney
 
 import logging
 import requests 
@@ -161,6 +162,25 @@ def test_investorid_article_fetcher(urls: list[str]):
         )
 
 
+def test_kompas(): 
+    scraper = KompasMoney()
+
+    scraper.fetch_news = MethodType(
+        fetch_with_scrapling_adapter,
+        scraper,
+    )
+
+    articles = scraper.extract_news_pages(
+        num_pages=1,
+        date="20260927",
+    )
+
+    LOGGER.info(f"kompas articles:", len(articles))
+
+    if articles:
+        LOGGER.info(f"kompas sample:", articles[0])
+
+
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.INFO,
@@ -168,8 +188,8 @@ if __name__ == "__main__":
     )
 
     # test_switch__scrapling()
-    test_jakarta_globe_and_investor_id()
-
+    # test_jakarta_globe_and_investor_id()
+    test_kompas()
     # urls = [
     #     "https://investor.id/market/455147/memperbesar-peluangnormalisasi-treatment-msci",
     #     "https://jakartaglobe.id/business/two-years-into-prabowo-presidency-economists-question-quality-of-economic-growth"

@@ -1,6 +1,6 @@
 MODEL_NAMES = [
-    "gpt-oss-120b",
     "glm-5.3-flash",
+    "gpt-oss-120b",
     "deepsek-v4-flash",
     "gpt-oss-20b",
     "nvidia-nemotron-3-ultra",
