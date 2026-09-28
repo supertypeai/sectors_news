@@ -1,7 +1,7 @@
 from types import MethodType
 from urllib.parse import urlparse
 
-from scraper_engine.base.scraper import Scraper
+from scraper_engine.base.scraper import Scraper, SeleniumScraper
 from scraper_engine.sources.idx.scrape_investor_id import InvestorID
 from scraper_engine.sources.idx.scrape_kontan_investasi import KontanInvestasi
 from scraper_engine.sources.idx.scrape_bisnis_com import BisnisMarket
@@ -162,11 +162,31 @@ def test_investorid_article_fetcher(urls: list[str]):
         )
 
 
+def fetch_with_selenium_adapter(self, url: str):
+    selenium_scraper = SeleniumScraper()
+    
+    wait_selector = (
+        "div.articleItem"
+        if "indeks.kompas.com" in url
+        else "div.read__time"
+    )
+
+    soup = selenium_scraper.fetch_news_with_selenium(
+        url,
+        wait_selector=wait_selector,
+        time_sleep=5,
+    )
+
+    if soup and soup.select_one("#challenge-container"):
+        LOGGER.warning("Kompas still returned an AWS WAF challenge")
+
+    return soup
+
+
 def test_kompas(): 
     scraper = KompasMoney()
-
     scraper.fetch_news = MethodType(
-        fetch_with_scrapling_adapter,
+        fetch_with_selenium_adapter,
         scraper,
     )
 
