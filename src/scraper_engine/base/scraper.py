@@ -329,10 +329,15 @@ class Scraper:
             response = scrapling_session.get(url)
 
             if response.status != 200:
+                body_preview = bytes(response.body).decode(
+                    "utf-8",
+                    errors="replace",
+                )
                 LOGGER.warning(
-                    "Non-200 status %d for %s",
+                    "Non-200 status %d for %s; response body preview: %r",
                     response.status,
                     url,
+                    body_preview,
                 )
                 self.record_request_failure(
                     url=url,

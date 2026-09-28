@@ -175,10 +175,10 @@ def test_kompas():
         date="20260927",
     )
 
-    LOGGER.info(f"kompas articles:", len(articles))
+    LOGGER.info("kompas articles: %d", len(articles))
 
     if articles:
-        LOGGER.info(f"kompas sample:", articles[0])
+        LOGGER.info("kompas sample: %s", articles[0])
 
 
 if __name__ == "__main__":
