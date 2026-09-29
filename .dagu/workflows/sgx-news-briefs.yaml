@@ -1,0 +1,48 @@
+description: SGX news briefs — pre-open and post-close market brief
+
+container:
+  image: sectors-news-runtime:latest
+  pull_policy: never
+  working_dir: /workspace
+  volumes:
+    # preflight.sh asserts the /dev/shm mount even though briefs never start Chrome.
+    - /dev/shm:/dev/shm
+    - /srv/runners/tokens/sectors_news:/run/secrets:ro
+  env:
+    - GIT_CONFIG_VALUE_1: '!f() { test "$1" = get && echo username=x-access-token && echo password="$(cat /run/secrets/token)"; }; f'
+    - MARKET: sgx
+
+secrets:
+  - SUPABASE_URL
+  - SUPABASE_KEY
+  - OPENROUTER_API_KEY
+  - GROQ_API_KEY_DEV
+  - PROXY
+
+# 08:20 and 17:20 SGT, the session times in news_brief/constant.py MARKETS.
+# On the same queue as the scrapes, so a slow sgx-news-pipeline run makes this wait
+# rather than brief without the articles it is still inserting.
+schedule: "20 0,9 * * 1-5"
+queue: news-data-pipeline
+timeout_sec: 3600
+hist_retention_days: 30
+
+steps:
+  - id: checkout
+    run: runners clone
+
+  - id: preflight
+    depends: [checkout]
+    run: bash .dagu/steps/preflight.sh
+
+  # Safe to retry: it briefs whatever closed since the committed state.json,
+  # and re-briefing a session upserts over the same news_briefs row.
+  - id: brief
+    depends: [preflight]
+    run: bash -c 'set -e; python -m scraper_engine.news_brief.cli run --market "$MARKET"'
+
+  - id: publish
+    depends: [brief]
+    run: >-
+      runners push -m "chore(sgx): checkpoint news briefs"
+      data/briefs_result/sgx/state.json

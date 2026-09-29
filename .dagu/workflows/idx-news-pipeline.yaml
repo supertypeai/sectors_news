@@ -28,7 +28,8 @@ secrets:
   - BRIGHTDATA_API_KEY
   - BRIGHTDATA_ZONE
 
-schedule: "15 */4 * * *"
+# 08:15 and 16:15 WIB land just before the pre-open and post-close briefs.
+schedule: "15 1,5,9,13,17,21 * * *"
 queue: news-data-pipeline
 timeout_sec: 21600
 hist_retention_days: 30

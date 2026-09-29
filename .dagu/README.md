@@ -7,10 +7,23 @@ and registers it over Dagu's REST API.
 
 | File | DAG | Schedule (UTC) | Replaces |
 | --- | --- | --- | --- |
-| `workflows/idx-news-pipeline.yaml` | `sectors_news--idx-news-pipeline` | `15 */4 * * *` | `.github/workflows/pipeline_idx.yaml` |
-| `workflows/sgx-news-pipeline.yaml` | `sectors_news--sgx-news-pipeline` | `0 */4 * * *` | `.github/workflows/pipeline_sgx.yaml` |
+| `workflows/idx-news-pipeline.yaml` | `sectors_news--idx-news-pipeline` | `15 1,5,9,13,17,21 * * *` | `.github/workflows/pipeline_idx.yaml` |
+| `workflows/sgx-news-pipeline.yaml` | `sectors_news--sgx-news-pipeline` | `10 0,4,9,13,17,21 * * *` | `.github/workflows/pipeline_sgx.yaml` |
 | `workflows/idx-news-resume.yaml` | `sectors_news--idx-news-resume` | manual | that workflow's `process_only` input |
 | `workflows/sgx-news-resume.yaml` | `sectors_news--sgx-news-resume` | manual | the same, for SGX |
+| `workflows/idx-news-briefs.yaml` | `sectors_news--idx-news-briefs` | `35 1,9 * * 1-5` | new |
+| `workflows/sgx-news-briefs.yaml` | `sectors_news--sgx-news-briefs` | `20 0,9 * * 1-5` | new |
+
+The scrape hours are not an even `*/4` because each market needs one scrape just
+before its pre-open and one just after its close, and the briefs follow those:
+
+| | Pre-open scrape → brief | Post-close scrape → brief |
+| --- | --- | --- |
+| IDX (WIB, UTC+7) | 08:15 → 08:35, pre-open 08:45 | 16:15 → 16:35, close 16:00 |
+| SGX (SGT, UTC+8) | 08:10 → 08:20, pre-open 08:30 | 17:10 → 17:20, close 17:00 |
+
+Both markets close at 09:00 UTC, so four runs fall between 09:10 and 09:35 UTC.
+That is what the queue below is for.
 
 ```
 .dagu/
@@ -163,9 +176,13 @@ queues:
       max_concurrency: 1
 ```
 
-Without it the two may overlap, which costs nothing but a rebase — the schedules
-are 15 minutes apart, the markets write disjoint files, and `runners push`
-retries a lost race five times.
+The briefs depend on it. A brief takes its window up to the moment it starts, so
+queued behind a slow scrape it waits and includes that scrape's articles; without
+the queue it starts on time and those articles land in the next session's brief
+instead. Nothing is lost either way — the brief's watermark is
+`data/briefs_result/<market>/state.json` — but the queue keeps the post-close
+brief complete. Overlapping pushes cost nothing but a rebase: the DAGs write
+disjoint files and `runners push` retries a lost race five times.
 
 ## Two things Dagu 2.16 forces
 

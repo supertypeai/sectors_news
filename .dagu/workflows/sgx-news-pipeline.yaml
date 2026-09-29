@@ -28,7 +28,8 @@ secrets:
   - BRIGHTDATA_API_KEY
   - BRIGHTDATA_ZONE
 
-schedule: "0 */4 * * *"
+# 08:10 and 17:10 SGT land just before the pre-open and post-close briefs.
+schedule: "10 0,4,9,13,17,21 * * *"
 queue: news-data-pipeline
 timeout_sec: 21600
 hist_retention_days: 30
