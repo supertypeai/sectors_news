@@ -32,8 +32,15 @@ class TheEdgeSingapore(Scraper):
 
         return article_items if article_items else []
 
-    def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
-        soup = self.fetch_news_with_scrapling(article_url)
+    def fetch_article_content(
+        self,
+        article_url: str,
+        article_soup: BeautifulSoup | None = None,
+    ) -> tuple[str | None, str | None]:
+        if article_soup is None:
+            soup = self.fetch_news_with_scrapling(article_url)
+        else:
+            soup = article_soup
 
         if not soup:
             return None, None
@@ -85,7 +92,21 @@ class TheEdgeSingapore(Scraper):
                     raw_src = img_tag.get("src")
                     thumbnail_url = f"{self.BASE_URL}{raw_src}" if raw_src and raw_src.startswith("/") else raw_src
 
-            published_at, article_body = self.fetch_article_content(source_url)
+            article_soup = self.fetch_news_with_scrapling(source_url)
+            image_tag = (
+                article_soup.select_one('meta[property="og:image"]')
+                if article_soup
+                else None
+            )
+            article_image_url = image_tag.get("content") if image_tag else None
+
+            if article_image_url:
+                thumbnail_url = article_image_url
+
+            published_at, article_body = self.fetch_article_content(
+                source_url,
+                article_soup,
+            )
 
             if not published_at:
                 LOGGER.info("[The Edge SG] Failed to parse timestamp for %s. Skipping.", source_url)

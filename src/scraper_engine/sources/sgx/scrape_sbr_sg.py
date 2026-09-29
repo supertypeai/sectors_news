@@ -1,5 +1,6 @@
 from datetime import datetime, timezone 
 from zoneinfo import ZoneInfo
+from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
 
@@ -29,8 +30,16 @@ class SBRSG(Scraper):
 
         return view_content.select("div.item--large, div.item")
 
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news(url=article_url)
+    def fetch_article_timestamp(
+        self,
+        article_url: str,
+        article_soup: BeautifulSoup | None = None,
+    ) -> str:
+        if article_soup is None:
+            soup = self.fetch_news(url=article_url)
+        else:
+            soup = article_soup
+
         if soup is None:
             return None
 
@@ -78,9 +87,29 @@ class SBRSG(Scraper):
                 continue
 
             thumbnail_tag = article_item.select_one("img.progressivePlain-img")
-            thumbnail_url = thumbnail_tag.get("src") if thumbnail_tag else None
+            thumbnail_url = (
+                thumbnail_tag.get("data-src") or thumbnail_tag.get("src")
+                if thumbnail_tag
+                else None
+            )
 
-            published_at = self.fetch_article_timestamp(source_url)
+            article_soup = self.fetch_news(url=source_url)
+            image_tag = (
+                article_soup.select_one('meta[property="og:image"]')
+                if article_soup
+                else None
+            )
+            article_image_url = image_tag.get("content") if image_tag else None
+
+            if article_image_url:
+                thumbnail_url = article_image_url
+            elif thumbnail_url and "/styles/taxonomy_scale_small/" in thumbnail_url:
+                thumbnail_url = thumbnail_url.replace(
+                    "/styles/taxonomy_scale_small/",
+                    "/styles/taxonomy_scale_big/",
+                )
+
+            published_at = self.fetch_article_timestamp(source_url, article_soup)
             time.sleep(0.5)
 
             if not published_at:

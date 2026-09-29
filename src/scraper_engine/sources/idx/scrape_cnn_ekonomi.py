@@ -38,6 +38,18 @@ class CNNEkonomi(Scraper):
             thumbnail_tag = article_item.select_one("img")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
+            if source_url:
+                article_soup = self.fetch_news_with_scrapling(source_url)
+                if article_soup:
+                    open_graph_image_tag = article_soup.select_one(
+                        'meta[property="og:image"]'
+                    )
+                    if open_graph_image_tag:
+                        thumbnail_url = (
+                            open_graph_image_tag.get("content")
+                            or thumbnail_url
+                        )
+
             raw_date = ""
             date_tag = article_item.select_one("span.text-xs.text-cnn_black_light3")
             

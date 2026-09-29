@@ -37,6 +37,18 @@ class FinanceDetik(Scraper):
             thumbnail_img = thumbnail_tag.find("img") if thumbnail_tag else None
             thumbnail_url = thumbnail_img["src"] if thumbnail_img else None
 
+            if source_url:
+                article_soup = self.fetch_news(source_url)
+                if article_soup:
+                    open_graph_image_tag = article_soup.select_one(
+                        'meta[property="og:image"]'
+                    )
+                    if open_graph_image_tag:
+                        thumbnail_url = (
+                            open_graph_image_tag.get("content")
+                            or thumbnail_url
+                        )
+
             date_tag = article_item.find("div", class_="media__date")
             date_span = date_tag.find("span") if date_tag else None
             raw_timestamp = date_span["title"] if date_span else None

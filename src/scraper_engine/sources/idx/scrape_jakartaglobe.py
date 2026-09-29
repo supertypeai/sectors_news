@@ -1,5 +1,6 @@
 from datetime import datetime
 from goose3 import Goose
+from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
 
@@ -48,8 +49,12 @@ class JakartaGlobe(Scraper):
     def fetch_article_content(
         self,
         article_url: str,
+        article_soup: BeautifulSoup | None = None,
     ) -> tuple[str | None, str | None]:
-        soup = self.fetch_news_with_web_unlocker(article_url)
+        if article_soup is None:
+            soup = self.fetch_news_with_web_unlocker(article_url)
+        else:
+            soup = article_soup
 
         if soup is None:
             return None, None
@@ -118,9 +123,27 @@ class JakartaGlobe(Scraper):
             title = title_tag.get_text(strip=True) if title_tag else None
 
             thumbnail_tag = article_item.select_one("div.col-4 img.lazy")
-            thumbnail_url = thumbnail_tag.get("src") if thumbnail_tag else None
+            thumbnail_url = (
+                thumbnail_tag.get("data-src") or thumbnail_tag.get("src")
+                if thumbnail_tag
+                else None
+            )
 
-            published_at, article_body = self.fetch_article_content(source_url)
+            article_soup = self.fetch_news_with_web_unlocker(source_url)
+            image_tag = (
+                article_soup.select_one('meta[property="og:image"]')
+                if article_soup
+                else None
+            )
+            article_image_url = image_tag.get("content") if image_tag else None
+
+            if article_image_url:
+                thumbnail_url = article_image_url
+
+            published_at, article_body = self.fetch_article_content(
+                source_url,
+                article_soup,
+            )
             time.sleep(0.5)
 
             if not published_at:

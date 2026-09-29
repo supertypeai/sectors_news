@@ -70,6 +70,20 @@ class TheSmartInvestor(Scraper):
                 break
 
             thumbnail_url = post.get("featured_image_src") or None
+            featured_media_items = post.get("_embedded", {}).get("wp:featuredmedia", [])
+
+            if featured_media_items:
+                featured_media = featured_media_items[0]
+                full_image = (
+                    featured_media.get("media_details", {})
+                    .get("sizes", {})
+                    .get("full", {})
+                )
+                thumbnail_url = (
+                    full_image.get("source_url")
+                    or featured_media.get("source_url")
+                    or thumbnail_url
+                )
 
             content_soup = BeautifulSoup(post["content"]["rendered"], "html.parser")
             article_body = content_soup.get_text(separator="\n", strip=True)
@@ -85,7 +99,7 @@ class TheSmartInvestor(Scraper):
         return parsed_articles, reached_older_date
 
     def extract_news_pages(self, num_pages: int, date: str) -> list:
-        base_url = "https://thesmartinvestor.com.sg/wp-json/wp/v2/posts?"
+        base_url = "https://thesmartinvestor.com.sg/wp-json/wp/v2/posts?_embed=wp:featuredmedia"
         page_number = 1
 
         while True:

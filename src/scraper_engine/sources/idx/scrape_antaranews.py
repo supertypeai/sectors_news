@@ -1,5 +1,7 @@
 from datetime import datetime 
 
+from bs4 import BeautifulSoup
+
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
 
@@ -23,8 +25,16 @@ class AntaraNews(Scraper):
 
         return article_lists
 
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news(article_url)
+    def fetch_article_timestamp(
+        self,
+        article_url: str,
+        article_soup: BeautifulSoup | None = None,
+    ) -> str:
+        soup = (
+            article_soup
+            if article_soup is not None
+            else self.fetch_news(article_url)
+        )
 
         if not soup:
             return None
@@ -89,7 +99,23 @@ class AntaraNews(Scraper):
             thumbnail_tag = article_item.select_one("div.col-md-5 img.img-fluid")
             thumbnail_url = thumbnail_tag["data-src"] if thumbnail_tag else None
 
-            published_at = self.fetch_article_timestamp(source_url)
+            article_soup = self.fetch_news(source_url)
+            published_at = (
+                self.fetch_article_timestamp(source_url, article_soup)
+                if article_soup
+                else None
+            )
+
+            if article_soup:
+                open_graph_image_tag = article_soup.select_one(
+                    'meta[property="og:image"]'
+                )
+                if open_graph_image_tag:
+                    thumbnail_url = (
+                        open_graph_image_tag.get("content")
+                        or thumbnail_url
+                    )
+
             time.sleep(0.5)
 
             if not published_at:
