@@ -19,7 +19,7 @@ secrets:
   - GROQ_API_KEY_DEV
   - PROXY
 
-# 08:35 and 16:35 WIB, the session times in news_brief/constant.py MARKETS.
+# 08:35 and 16:35 WIB, the session times in news_briefs/constant.py MARKETS.
 # On the same queue as the scrapes, so a slow idx-news-pipeline run makes this wait
 # rather than brief without the articles it is still inserting.
 schedule: "35 1,9 * * 1-5"
@@ -39,7 +39,7 @@ steps:
   # and re-briefing a session upserts over the same news_briefs row.
   - id: brief
     depends: [preflight]
-    run: bash -c 'set -e; python -m scraper_engine.news_brief.cli run --market "$MARKET"'
+    run: bash -c 'set -e; python -m scraper_engine.news_briefs.cli run --market "$MARKET"'
 
   - id: publish
     depends: [brief]

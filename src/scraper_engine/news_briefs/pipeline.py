@@ -250,7 +250,7 @@ def run_news_briefs_pipeline(market: str) -> None:
             token_usage_logger=token_usage_logger,
         )
 
-        # upsert_news_brief(brief_result)
+        upsert_news_brief(brief_result)
 
         recent_briefs = [
             *recent_briefs, 

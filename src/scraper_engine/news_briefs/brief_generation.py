@@ -4,7 +4,6 @@ from .prompts.market_brief import MarketBriefSchema, MarketBriefPrompts
 from .prompts.what_to_watch import WhatToWatchPrompts, WhatToWatch
 from .utils.format_records import format_records
 
-import json
 import logging
 import asyncio 
 
@@ -136,28 +135,3 @@ async def run_brief_generation(
         "what_to_watch": what_to_watch,
     }
 
-
-if __name__ == "__main__":
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s [%(levelname)s] %(name)s - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S',
-        # handlers=[
-        #     logging.StreamHandler(sys.stdout),
-        #     logging.FileHandler("src/scraper_engine/brief_preprocessing/unit.log") 
-        # ]
-    )
-     
-    with open(
-        "src/scraper_engine/brief_preprocessing/data/example.json", "r"
-    ) as file: 
-        records = json.load(file)["reconciled_developments"]
-
-    result = asyncio.run(
-        run_brief_generation(
-            merged_developments=records,
-            exchange="IDX",
-        )
-    )
-
-    print(json.dumps(result, indent=2))

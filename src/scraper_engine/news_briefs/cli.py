@@ -54,5 +54,5 @@ if __name__ == "__main__":
     app()
 
 
-# uv run -m scraper_engine.brief_preprocessing.cli run --market idx
-# uv run -m scraper_engine.brief_preprocessing.cli backfill --market idx --start-date 2026-09-28 --end-date 2026-09-28
+# uv run -m scraper_engine.news_briefs.cli run --market idx
+# uv run -m scraper_engine.news_briefs.cli backfill --market idx --start-date 2026-09-28 --end-date 2026-09-28

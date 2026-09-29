@@ -28,5 +28,5 @@ MARKETS = {
 
 BRIEFS_TABLE = "news_briefs"
 STATE_DIR = Path("data/briefs_result")
-BACKFILL_OUTPUT_DIR = Path("src/scraper_engine/brief_preprocessing/data")
+BACKFILL_OUTPUT_DIR = STATE_DIR / "backfill"
 PREVIOUS_BRIEFS_FOR_RECONCILE = 2
