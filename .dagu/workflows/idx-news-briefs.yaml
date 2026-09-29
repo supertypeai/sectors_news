@@ -18,6 +18,8 @@ secrets:
   - OPENROUTER_API_KEY
   - GROQ_API_KEY_DEV
   - PROXY
+  - BRIGHTDATA_API_KEY
+  - BRIGHTDATA_ZONE
 
 # 08:35 and 16:35 WIB, the session times in news_briefs/constant.py MARKETS.
 # On the same queue as the scrapes, so a slow idx-news-pipeline run makes this wait
