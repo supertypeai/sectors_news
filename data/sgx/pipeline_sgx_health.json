@@ -2,8 +2,8 @@
     {
         "source": "StraitsTimes",
         "date": "20260929",
-        "articles_found": 0,
-        "duration_minutes": 0.010724088351707906,
+        "articles_found": 1,
+        "duration_minutes": 0.045169536218357585,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -13,8 +13,8 @@
     {
         "source": "ChannelNewsAsiaSG",
         "date": "20260929",
-        "articles_found": 4,
-        "duration_minutes": 0.008268756314646453,
+        "articles_found": 8,
+        "duration_minutes": 0.03975586721595998,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -25,7 +25,7 @@
         "source": "SBRSG",
         "date": "20260929",
         "articles_found": 0,
-        "duration_minutes": 0.14151897101352612,
+        "duration_minutes": 0.14344399356826518,
         "requests": 16,
         "successful_requests": 16,
         "failed_requests": 0,
@@ -52,8 +52,8 @@
     {
         "source": "AsiaNews",
         "date": "20260929",
-        "articles_found": 0,
-        "duration_minutes": 0.03135596691863611,
+        "articles_found": 2,
+        "duration_minutes": 0.0448313977336511,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -65,12 +65,13 @@
     {
         "source": "EdgeProp",
         "date": "20260929",
-        "articles_found": 0,
-        "duration_minutes": 0.06025190036743879,
-        "requests": 2,
-        "successful_requests": 2,
+        "articles_found": 1,
+        "duration_minutes": 0.07612731095092992,
+        "requests": 3,
+        "successful_requests": 3,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200
         ],
@@ -80,7 +81,7 @@
         "source": "NextInsight",
         "date": "20260929",
         "articles_found": 1,
-        "duration_minutes": 0.019240420816155773,
+        "duration_minutes": 0.02515657425004368,
         "requests": 3,
         "successful_requests": 3,
         "failed_requests": 0,
@@ -95,7 +96,7 @@
         "source": "TheSmartInvestor",
         "date": "20260929",
         "articles_found": 0,
-        "duration_minutes": 0.005473494801359872,
+        "duration_minutes": 0.017743324434074264,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -105,50 +106,47 @@
     {
         "source": "TheEdgeSingapore",
         "date": "20260929",
-        "articles_found": 0,
-        "duration_minutes": 0.0031716153336067993,
-        "requests": 1,
-        "successful_requests": 0,
-        "failed_requests": 1,
+        "articles_found": 6,
+        "duration_minutes": 0.09720576039981096,
+        "requests": 8,
+        "successful_requests": 8,
+        "failed_requests": 0,
         "http_statuses": [
-            404
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
         ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://www.theedgesingapore.com/section/news/1",
-                "status": 404,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 404"
-            }
-        ]
+        "failures": []
     },
     {
         "source": "TheEdgeReits",
         "date": "20260929",
         "articles_found": 0,
-        "duration_minutes": 0.005675236733319859,
-        "requests": 1,
-        "successful_requests": 0,
-        "failed_requests": 1,
+        "duration_minutes": 0.1074936253329118,
+        "requests": 7,
+        "successful_requests": 7,
+        "failed_requests": 0,
         "http_statuses": [
-            404
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
         ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://www.theedgesingapore.com/edgecollective/REITs-Report",
-                "status": 404,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 404"
-            }
-        ]
+        "failures": []
     },
     {
         "source": "SGXMarketUpdates",
         "date": "20260929",
         "articles_found": 0,
-        "duration_minutes": 0.028431190449434023,
+        "duration_minutes": 0.031168730199957886,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -159,7 +157,7 @@
         "source": "SmallCapAsia",
         "date": "20260929",
         "articles_found": 0,
-        "duration_minutes": 0.005335141000493119,
+        "duration_minutes": 0.04839849346705402,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -171,8 +169,8 @@
     {
         "source": "BusinessTimesSG",
         "date": "20260929",
-        "articles_found": 0,
-        "duration_minutes": 3.287113350299963,
+        "articles_found": 3,
+        "duration_minutes": 2.7749122551487138,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
