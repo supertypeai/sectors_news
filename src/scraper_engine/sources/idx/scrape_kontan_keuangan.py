@@ -61,7 +61,7 @@ class KontanKeuangan(Scraper):
         except (ValueError, IndexError, AttributeError):
             return None
 
-    def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None]:
+    def fetch_article_content(self, article_url: str) -> tuple[str | None, str | None, str | None]:
         try:
             response = Fetcher.get(
                 article_url, 
@@ -75,10 +75,13 @@ class KontanKeuangan(Scraper):
                     response.status, 
                     article_url
                 )
-                return None, None
+                return None, None, None
 
             body = bytes(response.body)
             soup = BeautifulSoup(body, "html.parser")
+
+            open_graph_image_tag = soup.select_one('meta[property="og:image"]')
+            thumbnail_url = open_graph_image_tag.get("content") if open_graph_image_tag else None
 
             timestamp_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
             raw_time = timestamp_tag.get_text(strip=True) if timestamp_tag else None
@@ -88,11 +91,11 @@ class KontanKeuangan(Scraper):
             article_data = goose_extractor.extract(raw_html=body)
             article_body = article_data.cleaned_text or None
 
-            return published_at, article_body
+            return published_at, article_body, thumbnail_url
 
         except Exception as error:
             LOGGER.error("[Kontan Keuangan] Failed to fetch article content for %s: %s", article_url, error)
-            return None, None
+            return None, None, None
     
     def parse_articles(self, article_items: list) -> list:
         parsed_articles = []
@@ -107,8 +110,10 @@ class KontanKeuangan(Scraper):
             thumbnail_tag = article_item.select_one("div.pic img")
             thumbnail_url = thumbnail_tag["data-src"] if thumbnail_tag else None
 
-            published_at, article_body = self.fetch_article_content(source_url)
-            time.sleep(0.3)
+            published_at, article_body, article_thumbnail_url = self.fetch_article_content(source_url)
+
+            if article_thumbnail_url:
+                thumbnail_url = article_thumbnail_url
 
             if not published_at:
                 LOGGER.warning(
