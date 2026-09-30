@@ -1,9 +1,196 @@
 [
     {
         "source": "StraitsTimes",
-        "date": "20260930",
+        "date": "20261001",
         "articles_found": 0,
-        "duration_minutes": 0.004453427232025812,
+        "duration_minutes": 0.007703019783366472,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "ChannelNewsAsiaSG",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.010018609382677823,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "SBRSG",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.198952581481232,
+        "requests": 16,
+        "successful_requests": 16,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "AsiaNews",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.03270086626677463,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "EdgeProp",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.055861493766618274,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "NextInsight",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.0139009845831121,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "TheSmartInvestor",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.03924654936805989,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "TheEdgeSingapore",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.684306348565345,
+        "requests": 1,
+        "successful_requests": 0,
+        "failed_requests": 1,
+        "http_statuses": [
+            404
+        ],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://www.theedgesingapore.com/section/news/1",
+                "status": 404,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 404"
+            }
+        ]
+    },
+    {
+        "source": "TheEdgeReits",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.6841325683984906,
+        "requests": 1,
+        "successful_requests": 0,
+        "failed_requests": 1,
+        "http_statuses": [
+            504
+        ],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://www.theedgesingapore.com/edgecollective/REITs-Report",
+                "status": 504,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 504"
+            }
+        ]
+    },
+    {
+        "source": "SGXMarketUpdates",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.028133076099523653,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "SmallCapAsia",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 0.04816467670025304,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BusinessTimesSG",
+        "date": "20261001",
+        "articles_found": 0,
+        "duration_minutes": 4.927806201833301,
+        "requests": 2,
+        "successful_requests": 1,
+        "failed_requests": 1,
+        "http_statuses": [],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://www.businesstimes.com.sg/singapore/economy-policy?ref=listing-menubar",
+                "status": null,
+                "reason": "ReadTimeoutError",
+                "message": "HTTPConnectionPool(host='localhost', port=49225): Read timed out. (read timeout=120)"
+            }
+        ]
+    },
+    {
+        "source": "StraitsTimes",
+        "date": "20260930",
+        "articles_found": 2,
+        "duration_minutes": 0.007451536584024628,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -13,8 +200,8 @@
     {
         "source": "ChannelNewsAsiaSG",
         "date": "20260930",
-        "articles_found": 23,
-        "duration_minutes": 0.012919731814569483,
+        "articles_found": 24,
+        "duration_minutes": 0.006351923282879094,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -24,12 +211,13 @@
     {
         "source": "SBRSG",
         "date": "20260930",
-        "articles_found": 7,
-        "duration_minutes": 0.253610811867596,
-        "requests": 23,
-        "successful_requests": 23,
+        "articles_found": 8,
+        "duration_minutes": 0.1930150757000471,
+        "requests": 24,
+        "successful_requests": 24,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
@@ -60,7 +248,7 @@
         "source": "AsiaNews",
         "date": "20260930",
         "articles_found": 1,
-        "duration_minutes": 0.04479286876739934,
+        "duration_minutes": 0.027140996267553417,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -72,12 +260,13 @@
     {
         "source": "EdgeProp",
         "date": "20260930",
-        "articles_found": 5,
-        "duration_minutes": 0.18124898665118963,
-        "requests": 7,
-        "successful_requests": 7,
+        "articles_found": 6,
+        "duration_minutes": 0.12234120448119938,
+        "requests": 8,
+        "successful_requests": 8,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
@@ -92,7 +281,7 @@
         "source": "NextInsight",
         "date": "20260930",
         "articles_found": 1,
-        "duration_minutes": 0.025153254131631306,
+        "duration_minutes": 0.0197008243141075,
         "requests": 3,
         "successful_requests": 3,
         "failed_requests": 0,
@@ -107,7 +296,7 @@
         "source": "TheSmartInvestor",
         "date": "20260930",
         "articles_found": 4,
-        "duration_minutes": 0.2138308946819355,
+        "duration_minutes": 0.0368037071195431,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -117,12 +306,18 @@
     {
         "source": "TheEdgeSingapore",
         "date": "20260930",
-        "articles_found": 34,
-        "duration_minutes": 0.7171686567172098,
-        "requests": 38,
-        "successful_requests": 38,
+        "articles_found": 39,
+        "duration_minutes": 0.5246002694979931,
+        "requests": 44,
+        "successful_requests": 44,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -168,7 +363,7 @@
         "source": "TheEdgeReits",
         "date": "20260930",
         "articles_found": 0,
-        "duration_minutes": 0.11682075404872497,
+        "duration_minutes": 0.12957157156585405,
         "requests": 7,
         "successful_requests": 7,
         "failed_requests": 0,
@@ -187,7 +382,7 @@
         "source": "SGXMarketUpdates",
         "date": "20260930",
         "articles_found": 0,
-        "duration_minutes": 0.028451266683017215,
+        "duration_minutes": 0.02467709198438873,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -198,7 +393,7 @@
         "source": "SmallCapAsia",
         "date": "20260930",
         "articles_found": 0,
-        "duration_minutes": 0.006730272333758573,
+        "duration_minutes": 0.005041460851983478,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -211,7 +406,7 @@
         "source": "BusinessTimesSG",
         "date": "20260930",
         "articles_found": 5,
-        "duration_minutes": 0.9738296334204884,
+        "duration_minutes": 2.973774628783576,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
