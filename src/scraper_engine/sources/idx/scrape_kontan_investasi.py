@@ -143,6 +143,16 @@ class KontanInvestasi(Scraper):
                     else None
                 )
 
+                if article_thumbnail_tag:
+                    image_error_handler = article_thumbnail_tag.get("onerror", "")
+                    fallback_thumbnail_match = re.search(
+                        r"this[.]src='([^']+)'",
+                        image_error_handler,
+                    )
+                    
+                    if fallback_thumbnail_match:
+                        article_thumbnail_url = fallback_thumbnail_match.group(1)
+
                 if not article_thumbnail_url:
                     open_graph_image_tag = article_soup.select_one(
                         'meta[property="og:image"]'

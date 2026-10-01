@@ -28,8 +28,13 @@ class InvestorID(Scraper):
     def fetch_article_content(
         self,
         article_url: str,
+        article_soup: BeautifulSoup | None = None,
     ) -> tuple[str | None, str | None]:
-        soup = self.fetch_news_with_web_unlocker(article_url)
+        soup = (
+            article_soup
+            if article_soup is not None
+            else self.fetch_news_with_web_unlocker(article_url)
+        )
 
         if soup is None:
             return None, None
@@ -126,7 +131,28 @@ class InvestorID(Scraper):
             thumbnail_tag = article_item.select_one("div.col-4 img.lazy")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
-            published_at, article_body = self.fetch_article_content(source_url)
+            article_soup = self.fetch_news_with_web_unlocker(source_url)
+
+            if article_soup:
+                published_at, article_body = self.fetch_article_content(
+                    source_url,
+                    article_soup=article_soup,
+                )
+
+                open_graph_image_tag = article_soup.select_one(
+                    'meta[property="og:image"]'
+                )
+                article_thumbnail_url = (
+                    open_graph_image_tag.get("content")
+                    if open_graph_image_tag
+                    else None
+                )
+
+                if article_thumbnail_url:
+                    thumbnail_url = article_thumbnail_url
+            else:
+                published_at, article_body = None, None
+
             time.sleep(0.5)
 
             if not published_at:
