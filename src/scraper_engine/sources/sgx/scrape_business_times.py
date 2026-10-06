@@ -1,10 +1,9 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from bs4 import BeautifulSoup
+from scrapling.fetchers import Fetcher
 
-from scraper_engine.base.scraper import SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 
-import requests
 import time
 import argparse
 import logging
@@ -13,154 +12,184 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-class BusinessTimesSG(SeleniumScraper):
+class BusinessTimesSG(Scraper):
+    BASE_URL = "https://www.businesstimes.com.sg"
+    SINGAPORE_TIMEZONE = ZoneInfo("Asia/Singapore")
+    PAGE_SIZE = 10
+    MAX_PAGES = 20
+
+    # Listing pages load more stories through these APIs (infinite scroll):
+    # section pages page by `page`, keyword pages page by `offset`
+    LISTINGS = [
+        {
+            "name": "keywords/sgx",
+            "endpoint": "/_plat/api/v1/articles/tags",
+            "params": {"urlPath": "/keywords/sgx"},
+            "paging": "offset",
+        },
+        {
+            "name": "singapore/economy-policy",
+            "endpoint": "/_plat/api/v1/articles/sections",
+            "params": {"sections": "singapore_economy-policy"},
+            "paging": "page",
+        },
+        {
+            "name": "companies-markets",
+            "endpoint": "/_plat/api/v1/articles/sections",
+            "params": {"sections": "companies-markets"},
+            "paging": "page",
+        },
+    ]
+
+    def fetch_listing_page(self, listing: dict, page_number: int) -> list:
+        params = {**listing["params"], "size": self.PAGE_SIZE}
+
+        if listing["paging"] == "offset":
+            params["offset"] = (page_number - 1) * self.PAGE_SIZE
+        else:
+            params["page"] = page_number
+
+        url = f"{self.BASE_URL}{listing['endpoint']}"
+
+        try:
+            response = Fetcher.get(
+                url,
+                params=params,
+                stealthy_headers=True,
+                impersonate="chrome",
+            )
+
+            if response.status != 200:
+                LOGGER.warning("[BT SG] Non-200 status %d for %s", response.status, url)
+                self.record_request_failure(
+                    url=url,
+                    reason="HTTPStatusError",
+                    status_code=response.status,
+                    message=f"Received status code {response.status}",
+                )
+                return []
+
+            self.record_request_success(status_code=response.status)
+            return (response.json().get("data") or {}).get("items") or []
+
+        except Exception as error:
+            LOGGER.error("[BT SG] Failed to fetch %s page %d: %s", listing["name"], page_number, error)
+            self.record_request_failure(
+                url=url,
+                reason=type(error).__name__,
+                message=str(error),
+            )
+            return []
+
     def normalize_timestamp(self, raw_time_str: str) -> datetime | None:
         if not raw_time_str:
             return None
 
         try:
-            dt = datetime.strptime(raw_time_str, "%b %d, %Y %I:%M %p")
-            return dt.replace(tzinfo=ZoneInfo("Asia/Singapore"))
+            return datetime.fromisoformat(raw_time_str.replace("Z", "+00:00")).astimezone(
+                self.SINGAPORE_TIMEZONE
+            )
 
         except ValueError as error:
             LOGGER.error("[BT SG] Failed to parse timestamp '%s': %s", raw_time_str, error)
             return None
 
-    def check_valid_article(self, url: str) -> bool:
-        try:
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()
+    def get_thumbnail(self, article_data: dict) -> str | None:
+        for media in article_data.get("media") or []:
+            if media.get("type") != "picture":
+                continue
 
-            soup = BeautifulSoup(response.text, "html.parser")
+            for variant in ("landscape", "original"):
+                if url := (media.get(variant) or {}).get("url"):
+                    return url
 
-            if soup.find(attrs={"data-testid": "kicker-subscriber-label-separator"}):
-                LOGGER.info("[BT SG] Skipping subscriber article: %s", url)
-                return False
-
-            subscriber_text = soup.find(
-                string=lambda text: text and "SUBSCRIBERS" in text.upper()
-            )
-            if subscriber_text:
-                LOGGER.info("[BT SG] Skipping subscriber article (text match): %s", url)
-                return False
-
-            return True
-
-        except Exception as error:
-            LOGGER.error("[BT SG] Failed to check validity for %s: %s", url, error)
-            return False
+        return None
 
     def parse_articles(
         self,
-        soup: BeautifulSoup,
+        items: list,
         target_datetime: datetime,
         seen_urls: set,
     ) -> tuple[list, bool]:
-        cards = soup.find_all("div", attrs={"data-testid": "basic-card-component"})
-
-        if not cards:
-            return [], False
-
         parsed_articles = []
-        reached_older_date = False
+        has_recent_article = False
 
-        for card in cards:
-            title_tag = card.find("h3", attrs={"data-testid": "card-title-component"})
-            if not title_tag:
+        for item in items:
+            article_data = item.get("articleData") or {}
+
+            title = article_data.get("title")
+            url = (article_data.get("urlPath") or "").strip()
+
+            if item.get("itemType") != "Article" or not title or not url:
                 continue
 
-            link_tag = title_tag.find("a")
-            if not link_tag:
-                continue
-
-            title = link_tag.get_text(strip=True)
-            relative_url = link_tag.get("href", "")
-
-            url = (
-                f"https://www.businesstimes.com.sg{relative_url}"
-                if relative_url.startswith("/")
-                else relative_url
-            )
-            url = url.strip().rstrip(":")
-
-            if not url or url in seen_urls:
-                continue
-
-            time_tag = card.find("div", attrs={"data-testid": "created-time-component"})
-            raw_time = time_tag.get_text(strip=True) if time_tag else ""
-
-            article_datetime = self.normalize_timestamp(raw_time)
+            article_datetime = self.normalize_timestamp(article_data.get("publishTime"))
 
             if not article_datetime:
                 LOGGER.info("[BT SG] Failed to parse timestamp for %s. Skipping.", url)
-                seen_urls.add(url)
                 continue
 
+            # Listings are not strictly ordered by time, so only stop paging
+            # once a whole page is older than the target date
             if article_datetime < target_datetime:
-                reached_older_date = True
-                break
+                continue
 
-            image_div = card.find("div", attrs={"data-testid": "card-image-v2-component"})
-            img_tag = image_div.find("img") if image_div else None
-            thumbnail = img_tag.get("src") if img_tag else None
+            has_recent_article = True
+
+            if url in seen_urls:
+                continue
 
             seen_urls.add(url)
 
-            if not self.check_valid_article(url):
+            if article_data.get("paidMode") == "premium":
+                LOGGER.info("[BT SG] Skipping subscriber article: %s", url)
                 continue
 
             parsed_articles.append({
                 "title": title,
                 "source": url,
-                "thumbnail": thumbnail,
+                "thumbnail": self.get_thumbnail(article_data),
                 "timestamp": article_datetime.strftime("%Y-%m-%d %H:%M:%S"),
             })
 
-        return parsed_articles, reached_older_date
+        return parsed_articles, not has_recent_article
 
     def extract_news_pages(self, num_pages: int | None, target_date: str) -> list:
         target_datetime = datetime(
             int(target_date[:4]),
             int(target_date[4:6]),
             int(target_date[6:]),
-            tzinfo=ZoneInfo("Asia/Singapore"),
+            tzinfo=self.SINGAPORE_TIMEZONE,
         )
 
-        base_urls = [
-            "https://www.businesstimes.com.sg/keywords/sgx",
-            'https://www.businesstimes.com.sg/singapore/economy-policy?ref=listing-menubar'
-        ]
+        max_pages = num_pages or self.MAX_PAGES
+        seen_urls = set()
 
-        for base_url in base_urls:
-            soup = self.fetch_news_with_selenium(base_url)
+        for listing in self.LISTINGS:
+            for page_number in range(1, max_pages + 1):
+                items = self.fetch_listing_page(listing, page_number)
 
-            if soup is None:
-                LOGGER.error("[BT SG] Failed to load initial page, aborting.")
-                return self.articles
+                if not items:
+                    LOGGER.info("[BT SG] %s: no items on page %d, stopping.", listing["name"], page_number)
+                    break
 
-            seen_urls = set()
-            scroll_count = 0
-
-            while True:
-                LOGGER.info("[BT SG] Scroll %d", scroll_count + 1)
-                self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                time.sleep(4)
-
-                current_soup = BeautifulSoup(self.driver.page_source, "html.parser")
                 articles, reached_older_date = self.parse_articles(
-                    current_soup, target_datetime, seen_urls
+                    items, target_datetime, seen_urls
                 )
                 self.articles.extend(articles)
 
+                LOGGER.info(
+                    "[BT SG] %s page %d: %d articles collected.",
+                    listing["name"],
+                    page_number,
+                    len(articles),
+                )
+
                 if reached_older_date:
-                    LOGGER.info("[BT SG] Reached articles older than %s, stopping.", target_date)
+                    LOGGER.info("[BT SG] %s: reached articles older than %s, stopping.", listing["name"], target_date)
                     break
 
-                scroll_count += 1
-
-                if num_pages is not None and scroll_count >= num_pages:
-                    LOGGER.info("[BT SG] Reached page limit of %d, stopping.", num_pages)
-                    break
+                time.sleep(1)
 
         LOGGER.info("[BT SG] Total scraped: %d", len(self.articles))
         return self.articles
@@ -172,7 +201,7 @@ def main():
     parser = argparse.ArgumentParser(description="Script for scraping data from Business Times SG")
     parser.add_argument("date", type=str)
     parser.add_argument("filename", type=str, nargs="?", default="businesstimes")
-    parser.add_argument("--pages", type=int, default=5, help="Number of scrolls (default: 5)")
+    parser.add_argument("--pages", type=int, default=None, help="Max pages per listing (default: 20)")
     parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
@@ -182,8 +211,6 @@ def main():
 
     if args.csv:
         scraper.write_csv(scraper.articles, args.filename)
-
-    BusinessTimesSG.close_shared_driver()
 
 
 if __name__ == "__main__":
@@ -197,4 +224,3 @@ if __name__ == "__main__":
     uv run -m src.scraper_engine.sources.sgx.scrape_business_times 20260427 test_scrape_bt --pages 5 --csv
     """
     main()
-    

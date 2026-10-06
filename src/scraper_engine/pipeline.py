@@ -5,7 +5,6 @@ from zoneinfo import ZoneInfo
 from json import JSONDecodeError
 
 from scraper_engine.base.scraper_collection import ScraperCollection
-from scraper_engine.base.scraper import SeleniumScraper
 
 # from scraper_engine.sources.idx.scrape_petromindo import PetromindoScraper
 # from scraper_engine.sources.idx.scrape_insight_kontan import InsightKontanScraper
@@ -21,7 +20,7 @@ from scraper_engine.sources.idx.registry import (
 from scraper_engine.sources.sgx.registry import (
     BusinessTimesSG, StraitsTimes, ChannelNewsAsiaSG, SBRSG,
     AsiaNews, EdgeProp, NextInsight, TheSmartInvestor, TheEdgeSingapore,
-    TheEdgeReits, SGXMarketUpdates, SmallCapAsia
+    TheEdgeReits, SGXMarketUpdates, SmallCapAsia, ZaobaoSG
 )
 
 from .processor import post_source, build_filtered_article
@@ -257,7 +256,6 @@ def main_idx(
 
         finally:
             scrapercollection.close_scrapling_sessions()
-            SeleniumScraper.close_shared_driver()
 
     # scrape-only: the work-list is built and committed nothing to process yet
     if scrape_only:
@@ -340,6 +338,7 @@ def main_sgx(
         the_edge_reits_scraper = TheEdgeReits()
         sgx_market_updates = SGXMarketUpdates()
         smallcapasia_scraper = SmallCapAsia()
+        zaobao_scraper = ZaobaoSG()
 
         scrapercollection = ScraperCollection()
 
@@ -356,6 +355,7 @@ def main_sgx(
             scrapercollection.add_scraper(the_edge_reits_scraper)
             scrapercollection.add_scraper(sgx_market_updates)
             scrapercollection.add_scraper(smallcapasia_scraper)
+            scrapercollection.add_scraper(zaobao_scraper)
 
             write_json(
                 last_state_path,
@@ -393,7 +393,6 @@ def main_sgx(
 
         finally:
             scrapercollection.close_scrapling_sessions()
-            SeleniumScraper.close_shared_driver()
 
     # scrape-only: the work-list is built and committed nothing to process yet
     if scrape_only:

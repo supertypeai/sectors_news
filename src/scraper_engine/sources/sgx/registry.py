@@ -10,6 +10,7 @@ from scraper_engine.sources.sgx.scrape_the_edge import TheEdgeSingapore
 from scraper_engine.sources.sgx.scrape_the_edge_reits import TheEdgeReits
 from scraper_engine.sources.sgx.scrape_sgx_market import SGXMarketUpdates
 from scraper_engine.sources.sgx.scrape_smallcapasia import SmallCapAsia
+from scraper_engine.sources.sgx.scrape_zaobao import ZaobaoSG
 
 __all__ = [
     "BusinessTimesSG",
@@ -23,5 +24,6 @@ __all__ = [
     "TheEdgeSingapore",
     "TheEdgeReits",
     "SGXMarketUpdates",
-    "SmallCapAsia"
+    "SmallCapAsia",
+    "ZaobaoSG",
 ]

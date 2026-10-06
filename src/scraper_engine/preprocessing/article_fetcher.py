@@ -243,6 +243,36 @@ def get_article_edgeprop_news(url: str) -> str | None:
     return "\n\n".join(paragraphs)
 
 
+def get_article_zaobao_news(url: str) -> str | None:
+    scraper = Scraper()
+    soup = scraper.fetch_news(url)
+
+    if soup is None:
+        return None
+
+    content_div = soup.select_one("div.articleBody")
+
+    if not content_div:
+        LOGGER.warning(
+            "[Fail Zaobao] articleBody container not found for %s", url
+        )
+        return None
+
+    paragraphs = [
+        text
+        for paragraph in content_div.find_all("p")
+        if (text := paragraph.get_text(separator=" ", strip=True))
+    ]
+
+    if not paragraphs:
+        LOGGER.warning(
+            "[Fail Zaobao] No article text found for %s", url
+        )
+        return None
+
+    return "\n\n".join(paragraphs)
+
+
 def get_article_sgx_market_update(url: str) -> str | None:
     selenium_scraper = SeleniumScraper()
 
@@ -348,6 +378,7 @@ def extract_via_custom_parser(url: str) -> str | None:
             "bloomberg": get_article_bloomberg_technoz_news, 
             "investasi.kontan": get_article_kontan_news,
             "edgeprop": get_article_edgeprop_news, 
+            "zaobao.com.sg": get_article_zaobao_news,
             "sgx.com/research-education/market-updates/": get_article_sgx_market_update,
         }
 

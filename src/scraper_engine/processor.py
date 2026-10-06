@@ -442,27 +442,27 @@ async def process_article_batch(
         return []
 
     # Dedup articles
-    # if len(survivor_articles) > 1:
-    #     unique_articles = run_dedup_articles(
-    #         survived_articles=survivor_articles,
-    #         token_usage_logger=token_usage_logger,
-    #     )
+    if len(survivor_articles) > 1:
+        unique_articles = run_dedup_articles(
+            survived_articles=survivor_articles,
+            token_usage_logger=token_usage_logger,
+        )
 
-    # else:
-    #     unique_articles = survivor_articles
+    else:
+        unique_articles = survivor_articles
 
-    # LOGGER.info(
-    #     "Deduplication complete: %d survivors -> %d unique articles",
-    #     len(survivor_articles),
-    #     len(unique_articles),
-    # )
+    LOGGER.info(
+        "Deduplication complete: %d survivors -> %d unique articles",
+        len(survivor_articles),
+        len(unique_articles),
+    )
 
-    # if not unique_articles:
-    #     return []
+    if not unique_articles:
+        return []
 
     # Phase 2: enrichment 
     enrichment_results = await enrich_article_batch(
-        unique_articles=survivor_articles,  
+        unique_articles=unique_articles,  
         source_scraper=source_scraper,
         top_200_symbols_sgx=top_200_symbols_sgx,
         token_usage_logger=token_usage_logger,
