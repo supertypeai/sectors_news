@@ -301,8 +301,15 @@ async def filter_valid_articles(
     min_score: int,
     token_usage_logger: TokenUsageLogger | None = None,
 ) -> tuple[News | None, str]:
-    source = data.get("source").strip()
-    timestamp_str = data.get("timestamp").strip().replace("T", " ")
+    source = (data.get("source") or "").strip()
+    timestamp_str = (data.get("timestamp") or "").strip().replace("T", " ")
+
+    if not source or not timestamp_str:
+        LOGGER.info(
+            "Skipped article with missing source or timestamp: %s",
+            source or data.get("title"),
+        )
+        return None, "no_retry"
 
     try:
         prefetched_body = data.get("article")

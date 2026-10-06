@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
-from scraper_engine.sources.utils.time_parser import parse_relative_time
+
+from datetime import datetime
 
 import argparse
 import time
@@ -25,6 +26,22 @@ class CNNEkonomi(Scraper):
 
         return article_items
 
+    @staticmethod
+    def parse_publish_date(article_soup) -> str | None:
+        publish_date_tag = article_soup.select_one('meta[name="publishdate"]')
+
+        if not publish_date_tag or not publish_date_tag.get("content"):
+            return None
+
+        try:
+            published_at = datetime.strptime(
+                publish_date_tag["content"].strip(), "%Y/%m/%d %H:%M:%S"
+            )
+        except ValueError:
+            return None
+
+        return published_at.strftime("%Y-%m-%d %H:%M:%S")
+
     def parse_articles(self, article_items: list) -> list:
         parsed_articles = []
 
@@ -38,28 +55,26 @@ class CNNEkonomi(Scraper):
             thumbnail_tag = article_item.select_one("img")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
+            published_at = None
+
             if source_url:
                 article_soup = self.fetch_news_with_scrapling(source_url)
+                
                 if article_soup:
                     open_graph_image_tag = article_soup.select_one(
                         'meta[property="og:image"]'
                     )
+
                     if open_graph_image_tag:
                         thumbnail_url = (
                             open_graph_image_tag.get("content")
                             or thumbnail_url
                         )
 
-            raw_date = ""
-            date_tag = article_item.select_one("span.text-xs.text-cnn_black_light3")
-            
-            if date_tag:
-                raw_date = date_tag.get_text(strip=True)
-
-            published_at = parse_relative_time(raw_date)
+                    published_at = self.parse_publish_date(article_soup)
 
             if not published_at:
-                LOGGER.warning("[CNN Ekonomi] Could not parse timestamp '%s' for %s", raw_date, source_url)
+                LOGGER.warning("[CNN Ekonomi] Could not find publish date for %s", source_url)
 
             parsed_articles.append({
                 "title": title,
