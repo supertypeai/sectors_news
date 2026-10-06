@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from goose3 import Goose
 
 from scraper_engine.base.scraper import Scraper
+from scraper_engine.sources.utils.previous_run import load_previous_run_articles
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
 
 import argparse
@@ -14,6 +15,11 @@ LOGGER = logging.getLogger(__name__)
 
 
 class InvestorID(Scraper):
+    def __init__(self):
+        super().__init__()
+        # Articles from the previous run, reused to avoid paid re-fetches
+        self.previous_articles = load_previous_run_articles()
+
     def fetch_article_list(
         self, 
         url: str, 
@@ -131,29 +137,39 @@ class InvestorID(Scraper):
             thumbnail_tag = article_item.select_one("div.col-4 img.lazy")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
-            article_soup = self.fetch_news_with_web_unlocker(source_url)
+            previous_article = self.previous_articles.get(source_url)
 
-            if article_soup:
-                published_at, article_body = self.fetch_article_content(
-                    source_url,
-                    article_soup=article_soup,
-                )
+            if previous_article:
+                # Already fetched in the previous run, reuse it instead of paying
+                # for another Web Unlocker request
+                published_at = previous_article.get("timestamp")
+                article_body = previous_article.get("article")
+                thumbnail_url = previous_article.get("thumbnail") or thumbnail_url
 
-                open_graph_image_tag = article_soup.select_one(
-                    'meta[property="og:image"]'
-                )
-                article_thumbnail_url = (
-                    open_graph_image_tag.get("content")
-                    if open_graph_image_tag
-                    else None
-                )
-
-                if article_thumbnail_url:
-                    thumbnail_url = article_thumbnail_url
             else:
-                published_at, article_body = None, None
+                article_soup = self.fetch_news_with_web_unlocker(source_url)
 
-            time.sleep(0.5)
+                if article_soup:
+                    published_at, article_body = self.fetch_article_content(
+                        source_url,
+                        article_soup=article_soup,
+                    )
+
+                    open_graph_image_tag = article_soup.select_one(
+                        'meta[property="og:image"]'
+                    )
+                    article_thumbnail_url = (
+                        open_graph_image_tag.get("content")
+                        if open_graph_image_tag
+                        else None
+                    )
+
+                    if article_thumbnail_url:
+                        thumbnail_url = article_thumbnail_url
+                else:
+                    published_at, article_body = None, None
+
+                time.sleep(0.5)
 
             if not published_at:
                 LOGGER.info("[Investor ID] Failed to parse date for url: %s. Skipping.", source_url)
