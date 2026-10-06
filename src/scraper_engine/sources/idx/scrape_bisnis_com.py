@@ -1,4 +1,6 @@
 from datetime import datetime
+from bs4 import BeautifulSoup
+from scrapling.fetchers import StealthySession
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
@@ -12,8 +14,85 @@ LOGGER = logging.getLogger(__name__)
 
 
 class BisnisMarket(Scraper):
-    def fetch_article_list(self, url):
+    def __init__(self):
+        super().__init__()
+        self.stealthy_session_manager = None
+        self.stealthy_session = None
+
+    def fetch_with_stealthy_browser(self, url: str):
+        # Article pages sit behind a Cloudflare JS challenge that plain HTTP
+        # clients cannot pass, so solve it in a stealth browser. One browser
+        # session is reused for the whole run
+        try:
+            if self.stealthy_session is None:
+                self.stealthy_session_manager = StealthySession(
+                    headless=True,
+                    solve_cloudflare=True,
+                    network_idle=True,
+                )
+                self.stealthy_session = self.stealthy_session_manager.__enter__()
+
+            response = self.stealthy_session.fetch(url)
+
+            if response.status != 200:
+                LOGGER.warning("[Bisnis Market] Stealthy browser got status %d for %s", response.status, url)
+                self.record_request_failure(
+                    url=url,
+                    reason="HTTPStatusError",
+                    status_code=response.status,
+                    message=f"Received status code {response.status}",
+                )
+                return None
+
+            self.record_request_success(status_code=response.status)
+            return BeautifulSoup(bytes(response.body), "html.parser")
+
+        except Exception as error:
+            LOGGER.error("[Bisnis Market] Stealthy browser failed for %s: %s", url, error)
+            self.record_request_failure(
+                url=url,
+                reason=type(error).__name__,
+                message=str(error),
+            )
+            return None
+
+    def close_stealthy_session(self) -> None:
+        if self.stealthy_session_manager is None:
+            return
+
+        try:
+            self.stealthy_session_manager.__exit__(None, None, None)
+        
+        except Exception as error:
+            LOGGER.warning("[Bisnis Market] Failed to close stealthy session: %s", error)
+        
+        finally:
+            self.stealthy_session_manager = None
+            self.stealthy_session = None
+
+    def fetch_with_fallback(self, url: str):
         soup = self.fetch_news_with_scrapling(url)
+
+        if soup is not None:
+            return soup
+
+        LOGGER.info(
+            "[Bisnis Market] Scrapling failed for %s, trying stealthy browser", 
+            url
+        )
+        soup = self.fetch_with_stealthy_browser(url)
+
+        if soup is not None:
+            return soup
+
+        LOGGER.info(
+            "[Bisnis Market] Stealthy browser failed for %s, falling back to Web Unlocker", 
+            url
+        )
+        return self.fetch_news_with_web_unlocker(url)
+
+    def fetch_article_list(self, url):
+        soup = self.fetch_with_fallback(url)
         
         if not soup:
             LOGGER.info("[Bisnis Market] [FAIL] Failed to fetch HTML or timed out for %s", url)
@@ -30,7 +109,7 @@ class BisnisMarket(Scraper):
         return articles_items
 
     def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news_with_scrapling(article_url)
+        soup = self.fetch_with_fallback(article_url)
 
         if not soup:
             return None
@@ -128,49 +207,52 @@ class BisnisMarket(Scraper):
 
         seen_urls = set()
 
-        for url in [market_url, finance_url]:
-            page_number = 1
+        try:
+            for url in [market_url, finance_url]:
+                page_number = 1
 
-            while True:
-                params = f"date={formatted_date}&page={page_number}"
-                page_url = url + params
+                while True:
+                    params = f"date={formatted_date}&page={page_number}"
+                    page_url = url + params
                 
-                article_items = self.fetch_article_list(page_url)
+                    article_items = self.fetch_article_list(page_url)
 
-                if not article_items:
+                    if not article_items:
+                        LOGGER.info(
+                            "[Bisnis Market] No articles found on page %d, stopping.", 
+                            page_number
+                        )
+                        break
+
+                    articles = self.parse_articles(article_items)
+
+                    new_articles = [
+                        article for article in articles 
+                        if article.get('source') not in seen_urls
+                    ]
+
+                    if not new_articles:
+                        LOGGER.info("[Bisnis Market] Page %d returned duplicate articles, stopping.", page_number)
+                        break
+
+                    for article in articles: 
+                        seen_urls.add(article.get('source'))
+
+                    self.articles.extend(new_articles)
+
                     LOGGER.info(
-                        "[Bisnis Market] No articles found on page %d, stopping.", 
-                        page_number
+                        "[Bisnis Market] Page %d: %d articles collected.", 
+                        page_number, 
+                        len(new_articles)
                     )
-                    break
 
-                articles = self.parse_articles(article_items)
+                    if num_pages is not None and page_number >= num_pages:
+                        break
 
-                new_articles = [
-                    article for article in articles 
-                    if article.get('source') not in seen_urls
-                ]
-
-                if not new_articles:
-                    LOGGER.info("[Bisnis Market] Page %d returned duplicate articles, stopping.", page_number)
-                    break
-
-                for article in articles: 
-                    seen_urls.add(article.get('source'))
-
-                self.articles.extend(new_articles)
-
-                LOGGER.info(
-                    "[Bisnis Market] Page %d: %d articles collected.", 
-                    page_number, 
-                    len(new_articles)
-                )
-
-                if num_pages is not None and page_number >= num_pages:
-                    break
-
-                page_number += 1
-                time.sleep(1)
+                    page_number += 1
+                    time.sleep(1)
+        finally:
+            self.close_stealthy_session()
 
         LOGGER.info("[Bisnis Market] Total scraped: %d", len(self.articles))
         return self.articles
