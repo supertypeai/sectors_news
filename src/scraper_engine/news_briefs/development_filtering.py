@@ -4,7 +4,11 @@ from scraper_engine.llm.caller import (
 )
 from scraper_engine.llm.client import TokenUsageLogger
 from .prompts.development import DevelopmentArticles, DevelopmentPrompts
-from .prompts.merge_development import DevelopmentMergeResult, MergeDevelopmentPrompts
+from .prompts.merge_development import (
+    DevelopmentMergeResult,
+    MergeDevelopmentPrompts,
+    find_partition_errors,
+)
 from .prompts.development_topics import DevelopmentTopics, DevelopmentTopicsPrompts
 from .prompts.reconcile import ReconcilePrompts, ReconciledDevelopments
 from .utils.format_records import format_records
@@ -143,7 +147,8 @@ def get_merger_development(
         "gpt-oss-120b"
     ],
     token_usage_logger: TokenUsageLogger | None = None,
-)-> dict: 
+    max_partition_retry: int = 3,
+)-> dict | None: 
     system_prompt = MergeDevelopmentPrompts.get_system_merge_development_prompt(exchange)
     user_prompt = MergeDevelopmentPrompts.get_user_merge_development_prompt()
 
@@ -160,18 +165,44 @@ def get_merger_development(
         )
     }
 
-    response = invoke_structured_llm(
-        pydantic_output=DevelopmentMergeResult,
-        system_prompt=system_prompt,
-        user_prompt=user_prompt,
-        log_name="Merged development",
-        input_data=input_data,
-        models=models,
-        effort=effort,
-        token_usage_logger=token_usage_logger,
-    )
+    input_ids = {
+        development["source_development_id"]
+        for development in developments
+    }
 
-    return response
+    # The model sometimes returns an invalid partition (an ID missing, repeated,
+    # or unknown), so retry until every input ID appears exactly once
+    for attempt in range(1, max_partition_retry + 1):
+        response = invoke_structured_llm(
+            pydantic_output=DevelopmentMergeResult,
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            log_name="Merged development",
+            input_data=input_data,
+            models=models,
+            effort=effort,
+            token_usage_logger=token_usage_logger,
+        )
+
+        if response is None:
+            return None
+
+        partition_errors = find_partition_errors(
+            result=DevelopmentMergeResult.model_validate(response),
+            input_ids=input_ids,
+        )
+
+        if not any(partition_errors.values()):
+            return response
+
+        LOGGER.warning(
+            "Merged development | invalid partition on attempt %d/%d | %s",
+            attempt,
+            max_partition_retry,
+            {key: sorted(value) for key, value in partition_errors.items() if value},
+        )
+
+    return None
 
 
 async def process_development_batch(

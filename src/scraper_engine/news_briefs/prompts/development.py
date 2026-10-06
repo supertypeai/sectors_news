@@ -104,7 +104,7 @@ class DevelopmentPrompts:
             A development is a concrete factual change in the state of a company,
             sector, industry, regulation, transaction, operation, ownership
             structure, financial performance, governance situation, legal
-            situation, or other real-world condition.
+            situation, the macroeconomy, or other real-world condition.
 
             Examples include:
             - a company reports financial results;
@@ -117,7 +117,18 @@ class DevelopmentPrompts:
             - operations are suspended, disrupted, expanded, or restarted;
             - a company enters restructuring, default, {insolvency_terms},
               litigation, or investigation;
-            - a major project reaches a concrete new stage.
+            - a major project reaches a concrete new stage;
+            - a central bank makes a rate decision, intervenes in a market, or
+              changes its policy tools;
+            - the currency, a benchmark bond yield, or a major commodity price
+              crosses a level reported as significant by the articles;
+            - the government sets or changes a budget, tax, subsidy, or
+              macroeconomic assumption;
+            - an official economic figure is released (inflation, GDP, trade
+              balance, reserves).
+
+            Macroeconomic developments usually have no ticker. Return an empty
+            tickers list for them rather than excluding the article.
 
             A development must be based on a factual event or state change.
 
@@ -127,13 +138,19 @@ class DevelopmentPrompts:
             - technical analysis;
             - stock recommendations;
             - generic forecasts or predictions;
-            - stock-price movements without an identifiable factual catalyst;
-            - foreign or domestic investor flow observations by themselves;
+            - movements in individual stock prices without an identifiable
+              factual catalyst;
+            - foreign or domestic investor flow observations in individual stocks
+              by themselves;
             - valuation commentary;
             - opinion pieces;
             - generic market outlooks;
             - "stocks to watch" articles;
             - commentary that introduces no new factual event.
+
+            These exclusions cover individual stocks only. A currency move, a
+            central bank statement, or a government response reported in the
+            same article is a macroeconomic development and must be extracted.
 
             If an article contains both commentary and a valid factual development,
             extract the factual development and ignore the commentary.
