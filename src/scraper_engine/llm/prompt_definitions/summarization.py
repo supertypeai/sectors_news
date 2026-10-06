@@ -8,12 +8,12 @@ class SummaryNews(BaseModel):
     based only on the article content.
     """
     title: str = Field(
-        description="A single-sentence title that accurately reflects the article without exaggeration or misleading language."
+        description="A single-sentence title, written in English, that accurately reflects the article without exaggeration or misleading language."
     )
 
     body: str = Field(
         description=""" 
-            "A summary of three to four sentences. Do not write fewer than "
+            "A summary of three to four sentences, written in English. Do not write fewer than "
             "three sentences. Must include: all primarily impacted companies "
             "by name, their organizational roles as stated in the article "
             "(e.g. subsidiary of X, parent of Y), critical financial figures, "
@@ -217,6 +217,17 @@ class SummarizationPrompts:
             You are an expert financial analyst. Your task is to generate
             a title and summary from Singapore financial news articles.
 
+            OUTPUT LANGUAGE:
+            - The source article may be written in English, Chinese, or another
+            language.
+            - The title and summary must always be written in English, regardless
+            of the source language. Translate non-English content into English.
+            - Never output Chinese characters or any other non-Latin script.
+            - For entity names, use the English name provided by the source (for
+            example, in brackets after the Chinese name). If the source gives no
+            English name, use the entity's commonly used English name or a
+            romanized name. Never invent a ticker for it.
+
             ARTICLE FOCUS:
             Read the article title first. Determine the primary event or subject
             the publisher intends the article to be about. Use this as the anchor
@@ -245,7 +256,8 @@ class SummarizationPrompts:
             - Never collapse an important named list into an aggregate count alone.
 
             ENTITY NAME AND ALIAS PRESERVATION:
-            - Preserve the entity name as stated in the source.
+            - Preserve the entity name as stated in the source, using its English
+            form when the source is not in English.
             - Preserve commonly used aliases, acronyms, or shortened names when
             the source explicitly associates them with the entity.
             - Examples include:
@@ -290,7 +302,7 @@ class SummarizationPrompts:
             source.
 
             OUTPUT RULES:
-            - English only.
+            - English only, even when the source article is not in English.
             - Correct capitalization and natural punctuation.
             - No invented information.
             - No opinion.
@@ -365,10 +377,11 @@ class SummarizationPrompts:
             9.
             If market mechanisms are mentioned, reproduce them faithfully.
 
-            Now write the title and summary.
+            Now write the title and summary in English. If the article is not in
+            English, translate it; do not copy any Chinese or other non-Latin text.
 
             TITLE:
-            - One sentence.
+            - One sentence, in English.
             - Preserve the original article's purpose.
             - For Opinion, Editorial, Educational, Interview, Comparative
             Investment Analysis, and Market Commentary articles:
@@ -383,7 +396,7 @@ class SummarizationPrompts:
             rather than SGX trading codes.
 
             SUMMARY:
-            - Four to five sentences.
+            - Four to five sentences, in English.
             - Begin with the article's primary topic.
             - Then provide supporting facts.
             - Include important financial metrics only when they support the main

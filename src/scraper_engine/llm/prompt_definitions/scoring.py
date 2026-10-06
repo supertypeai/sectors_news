@@ -5,8 +5,7 @@ from pydantic import BaseModel, Field
 
 class ScoringSchema(BaseModel):
     """
-    Scores a financial news summary for its usefulness to investors
-    following the Indonesian equity market.
+    Scores a financial news summary for its usefulness to equity investors.
 
     The model selects the tier, base score, and applicable bonus totals.
     The final score is calculated by the application.
@@ -594,8 +593,8 @@ class ScoringPrompts:
     @staticmethod
     def get_scoring_user_prompt() -> str:
         return """
-            Score the following financial news summary for its usefulness to investors
-            following the Indonesian equity market.
+            Score the following financial news summary for its usefulness to equity
+            investors, as defined in the system instructions.
 
             Article Summary:
             {article}

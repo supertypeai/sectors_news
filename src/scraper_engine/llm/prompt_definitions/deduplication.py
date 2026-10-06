@@ -77,8 +77,10 @@ SYSTEM_PROMPT = """
     - management actions
     - material risks or consequences
 
-    If articles covering the same event contribute materially different
-    information, keep them separate.
+    Judge redundancy against the canonical article: an article is redundant
+    when keeping only the canonical article would not lose a core event fact
+    (see FACTUAL CONFLICTS). Keep an article separate only when it carries a
+    core event fact that the canonical article lacks.
 
     Do not keep articles separate merely because one contains:
     - additional background
@@ -86,24 +88,54 @@ SYSTEM_PROMPT = """
     - general commentary
     - historical context
     - minor descriptive details
+    - the same figures converted to another currency or unit
+    - a different selection or ordering of the same facts
     - information that does not materially change understanding of the event
+
+
+    SAME EVENT FROM DIFFERENT PUBLISHERS
+
+    Articles from different publishers, possibly in different languages
+    before summarization, frequently report the same event at the same
+    stage, such as the same IPO filing, earnings release, rating initiation,
+    or share buyback.
+
+    When they report the same event at the same stage and their core
+    material facts agree (for example the same price, amount, share count,
+    profit figure, rating, or target price), group them and keep the most
+    complete one as canonical.
+
+    Differences in writing style, emphasis, length, or supporting detail
+    between publishers are expected and are not a reason to keep both.
+    This includes one article carrying secondary figures the other lacks,
+    such as forecasts, balance-sheet items, or market background.
 
 
     FACTUAL CONFLICTS
 
-    Do not group articles when they contain a substantive unresolved conflict
-    in a material fact.
+    Distinguish core event facts from secondary figures.
 
-    Examples of material facts include:
-    - transaction amount or price
-    - share count
-    - ownership percentage
-    - dividend amount
-    - material dates
-    - financial or production figures
-    - approval or completion status
+    Core event facts define the event itself, for example:
+    - the event type and stage (filing, pricing, approval, completion)
+    - the transaction amount, offer price, or deal value
+    - the share count or ownership stake being transacted
+    - the headline result being reported (such as the period's net profit)
+    - the dividend amount being declared
+    - the rating and target price of a broker report
+    - the key event date (such as the listing or completion date)
 
-    Do not decide which conflicting value is correct.
+    Secondary figures are supporting context, for example prior-period
+    results, order book size, market share, forecasts, valuation multiples,
+    balance-sheet items, cornerstone or shareholder details, and market or
+    sector background.
+
+    Do not group articles when they conflict on a core event fact. Do not
+    decide which conflicting value is correct.
+
+    When the core event facts agree, differences or omissions in secondary
+    figures are NOT a reason to keep articles separate, even when the values
+    differ between publishers. Group them and keep the most complete article
+    as canonical.
 
     Differences caused only by formatting, units, rounding, or reasonable
     precision are NOT conflicts.
@@ -162,9 +194,10 @@ SYSTEM_PROMPT = """
     - canonical_index must not appear in duplicate_indexes.
     - An article index must not appear in more than one group.
     - duplicate_indexes must contain at least one article.
-    - Same-event coverage alone is insufficient.
-    - When uncertain whether removing an article would discard meaningful
-    investor-relevant information, keep the articles separate.
+    - Same-event coverage alone is insufficient, the canonical article must
+    also cover the other article's core event facts.
+    - When uncertain whether articles describe the same event or the same
+    stage of a process, keep them separate.
 """
 
 
@@ -179,8 +212,11 @@ USER_PROMPT = """
     Do not group articles merely because they originate from the same company,
     announcement, press conference, disclosure, or broader event.
 
-    If two articles cover the same event but each contributes meaningful
-    non-overlapping investor-relevant facts, keep both.
+    If two articles cover the same event at the same stage, group them unless
+    the non-canonical article carries a core event fact that the canonical
+    article lacks, or the two conflict on a core event fact. Different
+    publishers covering the same event with agreeing core facts should be
+    grouped, even when their secondary figures differ.
 
     Return the duplicate groups using the provided structured output schema.
     {format_instructions}
