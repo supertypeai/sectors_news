@@ -1,4 +1,3 @@
-from datetime import date
 from typing_extensions import Annotated, Optional
 
 from config.logging_setup import setup_logging
@@ -73,28 +72,6 @@ def run(
             )
 
 
-@app.command(name="upsert")
-def upsert(
-    exchange: Annotated[Exchange, typer.Option(case_sensitive=False, help="Market to upsert")],
-    issue_date: Annotated[Optional[str], typer.Option(help="Upsert final_data_clean_<date>.json instead of the latest issue, YYYY-MM-DD")] = None,
-) -> None:
-    """
-    Upsert the saved final_data_clean issue into news_issue.
-    """
-    if issue_date is None:
-        upsert_data(
-            exchange=exchange.value,
-            data_path="final_data_clean",
-        )
-        return
-
-    upsert_data(
-        exchange=exchange.value,
-        data_path=f"final_data_clean_{issue_date}",
-        issue_date=date.fromisoformat(issue_date),
-    )
-
-
 if __name__ == "__main__":
     app()
 
@@ -102,5 +79,3 @@ if __name__ == "__main__":
 # uv run -m news_issues.pipeline run --exchange IDX --issue-date 2026-10-07
 # uv run -m news_issues.pipeline run --exchange IDX --issue-date 2026-09-28 --issue-count 7 --upsert
 # uv run -m news_issues.pipeline run --exchange SGX --issue-date 2026-10-02
-# uv run -m news_issues.pipeline upsert --exchange IDX
-# uv run -m news_issues.pipeline upsert --exchange IDX --issue-date 2026-10-04
