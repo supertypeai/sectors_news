@@ -1,11 +1,9 @@
-from bs4 import BeautifulSoup
 from datetime import datetime
-from scrapling import Fetcher, StealthyFetcher
 from types import MethodType
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
-from scraper_engine.base.scraper import Scraper, SeleniumScraper
+from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.scrape_investor_id import InvestorID
 from scraper_engine.sources.idx.scrape_kontan_investasi import KontanInvestasi
 from scraper_engine.sources.idx.scrape_bisnis_com import BisnisMarket
@@ -17,7 +15,7 @@ from scraper_engine.sources.idx.scrape_jakartaglobe import JakartaGlobe
 from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
 from scraper_engine.sources.sgx.scrape_the_edge_reits import TheEdgeReits
 from scraper_engine.config.conf import BRIGHTDATA_API_KEY, BRIGHTDATA_ZONE
-from scraper_engine.preprocessing.article_fetcher import get_article_body
+from scraper_engine.preprocessing.article_fetcher import get_article_body, get_article_kompas_news
 from scraper_engine.sources.idx.scrape_kompas import KompasMoney
 
 import logging
@@ -183,60 +181,6 @@ def test_kompas(date: str | None = None) -> list[dict]:
         LOGGER.info("kompas sample: %s", articles[0])
 
     return articles
-
-
-def fetch_kompas_with_stealthy_browser(url: str) -> bytes | None:
-    # Ads keep the page from ever going idle, so skip images, fonts and
-    # styles and wait for the article text instead (scripts still run,
-    # so the AWS WAF challenge can solve itself)
-    response = StealthyFetcher.fetch(
-        url,
-        headless=True,
-        disable_resources=True,
-        wait_selector="div.read__content",
-    )
-
-    body = bytes(response.body)
-
-    if response.status != 200 or b"awsWafCookieDomainList" in body:
-        LOGGER.warning("[Kompas] Stealthy browser got status %d for %s", response.status, url)
-        return None
-
-    return body
-
-
-def get_article_kompas_news(url: str) -> str | None:
-    response = Fetcher.get(url, stealthy_headers=True, impersonate="chrome")
-    body = bytes(response.body) if response.status == 200 else None
-
-    if body is not None:
-        LOGGER.info("[Kompas] Scrapling got 200 for %s", url)
-
-    else:
-        LOGGER.info("[Kompas] Scrapling got %d for %s, trying stealthy browser", response.status, url)
-        body = fetch_kompas_with_stealthy_browser(url)
-
-        if body is not None:
-            LOGGER.info("[Kompas] Stealthy browser passed for %s", url)
-
-    if body is None:
-        return None
-
-    soup = BeautifulSoup(body, "html.parser")
-
-    # Direct children only: the donation appeal at the end sits inside an <i>
-    paragraphs = [
-        text
-        for paragraph in soup.select("div.read__content div.clearfix > p")
-        if (text := paragraph.get_text(separator=" ", strip=True))
-        and not text.startswith("Baca juga:")
-    ]
-
-    if not paragraphs:
-        LOGGER.warning("[Kompas] No article text found for %s", url)
-        return None
-
-    return "\n\n".join(paragraphs)
 
 
 def test_kompas_article_fetcher(urls: list[str]):
