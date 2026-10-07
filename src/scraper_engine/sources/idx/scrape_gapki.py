@@ -19,19 +19,7 @@ class GapkiScraper(Scraper):
 
         return soup.find_all("article", class_="post")
 
-    def fetch_article_timestamp(self, article_url: str) -> datetime | None:
-        soup = self.fetch_news_with_scrapling(article_url)
-
-        if not soup:
-            return None
-
-        meta_list = soup.select_one("ul.nv-meta-list")
-
-        if not meta_list:
-            return None
-
-        time_tag = meta_list.select_one("time[datetime]")
-
+    def parse_timestamp(self, time_tag) -> datetime | None:
         if not time_tag:
             return None
 
@@ -47,6 +35,19 @@ class GapkiScraper(Scraper):
             LOGGER.error("[GAPKI] Failed to parse timestamp '%s': %s", raw_datetime, error)
             return None
 
+    def fetch_article_timestamp(self, article_url: str) -> datetime | None:
+        soup = self.fetch_news_with_scrapling(article_url)
+
+        if not soup:
+            return None
+
+        meta_list = soup.select_one("ul.nv-meta-list")
+
+        if not meta_list:
+            return None
+
+        return self.parse_timestamp(meta_list.select_one("time[datetime]"))
+
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
         parsed_articles = []
         reached_older_date = False
@@ -58,27 +59,32 @@ class GapkiScraper(Scraper):
         )
 
         for article_item in article_items:
-            link_element = article_item.select_one(
-                "h2.blog-entry-title a, .nv-post-thumbnail-wrap a"
-            )
+            # The image link on each card carries the title in aria-label
+            link_element = article_item.select_one("a[href][aria-label]")
 
             if not link_element:
                 LOGGER.info("[GAPKI] Could not find link element. Skipping.")
                 continue
 
-            title = link_element.get("title", "").strip()
+            title = link_element.get("aria-label", "").strip()
             source = link_element.get("href", "").strip()
 
             if not title or not source:
                 LOGGER.info("[GAPKI] Missing title or source. Skipping.")
                 continue
 
-            thumbnail_wrap = article_item.select_one(".nv-post-thumbnail-wrap img")
-            thumbnail_url = thumbnail_wrap.get("src") if thumbnail_wrap else None
+            thumbnail_tag = link_element.select_one("img")
+            thumbnail_url = thumbnail_tag.get("src") if thumbnail_tag else None
 
-            published_at = self.fetch_article_timestamp(source)
-        
-            time.sleep(0.5)
+            # The listing card has the publish time, so the article page is only
+            # fetched when the card is missing it
+            published_at = self.parse_timestamp(
+                article_item.select_one("time[datetime]")
+            )
+
+            if not published_at:
+                published_at = self.fetch_article_timestamp(source)
+                time.sleep(0.5)
 
             if not published_at:
                 LOGGER.info("[GAPKI] Failed to fetch timestamp for %s. Skipping.", source)

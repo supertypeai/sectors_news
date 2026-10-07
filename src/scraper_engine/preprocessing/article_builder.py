@@ -28,6 +28,7 @@ from scraper_engine.utils.article_helpers import (
     clean_article,
 )
 
+import asyncio
 import logging
 
 
@@ -315,7 +316,9 @@ async def filter_valid_articles(
         prefetched_body = data.get("article")
 
         if not prefetched_body:
-            prefetched_body = get_article_body(source)
+            # Body fetching is blocking (HTTP clients, browsers), so run it off
+            # the event loop. This also lets sync Playwright start
+            prefetched_body = await asyncio.to_thread(get_article_body, source)
 
             if not prefetched_body:
                 LOGGER.info(

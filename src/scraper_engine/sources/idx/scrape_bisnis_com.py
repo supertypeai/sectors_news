@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup
 from scrapling.fetchers import StealthySession
 
@@ -11,6 +12,14 @@ import logging
 
 
 LOGGER = logging.getLogger(__name__)
+
+WIB = ZoneInfo("Asia/Jakarta")
+
+RELATIVE_UNITS = {
+    "detik": "seconds",
+    "menit": "minutes",
+    "jam": "hours",
+}
 
 
 class BisnisMarket(Scraper):
@@ -140,9 +149,14 @@ class BisnisMarket(Scraper):
             thumbnail_tag = article_item.select_one("div.artImg img")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
-            if "menit yang lalu" in raw_date or "jam yang lalu" in raw_date:
-                published_at = self.fetch_article_timestamp(source_url)
-                time.sleep(0.5)
+            if "yang lalu" in raw_date:
+                # Article pages sit behind Cloudflare and take minutes each, so
+                # derive the time from the listing's relative label instead
+                published_at = self.parse_relative_date(raw_date)
+
+                if not published_at:
+                    published_at = self.fetch_article_timestamp(source_url)
+                    time.sleep(0.5)
 
             else:
                 published_at = self.parse_absolute_date(raw_date)
@@ -160,6 +174,26 @@ class BisnisMarket(Scraper):
 
         return parsed_articles
     
+    def parse_relative_date(self, raw_date: str) -> str | None:
+        # "20 menit yang lalu" or "2 jam yang lalu". Hours are truncated by the
+        # site, so the result can be up to 59 minutes later than the real time
+        parts = raw_date.split()
+
+        if len(parts) < 2 or parts[1] not in RELATIVE_UNITS:
+            return None
+
+        try:
+            amount = int(parts[0])
+
+        except ValueError:
+            return None
+
+        published_at = datetime.now(WIB) - timedelta(
+            **{RELATIVE_UNITS[parts[1]]: amount}
+        )
+
+        return published_at.strftime("%Y-%m-%d %H:%M:%S")
+
     def parse_absolute_date(self, raw_date: str) -> str:
         if not raw_date:
             return None

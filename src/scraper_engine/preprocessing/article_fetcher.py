@@ -1,11 +1,14 @@
 from bs4 import BeautifulSoup
 from goose3 import Goose
 from io import StringIO
+from urllib.parse import urlparse
 from scrapling import Fetcher, DynamicFetcher
+from scrapling.fetchers import StealthySession
 
 from scraper_engine.config.conf import PROXY, USER_AGENT
-from scraper_engine.base.scraper import SeleniumScraper, Scraper
+from scraper_engine.base.scraper import Scraper
 
+import json
 import requests
 import re
 import cloudscraper
@@ -14,6 +17,43 @@ import csv
 
 
 LOGGER = logging.getLogger(__name__)
+
+BLOCKED_RESOURCE_TYPES = {"image", "font", "stylesheet", "media"}
+
+SGX_CONTENT_API_URL = "https://api2.sgx.com/content-api"
+
+# Query the sgx.com front end uses to load a page's content. The hash is
+# tied to SGX's deployed site, so it may need updating if they redeploy
+SGX_PAGE_QUERY_ID = "9c3e9f7f03300303a53a580b5a7e760732e5a320:page"
+
+
+def fetch_html_with_stealthy_browser(
+    url: str,
+    wait_selector: str | None = None,
+    settle_ms: int = 3000,
+) -> str | None:
+    # Scrapling's fetch waits for the page "load" event, which ads and slow
+    # third-party hosts often hold up for 30s+. Drive the stealth browser
+    # directly and only wait for the DOM, then for wait_selector (or a short
+    # settle time) so challenge pages can reload into the article
+    with StealthySession(headless=True) as session:
+        page = session.context.new_page()
+        page.route(
+            "**/*",
+            lambda route: route.abort()
+            if route.request.resource_type in BLOCKED_RESOURCE_TYPES
+            else route.continue_(),
+        )
+
+        page.goto(url, wait_until="domcontentloaded", timeout=30000)
+
+        if wait_selector:
+            page.wait_for_selector(wait_selector, timeout=30000)
+
+        else:
+            page.wait_for_timeout(settle_ms)
+
+        return page.content()
 
 
 def fetch_article_with_proxy(target_url: str) -> str:
@@ -273,34 +313,85 @@ def get_article_zaobao_news(url: str) -> str | None:
     return "\n\n".join(paragraphs)
 
 
+def fetch_kompas_with_stealthy_browser(url: str) -> str | None:
+    # Kompas sits behind an AWS WAF JS challenge (status 202) that plain
+    # HTTP clients cannot pass; the browser solves it and reloads
+    try:
+        html = fetch_html_with_stealthy_browser(url, wait_selector="div.read__content")
+
+    except Exception as error:
+        LOGGER.warning("[Kompas] Stealthy browser failed for %s: %s", url, error)
+        return None
+
+    if "awsWafCookieDomainList" in html:
+        LOGGER.warning("[Kompas] Stealthy browser still on the WAF challenge for %s", url)
+        return None
+
+    return html
+
+
+def get_article_kompas_news(url: str) -> str | None:
+    response = Fetcher.get(url, stealthy_headers=True, impersonate="chrome")
+    body = bytes(response.body) if response.status == 200 else None
+
+    if body is None:
+        LOGGER.info("[Kompas] Status %d for %s, trying stealthy browser", response.status, url)
+        body = fetch_kompas_with_stealthy_browser(url)
+
+    if body is None:
+        return None
+
+    soup = BeautifulSoup(body, "html.parser")
+
+    # Direct children only: the donation appeal at the end sits inside an <i>
+    paragraphs = [
+        text
+        for paragraph in soup.select("div.read__content div.clearfix > p")
+        if (text := paragraph.get_text(separator=" ", strip=True))
+        and not text.startswith("Baca juga:")
+    ]
+
+    if not paragraphs:
+        LOGGER.warning("[Kompas] No article text found for %s", url)
+        return None
+
+    return "\n\n".join(paragraphs)
+
+
 def get_article_sgx_market_update(url: str) -> str | None:
-    selenium_scraper = SeleniumScraper()
+    # Market update pages are rendered client-side from SGX's content API,
+    # so read the article straight from the API instead of the page
+    path = urlparse(url).path
 
-    soup = selenium_scraper.fetch_news_with_selenium(
-        url,
-        wait_selector="article#page-container .template-article-section",
+    response = requests.get(
+        SGX_CONTENT_API_URL,
+        params={
+            "queryId": SGX_PAGE_QUERY_ID,
+            "variables": json.dumps({"path": path, "lang": "EN"}, separators=(",", ":")),
+        },
+        headers={"User-Agent": USER_AGENT},
+        timeout=20,
     )
 
-    if not soup:
-        LOGGER.warning("[SGX] Failed to render market update: %s", url)
+    if response.status_code != 200:
+        LOGGER.warning("[SGX] Content API returned %d for %s", response.status_code, url)
         return None
 
-    article_container = soup.select_one(
-        "article#page-container .template-article-section"
-    )
+    route = (response.json().get("data") or {}).get("route") or {}
+    page = ((route.get("data") or {}).get("data")) or {}
 
-    if not article_container:
-        LOGGER.warning("[SGX] Article container not found for %s", url)
-        return None
+    # The text sits in rich text widgets, the others are images and downloads
+    sections = [
+        BeautifulSoup(content, "html.parser").get_text(separator="\n", strip=True)
+        for widget in page.get("widgets") or []
+        if (widget_data := widget.get("data") or {}).get("widgetType") == "rich_text_widget"
+        and (content := (widget_data.get("content") or {}).get("processed"))
+    ]
 
-    article_text = article_container.get_text(separator="\n", strip=True)
-
-    if "latest browser technologies" in article_text.lower():
-        LOGGER.warning("[SGX] Browser compatibility page received for %s", url)
-        return None
+    article_text = "\n\n".join(section for section in sections if section)
 
     if not article_text:
-        LOGGER.warning("[SGX] Article container is empty for %s", url)
+        LOGGER.warning("[SGX] No article text in content API for %s", url)
         return None
 
     return article_text
@@ -379,6 +470,7 @@ def extract_via_custom_parser(url: str) -> str | None:
             "investasi.kontan": get_article_kontan_news,
             "edgeprop": get_article_edgeprop_news, 
             "zaobao.com.sg": get_article_zaobao_news,
+            "money.kompas.com": get_article_kompas_news,
             "sgx.com/research-education/market-updates/": get_article_sgx_market_update,
         }
 
@@ -458,70 +550,63 @@ def extract_via_cloudscraper(url: str) -> str | None:
         return None 
 
 
-def extract_via_selenium(url: str) -> str | None: 
+def extract_via_stealthy_browser(url: str) -> str | None: 
     try:
-        LOGGER.info("[TIER 2] Attempting Selenium extraction (No Proxy)")
-        selenium_scraper = SeleniumScraper()
-        soup_result = selenium_scraper.fetch_news_with_selenium(url)
+        LOGGER.info("[TIER 2] Attempting stealthy browser extraction (No Proxy)")
+        html = fetch_html_with_stealthy_browser(url)
+        soup_result = BeautifulSoup(html, "html.parser")
 
-        if soup_result:
-            raw_html_content = str(soup_result)
-
-            goose_extractor = Goose()
-            article_data = goose_extractor.extract(raw_html=raw_html_content)
+        goose_extractor = Goose()
+        article_data = goose_extractor.extract(raw_html=str(soup_result))
+        
+        if article_data and article_data.cleaned_text:
+            article_extracted = article_data.cleaned_text
             
-            if article_data and article_data.cleaned_text:
-                LOGGER.info(
-                    "[SUCCESS] Extracted via Selenium + Goose: %s",
-                    url,
+            blocked_phrases = (
+                "has banned the autonomous system",
+                "error 1005",
+                "cloudflare",
+                "your ip address is in",
+                "developers.cloudflare.com/support/troubleshooting",
+            )
+
+            if any(
+                phrase in article_extracted.lower()
+                for phrase in blocked_phrases
+            ):
+                LOGGER.warning(
+                    "[BLOCKED] Stealthy browser reached a Cloudflare block page."
                 )
-                article_extracted = article_data.cleaned_text
                 
-                blocked_phrases = (
-                    "has banned the autonomous system",
-                    "error 1005",
-                    "cloudflare",
-                    "your ip address is in",
-                    "developers.cloudflare.com/support/troubleshooting",
-                )
+                return None
 
-                if any(
-                    phrase in article_extracted.lower()
-                    for phrase in blocked_phrases
-                ):
-                    LOGGER.warning(
-                        "[BLOCKED] Selenium reached a Cloudflare block page."
-                    )
-                    
-                    return None
+            LOGGER.info(
+                "[SUCCESS] Extracted via stealthy browser + Goose: %s",
+                url,
+            )
+            return article_extracted
 
-                LOGGER.info(
-                    "[SUCCESS] Extracted via Selenium + Goose: %s",
-                    url,
-                )
-                return article_extracted
-
-            LOGGER.info("[WARNING] Selenium DOM fetched, but Goose failed. Attempting Soup fallbacks.")
-            
-            content_container = soup_result.find("div", class_="content")
-            if content_container and content_container.get_text(strip=True):
-                LOGGER.info(
-                    "[SUCCESS] Extracted via Selenium + Soup: %s",
-                    url,
-                )
-                return content_container.get_text(strip=True)
-            
-            antara_container = soup_result.find("div", class_="wrap__article-detail")
-            if antara_container and antara_container.get_text(strip=True):
-                LOGGER.info(
-                    "[SUCCESS] Extracted via Selenium + Soup: %s",
-                    url,
-                )
-                return antara_container.get_text(strip=True)
+        LOGGER.info("[WARNING] Stealthy browser DOM fetched, but Goose failed. Attempting Soup fallbacks.")
+        
+        content_container = soup_result.find("div", class_="content")
+        if content_container and content_container.get_text(strip=True):
+            LOGGER.info(
+                "[SUCCESS] Extracted via stealthy browser + Soup: %s",
+                url,
+            )
+            return content_container.get_text(strip=True)
+        
+        antara_container = soup_result.find("div", class_="wrap__article-detail")
+        if antara_container and antara_container.get_text(strip=True):
+            LOGGER.info(
+                "[SUCCESS] Extracted via stealthy browser + Soup: %s",
+                url,
+            )
+            return antara_container.get_text(strip=True)
 
     except Exception as error:
         LOGGER.error(
-            "[FAIL] Tier 2 Selenium fallback failed: %s",
+            "[FAIL] Tier 2 stealthy browser fallback failed: %s",
             error,
         )
         return None 
@@ -595,7 +680,7 @@ def get_article_body(url: str) -> str | None:
     if extracted_text := extract_via_cloudscraper(url):
         return extracted_text 
  
-    if extracted_text := extract_via_selenium(url):
+    if extracted_text := extract_via_stealthy_browser(url):
         return extracted_text 
 
     if extracted_text := extract_via_proxy(url):

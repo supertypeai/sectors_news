@@ -4,7 +4,6 @@ from pathlib import Path
 
 from scraper_engine.preprocessing.article_builder import filter_valid_articles, enrich_articles
 from scraper_engine.database.client import SUPABASE_CLIENT
-from scraper_engine.base.scraper import SeleniumScraper
 from scraper_engine.llm.client import TokenUsageLogger
 from scraper_engine.preprocessing.models import News
 from scraper_engine.preprocessing.deduplication import run_dedup_articles
@@ -523,23 +522,18 @@ async def post_source(
         len(data_articles),
     )
     
-    try:
-        # only need this when processing sgx news
-        top_200_symbols_sgx = None 
+    # only need this when processing sgx news
+    top_200_symbols_sgx = None 
 
-        if source_scraper == "sgx":
-            top_200_symbols_sgx = get_top_200_symbols()
+    if source_scraper == "sgx":
+        top_200_symbols_sgx = get_top_200_symbols()
 
-        successful_articles = await process_article_batch(
-            data_articles=data_articles,
-            source_scraper=source_scraper,
-            top_200_symbols_sgx=top_200_symbols_sgx,
-            token_usage_logger=token_usage_logger,
-         )
-        
-    finally:
-        LOGGER.info("All processing done. Closing Shared WebDriver.")
-        SeleniumScraper.close_shared_driver()
+    successful_articles = await process_article_batch(
+        data_articles=data_articles,
+        source_scraper=source_scraper,
+        top_200_symbols_sgx=top_200_symbols_sgx,
+        token_usage_logger=token_usage_logger,
+    )
 
     end_time = time.time()
     final_time = (end_time - start_time) / 60

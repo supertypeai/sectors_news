@@ -2,7 +2,7 @@ from copy import deepcopy
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-from .scraper import Scraper, SeleniumScraper
+from .scraper import Scraper
 from scraper_engine.utils.json_helpers import (
     write_csv as write_csv_file,
     write_json as write_json_file,
@@ -99,26 +99,6 @@ class ScraperCollection:
                 date_to_scrape,
             )
 
-    async def _run_selenium_scrapers(
-        self,
-        scrapers: list[Scraper],
-        num_page: int | None,
-        date_to_scrape: str,
-    ) -> list[tuple[list, dict]]:
-        results = []
-
-        for scraper in scrapers:
-            result = await asyncio.to_thread(
-                self._run_scraper,
-                scraper,
-                num_page,
-                date_to_scrape,
-            )
-
-            results.append(result)
-
-        return results
-
     async def run_all(
         self,
         num_page: int | None,
@@ -146,18 +126,6 @@ class ScraperCollection:
 
         semaphore = asyncio.Semaphore(max_concurrency)
 
-        concurrent_scrapers = [
-            scraper
-            for scraper in self.scrapers
-            if not isinstance(scraper, SeleniumScraper)
-        ]
-
-        selenium_scrapers = [
-            scraper
-            for scraper in self.scrapers
-            if isinstance(scraper, SeleniumScraper)
-        ]
-
         for date_to_scrape in dates_to_scrape:
             tasks = [
                 self._run_scraper_concurrently(
@@ -166,28 +134,10 @@ class ScraperCollection:
                     date_to_scrape,
                     semaphore,
                 )
-                for scraper in concurrent_scrapers
+                for scraper in self.scrapers
             ]
 
-            if selenium_scrapers:
-                selenium_task = self._run_selenium_scrapers(
-                    selenium_scrapers,
-                    num_page,
-                    date_to_scrape,
-                )
-
-                concurrent_results, selenium_results = await asyncio.gather(
-                    asyncio.gather(*tasks),
-                    selenium_task,
-                )
-
-                results = [
-                    *concurrent_results,
-                    *selenium_results,
-                ]
-
-            else:
-                results = await asyncio.gather(*tasks)
+            results = await asyncio.gather(*tasks)
 
             for scraper_articles, scraper_result in results:
                 self.articles.extend(scraper_articles)
