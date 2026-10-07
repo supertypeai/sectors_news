@@ -4,7 +4,8 @@ from pathlib import Path
 
 from scraper_engine.preprocessing.article_builder import filter_valid_articles, enrich_articles
 from scraper_engine.database.client import SUPABASE_CLIENT
-from scraper_engine.llm.client import TokenUsageLogger
+from llm.client import TokenUsageLogger
+from llm.cost import log_total_cost
 from scraper_engine.preprocessing.models import News
 from scraper_engine.preprocessing.deduplication import run_dedup_articles
 from scraper_engine.utils.json_helpers import read_json, write_json
@@ -305,21 +306,6 @@ def get_article_to_process(
     return remaining
 
 
-def log_total_llm_cost(token_usage_logger: TokenUsageLogger) -> None:
-    total_cost = sum(
-        cost
-        for cost in token_usage_logger.request_costs
-        if cost is not None
-    )
-
-    LOGGER.info(
-        "Total reported cost: $%.8f USD | completed requests: %d | missing cost: %d",
-        total_cost,
-        len(token_usage_logger.request_costs),
-        token_usage_logger.request_costs.count(None),
-    )
-
-
 async def filter_one_article(
     article_data: dict,
     index: int,
@@ -513,7 +499,7 @@ async def post_source(
 
     if not data_articles:
         LOGGER.info("Batch %d: No articles to process.", batch)
-        log_total_llm_cost(token_usage_logger)
+        log_total_cost(token_usage_logger)
         return
 
     LOGGER.info(
@@ -543,7 +529,7 @@ async def post_source(
         final_time
     )
 
-    log_total_llm_cost(token_usage_logger)
+    log_total_cost(token_usage_logger)
 
     run_sending_data(
         batch=batch, 

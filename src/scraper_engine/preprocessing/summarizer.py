@@ -1,10 +1,10 @@
 from goose3 import Goose
 
-from scraper_engine.llm.caller import invoke_structured_llm_async
-from scraper_engine.llm.client import TokenUsageLogger
-from scraper_engine.llm.prompt_definitions.summarization import SummarizationPrompts, SummaryNews
+from llm.caller import invoke_structured_llm_async
+from llm.client import TokenUsageLogger
+from scraper_engine.prompts.summarization import SummarizationPrompts, SummaryNews
 from scraper_engine.config.conf import USER_AGENT
-from scraper_engine.llm.constant import MODEL_NAMES
+from llm.constant import MODEL_NAMES
 from .article_fetcher import extract_table_content
 from scraper_engine.utils.article_helpers import (
     basic_cleaning_body,

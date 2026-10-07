@@ -1,11 +1,11 @@
-from scraper_engine.llm.prompt_definitions.entity_extraction import (
+from scraper_engine.prompts.entity_extraction import (
     EntityExtractionPrompts,
     CompanyNameExtraction,
 )
 from scraper_engine.database.metadata import load_company_data_sgx
-from scraper_engine.llm.caller import invoke_structured_llm_async
-from scraper_engine.llm.client import TokenUsageLogger
-from scraper_engine.llm.constant import MODEL_NAMES
+from llm.caller import invoke_structured_llm_async
+from llm.client import TokenUsageLogger
+from llm.constant import MODEL_NAMES
 
 import logging 
 

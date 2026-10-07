@@ -7,6 +7,10 @@ MODEL_NAMES = [
 ]
 
 MODEL_CONFIG = {
+    "gpt-6-luna": {
+        "model": "openai/gpt-6-luna",
+        "provider": "openrouter",     
+    },
     "gpt-oss-120b": {
         "model": "openai/gpt-oss-120b",
         "provider": "groq",

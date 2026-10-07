@@ -3,10 +3,10 @@ from scraper_engine.database.metadata import (
     load_subsector_data_sgx as load_subsector_data_sgx_from_metadata,
     load_tag_data as load_tag_data_from_metadata,
 )
-from scraper_engine.llm.caller import invoke_structured_llm_async
-from scraper_engine.llm.client import TokenUsageLogger
-from scraper_engine.llm.constant import MODEL_NAMES
-from scraper_engine.llm.prompt_definitions.classification import (
+from llm.caller import invoke_structured_llm_async
+from llm.client import TokenUsageLogger
+from llm.constant import MODEL_NAMES
+from scraper_engine.prompts.classification import (
     ClassifierPrompts, 
     ClassificationSchema, 
     SubsectorClassification

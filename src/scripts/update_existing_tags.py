@@ -6,8 +6,8 @@ from datetime                       import datetime, timedelta
 from typing                         import List, Dict
 from groq                           import RateLimitError
 
-from scraper_engine.llm.client  import LLMCollection, invoke_llm
-from scraper_engine.llm.prompt_definitions import (ClassifierPrompts, TagsClassification)
+from llm.client  import LLMCollection, invoke_llm
+from scraper_engine.prompts import (ClassifierPrompts, TagsClassification)
 
 from scraper_engine.database.client  import SUPABASE_CLIENT
 

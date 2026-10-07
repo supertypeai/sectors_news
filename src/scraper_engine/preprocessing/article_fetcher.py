@@ -5,7 +5,8 @@ from urllib.parse import urlparse
 from scrapling import Fetcher, DynamicFetcher
 from scrapling.fetchers import StealthySession
 
-from scraper_engine.config.conf import PROXY, USER_AGENT
+from config.env import PROXY
+from scraper_engine.config.conf import USER_AGENT
 from scraper_engine.base.scraper import Scraper
 
 import json

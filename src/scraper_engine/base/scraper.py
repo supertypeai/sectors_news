@@ -7,13 +7,13 @@ from pathlib import Path
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+from config.env import (
+    PROXY, BRIGHTDATA_API_KEY, BRIGHTDATA_ZONE
+)
 from scraper_engine.config.conf import (
-    PROXY, 
     USER_AGENT, 
     HEADERS_SCRAPER, 
     CRAWLER_USER_AGENT,
-    BRIGHTDATA_API_KEY, 
-    BRIGHTDATA_ZONE
 )
 from scraper_engine.utils.json_helpers import (
     write_csv as write_csv_file,

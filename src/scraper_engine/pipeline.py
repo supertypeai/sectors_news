@@ -26,24 +26,11 @@ from scraper_engine.sources.sgx.registry import (
 from .processor import post_source, build_filtered_article
 from scraper_engine.database.client import SUPABASE_CLIENT
 from scraper_engine.utils.json_helpers import read_json, write_json
+from config.logging_setup import setup_logging
 
 import typer 
-import sys
 import logging
 import asyncio
-
-
-def setup_logging():
-    """Configures logging for the whole application"""
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s [%(levelname)s] %(name)s - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S',
-        handlers=[
-            logging.StreamHandler(sys.stdout),
-            # logging.FileHandler("scraper.log") 
-        ]
-    )
 
 
 app = typer.Typer(

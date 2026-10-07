@@ -1,5 +1,5 @@
 from supabase import create_client, Client
-from scraper_engine.config.conf import SUPABASE_KEY, SUPABASE_URL  
+from config.env import SUPABASE_KEY, SUPABASE_URL  
 
 if not SUPABASE_URL or not SUPABASE_KEY:
     raise ValueError("Supabase key and URL must be set in configuration.")

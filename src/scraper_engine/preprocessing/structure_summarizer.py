@@ -1,11 +1,11 @@
-from scraper_engine.llm.prompt_definitions.structure_summarization import (
+from scraper_engine.prompts.structure_summarization import (
     USER_PROMPT, 
     SYSTEM_PROMPT, 
     StructureNewsSummary
 ) 
-from scraper_engine.llm.caller import invoke_structured_llm_async
-from scraper_engine.llm.constant import MODEL_NAMES
-from scraper_engine.llm.client import TokenUsageLogger
+from llm.caller import invoke_structured_llm_async
+from llm.constant import MODEL_NAMES
+from llm.client import TokenUsageLogger
 
 
 async def get_structure_summary(

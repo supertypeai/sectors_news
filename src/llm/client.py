@@ -4,11 +4,11 @@ from langchain_core.messages import BaseMessage
 from langchain_core.outputs import ChatResult
 from langchain_core.callbacks import BaseCallbackHandler
 
-from scraper_engine.config.conf import (
+from config.env import (
     GROQ_API_KEY_DEV,
     OPENROUTER_API_KEY,
 )
-from scraper_engine.llm.constant import (
+from llm.constant import (
     ABORT_KEYWORDS,
     ABORT_STATUS_CODES,
     MODEL_CONFIG,

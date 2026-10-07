@@ -14,7 +14,7 @@ from scraper_engine.sources.idx.scrape_icn import ICNScraper
 from scraper_engine.sources.idx.scrape_jakartaglobe import JakartaGlobe
 from scraper_engine.sources.idx.scrape_jakartapost import JakartaPost
 from scraper_engine.sources.sgx.scrape_the_edge_reits import TheEdgeReits
-from scraper_engine.config.conf import BRIGHTDATA_API_KEY, BRIGHTDATA_ZONE
+from config.env import BRIGHTDATA_API_KEY, BRIGHTDATA_ZONE
 from scraper_engine.preprocessing.article_fetcher import get_article_body, get_article_kompas_news
 from scraper_engine.sources.idx.scrape_kompas import KompasMoney
 

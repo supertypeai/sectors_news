@@ -1,11 +1,11 @@
-from scraper_engine.llm.caller import invoke_structured_llm
-from scraper_engine.llm.prompt_definitions.deduplication import (
+from llm.caller import invoke_structured_llm
+from scraper_engine.prompts.deduplication import (
     SYSTEM_PROMPT, 
     USER_PROMPT,
     DeduplicationSchema
 )
-from scraper_engine.llm.constant import MODEL_NAMES
-from scraper_engine.llm.client import TokenUsageLogger
+from llm.constant import MODEL_NAMES
+from llm.client import TokenUsageLogger
 
 
 def format_articles_for_dedup(

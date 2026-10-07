@@ -1,7 +1,7 @@
-from scraper_engine.llm.caller import invoke_structured_llm_async
-from scraper_engine.llm.client import TokenUsageLogger
-from scraper_engine.llm.prompt_definitions.scoring import ScoringSchema, ScoringPrompts
-from scraper_engine.llm.constant import MODEL_NAMES
+from llm.caller import invoke_structured_llm_async
+from llm.client import TokenUsageLogger
+from scraper_engine.prompts.scoring import ScoringSchema, ScoringPrompts
+from llm.constant import MODEL_NAMES
 
 import logging
 

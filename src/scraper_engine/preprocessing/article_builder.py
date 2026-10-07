@@ -23,7 +23,7 @@ from scraper_engine.utils.symbol_helpers import (
     normalize_idx_company_name,
     normalize_sgx_company_name,
 )
-from scraper_engine.llm.client import TokenUsageLogger
+from llm.client import TokenUsageLogger
 from scraper_engine.utils.article_helpers import (
     clean_article,
 )
