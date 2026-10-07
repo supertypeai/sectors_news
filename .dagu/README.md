@@ -11,19 +11,23 @@ and registers it over Dagu's REST API.
 | `workflows/sgx-news-pipeline.yaml` | `sectors_news--sgx-news-pipeline` | `10 0,4,9,13,17,21 * * *` | `.github/workflows/pipeline_sgx.yaml` |
 | `workflows/idx-news-resume.yaml` | `sectors_news--idx-news-resume` | manual | that workflow's `process_only` input |
 | `workflows/sgx-news-resume.yaml` | `sectors_news--sgx-news-resume` | manual | the same, for SGX |
-| `workflows/idx-news-briefs.yaml` | `sectors_news--idx-news-briefs` | `35 1,9 * * 1-5` | new |
-| `workflows/sgx-news-briefs.yaml` | `sectors_news--sgx-news-briefs` | `20 0,9 * * 1-5` | new |
+| `workflows/idx-news-issue.yaml` | `sectors_news--idx-news-issue` | `35 10 * * *` | `idx-news-briefs` |
+| `workflows/sgx-news-issue.yaml` | `sectors_news--sgx-news-issue` | `35 9 * * 5` | `sgx-news-briefs` |
 
 The scrape hours are not an even `*/4` because each market needs one scrape just
-before its pre-open and one just after its close, and the briefs follow those:
+before its pre-open and one just after its close.
 
-| | Pre-open scrape → brief | Post-close scrape → brief |
-| --- | --- | --- |
-| IDX (WIB, UTC+7) | 08:15 → 08:35, pre-open 08:45 | 16:15 → 16:35, close 16:00 |
-| SGX (SGT, UTC+8) | 08:10 → 08:20, pre-open 08:30 | 17:10 → 17:20, close 17:00 |
+The news issues run just after a fixed 17:30 local cutoff, each covering the
+articles created in the window that ends there:
 
-Both markets close at 09:00 UTC, so four runs fall between 09:10 and 09:35 UTC.
-That is what the queue below is for.
+| | Cutoff | Issue runs | Window |
+| --- | --- | --- | --- |
+| IDX (WIB, UTC+7) | 17:30 WIB daily | 17:35 WIB = 10:35 UTC, every day | previous issue's cutoff → today 17:30 WIB |
+| SGX (SGT, UTC+8) | 17:30 SGT Friday | Friday 17:35 SGT = 09:35 UTC | previous issue's cutoff → Friday 17:30 SGT |
+
+Both markets close at 09:00 UTC, so the two post-close scrapes fall at 09:10 and
+09:15 UTC, followed on Fridays by the SGX issue at 09:35 and every day by the IDX
+issue at 10:35 UTC. That is what the queue below is for.
 
 ```
 .dagu/
@@ -176,13 +180,15 @@ queues:
       max_concurrency: 1
 ```
 
-The briefs depend on it. A brief takes its window up to the moment it starts, so
-queued behind a slow scrape it waits and includes that scrape's articles; without
-the queue it starts on time and those articles land in the next session's brief
-instead. Nothing is lost either way — the brief's watermark is
-`data/briefs_result/<market>/state.json` — but the queue keeps the post-close
-brief complete. Overlapping pushes cost nothing but a rebase: the DAGs write
-disjoint files and `runners push` retries a lost race five times.
+The news issues share it, but their window always ends at the 17:30 cutoff
+whatever time they start, so waiting behind a scrape changes nothing in the
+issue. Articles a slow scrape inserts after 17:30 land in the next issue's
+window, so nothing is lost. The issue's state is
+`data/news_issues/<market>/previous_issue.json`: the last issue's date, its window
+and its stories. The next issue starts its window at that `window_end`, so a missed
+run's articles roll into it, and reads the stories to avoid repeating them. Overlapping pushes cost nothing but
+a rebase: the DAGs write disjoint files and `runners push` retries a lost race
+five times.
 
 ## Two things Dagu 2.16 forces
 

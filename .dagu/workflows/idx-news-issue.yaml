@@ -1,0 +1,53 @@
+description: IDX news issue — daily issue for the window ending 17:30 WIB
+
+container:
+  image: sectors-news-runtime:latest
+  pull_policy: never
+  working_dir: /workspace
+  volumes:
+    # preflight.sh asserts the /dev/shm mount even though the issue never starts Chrome.
+    - /dev/shm:/dev/shm
+    - /srv/runners/tokens/sectors_news:/run/secrets:ro
+  env:
+    - GIT_CONFIG_VALUE_1: '!f() { test "$1" = get && echo username=x-access-token && echo password="$(cat /run/secrets/token)"; }; f'
+    - MARKET: idx
+    # The issue is dated on the local day its 17:30 cutoff falls on
+    - ISSUE_TZ: Asia/Jakarta
+
+secrets:
+  - SUPABASE_URL
+  - SUPABASE_KEY
+  - OPENROUTER_API_KEY
+  - GROQ_API_KEY_DEV
+  - PROXY
+  - BRIGHTDATA_API_KEY
+  - BRIGHTDATA_ZONE
+
+# 17:35 WIB (UTC+7), just after the 17:30 WIB cutoff, every day. Each issue covers the
+# articles created from the previous issue's cutoff (window_end in previous_issue.json)
+# to today 17:30 WIB, so a missed day rolls into the next issue instead of being lost.
+schedule: "35 10 * * *"
+queue: news-data-pipeline
+timeout_sec: 3600
+hist_retention_days: 30
+
+steps:
+  - id: checkout
+    run: runners clone
+
+  - id: preflight
+    depends: [checkout]
+    run: bash .dagu/steps/preflight.sh
+
+  # Builds the issue against the committed previous_issue.json and upserts it into
+  # news_issue. Safe to re-run: once publish has pushed this issue's state, a re-run
+  # sees the same issue_date and skips.
+  - id: issue
+    depends: [preflight]
+    run: bash -c 'set -e; python -m news_issues.pipeline run --exchange "$MARKET" --issue-date "$(TZ="$ISSUE_TZ" date +%F)" --upsert'
+
+  - id: publish
+    depends: [issue]
+    run: >-
+      runners push -m "chore(idx): checkpoint news issue"
+      data/news_issues/idx/previous_issue.json
