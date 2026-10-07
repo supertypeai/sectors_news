@@ -1,128 +1,162 @@
 from datetime import datetime
+from zoneinfo import ZoneInfo
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
+from scrapling.fetchers import StealthySession
 
 from scraper_engine.base.scraper import Scraper
-from scraper_engine.sources.utils.constant import INDO_TO_ENG
 
 import argparse
-import time
-import logging 
-import re 
+import logging
+import warnings
 
 
 LOGGER = logging.getLogger(__name__)
 
+# The sitemap is parsed with html.parser, which keeps every field we need
+warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+# Google News sitemap: the last 48 hours of articles with title, publish
+# time and image, so one request replaces the listing pages and the
+# per-article timestamp fetches
+SITEMAP_URL = "https://money.kompas.com/sitemap-news-money.xml"
+
+AWS_WAF_CHALLENGE_MARKER = "awsWafCookieDomainList"
+
+WIB = ZoneInfo("Asia/Jakarta")
+
 
 class KompasMoney(Scraper):
-    def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news(url)
+    def __init__(self):
+        super().__init__()
+        self.stealthy_session_manager = None
+        self.stealthy_session = None
 
-        if not soup:
-            return []
+    def fetch_with_stealthy_browser(self, url: str):
+        # Kompas sits behind an AWS WAF JS challenge (status 202) that plain
+        # HTTP clients cannot pass, so let a stealth browser run it
+        try:
+            if self.stealthy_session is None:
+                self.stealthy_session_manager = StealthySession(
+                    headless=True,
+                    network_idle=True,
+                )
+                self.stealthy_session = self.stealthy_session_manager.__enter__()
 
-        return soup.select("div.articleItem")
+            response = self.stealthy_session.fetch(url)
+            body = bytes(response.body)
 
-    def fetch_article_timestamp(self, article_url: str) -> str:
-        soup = self.fetch_news(article_url)
+            if response.status != 200 or AWS_WAF_CHALLENGE_MARKER.encode() in body:
+                LOGGER.warning("[Kompas Money] Stealthy browser got status %d for %s", response.status, url)
+                self.record_request_failure(
+                    url=url,
+                    reason="HTTPStatusError",
+                    status_code=response.status,
+                    message=f"Received status code {response.status}",
+                )
+                return None
 
-        if not soup:
+            self.record_request_success(status_code=response.status)
+            return BeautifulSoup(body, "html.parser")
+
+        except Exception as error:
+            LOGGER.error("[Kompas Money] Stealthy browser failed for %s: %s", url, error)
+            self.record_request_failure(
+                url=url,
+                reason=type(error).__name__,
+                message=str(error),
+            )
             return None
-        
-        read_time_tag = soup.select_one("div.read__time")
-       
-        if not read_time_tag:
-            return None
 
-        raw_text = "".join(
-            text_node
-            for text_node in read_time_tag.strings
-            if text_node.strip() and "kompas.com" not in text_node.strip().lower()
-        ).strip().strip(",").strip()
+    def close_stealthy_session(self) -> None:
+        if self.stealthy_session_manager is None:
+            return
 
-        cleaned = self.parse_date(raw_text)
-    
-        return cleaned
+        try:
+            self.stealthy_session_manager.__exit__(None, None, None)
+
+        except Exception as error:
+            LOGGER.warning("[Kompas Money] Failed to close stealthy session: %s", error)
+
+        finally:
+            self.stealthy_session_manager = None
+            self.stealthy_session = None
+
+    def fetch_with_fallback(self, url: str):
+        soup = self.fetch_news_with_scrapling(url)
+
+        if soup is not None:
+            return soup
+
+        LOGGER.info(
+            "[Kompas Money] Scrapling failed for %s, trying stealthy browser",
+            url
+        )
+        soup = self.fetch_with_stealthy_browser(url)
+
+        if soup is not None:
+            return soup
+
+        LOGGER.info(
+            "[Kompas Money] Stealthy browser failed for %s, falling back to Web Unlocker",
+            url
+        )
+        return self.fetch_news_with_web_unlocker(url)
 
     def parse_date(self, raw_date: str) -> str:
         if not raw_date:
             return None
-        
+
         try:
-            cleaned_date = (
-                raw_date.replace("WIB", "")
-                .replace("WITA", "")
-                .replace("WIT", "")
-                .strip()
-                .strip(",")
-                .strip()
-            )
+            published_at = datetime.fromisoformat(raw_date).astimezone(WIB)
+            return published_at.strftime("%Y-%m-%d %H:%M:%S")
 
-            for idn_month, eng_month in INDO_TO_ENG.items(): 
-                if idn_month.lower() in cleaned_date.lower():
-                    cleaned_date = re.sub(re.escape(idn_month), eng_month, cleaned_date, flags=re.IGNORECASE)
-                    break
-
-            parsed_date = datetime.strptime(cleaned_date, "%d %B %Y, %H:%M")
-            return parsed_date.strftime("%Y-%m-%d %H:%M:%S")
-        
         except ValueError:
             return None
-        
-    def parse_articles(self, article_items: list) -> list:
+
+    def parse_sitemap(self, soup: BeautifulSoup, date: str) -> list:
         parsed_articles = []
 
-        for article_item in article_items:
-            anchor_tag = article_item.select_one("a.article-link")
-            source_url = anchor_tag["href"] if anchor_tag else None
+        for url_tag in soup.find_all("url"):
+            loc_tag = url_tag.find("loc")
+            title_tag = url_tag.find("news:title")
+            date_tag = url_tag.find("news:publication_date")
+            image_tag = url_tag.find("image:loc")
 
-            title_tag = article_item.select_one("h2.articleTitle")
-            title = title_tag.get_text(strip=True) if title_tag else None
+            if not loc_tag or not title_tag or not date_tag:
+                continue
 
-            thumbnail_tag = article_item.select_one("div.articleItem-img img")
-            thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
+            published_at = self.parse_date(date_tag.get_text(strip=True))
 
-            published_at = None
+            if not published_at:
+                LOGGER.info("[Kompas Money] Failed to parse date for url: %s. Skipping.", loc_tag.get_text(strip=True))
+                continue
 
-            if source_url:
-                published_at = self.fetch_article_timestamp(source_url)
-                time.sleep(0.5)
+            # The sitemap covers two days, so keep only the requested one
+            if published_at[:10].replace("-", "") != date:
+                continue
 
             parsed_articles.append({
-                "title": title,
-                "source": source_url,
-                "thumbnail": thumbnail_url,
+                "title": title_tag.get_text(strip=True),
+                "source": loc_tag.get_text(strip=True),
+                "thumbnail": image_tag.get_text(strip=True) if image_tag else None,
                 "timestamp": published_at,
             })
 
         return parsed_articles
 
     def extract_news_pages(self, num_pages: int, date: str):
-        base_url = f'https://indeks.kompas.com/?site=money' 
-        
-        year = date[:4]    
-        month = date[4:6] 
-        day = date[6:]
+        # num_pages is unused: the sitemap is a single document
+        try:
+            soup = self.fetch_with_fallback(SITEMAP_URL)
+        finally:
+            self.close_stealthy_session()
 
-        page = 1 
+        if not soup:
+            LOGGER.info("[Kompas Money] Failed to fetch sitemap, stopping.")
+            return self.articles
 
-        while True:
-            params = f'&date={year}-{month}-{day}&page={page}'
-            full_url = base_url + params 
-            article_list = self.fetch_article_list(full_url)
-
-            if not article_list:
-                LOGGER.info("[Kompas Money] No articles found on page %d, stopping.", page)
-                break 
-
-            articles = self.parse_articles(article_list)
-            
-            self.articles.extend(articles)
-            LOGGER.info("[Kompas Money] Page %d: %d articles collected.", page, len(articles))
-
-            if num_pages is not None and page >= num_pages: 
-                break
-            
-            page += 1
-            time.sleep(1)
+        articles = self.parse_sitemap(soup, date)
+        self.articles.extend(articles)
 
         LOGGER.info("[Kompas Money] Total scraped: %d", len(self.articles))
         return self.articles
@@ -134,7 +168,7 @@ def main():
     parser = argparse.ArgumentParser(description="Script for scraping data from Kompas Money")
     parser.add_argument("date", type=str)
     parser.add_argument("filename", type=str, nargs="?", default="kompasmoney")
-    parser.add_argument("--pages", type=int, default=None, help="Number of pages to scrape (default: all)")
+    parser.add_argument("--pages", type=int, default=None, help="Unused, kept for the shared scraper interface")
     parser.add_argument("--csv", action="store_true", help="Flag to indicate write to csv file")
 
     args = parser.parse_args()
@@ -149,11 +183,10 @@ def main():
 if __name__ == "__main__":
     """
     How to run:
-    uv run -m src.scraper_engine.sources.idx.scrape_kompas <date> [filename] [--pages N] [--csv]
+    uv run -m src.scraper_engine.sources.idx.scrape_kompas <date> [filename] [--csv]
 
     Examples:
     uv run -m src.scraper_engine.sources.idx.scrape_kompas 20260427
-    uv run -m src.scraper_engine.sources.idx.scrape_kompas 20260427 test_kompas
-    uv run -m src.scraper_engine.sources.idx.scrape_kompas 20260427 test_kompas --pages 3 --csv
+    uv run -m src.scraper_engine.sources.idx.scrape_kompas 20260427 test_kompas --csv
     """
     main()

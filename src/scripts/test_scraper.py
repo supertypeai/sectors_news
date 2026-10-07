@@ -1,5 +1,9 @@
+from bs4 import BeautifulSoup
+from datetime import datetime
+from scrapling import Fetcher, StealthyFetcher
 from types import MethodType
 from urllib.parse import urlparse
+from zoneinfo import ZoneInfo
 
 from scraper_engine.base.scraper import Scraper, SeleniumScraper
 from scraper_engine.sources.idx.scrape_investor_id import InvestorID
@@ -162,43 +166,90 @@ def test_investorid_article_fetcher(urls: list[str]):
         )
 
 
-def fetch_with_selenium_adapter(self, url: str):
-    selenium_scraper = SeleniumScraper()
-    
-    wait_selector = (
-        "div.articleItem"
-        if "indeks.kompas.com" in url
-        else "div.read__time"
-    )
+def test_kompas(date: str | None = None) -> list[dict]:
+    date = date or datetime.now(ZoneInfo("Asia/Jakarta")).strftime("%Y%m%d")
 
-    soup = selenium_scraper.fetch_news_with_selenium(
-        url,
-        wait_selector=wait_selector,
-        time_sleep=5,
-    )
-
-    if soup and soup.select_one("#challenge-container"):
-        LOGGER.warning("Kompas still returned an AWS WAF challenge")
-
-    return soup
-
-
-def test_kompas(): 
     scraper = KompasMoney()
-    scraper.fetch_news = MethodType(
-        fetch_with_selenium_adapter,
-        scraper,
-    )
 
     articles = scraper.extract_news_pages(
-        num_pages=1,
-        date="20260927",
+        num_pages=None,
+        date=date,
     )
 
-    LOGGER.info("kompas articles: %d", len(articles))
+    LOGGER.info("kompas articles for %s: %d", date, len(articles))
+    LOGGER.info("kompas health: %s", scraper.health)
 
     if articles:
         LOGGER.info("kompas sample: %s", articles[0])
+
+    return articles
+
+
+def fetch_kompas_with_stealthy_browser(url: str) -> bytes | None:
+    # Ads keep the page from ever going idle, so skip images, fonts and
+    # styles and wait for the article text instead (scripts still run,
+    # so the AWS WAF challenge can solve itself)
+    response = StealthyFetcher.fetch(
+        url,
+        headless=True,
+        disable_resources=True,
+        wait_selector="div.read__content",
+    )
+
+    body = bytes(response.body)
+
+    if response.status != 200 or b"awsWafCookieDomainList" in body:
+        LOGGER.warning("[Kompas] Stealthy browser got status %d for %s", response.status, url)
+        return None
+
+    return body
+
+
+def get_article_kompas_news(url: str) -> str | None:
+    response = Fetcher.get(url, stealthy_headers=True, impersonate="chrome")
+    body = bytes(response.body) if response.status == 200 else None
+
+    if body is not None:
+        LOGGER.info("[Kompas] Scrapling got 200 for %s", url)
+
+    else:
+        LOGGER.info("[Kompas] Scrapling got %d for %s, trying stealthy browser", response.status, url)
+        body = fetch_kompas_with_stealthy_browser(url)
+
+        if body is not None:
+            LOGGER.info("[Kompas] Stealthy browser passed for %s", url)
+
+    if body is None:
+        return None
+
+    soup = BeautifulSoup(body, "html.parser")
+
+    # Direct children only: the donation appeal at the end sits inside an <i>
+    paragraphs = [
+        text
+        for paragraph in soup.select("div.read__content div.clearfix > p")
+        if (text := paragraph.get_text(separator=" ", strip=True))
+        and not text.startswith("Baca juga:")
+    ]
+
+    if not paragraphs:
+        LOGGER.warning("[Kompas] No article text found for %s", url)
+        return None
+
+    return "\n\n".join(paragraphs)
+
+
+def test_kompas_article_fetcher(urls: list[str]):
+    for url in urls:
+        article = get_article_kompas_news(url)
+
+        if not article:
+            LOGGER.warning("kompas article FAILED: %s", url)
+            continue
+
+        LOGGER.info(
+            "kompas article OK (%d chars): %s\n%s", len(article), url, article[:300]
+        )
 
 
 if __name__ == "__main__":
@@ -209,7 +260,12 @@ if __name__ == "__main__":
 
     # test_switch__scrapling()
     # test_jakarta_globe_and_investor_id()
-    test_kompas()
+    kompas_articles = test_kompas()
+
+    test_kompas_article_fetcher(
+        urls=[article["source"] for article in kompas_articles[:3]]
+    )
+    
     # urls = [
     #     "https://investor.id/market/455147/memperbesar-peluangnormalisasi-treatment-msci",
     #     "https://jakartaglobe.id/business/two-years-into-prabowo-presidency-economists-question-quality-of-economic-growth"
