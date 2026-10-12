@@ -1,57 +1,120 @@
 {
-  "issue_date": "2026-10-11",
-  "window_start": "2026-10-10T10:30:00Z",
-  "window_end": "2026-10-11T10:30:00Z",
+  "issue_date": "2026-10-12",
+  "window_start": "2026-10-11T10:30:00Z",
+  "window_end": "2026-10-12T10:30:00Z",
   "lead": {
-    "event": "Foreign investors' 2026 net selling of Indonesian stocks reaches Rp84.99 trillion",
-    "headline": "Foreign investors’ 2026 net selling of Indonesian stocks reaches Rp84.99 trillion",
-    "blurb": "The outflow through 9 October exceeded the Rp53.84 trillion recorded in 2020 and Rp50.17 trillion in 2008. Analysts cite a strong US dollar, high US yields, Indonesia’s market mix and domestic concerns over transparency, free float and policy certainty. OJK and SRO have launched eight reform action plans, and investors await MSCI’s rebalancing announcement on 11 November.",
-    "tickers": [
-      "REAL.JK",
-      "PIPA.JK",
-      "IMPC.JK"
-    ]
+    "event": "Indonesia revises stock-exchange IPO listing requirements",
+    "headline": "Indonesia tightens IPO listing rules after JCI falls more than 30%",
+    "blurb": "The Indonesia Stock Exchange (BEI) announced a second-stage refinement of its listing rules. Main-board candidates must have retained earnings and provide financial projections for five years after listing, while the minimum IPO share price is removed. The changes also adjust free-float eligibility and stock-code rules; they follow concerns from global investors and index managers, including MSCI, which lowered Indonesia’s transparency score mid-year.",
+    "tickers": []
   },
   "sections": {
+    "capital_raising_buybacks": [
+      {
+        "event": "Bank Mandiri issues US$750 million perpetual bond as additional core capital",
+        "headline": "BMRI issues US$750 million perpetual bond as additional core capital",
+        "blurb": "Bank Mandiri says proceeds will strengthen its capital structure and ratios and support business expansion. OJK approved the issuance, equivalent to Rp13.42 trillion at the current exchange rate, and it counted toward core capital at end-September 2026.",
+        "tickers": [
+          "BMRI.JK"
+        ]
+      },
+      {
+        "event": "Visi Media Asia plans debt-to-equity private placement",
+        "headline": "VIVA plans Rp1.72 trillion debt-to-equity private placement",
+        "blurb": "The proposed issue covers up to 43.08 billion Series C shares for two creditors, raises no fresh funds and would dilute existing holders by 72.35%. Shareholders of record on 23 October can attend the 17 November extraordinary meeting, which must approve the plan.",
+        "tickers": [
+          "VIVA.JK"
+        ]
+      },
+      {
+        "event": "Modernland Realty completes US$280 million bond restructuring through land-for-notes exchange",
+        "headline": "MDLN completes US$280 million bond restructuring via land-for-notes exchange",
+        "blurb": "The exchange transferred land valued at about Rp3.5 trillion to a bondholder vehicle, extinguishing all bond-related obligations, including accrued interest. It covered notes due 30 April 2027 issued by wholly owned subsidiary Modernland Overseas, had nearly 100% bondholder support and took effect on 30 September after Singapore High Court approval on 17 September.",
+        "tickers": [
+          "MDLN.JK"
+        ]
+      },
+      {
+        "event": "KB Bank offers Rp500 billion in subordinated bonds",
+        "headline": "BBKP offers Rp500 billion in subordinated bonds",
+        "blurb": "The offer comprises Rp425 billion of five-year Series A bonds at 8.95% per year and Rp75 billion of seven-year Series B bonds at 9.30% per year, as part of a Rp1 trillion fundraising target. The offer runs 12–13 October, with an IDX listing planned for 19 October.",
+        "tickers": [
+          "BBKP.JK"
+        ]
+      }
+    ],
+    "market_structure_policy": [
+      {
+        "event": "OJK investigates suspected price manipulation involving issuers and securities firms",
+        "headline": "OJK probes price manipulation, with potential sanctions of hundreds of billions of rupiah",
+        "blurb": "Barito Renewables fell 11.11% to Rp2,400 and Dian Swastika Sentosa dropped 12.39% to Rp990 by the second session on 12 October. The declines came amid rumors of exchange sanctions on 13 October, while OJK legal action awaits completion of its joint examination with the IDX.",
+        "tickers": [
+          "BREN.JK",
+          "DSSA.JK"
+        ]
+      }
+    ],
     "deals_control": [
       {
-        "event": "Jhonlin Baratama completes acquisition of 30.25% stake in Bayan Resources",
-        "headline": "Jhonlin completes acquisition of 30.25% of BYAN",
-        "blurb": "Jhonlin Baratama acquired 10.08 billion Bayan Resources shares from Low Tuck Kwong and Elaine Low for Rp26.10 trillion, at Rp2,588 each, with the transfer completed on 7 October. Low and Elaine retained direct stakes of 9.95% and 22.05%, respectively, and control of Bayan Resources did not change.",
+        "event": "Danantara invests US$250 million in HighPeak Energy",
+        "headline": "Danantara invests US$250 million in HighPeak Energy",
+        "blurb": "The investment is structured through preferred shares yielding around 6-7% annually, with periodic payments. After the transaction closes, HighPeak will develop training and secondment programs for Indonesian workers, while ENRG's Energi Mega Persada separately invested US$200 million.",
         "tickers": [
-          "BYAN.JK",
-          "PGUN.JK",
-          "JARR.JK",
-          "BMRI.JK"
+          "ENRG.JK"
+        ]
+      },
+      {
+        "event": "Wibowo Group Capital acquires an 82.5% stake in Mitrabahtera Segara Sejati",
+        "headline": "Wibowo Group Capital acquires 82.5% of MBSS for Rp4.21 trillion",
+        "blurb": "On 31 July, Mitrabahtera Segara Sejati’s shares were bought from previous controller PT Galley Adhika Arnawama at about Rp2,914.25 per share. The deal was followed by a mandatory tender offer for the remaining 17.5% public stake.",
+        "tickers": [
+          "MBSS.JK"
+        ]
+      },
+      {
+        "event": "Era Media Sejahtera plans INET stake acquisition and rights issue",
+        "headline": "DOOH plans 29.88% INET stake buy and 154.77 billion-share rights issue",
+        "blurb": "Era Media Sejahtera plans to buy the stake from Abadi Kreasi Unggul Nusantara through subsidiary Cakrawala Nexus Investama for Rp2.01 trillion, or Rp300 per share. BRI Danareksa Sekuritas estimates the rights issue could dilute existing shareholders by up to 95.24%, depending on participation. Shareholders are due to vote on the proposals at an extraordinary meeting on 9 November.",
+        "tickers": [
+          "DOOH.JK",
+          "INET.JK"
+        ]
+      },
+      {
+        "event": "Astra International launches voluntary tender offer for Astra Otoparts shares",
+        "headline": "ASII launches voluntary tender offer for up to 238.44 million AUTO shares",
+        "blurb": "Astra International is offering Rp3,600 per share, up to Rp858.39 billion, for a 4.947% stake in Astra Otoparts. The offer runs from 13 October to 11 November, with payment scheduled for 18 November; ASII could raise its holding to 84.947% but will remain the controlling shareholder.",
+        "tickers": [
+          "ASII.JK",
+          "AUTO.JK"
         ]
       }
     ],
     "other": [
       {
-        "event": "Mandiri Herindo Adiperkasa secures Rp2.2 trillion coal hauling contract",
-        "headline": "MAHA secures Rp2.2 trillion coal hauling contract",
-        "blurb": "The four-year agreement with Ade Putra Tanrajeng appoints Mandiri Herindo Adiperkasa as coal transportation services provider. It runs through 2030.",
+        "event": "Ascot Group files PKPU petition against MNC Sky Vision",
+        "headline": "Ascot Group files PKPU petition against MSKY, with ruling still pending",
+        "blurb": "Hearings at the Central Jakarta Commercial Court took place on 1 and 8 October, and the examination is ongoing. MNC Sky Vision said the petition has had no material impact on operations, finances or business continuity, and it continues to operate normally.",
         "tickers": [
-          "MAHA.JK"
+          "MSKY.JK"
         ]
       }
     ],
     "earnings_guidance": [
       {
-        "event": "CGS International initiates AMMN coverage with Add rating and Rp7,000 target",
-        "headline": "CGS initiates AMMN coverage with Add rating and Rp7,000 target",
-        "blurb": "Analyst Joanne Ong's target implies 19.6x projected 2027 earnings. She forecasts 10% revenue CAGR and 29% EPS CAGR for 2026-28, citing higher ore grades at Batu Hijau and the smelter and refinery's full operation since July 2026.",
+        "event": "Aneka Tambang reports first-half 2026 earnings above analyst projections",
+        "headline": "ANTM reports first-half 2026 profit of Rp6.4 trillion, above projections",
+        "blurb": "Antam's revenue rose 6.3% to Rp62.7 trillion, and its net profit reached 69.7% of BRIDS's full-year estimate and 70% of analyst consensus. BRIDS maintained its 2026 estimates of Rp118.7 trillion in revenue and Rp9.2 trillion in net profit, with a buy recommendation and Rp4,800 target price.",
         "tickers": [
-          "AMMN.JK"
+          "ANTM.JK"
         ]
       },
       {
-        "event": "BRI Danareksa raises ADRO profit forecasts and price target",
-        "headline": "BRI Danareksa lifts ADRO 2026 profit forecast by 4.3%",
-        "blurb": "BRI Danareksa also raised its price target on Alamtri, citing what its analysts view as a discounted valuation. It projects net profit of Rp600 billion in 2026, Rp714 billion in 2027 and Rp731 billion in 2028, after raising coking coal price assumptions to US$230, US$220 and US$200 per ton for those years, respectively, from US$170 previously.",
+        "event": "Daya Intiguna Yasa reports first-half 2026 revenue growth and negative same-store sales",
+        "headline": "MDIY reports 24.5% first-half revenue growth as same-store sales fall 1.2%",
+        "blurb": "MR DIY attributed revenue growth mainly to store expansion, with transactions up 23.3% and average spending stable at Rp80,000–90,000 per transaction. Same-store sales fell 5.9% in Q2 before returning to growth in May and June; the company had opened 123 stores by September and targets 270 additional stores by year-end.",
         "tickers": [
-          "ADRO.JK",
-          "ADMR.JK"
+          "MDIY.JK"
         ]
       }
     ]
