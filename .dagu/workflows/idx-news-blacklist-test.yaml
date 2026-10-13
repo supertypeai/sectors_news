@@ -34,3 +34,15 @@ steps:
   - id: test_blacklisted_sources
     depends: [preflight]
     run: python -m src.scripts.test_scraper
+
+  # Can the runner reach the site's news refresh endpoint? Sent without a secret,
+  # so nothing is refreshed. 401 = reached the site, only the secret is missing.
+  # 429 = Vercel's firewall challenged the runner. 404 = endpoint not deployed.
+  # Runs beside the scraper test and never fails the run.
+  - id: test_site_refresh_reachable
+    depends: [checkout]
+    run: >-
+      bash -c 'curl -s -o /dev/null -m 15
+      -w "site refresh endpoint answered HTTP %{http_code} (401 reachable, 429 firewall, 404 not deployed)\n"
+      -X POST https://sectors.app/api/revalidate/news-issue
+      || echo "site refresh endpoint: could not connect"'
