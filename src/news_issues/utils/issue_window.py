@@ -1,17 +1,16 @@
-from datetime import date, datetime, time, timezone, timedelta
+from datetime import date, datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 
-from .constant import MARKET_TIME_ZONES, ISSUE_WINDOW_DAYS
+from .constant import MARKET_TIME_ZONES, ISSUE_WINDOW_DAYS, ISSUE_CUTOFF_TIMES
 
 
 def build_cutoff_utc(
     issue_date: date,
     exchange: str,
-    cutoff_time: time = time(17, 30),
 ) -> str:
     local_cutoff = datetime.combine(
         issue_date,
-        cutoff_time,
+        ISSUE_CUTOFF_TIMES[exchange],
         tzinfo=ZoneInfo(MARKET_TIME_ZONES[exchange]),
     )
 

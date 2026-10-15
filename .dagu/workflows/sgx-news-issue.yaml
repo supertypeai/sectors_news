@@ -1,4 +1,4 @@
-description: SGX news issue — weekly issue for the window ending Friday 17:30 SGT
+description: SGX news issue — weekly issue for the window ending Friday 17:20 SGT
 
 container:
   image: sectors-news-runtime:latest
@@ -11,7 +11,7 @@ container:
   env:
     - GIT_CONFIG_VALUE_1: '!f() { test "$1" = get && echo username=x-access-token && echo password="$(cat /run/secrets/token)"; }; f'
     - MARKET: sgx
-    # The issue is dated on the local day its 17:30 cutoff falls on
+    # The issue is dated on the local day its 17:20 cutoff falls on
     - ISSUE_TZ: Asia/Singapore
 
 secrets:
@@ -23,10 +23,10 @@ secrets:
   - BRIGHTDATA_API_KEY
   - BRIGHTDATA_ZONE
 
-# Friday 17:35 SGT (UTC+8), just after the 17:30 SGT cutoff. Each issue covers the
+# Friday 17:25 SGT (UTC+8), just after the 17:20 SGT cutoff. Each issue covers the
 # articles created from the previous issue's cutoff (window_end in previous_issue.json)
-# to this Friday 17:30 SGT, so a missed week rolls into the next issue.
-schedule: "35 9 * * 5"
+# to this Friday 17:20 SGT, so a missed week rolls into the next issue.
+schedule: "25 9 * * 5"
 queue: news-data-pipeline
 timeout_sec: 3600
 hist_retention_days: 30

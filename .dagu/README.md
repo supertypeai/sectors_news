@@ -11,23 +11,23 @@ and registers it over Dagu's REST API.
 | `workflows/sgx-news-pipeline.yaml` | `sectors_news--sgx-news-pipeline` | `10 0,4,9,13,17,21 * * *` | `.github/workflows/pipeline_sgx.yaml` |
 | `workflows/idx-news-resume.yaml` | `sectors_news--idx-news-resume` | manual | that workflow's `process_only` input |
 | `workflows/sgx-news-resume.yaml` | `sectors_news--sgx-news-resume` | manual | the same, for SGX |
-| `workflows/idx-news-issue.yaml` | `sectors_news--idx-news-issue` | `35 10 * * *` | `idx-news-briefs` |
-| `workflows/sgx-news-issue.yaml` | `sectors_news--sgx-news-issue` | `35 9 * * 5` | `sgx-news-briefs` |
+| `workflows/idx-news-issue.yaml` | `sectors_news--idx-news-issue` | `50 9 * * *` | `idx-news-briefs` |
+| `workflows/sgx-news-issue.yaml` | `sectors_news--sgx-news-issue` | `25 9 * * 5` | `sgx-news-briefs` |
 
 The scrape hours are not an even `*/4` because each market needs one scrape just
 before its pre-open and one just after its close.
 
-The news issues run just after a fixed 17:30 local cutoff, each covering the
+The news issues run just after a fixed local cutoff, each covering the
 articles created in the window that ends there:
 
 | | Cutoff | Issue runs | Window |
 | --- | --- | --- | --- |
-| IDX (WIB, UTC+7) | 17:30 WIB daily | 17:35 WIB = 10:35 UTC, every day | previous issue's cutoff → today 17:30 WIB |
-| SGX (SGT, UTC+8) | 17:30 SGT Friday | Friday 17:35 SGT = 09:35 UTC | previous issue's cutoff → Friday 17:30 SGT |
+| IDX (WIB, UTC+7) | 16:45 WIB daily | 16:50 WIB = 09:50 UTC, every day | previous issue's cutoff → today 16:45 WIB |
+| SGX (SGT, UTC+8) | 17:20 SGT Friday | Friday 17:25 SGT = 09:25 UTC | previous issue's cutoff → Friday 17:20 SGT |
 
 Both markets close at 09:00 UTC, so the two post-close scrapes fall at 09:10 and
-09:15 UTC, followed on Fridays by the SGX issue at 09:35 and every day by the IDX
-issue at 10:35 UTC. That is what the queue below is for.
+09:15 UTC, followed on Fridays by the SGX issue at 09:25 (15 minutes after its
+scrape) and every day by the IDX issue at 09:50 UTC (35 minutes after its scrape). That is what the queue below is for.
 
 ```
 .dagu/
@@ -180,9 +180,9 @@ queues:
       max_concurrency: 1
 ```
 
-The news issues share it, but their window always ends at the 17:30 cutoff
+The news issues share it, but their window always ends at its cutoff
 whatever time they start, so waiting behind a scrape changes nothing in the
-issue. Articles a slow scrape inserts after 17:30 land in the next issue's
+issue. Articles a slow scrape inserts after the cutoff land in the next issue's
 window, so nothing is lost. The issue's state is
 `data/news_issues/<market>/previous_issue.json`: the last issue's date, its window
 and its stories. The next issue starts its window at that `window_end`, so a missed

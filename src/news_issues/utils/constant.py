@@ -1,3 +1,4 @@
+from datetime import time
 from enum import Enum
 
 
@@ -17,6 +18,12 @@ NEWS_TABLES = {
 ISSUE_WINDOW_DAYS = {
     "IDX": 1,
     "SGX": 7,
+}
+
+# Local cutoff each issue window ends at, 5 minutes before the issue runs
+ISSUE_CUTOFF_TIMES = {
+    "IDX": time(16, 45),
+    "SGX": time(17, 20),
 }
 
 DAILY_DATA_TABLES = {
