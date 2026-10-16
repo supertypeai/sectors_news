@@ -3,7 +3,7 @@
         "source": "ICNScraper",
         "date": "20261016",
         "articles_found": 0,
-        "duration_minutes": 0.06636487417078267,
+        "duration_minutes": 0.06946444085333496,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +16,7 @@
         "source": "GapkiScraper",
         "date": "20261016",
         "articles_found": 0,
-        "duration_minutes": 0.054796936176717284,
+        "duration_minutes": 0.03568326215414951,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,7 +29,7 @@
         "source": "MinerbaScraper",
         "date": "20261016",
         "articles_found": 0,
-        "duration_minutes": 0.0017646990716457367,
+        "duration_minutes": 0.0272231724501277,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -42,7 +42,7 @@
         "source": "IdnMinerScraper",
         "date": "20261016",
         "articles_found": 0,
-        "duration_minutes": 0.009209484265496334,
+        "duration_minutes": 0.009010032300526898,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -54,8 +54,8 @@
     {
         "source": "IDNFinancialScraper",
         "date": "20261016",
-        "articles_found": 1,
-        "duration_minutes": 0.006743943745580812,
+        "articles_found": 8,
+        "duration_minutes": 0.009097721450962127,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -67,12 +67,13 @@
     {
         "source": "BisnisMarket",
         "date": "20261016",
-        "articles_found": 3,
-        "duration_minutes": 0.02982794341320793,
-        "requests": 3,
-        "successful_requests": 3,
+        "articles_found": 17,
+        "duration_minutes": 0.05280449132745465,
+        "requests": 4,
+        "successful_requests": 4,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200
@@ -82,12 +83,20 @@
     {
         "source": "BloombergTechnoz",
         "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.01276782106142491,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 8,
+        "duration_minutes": 0.09865097678266466,
+        "requests": 9,
+        "successful_requests": 9,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200
         ],
         "failures": []
@@ -95,12 +104,31 @@
     {
         "source": "InvestorID",
         "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.18054564810202767,
-        "requests": 2,
-        "successful_requests": 2,
+        "articles_found": 17,
+        "duration_minutes": 3.464342194966351,
+        "requests": 21,
+        "successful_requests": 21,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200
         ],
@@ -110,7 +138,7 @@
         "source": "AbafScraper",
         "date": "20261016",
         "articles_found": 0,
-        "duration_minutes": 0.007253070431761444,
+        "duration_minutes": 0.008218809597504635,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -123,12 +151,14 @@
     {
         "source": "JakartaGlobe",
         "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.1789999386140456,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 1,
+        "duration_minutes": 0.5097836224827915,
+        "requests": 3,
+        "successful_requests": 3,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200
         ],
         "failures": []
@@ -137,7 +167,7 @@
         "source": "AntaraNews",
         "date": "20261016",
         "articles_found": 0,
-        "duration_minutes": 0.010111147801702221,
+        "duration_minutes": 0.012815881644686063,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -151,7 +181,7 @@
         "source": "AsianTelecom",
         "date": "20261016",
         "articles_found": 0,
-        "duration_minutes": 0.011995544199210902,
+        "duration_minutes": 0.015223490283824503,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -164,75 +194,8 @@
     {
         "source": "JakartaPost",
         "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.03951788591220975,
-        "requests": 2,
-        "successful_requests": 2,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "KontanInvestasi",
-        "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.36754740136675534,
-        "requests": 1,
-        "successful_requests": 1,
-        "failed_requests": 0,
-        "http_statuses": [
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "EmitenNews",
-        "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.021752878394909202,
-        "requests": 2,
-        "successful_requests": 2,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "BCANews",
-        "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.0088160733692348,
-        "requests": 1,
-        "successful_requests": 1,
-        "failed_requests": 0,
-        "http_statuses": [
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "CNBCMarket",
-        "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.002563165733590722,
-        "requests": 1,
-        "successful_requests": 1,
-        "failed_requests": 0,
-        "http_statuses": [
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "CNNEkonomi",
-        "date": "20261016",
         "articles_found": 1,
-        "duration_minutes": 0.03030089008777092,
+        "duration_minutes": 0.023510819386380413,
         "requests": 3,
         "successful_requests": 3,
         "failed_requests": 0,
@@ -244,10 +207,118 @@
         "failures": []
     },
     {
-        "source": "KompasMoney",
+        "source": "KontanInvestasi",
+        "date": "20261016",
+        "articles_found": 13,
+        "duration_minutes": 1.95632187090038,
+        "requests": 15,
+        "successful_requests": 15,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "EmitenNews",
+        "date": "20261016",
+        "articles_found": 6,
+        "duration_minutes": 0.08297965833141158,
+        "requests": 8,
+        "successful_requests": 8,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BCANews",
         "date": "20261016",
         "articles_found": 0,
-        "duration_minutes": 0.18640640492085367,
+        "duration_minutes": 0.009248012381916245,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "CNBCMarket",
+        "date": "20261016",
+        "articles_found": 9,
+        "duration_minutes": 0.023792134784162044,
+        "requests": 10,
+        "successful_requests": 10,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "CNNEkonomi",
+        "date": "20261016",
+        "articles_found": 11,
+        "duration_minutes": 0.0695927910351505,
+        "requests": 14,
+        "successful_requests": 14,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "KompasMoney",
+        "date": "20261016",
+        "articles_found": 20,
+        "duration_minutes": 0.21936791678890585,
         "requests": 2,
         "successful_requests": 1,
         "failed_requests": 1,
@@ -268,12 +339,15 @@
     {
         "source": "FinanceDetik",
         "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.06823954274877905,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 2,
+        "duration_minutes": 0.0396133940666914,
+        "requests": 4,
+        "successful_requests": 4,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
             200
         ],
         "failures": []
@@ -281,12 +355,13 @@
     {
         "source": "KontanKeuangan",
         "date": "20261016",
-        "articles_found": 0,
-        "duration_minutes": 0.006427958289471765,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 1,
+        "duration_minutes": 0.042625101865269244,
+        "requests": 2,
+        "successful_requests": 2,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200
         ],
         "failures": []
