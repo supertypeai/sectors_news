@@ -80,8 +80,13 @@ class KontanKeuangan(Scraper):
             body = bytes(response.body)
             soup = BeautifulSoup(body, "html.parser")
 
-            open_graph_image_tag = soup.select_one('meta[property="og:image"]')
-            thumbnail_url = open_graph_image_tag.get("content") if open_graph_image_tag else None
+            # The article image src is full size; og:image is the 675px "p" variant
+            article_image_tag = soup.select_one("div.img-detail-desk img")
+            thumbnail_url = article_image_tag.get("src") if article_image_tag else None
+
+            if not thumbnail_url:
+                open_graph_image_tag = soup.select_one('meta[property="og:image"]')
+                thumbnail_url = open_graph_image_tag.get("content") if open_graph_image_tag else None
 
             timestamp_tag = soup.select_one("div.fs14.ff-opensans.font-gray")
             raw_time = timestamp_tag.get_text(strip=True) if timestamp_tag else None

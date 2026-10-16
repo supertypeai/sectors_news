@@ -7,6 +7,7 @@ from scraper_engine.sources.utils.previous_run import load_previous_run_articles
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
 
 import argparse
+import re
 import time
 import logging 
 
@@ -170,6 +171,21 @@ class InvestorID(Scraper):
                     published_at, article_body = None, None
 
                 time.sleep(0.5)
+
+            # The /cache/investor/960x620-w/ variant upscales small originals and
+            # looks soft, so use the original upload when it is 960px wide or less
+            original_size_match = (
+                re.search(r"-(\d+)x\d+\.\w+$", thumbnail_url)
+                if thumbnail_url
+                else None
+            )
+
+            if original_size_match and int(original_size_match.group(1)) <= 960:
+                thumbnail_url = re.sub(
+                    r"/cache/investor/[^/]+/",
+                    "/investor/",
+                    thumbnail_url,
+                )
 
             if not published_at:
                 LOGGER.info("[Investor ID] Failed to parse date for url: %s. Skipping.", source_url)

@@ -159,7 +159,9 @@ class KontanInvestasi(Scraper):
                         else None
                     )
 
-                    if article_thumbnail_tag:
+                    # src is the full-size image, the onerror fallback is the
+                    # 675px "p" variant, so only use it when src is missing
+                    if article_thumbnail_tag and not article_thumbnail_url:
                         image_error_handler = article_thumbnail_tag.get("onerror", "")
                         fallback_thumbnail_match = re.search(
                             r"this[.]src='([^']+)'",
