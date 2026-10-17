@@ -7,6 +7,7 @@ from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
 
 import argparse
+import re
 import time
 import logging 
 
@@ -14,6 +15,10 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 WIB = ZoneInfo("Asia/Jakarta")
+
+# Article URLs carry the publish date, e.g. /read/20261016/7/2013091/...
+# and photo pages use /view/20261016/...
+URL_DATE_PATTERN = re.compile(r"/(?:read|view)/(\d{8})/")
 
 RELATIVE_UNITS = {
     "detik": "seconds",
@@ -149,14 +154,18 @@ class BisnisMarket(Scraper):
             thumbnail_tag = article_item.select_one("div.artImg img")
             thumbnail_url = thumbnail_tag["src"] if thumbnail_tag else None
 
+            if thumbnail_url and "images.bisnis.com/thumb/" in thumbnail_url:
+                thumbnail_url = thumbnail_url.split("?", 1)[0] + "?w=1920&h=1080"
+
             if "yang lalu" in raw_date:
-                # Article pages sit behind Cloudflare and take minutes each, so
-                # derive the time from the listing's relative label instead
-                published_at = self.parse_relative_date(raw_date)
+                # Relative labels truncate hours, so read the exact time from the
+                # article page. Only the first fetch is slow (it solves Cloudflare),
+                # later ones reuse the session. Fall back to the label if it fails
+                published_at = self.fetch_article_timestamp(source_url)
+                time.sleep(0.5)
 
                 if not published_at:
-                    published_at = self.fetch_article_timestamp(source_url)
-                    time.sleep(0.5)
+                    published_at = self.parse_relative_date(raw_date)
 
             else:
                 published_at = self.parse_absolute_date(raw_date)
@@ -230,24 +239,31 @@ class BisnisMarket(Scraper):
             LOGGER.error("[Bisnis Market] Error parsing date '%s': %s", raw_date, error)
             return None
 
-    def extract_news_pages(self, num_pages: int, date: str) -> list:
-        market_url = "https://www.bisnis.com/index?categoryId=194&type=indeks&"
-        finance_url = "https://www.bisnis.com/index?categoryId=5&date=&type=indeks&"
+    def get_url_date(self, article_item) -> str | None:
+        link_tag = article_item.find("a", class_="artLink")
+        
+        match = URL_DATE_PATTERN.search(
+            link_tag.get("href", "")
+        ) if link_tag else None
 
-        year = date[:4]
-        month = date[4:6]
-        day = date[6:]
-        formatted_date = f"{year}-{month}-{day}"
+        return match.group(1) if match else None
+
+    def extract_news_pages(self, num_pages: int, date: str) -> list:
+        # The site ignores the page param when a date param is present, so
+        # page through the undated index (newest first) and filter by the
+        # date in each article URL, which is exact unlike relative labels
+        market_url = "https://www.bisnis.com/index?categoryId=194&type=indeks&"
+        finance_url = "https://www.bisnis.com/index?categoryId=5&type=indeks&"
 
         seen_urls = set()
 
         try:
             for url in [market_url, finance_url]:
                 page_number = 1
+                seen_page_urls = set()
 
                 while True:
-                    params = f"date={formatted_date}&page={page_number}"
-                    page_url = url + params
+                    page_url = url + f"page={page_number}"
                 
                     article_items = self.fetch_article_list(page_url)
 
@@ -258,16 +274,57 @@ class BisnisMarket(Scraper):
                         )
                         break
 
-                    articles = self.parse_articles(article_items)
+                    url_dates = [
+                        self.get_url_date(item) 
+                        for item in article_items
+                    ]
+
+                    known_dates = [
+                        url_date 
+                        for url_date in url_dates 
+                        if url_date
+                    ]
+
+                    if known_dates and all(
+                        url_date < date 
+                        for url_date in known_dates
+                    ):
+                        LOGGER.info(
+                            "[Bisnis Market] Page %d is older than %s, stopping.", 
+                            page_number, 
+                            date
+                        )
+                        break
+
+                    page_urls = {
+                        item.find("a", class_="artLink").get("href")
+                        for item in article_items
+                        if item.find("a", class_="artLink")
+                    }
+
+                    if page_urls <= seen_page_urls:
+                        LOGGER.info(
+                            "[Bisnis Market] Page %d returned duplicate articles, stopping.", 
+                            page_number
+                        )
+                        break
+
+                    seen_page_urls.update(page_urls)
+
+                    target_items = [
+                        item 
+                        for item, url_date in zip(
+                            article_items, url_dates
+                        )
+                        if url_date == date
+                    ]
+
+                    articles = self.parse_articles(target_items)
 
                     new_articles = [
                         article for article in articles 
                         if article.get('source') not in seen_urls
                     ]
-
-                    if not new_articles:
-                        LOGGER.info("[Bisnis Market] Page %d returned duplicate articles, stopping.", page_number)
-                        break
 
                     for article in articles: 
                         seen_urls.add(article.get('source'))
