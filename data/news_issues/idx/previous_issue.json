@@ -1,42 +1,123 @@
 {
-  "issue_date": "2026-10-18",
-  "window_start": "2026-10-17T09:45:00Z",
-  "window_end": "2026-10-18T09:45:00Z",
+  "issue_date": "2026-10-19",
+  "window_start": "2026-10-18T09:45:00Z",
+  "window_end": "2026-10-19T09:45:00Z",
   "lead": {
-    "event": "OJK fines DSSA, BREN and CUAN, prompting a police investigation",
-    "headline": "OJK fines DSSA, BREN and CUAN Rp2.1 trillion as police plan probe",
-    "blurb": "Dian Swastatika Sentosa was fined Rp1.5 trillion, Barito Renewables Rp500 billion and Petrindo Jaya Kreasi Rp100 billion for suspected market violations. OJK tied the first fine to trading from 2023 to 2026 and the others to suspected IPO order-placement violations. National Police Chief Suyudi Ario Seto said Bareskrim Polri will deploy a team to investigate suspected crimes and take firm action once it gathers evidence.",
-    "tickers": [
-      "DSSA.JK",
-      "BREN.JK",
-      "CUAN.JK"
-    ]
+    "event": "IDX cuts the asymmetric auto-rejection bottom limit to 7%",
+    "headline": "IDX cuts lower price limit to 7% for stocks above Rp10",
+    "blurb": "The temporary change, effective 19 October through 31 December, reduces the limit from 15% for shares priced above Rp10. Shares priced Rp1 to Rp10 retain a Rp1 limit. IDX introduced the measure after MSCI announced a consultation on reclassifying Indonesia from an emerging market to a standalone market. IDX will evaluate the policy based on market developments.",
+    "tickers": []
   },
   "sections": {
     "market_structure_policy": [
       {
-        "event": "MSCI consultation to reclassify Indonesia triggers a market selloff and institutional responses",
-        "headline": "MSCI proposes standalone-market status for Indonesia as IHSG falls 14.91% in a week",
-        "blurb": "MSCI’s consultation runs through April 2027, with a final decision due by 30 June 2027. Airlangga Hartarto said the deadline had been moved from November. OJK and the Indonesia Stock Exchange said they would continue reforms and communicate with MSCI, while Hans Kwee said verified governance improvements could reverse the proposal.",
+        "event": "IDX and OJK schedule clarification meeting with MSCI on Indonesia's market status",
+        "headline": "IDX and OJK schedule 19 October clarification meeting with MSCI on market status",
+        "blurb": "The virtual meeting is set for 15:30 WIB to discuss MSCI’s proposal to reclassify Indonesia from emerging to standalone-market status, below frontier-market status. MSCI will accept market input through 30 April 2027 and plans a final decision on 30 June 2027.",
         "tickers": []
       },
       {
-        "event": "OJK fines parties over BREN and CUAN IPO share-allocation violations",
-        "headline": "OJK fines parties Rp600 billion over BREN, CUAN IPO allocation violations",
-        "blurb": "The penalties are Rp500 billion for parties tied to Barito Renewables’ offering and Rp100 billion for those tied to Petrindo’s. Neither issuer was fined directly. OJK found IPO shares had been pre-planned for a group affiliated with controlling shareholders and is reviewing offering documents while tracing fund flows.",
+        "event": "IDX lifts trading suspension on MKNT",
+        "headline": "IDX lifts MKNT suspension as shares gain 100%",
+        "blurb": "Mitra Komunikasi Nusantara met the obligations that prompted the suspension, and the exchange said no other suspension conditions remained. The lift took effect in the first Periodic Call Auction session on 19 October, when shares rose from Rp1 to Rp2. The exchange urged market participants to monitor company disclosures.",
         "tickers": [
+          "MKNT.JK"
+        ]
+      }
+    ],
+    "macro_flows": [
+      {
+        "event": "Indonesia's 10-year government bond yield reaches a multiyear high",
+        "headline": "Indonesia's 10-year government bond yield reaches 7.46%, highest since September 2022",
+        "blurb": "Selling pressure lifted the 11-year yield 21.6 basis points to 7.48%, with yields rising across nearly all tenors. The higher risk premium followed MSCI's consultation on a possible downgrade to standalone-market status, while Bank Indonesia is scheduled to announce its BI Rate on 21 October.",
+        "tickers": []
+      },
+      {
+        "event": "Jusuf Hamka consortium plans Rp5 trillion in stock purchases",
+        "headline": "Jusuf Hamka consortium plans up to Rp5 trillion in stock purchases",
+        "blurb": "Hamka said the group would target blue-chip shares in Bank Mandiri, BRI, BNI and BCA, which he said offer average dividends of 8-9%. The plan follows an 11.57% JCI drop on 16 October and concerns over an MSCI review of Indonesia’s market classification. Consultation runs through 30 April 2027, with a decision due by 30 June 2027.",
+        "tickers": []
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "event": "BCA continues its Rp5 trillion share-buyback program from October 19–21",
+        "headline": "BBCA continues Rp5 trillion share buyback through 21 October",
+        "blurb": "BCA shareholders approved the 12-month program on 12 March, and the bank had already bought shares in April and June. The mandate runs until 11 March 2027 unless ended earlier.",
+        "tickers": [
+          "BBCA.JK"
+        ]
+      },
+      {
+        "event": "Prajogo-linked issuers and DSSA announce share-buyback plans",
+        "headline": "BRPT, BREN, CUAN, TPIA and DSSA announce buybacks of up to Rp4.5 trillion",
+        "blurb": "Barito Pacific and Barito Renewables each set aside up to Rp1 trillion, Petrindo Jaya Kreasi Rp500 billion, Chandra Asri Pacific Rp1 trillion and Dian Swastika Sentosa a separate Rp1 trillion, all from internal cash. BRPT, BREN and CUAN’s plans run through 31 December, DSSA’s through 18 January 2027, while reports differ on TPIA’s dates.",
+        "tickers": [
+          "BRPT.JK",
           "BREN.JK",
-          "CUAN.JK"
+          "CUAN.JK",
+          "DSSA.JK",
+          "TPIA.JK"
         ]
       }
     ],
     "earnings_guidance": [
       {
-        "event": "RHB Sekuritas raises profit forecasts for TKIM",
-        "headline": "RHB Sekuritas lifts TKIM profit forecasts by up to 24.8%",
-        "blurb": "RHB Sekuritas raised Tjiwi Kimia’s estimates to US$368 million for 2026 and US$391 million for 2027, citing tax incentives and higher foreign-exchange gains. It expects the new 3-million-ton OKI facility to start commercial operations at end-2026 and reach 40% utilization in 2027, supporting earnings with pulp sales; its target implies 121% upside.",
+        "event": "SSIA targets 135 hectares of Subang industrial land sales in 2026",
+        "headline": "SSIA targets 135 hectares of Subang industrial land sales in 2026",
+        "blurb": "SSIA also targets 10 hectares of data-center land sales in Karawang in 2026. Maybank Sekuritas Indonesia and Ciptadana Sekuritas Asia maintained buy ratings, citing sales and rising investor interest in Subang Smartpolitan, with price targets of Rp2,100 and Rp2,340 per share. The Patimban toll road is targeted for completion in the first half of 2027.",
         "tickers": [
-          "TKIM.JK"
+          "SSIA.JK"
+        ]
+      },
+      {
+        "event": "JPMorgan assigns BBRI an Overweight rating",
+        "headline": "JPMorgan rates BBRI Overweight as consensus target implies nearly 46% upside",
+        "blurb": "A Bloomberg consensus of 33 analysts set a 12-month target of Rp3,848.21, versus Bank Rakyat Indonesia’s last close of Rp2,640. The IHSG had fallen more than 40% this year through 16 October, while BBRI traded at 1.38 times book value.",
+        "tickers": [
+          "BBRI.JK"
+        ]
+      },
+      {
+        "event": "HMSP reports H1 2026 net profit growth of 97.1%",
+        "headline": "HMSP reports 97.1% H1 2026 net profit growth",
+        "blurb": "Sampoerna’s net profit reached Rp4.2 trillion, while revenue rose 2.4% to Rp56.5 trillion. Sales volume fell 1.3% to 38.8 billion sticks and market share slipped to 29% from 30.5%. MNC Sekuritas analyst Catherine Florencia M remains cautious, with HMSP required to raise public ownership to at least 12.5% by March 2027 and 15% by March 2028.",
+        "tickers": [
+          "HMSP.JK"
+        ]
+      }
+    ],
+    "deals_control": [
+      {
+        "event": "Visionary Capital Global becomes TGUK's controlling shareholder",
+        "headline": "Visionary Capital Global takes 56.84% control of TGUK",
+        "blurb": "Visionary Capital Global acquired 2.03 billion shares from Dinasti Kreatif Indonesia on 2 October for about Rp40.60 billion, or Rp20 per share. It appointed Artha Global Trikanaka Investama to conduct the mandatory tender offer under OJK rules.",
+        "tickers": [
+          "TGUK.JK"
+        ]
+      },
+      {
+        "event": "Medco agrees to acquire 10% participation in four Kutei Basin PSCs",
+        "headline": "MEDC agrees to acquire 10% participation in four Kutei Basin PSCs",
+        "blurb": "Medco signed a conditional sale and purchase agreement for the rights, adding over 1.3 TCF of net gas in place and lifting 1P reserves by roughly 25% from 362 million boe at end-June 2026. The four PSCs are operated by Searah, a joint venture between Eni and PETRONAS, and completion is targeted by end-2026 pending regulatory approval.",
+        "tickers": [
+          "MEDC.JK"
+        ]
+      },
+      {
+        "event": "Wibowo Group completes mandatory tender offer for MBSS shares",
+        "headline": "Wibowo Group completes MBSS tender offer, raises stake to 90.09%",
+        "blurb": "Wibowo Group Capital acquired 132.84 million Mitrabahtera shares from 22 public shareholders for Rp387.22 billion at Rp2,915 per share. The offer ran from 9 September to 8 October and was completed on 15 October, bringing Wibowo Group Capital’s holding to 90.09%.",
+        "tickers": [
+          "MBSS.JK"
+        ]
+      },
+      {
+        "event": "Prima Tunas Investama raises its Bank Ganesha stake to 9.04%",
+        "headline": "Prima Tunas raises BGTG stake to 9.04%",
+        "blurb": "Prima Tunas bought 1.38 billion shares at Rp125 each on 7 and 8 September, paying Rp172.31 billion for direct investment. Its holding in Bank Ganesha rose from 3.29% to 9.04%, or 2.16 billion shares.",
+        "tickers": [
+          "BGTG.JK"
         ]
       }
     ]
