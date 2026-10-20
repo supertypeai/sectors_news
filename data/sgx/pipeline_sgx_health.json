@@ -1,9 +1,212 @@
 [
     {
         "source": "BusinessTimesSG",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.04318553711733936,
+        "requests": 3,
+        "successful_requests": 3,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "StraitsTimes",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.007511344517115504,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "ChannelNewsAsiaSG",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.00646209505018002,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "SBRSG",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 3.4212370986497262,
+        "requests": 13,
+        "successful_requests": 10,
+        "failed_requests": 3,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://sbr.com.sg/markets-investing?page=0",
+                "status": null,
+                "reason": "ConnectionError",
+                "message": "HTTPSConnectionPool(host='sbr.com.sg', port=443): Max retries exceeded with url: /markets-investing?page=0 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='sbr.com.sg', port=443): Read timed out. (read timeout=10)\"))"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://sbr.com.sg/markets?page=0",
+                "status": null,
+                "reason": "ConnectionError",
+                "message": "HTTPSConnectionPool(host='sbr.com.sg', port=443): Max retries exceeded with url: /markets?page=0 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='sbr.com.sg', port=443): Read timed out. (read timeout=10)\"))"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://sbr.com.sg/transport-logistics?page=0",
+                "status": null,
+                "reason": "ConnectionError",
+                "message": "HTTPSConnectionPool(host='sbr.com.sg', port=443): Max retries exceeded with url: /transport-logistics?page=0 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='sbr.com.sg', port=443): Read timed out. (read timeout=10)\"))"
+            }
+        ]
+    },
+    {
+        "source": "AsiaNews",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.0327316297829384,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "EdgeProp",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.04864287296659313,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "NextInsight",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.010488701650562387,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "TheSmartInvestor",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.05898865131700101,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "TheEdgeSingapore",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.014581675433631366,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "TheEdgeReits",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.0843623257833921,
+        "requests": 7,
+        "successful_requests": 7,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "SGXMarketUpdates",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.027279028216920173,
+        "requests": 0,
+        "successful_requests": 0,
+        "failed_requests": 0,
+        "http_statuses": [],
+        "failures": []
+    },
+    {
+        "source": "SmallCapAsia",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.004256865216302685,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "ZaobaoSG",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.012983842416239592,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BusinessTimesSG",
         "date": "20261020",
-        "articles_found": 34,
-        "duration_minutes": 0.17839028475039717,
+        "articles_found": 36,
+        "duration_minutes": 0.15470309500039245,
         "requests": 9,
         "successful_requests": 9,
         "failed_requests": 0,
@@ -24,7 +227,7 @@
         "source": "StraitsTimes",
         "date": "20261020",
         "articles_found": 2,
-        "duration_minutes": 0.009348482399946078,
+        "duration_minutes": 0.004604323700186796,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -34,8 +237,8 @@
     {
         "source": "ChannelNewsAsiaSG",
         "date": "20261020",
-        "articles_found": 18,
-        "duration_minutes": 0.00971036400005687,
+        "articles_found": 19,
+        "duration_minutes": 0.003324920566713748,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -45,12 +248,16 @@
     {
         "source": "SBRSG",
         "date": "20261020",
-        "articles_found": 0,
-        "duration_minutes": 0.13681488893344068,
-        "requests": 16,
-        "successful_requests": 16,
+        "articles_found": 4,
+        "duration_minutes": 0.14793275886719737,
+        "requests": 20,
+        "successful_requests": 20,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -74,7 +281,7 @@
         "source": "AsiaNews",
         "date": "20261020",
         "articles_found": 1,
-        "duration_minutes": 0.030181774649827277,
+        "duration_minutes": 0.02745071726676542,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -86,12 +293,13 @@
     {
         "source": "EdgeProp",
         "date": "20261020",
-        "articles_found": 5,
-        "duration_minutes": 0.14638474664971,
-        "requests": 7,
-        "successful_requests": 7,
+        "articles_found": 6,
+        "duration_minutes": 0.15035165903294304,
+        "requests": 8,
+        "successful_requests": 8,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
@@ -106,7 +314,7 @@
         "source": "NextInsight",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.011723684716465262,
+        "duration_minutes": 0.013007438466108094,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -120,7 +328,7 @@
         "source": "TheSmartInvestor",
         "date": "20261020",
         "articles_found": 4,
-        "duration_minutes": 0.03645736138326659,
+        "duration_minutes": 0.027892264366770784,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -130,12 +338,14 @@
     {
         "source": "TheEdgeSingapore",
         "date": "20261020",
-        "articles_found": 26,
-        "duration_minutes": 0.49287466718330203,
-        "requests": 30,
-        "successful_requests": 30,
+        "articles_found": 28,
+        "duration_minutes": 0.30660845458332914,
+        "requests": 32,
+        "successful_requests": 32,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200,
             200,
             200,
@@ -173,7 +383,7 @@
         "source": "TheEdgeReits",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.09546658141625812,
+        "duration_minutes": 0.09129337141736565,
         "requests": 7,
         "successful_requests": 7,
         "failed_requests": 0,
@@ -192,7 +402,7 @@
         "source": "SGXMarketUpdates",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.02758700763321637,
+        "duration_minutes": 0.02512547113292385,
         "requests": 0,
         "successful_requests": 0,
         "failed_requests": 0,
@@ -203,7 +413,7 @@
         "source": "SmallCapAsia",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.0031081014831822055,
+        "duration_minutes": 0.002433397049511162,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -215,8 +425,8 @@
     {
         "source": "ZaobaoSG",
         "date": "20261020",
-        "articles_found": 22,
-        "duration_minutes": 0.028447323883301578,
+        "articles_found": 23,
+        "duration_minutes": 0.0024510561663191764,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
