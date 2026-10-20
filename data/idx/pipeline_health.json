@@ -1,9 +1,311 @@
 [
     {
         "source": "ICNScraper",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.07083669131679926,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "GapkiScraper",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.029984898499484793,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "MinerbaScraper",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.0014534849828730027,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "IdnMinerScraper",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.8678485610163382,
+        "requests": 1,
+        "successful_requests": 0,
+        "failed_requests": 1,
+        "http_statuses": [],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://indonesiaminer.com/news?page=1",
+                "status": null,
+                "reason": "ConnectTimeout",
+                "message": "HTTPSConnectionPool(host='indonesiaminer.com', port=443): Max retries exceeded with url: /news?page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='indonesiaminer.com', port=443) at 0x732cae14aa50>, 'Connection to indonesiaminer.com timed out. (connect timeout=10)'))"
+            }
+        ]
+    },
+    {
+        "source": "IDNFinancialScraper",
+        "date": "20261021",
+        "articles_found": 1,
+        "duration_minutes": 0.007493468683484631,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BisnisMarket",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.011003816917461032,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BloombergTechnoz",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.013644146383740008,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "InvestorID",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.7041050615002556,
+        "requests": 3,
+        "successful_requests": 3,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "AbafScraper",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.8699399244496211,
+        "requests": 1,
+        "successful_requests": 0,
+        "failed_requests": 1,
+        "http_statuses": [],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://asianbankingandfinance.net/market/indonesia?page=0",
+                "status": null,
+                "reason": "ConnectionError",
+                "message": "HTTPSConnectionPool(host='asianbankingandfinance.net', port=443): Max retries exceeded with url: /market/indonesia?page=0 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='asianbankingandfinance.net', port=443): Read timed out. (read timeout=10)\"))"
+            }
+        ]
+    },
+    {
+        "source": "JakartaGlobe",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.3936304811834513,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "AntaraNews",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.013700617116410286,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "AsianTelecom",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.017764522100333125,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "JakartaPost",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.01825048136621869,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "KontanInvestasi",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.179906807266525,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "EmitenNews",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.02381497464957647,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BCANews",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.009005192400460752,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "CNBCMarket",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.0019188813826379676,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "CNNEkonomi",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.002119502783170901,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "KompasMoney",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.1382270703674294,
+        "requests": 2,
+        "successful_requests": 1,
+        "failed_requests": 1,
+        "http_statuses": [
+            202,
+            200
+        ],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://money.kompas.com/sitemap-news-money.xml",
+                "status": 202,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 202"
+            }
+        ]
+    },
+    {
+        "source": "FinanceDetik",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.00806309153267648,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "KontanKeuangan",
+        "date": "20261021",
+        "articles_found": 0,
+        "duration_minutes": 0.007339910316901902,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "ICNScraper",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.029189947299892084,
+        "duration_minutes": 0.025726370917012294,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +318,7 @@
         "source": "GapkiScraper",
         "date": "20261020",
         "articles_found": 1,
-        "duration_minutes": 0.04612389154984461,
+        "duration_minutes": 0.0008426660332285489,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,7 +331,7 @@
         "source": "MinerbaScraper",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.0014622583665186539,
+        "duration_minutes": 0.0009004439673541734,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -42,7 +344,7 @@
         "source": "IdnMinerScraper",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.8682148392836098,
+        "duration_minutes": 0.8729154916674209,
         "requests": 1,
         "successful_requests": 0,
         "failed_requests": 1,
@@ -53,19 +355,20 @@
                 "url": "https://indonesiaminer.com/news?page=1",
                 "status": null,
                 "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='indonesiaminer.com', port=443): Max retries exceeded with url: /news?page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='indonesiaminer.com', port=443) at 0x7dade5f40d40>, 'Connection to indonesiaminer.com timed out. (connect timeout=10)'))"
+                "message": "HTTPSConnectionPool(host='indonesiaminer.com', port=443): Max retries exceeded with url: /news?page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='indonesiaminer.com', port=443) at 0x732c9ba22660>, 'Connection to indonesiaminer.com timed out. (connect timeout=10)'))"
             }
         ]
     },
     {
         "source": "IDNFinancialScraper",
         "date": "20261020",
-        "articles_found": 43,
-        "duration_minutes": 0.028058226249898628,
-        "requests": 5,
-        "successful_requests": 5,
+        "articles_found": 55,
+        "duration_minutes": 0.026287845399929212,
+        "requests": 6,
+        "successful_requests": 6,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
@@ -77,16 +380,19 @@
     {
         "source": "BisnisMarket",
         "date": "20261020",
-        "articles_found": 77,
-        "duration_minutes": 11.164234711417036,
-        "requests": 86,
-        "successful_requests": 82,
-        "failed_requests": 4,
+        "articles_found": 80,
+        "duration_minutes": 11.644230932982948,
+        "requests": 90,
+        "successful_requests": 85,
+        "failed_requests": 5,
         "http_statuses": [
             200,
             403,
             200,
             200,
+            403,
+            200,
+            403,
             200,
             403,
             200,
@@ -152,7 +458,8 @@
             403,
             200,
             200,
-            403,
+            200,
+            200,
             200,
             200,
             200,
@@ -173,7 +480,21 @@
         "failures": [
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261020/7/2014226/bei-keluarkan-saham-hsc-dari-ihsg-ini-dampaknya",
+                "url": "https://market.bisnis.com/read/20261020/7/2014279/penjelasan-boy-thohir-usai-borong-282-juta-saham-essa-adro-dan-aadi",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261020/7/2014218/bursa-saham-indonesia-catat-koreksi-terbesar-di-kawasan-asean3",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261020/7/2014191/panduan-saham-hsc-daftar-80-emiten-aturan-bei-dan-dampaknya",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -187,14 +508,7 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://finansial.bisnis.com/read/20261020/11/2014274/big-consensus-insights-mayoritas-ekonom-proyeksi-bi-rate-naik",
-                "status": 403,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 403"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://finansial.bisnis.com/read/20261020/11/2014223/proyeksi-bi-rate-oktober-2026-suku-bunga-diramal-naik-jadi-6",
+                "url": "https://finansial.bisnis.com/read/20261020/90/2014295/bri-siap-buyback-perkuat-nilai-perusahaan-dan-pemegang-saham",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -204,12 +518,15 @@
     {
         "source": "BloombergTechnoz",
         "date": "20261020",
-        "articles_found": 46,
-        "duration_minutes": 0.6631030204996933,
-        "requests": 47,
-        "successful_requests": 47,
+        "articles_found": 49,
+        "duration_minutes": 1.018202335666865,
+        "requests": 50,
+        "successful_requests": 50,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -263,11 +580,11 @@
     {
         "source": "InvestorID",
         "date": "20261020",
-        "articles_found": 48,
-        "duration_minutes": 6.4281396921001335,
-        "requests": 19,
-        "successful_requests": 17,
-        "failed_requests": 2,
+        "articles_found": 53,
+        "duration_minutes": 2.2837054180330596,
+        "requests": 13,
+        "successful_requests": 13,
+        "failed_requests": 0,
         "http_statuses": [
             200,
             200,
@@ -279,38 +596,17 @@
             200,
             200,
             200,
-            500,
-            200,
-            500,
-            200,
-            200,
-            200,
             200,
             200,
             200
         ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/458734/regulator-benahi-bursa-ihsg-terbang-4",
-                "status": 500,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 500"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/458656/bei-bersihkan-ihsg-dari-pengaruh-saham-hsc",
-                "status": 500,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 500"
-            }
-        ]
+        "failures": []
     },
     {
         "source": "AbafScraper",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.04485495583309482,
+        "duration_minutes": 0.4127056756997869,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -323,8 +619,8 @@
     {
         "source": "JakartaGlobe",
         "date": "20261020",
-        "articles_found": 8,
-        "duration_minutes": 2.381783895616536,
+        "articles_found": 10,
+        "duration_minutes": 0.6017624622666821,
         "requests": 4,
         "successful_requests": 4,
         "failed_requests": 0,
@@ -340,7 +636,7 @@
         "source": "AntaraNews",
         "date": "20261020",
         "articles_found": 9,
-        "duration_minutes": 0.09530728514995038,
+        "duration_minutes": 0.09179439816701536,
         "requests": 11,
         "successful_requests": 11,
         "failed_requests": 0,
@@ -363,7 +659,7 @@
         "source": "AsianTelecom",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.06620881266668827,
+        "duration_minutes": 0.011782178133338069,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -377,7 +673,7 @@
         "source": "JakartaPost",
         "date": "20261020",
         "articles_found": 0,
-        "duration_minutes": 0.016122406133217738,
+        "duration_minutes": 0.014844586433415923,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -390,78 +686,29 @@
     {
         "source": "KontanInvestasi",
         "date": "20261020",
-        "articles_found": 111,
-        "duration_minutes": 7.488784081666866,
-        "requests": 34,
-        "successful_requests": 31,
-        "failed_requests": 3,
+        "articles_found": 0,
+        "duration_minutes": 0.955345796783998,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
         "http_statuses": [
-            200,
-            200,
-            200,
-            200,
-            500,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
             200
         ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/tera-data-indonusa-axio-tebar-dividen-interim-rp-4672-miliar-cek-jadwalnya",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/rupiah-berpotensi-tertekan-hingga-akhir-2026-ini-faktor-pemberatnya",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/saham-hsc-bakal-keluar-dari-ihsg-cermati-rekomendasi-analis",
-                "status": 500,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 500"
-            }
-        ]
+        "failures": []
     },
     {
         "source": "EmitenNews",
         "date": "20261020",
-        "articles_found": 20,
-        "duration_minutes": 0.28503627643319,
-        "requests": 24,
-        "successful_requests": 24,
+        "articles_found": 24,
+        "duration_minutes": 0.3956930559002406,
+        "requests": 28,
+        "successful_requests": 28,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -493,7 +740,7 @@
         "source": "BCANews",
         "date": "20261020",
         "articles_found": 27,
-        "duration_minutes": 0.14131310731706132,
+        "duration_minutes": 0.14795848756621127,
         "requests": 5,
         "successful_requests": 5,
         "failed_requests": 0,
@@ -510,7 +757,7 @@
         "source": "CNBCMarket",
         "date": "20261020",
         "articles_found": 10,
-        "duration_minutes": 0.02516873375037297,
+        "duration_minutes": 0.04793466451616647,
         "requests": 11,
         "successful_requests": 11,
         "failed_requests": 0,
@@ -532,12 +779,17 @@
     {
         "source": "CNNEkonomi",
         "date": "20261020",
-        "articles_found": 55,
-        "duration_minutes": 0.27686552659967373,
-        "requests": 62,
-        "successful_requests": 62,
+        "articles_found": 60,
+        "duration_minutes": 0.31996364875036915,
+        "requests": 67,
+        "successful_requests": 67,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -606,8 +858,8 @@
     {
         "source": "KompasMoney",
         "date": "20261020",
-        "articles_found": 94,
-        "duration_minutes": 0.12879479791687723,
+        "articles_found": 100,
+        "duration_minutes": 0.09626943811696644,
         "requests": 2,
         "successful_requests": 1,
         "failed_requests": 1,
@@ -628,12 +880,13 @@
     {
         "source": "FinanceDetik",
         "date": "20261020",
-        "articles_found": 19,
-        "duration_minutes": 0.19392752403364283,
-        "requests": 21,
-        "successful_requests": 21,
+        "articles_found": 20,
+        "duration_minutes": 0.10784650678300144,
+        "requests": 22,
+        "successful_requests": 22,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
@@ -661,12 +914,13 @@
     {
         "source": "KontanKeuangan",
         "date": "20261020",
-        "articles_found": 59,
-        "duration_minutes": 0.3571304305000619,
-        "requests": 5,
-        "successful_requests": 5,
+        "articles_found": 72,
+        "duration_minutes": 0.4193750533333514,
+        "requests": 6,
+        "successful_requests": 6,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
