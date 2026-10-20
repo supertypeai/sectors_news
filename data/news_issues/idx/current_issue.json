@@ -1,11 +1,11 @@
 {
   "issue_date": "2026-10-20",
   "window_start": "2026-10-19T09:45:00Z",
-  "window_end": "2026-10-20T05:58:47Z",
+  "window_end": "2026-10-20T09:57:58Z",
   "lead": {
-    "event": "BEI announces HSC-stock exclusion and shareholder-affiliation disclosure reforms",
-    "headline": "BEI plans to exclude 80 HSC stocks from IHSG and expand ownership disclosures",
-    "blurb": "The 80 High Shareholding Concentration stocks will remain listed and tradable, but their price movements will no longer affect IHSG. They carry an estimated combined index weight of 18.41%. BEI will also disclose whether shareholders with 1% or more are affiliates or non-affiliates. President director Jeffrey Hendrik said effective dates for both changes would be announced later.",
+    "event": "IDX plans HSC-stock exclusion and shareholder-transparency reforms",
+    "headline": "IDX plans to exclude 80 HSC stocks from IHSG calculation",
+    "blurb": "The 80 High Shareholding Concentration stocks will remain listed and tradable, but their price movements will no longer affect the IHSG. They account for about 18% of its weight, which BEI plans to redistribute to more liquid stocks with adequate free float while adjusting the divisor to avoid mechanical moves. The change is due at the start of November, and BEI will also label ownership data for shareholders holding 1% or more as affiliate or non-affiliate.",
     "tickers": [
       "MPRO.JK",
       "DCII.JK",
@@ -92,28 +92,9 @@
   "sections": {
     "capital_raising_buybacks": [
       {
-        "event": "Indonesian issuers announce share buybacks amid market volatility",
-        "headline": "UNTR and other issuers announce buybacks of up to Rp2 trillion",
-        "blurb": "Barito Renewables, Chandra Asri Pacific, Barito Pacific and Dian Swastatika Sentosa each plan up to Rp1 trillion, while Petrindo Jaya Kreasi, KLBF and TOWR each plan up to Rp500 billion. BREN, BRPT and CUAN’s buyback periods run through 31 December, and DSSA’s through 18 January 2027.",
-        "tickers": [
-          "BREN.JK",
-          "CUAN.JK",
-          "DSSA.JK",
-          "TPIA.JK",
-          "BRPT.JK",
-          "PBSA.JK",
-          "BBCA.JK",
-          "UNTR.JK",
-          "AALI.JK",
-          "KLBF.JK",
-          "TOWR.JK",
-          "HRUM.JK"
-        ]
-      },
-      {
         "event": "Bank Mandiri and BNI strengthen capital through AT1 issuances",
-        "headline": "BMRI and BBNI strengthen capital with US$750m and US$700m AT1 issues",
-        "blurb": "Bank Mandiri issued a US$750 million perpetual bond in late September, recognized as additional core capital. BNI completed a US$700 million AT1 issuance in April at a 7.15% annual yield, counted as additional core capital by end-May, and plans to repurchase most of its 2021 AT1 instruments.",
+        "headline": "BMRI and BBNI strengthen capital with US$1.45 billion in AT1 issues",
+        "blurb": "Bank Mandiri issued a US$750 million perpetual bond in late September, while BNI completed a US$700 million AT1 issuance in April at a 7.15% annual yield. Both were counted as additional core capital, and BNI plans to repurchase most of its 2021 AT1 instruments.",
         "tickers": [
           "BMRI.JK",
           "BBNI.JK",
@@ -122,28 +103,53 @@
         ]
       },
       {
-        "event": "Telkom prepares to accelerate its Rp4 trillion share buyback",
-        "headline": "TLKM prepares to accelerate its share buyback of up to Rp4 trillion",
-        "blurb": "More than Rp3 trillion of the allocation remained as of 19 October, with Telkom funding purchases from internal cash and weighing market conditions, cash position and operational and investment needs. Approved on 8 June, the program runs through 8 June 2027.",
-        "tickers": [
-          "TLKM.JK"
-        ]
-      },
-      {
-        "event": "ADRO and AADI begin share buybacks",
-        "headline": "ADRO and AADI begin buybacks capped at Rp10 trillion combined",
-        "blurb": "Alamtri Resources and Adaro Andalan each allocated up to Rp5 trillion for repurchases. ADRO’s 12-month implementation period began 18 April, while AADI’s buyback runs until 22 May 2027.",
+        "event": "ADRO and AADI begin shareholder-approved share buybacks",
+        "headline": "ADRO and AADI begin shareholder-approved buybacks capped at Rp10 trillion",
+        "blurb": "Alamtri Resources and Adaro Andalan Indonesia each have a Rp5 trillion ceiling. ADRO’s program runs through April 2027, while AADI’s runs until 22 May 2027.",
         "tickers": [
           "ADRO.JK",
           "AADI.JK"
+        ]
+      },
+      {
+        "event": "Indonesian issuers announce share buybacks amid market volatility",
+        "headline": "Indonesian issuers announce buybacks of up to Rp1 trillion each at BREN, BRPT and TPIA",
+        "blurb": "The four Barito Group programs, including CUAN’s allocation reported as Rp300 billion in one account and up to Rp500 billion in another, total a reported Rp3.5 trillion. BREN and BRPT plan to run through 31 December, while TPIA’s reported end dates differ between 31 December and 19 January. Analysts said buybacks may absorb selling pressure but do not guarantee a recovery.",
+        "tickers": [
+          "BREN.JK",
+          "CUAN.JK",
+          "DSSA.JK",
+          "TPIA.JK",
+          "BRPT.JK",
+          "BBCA.JK",
+          "PBSA.JK",
+          "UNTR.JK",
+          "AALI.JK",
+          "KLBF.JK",
+          "TOWR.JK",
+          "HRUM.JK"
+        ]
+      },
+      {
+        "event": "Telkom prepares to accelerate its Rp4 trillion share buyback",
+        "headline": "TLKM prepares to accelerate buyback of up to Rp4 trillion",
+        "blurb": "More than Rp3 trillion of the approved allocation remained on 19 October. Purchases are funded from internal cash and will be timed around market conditions and the company’s cash and investment needs, with the shareholder-approved program running through 8 June 2027.",
+        "tickers": [
+          "TLKM.JK"
         ]
       }
     ],
     "market_structure_policy": [
       {
-        "event": "OJK imposes Rp2.1 trillion in capital-market fines on DSSA, BREN, and CUAN-related parties",
-        "headline": "OJK imposes Rp2.1 trillion in fines on DSSA, BREN and CUAN-related parties",
-        "blurb": "The penalties comprise Rp1.5 trillion for DSSA, Rp500 billion for BREN and Rp100 billion related to CUAN’s public offering. OJK alleged share-trading manipulation at DSSA and planned allocations to controlling-shareholder-related parties in the BREN and CUAN offerings. CUAN said it was not directly fined and expected no material impact.",
+        "event": "IDX changes temporary auto-rejection-bottom limits to contain market panic",
+        "headline": "IDX cuts temporary lower price limit to 7% on three boards",
+        "blurb": "Effective 20 October through 31 December, the rule covers Main, Development and New Economy Board securities. Acceleration and Special Monitoring Board securities retain existing limits, and IDX said it would evaluate the measure based on market conditions.",
+        "tickers": []
+      },
+      {
+        "event": "OJK imposes Rp2.1 trillion in sanctions on DSSA, BREN and CUAN",
+        "headline": "OJK imposes Rp2.1 trillion in sanctions on DSSA, BREN and CUAN",
+        "blurb": "OJK set penalties at Rp1.5 trillion for Dian Swastatika Sentosa, Rp500 billion for Barito Renewables and Rp100 billion tied to Petrindo Jaya Kreasi, citing DSSA trading and BREN and CUAN IPOs. Petrindo said its penalty was not imposed directly on the company, while DSSA said its sanction would not materially affect its finances or operations.",
         "tickers": [
           "DSSA.JK",
           "BREN.JK",
@@ -153,17 +159,33 @@
     ],
     "earnings_guidance": [
       {
-        "event": "SSIA reports a return to profit in the first half of 2026",
-        "headline": "SSIA returns to profit in first half of 2026 with Rp262.6 billion net income",
-        "blurb": "Surya Semesta Internusa's revenue rose 58.4%, while management targets full-year revenue of Rp7.2 trillion and net profit of around Rp400 billion. Marketing sales reached 24.1 hectares against a 135-hectare annual target, and the hotel segment remained in net loss.",
+        "event": "DMAS reports nine-month presales against its revised 2026 target",
+        "headline": "DMAS records Rp2.61 trillion in nine-month presales, 88.57% of revised target",
+        "blurb": "Puradelta Lestari raised its 2026 target to Rp2.95 trillion, around 42% above the original goal, with industrial land sales mainly driven by data-center demand. Kiwoom Sekuritas and Mirae Asset Sekuritas view the revision as positive through 2027, while citing transaction realization, revenue and profit conversion, land availability and investment delays as risks.",
+        "tickers": [
+          "DMAS.JK"
+        ]
+      },
+      {
+        "event": "Surya Semesta Internusa reports a return to profit in H1 2026",
+        "headline": "SSIA returns to profit with Rp262.6 billion H1 2026 net profit",
+        "blurb": "Surya Semesta's revenue rose 58.4% in H1, while marketing sales reached 24.1 hectares against a 135-hectare full-year target. Management targets Rp7.2 trillion in 2026 revenue and around Rp400 billion in net profit, with land sales realization remaining a challenge.",
         "tickers": [
           "SSIA.JK"
         ]
       },
       {
-        "event": "BRIS reports Rp139 trillion in remittance transactions through September",
-        "headline": "BRIS reports Rp139 trillion in remittance transactions through September",
-        "blurb": "Bank Syariah Indonesia said integration with its e-channels lifted remittance service users by 15%, supported by 15 remittance partners and 29 global partners. Corporate Secretary Wisnu Sunandar said the bank is optimistic remittance business growth this year will exceed last year's.",
+        "event": "Bank Mandiri reports August asset and profit growth",
+        "headline": "BMRI reports 20.7% asset and 22.3% net profit growth in August",
+        "blurb": "Bank Mandiri reported bank-only assets of Rp2,359 trillion and net profit of Rp37.5 trillion. Loans and third-party funds each rose 17.6% year on year, to Rp1,592 trillion and Rp1,687 trillion, respectively. Finance & Strategy Director Novita Widya Anggraini said funding was supported by Livin' by Mandiri and Kopra by Mandiri.",
+        "tickers": [
+          "BMRI.JK"
+        ]
+      },
+      {
+        "event": "BSI records Rp139 trillion in remittance transactions through September",
+        "headline": "BRIS records Rp139 trillion in remittance transactions through September",
+        "blurb": "Bank Syariah Indonesia said integration with its e-channels helped increase remittance-service users by 15%, supported by 15 remittance partners and 29 global partners. Corporate Secretary Wisnu Sunandar said the bank expects remittance growth this year to exceed last year's.",
         "tickers": [
           "BRIS.JK"
         ]
@@ -171,19 +193,39 @@
     ],
     "deals_control": [
       {
-        "event": "ISB transfers its 26.667% WIFI stake to Sinergi Graha Kapital",
-        "headline": "ISB transfers 26.667% WIFI stake to SGK for Rp4.06 trillion",
-        "blurb": "Solusi Sinergi Digital’s controlling shareholder, Investasi Sukses Bersama, sold 1.416 billion shares at Rp2,870 each on 19 October to Sinergi Graha Kapital, which had held no shares. ISB’s holding fell to 27.756%, but it remains the largest shareholder and controller, with no change of control. An extraordinary general meeting on 21 October will consider the resignations of the president commissioner and a director.",
+        "event": "WIFI controlling shareholder transfers a 26.667% stake to Sinergi Graha Kapital",
+        "headline": "WIFI controller transfers 26.667% stake to Sinergi Graha Kapital",
+        "blurb": "Solusi Sinergi Digital said Investasi Sukses Bersama sold 1.42 billion shares to SGK at Rp2,870 each for Rp4.06 trillion, for SGK’s long-term investment. ISB retained 27.756% and control, while SGK became a 26.667% shareholder. WIFI’s 21 October extraordinary meeting is set to decide on two executives’ resignations.",
         "tickers": [
           "WIFI.JK"
+        ]
+      },
+      {
+        "event": "Paradiso Resources increases its stake in NSSS to 5.85%",
+        "headline": "Paradiso Resources raises NSSS stake to 5.85%",
+        "blurb": "Nusantara Sawit Sejahtera said Paradiso acquired 414.63 million shares at Rp820 apiece on 15 October, paying Rp339.99 billion for direct investment. Its prior holding was 4.11%, and NSSS shares fell 6.31% to Rp520 on 20 October.",
+        "tickers": [
+          "NSSS.JK"
         ]
       }
     ],
     "macro_flows": [
       {
-        "event": "MSCI consults on Indonesia’s market classification, prompting market reactions",
-        "headline": "MSCI consults on Indonesia reclassification, with US$5.6 billion in potential outflows",
-        "blurb": "The consultation runs through 30 April 2027, with a final decision due by 30 June. During that period, MSCI will freeze several changes to Indonesian stock indexes and continue removing stocks identified by Indonesian authorities under its high-shareholding-concentration framework.",
+        "event": "Rupiah weakens below Rp18,000 as authorities defend the currency",
+        "headline": "Rupiah breaks through Rp18,000 as BI intervenes to defend currency",
+        "blurb": "After falling through Rp18,000, the rupiah recovered 0.28% to Rp17,992 per US dollar on 20 October. President Prabowo ordered Bank Indonesia to defend the currency, and BI intervened in spot, swap, NDF and DNDF markets and bought government securities. Its rate decision is due 21 October.",
+        "tickers": []
+      },
+      {
+        "event": "Goldman Sachs estimates MSCI reclassification could trigger Indonesian fund outflows",
+        "headline": "Goldman Sachs estimates MSCI reclassification could trigger US$5.6 billion in outflows",
+        "blurb": "MSCI opened a consultation on 16 October on moving Indonesia from emerging-market to standalone status, citing insufficient progress on ownership transparency and trading conduct. Goldman Sachs says actively managed funds benchmarked to MSCI indexes hold more than US$8 billion in Indonesian stocks, with any sales dependent on managers’ strategies.",
+        "tickers": []
+      },
+      {
+        "event": "Mirae Asset estimates MSCI reclassification risks Indonesian bond outflows",
+        "headline": "Mirae Asset estimates MSCI proposal could trigger US$3 billion in Indonesian bond outflows",
+        "blurb": "Mirae Asset fixed-income analyst Jessica Tasijawa said the proposed shift from Emerging Market to Standalone Market could drive passive outflows of around US$3 billion before the final decision in June 2027. Since the 16 October announcement, foreign investors have sold Rp1.5 trillion of government bonds, and the 10-year yield has risen 11 bps to 7.36%.",
         "tickers": []
       }
     ]
