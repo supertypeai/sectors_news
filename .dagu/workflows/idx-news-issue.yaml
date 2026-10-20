@@ -1,4 +1,4 @@
-description: IDX news issue — daily issue for the window ending 16:45 WIB
+description: IDX news issue — the day's issue, updated through the day and closed after the 20:50 WIB cutoff
 
 container:
   image: sectors-news-runtime:latest
@@ -11,7 +11,7 @@ container:
   env:
     - GIT_CONFIG_VALUE_1: '!f() { test "$1" = get && echo username=x-access-token && echo password="$(cat /run/secrets/token)"; }; f'
     - MARKET: idx
-    # The issue is dated on the local day its 16:45 cutoff falls on
+    # The issue is dated on the local day its 20:50 cutoff falls on
     - ISSUE_TZ: Asia/Jakarta
 
 secrets:
@@ -23,10 +23,19 @@ secrets:
   - BRIGHTDATA_API_KEY
   - BRIGHTDATA_ZONE
 
-# 16:50 WIB (UTC+7), just after the 16:45 WIB cutoff, every day. Each issue covers the
-# articles created from the previous issue's cutoff (window_end in previous_issue.json)
-# to today 16:45 WIB, so a missed day rolls into the next issue instead of being lost.
-schedule: "50 9 * * *"
+# 08:45 WIB (UTC+7), before the 09:00 open, then 12:55, 16:55 and 20:55 WIB, 40 minutes
+# after the 12:15, 16:15 and 20:15 scrapes, every day. Each issue covers the articles
+# created from the previous issue's cutoff (window_end in previous_issue.json), so a
+# missed day rolls into the next issue instead of being lost.
+# --scheduled picks the kind of run from the clock:
+# - before the 20:50 WIB cutoff, an update: its window ends when it starts, and it
+#   leaves previous_issue.json alone, so a run the queue holds late stays an update
+# - after the cutoff, the final run: its window ends at 20:50 WIB and it moves
+#   previous_issue.json on to the next day
+# Every run saves current_issue.json, which the next run of the day reads to keep its lead.
+schedule:
+  - "45 1 * * *"
+  - "55 5,9,13 * * *"
 queue: news-data-pipeline
 timeout_sec: 3600
 hist_retention_days: 30
@@ -40,14 +49,16 @@ steps:
     run: bash .dagu/steps/preflight.sh
 
   # Builds the issue against the committed previous_issue.json and upserts it into
-  # news_issue. Safe to re-run: once publish has pushed this issue's state, a re-run
-  # sees the same issue_date and skips.
+  # news_issue. Safe to re-run: once publish has pushed the final run's state, a
+  # re-run sees the same issue_date and skips.
   - id: issue
     depends: [preflight]
-    run: bash -c 'set -e; python -m news_issues.pipeline run --exchange "$MARKET" --issue-date "$(TZ="$ISSUE_TZ" date +%F)" --upsert'
+    run: bash -c 'set -e; python -m news_issues.pipeline run --exchange "$MARKET" --issue-date "$(TZ="$ISSUE_TZ" date +%F)" --scheduled --upsert'
 
+  # An update changes only current_issue.json, the final run both files
   - id: publish
     depends: [issue]
     run: >-
       runners push -m "chore(idx): checkpoint news issue"
       data/news_issues/idx/previous_issue.json
+      data/news_issues/idx/current_issue.json

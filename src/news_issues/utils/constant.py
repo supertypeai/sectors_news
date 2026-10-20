@@ -20,9 +20,10 @@ ISSUE_WINDOW_DAYS = {
     "SGX": 7,
 }
 
-# Local cutoff each issue window ends at, 5 minutes before the issue runs
+# Local cutoff each issue window ends at, 5 minutes before the final run.
+# IDX's falls after the 20:15 WIB scrape so post-close filings stay in the day's issue
 ISSUE_CUTOFF_TIMES = {
-    "IDX": time(16, 45),
+    "IDX": time(20, 50),
     "SGX": time(17, 20),
 }
 

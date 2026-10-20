@@ -75,16 +75,16 @@ def check_assignment_result(
     }
 
 
-def build_previous_stories_payload(previous_issue: dict | None) -> str:
-    if previous_issue is None:
+def build_issue_stories_payload(issue: dict | None) -> str:
+    if issue is None:
         return "[]"
 
     stories = []
-    
-    if previous_issue["lead"] is not None:
-        stories.append(previous_issue["lead"])
-    
-    for section_stories in previous_issue["sections"].values():
+
+    if issue["lead"] is not None:
+        stories.append(issue["lead"])
+
+    for section_stories in issue["sections"].values():
         stories.extend(section_stories)
 
     payload = [
@@ -98,9 +98,25 @@ def build_previous_stories_payload(previous_issue: dict | None) -> str:
     ]
 
     return json.dumps(
-        payload, 
-        ensure_ascii=False, 
+        payload,
+        ensure_ascii=False,
         indent=2
+    )
+
+
+def build_current_lead_payload(current_issue: dict | None) -> str:
+    if current_issue is None or current_issue["lead"] is None:
+        return "null"
+
+    lead = current_issue["lead"]
+
+    return json.dumps(
+        {
+            "event": lead["event"],
+            "headline": lead["headline"],
+        },
+        ensure_ascii=False,
+        indent=2,
     )
 
 
@@ -109,6 +125,7 @@ def run_importance(
     models: list[str],
     as_of: str,
     previous_issue: dict | None = None,
+    current_issue: dict | None = None,
     exchange: str = "IDX",
     effort: str = "medium",
     token_usage_logger: TokenUsageLogger | None = None,
@@ -124,8 +141,16 @@ def run_importance(
         log_name="Importance",
         input_data={
             "developments": formated_developments,
-            "previous_stories": build_previous_stories_payload(
-                previous_issue=previous_issue
+            "previous_stories": build_issue_stories_payload(
+                issue=previous_issue
+            ),
+            # An earlier run of this same issue, so the lead and layout change
+            # between updates only when the news does
+            "current_stories": build_issue_stories_payload(
+                issue=current_issue
+            ),
+            "current_lead": build_current_lead_payload(
+                current_issue=current_issue
             ),
             "as_of": as_of,
         },  

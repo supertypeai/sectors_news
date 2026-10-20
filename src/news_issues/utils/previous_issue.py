@@ -1,10 +1,12 @@
 from datetime import date
 
-from .issue_window import build_issue_window
+from .issue_window import build_issue_window, build_update_end_utc
 from .json_io import output_path, read_json, write_json
 
 
 PREVIOUS_ISSUE_NAME = "previous_issue"
+# The latest run of the day's issue, update or final, so the next run keeps its lead
+CURRENT_ISSUE_NAME = "current_issue"
 
 
 def to_previous_story(story: dict) -> dict:
@@ -46,12 +48,17 @@ def resolve_issue_window(
     issue_date: date,
     exchange: str,
     previous_issue: dict | None,
+    update: bool = False,
 ) -> tuple[str, str]:
     window_start, window_end = build_issue_window(issue_date, exchange)
 
     # Start where the previous issue stopped, so a missed run's articles roll into this issue
     if previous_issue is not None and previous_issue.get("window_end"):
         window_start = previous_issue["window_end"]
+
+    # An update during the day ends at the run, the final run at the cutoff
+    if update:
+        window_end = build_update_end_utc(issue_date, exchange)
 
     return window_start, window_end
 
@@ -86,5 +93,38 @@ def save_previous_issue(
     write_json(
         data=previous_issue,
         name=PREVIOUS_ISSUE_NAME,
+        exchange=exchange,
+    )
+
+
+def load_current_issue(
+    issue_date: date,
+    exchange: str,
+) -> dict | None:
+    if not output_path(
+        name=CURRENT_ISSUE_NAME,
+        exchange=exchange
+    ).exists():
+        return None
+
+    current_issue = read_json(
+        name=CURRENT_ISSUE_NAME,
+        exchange=exchange
+    )
+
+    # Only an earlier run of this same issue counts, not yesterday's last one
+    if current_issue.get("issue_date") != issue_date.isoformat():
+        return None
+
+    return current_issue
+
+
+def save_current_issue(
+    current_issue: dict,
+    exchange: str,
+) -> None:
+    write_json(
+        data=current_issue,
+        name=CURRENT_ISSUE_NAME,
         exchange=exchange,
     )

@@ -19,6 +19,28 @@ def build_cutoff_utc(
     ).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def build_now_utc() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def build_update_end_utc(
+    issue_date: date,
+    exchange: str,
+) -> str:
+    # An update reads every article inserted so far, so a slow scrape's tail
+    # still lands, but never past the cutoff the final run stops at
+    return min(build_now_utc(), build_cutoff_utc(issue_date, exchange))
+
+
+def is_before_cutoff(
+    issue_date: date,
+    exchange: str,
+) -> bool:
+    # A run that starts before the cutoff is an update, even when the queue held
+    # it late: only a run after the cutoff has every article of the day inserted
+    return build_now_utc() < build_cutoff_utc(issue_date, exchange)
+
+
 def build_issue_window(
     issue_date: date,
     exchange: str,

@@ -28,6 +28,8 @@ def run_daily_issue(
     exchange: str,
     models: list[str],
     previous_issue: dict | None,
+    current_issue: dict | None = None,
+    update: bool = False,
 ) -> dict | None:
     run_date = issue_date.isoformat()
 
@@ -43,11 +45,13 @@ def run_daily_issue(
         issue_date,
         exchange,
         previous_issue,
+        update,
     )
 
     LOGGER.info(
-        "Issue %s: window %s to %s",
+        "Issue %s (%s): window %s to %s",
         run_date,
+        "update" if update else "final",
         window_start,
         window_end,
     )
@@ -114,14 +118,18 @@ def run_daily_issue(
         models=models,
         as_of=as_of,
         previous_issue=previous_issue,
+        current_issue=current_issue,
         effort="high",
         token_usage_logger=token_usage_logger,
     )
 
+    current_lead = (current_issue or {}).get("lead")
+
     LOGGER.info(
-        "Issue %s: importance: lead %s | check %s",
+        "Issue %s: importance: lead %s (current lead: %s) | check %s",
         run_date,
         importance_result["lead_development_id"],
+        current_lead["headline"] if current_lead else "none",
         importance_result["check"],
     )
 
