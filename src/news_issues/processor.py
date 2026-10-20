@@ -12,6 +12,7 @@ from .steps.grouping import run_grouping, remove_duplicate_ids
 from .steps.development_generation import run_group_generation
 from .steps.importance import run_importance
 from .steps.issue_layout import get_market_caps, build_issue_layout
+from .steps.copy_carry_over import carry_over_copy
 from .steps.display_copy import run_display_copy
 from .steps.what_to_watch import run_what_to_watch_generation
 from .steps.final_data import get_final_data_clean
@@ -144,8 +145,10 @@ def run_daily_issue(
         exchange=exchange,
     )
 
+    # The scored developments, in the same order, so each placed story carries
+    # its match to the current version
     issue_layout = build_issue_layout(
-        developments=developments,
+        developments=importance_result["assignments"],
         result=importance_result,
         market_caps=market_caps,
     )
@@ -156,6 +159,11 @@ def run_daily_issue(
         "yes" if issue_layout["lead"] is not None else "none",
         sum(len(stories) for stories in issue_layout["sections"].values()),
         len(issue_layout["flash"]),
+    )
+
+    issue_layout = carry_over_copy(
+        issue_layout=issue_layout,
+        current_issue=current_issue,
     )
 
     # step 5
@@ -177,6 +185,7 @@ def run_daily_issue(
     # step 6
     what_to_watch_result = run_what_to_watch_generation(
         developments=developments,
+        current_issue=current_issue,
         exchange=exchange,
         models=models,
         as_of=as_of,
@@ -216,6 +225,7 @@ def run_daily_issue(
 
     return to_previous_issue(
         display_result=display_result,
+        what_to_watch_result=what_to_watch_result,
         issue_date=run_date,
         window_start=window_start,
         window_end=window_end,

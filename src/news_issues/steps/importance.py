@@ -104,6 +104,43 @@ def build_issue_stories_payload(issue: dict | None) -> str:
     )
 
 
+def current_issue_stories(current_issue: dict | None) -> list[dict]:
+    if current_issue is None:
+        return []
+
+    stories = []
+
+    if current_issue["lead"] is not None:
+        stories.append(current_issue["lead"])
+
+    for section_stories in current_issue["sections"].values():
+        stories.extend(section_stories)
+
+    stories.extend(current_issue.get("flash", []))
+
+    return [story for story in stories if story.get("id")]
+
+
+def build_current_stories_payload(current_issue: dict | None) -> str:
+    payload = [
+        {
+            "id": story["id"],
+            "slot": story["slot"],
+            "event": story["event"],
+            "headline": story["headline"],
+            "blurb": story["blurb"],
+            "tickers": story["tickers"],
+        }
+        for story in current_issue_stories(current_issue)
+    ]
+
+    return json.dumps(
+        payload,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
 def build_current_lead_payload(current_issue: dict | None) -> str:
     if current_issue is None or current_issue["lead"] is None:
         return "null"
@@ -146,8 +183,8 @@ def run_importance(
             ),
             # An earlier run of this same issue, so the lead and layout change
             # between updates only when the news does
-            "current_stories": build_issue_stories_payload(
-                issue=current_issue
+            "current_stories": build_current_stories_payload(
+                current_issue=current_issue
             ),
             "current_lead": build_current_lead_payload(
                 current_issue=current_issue
@@ -173,16 +210,32 @@ def run_importance(
         for assignment in response["assignments"]
     }
 
+    current_ids = {story["id"] for story in current_issue_stories(current_issue)}
     scored_developments = []
 
     for position, development in enumerate(developments, start=1):
         development_id = f"dev_{position:03d}"
         assignment = assignment_by_id.get(development_id, {})
 
+        # A match to an id the current version does not hold counts as none
+        same_as_current_story = assignment.get("same_as_current_story")
+        if same_as_current_story not in current_ids:
+            same_as_current_story = None
+
+        adds_new_fact = bool(assignment.get("adds_new_fact", True))
+        new_fact = (
+            assignment.get("new_fact")
+            if same_as_current_story is not None and adds_new_fact
+            else None
+        )
+
         scored_developments.append({
             "development_id": development_id,
             **development,
             "covered_in_previous_issue": assignment.get("covered_in_previous_issue", False),
+            "same_as_current_story": same_as_current_story,
+            "adds_new_fact": adds_new_fact,
+            "new_fact": new_fact,
             "section": assignment.get("section", "other"),
             "importance": assignment.get("importance", 1),
         })

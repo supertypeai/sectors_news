@@ -35,6 +35,10 @@ async def generate_display_copy(
     effort: str,
     token_usage_logger: TokenUsageLogger | None = None,
 ) -> dict:
+    # A story readers already saw, with nothing new, keeps its words
+    if development.get("carried_copy"):
+        return {**development, **development["carried_copy"]}
+
     async with semaphore:
         response = await invoke_structured_llm_async(
             pydantic_output=DisplayCopy,
@@ -45,6 +49,9 @@ async def generate_display_copy(
                 "as_of": as_of,
                 "slot": slot.value,
                 "development": build_display_payload(development=development),
+                # Set when readers saw this story earlier today, so the
+                # rewrite says what moved on
+                "new_fact": json.dumps(development.get("new_fact"), ensure_ascii=False),
             },
             models=models,
             effort=effort,
@@ -80,7 +87,6 @@ async def run_display_copy(
 ) -> dict:
     semaphore = asyncio.Semaphore(concurrency)
 
-    # The lead and every section story, flattened so they all run together
     slots = []
 
     if issue_layout["lead"] is not None:
@@ -115,13 +121,18 @@ async def run_display_copy(
         else:
             sections.setdefault(section, []).append(development)
 
-    # Flash items only show a headline, so the development title is used as is
+    # Flash items only show a headline, so the development title is used as is,
+    # unless the item keeps the headline readers already saw
     flash = [
-        {
-            **development, 
-            "headline": development["title"], 
-            "blurb": None
-        }
+        (
+            {**development, **development["carried_copy"]}
+            if development.get("carried_copy")
+            else {
+                **development,
+                "headline": development["title"],
+                "blurb": None
+            }
+        )
         for development in issue_layout["flash"]
     ]
 

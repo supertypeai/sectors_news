@@ -23,6 +23,28 @@ class DevelopmentAssignment(BaseModel):
             "list is empty."
         ),
     )
+    same_as_current_story: str | None = Field(
+        description=(
+            "ID of the CURRENT VERSION story that is the same story as this "
+            "development, copied exactly. Null when none is, and always null "
+            "when that list is empty."
+        ),
+    )
+    adds_new_fact: bool = Field(
+        description=(
+            "True when this development's summary holds a material fact that "
+            "the matched CURRENT VERSION story's headline and blurb do not. "
+            "False when it adds none, and always false when "
+            "same_as_current_story is null."
+        ),
+    )
+    new_fact: str | None = Field(
+        description=(
+            "When adds_new_fact is true, the new fact in one short line, with "
+            "its figure or date exactly as the summary gives it. Null when "
+            "adds_new_fact is false."
+        ),
+    )
     section: Section = Field(
         description="The single section this development belongs to.",
     )
@@ -258,6 +280,14 @@ ASSIGNMENT_SYSTEM_PROMPT_TEMPLATE = """
     - Pick a different lead only when another development scores strictly higher, or when no development is the same story as the current lead.
     Score every development on its own merits first. Never lower another development's score to keep the current lead.
 
+    MATCHING THE CURRENT VERSION
+    Readers may have read the current version a few hours ago. A story they already read keeps its wording unless its news has moved on, so for each development you say which current story it is, and whether it adds anything.
+    - same_as_current_story is the id of the CURRENT VERSION story that is the same story: the same company or institution and the same situation, as for the previous issue. Use each current id for at most one development. Null when no current story matches.
+    - adds_new_fact is true when the development's summary holds a material fact that the matched story's headline and blurb do not: a new figure, a new decision or completed step, a new party, a new date, or a reaction or price move the reader has not been told. More outlets repeating the same facts, rewording, analyst colour that changes no figure, and background are not new facts.
+    - new_fact states that fact in one short line, so the copy can be rewritten around it, for example "Exclusion takes effect in November" or "IDX asks BREN and CUAN to explain their price moves". Take it from the summary only. When several facts are new, give the one an investor would most want to know. Null when adds_new_fact is false.
+    - When same_as_current_story is null, adds_new_fact is false and new_fact is null.
+    These fields never change a section or a score.
+
     OUTPUT RULES
     - Return exactly one assignment for every input development ID.
     - Use only IDs that appear in the input. Never invent an ID.
@@ -297,7 +327,7 @@ ASSIGNMENT_USER_PROMPT = """
     {previous_stories}
 
     CURRENT VERSION:
-    The stories this same issue published earlier today, in the same fields. An empty list means this is the issue's first version.
+    The stories this same issue published earlier today. Each has an id, its slot (lead, story, or flash), an event label, a headline, a blurb, and its tickers. An empty list means this is the issue's first version.
     {current_stories}
 
     CURRENT LEAD:

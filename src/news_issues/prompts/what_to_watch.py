@@ -129,11 +129,26 @@ MARKET_CONTEXTS = {
 
 class WhatToWatchItem(BaseModel):
     development_ids: list[str] = Field(
-        min_length=1,
         description=(
             "Development IDs this item is taken from, exactly as supplied. "
             "Usually one. Use more than one only when several developments "
-            "state the same event on the same date."
+            "state the same event on the same date. Empty only for an item "
+            "kept from the CURRENT LIST that no development restates."
+        ),
+    )
+
+    same_as_current_item: str | None = Field(
+        description=(
+            "ID of the CURRENT LIST item that is the same event, copied "
+            "exactly. Null for an event not in that list."
+        ),
+    )
+
+    changes_current_item: bool = Field(
+        description=(
+            "True when the developments change the matched item's date or "
+            "terms. False when they do not, and always false when "
+            "same_as_current_item is null."
         ),
     )
 
@@ -279,6 +294,28 @@ class WhatToWatchPrompts:
             Then write items consistent with it, ordered by sort_date, earliest
             first.
 
+            THE CURRENT LIST
+
+            Readers may have seen this issue's What to Watch a few hours ago,
+            given as the CURRENT LIST. It is empty for the issue's first
+            version. Readers rely on it as a calendar, so an event must not
+            disappear or change wording between versions without a reason.
+
+            - Keep every current item, with the same wording, unless one of
+              these holds: its date is on or before AS OF, the developments
+              now give a different date or terms, or the list is full and a
+              new event matters more. Say in the explanation which current
+              items you drop and why.
+            - For a kept item, set same_as_current_item to its id. When the
+              developments change its date or terms, set changes_current_item
+              to true and write the item from the developments. Otherwise set
+              it to false, and its date and wording are kept as they were.
+            - A kept item lists the developments that state its event. When
+              none does, because today's later articles no longer repeat the
+              date, keep it with an empty development_ids.
+            - Add new events by the rules above, and apply the same bar to
+              them as to the current items.
+
             WRITING THE ITEM
 
             development_ids: The Development IDs the event comes from, copied
@@ -330,6 +367,11 @@ class WhatToWatchPrompts:
 
             DEVELOPMENTS:
             {developments}
+
+            CURRENT LIST:
+            The What to Watch items this issue published earlier today. Each
+            has an id, sort_date, timing_label, title, and tickers.
+            {current_items}
 
             Return the response in the following JSON schema:
             {format_instructions}

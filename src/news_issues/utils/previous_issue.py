@@ -1,46 +1,85 @@
 from datetime import date
+from itertools import count
 
 from .issue_window import build_issue_window, build_update_end_utc
 from .json_io import output_path, read_json, write_json
 
 
 PREVIOUS_ISSUE_NAME = "previous_issue"
-# The latest run of the day's issue, update or final, so the next run keeps its lead
 CURRENT_ISSUE_NAME = "current_issue"
 
 
-def to_previous_story(story: dict) -> dict:
-    # The importance step only reads these fields to spot stories already covered
+def to_previous_story(
+    story: dict,
+    story_id: str,
+    slot: str,
+) -> dict:
     return {
+        "id": story_id,
+        "slot": slot,
         "event": story["event"],
         "headline": story["headline"],
         "blurb": story["blurb"],
         "tickers": story["tickers"],
+        "supporting_news_ids": [news["id"] for news in story["supporting_news"]],
+        "copy_decision": story.get("copy_decision"),
+    }
+
+
+def to_watch_item(item: dict, item_id: str) -> dict:
+    return {
+        "id": item_id,
+        "sort_date": item["sort_date"],
+        "timing_label": item["timing_label"],
+        "title": item["title"],
+        "tickers": item["tickers"],
+        "supporting_news_ids": [news["id"] for news in item["supporting_news"]],
     }
 
 
 def to_previous_issue(
     display_result: dict,
+    what_to_watch_result: dict | None,
     issue_date: str,
     window_start: str,
     window_end: str,
 ) -> dict:
+    story_numbers = count(1)
+
+    def next_story(story: dict, slot: str) -> dict:
+        return to_previous_story(
+            story=story,
+            story_id=f"cur_{next(story_numbers):02d}",
+            slot=slot,
+        )
+
     return {
         "issue_date": issue_date,
         "window_start": window_start,
         "window_end": window_end,
         "lead": (
-            to_previous_story(display_result["lead"])
+            next_story(display_result["lead"], "lead")
             if display_result["lead"] is not None
             else None
         ),
         "sections": {
             section: [
-                to_previous_story(story) 
+                next_story(story, "story")
                 for story in stories
             ]
             for section, stories in display_result["sections"].items()
         },
+        "flash": [
+            next_story(story, "flash")
+            for story in display_result["flash"]
+        ],
+        "what_to_watch": [
+            to_watch_item(item, f"wtw_{position:02d}")
+            for position, item in enumerate(
+                (what_to_watch_result or {}).get("items", []),
+                start=1,
+            )
+        ],
     }
 
 
