@@ -2,6 +2,7 @@ from datetime import datetime
 from types import MethodType
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
+from dotenv import load_dotenv 
 
 from scraper_engine.base.scraper import Scraper
 from scraper_engine.sources.idx.scrape_investor_id import InvestorID
@@ -19,16 +20,58 @@ from scraper_engine.preprocessing.article_fetcher import get_article_body, get_a
 from scraper_engine.sources.idx.scrape_kompas import KompasMoney
 
 import logging
+import os
 import requests 
+from bs4 import BeautifulSoup
 
+
+load_dotenv()
 
 LOGGER = logging.getLogger(__name__)
+
+
+def fetch_with_scrapingant_adapter(self, target_url: str):
+    api_key = os.getenv("SCRAPINGANT_API_KEY")
+
+    if not api_key:
+        raise ValueError("Missing required environment variable: SCRAPINGANT_API_KEY")
+
+    response = requests.get(
+        "https://api.scrapingant.com/v2/general",
+        params={
+            "url": target_url,
+            "x-api-key": api_key,
+            "browser": "false",
+        },
+        timeout=60,
+    )
+
+    if response.status_code != 200:
+        LOGGER.warning(
+            "ScrapingAnt returned status %d for %s",
+            response.status_code,
+            target_url,
+        )
+        self.record_request_failure(
+            url=target_url,
+            reason="HTTPStatusError",
+            status_code=response.status_code,
+            message=f"Received status code {response.status_code}",
+        )
+        return None
+
+    self.record_request_success(status_code=response.status_code)
+    return BeautifulSoup(response.content, "html.parser")
 
 
 def test_scrapers():
     target_date = "20260921"
 
     investor_id = InvestorID()
+    investor_id.fetch_news_with_web_unlocker = MethodType(
+        fetch_with_scrapingant_adapter,
+        investor_id,
+    )
     kontan_investasi = KontanInvestasi()
 
     LOGGER.info("=== Testing Investor ID ===")
@@ -36,7 +79,6 @@ def test_scrapers():
     investor_articles = investor_id.extract_news_pages(
         num_pages=1,
         date=target_date,
-        is_use_proxy=True,
     )
 
     LOGGER.info(
@@ -204,11 +246,13 @@ if __name__ == "__main__":
 
     # test_switch__scrapling()
     # test_jakarta_globe_and_investor_id()
-    kompas_articles = test_kompas()
+    # kompas_articles = test_kompas()
 
-    test_kompas_article_fetcher(
-        urls=[article["source"] for article in kompas_articles[:3]]
-    )
+    # test_kompas_article_fetcher(
+    #     urls=[article["source"] for article in kompas_articles[:3]]
+    # )
+    
+    test_scrapers()
     
     # urls = [
     #     "https://investor.id/market/455147/memperbesar-peluangnormalisasi-treatment-msci",

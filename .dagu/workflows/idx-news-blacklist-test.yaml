@@ -18,6 +18,7 @@ secrets:
   - PROXY
   - BRIGHTDATA_API_KEY
   - BRIGHTDATA_ZONE
+  - SCRAPINGANT_API_KEY
 
 queue: news-data-pipeline
 timeout_sec: 3600
