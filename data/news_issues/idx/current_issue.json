@@ -1,143 +1,45 @@
 {
   "issue_date": "2026-10-21",
   "window_start": "2026-10-20T13:50:00Z",
-  "window_end": "2026-10-21T09:58:14Z",
+  "window_end": "2026-10-21T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Bank Indonesia holds its BI Rate and cuts reserve requirements in its October policy package",
-    "headline": "Bank Indonesia holds BI Rate at 5.75% and cuts reserve requirements",
-    "blurb": "Conventional banks’ reserve requirement will fall from 9% to 8% on 1 November and 7% on 1 December. For Islamic banks and business units, it will drop from 7.5% to 6.5% and then 5.5% on those dates. At its 20–21 October meeting, BI raised the Deposit Facility rate to 5.00% and kept the Lending Facility at 6.50%. BI said a 2% reserve requirement cut could add around Rp190 trillion in liquidity.",
+    "event": "Bank Indonesia cuts reserve requirements and macroprudential liquidity incentives",
+    "headline": "Bank Indonesia cuts reserve rates to 7% and 5.5%, liquidity incentive to 5%",
+    "blurb": "Bank Indonesia will lower conventional banks’ reserve requirement from 9% to 8% on 1 November and 7% on 1 December, while Islamic banks’ rate will decline from 7.5% to 6.5% and then 5.5%. It will also reduce the Macroprudential Liquidity Incentive from a maximum of 6% to 5% on 1 December. Governor Destry Damayanti said the staged 2% reserve cut could provide banks with up to Rp190 trillion in additional liquidity. The incentive’s financing-channel maximum will fall from 4% to 3%, while the money-market-deepening maximum remains 2%.",
     "tickers": [],
     "supporting_news_ids": [
-      30607,
+      30646,
+      30656,
       30609,
-      30611,
       30613,
-      30621,
-      30622,
       30628
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: regrouped, 4 of its articles moved out"
   },
   "sections": {
-    "macro_flows": [
+    "market_structure_policy": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "MSCI’s Indonesia reclassification proposal prompts market-risk warnings and official responses",
-        "headline": "MSCI’s Indonesia proposal prompts warnings of up to US$5.6 billion in outflows",
-        "blurb": "MSCI proposes moving Indonesia from emerging to standalone status, with its classification unchanged during consultation through 30 April 2027. Goldman Sachs estimates passive outflows of up to US$5.6 billion. Airlangga Hartarto said assessment does not depend on one rating agency. A final decision is expected by 30 June 2027.",
-        "tickers": [],
+        "event": "Indonesia revises 2026 RKAB production quotas for nickel and coal",
+        "headline": "Indonesia revises 2026 nickel ore and coal quotas to about 290 million and 700 million tons",
+        "blurb": "The nickel quota carries a potential ore deficit of 3 million to 87 million tons. Analysts say the changes could affect miners’ production, sales, operating costs and profitability, while coal exports are expected to fall 14% year on year to a maximum of 450 million tons amid domestic market obligations and logistics constraints.",
+        "tickers": [
+          "PTBA.JK",
+          "AADI.JK",
+          "INCO.JK",
+          "ANTM.JK",
+          "NCKL.JK"
+        ],
         "supporting_news_ids": [
-          30547,
-          30559,
-          30567,
-          30579,
-          30614,
-          30625,
-          30626
+          30636
         ],
         "copy_decision": "new story"
-      }
-    ],
-    "market_structure_policy": [
-      {
-        "id": "cur_03",
-        "slot": "story",
-        "event": "IDX sets quarterly reviews and November exclusions for high-concentration stocks",
-        "headline": "IDX sets quarterly reviews and November exclusions for 80 high-concentration stocks",
-        "blurb": "HSC stocks account for about 18% of the IHSG. After meeting with MSCI on 19 October, BEI said it will review them every three months, allowing stocks that no longer meet the criteria to return to the IHSG. They are also barred from IDX80, IDX30 and LQ45.",
-        "tickers": [
-          "SSMS.JK",
-          "SMMT.JK",
-          "BMAS.JK",
-          "TBIG.JK",
-          "CITA.JK",
-          "PSAB.JK",
-          "BALI.JK",
-          "MAYA.JK",
-          "CLAY.JK",
-          "ADES.JK",
-          "TMAS.JK",
-          "BBMD.JK",
-          "INPP.JK",
-          "SAME.JK",
-          "DMND.JK",
-          "MTEL.JK",
-          "EPMT.JK",
-          "SHIP.JK",
-          "DUTI.JK",
-          "BSWD.JK",
-          "INDO.JK",
-          "BIKE.JK",
-          "MSJA.JK",
-          "NICK.JK",
-          "SAFE.JK",
-          "BDKR.JK",
-          "MDIA.JK",
-          "BAJA.JK",
-          "BKDP.JK",
-          "ALKA.JK",
-          "AGAR.JK",
-          "BNII.JK",
-          "MCOL.JK",
-          "LIFE.JK",
-          "POLU.JK",
-          "ELPI.JK",
-          "KING.JK",
-          "ALII.JK",
-          "FITT.JK",
-          "YUPI.JK",
-          "KONI.JK",
-          "MKPI.JK",
-          "CMNT.JK",
-          "SMAR.JK",
-          "CMNP.JK",
-          "PRAY.JK",
-          "MPRO.JK",
-          "BELI.JK",
-          "MEGA.JK",
-          "GEMS.JK",
-          "MLPT.JK",
-          "STTP.JK",
-          "BTPN.JK",
-          "BBSI.JK",
-          "SILO.JK",
-          "FAPA.JK",
-          "RISE.JK",
-          "SOHO.JK",
-          "BBHI.JK",
-          "PGUN.JK",
-          "BINA.JK",
-          "BNLI.JK",
-          "SRAJ.JK",
-          "MORA.JK",
-          "DNET.JK",
-          "BYAN.JK",
-          "DCII.JK",
-          "HATM.JK",
-          "DGWG.JK",
-          "SATU.JK",
-          "MGRO.JK",
-          "TCPI.JK",
-          "WBSA.JK",
-          "SOTS.JK",
-          "ROCK.JK",
-          "RLCO.JK",
-          "IFSH.JK",
-          "DSSA.JK",
-          "BREN.JK",
-          "AGII.JK"
-        ],
-        "supporting_news_ids": [
-          30561,
-          30576
-        ],
-        "copy_decision": "rewritten: moved from lead to story"
       },
       {
-        "id": "cur_04",
+        "id": "cur_03",
         "slot": "story",
         "event": "IDX suspends trading in MSIN and BSWD",
         "headline": "IDX suspends MSIN and BSWD after BSWD gains 438.33%",
@@ -150,28 +52,11 @@
           30588
         ],
         "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "OJK considers further sanctions in DSSA, BREN and CUAN trading cases",
-        "headline": "OJK weighs further sanctions in DSSA, BREN and CUAN cases after Rp2.1 trillion fines",
-        "blurb": "OJK also said the three cases will face criminal enforcement. Fines totaled Rp1.5 trillion in the Dian Swastika Sentosa case, Rp500 billion in Barito Renewables Energy’s and Rp100 billion in Petrindo Jaya Kreasi’s, following evidence of market manipulation and concealed order identities. OJK may impose further sanctions on violators, not the listed companies, after establishing legal grounds.",
-        "tickers": [
-          "CUAN.JK",
-          "BREN.JK",
-          "DSSA.JK"
-        ],
-        "supporting_news_ids": [
-          30545,
-          30546
-        ],
-        "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
       }
     ],
     "capital_raising_buybacks": [
       {
-        "id": "cur_06",
+        "id": "cur_04",
         "slot": "story",
         "event": "EMAS plans a private placement of up to 1.47 billion shares",
         "headline": "EMAS plans private placement of up to 1.47 billion shares",
@@ -184,10 +69,10 @@
           30580,
           30608
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: If fully issued, the controlling shareholder’s stake falls from 64.83% to 58.94%, without a change in control."
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_07",
+        "id": "cur_05",
         "slot": "story",
         "event": "TINS secures a DHE-SDA facility from Bank Mandiri",
         "headline": "TINS signs up to Rp4 trillion DHE-SDA facility with Bank Mandiri",
@@ -201,7 +86,21 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_08",
+        "id": "cur_06",
+        "slot": "story",
+        "event": "TBS Energi Utama secures up to S$555 million for waste management expansion",
+        "headline": "TOBA announces up to S$555 million for waste management expansion",
+        "blurb": "TBS Energi Utama announced the investment from funds and managed accounts of HPS Investment Partners, part of BlackRock, through staged purchases of newly issued preferred shares in SBTH Asia Holdings, the parent of its waste management platform. The investment requires shareholder approval at an extraordinary meeting, and TBS will retain control.",
+        "tickers": [
+          "TOBA.JK"
+        ],
+        "supporting_news_ids": [
+          30637
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_07",
         "slot": "story",
         "event": "CENT secures loan facilities for refinancing",
         "headline": "CENT secures Rp12.48 trillion in loan facilities for refinancing",
@@ -213,23 +112,61 @@
           30560
         ],
         "copy_decision": "kept: same articles"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "CIMB Group explores privatization and delisting of CIMB Niaga",
+        "headline": "CIMB Group explores BNGA privatization and delisting ahead of 15% float rule",
+        "blurb": "BNGA shares rose 11.29% to Rp1,725 on 21 October. CIMB Niaga says it is still assessing options, with no final decision, while its free float was about 7.5% in September. Reported requirements call for 12.5% by March 2027 and 15% by March 2028.",
+        "tickers": [
+          "BNGA.JK"
+        ],
+        "supporting_news_ids": [
+          30655,
+          30654,
+          30606,
+          30612,
+          30616,
+          30618,
+          30627
+        ],
+        "copy_decision": "rewritten: 2 new articles with a new fact: BNGA shares rose 11.29% to Rp1,725 on 21 October."
       },
       {
         "id": "cur_09",
         "slot": "story",
-        "event": "BCA extends its share buyback period through October 23",
-        "headline": "BCA extends share buyback through 23 October",
-        "blurb": "BCA’s buyback, initially scheduled to run through 21 October, now runs from 19–23 October. It has a maximum fund of Rp5 trillion under a 12-month program approved on 12 March, which runs through 11 March 2027.",
-        "tickers": [],
-        "supporting_news_ids": [
-          30592
+        "event": "IPAC shareholders approve privatization and IDX delisting",
+        "headline": "IPAC shareholders approve privatization and IDX delisting with Rp250 tender offer",
+        "blurb": "APAC Investment 2 is offering Rp250 per share for up to 89.31 million public shares, worth about Rp22.33 billion if fully taken up. The approved privatization and delisting remain subject to regulatory processes and approvals, and holders who do not tender may retain shares that no longer trade on the exchange.",
+        "tickers": [
+          "IPAC.JK"
         ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "supporting_news_ids": [
+          30640
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "SILO completes the first-stage acquisition of three companies",
+        "headline": "SILO completes first-stage acquisition of three companies for Rp828.67 billion",
+        "blurb": "Siloam and subsidiary Megapratama Karya Bersama completed the purchase of Buton Bangun Cipta, Menara Abadi Megah and Nusa Bahana Niaga. Analysts see potential long-term gains in hospital asset ownership and rental efficiency, but say higher interest and depreciation expenses could weigh on near-term profit.",
+        "tickers": [
+          "SILO.JK"
+        ],
+        "supporting_news_ids": [
+          30619
+        ],
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_10",
+        "id": "cur_11",
         "slot": "story",
         "event": "PPRE reports a nine-month net loss",
         "headline": "PPRE reports a Rp161.61 billion nine-month net loss",
@@ -243,7 +180,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_11",
+        "id": "cur_12",
         "slot": "story",
         "event": "PGEO capacity expansion target",
         "headline": "PGEO targets 1.8 GW of installed capacity by 2034",
@@ -257,7 +194,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_12",
+        "id": "cur_13",
         "slot": "story",
         "event": "Samuel Sekuritas assigns TINS a Buy rating",
         "headline": "Samuel Sekuritas gives TINS a Buy rating with a Rp5,000 target price",
@@ -269,38 +206,83 @@
           30558
         ],
         "copy_decision": "kept: same articles"
-      }
-    ],
-    "deals_control": [
-      {
-        "id": "cur_13",
-        "slot": "story",
-        "event": "CIMB Group explores BNGA privatization or delisting over free-float rules",
-        "headline": "CIMB Group weighs BNGA privatization or delisting as float stands at 7.5%",
-        "blurb": "CIMB Niaga is assessing a go-private deal that CIMB Group estimates would cost around Rp3.3 trillion, based on 1.86 billion public shares at Rp1,550 each. No final decision has been made, with minimum free-float rules set to rise to 12.5% by March 2027 and 15% by March 2028.",
-        "tickers": [
-          "BNGA.JK"
-        ],
-        "supporting_news_ids": [
-          30606,
-          30612,
-          30616,
-          30618,
-          30627
-        ],
-        "copy_decision": "new story"
       },
       {
         "id": "cur_14",
         "slot": "story",
-        "event": "SILO completes the first-stage acquisition of three companies",
-        "headline": "SILO completes first-stage acquisition of three companies for Rp828.67 billion",
-        "blurb": "Siloam and subsidiary Megapratama Karya Bersama completed the purchase of Buton Bangun Cipta, Menara Abadi Megah and Nusa Bahana Niaga. Analysts see potential long-term gains in hospital asset ownership and rental efficiency, but say higher interest and depreciation expenses could weigh on near-term profit.",
+        "event": "Phapros sets 2026 sales and profit growth targets",
+        "headline": "PEHA targets over 20% sales growth and double-digit profit growth in 2026",
+        "blurb": "At a public expose, Phapros allocated Rp68.7 billion for capital expenditure. Analyst Surya Rianto says reaching the targets requires Rp646.21 billion in additional revenue beyond first-half sales of Rp482.85 billion and a net profit margin of around 3%, which would lift net profit 23% to Rp33.87 billion.",
         "tickers": [
-          "SILO.JK"
+          "PEHA.JK"
         ],
         "supporting_news_ids": [
-          30619
+          30641
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "macro_flows": [
+      {
+        "id": "cur_15",
+        "slot": "story",
+        "event": "Bank Indonesia holds the BI Rate at 5.75%",
+        "headline": "Bank Indonesia holds BI Rate at 5.75%",
+        "blurb": "At its 20–21 October meeting, it raised the Deposit Facility rate to 5% and kept the Lending Facility rate at 6.50%. The BI Rate has now been unchanged for five consecutive meetings after a 25-basis-point increase in June.",
+        "tickers": [],
+        "supporting_news_ids": [
+          30607,
+          30611,
+          30621
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_16",
+        "slot": "story",
+        "event": "MSCI's Indonesia reclassification consultation and market responses",
+        "headline": "MSCI opens Indonesia reclassification consultation, decision due by 30 June 2027",
+        "blurb": "The IHSG fell 11.57% on 16 October to 5,185. The proposal would shift Indonesia from Emerging Market to Standalone Market, but its status remains unchanged during the consultation as MSCI freezes certain index changes for Indonesian stocks. Feedback is open through 30 April 2027, with a final decision due no later than 30 June 2027.",
+        "tickers": [],
+        "supporting_news_ids": [
+          30645,
+          30647,
+          30648,
+          30650,
+          30651,
+          30547,
+          30559,
+          30567,
+          30582,
+          30622,
+          30625,
+          30626,
+          30630,
+          30632
+        ],
+        "copy_decision": "rewritten: regrouped, 2 of its articles moved out"
+      },
+      {
+        "id": "cur_17",
+        "slot": "story",
+        "event": "Chinese nickel producers consider coordinated Indonesian output cuts",
+        "headline": "Chinese nickel producers consider roughly 30% cuts at Indonesian HPAL facilities",
+        "blurb": "The proposal would apply to each company’s Indonesian HPAL facilities, which produce mixed hydroxide precipitate for battery-grade nickel. Executives from Tsingshan Holding Group, GEM, Lygend Resources & Technology and Zhejiang Huayou Cobalt are scheduled to meet to finalize the plan, but no agreement is guaranteed.",
+        "tickers": [],
+        "supporting_news_ids": [
+          30573
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_18",
+        "slot": "story",
+        "event": "Indonesia's investment risk premium rises toward 100 basis points",
+        "headline": "Indonesia's investment risk premium rises toward 100 basis points",
+        "blurb": "Five-year CDS briefly approached 100 before easing to around 99 on 21 October, ahead of BI's rate announcement. A proposed MSCI downgrade and weaker sukuk demand added pressure, with auction bids falling 30% to Rp22.76 trillion from Rp32.61 trillion at the previous auction.",
+        "tickers": [],
+        "supporting_news_ids": [
+          30614
         ],
         "copy_decision": "new story"
       }
@@ -308,7 +290,7 @@
   },
   "flash": [
     {
-      "id": "cur_15",
+      "id": "cur_19",
       "slot": "flash",
       "event": "BBNI plans to continue its share buyback",
       "headline": "BBNI plans to continue share buyback of up to Rp627 billion",
@@ -319,10 +301,10 @@
       "supporting_news_ids": [
         30568
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
+      "id": "cur_20",
       "slot": "flash",
       "event": "DMAS interim dividend distribution",
       "headline": "Puradelta Lestari (DMAS) plans an Rp1.39 trillion interim dividend for 2026",
@@ -338,7 +320,22 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_17",
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "MBSS prepares a Rp200 billion share buyback",
+      "headline": "Mitrabahtera Segara Sejati (MBSS.JK) plans a share buyback of up to Rp200 billion",
+      "blurb": null,
+      "tickers": [
+        "MBSS.JK"
+      ],
+      "supporting_news_ids": [
+        30631,
+        30638
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_22",
       "slot": "flash",
       "event": "VISI private placement",
       "headline": "PT Satu Visi Putra Tbk (VISI) to Raise Capital via Private Placement Taken by Raffi Ahmad-Linked and Thohir Family Vehicles",
@@ -352,24 +349,104 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
+      "id": "cur_23",
       "slot": "flash",
-      "event": "BBRI shares rebound after earlier declines",
-      "headline": "PT Bank Rakyat Indonesia Tbk (BBRI) Rebounds 9.84% After Sharp Declines, Trading Below 10-Year Valuation Averages",
+      "event": "IDX sets quarterly reviews and November exclusions for high-concentration stocks",
+      "headline": "IDX sets quarterly reviews and November exclusions for 80 high-concentration stocks",
       "blurb": null,
       "tickers": [
-        "BBRI.JK"
+        "SSMS.JK",
+        "SMMT.JK",
+        "BMAS.JK",
+        "TBIG.JK",
+        "CITA.JK",
+        "PSAB.JK",
+        "BALI.JK",
+        "MAYA.JK",
+        "CLAY.JK",
+        "ADES.JK",
+        "TMAS.JK",
+        "BBMD.JK",
+        "INPP.JK",
+        "SAME.JK",
+        "DMND.JK",
+        "MTEL.JK",
+        "EPMT.JK",
+        "SHIP.JK",
+        "DUTI.JK",
+        "BSWD.JK",
+        "INDO.JK",
+        "BIKE.JK",
+        "MSJA.JK",
+        "NICK.JK",
+        "SAFE.JK",
+        "BDKR.JK",
+        "MDIA.JK",
+        "BAJA.JK",
+        "BKDP.JK",
+        "ALKA.JK",
+        "AGAR.JK",
+        "BNII.JK",
+        "MCOL.JK",
+        "LIFE.JK",
+        "POLU.JK",
+        "ELPI.JK",
+        "KING.JK",
+        "ALII.JK",
+        "FITT.JK",
+        "YUPI.JK",
+        "KONI.JK",
+        "MKPI.JK",
+        "CMNT.JK",
+        "SMAR.JK",
+        "CMNP.JK",
+        "PRAY.JK",
+        "MPRO.JK",
+        "BELI.JK",
+        "MEGA.JK",
+        "GEMS.JK",
+        "MLPT.JK",
+        "STTP.JK",
+        "BTPN.JK",
+        "BBSI.JK",
+        "SILO.JK",
+        "FAPA.JK",
+        "RISE.JK",
+        "SOHO.JK",
+        "BBHI.JK",
+        "PGUN.JK",
+        "BINA.JK",
+        "BNLI.JK",
+        "SRAJ.JK",
+        "MORA.JK",
+        "DNET.JK",
+        "BYAN.JK",
+        "DCII.JK",
+        "HATM.JK",
+        "DGWG.JK",
+        "SATU.JK",
+        "MGRO.JK",
+        "TCPI.JK",
+        "WBSA.JK",
+        "SOTS.JK",
+        "ROCK.JK",
+        "RLCO.JK",
+        "IFSH.JK",
+        "DSSA.JK",
+        "BREN.JK",
+        "AGII.JK"
       ],
       "supporting_news_ids": [
-        30555
+        30561,
+        30576
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "kept: same articles, headline kept in flash from story"
     },
     {
-      "id": "cur_19",
+      "id": "cur_24",
       "slot": "flash",
-      "event": "OJK examines 31 listed companies for alleged capital-market crimes",
-      "headline": "OJK Continues Examination of 31 Listed Companies Indicated of Capital Market Crimes, Results to Be Announced Gradually",
+      "event": "OJK investigations and sanctions over DSSA, BREN and CUAN market violations",
+      "headline": "OJK imposes Rp2.1 trillion in sanctions in cases involving Dian Swastatika Sentosa (DSSA), Barito Renewables Energy (BREN) and Petrindo Jaya Kreasi (CUAN)",
       "blurb": null,
       "tickers": [
         "DSSA.JK",
@@ -377,12 +454,18 @@
         "CUAN.JK"
       ],
       "supporting_news_ids": [
-        30543
+        30642,
+        30652,
+        30634,
+        30649,
+        30543,
+        30545,
+        30546
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 5 new articles with a new fact: OJK handed over the sanction letters on 21 October 2026."
     },
     {
-      "id": "cur_20",
+      "id": "cur_25",
       "slot": "flash",
       "event": "BNY Mellon increases its stake in TLKM",
       "headline": "BNY Mellon Buys 74.91 Million TLKM Shares as Ownership Rises to 6.23%",
@@ -403,7 +486,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_21",
+      "id": "cur_26",
       "slot": "flash",
       "event": "Boy Thohir buys ADRO, AADI and ESSA shares on October 19",
       "headline": "Alamtri Resources Indonesia (ADRO) shares were among 2,824,900 shares bought by PT Trinugraha Thohir across three issuers",
@@ -418,10 +501,10 @@
         30557,
         30572
       ],
-      "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_22",
+      "id": "cur_27",
       "slot": "flash",
       "event": "Boy Thohir buys ADRO, AADI and ESSA shares on October 20",
       "headline": "Boy Thohir Buys Shares of PT Adaro Andalan Indonesia Tbk (AADI), PT Alamtri Resources Indonesia Tbk (ADRO), and PT Essa Industries Indonesia Tbk (ESSA)",
@@ -434,10 +517,10 @@
       "supporting_news_ids": [
         30581
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_23",
+      "id": "cur_28",
       "slot": "flash",
       "event": "AADI begins its Rp5 trillion share buyback",
       "headline": "PT Adaro Andalan Indonesia Tbk (AADI) Begins Rp5 Trillion Share Buyback Program",
@@ -451,21 +534,22 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_24",
+      "id": "cur_29",
       "slot": "flash",
-      "event": "BSI considers a share buyback",
-      "headline": "PT Bank Syariah Indonesia (Persero) Tbk Considers Share Buyback to Support Shareholder Value Amid Market Volatility",
+      "event": "Bank Syariah Indonesia considers a share buyback",
+      "headline": "Bank Syariah Indonesia (BRIS.JK) is evaluating a share buyback with no final decision made",
       "blurb": null,
       "tickers": [
         "BRIS.JK"
       ],
       "supporting_news_ids": [
+        30653,
         30542
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: BRIS shares were down 53.36% year to date as of 21 October 2026."
     },
     {
-      "id": "cur_25",
+      "id": "cur_30",
       "slot": "flash",
       "event": "HRTA controlling shareholder affiliate buys shares",
       "headline": "PT Hartadinata Abadi Tbk (HRTA) Shares Rebound After Controlling Shareholder's Company Buys Millions of Shares",
@@ -479,7 +563,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_26",
+      "id": "cur_31",
       "slot": "flash",
       "event": "Hashim’s company sells 1.42 billion WIFI shares for Rp4.06 trillion",
       "headline": "Solusi Sinergi Digital (WIFI.JK) shares worth around Rp4.06 trillion sold by Hashim-linked Investasi Sukses Bersama",
@@ -491,10 +575,10 @@
         30587,
         30590
       ],
-      "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_27",
+      "id": "cur_32",
       "slot": "flash",
       "event": "WIFI holds an extraordinary meeting on Hashim’s resignation and telecom infrastructure business",
       "headline": "PT Solusi Sinergi Digital Tbk (WIFI) Shares Hit Auto Reject Bottom Ahead of Extraordinary Shareholders Meeting",
@@ -505,10 +589,10 @@
       "supporting_news_ids": [
         30583
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_28",
+      "id": "cur_33",
       "slot": "flash",
       "event": "AXIO declares an interim dividend",
       "headline": "PT Tera Data Indonusa Tbk (AXIO) Declares Interim Dividend of Rp8 Per Share After Q3 Profit Growth",
@@ -522,78 +606,57 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_29",
+      "id": "cur_34",
       "slot": "flash",
-      "event": "HSBC accumulates shares in APEX",
-      "headline": "HSBC Holdings Accumulates 218.09 Million Shares of Apexindo Pratama Duta (APEX) as Stock Remains Down 41 Percent Year-to-Date",
+      "event": "Apexindo issues shares to foreign syndicated creditors in debt conversion",
+      "headline": "Apexindo Pratama Duta (APEX) issued 218.09 million shares to foreign syndicated creditors for debt refinancing",
       "blurb": null,
       "tickers": [
         "APEX.JK"
       ],
       "supporting_news_ids": [
-        30564
+        30564,
+        30639
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: APEX issued the 218.09 million shares to settle creditors' receivables, with no cash proceeds."
     },
     {
-      "id": "cur_30",
+      "id": "cur_35",
       "slot": "flash",
-      "event": "Chinese producers consider nickel output cuts in Indonesia",
-      "headline": "Four Chinese Nickel Producers Consider Coordinated Production Cuts in Indonesia Amid Falling Prices and Rising Costs",
+      "event": "Finance Ministry issues its 2026 bond-yield and budget-deficit outlook",
+      "headline": "Finance Ministry Expects Government Bond Yields to Hold Around 7% Through End of 2026",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
-        30573
+        30579
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_36",
+      "slot": "flash",
+      "event": "BCA extends its share buyback period through October 23",
+      "headline": "BCA extends share buyback through 23 October",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        30592
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_37",
+      "slot": "flash",
+      "event": "GIC and Temasek deny alleged pressure on MSCI",
+      "headline": "MSCI considers reclassifying Indonesia from emerging to standalone market",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        30643,
+        30629
+      ],
+      "copy_decision": "new story"
     }
   ],
-  "what_to_watch": [
-    {
-      "id": "wtw_01",
-      "sort_date": "2026-11-01",
-      "timing_label": "1 Nov",
-      "title": "BI's first reserve-requirement cuts take effect",
-      "tickers": [],
-      "supporting_news_ids": [
-        30607,
-        30609,
-        30611,
-        30613,
-        30621,
-        30622,
-        30628
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-11-26",
-      "timing_label": "26 Nov",
-      "title": "EMAS shareholders vote on a private placement of up to 1.47 billion shares",
-      "tickers": [
-        "EMAS.JK"
-      ],
-      "supporting_news_ids": [
-        30544,
-        30580,
-        30608
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2027-06-30",
-      "timing_label": "By 30 Jun 2027",
-      "title": "MSCI expected to decide on Indonesia's market classification",
-      "tickers": [],
-      "supporting_news_ids": [
-        30547,
-        30559,
-        30567,
-        30579,
-        30614,
-        30625,
-        30626
-      ]
-    }
-  ]
+  "what_to_watch": []
 }
