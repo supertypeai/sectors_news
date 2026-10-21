@@ -27,6 +27,7 @@ try:
     PROXY = get_required_env('PROXY')
     BRIGHTDATA_API_KEY = get_required_env("BRIGHTDATA_API_KEY")
     BRIGHTDATA_ZONE = get_required_env("BRIGHTDATA_ZONE")
+    SCRAPINGANT_API_KEY = get_required_env("SCRAPINGANT_API_KEY")
 
 except ValueError as error:
     logger.critical("Configuration failed: %s", error)

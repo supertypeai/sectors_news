@@ -25,7 +25,7 @@ class KontanInvestasi(Scraper):
         self,
         url: str,
     ) -> list:
-        soup = self.fetch_news_with_web_unlocker(url)
+        soup = self.fetch_news_with_fallback(url)
 
         if not soup:
             return []
@@ -76,7 +76,7 @@ class KontanInvestasi(Scraper):
             soup = (
                 article_soup
                 if article_soup is not None
-                else self.fetch_news_with_web_unlocker(article_url)
+                else self.fetch_news_with_fallback(article_url)
             )
 
             if not soup:
@@ -116,15 +116,26 @@ class KontanInvestasi(Scraper):
             LOGGER.error("[Kontan Investasi] Failed to fetch article content for %s: %s", article_url, error)
             return None, None
     
+    def article_url(self, article_item) -> str | None:
+        anchor_tag = article_item.select_one("a")
+        return anchor_tag["href"] if anchor_tag else None
+
     def parse_articles(
         self,
         article_items: list,
     ) -> list:
         parsed_articles = []
 
+        # The index is already filtered to the date, so fetch every new article
+        # on the page together instead of one after another
+        article_soups = self.fetch_many_with_fallback([
+            article_url
+            for article_url in map(self.article_url, article_items)
+            if article_url not in self.previous_articles
+        ])
+
         for article_item in article_items:
-            anchor_tag = article_item.select_one("a")
-            source_url = anchor_tag["href"] if anchor_tag else None
+            source_url = self.article_url(article_item)
 
             title_tag = article_item.select_one("div.sp-hl h1 a")
             title = title_tag.get_text(strip=True) if title_tag else None
@@ -142,7 +153,7 @@ class KontanInvestasi(Scraper):
                 thumbnail_url = previous_article.get("thumbnail") or thumbnail_url
 
             else:
-                article_soup = self.fetch_news_with_web_unlocker(source_url)
+                article_soup = article_soups.get(source_url)
 
                 if article_soup:
                     published_at, article_body = self.fetch_article_content(
@@ -185,8 +196,6 @@ class KontanInvestasi(Scraper):
                         thumbnail_url = article_thumbnail_url
                 else:
                     published_at, article_body = None, None
-
-                time.sleep(0.3)
 
             if not published_at:
                 LOGGER.warning(

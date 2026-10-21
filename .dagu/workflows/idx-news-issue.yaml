@@ -22,6 +22,7 @@ secrets:
   - PROXY
   - BRIGHTDATA_API_KEY
   - BRIGHTDATA_ZONE
+  - SCRAPINGANT_API_KEY
 
 # 08:45 WIB (UTC+7), before the 09:00 open, then 12:55, 16:55 and 20:55 WIB, 40 minutes
 # after the 12:15, 16:15 and 20:15 scrapes, every day. Each issue covers the articles

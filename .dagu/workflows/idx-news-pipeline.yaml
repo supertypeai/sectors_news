@@ -27,6 +27,7 @@ secrets:
   - PROXY
   - BRIGHTDATA_API_KEY
   - BRIGHTDATA_ZONE
+  - SCRAPINGANT_API_KEY
 
 # 08:15 and 16:15 WIB land just before the pre-open and post-close briefs.
 schedule: "15 1,5,9,13,17,21 * * *"

@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from goose3 import Goose
 
 from scraper_engine.base.scraper import Scraper
+from scraper_engine.config.conf import FETCH_CONCURRENCY
 from scraper_engine.sources.utils.previous_run import load_previous_run_articles
 from scraper_engine.sources.utils.constant import INDONESIAN_MONTHS
 
@@ -25,7 +26,7 @@ class InvestorID(Scraper):
         self, 
         url: str, 
     ) -> list:
-        soup = self.fetch_news_with_web_unlocker(url)
+        soup = self.fetch_news_with_fallback(url)
 
         if not soup:
             return []
@@ -40,7 +41,7 @@ class InvestorID(Scraper):
         soup = (
             article_soup
             if article_soup is not None
-            else self.fetch_news_with_web_unlocker(article_url)
+            else self.fetch_news_with_fallback(article_url)
         )
 
         if soup is None:
@@ -109,6 +110,15 @@ class InvestorID(Scraper):
             )
             return None
 
+    def article_url(self, article_item) -> str | None:
+        anchor_tag = article_item.find("a", class_="stretched-link")
+
+        if not anchor_tag:
+            return None
+
+        relative_url = anchor_tag.get("href")
+        return f"https://investor.id{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
+
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
         parsed_articles = []
         seen_urls = set()
@@ -120,14 +130,23 @@ class InvestorID(Scraper):
             int(target_date[6:]),
         )
 
-        for article_item in article_items:
-            anchor_tag = article_item.find("a", class_="stretched-link")
+        article_soups = {}
 
-            if not anchor_tag:
-                continue
+        for position, article_item in enumerate(article_items):
+            # Fetch the next FETCH_CONCURRENCY new articles together. Batches go
+            # in page order, so stopping at an older article wastes at most a
+            # batch's worth of paid requests
+            if position % FETCH_CONCURRENCY == 0:
+                article_soups = self.fetch_many_with_fallback([
+                    article_url
+                    for article_url in map(
+                        self.article_url,
+                        article_items[position:position + FETCH_CONCURRENCY],
+                    )
+                    if article_url not in self.previous_articles
+                ])
 
-            relative_url = anchor_tag.get("href")
-            source_url = f"https://investor.id{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
+            source_url = self.article_url(article_item)
 
             if not source_url or source_url in seen_urls:
                 continue
@@ -148,7 +167,7 @@ class InvestorID(Scraper):
                 thumbnail_url = previous_article.get("thumbnail") or thumbnail_url
 
             else:
-                article_soup = self.fetch_news_with_web_unlocker(source_url)
+                article_soup = article_soups.get(source_url)
 
                 if article_soup:
                     published_at, article_body = self.fetch_article_content(
@@ -169,8 +188,6 @@ class InvestorID(Scraper):
                         thumbnail_url = article_thumbnail_url
                 else:
                     published_at, article_body = None, None
-
-                time.sleep(0.5)
 
             # The /cache/investor/960x620-w/ variant upscales small originals and
             # looks soft, so use the original upload when it is 960px wide or less
@@ -231,7 +248,7 @@ class InvestorID(Scraper):
                 article_items = self.fetch_article_list(
                     url=page_url,
                 )
-                
+
                 if not article_items:
                     LOGGER.info("[Investor ID] No articles found on page %d, stopping.", page_number)
                     break

@@ -21,7 +21,8 @@ from scraper_engine.sources.idx.scrape_kompas import KompasMoney
 
 import logging
 import os
-import requests 
+import requests
+import time
 from bs4 import BeautifulSoup
 
 
@@ -97,7 +98,6 @@ def test_scrapers():
     kontan_articles = kontan_investasi.extract_news_pages(
         num_pages=1,
         date=target_date,
-        is_use_proxy=True,
     )
 
     LOGGER.info(
@@ -225,6 +225,30 @@ def test_kompas(date: str | None = None) -> list[dict]:
     return articles
 
 
+def test_bisnis(date: str | None = None, num_pages: int | None = 1) -> list[dict]:
+    date = date or datetime.now(ZoneInfo("Asia/Jakarta")).strftime("%Y%m%d")
+
+    scraper = BisnisMarket()
+
+    started_at = time.monotonic()
+    
+    articles = scraper.extract_news_pages(
+        num_pages=num_pages,
+        date=date,
+    )
+    duration = time.monotonic() - started_at
+
+    LOGGER.info(
+        "bisnis articles for %s: %d in %.1f s", date, len(articles), duration
+    )
+    LOGGER.info("bisnis health: %s", scraper.health)
+
+    if articles:
+        LOGGER.info("bisnis sample: %s", articles[0])
+
+    return articles
+
+
 def test_kompas_article_fetcher(urls: list[str]):
     for url in urls:
         article = get_article_kompas_news(url)
@@ -247,13 +271,15 @@ if __name__ == "__main__":
     # test_switch__scrapling()
     # test_jakarta_globe_and_investor_id()
     # kompas_articles = test_kompas()
+    # bisnis_articles = test_bisnis()
 
     # test_kompas_article_fetcher(
     #     urls=[article["source"] for article in kompas_articles[:3]]
     # )
     
     test_scrapers()
-    
+    test_bisnis()
+
     # urls = [
     #     "https://investor.id/market/455147/memperbesar-peluangnormalisasi-treatment-msci",
     #     "https://jakartaglobe.id/business/two-years-into-prabowo-presidency-economists-question-quality-of-economic-growth"

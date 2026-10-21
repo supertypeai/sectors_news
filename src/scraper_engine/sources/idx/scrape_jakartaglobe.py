@@ -3,11 +3,11 @@ from goose3 import Goose
 from bs4 import BeautifulSoup
 
 from scraper_engine.base.scraper import Scraper
+from scraper_engine.config.conf import FETCH_CONCURRENCY
 from scraper_engine.sources.utils.previous_run import load_previous_run_articles
 
 import argparse
 import logging 
-import time 
 
 
 LOGGER = logging.getLogger(__name__)
@@ -20,7 +20,7 @@ class JakartaGlobe(Scraper):
         self.previous_articles = load_previous_run_articles()
 
     def fetch_article_list(self, url: str) -> list:
-        soup = self.fetch_news_with_web_unlocker(url)
+        soup = self.fetch_news_with_fallback(url)
 
         if not soup:
             LOGGER.info("[Jakarta Globe] [FAIL] Failed to fetch HTML or timed out for %s", url)
@@ -58,7 +58,7 @@ class JakartaGlobe(Scraper):
         article_soup: BeautifulSoup | None = None,
     ) -> tuple[str | None, str | None]:
         if article_soup is None:
-            soup = self.fetch_news_with_web_unlocker(article_url)
+            soup = self.fetch_news_with_fallback(article_url)
         else:
             soup = article_soup
 
@@ -103,6 +103,15 @@ class JakartaGlobe(Scraper):
             LOGGER.error("[Jakarta Globe] Error parsing date '%s': %s", raw_timestamp, error)
             return None
 
+    def article_url(self, article_item) -> str | None:
+        anchor_tag = article_item.select_one("div.col-4 a")
+
+        if not anchor_tag:
+            return None
+
+        relative_url = anchor_tag.get("href")
+        return f"https://jakartaglobe.id{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
+
     def parse_articles(self, article_items: list, target_date: str) -> tuple[list, bool]:
         parsed_articles = []
         reached_older_date = False
@@ -113,14 +122,23 @@ class JakartaGlobe(Scraper):
             int(target_date[6:]),
         )
 
-        for article_item in article_items:
-            anchor_tag = article_item.select_one("div.col-4 a")
+        article_soups = {}
 
-            if not anchor_tag:
-                continue
+        for position, article_item in enumerate(article_items):
+            # Fetch the next FETCH_CONCURRENCY new articles together. Batches go
+            # in page order, so stopping at an older article wastes at most a
+            # batch's worth of paid requests
+            if position % FETCH_CONCURRENCY == 0:
+                article_soups = self.fetch_many_with_fallback([
+                    article_url
+                    for article_url in map(
+                        self.article_url,
+                        article_items[position:position + FETCH_CONCURRENCY],
+                    )
+                    if article_url not in self.previous_articles
+                ])
 
-            relative_url = anchor_tag.get("href")
-            source_url = f"https://jakartaglobe.id{relative_url}" if relative_url and relative_url.startswith("/") else relative_url
+            source_url = self.article_url(article_item)
 
             if not source_url:
                 continue
@@ -145,7 +163,7 @@ class JakartaGlobe(Scraper):
                 thumbnail_url = previous_article.get("thumbnail") or thumbnail_url
 
             else:
-                article_soup = self.fetch_news_with_web_unlocker(source_url)
+                article_soup = article_soups.get(source_url)
                 image_tag = (
                     article_soup.select_one('meta[property="og:image"]')
                     if article_soup
@@ -160,7 +178,6 @@ class JakartaGlobe(Scraper):
                     source_url,
                     article_soup,
                 )
-                time.sleep(0.5)
 
             if not published_at:
                 LOGGER.info("[Jakarta Globe] Failed to parse date for url: %s. Skipping.", source_url)

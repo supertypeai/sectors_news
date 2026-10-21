@@ -23,3 +23,11 @@ CRAWLER_USER_AGENT = (
     "Googlebot/2.1; +http://www.google.com/bot.html) "
     "Chrome/120.0.0.0 Safari/537.36"
 )
+
+# Web Unlocker takes up to ~40 s a page, so a scraper fetches its new articles
+# this many at a time
+FETCH_CONCURRENCY = 5
+
+# ScrapingAnt answers 409 when the plan's concurrent request limit is reached,
+# retried after 1, 2, 4 and 8 s
+SCRAPINGANT_CONFLICT_RETRIES = 4

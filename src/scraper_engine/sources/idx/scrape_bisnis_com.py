@@ -36,13 +36,15 @@ class BisnisMarket(Scraper):
     def fetch_with_stealthy_browser(self, url: str):
         # Article pages sit behind a Cloudflare JS challenge that plain HTTP
         # clients cannot pass, so solve it in a stealth browser. One browser
-        # session is reused for the whole run
+        # session is reused for the whole run. No network_idle: the page's ads
+        # never go idle, so each fetch waited out the timeout (~2 min instead
+        # of ~5 s), and the publish date is in the HTML on load
         try:
             if self.stealthy_session is None:
                 self.stealthy_session_manager = StealthySession(
                     headless=True,
                     solve_cloudflare=True,
-                    network_idle=True,
+                    network_idle=False,
                 )
                 self.stealthy_session = self.stealthy_session_manager.__enter__()
 
