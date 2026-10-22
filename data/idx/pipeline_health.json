@@ -3,7 +3,7 @@
         "source": "ICNScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.06922017825030101,
+        "duration_minutes": 0.05072648315011368,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +16,7 @@
         "source": "GapkiScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.09561333166687594,
+        "duration_minutes": 0.077701835516685,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,7 +29,7 @@
         "source": "MinerbaScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.0013145488667457054,
+        "duration_minutes": 0.0015134981668476636,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -42,7 +42,7 @@
         "source": "IdnMinerScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.0309278929499366,
+        "duration_minutes": 0.008017323333964063,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -54,8 +54,8 @@
     {
         "source": "IDNFinancialScraper",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.0084011868670738,
+        "articles_found": 7,
+        "duration_minutes": 0.01127135803399142,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -67,12 +67,24 @@
     {
         "source": "BisnisMarket",
         "date": "20261022",
-        "articles_found": 1,
-        "duration_minutes": 1.4524642271503885,
-        "requests": 5,
-        "successful_requests": 4,
-        "failed_requests": 1,
+        "articles_found": 7,
+        "duration_minutes": 1.6753557189833372,
+        "requests": 17,
+        "successful_requests": 10,
+        "failed_requests": 7,
         "http_statuses": [
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
             200,
             403,
             200,
@@ -80,6 +92,48 @@
             200
         ],
         "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/235/2014707/harga-buyback-emas-antam-ubs-galeri-24-di-pegadaian-hari-ini-kamis-22-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/235/2014706/harga-emas-antam-ubs-dan-galeri-24-di-pegadaian-hari-ini-kamis-22-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/235/2014705/harga-emas-antam-di-pegadaian-hari-ini-kamis-22-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/189/2014709/ihsg-dibayangi-bi-rate-dan-msci-simak-rekomendasi-saham-hari-ini-2210",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/93/2014685/nilai-tukar-rupiah-terhadap-dolar-as-hari-ini-kamis-22-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/189/2014684/rekomendasi-saham-dan-pergerakan-ihsg-hari-ini-kamis-22-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
             {
                 "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261022/189/2014675/bi-rate-ditahan-saham-big-banks-layak-dicermati-di-tengah-rilis-lapkeu",
@@ -92,12 +146,19 @@
     {
         "source": "BloombergTechnoz",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.01742999098302486,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 7,
+        "duration_minutes": 0.09150075571669732,
+        "requests": 8,
+        "successful_requests": 8,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200
         ],
         "failures": []
@@ -105,19 +166,39 @@
     {
         "source": "InvestorID",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 1.6775063028006116,
-        "requests": 3,
-        "successful_requests": 2,
+        "articles_found": 13,
+        "duration_minutes": 5.15313014438337,
+        "requests": 23,
+        "successful_requests": 22,
         "failed_requests": 1,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200
         ],
         "failures": [
             {
                 "stage": "fetch",
-                "url": "https://investor.id/stock/indeks/1",
+                "url": "https://investor.id/market/458939/ini-dia-pihakpihak-dalam-skandal-transaksi-dssa-bren-dan-cuan",
                 "status": null,
                 "reason": "ReadTimeout",
                 "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
@@ -128,7 +209,7 @@
         "source": "AbafScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.011910891917068511,
+        "duration_minutes": 0.01134937298290121,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -142,17 +223,43 @@
         "source": "JakartaGlobe",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 1.0475521730666515,
-        "requests": 2,
-        "successful_requests": 1,
-        "failed_requests": 1,
+        "duration_minutes": 2.1993826209334655,
+        "requests": 10,
+        "successful_requests": 6,
+        "failed_requests": 4,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
             200
         ],
         "failures": [
             {
                 "stage": "fetch",
                 "url": "https://jakartaglobe.id/business/newsindex/1",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/idx-crash-a-wakeup-call-for-indonesias-retail-investors",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/jakarta-spends-just-5439-of-2026-budget-by-end-of-september",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/indonesia-fears-no-one-prabowo-on-msci-downgrade",
                 "status": null,
                 "reason": "ReadTimeout",
                 "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
@@ -163,7 +270,7 @@
         "source": "AntaraNews",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.011129260332866882,
+        "duration_minutes": 0.01428160625024854,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -177,7 +284,7 @@
         "source": "AsianTelecom",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.025312728316445526,
+        "duration_minutes": 0.02066070035022373,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -191,7 +298,7 @@
         "source": "JakartaPost",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.01893320295008986,
+        "duration_minutes": 0.02455369048305632,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -204,25 +311,71 @@
     {
         "source": "KontanInvestasi",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.31639438211665644,
-        "requests": 1,
-        "successful_requests": 1,
-        "failed_requests": 0,
+        "articles_found": 11,
+        "duration_minutes": 3.3907903074500307,
+        "requests": 17,
+        "successful_requests": 13,
+        "failed_requests": 4,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200
         ],
-        "failures": []
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/simak-proyeksi-pergerakan-rupiah-hari-ini-2210",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/cermati-rekomendasi-saham-pilihan-yang-layak-dilirik-hari-ini-2210",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/daftar-saham-per-terendah-tertinggi-lq45-21-oktober-2026-bbtn-dan-brpt-melesat",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal=22&bulan=10&tahun=2026&pos=indeks&per_page=20",
+                "status": null,
+                "reason": "ReadTimeout",
+                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+            }
+        ]
     },
     {
         "source": "EmitenNews",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.025322576550145946,
-        "requests": 2,
-        "successful_requests": 2,
+        "articles_found": 5,
+        "duration_minutes": 0.09288368490039527,
+        "requests": 7,
+        "successful_requests": 7,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200
         ],
@@ -232,7 +385,7 @@
         "source": "BCANews",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.010292108683885696,
+        "duration_minutes": 0.011056773166637867,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -244,12 +397,20 @@
     {
         "source": "CNBCMarket",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.004869564649804185,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 8,
+        "duration_minutes": 0.07929730923400105,
+        "requests": 9,
+        "successful_requests": 9,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200
         ],
         "failures": []
@@ -257,12 +418,16 @@
     {
         "source": "CNNEkonomi",
         "date": "20261022",
-        "articles_found": 1,
-        "duration_minutes": 0.027000124849534284,
-        "requests": 3,
-        "successful_requests": 3,
+        "articles_found": 5,
+        "duration_minutes": 0.09858783390081953,
+        "requests": 7,
+        "successful_requests": 7,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200
@@ -272,24 +437,16 @@
     {
         "source": "KompasMoney",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.704939578899454,
-        "requests": 3,
+        "articles_found": 15,
+        "duration_minutes": 0.08042415700037964,
+        "requests": 2,
         "successful_requests": 1,
-        "failed_requests": 2,
+        "failed_requests": 1,
         "http_statuses": [
-            202,
             202,
             200
         ],
         "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://money.kompas.com/sitemap-news-money.xml",
-                "status": 202,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 202"
-            },
             {
                 "stage": "fetch",
                 "url": "https://money.kompas.com/sitemap-news-money.xml",
@@ -302,12 +459,14 @@
     {
         "source": "FinanceDetik",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.03775185011715318,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 1,
+        "duration_minutes": 0.03643732561710446,
+        "requests": 3,
+        "successful_requests": 3,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200
         ],
         "failures": []
@@ -315,12 +474,13 @@
     {
         "source": "KontanKeuangan",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.009067183333293845,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 2,
+        "duration_minutes": 0.036842842066350086,
+        "requests": 2,
+        "successful_requests": 2,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200
         ],
         "failures": []
