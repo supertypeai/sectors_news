@@ -2,8 +2,8 @@
     {
         "source": "ICNScraper",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.05072648315011368,
+        "articles_found": 1,
+        "duration_minutes": 0.07433458384960735,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +16,7 @@
         "source": "GapkiScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.077701835516685,
+        "duration_minutes": 0.032806770833364376,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,7 +29,7 @@
         "source": "MinerbaScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.0015134981668476636,
+        "duration_minutes": 0.0029299445498812324,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -42,7 +42,7 @@
         "source": "IdnMinerScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.008017323333964063,
+        "duration_minutes": 0.0056043987501955906,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -54,12 +54,13 @@
     {
         "source": "IDNFinancialScraper",
         "date": "20261022",
-        "articles_found": 7,
-        "duration_minutes": 0.01127135803399142,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 18,
+        "duration_minutes": 0.009195303750069191,
+        "requests": 2,
+        "successful_requests": 2,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200
         ],
         "failures": []
@@ -67,15 +68,26 @@
     {
         "source": "BisnisMarket",
         "date": "20261022",
-        "articles_found": 7,
-        "duration_minutes": 1.6753557189833372,
-        "requests": 17,
-        "successful_requests": 10,
-        "failed_requests": 7,
+        "articles_found": 21,
+        "duration_minutes": 5.647875849400104,
+        "requests": 45,
+        "successful_requests": 25,
+        "failed_requests": 20,
         "http_statuses": [
             200,
             403,
             200,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
             403,
             200,
             403,
@@ -88,10 +100,118 @@
             200,
             403,
             200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            200,
+            200,
+            403,
+            200,
+            403,
             200,
             200
         ],
         "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/192/2014769/aksi-danantara-borong-saham-saat-ihsg-bergejolak-bidik-emiten-fundamental-kuat",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/192/2014751/bos-danantara-bertemu-pengendali-astra-asii-di-hong-kong-bahas-apa",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/189/2014752/brids-pangkas-target-ihsg-jadi-6000-jagokan-saham-ammn-bbni-hingga-tins",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/235/2014744/harga-emas-antam-2210-melemah-ini-simulasi-untung-rugi-investor",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/192/2014737/fore-kopi-fore-cetak-laba-bersih-rp90-miliar-naik-4975-yoy-kuartal-iii2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/7/2014738/indeks-bisnis-27-dibuka-melemah-saham-amrt-masih-bertenaga",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/7/2014724/dibayangi-msci-ojk-pastikan-presiden-dukung-pembenahan-bursa",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/93/2014685/nilai-tukar-rupiah-terhadap-dolar-as-hari-ini-kamis-22-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/93/2014730/rupiah-dibuka-melemah-ke-rp18022-per-dolar-as-hari-ini-2210",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/189/2014684/rekomendasi-saham-dan-pergerakan-ihsg-hari-ini-kamis-22-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/7/2014728/ihsg-dibuka-turun-251-ke-5194-saham-tpia-hingga-cuan-longsor",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/7/2014729/bei-saham-hsc-resmi-keluar-dari-ihsg-mulai-2-november",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261022/235/2014710/harga-emas-perhiasan-hari-ini-kamis-22-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
             {
                 "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261022/235/2014707/harga-buyback-emas-antam-ubs-galeri-24-di-pegadaian-hari-ini-kamis-22-oktober-2026",
@@ -122,21 +242,21 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261022/93/2014685/nilai-tukar-rupiah-terhadap-dolar-as-hari-ini-kamis-22-oktober-2026",
-                "status": 403,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 403"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261022/189/2014684/rekomendasi-saham-dan-pergerakan-ihsg-hari-ini-kamis-22-oktober-2026",
-                "status": 403,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 403"
-            },
-            {
-                "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261022/189/2014675/bi-rate-ditahan-saham-big-banks-layak-dicermati-di-tengah-rilis-lapkeu",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261022/90/2014763/bank-bjb-raih-penghargaan-trusted-popular-brand-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261022/90/2014760/cimb-group-bantah-rumor-delisting-cimb-niaga-bnga-dari-bei",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -146,12 +266,32 @@
     {
         "source": "BloombergTechnoz",
         "date": "20261022",
-        "articles_found": 7,
-        "duration_minutes": 0.09150075571669732,
-        "requests": 8,
-        "successful_requests": 8,
+        "articles_found": 27,
+        "duration_minutes": 0.32883809525034546,
+        "requests": 28,
+        "successful_requests": 28,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -166,42 +306,247 @@
     {
         "source": "InvestorID",
         "date": "20261022",
-        "articles_found": 13,
-        "duration_minutes": 5.15313014438337,
-        "requests": 23,
-        "successful_requests": 22,
-        "failed_requests": 1,
+        "articles_found": 32,
+        "duration_minutes": 4.381280927933403,
+        "requests": 52,
+        "successful_requests": 26,
+        "failed_requests": 26,
         "http_statuses": [
+            407,
+            200,
+            407,
+            407,
+            407,
+            200,
+            200,
+            407,
+            200,
+            407,
+            200,
+            200,
+            407,
+            407,
+            407,
             200,
             200,
             200,
+            407,
+            200,
+            407,
+            200,
+            407,
+            407,
+            407,
             200,
             200,
             200,
+            407,
+            200,
+            407,
+            200,
+            407,
+            407,
+            200,
+            200,
+            407,
+            200,
+            407,
+            200,
+            407,
+            200,
+            407,
+            200,
+            407,
+            502,
+            407,
             200,
             200,
             200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
+            407,
             200
         ],
         "failures": [
             {
                 "stage": "fetch",
-                "url": "https://investor.id/market/458939/ini-dia-pihakpihak-dalam-skandal-transaksi-dssa-bren-dan-cuan",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+                "url": "https://investor.id/stock/indeks/1",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459014/msci-buka-suara-soal-usulan-downgrade-bursa-ri-ke-standalone",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459027/ihsg-tancap-gas-7saham-melaju-kencang",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459026/ojkprabowo-ingin-ri-pertahankan-posisi-di-emerging-market",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459010/investor-global-ternyata-akumulasi-bbri-cs-dan-bbca-lewat-ini",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459011/potensi-menggiurkan-saham-tlkm",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458997/pasar-saham-tertekan-msci-pgeo-punya-penopang-kuat",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459009/ihsg-kembali-melesat-sikap-prabowo-hadapi-msci-disorot",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459005/tegas-cimb-group-bantah-privatisasi-saham-bnga",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458999/ihsg-langsung-terjun-bebas-5-saham-malah-lawan-arus",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459004/ihsg-berbalik-naik-sahamsaham-ini-melejit-hingga-25",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458986/saham-emiten-hapsoro-masuk-uma",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458987/saham-pilihan-untuk-trading-22-oktober-dan-target-harganya",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458991/duit-triliunan-siap-masuk-pasar-ini-pemasok-terbesar",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458989/ihsg-bakal-kembali-melemah-tapi-6-saham-potensial-cuan",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458995/suspensi-saham-emiten-hary-tanoe-dibuka",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458985/bei-resmi-sesuaikan-kriteria-ihsg-nasib-saham-hsc-diungkap-rinci",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458984/2-saham-terbang-hingga-1026-kena-suspensi",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/stock/indeks/2",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458941/mulai-januari-2027-bi-izinkan-saham-masuk-skema-lindung-nilai-vastra",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/corporate-action/indeks/1",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459025/unilever-unvr-cetak-lonjakan-laba-bersih-26",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/458940/laba-peha-melonjak-541-valuasi-saham-masih-murah",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459023/bos-investasi-danantara-msci-bukan-sesuatu-yang-ringan",
+                "status": 502,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 502"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459018/nasib-ratusan-gerai-fore",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investor.id/market/459020/mbss-siapkan-buyback-saham-rp-200-miliar-mulai-hari-ini",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             }
         ]
     },
@@ -209,7 +554,7 @@
         "source": "AbafScraper",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.01134937298290121,
+        "duration_minutes": 0.0066529063498213265,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -222,15 +567,21 @@
     {
         "source": "JakartaGlobe",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 2.1993826209334655,
-        "requests": 10,
+        "articles_found": 2,
+        "duration_minutes": 0.7373794174491195,
+        "requests": 12,
         "successful_requests": 6,
-        "failed_requests": 4,
+        "failed_requests": 6,
         "http_statuses": [
+            407,
+            200,
+            407,
+            407,
             200,
             200,
-            200,
+            407,
+            407,
+            407,
             200,
             200,
             200
@@ -239,42 +590,58 @@
             {
                 "stage": "fetch",
                 "url": "https://jakartaglobe.id/business/newsindex/1",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/jakarta-stocks-open-151-lower-despite-bis-liquidity-boost",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/ojk-fines-11-brokerage-firms-in-rp-21-trillion-stock-market-crackdown",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/bank-indonesia-extends-zero-down-payment-policy-for-homes-vehicles-to-2027",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             },
             {
                 "stage": "fetch",
                 "url": "https://jakartaglobe.id/business/idx-crash-a-wakeup-call-for-indonesias-retail-investors",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             },
             {
                 "stage": "fetch",
-                "url": "https://jakartaglobe.id/business/jakarta-spends-just-5439-of-2026-budget-by-end-of-september",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://jakartaglobe.id/business/indonesia-fears-no-one-prabowo-on-msci-downgrade",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+                "url": "https://jakartaglobe.id/business/bahlil-weighs-ending-gas-export-contracts-to-prioritize-domestic-supply",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             }
         ]
     },
     {
         "source": "AntaraNews",
         "date": "20261022",
-        "articles_found": 0,
-        "duration_minutes": 0.01428160625024854,
-        "requests": 2,
-        "successful_requests": 2,
+        "articles_found": 2,
+        "duration_minutes": 0.029100925583043134,
+        "requests": 4,
+        "successful_requests": 4,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200,
             200
         ],
@@ -284,7 +651,7 @@
         "source": "AsianTelecom",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.02066070035022373,
+        "duration_minutes": 0.01243408963297649,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -298,7 +665,7 @@
         "source": "JakartaPost",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.02455369048305632,
+        "duration_minutes": 0.02377552658338876,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -311,66 +678,241 @@
     {
         "source": "KontanInvestasi",
         "date": "20261022",
-        "articles_found": 11,
-        "duration_minutes": 3.3907903074500307,
-        "requests": 17,
-        "successful_requests": 13,
-        "failed_requests": 4,
+        "articles_found": 26,
+        "duration_minutes": 2.6536972892004997,
+        "requests": 42,
+        "successful_requests": 18,
+        "failed_requests": 24,
         "http_statuses": [
+            407,
+            200,
+            407,
+            407,
+            407,
+            407,
             200,
             200,
             200,
             200,
+            407,
+            407,
             200,
             200,
+            407,
+            200,
+            407,
+            407,
             200,
             200,
+            407,
+            407,
+            423,
+            200,
+            407,
+            200,
+            407,
+            407,
+            200,
+            423,
+            407,
+            407,
             200,
             200,
+            407,
+            423,
+            407,
             200,
+            407,
             200,
+            407,
             200
         ],
         "failures": [
             {
                 "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/simak-proyeksi-pergerakan-rupiah-hari-ini-2210",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+                "url": "https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal=22&bulan=10&tahun=2026&pos=indeks",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             },
             {
                 "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/cermati-rekomendasi-saham-pilihan-yang-layak-dilirik-hari-ini-2210",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+                "url": "https://investasi.kontan.co.id/news/menghijau-di-tengah-wacana-delisting-intip-kembali-profil-emiten-bnga-dan-kinerjanya",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             },
             {
                 "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/daftar-saham-per-terendah-tertinggi-lq45-21-oktober-2026-bbtn-dan-brpt-melesat",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+                "url": "https://investasi.kontan.co.id/news/ekspansi-bisnis-bakrie-sumatera-plantations-unsp-dirikan-anak-usaha-baru",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/indika-energy-indy-gandeng-anak-usaha-pln-ekspansi-bisnis-energi-terbarukan",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/ihsg-diproyeksi-menguat-hingga-pekan-depan-analis-sarankan-selektif-pilih-saham",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/transaksi-derivatif-kripto-tembus-rp-456-t-bittime-tekankan-risiko-likuiditas",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/pendapatan-fore-coffee-fore-naik-533-jadi-rp-16-triliun-hingga-kuartal-iii-2026",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/ihsg-balik-menguat-ke-54189-di-sesi-pertama-top-gainers-lq45-mapi-bumi-mbma",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/pool-pinjam-rp-5-miliar-dengan-jaminan-125-juta-saham-pola-advista-finance-pola",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/bi-rate-ditahan-575-yield-sbn-10-tahun-diproyeksi-730-745",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/harga-emas-terkoreksi-analis-sarankan-investor-beli-bertahap",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/rupiah-melemah-752-sepanjang-2026-won-korea-selatan-menguat-878",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/harga-emas-terkoreksi-analis-sarankan-investor-beli-bertahap",
+                "status": 423,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 423"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/mbss-berencana-buyback-saham-rp200-miliar-intip-profil-emiten-jasa-transportasi-ini",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/daftar-harga-emas-antam-hari-ini-2210-turun-rp-4000-jadi-rp-2550000-per-gram",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/rupiah-dibuka-melemah-ke-rp-18035-per-dolar-as-hari-ini-2210-asia-mixed",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/rupiah-dibuka-melemah-ke-rp-18035-per-dolar-as-hari-ini-2210-asia-mixed",
+                "status": 423,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 423"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/catat-bei-keluarkan-saham-hsc-dari-perhitungan-ihsg-mulai-2-november",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/bursa-asia-melemah-di-pagi-ini-2210-indeks-asx-200-berada-di-jalur-pelemahan",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/unilever-unvr-cetak-kinerja-moncer-laba-melonjak-259-per-september-2026",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/unilever-unvr-cetak-kinerja-moncer-laba-melonjak-259-per-september-2026",
+                "status": 423,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 423"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/ihsg-melemah-ke-52869-di-pagi-ini-2210-top-losers-lq45-medc-dewa-cuan",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             },
             {
                 "stage": "fetch",
                 "url": "https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal=22&bulan=10&tahun=2026&pos=indeks&per_page=20",
-                "status": null,
-                "reason": "ReadTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=60)"
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal=22&bulan=10&tahun=2026&pos=indeks&per_page=30",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             }
         ]
     },
     {
         "source": "EmitenNews",
         "date": "20261022",
-        "articles_found": 5,
-        "duration_minutes": 0.09288368490039527,
-        "requests": 7,
-        "successful_requests": 7,
+        "articles_found": 10,
+        "duration_minutes": 0.18214850053288198,
+        "requests": 13,
+        "successful_requests": 13,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -385,7 +927,7 @@
         "source": "BCANews",
         "date": "20261022",
         "articles_found": 0,
-        "duration_minutes": 0.011056773166637867,
+        "duration_minutes": 0.010181007166587127,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -397,12 +939,14 @@
     {
         "source": "CNBCMarket",
         "date": "20261022",
-        "articles_found": 8,
-        "duration_minutes": 0.07929730923400105,
-        "requests": 9,
-        "successful_requests": 9,
+        "articles_found": 10,
+        "duration_minutes": 0.04926331889970849,
+        "requests": 11,
+        "successful_requests": 11,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200,
             200,
             200,
@@ -418,12 +962,25 @@
     {
         "source": "CNNEkonomi",
         "date": "20261022",
-        "articles_found": 5,
-        "duration_minutes": 0.09858783390081953,
-        "requests": 7,
-        "successful_requests": 7,
+        "articles_found": 17,
+        "duration_minutes": 0.12501977608286932,
+        "requests": 20,
+        "successful_requests": 20,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -437,8 +994,8 @@
     {
         "source": "KompasMoney",
         "date": "20261022",
-        "articles_found": 15,
-        "duration_minutes": 0.08042415700037964,
+        "articles_found": 49,
+        "duration_minutes": 0.05364457470035025,
         "requests": 2,
         "successful_requests": 1,
         "failed_requests": 1,
@@ -459,12 +1016,21 @@
     {
         "source": "FinanceDetik",
         "date": "20261022",
-        "articles_found": 1,
-        "duration_minutes": 0.03643732561710446,
-        "requests": 3,
-        "successful_requests": 3,
+        "articles_found": 10,
+        "duration_minutes": 0.12225403860017346,
+        "requests": 12,
+        "successful_requests": 12,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200
@@ -474,8 +1040,8 @@
     {
         "source": "KontanKeuangan",
         "date": "20261022",
-        "articles_found": 2,
-        "duration_minutes": 0.036842842066350086,
+        "articles_found": 9,
+        "duration_minutes": 0.11042994664943157,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
