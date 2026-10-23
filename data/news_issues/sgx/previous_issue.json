@@ -1,166 +1,562 @@
 {
-  "issue_date": "2026-10-16",
-  "window_start": "2026-10-09T09:30:00Z",
-  "window_end": "2026-10-16T09:20:00Z",
+  "issue_date": "2026-10-23",
+  "window_start": "2026-10-16T09:20:00Z",
+  "window_end": "2026-10-23T09:20:00Z",
   "lead": {
-    "event": "MAS holds policy settings and lowers its inflation forecast",
-    "headline": "MAS holds policy settings and lowers core inflation forecast to 1.5%-2%",
-    "blurb": "On 14 October, MAS left the slope, width and centre of its S$NEER policy band unchanged, after tightening in April and July. It lowered its core inflation forecast to 1.5%-2% and kept its headline inflation forecast at around 2%. Advance data showed third-quarter GDP growth of 5.4%, above the 5.1% median forecast. Most economists expected an extended hold through 2027, while HSBC expected a 25-basis-point slope increase in January 2027.",
-    "tickers": []
+    "id": "cur_01",
+    "slot": "lead",
+    "event": "Singapore Core CBD Grade A office rents rise 2% in Q3 2026",
+    "headline": "Core CBD Grade A office rents rise 2% in Q3 2026",
+    "blurb": "The monthly rate reached $12.75 psf, the strongest quarterly increase since 3Q2022. AI companies added to leasing demand, with Anthropic reportedly committing to 100 desks at The Executive Centre and OpenAI in advanced negotiations for about 120,000 sq ft at Shaw Tower. CBRE, Cushman & Wakefield and Newmark forecast 4% to 5% or higher rental growth for 2026, amid limited new supply before 2028.",
+    "tickers": [],
+    "supporting_news_ids": [
+      1292
+    ],
+    "copy_decision": "new story"
   },
   "sections": {
-    "macro_flows": [
-      {
-        "event": "Knight Frank forecasts record Singapore property investment sales",
-        "headline": "Knight Frank forecasts Singapore property sales could reach S$50 billion in 2026",
-        "blurb": "Knight Frank Singapore says sales could reach around S$50 billion for 2026 after the first nine months’ S$42.4 billion topped the full-year 2025 record of S$40.7 billion. Interim head of capital markets Melvin Chay expects healthy 4Q momentum, with large deals in due diligence and possible rate hikes motivating parties to close transactions by year-end.",
-        "tickers": [
-          "H78.SI",
-          "HMN.SI"
-        ]
-      },
-      {
-        "event": "Singapore technology stocks fall amid a semiconductor selloff",
-        "headline": "Singapore tech stocks fall in semiconductor selloff, CSE Global drops 10.294%",
-        "blurb": "AEM and UMS Holdings fell 9.724% and 9.65%, while Frencken Group and Aztech Global each lost more than 5%. The selloff followed hotter-than-expected US September inflation data, raising expectations of further Federal Reserve rate increases and pressure on AI-related capital spending.",
-        "tickers": [
-          "544.SI",
-          "XWA.SI",
-          "558.SI",
-          "E28.SI",
-          "8AZ.SI"
-        ]
-      },
-      {
-        "event": "Singapore's September non-oil domestic exports release",
-        "headline": "Singapore's September non-oil domestic exports rise 68.4% year on year",
-        "blurb": "The increase beat the 32.2% consensus forecast in a Bloomberg poll and followed August's revised 46.1% expansion. Electronics exports grew 107.6% on AI-related demand, while non-electronics shipments rose 54.2%, led by non-monetary gold and specialised machinery.",
-        "tickers": []
-      },
-      {
-        "event": "Singapore bank shares slide amid earnings concerns",
-        "headline": "Singapore bank shares shed US$22.4 billion amid earnings concerns",
-        "blurb": "In the first week of October, OCBC fell 9.9%, UOB 7.9% and DBS 6% as fears of earnings downgrades drove selling; the Straits Times Index was 6.6% below its peak. November’s bank results are seen as the sector’s first real test.",
-        "tickers": [
-          "D05.SI",
-          "O39.SI",
-          "U11.SI"
-        ]
-      }
-    ],
-    "capital_raising_buybacks": [
-      {
-        "event": "Volta Infrastructure's US$5 billion AI loan syndication",
-        "headline": "Volta Infrastructure syndicates US$5 billion AI loan at yields above 11%",
-        "blurb": "The loan is priced at 6.5 percentage points above benchmark and 95 US cents on the dollar. JPMorgan Chase and Goldman Sachs led the arrangement, underwriting the US$1.3 billion Norway data-centre lease loan but not the US$3.7 billion chip loan for about 36,000 Nvidia GPUs.",
-        "tickers": []
-      },
-      {
-        "event": "Seatrium launches a S$200 million share buyback",
-        "headline": "Seatrium launches S$200 million share buyback",
-        "blurb": "Funded from existing cash, the programme supports shareholder returns and employee incentives. Its current 2% mandate permits about 68 million shares, worth roughly S$136 million at S$2 each, with the balance requiring mandate renewals at future annual general meetings.",
-        "tickers": [
-          "5E2.SI"
-        ]
-      },
-      {
-        "event": "Genting announces a RM1.25 billion rights issue",
-        "headline": "Genting announces plan for RM1.25 billion rights issue",
-        "blurb": "The renounceable offer will be priced at a 25% to 30% discount, with proceeds used to repay borrowings and fund working capital. Genting had RM45.3 billion in borrowings at end-June.",
-        "tickers": []
-      },
-      {
-        "event": "AirTrunk delays its Singapore REIT IPO",
-        "headline": "AirTrunk delays planned US$1.5 billion Singapore REIT IPO to next year",
-        "blurb": "The Blackstone-backed data centre operator had planned to gauge investor interest in October and had considered offering a roughly 6% yield, up from 5.5%. Higher interest rates and market volatility have tempered demand, according to people familiar with the matter.",
-        "tickers": []
-      }
-    ],
     "deals_control": [
       {
-        "event": "Hongkong Land discusses buying Hotel Properties' Orchard Road assets",
-        "headline": "Hongkong Land discusses buying majority stake in three Orchard Road properties",
-        "blurb": "The early-stage talks with Hotel Properties cover voco Orchard, Forum and HPL House. A deal could expand Hongkong Land’s Singapore retail presence, but talks may still fall through.",
+        "id": "cur_02",
+        "slot": "story",
+        "event": "Bukit Sembawang agrees to acquire the Kallang DistriPark site",
+        "headline": "Bukit Sembawang agrees to acquire part of Kallang site at estimated S$1.01 billion",
+        "blurb": "Its subsidiaries signed a conditional agreement with Tropical Warehousing to buy 5.1ha of land and buildings for S$196.04 million, with estimated total land cost of about S$1.01 billion including lease-upgrade premium and land betterment charges. The planned residential development could yield 600 to 800 condominium units and requires shareholder approval at an upcoming extraordinary general meeting, as well as in-principle approval from the Singapore Land Authority for a fresh 99-year lease.",
         "tickers": [
-          "H78.SI",
-          "H15.SI"
-        ]
+          "B61.SI"
+        ],
+        "supporting_news_ids": [
+          1188,
+          1191
+        ],
+        "copy_decision": "new story"
       },
       {
-        "event": "Jardine Matheson raises guidance and buys out Gammon Construction",
-        "headline": "Jardine Matheson raises 2026 EPS guidance and buys out Gammon for £250 million",
-        "blurb": "The acquisition of Balfour Beatty’s remaining 50% stake makes Jardine Matheson sole owner of Gammon. The £250 million price is payable in three equal instalments, with the final due by 29 December 2028, and is expected to deliver modest earnings accretion from its first year. Underlying 2026 EPS guidance is US$5.50 to US$5.65, up from US$5.33.",
-        "tickers": [
-          "J36.SI"
-        ]
+        "id": "cur_03",
+        "slot": "story",
+        "event": "GIC and Primary Health Properties form a £700 million healthcare-property joint venture",
+        "headline": "GIC and Primary Health Properties form £700 million healthcare-property joint venture",
+        "blurb": "Primary Health Properties will contribute 27 private hospitals and receive £500 million to repay the bridging loan for its Assura acquisition and another debt facility. The deal will reduce its net debt to around £2.9 billion.",
+        "tickers": [],
+        "supporting_news_ids": [
+          1215
+        ],
+        "copy_decision": "new story"
       },
       {
-        "event": "IOI Properties enters exclusive talks for CHIJMES and Capitol Kempinski",
-        "headline": "IOI Properties enters exclusive talks for assets valued at S$976 million",
-        "blurb": "IOI is conducting due diligence, but no purchase consideration has been agreed. Chief executive Lee Yeow Seng plans to bring high-end fashion brands to CHIJMES and replace the hotel with a global ultra-luxury brand.",
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Keppel REIT agrees to acquire a 51% stake in Keppel South Central",
+        "headline": "Keppel REIT agrees to buy 51% of Keppel South Central for S$610.9 million",
+        "blurb": "The conditional agreement is with sponsor Keppel, and the acquisition is expected to add 2.01% to pro forma DPU. Unitholder approval is required at an EGM expected in 4Q2026, with completion targeted for 2Q2027.",
         "tickers": [
-          "9CI.SI"
-        ]
+          "K71U.SI",
+          "BN4.SI"
+        ],
+        "supporting_news_ids": [
+          1221,
+          1236,
+          1277
+        ],
+        "copy_decision": "new story"
       },
       {
-        "event": "Beauty World Plaza launches a collective sale",
-        "headline": "Beauty World Plaza launches collective sale at S$165 million",
-        "blurb": "The asking price equates to about S$2,231 per square foot of gross floor area. Sole marketing agent ETC is conducting a public tender that closes at 3pm on 19 November.",
-        "tickers": []
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Keppel-linked consortium seeks to sell Shanghai's International Bund Gateway",
+        "headline": "Keppel-linked consortium seeks to sell International Bund Gateway for 3 billion yuan",
+        "blurb": "The asking price is about 35% below the 4.6 billion yuan paid in 2019 by Keppel Land China, Keppel Capital’s AAMTF III and co-investors. Savills is the sole marketing agent, and the sale aims to repay debt tied to the asset.",
+        "tickers": [
+          "BN4.SI"
+        ],
+        "supporting_news_ids": [
+          1186
+        ],
+        "copy_decision": "new story"
       }
     ],
     "market_structure_policy": [
       {
-        "event": "Singapore probe into haze-linked palm oil companies",
-        "headline": "Singapore investigates haze-linked palm oil companies as First Resources falls 9.1%",
-        "blurb": "Prime Minister Lawrence Wong said Singapore would investigate which companies may be responsible for fires in Indonesia and act under the Transboundary Haze Pollution Act where warranted. Bumitama Agri fell as much as 7.5% and Golden Agri-Resources 6.9%. Greenpeace’s 5 October report linked Bumitama and First Resources to hotspots in Indonesian plantation concessions; First Resources denied the allegations.",
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Singapore's haze crackdown prompts plantation-company responses and share-price reactions",
+        "headline": "Singapore haze crackdown prompts response as First Resources shares fall over 14%",
+        "blurb": "On 19 October, Senior Minister K. Shanmugam said Singapore would seek more information from First Resources and Bumitama Agri. First Resources welcomed an evidence-based investigation on 20 October, offering satellite hotspot timelines and firefighting records and saying it was confident a review would confirm it had not used fire to clear land.",
         "tickers": [
           "EB5.SI",
-          "P8Z.SI"
-        ]
+          "P8Z.SI",
+          "E5H.SI",
+          "F34.SI",
+          "BNE.SI",
+          "5JS.SI",
+          "TSH.SI",
+          "VC2.SI",
+          "KUH.SI"
+        ],
+        "supporting_news_ids": [
+          1202,
+          1208,
+          1210,
+          1214,
+          1223,
+          1224,
+          1233,
+          1290
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Taiwan blocks Grab's acquisition of foodpanda's Taiwan business",
+        "headline": "Taiwan blocks Grab's US$600 million foodpanda acquisition",
+        "blurb": "The proposed all-cash purchase of foodpanda's Taiwan business from Delivery Hero would have added about 13% to Grab's delivery gross merchandise value and US$60 million to its 2028 adjusted EBITDA, according to Morningstar analyst Kai Wang. Taiwan's Fair Trade Commission said the deal would significantly affect local competition and rejected Grab's proposed remedies as insufficient and unenforceable.",
+        "tickers": [],
+        "supporting_news_ids": [
+          1247,
+          1250
+        ],
+        "copy_decision": "new story"
       }
     ],
-    "other": [
+    "capital_raising_buybacks": [
       {
-        "event": "ComfortDelGro-RATP Dev JV wins Copenhagen Metro operations contract",
-        "headline": "ComfortDelGro JV wins Copenhagen Metro contract worth S$3.3 billion",
-        "blurb": "The KBH Metro Partner venture with RATP Dev signed with Metroselskabet to operate and maintain lines M1 to M4. Operations are due to start in September 2027 under a 12-year term running until 2039, with an option to extend for three years to 2042.",
-        "tickers": [
-          "C52.SI"
-        ]
+        "id": "cur_08",
+        "slot": "story",
+        "event": "Mi Material launches its SGX Mainboard IPO",
+        "headline": "Mi Material launches SGX Mainboard IPO at S$1.80 a share",
+        "blurb": "Seven cornerstone investors, including Amova Asset Management Asia, Fullerton Fund Management and Manulife Investment Management, have committed to subscribe for about 41.94 million new shares. Expected net proceeds are S$157.9 million. Mi Material plans to list on 28 October at 2pm and use proceeds for facility and research expansion.",
+        "tickers": [],
+        "supporting_news_ids": [
+          1211,
+          1217
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "Carro establishes a S$450 million asset-backed securitisation facility",
+        "headline": "Carro establishes S$450 million asset-backed securitisation facility",
+        "blurb": "The warehouse facility is backed by Singapore auto loan receivables originated by its wholly owned subsidiary Genie Financial Services, and is intended to optimise financing and diversify long-term funding. Mizuho Bank arranged the facility, with HSBC and JP Morgan as lenders and note subscribers.",
+        "tickers": [],
+        "supporting_news_ids": [
+          1272
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "Eni announces an extraordinary dividend and increases its share buyback",
+        "headline": "Eni announces about €1.3 billion extraordinary dividend, lifts 2026 buyback to €3.8 billion",
+        "blurb": "The buyback rises from €3.4 billion after increases in April and July. Higher energy prices and refining margins amid the Middle East war buoyed cash flow, while third-quarter adjusted net income was €2.8 billion, above the €2.5 billion average analyst estimate.",
+        "tickers": [],
+        "supporting_news_ids": [
+          1294
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "Deluge Corp begins trading on the SGX Mainboard",
+        "headline": "Deluge Corp begins SGX Mainboard trading, closes 6.7% higher at S$0.64",
+        "blurb": "It opened at S$0.63, 5% above its S$0.60 offer price, after the IPO was 3.86 times subscribed. The IPO and a cornerstone tranche of 23.4 million new shares raised about S$23.4 million gross, with net proceeds of about S$20.1 million expected to fund expansion, working capital and strategic initiatives.",
+        "tickers": [],
+        "supporting_news_ids": [
+          1187
+        ],
+        "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "event": "Toku raises FY2026 revenue growth guidance",
-        "headline": "Toku raises FY2026 revenue growth guidance to exceed 20%",
-        "blurb": "After a review at the end of 3QFY2026 on 30 September, Toku expects 2HFY2026 revenue growth to exceed 26%, up from its previous outlook of more than 13%. Its order book rose 20.8% to US$35.4 million from 30 June.",
-        "tickers": []
+        "id": "cur_12",
+        "slot": "story",
+        "event": "Meta raises its 2026 capital expenditure outlook and announces a stock dividend",
+        "headline": "Meta lifts 2026 capex outlook to US$135-145 billion and announces stock dividend",
+        "blurb": "The new non-voting shares will be distributed as a stock dividend, effectively a two-for-one split, with trading expected from January 2027. Meta says the class will support fundraising, employee compensation and acquisitions while helping ensure Mark Zuckerberg continues to lead the company.",
+        "tickers": [],
+        "supporting_news_ids": [
+          1254
+        ],
+        "copy_decision": "new story"
       },
       {
-        "event": "CGS International upgrades DBS and raises its target price",
-        "headline": "CGS International upgrades DBS and raises target price to S$79.50",
-        "blurb": "The broker lifted its target from S$77.10, citing DBS’s 20% return on equity and projected FY2027 dividend yield of 4.8%, above the sector average of 4.3%. CGS International research head Zheng Weiquan expects Q3 FY2026 net profit of S$2.86 billion, down 3.2% year on year, with loan growth potentially offsetting margin pressure.",
-        "tickers": [
-          "D05.SI"
-        ]
-      },
-      {
-        "event": "UOB Kay Hian upgrades DBS and sets a higher target price",
-        "headline": "UOB Kay Hian upgrades DBS to Buy with S$83.60 target",
-        "blurb": "The broker cites DBS's S$638 billion deposit base, with 54.4% of customer deposits in CASA accounts, as cushioning it from fixed-deposit promotions by UOB and OCBC. It expects dividend yields of 4.5% for FY2026 and 4.7% for FY2027.",
-        "tickers": [
-          "D05.SI"
-        ]
-      },
-      {
-        "event": "DBS downgrades Singapore Exchange and cuts its target price",
-        "headline": "DBS downgrades Singapore Exchange to hold and cuts target to S$20",
-        "blurb": "The 12-month target was reduced from S$26.40. DBS Group Research also lowered earnings per share estimates by 4 to 5 per cent through FY2028, citing easing growth momentum in equities and derivatives and a lofty valuation ahead of Singapore Exchange’s first-half results.",
+        "id": "cur_13",
+        "slot": "story",
+        "event": "RHB lowers its target price for Singapore Exchange",
+        "headline": "RHB lowers Singapore Exchange target price to S$20.30",
+        "blurb": "RHB maintained a neutral rating after implied first-half FY2027 securities and derivatives activity tracked 7.4% and 10.2% below its expectations. It cut FY2027, FY2028 and FY2029 earnings forecasts by 8.3%, 8.4% and 8.5%, respectively, and now expects recurring net-profit growth to slow to 5% in FY2027 from 21.1% in FY2026.",
         "tickers": [
           "S68.SI"
-        ]
+        ],
+        "supporting_news_ids": [
+          1220
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_14",
+        "slot": "story",
+        "event": "DBS downgrades Jardine Matheson Southeast Asia to Hold",
+        "headline": "DBS downgrades Jardine Matheson Southeast Asia to Hold, cuts target to S$25",
+        "blurb": "DBS Group Research said near-term value-unlocking potential is largely priced in, with the company trading at about a 20 per cent premium to pro forma NAV and more than 85 per cent of gross asset value tied to Astra International. It cut FY2026 and FY2027 earnings forecasts by 5 per cent and 10 per cent, respectively, and said Astra’s investor day on 16 November could be a catalyst for both stocks.",
+        "tickers": [
+          "J36.SI",
+          "C07.SI"
+        ],
+        "supporting_news_ids": [
+          1237
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_15",
+        "slot": "story",
+        "event": "DBS raises its target price for Yangzijiang Shipbuilding",
+        "headline": "DBS raises Yangzijiang Shipbuilding target price to S$6.60",
+        "blurb": "DBS Group Research raised its target from S$5.60 and reiterated a BUY rating. Its 15 October report forecasts US$6.5 billion in FY2026 orders, up from US$4.5 billion, and expects the orderbook to exceed a record US$25 billion, providing visibility through 2030.",
+        "tickers": [
+          "SO7.SI"
+        ],
+        "supporting_news_ids": [
+          1234
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "macro_flows": [
+      {
+        "id": "cur_16",
+        "slot": "story",
+        "event": "Oil prices rise after an attack on Saudi Aramco's Shaybah field",
+        "headline": "Oil rises after attack on Saudi Aramco’s Shaybah field, with Brent above US$110",
+        "blurb": "A drone strike on the field killed two people, but operations were unaffected. West Texas Intermediate rose toward US$98 a barrel after swinging in a US$4 range, while Brent has surged almost 80% this year following a US-Iran war that disrupted Persian Gulf energy flows.",
+        "tickers": [],
+        "supporting_news_ids": [
+          1257
+        ],
+        "copy_decision": "new story"
       }
     ]
-  }
+  },
+  "flash": [
+    {
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "Keppel's Empire City arbitration claim is suspended pending its stake sale",
+      "headline": "Keppel's arbitration claim over S$332.76 million additional land use fee in Ho Chi Minh City suspended pending Empire City stake sale",
+      "blurb": null,
+      "tickers": [
+        "BN4.SI"
+      ],
+      "supporting_news_ids": [
+        1189
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "IOI Properties pursues Singapore acquisitions and targets top-three market status",
+      "headline": "IOI Properties Group president Lee Yeow Seng aims to rank among Singapore's top three property players within three to five years",
+      "blurb": null,
+      "tickers": [
+        "9CI.SI"
+      ],
+      "supporting_news_ids": [
+        1203
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "Tuan Sing agrees to acquire Westgate Tower for S$600 million",
+      "headline": "Tuan Sing Holdings to buy Westgate Tower in Jurong Lake District for $600 million",
+      "blurb": null,
+      "tickers": [
+        "T24.SI"
+      ],
+      "supporting_news_ids": [
+        1293
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "Musk endorses a potential SpaceX-Tesla merger amid early talks",
+      "headline": "Musk's public endorsement of potential US$3.5 trillion SpaceX-Tesla merger may complicate talks",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        1270
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "SGX CEO Loh Boon Chye plans to step down in 2027",
+      "headline": "SGX CEO Loh Boon Chye to step down in 2027 as exchange begins search for successor",
+      "blurb": null,
+      "tickers": [
+        "S68.SI"
+      ],
+      "supporting_news_ids": [
+        1291
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "CGS International cuts its Genting Singapore target price",
+      "headline": "CGS International cuts Genting Singapore target price to S$0.63 on hazy tourism outlook, keeps \"hold\"",
+      "blurb": null,
+      "tickers": [
+        "G13.SI"
+      ],
+      "supporting_news_ids": [
+        1289
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "Frasers Centrepoint Trust reports its H2 FY2026 results",
+      "headline": "Frasers Centrepoint Trust posts 6.214 Singapore cents H2 DPU as net property income rises 11.5%",
+      "blurb": null,
+      "tickers": [
+        "J69U.SI"
+      ],
+      "supporting_news_ids": [
+        1260
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_24",
+      "slot": "flash",
+      "event": "Suntec REIT reports higher Q3 distribution per unit",
+      "headline": "Suntec REIT (T82U.SI) reported a 13.4% year-on-year rise in third-quarter distribution per unit to S$0,02017.",
+      "blurb": null,
+      "tickers": [
+        "T82U.SI"
+      ],
+      "supporting_news_ids": [
+        1273,
+        1279
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_25",
+      "slot": "flash",
+      "event": "China Galaxy Securities lowers its Keppel REIT target price",
+      "headline": "China Galaxy Securities lowers target price for Keppel REIT to S$0.945 while maintaining Buy rating",
+      "blurb": null,
+      "tickers": [
+        "K71U.SI"
+      ],
+      "supporting_news_ids": [
+        1251
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_26",
+      "slot": "flash",
+      "event": "OUE REIT reports higher Q3 net property income",
+      "headline": "OUE Real Estate Investment Trust (TS0U.SI) reported Q3 net property income of S$59.6 million, up 4.6% year on year.",
+      "blurb": null,
+      "tickers": [
+        "TS0U.SI"
+      ],
+      "supporting_news_ids": [
+        1248,
+        1252
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_27",
+      "slot": "flash",
+      "event": "CapitaLand China Trust reports lower Q3 net property income",
+      "headline": "CapitaLand China Trust's Q3 net property income falls 5.1% as unit price edges up",
+      "blurb": null,
+      "tickers": [
+        "AU8U.SI"
+      ],
+      "supporting_news_ids": [
+        1283
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_28",
+      "slot": "flash",
+      "event": "Alpha Integrated REIT reports higher Q3 portfolio occupancy",
+      "headline": "Alpha Integrated REIT's portfolio occupancy rises to 96.1% in Q3",
+      "blurb": null,
+      "tickers": [
+        "M1GU.SI"
+      ],
+      "supporting_news_ids": [
+        1259
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_29",
+      "slot": "flash",
+      "event": "CapitaLand Malaysia Trust reports higher Q3 distribution per unit",
+      "headline": "CapitaLand Malaysia Trust's Q3 DPU up 21.6% to RM0.0135 on industrial and logistics contributions",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        1253
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_30",
+      "slot": "flash",
+      "event": "Marina Bay Sands reports lower Q3 adjusted property EBITDA",
+      "headline": "Marina Bay Sands' Q3 adjusted property Ebitda falls 20.6% on fewer high-roller visits and weaker hold",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        1274
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_31",
+      "slot": "flash",
+      "event": "IMDA fines Singtel S$1 million over March mobile outages",
+      "headline": "Singtel fined S$1 million by IMDA over March mobile outages affecting 720,000 subscribers",
+      "blurb": null,
+      "tickers": [
+        "Z74.SI"
+      ],
+      "supporting_news_ids": [
+        1232
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_32",
+      "slot": "flash",
+      "event": "Seatrium-GE Vernova consortium says offshore wind platform delivery remains on track",
+      "headline": "Seatrium-GE Vernova consortium's world's largest 2 GW offshore wind platform on track for 2028 delivery to Tennet",
+      "blurb": null,
+      "tickers": [
+        "5E2.SI"
+      ],
+      "supporting_news_ids": [
+        1275
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_33",
+      "slot": "flash",
+      "event": "Seatrium targets S$9 billion in offshore wind opportunities",
+      "headline": "Seatrium Targets S$9 Billion Offshore Wind Pipeline Across Europe and Asia",
+      "blurb": null,
+      "tickers": [
+        "5E2.SI"
+      ],
+      "supporting_news_ids": [
+        1278
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_34",
+      "slot": "flash",
+      "event": "Mapletree Logistics Trust reports 1Q FY2027 distribution per unit growth",
+      "headline": "Is Mapletree Logistics Trust's 6.8% Distribution Yield Safe?",
+      "blurb": null,
+      "tickers": [
+        "M44U.SI"
+      ],
+      "supporting_news_ids": [
+        1256
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_35",
+      "slot": "flash",
+      "event": "CSE Global begins data-centre work with a second hyperscaler",
+      "headline": "CSE Global: UOB Kay Hian Maintains BUY With S$1.79 Target After Positive Management Meeting",
+      "blurb": null,
+      "tickers": [
+        "544.SI"
+      ],
+      "supporting_news_ids": [
+        1255
+      ],
+      "copy_decision": "new story"
+    }
+  ],
+  "what_to_watch": [
+    {
+      "id": "wtw_01",
+      "sort_date": "2026-10-28",
+      "timing_label": "28 Oct",
+      "title": "Mi Material lists on SGX Mainboard",
+      "tickers": [],
+      "supporting_news_ids": [
+        1211,
+        1217
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2026-11-16",
+      "timing_label": "16 Nov",
+      "title": "Astra International holds investor day",
+      "tickers": [
+        "C07.SI",
+        "J36.SI"
+      ],
+      "supporting_news_ids": [
+        1237
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2026-12-31",
+      "timing_label": "Q4",
+      "title": "Keppel's Empire City stake sale resolves ALUF arbitration claims",
+      "tickers": [
+        "BN4.SI"
+      ],
+      "supporting_news_ids": [
+        1189
+      ]
+    },
+    {
+      "id": "wtw_04",
+      "sort_date": "2026-12-31",
+      "timing_label": "Q4",
+      "title": "Keppel REIT unitholders vote on Keppel South Central acquisition",
+      "tickers": [
+        "BN4.SI",
+        "K71U.SI"
+      ],
+      "supporting_news_ids": [
+        1221,
+        1236,
+        1277
+      ]
+    }
+  ]
 }
