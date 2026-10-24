@@ -1,631 +1,222 @@
 {
-  "issue_date": "2026-10-23",
-  "window_start": "2026-10-22T13:50:00Z",
-  "window_end": "2026-10-23T13:50:00Z",
+  "issue_date": "2026-10-24",
+  "window_start": "2026-10-23T13:50:00Z",
+  "window_end": "2026-10-24T01:46:19Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Bank Indonesia cuts reserve requirements and raises the Deposit Facility rate",
-    "headline": "Bank Indonesia cuts reserve requirements and raises Deposit Facility rate to 5%",
-    "blurb": "Conventional banks’ reserve requirement falls from 9% to 8% on 1 November and 7% on 1 December, while Islamic banks and business units’ requirement drops from 7.5% to 6.5% and then 5.5%. BI also lowers the KLM incentive from 6% to 5% on 1 December. The 25-basis-point Deposit Facility increase is from 4.75%, while BI holds its policy rate at 5.75% and the Lending Facility at 6.5%. BI says the changes align policy with money-market conditions and are not a signal of liquidity tightening.",
-    "tickers": [],
-    "supporting_news_ids": [
-      30892,
-      30898,
-      30904
+    "event": "Bukalapak reports third-quarter 2026 financial results",
+    "headline": "BUKA reports results through Q3 2026, swings to Rp885.8 billion net loss",
+    "blurb": "Bukalapak’s revenue through the third quarter rose 19.34% year on year to Rp5.64 trillion, but it moved from a Rp2.9 trillion profit a year earlier to a loss. A Rp2.03 trillion investment loss, versus a Rp2.32 trillion profit, contributed to an operating loss of Rp1.13 trillion. Adjusted EBITDA turned positive at Rp11 billion, an improvement of Rp64 billion, which Director Victor Putra Lesmana attributed to business transformation and cost discipline.",
+    "tickers": [
+      "BUKA.JK"
     ],
-    "copy_decision": "rewritten: moved from story to lead"
+    "supporting_news_ids": [
+      30941
+    ],
+    "copy_decision": "new story"
   },
   "sections": {
     "capital_raising_buybacks": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Indofood, Indofood CBP, and Salim Ivomas plan share buybacks",
-        "headline": "INDF, ICBP and LSIP plan Rp2.25 trillion share buybacks",
-        "blurb": "Each has allocated up to Rp750 billion, with purchases capped at 20% of paid-in capital and funded from internal cash. The programs are scheduled to run from 26 October to 31 December.",
+        "event": "Bank Rakyat Indonesia plans a second-phase share buyback",
+        "headline": "BBRI plans second-phase buyback of up to Rp1 trillion",
+        "blurb": "The program runs from 22 October to 21 January 2027. BRI plans to use repurchased shares for employee and/or board ownership programs, with transfers subject to approval at a General Meeting of Shareholders.",
         "tickers": [
-          "INDF.JK",
-          "ICBP.JK",
-          "LSIP.JK"
+          "BBRI.JK"
         ],
         "supporting_news_ids": [
-          30899
+          30938
         ],
         "copy_decision": "new story"
-      },
-      {
-        "id": "cur_03",
-        "slot": "story",
-        "event": "TOBA secures up to S$555 million investment for Asian waste-management expansion",
-        "headline": "TOBA plans to raise up to S$555 million for Asian waste expansion",
-        "blurb": "Funds managed by HPS Investment Partners would be channeled through SBTH Asia Holdings in staged issuances of preferred shares and warrants, with TOBA retaining control. Shareholder approval is scheduled for 27 November 2026.",
-        "tickers": [
-          "TOBA.JK"
-        ],
-        "supporting_news_ids": [
-          30821,
-          30831,
-          30862
-        ],
-        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_04",
+        "id": "cur_03",
         "slot": "story",
-        "event": "Pradiksi reports nine-month 2026 profit growth",
-        "headline": "PGUN reports 33.53% nine-month profit growth",
-        "blurb": "Pradiksi earned Rp135.44 billion for the period ended 30 September, up from Rp101.43 billion a year earlier, while basic earnings per share rose to 23.61 from 17.68. Net sales increased 5.25% to Rp566.1 billion, and PGUN shares rose 3.75% to Rp8,300 in morning trading after the results.",
-        "tickers": [
-          "PGUN.JK"
-        ],
-        "supporting_news_ids": [
-          30858
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "Bank Mandiri reports nine-month 2026 results",
-        "headline": "BMRI reports nine-month 2026 net profit of Rp45.5 trillion, up 20.7%",
-        "blurb": "Bank Mandiri's gross non-performing loan ratio improved to 0.98% from 1.03% a year earlier. Bank-only loans rose 16% to Rp1,605.83 trillion, while third-party funds increased 17.7% to Rp1,750.2 trillion.",
-        "tickers": [
-          "BMRI.JK"
-        ],
-        "supporting_news_ids": [
-          30879,
-          30891,
-          30907,
-          30917,
-          30923,
-          30924
-        ],
-        "copy_decision": "rewritten: 4 new articles with a new fact: Gross non-performing loans improved to 0.98% from 1.03% a year earlier."
-      },
-      {
-        "id": "cur_06",
-        "slot": "story",
-        "event": "AKR Corporindo reports nine-month 2026 profit growth",
-        "headline": "AKRA reports nine-month 2026 profit up 32.37%",
-        "blurb": "AKR Corporindo's revenue rose 43.64% to Rp46.53 trillion, with fuel and basic-chemicals trading and distribution accounting for more than 90%. The segment's gross margin improved to 6.9% in the third quarter from 4.6% in the second quarter, while industrial-estate revenue grew 143.60% to Rp2.72 trillion.",
-        "tickers": [
-          "AKRA.JK"
-        ],
-        "supporting_news_ids": [
-          30875,
-          30886,
-          30912
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: The trading and distribution segment’s gross margin improved to 6.9% in Q3-2026 from 4.6% in Q2-2026."
-      },
-      {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "Darma Henwa analyst outlook cites results, growth forecasts, and catalysts",
-        "headline": "DEWA analyst forecasts Rp1.64 trillion net profit in 2027",
-        "blurb": "Darma Henwa plans a Sukuk Wakalah issuance of up to Rp3.5 trillion, with an initial Rp1.5 trillion tranche targeted for December 2026. BRI Danareksa Sekuritas links its outlook to improving results and expansion, forecasting 2027 EBITDA of Rp4.04 trillion, up 86.4%, as DEWA targets 30–35 million bank cubic meters of overburden removal at Sebuku.",
-        "tickers": [
-          "DEWA.JK"
-        ],
-        "supporting_news_ids": [
-          30854,
-          30905,
-          30915
-        ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: DEWA plans a Sukuk Wakalah issuance of up to Rp3.5 trillion."
-      }
-    ],
-    "deals_control": [
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "PACK plans a rights issue to fund nickel-asset acquisitions",
-        "headline": "PACK plans Rp8.19 trillion rights issue for nickel acquisitions",
-        "blurb": "Abadi Nusantara plans to issue up to 100 billion shares at Rp10, with Eco Energi Perkasa backing up to US$418 million of unsubscribed shares. Proceeds would fund DDL and Bumanik acquisitions, loan repayment and working capital; CNGR targets at least 50% of PACK ahead of the 30 November shareholder vote.",
-        "tickers": [
-          "PACK.JK"
-        ],
-        "supporting_news_ids": [
-          30822,
-          30829,
-          30830,
-          30832,
-          30843,
-          30849,
-          30856,
-          30887,
-          30893,
-          30910,
-          30921
-        ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: CNGR is targeting at least 50% ownership of PACK."
-      },
-      {
-        "id": "cur_09",
-        "slot": "story",
-        "event": "Beruntung Berkat Sejahtera negotiates to acquire control of STRK",
-        "headline": "Beruntung Berkat Sejahtera negotiates to acquire 61.87% of STRK",
-        "blurb": "Beruntung Berkat Sejahtera signed a conditional Indicative Terms and Conditions agreement with Barito Mas Sukses on 21 October. It is negotiating to buy 6.63 billion STRK shares, equal to 61.87% of the company. The proposed acquisition is subject to further due diligence and a definitive sale and purchase agreement, and would make Beruntung Berkat Sejahtera STRK’s controlling shareholder.",
-        "tickers": [
-          "STRK.JK"
-        ],
-        "supporting_news_ids": [
-          30828,
-          30848,
-          30857,
-          30878
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_10",
-        "slot": "story",
-        "event": "Impack Pratama shareholders buy shares ahead of the interim dividend ex-date",
-        "headline": "IMPC shareholders buy Rp127 billion of shares ahead of interim dividend ex-date",
-        "blurb": "Impack Pratama shareholders bought a combined Rp127 billion of shares. Tunggal Jaya Investama accounted for Rp121.95 billion, buying 150 million shares at Rp813 on 20 October and raising its stake to 38.80% from 38.53%. The company will pay its Rp5-per-share interim dividend on 30 October.",
-        "tickers": [
-          "IMPC.JK"
-        ],
-        "supporting_news_ids": [
-          30889
-        ],
-        "copy_decision": "rewritten: moved from flash to story"
-      },
-      {
-        "id": "cur_11",
-        "slot": "story",
-        "event": "Adhi Karya schedules shareholder meeting on divestment and proceeds",
-        "headline": "ADHI schedules 13 November meeting on JMJ divestment and rights issue proceeds",
-        "blurb": "Adhi Karya will seek shareholder approval to divest its holding in affiliate Jasamarga Jogja Solo in a transaction worth more than 50% of its latest audited net assets. It will also seek approval to change the planned use of proceeds from its second rights issue, with the changes valued at more than 10% of total offering proceeds.",
-        "tickers": [
-          "ADHI.JK"
-        ],
-        "supporting_news_ids": [
-          30860
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "market_structure_policy": [
-      {
-        "id": "cur_12",
-        "slot": "story",
-        "event": "Government plans to hand over Papua gold mine to Antam",
-        "headline": "Government plans to hand over 275.36-hectare Papua gold mine to ANTM",
-        "blurb": "The government revoked Kristalin Eka Lestari’s mining permit on 12 October and shut down its 275.36-hectare site on 22 October. Antam is planned to manage the area as both operator and investor.",
+        "event": "ANTAM reports first-half results and continues studying a share buyback",
+        "headline": "ANTM reports Rp6.91 trillion first-half profit and continues buyback study",
+        "blurb": "Aneka Tambang's revenue rose 6.3% to Rp62.71 trillion and net profit increased 34% year on year. Corporate Secretary Wisnu Danandi Haryanto said the company is weighing market conditions, fundamentals, financial capacity and funding needs for operations and downstream development before deciding on a step.",
         "tickers": [
           "ANTM.JK"
         ],
         "supporting_news_ids": [
-          30861
+          30932,
+          30939
         ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "macro_flows": [
+        "copy_decision": "new story"
+      },
       {
-        "id": "cur_13",
+        "id": "cur_04",
         "slot": "story",
-        "event": "MSCI's proposed Indonesia reclassification prompts market responses and capital outflows",
-        "headline": "MSCI proposes Indonesia downgrade as investors sell net US$5.3 billion",
-        "blurb": "A downgrade would remove all Indonesian stocks from MSCI index coverage, and Goldman Sachs estimates it could trigger US$5.6 billion in outflows. Indonesia has until the end of April 2027 to show progress, with MSCI’s decision expected in June.",
-        "tickers": [],
-        "supporting_news_ids": [
-          30844,
-          30852,
-          30863,
-          30874,
-          30881,
-          30895,
-          30897,
-          30903,
-          30906,
-          30918,
-          30919,
-          30922
+        "event": "Bukit Asam reports first-half results and reviews a potential share buyback",
+        "headline": "PTBA reports first-half profit of Rp2.65 trillion, studies potential buyback",
+        "blurb": "Revenue rose 8% year on year to Rp22.03 trillion, while coal sales reached 21.10 million tons, including 10.33 million tons for export. Corporate Secretary Division Head Eko Prayitno said any buyback would be assessed against liquidity, working-capital needs and long-term plans, with any decision disclosed to OJK and the Indonesia Stock Exchange.",
+        "tickers": [
+          "PTBA.JK"
         ],
-        "copy_decision": "rewritten: moved from lead to story"
+        "supporting_news_ids": [
+          30937,
+          30940
+        ],
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_14",
+      "id": "cur_05",
       "slot": "flash",
-      "event": "Sido Muncul sets a 2026 interim dividend",
-      "headline": "Sido Muncul (SIDO) approves a Rp300 billion interim dividend for fiscal year 2026",
-      "blurb": null,
-      "tickers": [
-        "SIDO.JK"
-      ],
-      "supporting_news_ids": [
-        30873,
-        30883,
-        30901,
-        30916
-      ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: The Rp300 billion allocation is SIDO’s lowest interim dividend since 2020."
-    },
-    {
-      "id": "cur_15",
-      "slot": "flash",
-      "event": "Sat Nusapersada reports first-half 2026 results",
-      "headline": "PT Sat Nusapersada Tbk (PTSN.JK) reports first-half 2026 revenue of US$182.28 million, up 65.2%, as profit falls 30.4%",
-      "blurb": null,
-      "tickers": [
-        "PTSN.JK"
-      ],
-      "supporting_news_ids": [
-        30902,
-        30911
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "Garuda Metalindo reports its latest profit",
-      "headline": "Garuda Metalindo (BOLT) Records Profit of Rp116.74 Billion in Latest Performance",
-      "blurb": null,
-      "tickers": [
-        "BOLT.JK"
-      ],
-      "supporting_news_ids": [
-        30876
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_17",
-      "slot": "flash",
-      "event": "Adhi Karya reports nine-month 2026 profit growth",
-      "headline": "Adhi Karya (ADHI) reported a 247.05% increase in nine-month net profit to Rp15.34 billion",
-      "blurb": null,
-      "tickers": [
-        "ADHI.JK"
-      ],
-      "supporting_news_ids": [
-        30837,
-        30847
-      ],
-      "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
-    },
-    {
-      "id": "cur_18",
-      "slot": "flash",
-      "event": "PP reports progress on an emergency road repair project",
-      "headline": "PT PP Tbk (PTPP) Reports 70.83% Progress on Ministry of Public Works Emergency Road Project Worth Rp 268.66 Billion",
-      "blurb": null,
-      "tickers": [
-        "PTPP.JK"
-      ],
-      "supporting_news_ids": [
-        30913
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_19",
-      "slot": "flash",
-      "event": "Puri Sentul Permai reports Q3 2026 profit growth",
-      "headline": "KDTN reports Q3 2026 profit growth of 456.26%",
-      "blurb": null,
-      "tickers": [
-        "KDTN.JK"
-      ],
-      "supporting_news_ids": [
-        30859
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_20",
-      "slot": "flash",
-      "event": "Phapros sets 2026 sales and profit growth targets",
-      "headline": "PEHA targets over 20% sales growth and around 23% profit rise in 2026",
-      "blurb": null,
-      "tickers": [
-        "PEHA.JK"
-      ],
-      "supporting_news_ids": [
-        30823
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_21",
-      "slot": "flash",
-      "event": "Court cancels KPPU's sanction against Pindar",
-      "headline": "Pindar Boss Appreciates Court Ruling Canceling KPPU Sanction of Rp755 Billion",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        30880
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_22",
-      "slot": "flash",
-      "event": "BRI announces Phase II share buyback of up to Rp1 trillion",
-      "headline": "PT Bank Rakyat Indonesia (Persero) Tbk (BBRI) Announces Phase II Share Buyback of Up to Rp1 Trillion",
-      "blurb": null,
-      "tickers": [
-        "BBRI.JK"
-      ],
-      "supporting_news_ids": [
-        30840
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_23",
-      "slot": "flash",
-      "event": "DCI Indonesia reports nine-month 2026 results",
-      "headline": "PT DCI Indonesia Tbk (DCII) Posts Rp 919.84 Billion Net Profit for January-September 2026, Up 11.5%",
-      "blurb": null,
-      "tickers": [
-        "DCII.JK"
-      ],
-      "supporting_news_ids": [
-        30888
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_24",
-      "slot": "flash",
-      "event": "Bayan Resources responds to questions about its below-market share transfer price",
-      "headline": "Bayan Resources (BYAN) says it cannot explain the Rp2,588-per-share transfer to Jhonlin Baratama",
-      "blurb": null,
-      "tickers": [
-        "BYAN.JK"
-      ],
-      "supporting_news_ids": [
-        30836,
-        30841,
-        30846,
-        30920
-      ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: As of 19 October 2026, Jhonlin Baratama held 30.25% of BYAN, versus 30.30% for the combined Low family stake."
-    },
-    {
-      "id": "cur_25",
-      "slot": "flash",
-      "event": "OJK imposes record capital-market fines and sets a payment deadline",
-      "headline": "OJK imposed Rp2.1 trillion in fines in cases involving Dian Swastatika Sentosa (DSSA), Barito Renewables Energy and Petrindo Jaya Kreasi",
-      "blurb": null,
-      "tickers": [
-        "DSSA.JK",
-        "BREN.JK",
-        "CUAN.JK"
-      ],
-      "supporting_news_ids": [
-        30819,
-        30882,
-        30894,
-        30896,
-        30900
-      ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: As of 1 October 2026, 122 cases remained in OJK’s handling pipeline."
-    },
-    {
-      "id": "cur_26",
-      "slot": "flash",
-      "event": "Amman Mineral prepares a Rp1 trillion share buyback",
-      "headline": "Amman Mineral Internasional (AMMN) plans a share buyback of up to Rp1 trillion through January 2027.",
-      "blurb": null,
-      "tickers": [
-        "AMMN.JK"
-      ],
-      "supporting_news_ids": [
-        30834,
-        30845,
-        30877
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_27",
-      "slot": "flash",
-      "event": "Telkom completes buyback tied to wholesale fiber business separation",
-      "headline": "Telkom Indonesia (TLKM) completes buyback of 15,956,199 shares for Rp36.54 billion",
-      "blurb": null,
-      "tickers": [
-        "TLKM.JK"
-      ],
-      "supporting_news_ids": [
-        30820,
-        30850
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_28",
-      "slot": "flash",
-      "event": "BRMS CEO Agus Projosasmito buys 5.5 million shares",
-      "headline": "Bumi Resources Minerals (BRMS) director buys 5.5 million shares for about Rp2.46 billion",
-      "blurb": null,
-      "tickers": [
-        "BRMS.JK"
-      ],
-      "supporting_news_ids": [
-        30818,
-        30838
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_29",
-      "slot": "flash",
-      "event": "Unilever Indonesia reports nine-month 2026 earnings growth",
-      "headline": "Unilever Indonesia (UNVR) reported Rp4.20 trillion in net profit for January–September 2026",
-      "blurb": null,
-      "tickers": [
-        "UNVR.JK"
-      ],
-      "supporting_news_ids": [
-        30824,
-        30835
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_30",
-      "slot": "flash",
-      "event": "Jasa Marga studies a share buyback plan",
-      "headline": "Analysts weigh in on PT Jasa Marga Tbk (JSMR) share buyback plan as stock closes up 5.11%",
-      "blurb": null,
-      "tickers": [
-        "JSMR.JK"
-      ],
-      "supporting_news_ids": [
-        30833
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_31",
-      "slot": "flash",
-      "event": "Sumber Global Energy repays its bond early",
-      "headline": "SGER repays Rp273.64 billion bond early",
+      "event": "Sumber Global Energy repays its Rp273.64 billion bond",
+      "headline": "PT Sumber Global Energy Tbk (SGER) repays Rp273.64 billion bond to strengthen capital structure",
       "blurb": null,
       "tickers": [
         "SGER.JK"
       ],
       "supporting_news_ids": [
-        30885
+        30943
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "new story"
     },
     {
-      "id": "cur_32",
+      "id": "cur_06",
       "slot": "flash",
-      "event": "Tempo Scan sets Rp75-per-share interim dividend",
-      "headline": "Tempo Scan (TSPC) Sets Interim Dividend of Rp75 Per Share, Cum Date October 30",
+      "event": "Bank Mandiri reports nine-month 2026 financial results",
+      "headline": "Bank Mandiri Posts Rp45.5 Trillion Net Profit in Q3 2026, Up 20.7% YoY on Solid Performance",
       "blurb": null,
       "tickers": [
-        "TSPC.JK"
+        "BMRI.JK"
       ],
       "supporting_news_ids": [
-        30839
+        30936
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
     },
     {
-      "id": "cur_33",
+      "id": "cur_07",
       "slot": "flash",
-      "event": "Folago Global Nusantara and YouTube Indonesia announce a partnership",
-      "headline": "PT Folago Global Nusantara Tbk (IRSX) and YouTube Indonesia Announce Strategic Partnership on Micro Drama and Creator Collaboration",
+      "event": "Indofood CBP prepares a Rp750 billion share buyback",
+      "headline": "PT Indofood CBP Sukses Makmur Tbk (ICBP) Prepares Rp 750 Billion Share Buyback, Earnings per Share Projected to Rise",
       "blurb": null,
       "tickers": [
-        "IRSX.JK"
+        "ICBP.JK"
       ],
       "supporting_news_ids": [
-        30890
+        30934
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
     },
     {
-      "id": "cur_34",
+      "id": "cur_08",
       "slot": "flash",
-      "event": "Welly sells Suparma shares",
-      "headline": "Welly sell Shares of Suparma",
+      "event": "Indofood Sukses Makmur prepares a Rp750 billion share buyback",
+      "headline": "PT Indofood Sukses Makmur Tbk (INDF) Prepares Up to Rp 750 Billion for Share Buyback",
       "blurb": null,
       "tickers": [
-        "SPMA.JK"
+        "INDF.JK"
       ],
       "supporting_news_ids": [
-        30865
+        30933
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
     },
     {
-      "id": "cur_35",
+      "id": "cur_09",
       "slot": "flash",
-      "event": "Gloriajaya Gempita sells Suparma shares",
-      "headline": "Gloriajaya Gempita sell Shares of Suparma",
+      "event": "PP London Sumatra prepares a share buyback of up to Rp750 billion",
+      "headline": "PT PP London Sumatra Indonesia Tbk (LSIP) Prepares Share Buyback of Up to Rp 750 Billion",
       "blurb": null,
       "tickers": [
-        "SPMA.JK"
+        "LSIP.JK"
       ],
       "supporting_news_ids": [
-        30866
+        30935
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
     },
     {
-      "id": "cur_36",
+      "id": "cur_10",
       "slot": "flash",
-      "event": "IDX removes high-concentration and Acceleration Board stocks from JCI",
-      "headline": "IDX to Exclude High Shareholding Concentration Stocks from JCI Starting November 2",
+      "event": "Bank Indonesia eases macroprudential liquidity incentives and reserve requirements",
+      "headline": "Bank Indonesia Eases Macroprudential Liquidity Incentives as Deposit Growth Lags Credit Expansion",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
-        30825
+        30931
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Bank Indonesia confirms foreign capital outflows after MSCI's market-classification consultation",
+      "headline": "Bank Indonesia Confirms Foreign Capital Outflows After MSCI's Potential Downgrade of Indonesia to Standalone Market",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        30945
+      ],
+      "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-27",
-      "timing_label": "27 Nov",
-      "title": "TOBA shareholders vote on SGD555 million HPS investment",
+      "sort_date": "2026-10-26",
+      "timing_label": "26 Oct",
+      "title": "INDF buyback of up to Rp 750 billion opens, runs until 31 Dec",
       "tickers": [
-        "TOBA.JK"
+        "INDF.JK"
       ],
       "supporting_news_ids": [
-        30821,
-        30831,
-        30862
+        30933
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-11-30",
-      "timing_label": "Nov",
-      "title": "PACK shareholders vote on nickel acquisitions and a business-activity change",
+      "sort_date": "2026-10-26",
+      "timing_label": "26 Oct",
+      "title": "ICBP buyback of up to Rp 750 billion opens, runs until 31 Dec",
       "tickers": [
-        "PACK.JK"
+        "ICBP.JK"
       ],
       "supporting_news_ids": [
-        30822,
-        30829,
-        30830,
-        30832,
-        30843,
-        30849,
-        30856,
-        30887,
-        30893,
-        30910,
-        30921
+        30934
       ]
     },
     {
       "id": "wtw_03",
-      "sort_date": "2027-06-30",
-      "timing_label": "Jun 2027",
-      "title": "MSCI decides whether to downgrade Indonesia to Standalone Market status",
+      "sort_date": "2026-10-26",
+      "timing_label": "26 Oct",
+      "title": "LSIP buyback of up to Rp 750 billion opens, runs until 31 Dec",
+      "tickers": [
+        "LSIP.JK"
+      ],
+      "supporting_news_ids": [
+        30935
+      ]
+    },
+    {
+      "id": "wtw_04",
+      "sort_date": "2026-11-01",
+      "timing_label": "1 Nov",
+      "title": "BI lowers reserve requirement to 8%",
       "tickers": [],
       "supporting_news_ids": [
-        30844,
-        30852,
-        30863,
-        30874,
-        30881,
-        30895,
-        30897,
-        30903,
-        30906,
-        30918,
-        30919,
-        30922
+        30931
+      ]
+    },
+    {
+      "id": "wtw_05",
+      "sort_date": "2026-12-31",
+      "timing_label": "Dec",
+      "title": "BI cuts KLM financing incentive by 1 percentage point",
+      "tickers": [],
+      "supporting_news_ids": [
+        30931
       ]
     }
   ]
