@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-10-24",
   "window_start": "2026-10-23T13:50:00Z",
-  "window_end": "2026-10-24T01:46:19Z",
+  "window_end": "2026-10-24T05:56:17Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -14,7 +14,7 @@
     "supporting_news_ids": [
       30941
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
     "capital_raising_buybacks": [
@@ -30,12 +30,56 @@
         "supporting_news_ids": [
           30938
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Indofood CBP prepares a Rp750 billion share buyback",
+        "headline": "ICBP plans a Rp750 billion share buyback",
+        "blurb": "Indofood CBP plans to fund the repurchase with internal cash from 26 October to 31 December, or earlier if it reaches the cap, and shares bought back will not exceed 20% of paid-up capital. Assuming the full buyback, pro forma earnings per share is projected to rise from Rp317 to Rp321 based on 30 June 2026 financials.",
+        "tickers": [
+          "ICBP.JK"
+        ],
+        "supporting_news_ids": [
+          30934
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Indofood Sukses Makmur prepares and begins its Rp750 billion share buyback",
+        "headline": "INDF prepares a Rp750 billion share buyback",
+        "blurb": "Indofood Sukses Makmur will fund the buyback with internal cash and hold repurchased shares as treasury shares, with purchases capped at 20% of paid-up capital, subject to free-float requirements. Pro forma earnings per share rises from Rp538 to Rp545 assuming the full buyback. Purchases are scheduled from 26 October to 31 December, or earlier if the maximum value is reached.",
+        "tickers": [
+          "INDF.JK"
+        ],
+        "supporting_news_ids": [
+          30933,
+          30952
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Sumber Global Energy repays its Rp273.64 billion bond",
+        "headline": "SGER repays Rp273.64 billion in Series A bonds",
+        "blurb": "Sumber Global Energy's Series A bonds carried a fixed 10% annual coupon and a 370-day tenor, with proceeds used for working capital, mainly coal procurement and supplier payments. Its hydrogen peroxide plant in Merak is commencing its run test, with capacity of 20,000 metric tons per year at 100% concentration.",
+        "tickers": [
+          "SGER.JK"
+        ],
+        "supporting_news_ids": [
+          30943,
+          30947
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_03",
+        "id": "cur_06",
         "slot": "story",
         "event": "ANTAM reports first-half results and continues studying a share buyback",
         "headline": "ANTM reports Rp6.91 trillion first-half profit and continues buyback study",
@@ -47,82 +91,39 @@
           30932,
           30939
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Bank Tabungan Negara expects slower second-half profit growth",
+        "headline": "BBTN expects second-half profit growth to slow from first-half 40.8%",
+        "blurb": "Bank Tabungan Negara said rising funding costs, including deposit rates above 8% offered to large institutions, are pressuring industry profits. Its first-half net interest income fell 8% year on year to Rp8.59 trillion.",
+        "tickers": [
+          "BBTN.JK"
+        ],
+        "supporting_news_ids": [
+          30954
+        ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_04",
+        "id": "cur_08",
         "slot": "story",
-        "event": "Bukit Asam reports first-half results and reviews a potential share buyback",
-        "headline": "PTBA reports first-half profit of Rp2.65 trillion, studies potential buyback",
-        "blurb": "Revenue rose 8% year on year to Rp22.03 trillion, while coal sales reached 21.10 million tons, including 10.33 million tons for export. Corporate Secretary Division Head Eko Prayitno said any buyback would be assessed against liquidity, working-capital needs and long-term plans, with any decision disclosed to OJK and the Indonesia Stock Exchange.",
+        "event": "Bank BTPN Syariah reports Rp1.01 trillion in nine-month net profit",
+        "headline": "BTPS reports Rp1.01 trillion nine-month net profit",
+        "blurb": "BTPN Syariah’s assets rose 8% year-on-year to Rp24 trillion and financing grew 13% to Rp11 trillion as of September 2026. Return on assets was 7.3% and capital adequacy ratio was 59%, with Director Fachmy Achmad attributing the results to financing-quality and risk management.",
         "tickers": [
-          "PTBA.JK"
+          "BTPS.JK"
         ],
         "supporting_news_ids": [
-          30937,
-          30940
+          30950
         ],
         "copy_decision": "new story"
       }
     ]
   },
   "flash": [
-    {
-      "id": "cur_05",
-      "slot": "flash",
-      "event": "Sumber Global Energy repays its Rp273.64 billion bond",
-      "headline": "PT Sumber Global Energy Tbk (SGER) repays Rp273.64 billion bond to strengthen capital structure",
-      "blurb": null,
-      "tickers": [
-        "SGER.JK"
-      ],
-      "supporting_news_ids": [
-        30943
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_06",
-      "slot": "flash",
-      "event": "Bank Mandiri reports nine-month 2026 financial results",
-      "headline": "Bank Mandiri Posts Rp45.5 Trillion Net Profit in Q3 2026, Up 20.7% YoY on Solid Performance",
-      "blurb": null,
-      "tickers": [
-        "BMRI.JK"
-      ],
-      "supporting_news_ids": [
-        30936
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_07",
-      "slot": "flash",
-      "event": "Indofood CBP prepares a Rp750 billion share buyback",
-      "headline": "PT Indofood CBP Sukses Makmur Tbk (ICBP) Prepares Rp 750 Billion Share Buyback, Earnings per Share Projected to Rise",
-      "blurb": null,
-      "tickers": [
-        "ICBP.JK"
-      ],
-      "supporting_news_ids": [
-        30934
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_08",
-      "slot": "flash",
-      "event": "Indofood Sukses Makmur prepares a Rp750 billion share buyback",
-      "headline": "PT Indofood Sukses Makmur Tbk (INDF) Prepares Up to Rp 750 Billion for Share Buyback",
-      "blurb": null,
-      "tickers": [
-        "INDF.JK"
-      ],
-      "supporting_news_ids": [
-        30933
-      ],
-      "copy_decision": "new story"
-    },
     {
       "id": "cur_09",
       "slot": "flash",
@@ -135,10 +136,80 @@
       "supporting_news_ids": [
         30935
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_10",
+      "slot": "flash",
+      "event": "Bank Mandiri reports nine-month 2026 financial results",
+      "headline": "Bank Mandiri Posts Rp45.5 Trillion Net Profit in Q3 2026, Up 20.7% YoY on Solid Performance",
+      "blurb": null,
+      "tickers": [
+        "BMRI.JK"
+      ],
+      "supporting_news_ids": [
+        30936
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Bank Mandiri shares rebound after an MSCI-related selloff",
+      "headline": "PT Bank Mandiri Tbk (BMRI) Shares Rebound 15.04% in a Week After MSCI-Driven Slump, Backed by Domestic Net Buy and Strong Q3-2026 Earnings",
+      "blurb": null,
+      "tickers": [
+        "BMRI.JK"
+      ],
+      "supporting_news_ids": [
+        30949
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "Bukit Asam reports first-half results and reviews a potential share buyback",
+      "headline": "PTBA reports first-half profit of Rp2.65 trillion, studies potential buyback",
+      "blurb": null,
+      "tickers": [
+        "PTBA.JK"
+      ],
+      "supporting_news_ids": [
+        30937,
+        30940
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "Gudang Garam shares rebound amid sustained foreign buying",
+      "headline": "PT Gudang Garam Tbk (GGRM) Gains Tailwind With Sustained Foreign Net Buys Amid MSCI-Driven Market Turmoil",
+      "blurb": null,
+      "tickers": [
+        "GGRM.JK"
+      ],
+      "supporting_news_ids": [
+        30948
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "MSCI's potential Indonesia downgrade prompts Bank Indonesia outflow disclosure and investor-trust warning",
+      "headline": "MSCI opened a consultation on a proposed downgrade of Indonesia’s market status",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        30945,
+        30946
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: The rupiah briefly weakened above Rp 18,000, and BI is prepared to use DNDF and spot interventions if outflows pressure the currency."
+    },
+    {
+      "id": "cur_15",
       "slot": "flash",
       "event": "Bank Indonesia eases macroprudential liquidity incentives and reserve requirements",
       "headline": "Bank Indonesia Eases Macroprudential Liquidity Incentives as Deposit Growth Lags Credit Expansion",
@@ -147,17 +218,19 @@
       "supporting_news_ids": [
         30931
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_16",
       "slot": "flash",
-      "event": "Bank Indonesia confirms foreign capital outflows after MSCI's market-classification consultation",
-      "headline": "Bank Indonesia Confirms Foreign Capital Outflows After MSCI's Potential Downgrade of Indonesia to Standalone Market",
+      "event": "Pembangunan Graha Lestari Indah opens a Le Chic Bakehouse outlet",
+      "headline": "PT Pembangunan Graha Lestari Indah Tbk (PGLI) Expands Le Chic Bakehouse with New Outlet at Centre Point Mall Medan",
       "blurb": null,
-      "tickers": [],
+      "tickers": [
+        "PGLI.JK"
+      ],
       "supporting_news_ids": [
-        30945
+        30953
       ],
       "copy_decision": "new story"
     }
@@ -165,58 +238,13 @@
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-10-26",
-      "timing_label": "26 Oct",
-      "title": "INDF buyback of up to Rp 750 billion opens, runs until 31 Dec",
-      "tickers": [
-        "INDF.JK"
-      ],
-      "supporting_news_ids": [
-        30933
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-10-26",
-      "timing_label": "26 Oct",
-      "title": "ICBP buyback of up to Rp 750 billion opens, runs until 31 Dec",
-      "tickers": [
-        "ICBP.JK"
-      ],
-      "supporting_news_ids": [
-        30934
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2026-10-26",
-      "timing_label": "26 Oct",
-      "title": "LSIP buyback of up to Rp 750 billion opens, runs until 31 Dec",
-      "tickers": [
-        "LSIP.JK"
-      ],
-      "supporting_news_ids": [
-        30935
-      ]
-    },
-    {
-      "id": "wtw_04",
-      "sort_date": "2026-11-01",
-      "timing_label": "1 Nov",
-      "title": "BI lowers reserve requirement to 8%",
+      "sort_date": "2027-06-30",
+      "timing_label": "By 30 Jun 2027",
+      "title": "MSCI decision on Indonesia's market classification due",
       "tickers": [],
       "supporting_news_ids": [
-        30931
-      ]
-    },
-    {
-      "id": "wtw_05",
-      "sort_date": "2026-12-31",
-      "timing_label": "Dec",
-      "title": "BI cuts KLM financing incentive by 1 percentage point",
-      "tickers": [],
-      "supporting_news_ids": [
-        30931
+        30945,
+        30946
       ]
     }
   ]
