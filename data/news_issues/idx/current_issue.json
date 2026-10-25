@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-10-25",
   "window_start": "2026-10-24T13:50:00Z",
-  "window_end": "2026-10-25T09:56:09Z",
+  "window_end": "2026-10-25T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -29,7 +29,7 @@
         "supporting_news_ids": [
           30997
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_03",
@@ -50,19 +50,38 @@
       {
         "id": "cur_04",
         "slot": "story",
-        "event": "Amman Mineral plans a share buyback",
+        "event": "AMMN plans a share buyback of up to Rp1 trillion",
         "headline": "AMMN plans share buyback of up to Rp1 trillion",
-        "blurb": "Amman Mineral plans to fund the program with internal cash and buy back up to 0.37% of its placed and paid-up capital from 22 October to 22 January 2027. Analysts expect the effect on the share price to be limited because the number of shares is relatively small.",
+        "blurb": "Amman Mineral plans the repurchase from 22 October 2026 to 22 January 2027, using internal cash and covering at most 0.37% of its issued and paid-up capital. Mirae Asset Sekuritas recommends an accumulative buy with a target price of Rp6,425 per share.",
         "tickers": [
           "AMMN.JK"
         ],
         "supporting_news_ids": [
-          30996
+          30996,
+          31008
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 1 new articles with a new fact: Mirae Asset Sekuritas recommends an accumulative buy with a target price of Rp6,425 per share."
       },
       {
         "id": "cur_05",
+        "slot": "story",
+        "event": "Indofood issuers announce share buybacks totaling up to Rp2.25 trillion",
+        "headline": "ICBP, INDF and LSIP plan buybacks totaling Rp2.25 trillion",
+        "blurb": "London Sumatra shares rose 17.6% over five trading days. Each company plans to spend up to Rp750 billion from internal cash between 26 October and 31 December, with repurchases capped at 20% of paid-up capital and subject to free-float rules.",
+        "tickers": [
+          "ICBP.JK",
+          "INDF.JK",
+          "LSIP.JK"
+        ],
+        "supporting_news_ids": [
+          30970,
+          30987,
+          31005
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_06",
         "slot": "story",
         "event": "PACK plans a rights issue pending shareholder approval",
         "headline": "PACK plans 100 billion-share rights issue pending shareholder approval",
@@ -73,10 +92,10 @@
         "supporting_news_ids": [
           31000
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_06",
+        "id": "cur_07",
         "slot": "story",
         "event": "PT Visi Media Asia’s planned share issuance without pre-emptive rights",
         "headline": "VIVA plans to issue up to 43.09 billion shares without pre-emptive rights",
@@ -88,21 +107,6 @@
           30986
         ],
         "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "UVCR reports nine-month profit growth and plans a private placement",
-        "headline": "UVCR reports 395.8% profit growth, plans placement of up to 200 million shares",
-        "blurb": "Net profit reached Rp10.63 billion for January–September 2026, up from Rp2.14 billion a year earlier. Shareholders are due to consider the proposed issue on 27 October, with proceeds earmarked mainly for working capital, product and service development, operational capacity and marketing.",
-        "tickers": [
-          "UVCR.JK"
-        ],
-        "supporting_news_ids": [
-          30968,
-          30975
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net profit rose 395.8% to Rp10.63 billion."
       }
     ],
     "deals_control": [
@@ -118,10 +122,44 @@
         "supporting_news_ids": [
           30994
         ],
-        "copy_decision": "new story"
-      },
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "earnings_guidance": [
       {
         "id": "cur_09",
+        "slot": "story",
+        "event": "UVCR reports a sharp nine-month 2026 net profit increase",
+        "headline": "UVCR reports sharp rise in nine-month profit to Rp10.63 billion",
+        "blurb": "Trimegah Karya Pratama plans a private placement of up to 200 million shares, with proceeds mainly for working capital, product development, operational capacity and marketing. It also plans to develop Ultra Voucher Gift Card integrated with BCA's EDC/APOS payment systems, while shareholders are scheduled to consider the placement at an extraordinary meeting on 27 October.",
+        "tickers": [
+          "UVCR.JK"
+        ],
+        "supporting_news_ids": [
+          30968,
+          30975,
+          31009
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: UVCR plans to develop Ultra Voucher Gift Card integrated with BCA's EDC/APOS payment systems."
+      },
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "Bank Mandiri reports nine-month 2026 profit growth and analyst target-price changes",
+        "headline": "BMRI reports Rp45.5 trillion profit, up 20.7%, as brokers adjust target prices",
+        "blurb": "Nine-month net profit through September was 80% of Bloomberg’s Rp57.2 trillion full-year consensus. Loans reached Rp1,694 trillion, up 15.4% year on year. Samuel maintained a buy rating and Rp4,900 target, while Sucor raised its target to Rp4,350 and kept a hold.",
+        "tickers": [
+          "BMRI.JK"
+        ],
+        "supporting_news_ids": [
+          30973,
+          30978,
+          31006
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: Loans reached Rp1,694 trillion, up 15.4% year on year."
+      },
+      {
+        "id": "cur_11",
         "slot": "story",
         "event": "BUMI reports quarterly growth and mineral diversification activity",
         "headline": "BUMI reports 27.2% revenue growth and buys Loyal Metals for AUD79.07 million",
@@ -132,27 +170,10 @@
         "supporting_news_ids": [
           30983
         ],
-        "copy_decision": "rewritten: moved from flash to story"
-      }
-    ],
-    "earnings_guidance": [
-      {
-        "id": "cur_10",
-        "slot": "story",
-        "event": "Bank Mandiri reports nine-month 2026 earnings and broker target-price reactions",
-        "headline": "BMRI reports Rp45.5 trillion nine-month profit as brokers set target prices",
-        "blurb": "Bank Mandiri’s profit rose 20.7% year on year. Samuel Sekuritas maintained its buy rating and Rp4,900 target, implying 25.6% upside, while Sucor Sekuritas maintained hold and raised its target to Rp4,350.",
-        "tickers": [
-          "BMRI.JK"
-        ],
-        "supporting_news_ids": [
-          30973,
-          30978
-        ],
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_11",
+        "id": "cur_12",
         "slot": "story",
         "event": "BTPS reports nine-month 2026 profit growth",
         "headline": "BTPS reports nine-month 2026 profit up 7% to Rp1.01 trillion",
@@ -164,36 +185,21 @@
           30999,
           31003
         ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_12",
-        "slot": "story",
-        "event": "PT Fore Kopi Indonesia 9M 2026 results",
-        "headline": "FORE reports 9M 2026 revenue up 53.3% to Rp1.6 trillion",
-        "blurb": "Fore Kopi Indonesia’s EBITDA rose 70.6% to Rp342.2 billion and net profit climbed 49.7% to Rp90 billion, Mandiri Sekuritas said, though profit was slightly below its expectations. The group added more than 70 Fore Coffee outlets, bringing its network to 410 stores across Indonesia and Singapore.",
-        "tickers": [
-          "FORE.JK"
-        ],
-        "supporting_news_ids": [
-          30980
-        ],
         "copy_decision": "kept: same articles"
-      },
+      }
+    ],
+    "other": [
       {
         "id": "cur_13",
         "slot": "story",
-        "event": "PT Sat Nusapersada H1 2026 revenue results and stock surge",
-        "headline": "PTSN revenue rises 65.2% as shares gain 24.46%",
-        "blurb": "Sat Nusapersada reported first-half revenue of US$182.28 million, while gross margin narrowed to 8.1% from 13.9% and profit before tax fell to US$6.13 million. The 23 October share move followed speculation the company could assemble or produce devices for a government plan to distribute free phones to at least 25 million adults, with a Rp27.61 trillion budget.",
-        "tickers": [
-          "PTSN.JK"
-        ],
+        "event": "Fitch downgrades Pos Indonesia's bond rating to default",
+        "headline": "Fitch downgrades Pos Indonesia's Rp400 billion bonds to default",
+        "blurb": "The downgrade to D(idn) from C(idn) follows a missed coupon due 28 September that remained unpaid after the 14-business-day grace period. The bonds mature on 28 December 2027. Fitch will reassess Pos Indonesia’s credit profile after restructuring or settlement of missed payments, while a missed 8 October installment on its Rp1 trillion first-phase sukuk remains within its grace period.",
+        "tickers": [],
         "supporting_news_ids": [
-          30967,
-          30981
+          31004
         ],
-        "copy_decision": "kept: same articles"
+        "copy_decision": "new story"
       }
     ]
   },
@@ -215,6 +221,35 @@
     {
       "id": "cur_15",
       "slot": "flash",
+      "event": "PT Fore Kopi Indonesia 9M 2026 results",
+      "headline": "FORE reports 9M 2026 revenue up 53.3% to Rp1.6 trillion",
+      "blurb": null,
+      "tickers": [
+        "FORE.JK"
+      ],
+      "supporting_news_ids": [
+        30980
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "PT Sat Nusapersada H1 2026 revenue results and stock surge",
+      "headline": "PTSN revenue rises 65.2% as shares gain 24.46%",
+      "blurb": null,
+      "tickers": [
+        "PTSN.JK"
+      ],
+      "supporting_news_ids": [
+        30967,
+        30981
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_17",
+      "slot": "flash",
       "event": "Bank Mandiri discloses capital adequacy after paying an interim dividend",
       "headline": "PT Bank Mandiri (Persero) Tbk (BMRI) Confirms Healthy Capital Adequacy After Paying Rp 6.16 Trillion Interim Dividend",
       "blurb": null,
@@ -224,24 +259,10 @@
       "supporting_news_ids": [
         31001
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "Telkom pursues AI data center expansion and sets a Telin valuation target",
-      "headline": "BRI Danareksa Maintains Buy on Telkom (TLKM) with Rp 3,500 Target on AI Data Center Expansion",
-      "blurb": null,
-      "tickers": [
-        "TLKM.JK"
-      ],
-      "supporting_news_ids": [
-        30977
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_17",
+      "id": "cur_18",
       "slot": "flash",
       "event": "October 2026 home internet tariff reductions",
       "headline": "Home Internet Tariffs Fall 2.2%: What Is the Outlook for Telecommunications Stocks?",
@@ -253,23 +274,6 @@
       ],
       "supporting_news_ids": [
         30985
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_18",
-      "slot": "flash",
-      "event": "Indofood group issuers’ share buyback plans",
-      "headline": "Indofood CBP Sukses Makmur (ICBP) and two other Salim Group issuers plan buybacks of up to Rp 750 billion each",
-      "blurb": null,
-      "tickers": [
-        "ICBP.JK",
-        "INDF.JK",
-        "LSIP.JK"
-      ],
-      "supporting_news_ids": [
-        30970,
-        30987
       ],
       "copy_decision": "kept: same articles"
     },
@@ -286,7 +290,7 @@
         30984,
         30998
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: TOWR shares gained 13.11% over the preceding five days before closing down 0.48% at Rp414 on 23 October."
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_20",
@@ -314,7 +318,7 @@
         30992,
         31002
       ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: Foreign investors recorded net sells of Rp5.22 trillion in BBCA from 16 to 23 October."
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_22",
@@ -332,36 +336,29 @@
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-02",
-      "timing_label": "2 Nov",
-      "title": "IDX excludes 82 high-concentration stocks from IHSG calculation",
-      "tickers": [],
+      "sort_date": "2026-10-26",
+      "timing_label": "26 Oct",
+      "title": "ICBP, INDF and LSIP begin share buybacks totaling Rp2.25 trillion",
+      "tickers": [
+        "ICBP.JK",
+        "INDF.JK",
+        "LSIP.JK"
+      ],
       "supporting_news_ids": [
-        30971
+        30970,
+        30987,
+        31005
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-11-30",
-      "timing_label": "30 Nov",
-      "title": "PACK shareholders vote on rights issue of up to USD463,000,000",
-      "tickers": [
-        "PACK.JK"
-      ],
-      "supporting_news_ids": [
-        31000
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2027-06-30",
-      "timing_label": "By 30 Jun 2027",
-      "title": "MSCI issues final decision on Indonesia's market classification",
+      "sort_date": "2026-11-01",
+      "timing_label": "1 Nov",
+      "title": "BI begins phased reserve-requirement cuts",
       "tickers": [],
       "supporting_news_ids": [
-        30972,
-        30992,
-        31002
+        30989,
+        30991
       ]
     }
   ]
