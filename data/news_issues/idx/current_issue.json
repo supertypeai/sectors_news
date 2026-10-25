@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-10-25",
   "window_start": "2026-10-24T13:50:00Z",
-  "window_end": "2026-10-25T05:55:55Z",
+  "window_end": "2026-10-25T09:56:09Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -13,12 +13,26 @@
       30989,
       30991
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
     "market_structure_policy": [
       {
         "id": "cur_02",
+        "slot": "story",
+        "event": "IDX extends PTPP suspension amid debt restructuring and missed payments",
+        "headline": "IDX extends PTPP suspension amid Rp18.2 trillion debt restructuring",
+        "blurb": "PP shares remain suspended across all markets from 23 October until further notice after missed interest and profit-sharing payments due 22 October. Its restructuring agreement with creditor banks, covering Rp18.2 trillion of debt, took effect on 21 October.",
+        "tickers": [
+          "PTPP.JK"
+        ],
+        "supporting_news_ids": [
+          30997
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
         "slot": "story",
         "event": "IDX suspension following PT Guna Timur Raya’s share surge",
         "headline": "IDX suspends TRUK after 87.1% weekly surge",
@@ -29,12 +43,40 @@
         "supporting_news_ids": [
           30974
         ],
-        "copy_decision": "rewritten: moved from lead to story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "capital_raising_buybacks": [
       {
-        "id": "cur_03",
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Amman Mineral plans a share buyback",
+        "headline": "AMMN plans share buyback of up to Rp1 trillion",
+        "blurb": "Amman Mineral plans to fund the program with internal cash and buy back up to 0.37% of its placed and paid-up capital from 22 October to 22 January 2027. Analysts expect the effect on the share price to be limited because the number of shares is relatively small.",
+        "tickers": [
+          "AMMN.JK"
+        ],
+        "supporting_news_ids": [
+          30996
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "PACK plans a rights issue pending shareholder approval",
+        "headline": "PACK plans 100 billion-share rights issue pending shareholder approval",
+        "blurb": "Abadi Nusantara Hijau Investama will seek approval at a 30 November meeting for the issue. It plans to raise up to USD463 million to repay loans, buy Denway Development shares and fund working capital. Eco Energi Perkasa will guarantee up to USD418 million of unsubscribed shares, while non-participants could face dilution of about 74.6%.",
+        "tickers": [
+          "PACK.JK"
+        ],
+        "supporting_news_ids": [
+          31000
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_06",
         "slot": "story",
         "event": "PT Visi Media Asia’s planned share issuance without pre-emptive rights",
         "headline": "VIVA plans to issue up to 43.09 billion shares without pre-emptive rights",
@@ -45,26 +87,57 @@
         "supporting_news_ids": [
           30986
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_04",
+        "id": "cur_07",
         "slot": "story",
-        "event": "PT Trimegah Karya Pratama’s planned private placement",
-        "headline": "UVCR plans private placement of up to 200 million shares",
-        "blurb": "Ultra Voucher swung to operating profit of Rp10.35 billion in January–September 2026, from an operating loss of Rp275.9 million. Shareholders are due to vote on the placement at an extraordinary meeting on 27 October, with proceeds mainly for working capital, product and service development, operational capacity and marketing.",
+        "event": "UVCR reports nine-month profit growth and plans a private placement",
+        "headline": "UVCR reports 395.8% profit growth, plans placement of up to 200 million shares",
+        "blurb": "Net profit reached Rp10.63 billion for January–September 2026, up from Rp2.14 billion a year earlier. Shareholders are due to consider the proposed issue on 27 October, with proceeds earmarked mainly for working capital, product and service development, operational capacity and marketing.",
         "tickers": [
           "UVCR.JK"
         ],
         "supporting_news_ids": [
+          30968,
           30975
         ],
-        "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
+        "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net profit rose 395.8% to Rp10.63 billion."
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "Adhi Karya schedules meeting to consider divestment and rights-proceeds reallocation",
+        "headline": "ADHI schedules meeting on Rp1.76 trillion JMJ sale and rights-fund shift",
+        "blurb": "Adhi Karya will seek approval to sell 1,714,808 JMJ shares, or 47.18%, for Rp1.76 trillion and redirect Rp378.69 billion in remaining rights issue proceeds from investment entities to working capital for ongoing construction projects. The meeting is scheduled for 13 November.",
+        "tickers": [
+          "ADHI.JK"
+        ],
+        "supporting_news_ids": [
+          30994
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "BUMI reports quarterly growth and mineral diversification activity",
+        "headline": "BUMI reports 27.2% revenue growth and buys Loyal Metals for AUD79.07 million",
+        "blurb": "Bumi's revenue reached US$858 million and net profit US$59 million, up 27.2% and 188.4% year on year, respectively. The 100% acquisition expands its exposure to copper, gold and lithium.",
+        "tickers": [
+          "BUMI.JK"
+        ],
+        "supporting_news_ids": [
+          30983
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_05",
+        "id": "cur_10",
         "slot": "story",
         "event": "Bank Mandiri reports nine-month 2026 earnings and broker target-price reactions",
         "headline": "BMRI reports Rp45.5 trillion nine-month profit as brokers set target prices",
@@ -79,7 +152,22 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_06",
+        "id": "cur_11",
+        "slot": "story",
+        "event": "BTPS reports nine-month 2026 profit growth",
+        "headline": "BTPS reports nine-month 2026 profit up 7% to Rp1.01 trillion",
+        "blurb": "Assets rose 8% to Rp24 trillion and financing increased 13% to Rp11 trillion through September. Director Fachmy Achmad attributed the growth to healthier financing quality and sustained customer empowerment.",
+        "tickers": [
+          "BTPS.JK"
+        ],
+        "supporting_news_ids": [
+          30999,
+          31003
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_12",
         "slot": "story",
         "event": "PT Fore Kopi Indonesia 9M 2026 results",
         "headline": "FORE reports 9M 2026 revenue up 53.3% to Rp1.6 trillion",
@@ -90,10 +178,10 @@
         "supporting_news_ids": [
           30980
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_07",
+        "id": "cur_13",
         "slot": "story",
         "event": "PT Sat Nusapersada H1 2026 revenue results and stock surge",
         "headline": "PTSN revenue rises 65.2% as shares gain 24.46%",
@@ -105,27 +193,13 @@
           30967,
           30981
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: On 23 October 2026, PTSN shares rose 24.46% to Rp346 amid speculation it could benefit from a government free-phone plan."
-      },
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "PT Trimegah Karya Pratama 9M 2026 net profit results",
-        "headline": "UVCR reports 9M 2026 net profit of Rp10.63 billion, up 395.8%",
-        "blurb": "Trimegah Karya Pratama's net sales rose 37.94% to Rp917.99 billion and gross profit climbed 56.47% to Rp44.5 billion. The company swung to operating profit of Rp10.36 billion from a loss of Rp275.91 million a year earlier.",
-        "tickers": [
-          "UVCR.JK"
-        ],
-        "supporting_news_ids": [
-          30968
-        ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_09",
+      "id": "cur_14",
       "slot": "flash",
       "event": "PT Puradelta Lestari interim dividend",
       "headline": "Sinar Mas Group Issuer PT Puradelta Lestari Tbk (DMAS) Announces Interim Dividend of Rp 29 per Share with Jumbo Yield Indication",
@@ -136,10 +210,38 @@
       "supporting_news_ids": [
         30979
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Bank Mandiri discloses capital adequacy after paying an interim dividend",
+      "headline": "PT Bank Mandiri (Persero) Tbk (BMRI) Confirms Healthy Capital Adequacy After Paying Rp 6.16 Trillion Interim Dividend",
+      "blurb": null,
+      "tickers": [
+        "BMRI.JK"
+      ],
+      "supporting_news_ids": [
+        31001
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_10",
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "Telkom pursues AI data center expansion and sets a Telin valuation target",
+      "headline": "BRI Danareksa Maintains Buy on Telkom (TLKM) with Rp 3,500 Target on AI Data Center Expansion",
+      "blurb": null,
+      "tickers": [
+        "TLKM.JK"
+      ],
+      "supporting_news_ids": [
+        30977
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_17",
       "slot": "flash",
       "event": "October 2026 home internet tariff reductions",
       "headline": "Home Internet Tariffs Fall 2.2%: What Is the Outlook for Telecommunications Stocks?",
@@ -152,10 +254,10 @@
       "supporting_news_ids": [
         30985
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_18",
       "slot": "flash",
       "event": "Indofood group issuers’ share buyback plans",
       "headline": "Indofood CBP Sukses Makmur (ICBP) and two other Salim Group issuers plan buybacks of up to Rp 750 billion each",
@@ -169,38 +271,25 @@
         30970,
         30987
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: INDF and LSIP also plan buybacks of up to Rp750 billion each, bringing the three-company total to Rp2.25 trillion."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_19",
       "slot": "flash",
-      "event": "PT Bumi Resources quarterly results and Loyal Metals acquisition",
-      "headline": "Phintraco Sekuritas Highlights PT Bumi Resources Tbk (BUMI) Coal Operations and Mineral Diversification Strategy",
-      "blurb": null,
-      "tickers": [
-        "BUMI.JK"
-      ],
-      "supporting_news_ids": [
-        30983
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_13",
-      "slot": "flash",
-      "event": "Protelindo interim dividend to Sarana Menara Nusantara",
-      "headline": "Sarana Menara Nusantara (TOWR) to Receive Rp 176 Billion Interim Dividend from Protelindo",
+      "event": "Protelindo declares an interim dividend for parent TOWR",
+      "headline": "Sarana Menara Nusantara (TOWR) to receive Rp176 billion interim dividend from Protelindo",
       "blurb": null,
       "tickers": [
         "TOWR.JK"
       ],
       "supporting_news_ids": [
-        30984
+        30984,
+        30998
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: TOWR shares gained 13.11% over the preceding five days before closing down 0.48% at Rp414 on 23 October."
     },
     {
-      "id": "cur_14",
+      "id": "cur_20",
       "slot": "flash",
       "event": "PT Terang Anugrah Abadi’s purchases of Hartadinata Abadi shares",
       "headline": "PT Hartadinata Abadi Tbk (HRTA) Controlling Shareholder PT Terang Anugrah Abadi Buys Rp8.31 Billion of Shares Across Three October Purchases",
@@ -211,10 +300,24 @@
       "supporting_news_ids": [
         30988
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_15",
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "MSCI considers Indonesia reclassification, prompting official and market reactions",
+      "headline": "Indonesia faces possible MSCI standalone-market reclassification as the IHSG fell 11.57% on 16 October",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        30972,
+        30992,
+        31002
+      ],
+      "copy_decision": "rewritten: 2 new articles with a new fact: Foreign investors recorded net sells of Rp5.22 trillion in BBCA from 16 to 23 October."
+    },
+    {
+      "id": "cur_22",
       "slot": "flash",
       "event": "IDX removes 82 high-concentration stocks from IHSG calculation",
       "headline": "Indonesia Stock Exchange to Remove 82 High Shareholding Concentration Stocks from JCI Calculation Starting November 2, 2026",
@@ -224,42 +327,41 @@
         30971
       ],
       "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "MSCI consults on Indonesia’s market classification",
-      "headline": "Dasco Says Indonesia Will Set Its Own Market Rating as MSCI Weighs Reclassification to Standalone Market",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        30972
-      ],
-      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-01",
-      "timing_label": "1 Nov",
-      "title": "BI begins phased reserve-requirement cuts",
+      "sort_date": "2026-11-02",
+      "timing_label": "2 Nov",
+      "title": "IDX excludes 82 high-concentration stocks from IHSG calculation",
       "tickers": [],
       "supporting_news_ids": [
-        30989,
-        30991
+        30971
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-11-17",
-      "timing_label": "17 Nov",
-      "title": "VIVA shareholders vote on issuance of up to 43.09 billion shares",
+      "sort_date": "2026-11-30",
+      "timing_label": "30 Nov",
+      "title": "PACK shareholders vote on rights issue of up to USD463,000,000",
       "tickers": [
-        "VIVA.JK"
+        "PACK.JK"
       ],
       "supporting_news_ids": [
-        30986
+        31000
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2027-06-30",
+      "timing_label": "By 30 Jun 2027",
+      "title": "MSCI issues final decision on Indonesia's market classification",
+      "tickers": [],
+      "supporting_news_ids": [
+        30972,
+        30992,
+        31002
       ]
     }
   ]
