@@ -1,17 +1,17 @@
 {
   "issue_date": "2026-10-26",
   "window_start": "2026-10-25T13:50:00Z",
-  "window_end": "2026-10-26T01:45:55Z",
+  "window_end": "2026-10-26T05:55:57Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "MSCI's proposed Indonesia reclassification and official responses",
-    "headline": "MSCI proposes standalone status for Indonesia, with a decision due by 30 June 2027",
-    "blurb": "The proposal would remove Indonesian stocks from MSCI’s main global indexes, including the MSCI Emerging Markets Index, though MSCI could calculate a separate Indonesia index. MSCI cited concerns over ownership transparency, alleged coordinated trading, weak enforcement and stock investability, and opened consultation through 30 April 2027. Former Deputy Foreign Minister Dino Patti Djalal urged a constructive response, stronger OJK supervision and a task force to improve transparency and governance, while House Deputy Speaker Sufmi Dasco Ahmad said the market has strong fundamentals and participants could determine Indonesia’s rating. MSCI’s final decision is due by 30 June 2027.",
+    "event": "OJK extends buyback policy without shareholder approval until June 2027",
+    "headline": "OJK extends buyback window without shareholder approval to June 2027",
+    "blurb": "The extension lets issuers repurchase shares without general meeting of shareholders approval after MSCI raised the possibility of reclassifying Indonesia’s market from emerging-market to standalone status. Buybacks remain subject to OJK regulations, prudence, issuers’ financial capacity and minimum free-float requirements. MSCI’s decision on Indonesia’s market status is scheduled for 20-30 June 2027.",
     "tickers": [],
     "supporting_news_ids": [
-      31013,
-      31030
+      31051,
+      31039
     ],
     "copy_decision": "new story"
   },
@@ -27,13 +27,27 @@
           "BBRI.JK"
         ],
         "supporting_news_ids": [
-          31014,
-          31027
+          31027,
+          31014
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Adhi Karya begins implementation of Rp3 trillion debt restructuring agreement",
+        "headline": "ADHI begins implementing Rp3 trillion debt restructuring agreement",
+        "blurb": "Adhi Karya’s MRA took effect on 23 October after Bank Mandiri confirmed all conditions were met. The terms include Rp1.55 trillion in 15-year balloon debt at 3.5% a year, Rp1.46 trillion in five-year bullet debt at 1% funded by divestments, and accrued interest repaid interest-free over 18 months. Bank Mandiri, BRI and BNI are creditors.",
+        "tickers": [
+          "ADHI.JK"
+        ],
+        "supporting_news_ids": [
+          31044
         ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_03",
+        "id": "cur_04",
         "slot": "story",
         "event": "Cipta Perdana Lancar director's share purchase and planned corporate actions",
         "headline": "PART prepares Rp200 billion rights issue as president director buys 1,883,400 shares",
@@ -42,29 +56,59 @@
           "PART.JK"
         ],
         "supporting_news_ids": [
-          31016,
-          31022
+          31022,
+          31016
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_04",
+        "id": "cur_05",
         "slot": "story",
-        "event": "Bukalapak financial results through September 2026",
-        "headline": "BUKA reports Rp881.06 billion net loss through September",
-        "blurb": "Bukalapak recorded a Rp2.04 trillion investment value loss, reversing a Rp2.32 trillion gain a year earlier, and an operating loss of Rp1.14 trillion. Net revenue rose 19.34% to Rp5.64 trillion.",
+        "event": "Bukalapak reports nine-month 2026 net loss",
+        "headline": "BUKA reports nine-month 2026 net loss after Rp2.91 trillion profit",
+        "blurb": "Bukalapak's adjusted EBITDA was positive at Rp11 billion, up Rp64 billion from a Rp53 billion loss a year earlier. Net revenue rose 19.34% to Rp5.64 trillion, while an investment value loss of Rp2.04 trillion reversed a Rp2.32 trillion gain.",
         "tickers": [
           "BUKA.JK"
         ],
         "supporting_news_ids": [
+          31036,
           31012
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: Adjusted EBITDA was positive at Rp11 billion."
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Master Print reports nine-month 2026 profit turnaround",
+        "headline": "PTMR reports nine-month profit turnaround to Rp9.19 billion",
+        "blurb": "Master Print swung from a Rp10.93 billion loss in the same period last year, while revenue fell 7.68% to Rp89.82 billion. Operating profit turned positive at Rp13.3 billion, helped by Rp5 billion in other income and lower administrative expenses.",
+        "tickers": [
+          "PTMR.JK"
+        ],
+        "supporting_news_ids": [
+          31047
         ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_05",
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Bank Mandiri Q3 results prompt broker target-price revision",
+        "headline": "BMRI results prompt BRI Danareksa to raise target price to Rp6,400",
+        "blurb": "Bank Mandiri’s Q3 net profit rose 13.9% year on year to Rp15.1 trillion, and nine-month profit reached 79% of BRI Danareksa’s full-year projection. The broker also raised its 2026-2027 net profit forecasts by 2%-4%, citing stronger loan-growth and lower cost-to-income guidance.",
+        "tickers": [
+          "BMRI.JK"
+        ],
+        "supporting_news_ids": [
+          31053,
+          31054
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_08",
         "slot": "story",
         "event": "AKR Corporindo Q3 2026 financial results",
         "headline": "AKRA reports Rp2.21 trillion net profit through Q3 2026",
@@ -75,40 +119,32 @@
         "supporting_news_ids": [
           31010
         ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_06",
-        "slot": "story",
-        "event": "Darma Henwa Q3 2026 financial results",
-        "headline": "DEWA reports Q3 2026 net profit of Rp513.08 billion, up 114.55%",
-        "blurb": "Darma Henwa's revenue rose 9.71% year on year to Rp5.10 trillion, all from mining services, while cost of revenue increased 2.26% to Rp4.06 trillion. Basic earnings per share climbed to Rp13.10 from Rp6.34.",
-        "tickers": [
-          "DEWA.JK"
-        ],
-        "supporting_news_ids": [
-          31011
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "Bakrie Sumatera Plantations' September 2026 financial results",
-        "headline": "UNSP reports Rp43.47 billion net loss for first nine months of 2026",
-        "blurb": "The loss narrowed 31.5% year on year, while sales rose 18.81% to Rp2.21 trillion. Equity swung to Rp2.77 trillion from negative Rp5.27 trillion at end-2025, and liabilities fell to Rp4.71 trillion from Rp8.75 trillion.",
-        "tickers": [
-          "UNSP.JK"
-        ],
-        "supporting_news_ids": [
-          31029
-        ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "market_structure_policy": [
       {
-        "id": "cur_08",
+        "id": "cur_09",
+        "slot": "story",
+        "event": "BEI excludes high-concentration stocks from JCI calculation",
+        "headline": "BEI excludes HSC stocks from IHSG from 2 November",
+        "blurb": "BEI will redistribute their weights among the remaining constituents, which Maybank Sekuritas estimates will see weights rise by about 22%. The IHSG level will remain unchanged as BEI adjusts the divisor, and BREN, DSSA, DCII and BYAN will not influence the index while they retain HSC status.",
+        "tickers": [
+          "BREN.JK",
+          "DSSA.JK",
+          "DCII.JK",
+          "BYAN.JK",
+          "MORA.JK",
+          "SRAJ.JK"
+        ],
+        "supporting_news_ids": [
+          31041,
+          31049
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_10",
         "slot": "story",
         "event": "IDX-listed banks' compliance with the minimum free-float requirement",
         "headline": "26 IDX-listed banks remain below 15% free-float requirement",
@@ -137,13 +173,115 @@
         "supporting_news_ids": [
           31033
         ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "Bumi Resources completes acquisition of Mount Margaret Mining",
+        "headline": "BUMI completes Mount Margaret Mining acquisition for US$22.01 million",
+        "blurb": "Completed on 23 October, the transaction gives Bumi Resources indirect ownership of all shares in the Australian copper and gold company through its wholly owned subsidiary, Bumi Resources Australia. The Queensland project has roughly 13 million tons of ore resources, and BUMI said the deal supports diversification beyond coal.",
+        "tickers": [
+          "BUMI.JK"
+        ],
+        "supporting_news_ids": [
+          31043,
+          31038,
+          31046
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "macro_flows": [
+      {
+        "id": "cur_12",
+        "slot": "story",
+        "event": "FTSE Russell retains Indonesia in secondary emerging-market classification",
+        "headline": "FTSE Russell keeps Indonesia in secondary emerging-market category and off watchlist",
+        "blurb": "The decision followed an official report dated 6 October and an online meeting with BEI directors on 23 October. BEI chief director Jeffrey Hendrik said FTSE recognized reforms to transparency, free-float rules and trade surveillance, with the outcome helping sustain foreign inflows benchmarked to FTSE indices.",
+        "tickers": [],
+        "supporting_news_ids": [
+          31042
+        ],
         "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_09",
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "Darma Henwa Q3 2026 financial results",
+      "headline": "DEWA reports Q3 2026 net profit of Rp513.08 billion, up 114.55%",
+      "blurb": null,
+      "tickers": [
+        "DEWA.JK"
+      ],
+      "supporting_news_ids": [
+        31011
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "Bakrie Sumatera Plantations' September 2026 financial results",
+      "headline": "UNSP reports Rp43.47 billion net loss for first nine months of 2026",
+      "blurb": null,
+      "tickers": [
+        "UNSP.JK"
+      ],
+      "supporting_news_ids": [
+        31029
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Garuda Metalindo reports nine-month 2026 profit growth",
+      "headline": "PT Garuda Metalindo Tbk (BOLT) posts 8.34% net profit growth to Rp116.74 billion through Q3 2026",
+      "blurb": null,
+      "tickers": [
+        "BOLT.JK"
+      ],
+      "supporting_news_ids": [
+        31035
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "Adhi Karya reports Q3 2026 profit growth",
+      "headline": "PT Adhi Karya (Persero) Tbk (ADHI) net profit surges 247% in Q3 2026 despite revenue decline",
+      "blurb": null,
+      "tickers": [
+        "ADHI.JK"
+      ],
+      "supporting_news_ids": [
+        31037
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "Ultra Voucher reports nine-month 2026 earnings growth",
+      "headline": "PT Trimegah Karya Pratama Tbk (UVCR) Revenue Grows 37.9% with Gift Card Expansion as Focus",
+      "blurb": null,
+      "tickers": [
+        "UVCR.JK"
+      ],
+      "supporting_news_ids": [
+        31045
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_18",
       "slot": "flash",
       "event": "Indofood Sukses Makmur's Rp750 billion share buyback",
       "headline": "Foreign Investors Net Buy PT Indofood Sukses Makmur Tbk (INDF) Shares Amid MSCI Reclassification Uncertainty; Company Announces Rp 750 Billion Buyback",
@@ -155,10 +293,10 @@
       "supporting_news_ids": [
         31020
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_10",
+      "id": "cur_19",
       "slot": "flash",
       "event": "Sido Muncul's approved interim dividend",
       "headline": "PT Industri Jamu dan Farmasi Sido Muncul Tbk (SIDO) Prepares Rp 300 Billion Interim Dividend with Yield Comparable to Deposit Rates",
@@ -169,10 +307,10 @@
       "supporting_news_ids": [
         31024
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_20",
       "slot": "flash",
       "event": "Ultra Voucher's planned private placement",
       "headline": "Ultra Voucher (UVCR) Plans Private Placement of Up to 200 Million Shares",
@@ -183,10 +321,10 @@
       "supporting_news_ids": [
         31028
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_21",
       "slot": "flash",
       "event": "Foreign investors' 2026 net selling in Indonesian equities",
       "headline": "Foreign Investors Book Rp 94.87 Trillion Net Sell in 2026 as OJK Says Domestic Buying Supports IDX",
@@ -195,104 +333,83 @@
       "supporting_news_ids": [
         31032
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "Bukit Asam studies potential share buyback",
+      "headline": "PT Bukit Asam (Persero) Tbk (PTBA) Studies Potential Share Buyback to Maintain Company Value Stability",
+      "blurb": null,
+      "tickers": [
+        "PTBA.JK"
+      ],
+      "supporting_news_ids": [
+        31048
+      ],
       "copy_decision": "new story"
+    },
+    {
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "OJK responds to Dasco's call for Indonesia to set its own market rating",
+      "headline": "MSCI proposes reclassifying Indonesia’s stock market to standalone status, with a decision due by 30 June 2027",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        31050,
+        31030
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_24",
+      "slot": "flash",
+      "event": "MSCI downgrade proposal prompts Dino Patti Djalal warning",
+      "headline": "Dino Patti Djalal Warns President Prabowo Not to Underestimate MSCI's Proposed Downgrade of Indonesia's Stock Market",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        31013
+      ],
+      "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-10-27",
-      "timing_label": "27 Oct",
-      "title": "UVCR shareholders vote on private placement of up to 200 million shares",
+      "sort_date": "2026-11-02",
+      "timing_label": "2 Nov",
+      "title": "BEI removes HSC stocks from IHSG calculation",
       "tickers": [
-        "UVCR.JK"
+        "BREN.JK",
+        "BYAN.JK",
+        "DCII.JK",
+        "DSSA.JK",
+        "MORA.JK",
+        "SRAJ.JK"
       ],
       "supporting_news_ids": [
-        31028
+        31041,
+        31049
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-11-02",
-      "timing_label": "2 Nov",
-      "title": "SIDO cum-dividend (regular market) for its Rp 10 interim dividend",
+      "sort_date": "2026-11-30",
+      "timing_label": "Nov",
+      "title": "BEI begins enhanced surveillance and enforcement measures",
       "tickers": [
-        "SIDO.JK"
+        "BREN.JK",
+        "BYAN.JK",
+        "DCII.JK",
+        "DSSA.JK",
+        "MORA.JK",
+        "SRAJ.JK"
       ],
       "supporting_news_ids": [
-        31024
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2026-11-06",
-      "timing_label": "6 Nov",
-      "title": "BRIS shareholders vote on rights issue of up to 6.8 billion Series B shares",
-      "tickers": [
-        "AGRO.JK",
-        "AGRS.JK",
-        "BABP.JK",
-        "BBHI.JK",
-        "BCIC.JK",
-        "BDMN.JK",
-        "BKSW.JK",
-        "BMAS.JK",
-        "BNGA.JK",
-        "BNII.JK",
-        "BNLI.JK",
-        "BRIS.JK",
-        "BTPN.JK",
-        "DNAR.JK",
-        "MCOR.JK",
-        "NISP.JK",
-        "NOBU.JK",
-        "PNBN.JK",
-        "SUPA.JK"
-      ],
-      "supporting_news_ids": [
-        31033
-      ]
-    },
-    {
-      "id": "wtw_04",
-      "sort_date": "2027-03-31",
-      "timing_label": "31 Mar 2027",
-      "title": "IDX-listed banks face free-float compliance deadlines",
-      "tickers": [
-        "AGRO.JK",
-        "AGRS.JK",
-        "BABP.JK",
-        "BBHI.JK",
-        "BCIC.JK",
-        "BDMN.JK",
-        "BKSW.JK",
-        "BMAS.JK",
-        "BNGA.JK",
-        "BNII.JK",
-        "BNLI.JK",
-        "BRIS.JK",
-        "BTPN.JK",
-        "DNAR.JK",
-        "MCOR.JK",
-        "NISP.JK",
-        "NOBU.JK",
-        "PNBN.JK",
-        "SUPA.JK"
-      ],
-      "supporting_news_ids": [
-        31033
-      ]
-    },
-    {
-      "id": "wtw_05",
-      "sort_date": "2027-06-30",
-      "timing_label": "By 30 Jun 2027",
-      "title": "MSCI issues final decision on Indonesia’s proposed market reclassification",
-      "tickers": [],
-      "supporting_news_ids": [
-        31013,
-        31030,
-        31032
+        31041,
+        31049
       ]
     }
   ]
