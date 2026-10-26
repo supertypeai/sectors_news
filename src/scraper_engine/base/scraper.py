@@ -427,17 +427,17 @@ class Scraper:
             return None 
     
     def fetch_news_with_fallback(self, target_url: str):
-        soup = self.fetch_news_with_web_unlocker(target_url)
+        soup = self.fetch_news_with_scrapingant(target_url)
 
         if soup is not None:
             return soup
 
         LOGGER.warning(
-            "Web Unlocker failed for %s, falling back to ScrapingAnt",
+            "ScrapingAnt failed for %s, falling back to brightdata",
             target_url,
         )
         
-        return self.fetch_news_with_scrapingant(target_url)
+        return self.fetch_news_with_web_unlocker(target_url)
 
     def fetch_many_with_fallback(
         self,
