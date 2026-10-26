@@ -1,9 +1,12 @@
 from collections import Counter
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from llm.caller import invoke_structured_llm
 from llm.client import TokenUsageLogger
 
 from ..prompts.importance import get_assignment_system_prompt, ASSIGNMENT_USER_PROMPT, AssignmentResult
+from ..utils.constant import MARKET_TIME_ZONES
 
 import json
 import logging
@@ -104,6 +107,18 @@ def build_issue_stories_payload(issue: dict | None) -> str:
     )
 
 
+def build_previous_cutoff(issue: dict | None, exchange: str) -> str:
+    # When the previous issue stopped collecting news, in market time, so a
+    # step dated before it counts as already known
+    if issue is None or not issue.get("window_end"):
+        return "none"
+
+    window_end = datetime.fromisoformat(issue["window_end"].replace("Z", "+00:00"))
+    local_end = window_end.astimezone(ZoneInfo(MARKET_TIME_ZONES[exchange]))
+
+    return f"{local_end.day} {local_end:%B %Y, %H:%M} ({MARKET_TIME_ZONES[exchange]})"
+
+
 def current_issue_stories(current_issue: dict | None) -> list[dict]:
     if current_issue is None:
         return []
@@ -181,6 +196,10 @@ def run_importance(
             "previous_stories": build_issue_stories_payload(
                 issue=previous_issue
             ),
+            "previous_cutoff": build_previous_cutoff(
+                issue=previous_issue,
+                exchange=exchange,
+            ),
             # An earlier run of this same issue, so the lead and layout change
             # between updates only when the news does
             "current_stories": build_current_stories_payload(
@@ -223,22 +242,46 @@ def run_importance(
             same_as_current_story = None
 
         adds_new_fact = bool(assignment.get("adds_new_fact", True))
+        covered_in_previous_issue = assignment.get("covered_in_previous_issue", False)
+
+        # What readers have not seen yet: against the version they read earlier
+        # today when there is one, else against yesterday's issue
         new_fact = (
             assignment.get("new_fact")
             if same_as_current_story is not None and adds_new_fact
+            else None
+        ) or (
+            assignment.get("moved_on_fact")
+            if covered_in_previous_issue
             else None
         )
 
         scored_developments.append({
             "development_id": development_id,
             **development,
-            "covered_in_previous_issue": assignment.get("covered_in_previous_issue", False),
+            "covered_in_previous_issue": covered_in_previous_issue,
             "same_as_current_story": same_as_current_story,
             "adds_new_fact": adds_new_fact,
             "new_fact": new_fact,
             "section": assignment.get("section", "other"),
             "importance": assignment.get("importance", 1),
         })
+
+        # Every score, so a lead or a missing story can be traced in the logs.
+        # A story readers saw yesterday should only rank on what moved on
+        LOGGER.info(
+            "Importance | %s score %s (%s), %s%s | %s",
+            development_id,
+            assignment.get("importance", 1),
+            assignment.get("importance_basis"),
+            assignment.get("section", "other"),
+            (
+                f", covered yesterday, moved on: {assignment.get('moved_on_fact') or 'nothing'}"
+                if covered_in_previous_issue
+                else ""
+            ),
+            development["event"],
+        )
 
     return {
         "lead_development_id": response["lead_development_id"],

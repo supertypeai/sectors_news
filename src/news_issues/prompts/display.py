@@ -126,7 +126,7 @@ DISPLAY_USER_PROMPT = """
     {development}
 
     NEW SINCE THE LAST VERSION:
-    Readers saw an earlier version of this story today. This is the fact that has changed since, or null for a story they have not seen.
+    Readers have seen this story before, in an earlier version today or in the previous issue. This is the fact that has changed since, or null for a story they have not seen.
     - When it is not null, your copy must state it. Put it in the headline when it changes the story's main action or figure, otherwise in the first sentence of the blurb.
     - Take its wording and figures from the summary, as for every other fact.
     {new_fact}

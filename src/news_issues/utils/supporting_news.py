@@ -18,6 +18,7 @@ def build_supporting_news(
             continue
 
         supporting_news.append({
+            "timestamp": news_record.get("timestamp"),
             "id": news_record["id"],
             "title": news_record["title"],
             "sector": news_record["sector"],
@@ -26,7 +27,17 @@ def build_supporting_news(
             "thumbnail": news_record["thumbnail"]
         })
 
-    return supporting_news
+    # Newest first, so a story's first source is its latest news rather than
+    # an article from just after the previous issue's cutoff
+    supporting_news.sort(
+        key=lambda news: news["timestamp"] or "",
+        reverse=True,
+    )
+
+    return [
+        {key: value for key, value in news.items() if key != "timestamp"}
+        for news in supporting_news
+    ]
 
 
 def with_supporting_news(

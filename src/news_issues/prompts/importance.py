@@ -23,6 +23,15 @@ class DevelopmentAssignment(BaseModel):
             "list is empty."
         ),
     )
+    moved_on_fact: str | None = Field(
+        description=(
+            "When covered_in_previous_issue is true, the step the story has "
+            "moved on by since the previous issue, in one short line with its "
+            "figure or date exactly as the summary gives it. Null when it has "
+            "not moved on, and always null when covered_in_previous_issue is "
+            "false."
+        ),
+    )
     same_as_current_story: str | None = Field(
         description=(
             "ID of the CURRENT VERSION story that is the same story as this "
@@ -47,6 +56,13 @@ class DevelopmentAssignment(BaseModel):
     )
     section: Section = Field(
         description="The single section this development belongs to.",
+    )
+    importance_basis: str = Field(
+        description=(
+            "Written before importance. The PASS 2 line this development "
+            "meets, quoted in a few words, for example 'transaction of Rp1 "
+            "trillion or more'. 'not new' when PASS 1 found it not new."
+        ),
     )
     importance: int = Field(
         ge=1,
@@ -217,6 +233,9 @@ ASSIGNMENT_SYSTEM_PROMPT_TEMPLATE = """
     The CURRENT VERSION list is not the previous issue. It is this same issue as readers saw it a few hours ago. Never set covered_in_previous_issue to true because of a match in that list, and never lower a score because a development appears there.
 
     A previously covered development is new only when the story has moved on since: a new decision, a completed step, a newly released figure, or a further price move. The headline and blurb show what readers were already told. A fact that already appears there is not a new step. Repeat coverage, added analyst comment, and clarifications that change nothing are not new.
+    - For a previously covered development, set moved_on_fact to that new step in one short line, for example "ABCD raised its offer price to Rp620 a share" for a takeover readers already knew about. When nothing has moved on, set it to null, and the development is not new.
+    - The step must have happened after the PREVIOUS ISSUE CUTOFF. A decision, figure, or price move dated on or before it was already known when the previous issue was written, so it is not a step since, even when the previous headline and blurb left it out. A new estimate, reaction, or detail first reported after the cutoff can be a step.
+    - A previously covered development that is new is scored in PASS 2 by the size of its new step alone, not by the size of the whole story. Readers already know the story, so a follow-up leads only when the step itself is as big as a new lead story would be.
 
     A development that was not previously covered is new when the articles report its subject as news: a decision, transaction, filing, data release, market move, or announcement. It is still new when the decision behind it was signed or took effect earlier, as long as the articles treat it as news now, for example with first reports or a price reaction.
 
@@ -229,20 +248,21 @@ ASSIGNMENT_SYSTEM_PROMPT_TEMPLATE = """
     A development that is not new scores 1 or 2, whatever its size.
 
     PASS 2: HOW BIG IS IT?
-    Apply this only to developments that are new. Judge size from the amounts stated in the summary. If more than one line applies, use the highest level that applies.
+    Apply this only to developments that are new. Judge size from the amounts stated in the summary. If more than one line applies, use the highest level that applies. Write importance_basis first, quoting the line you matched, then give the score that line sets.
 
     5: Changes conditions for the whole market or an entire sector now. Only these qualify:
-    - A decision by a regulator, the exchange, the government, or the central bank that was first reported or took effect in this news cycle and applies market-wide or sector-wide.
+    - A decision by a regulator, the exchange, the government, or the central bank that was first reported or took effect in this news cycle and applies market-wide or sector-wide. A forecast, target, expectation, or statement by an authority is not a decision: score it like a data release in line with expectations.
     - A macro or market move that the summary describes as a record or a multi-year extreme.
     - A transaction, default, or fraud case of {threshold_top} or more.
-    Most days have no 5.
+    Most days have no 5. A ministry, central bank, or regulator forecasting yields, growth, or a deficit has decided nothing, so it is never a 5.
 
     4: Major for one company, or a clear signal for a sector. Any of these:
     - A change of control of a listed company.{extra_major_rules}
     - A transaction, fundraising, buyback, or debt event of {threshold_major} or more.
+    - A dividend of {threshold_major} or more that is special, a first, or clearly larger than the previous period. A regular dividend of that size, in line with previous periods, scores 3.
     - A proposed or draft rule for a sector that has not yet taken effect.
     - A central bank decision or data release that the summary says differed from expectations.
-    - A default, suspension, delisting, or major legal or regulatory action against a listed company.
+    - A default, delisting, or major legal or regulatory action against a listed company, or a suspension over a default, a missed payment, unfiled reports, or a going-concern doubt. A cooling-down suspension after unusual price moves is not one of these: it scores 2, or 3 when the summary shows the stock is among the market's largest by market value.
     - Newly released results that show a swing between profit and loss, or a raised or cut company guidance.
     - {price_move_rule}
 
@@ -258,6 +278,7 @@ ASSIGNMENT_SYSTEM_PROMPT_TEMPLATE = """
     - A value under {threshold_notable}.
     - A shareholder trade that does not change control and has no larger stated value.
     - A recurring corporate action in line with previous periods, such as a regular dividend.
+    - A temporary trading suspension after unusual price moves (a cooling-down), which the exchange applies routinely.
     - A development that is not new but still carries a figure a reader may want.
 
     1: Nothing an investor would act on.
@@ -284,7 +305,7 @@ ASSIGNMENT_SYSTEM_PROMPT_TEMPLATE = """
     Readers may have read the current version a few hours ago. A story they already read keeps its wording unless its news has moved on, so for each development you say which current story it is, and whether it adds anything.
     - same_as_current_story is the id of the CURRENT VERSION story that is the same story: the same company or institution and the same situation, as for the previous issue. Use each current id for at most one development. Null when no current story matches.
     - adds_new_fact is true when the development's summary holds a material fact that the matched story's headline and blurb do not: a new figure, a new decision or completed step, a new party, a new date, or a reaction or price move the reader has not been told. More outlets repeating the same facts, rewording, analyst colour that changes no figure, and background are not new facts.
-    - new_fact states that fact in one short line, so the copy can be rewritten around it, for example "Exclusion takes effect in November" or "IDX asks BREN and CUAN to explain their price moves". Take it from the summary only. When several facts are new, give the one an investor would most want to know. Null when adds_new_fact is false.
+    - new_fact states that fact in one short line, so the copy can be rewritten around it, for example "The rule takes effect on 1 December" or "The exchange asks ABCD to explain its price move". Take it from the summary only. When several facts are new, give the one an investor would most want to know. Null when adds_new_fact is false. moved_on_fact follows the same rules against the PREVIOUS ISSUE.
     - When same_as_current_story is null, adds_new_fact is false and new_fact is null.
     These fields never change a section or a score.
 
@@ -325,6 +346,10 @@ ASSIGNMENT_USER_PROMPT = """
     PREVIOUS ISSUE:
     Each story has an event label, a headline, a blurb, and its tickers. An empty list means there is no previous issue.
     {previous_stories}
+
+    PREVIOUS ISSUE CUTOFF:
+    The previous issue covered news up to this moment. "none" when there is no previous issue.
+    {previous_cutoff}
 
     CURRENT VERSION:
     The stories this same issue published earlier today. Each has an id, its slot (lead, story, or flash), an event label, a headline, a blurb, and its tickers. An empty list means this is the issue's first version.
