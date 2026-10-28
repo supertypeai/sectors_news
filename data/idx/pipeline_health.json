@@ -3,7 +3,7 @@
         "source": "ICNScraper",
         "date": "20261028",
         "articles_found": 0,
-        "duration_minutes": 0.03692019481677562,
+        "duration_minutes": 0.5923612739677385,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +16,7 @@
         "source": "GapkiScraper",
         "date": "20261028",
         "articles_found": 1,
-        "duration_minutes": 0.06574106341577135,
+        "duration_minutes": 0.04421720413374715,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,7 +29,7 @@
         "source": "MinerbaScraper",
         "date": "20261028",
         "articles_found": 0,
-        "duration_minutes": 0.0020271128334570674,
+        "duration_minutes": 0.0014918877665574353,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -42,7 +42,7 @@
         "source": "IdnMinerScraper",
         "date": "20261028",
         "articles_found": 0,
-        "duration_minutes": 0.03677086983419334,
+        "duration_minutes": 0.01939749169978313,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -54,12 +54,14 @@
     {
         "source": "IDNFinancialScraper",
         "date": "20261028",
-        "articles_found": 8,
-        "duration_minutes": 0.011700663366355002,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 20,
+        "duration_minutes": 0.022899985431771106,
+        "requests": 3,
+        "successful_requests": 3,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200
         ],
         "failures": []
@@ -67,15 +69,39 @@
     {
         "source": "BisnisMarket",
         "date": "20261028",
-        "articles_found": 17,
-        "duration_minutes": 28.235739732415336,
-        "requests": 42,
-        "successful_requests": 15,
-        "failed_requests": 27,
+        "articles_found": 35,
+        "duration_minutes": 20.632804391915368,
+        "requests": 75,
+        "successful_requests": 37,
+        "failed_requests": 38,
         "http_statuses": [
             200,
             403,
             200,
+            403,
+            200,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
             200,
             403,
             407,
@@ -86,31 +112,156 @@
             403,
             200,
             403,
-            407,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            200,
+            200,
             403,
             200,
             403,
             407,
             403,
             200,
-            200,
             403,
-            407,
-            200,
             200,
             403,
             200,
             403,
             200,
             403,
-            407,
+            200,
             403,
             200,
             403,
-            407,
+            200,
             200
         ],
         "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/192/2016366/astra-graphia-asgr-cetak-laba-rp20859-miliar-kuartal-iii2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/7/2016278/pergerakan-ihsg-dan-rekomendasi-saham-hari-ini-rabu-28-oktober-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/192/2016351/laba-astra-agro-aali-melonjak-78-per-september-2026-tembus-rp19-triliun",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/192/2016350/ratu-cetak-laba-bersih-rp448-miliar-sampai-september-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/192/2016344/direktur-citra-borneo-utama-cbut-ronny-hertantyo-raharjo-meninggal-dunia",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/192/2016329/laba-elnusa-elsa-tumbuh-29-jadi-rp6815-miliar-hingga-kuartal-iii2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/7/2016326/bei-minta-persetujuan-dividen-perdana-dalam-rupslb-hari-ini",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/7/2016313/indeks-bisnis-27-dibuka-melemah-saham-inco-klbf-dan-mbma-justru-melaju",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/235/2016290/antam-catat-penjualan-emas-25217-kg-hingga-september-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/93/2016312/rupiah-melemah-sentuh-rp18156-per-dolar-as-jelang-putusan-suku-bunga-the-fed",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/7/2016311/ihsg-dibuka-melemah-ke-5249-saham-bmri-bbri-hingga-tlkm-kompak-merah",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/7/2016309/bei-gelar-rupslb-hari-ini-2810-minta-restu-demutualisasi-bursa",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/235/2016303/tabel-harga-buyback-emas-antam-hari-ini-rabu-28-oktober-2026-nilai-pajaknya",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/235/2016301/harga-emas-antam-hari-ini-28-oktober-2026-1-gram-dibanderol-rp257-juta",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/235/2016301/harga-emas-antam-hari-ini-28-oktober-2026-1-gram-dibanderol-rp257-juta",
+                "status": null,
+                "reason": "TimeoutError",
+                "message": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://market.bisnis.com/read/20261028/235/2016301/harga-emas-antam-hari-ini-28-oktober-2026-1-gram-dibanderol-rp257-juta\", waiting until \"load\"\n"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/235/2016301/harga-emas-antam-hari-ini-28-oktober-2026-1-gram-dibanderol-rp257-juta",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
             {
                 "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261028/192/2016294/united-tractors-untr-tebar-dividen-interim-rp147-triliun-cek-jadwalnya",
@@ -120,7 +271,14 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/235/2016284/perbandingan-harga-emas-antam-galeri-24-dan-ubs-di-pegadaian-rabu-28-oktober-2026",
+                "url": "https://foto.bisnis.com/view/20261028/2016298/kimia-farma-optimalkan-kapasitas-produksi-418-miliar-unit",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261028/235/2016285/harga-buyback-emas-antam-ubs-galeri-24-di-pegadaian-hari-ini-rabu-28-oktober-2026",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -128,16 +286,9 @@
             {
                 "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261028/235/2016284/perbandingan-harga-emas-antam-galeri-24-dan-ubs-di-pegadaian-rabu-28-oktober-2026",
-                "status": null,
-                "reason": "TimeoutError",
-                "message": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://market.bisnis.com/read/20261028/235/2016284/perbandingan-harga-emas-antam-galeri-24-dan-ubs-di-pegadaian-rabu-28-oktober-2026\", waiting until \"load\"\n"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/235/2016284/perbandingan-harga-emas-antam-galeri-24-dan-ubs-di-pegadaian-rabu-28-oktober-2026",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
             },
             {
                 "stage": "fetch",
@@ -169,45 +320,10 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/235/2016265/harga-emas-perhiasan-hari-ini-rabu-28-oktober-2026-berbalik-naik",
-                "status": null,
-                "reason": "TimeoutError",
-                "message": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://market.bisnis.com/read/20261028/235/2016265/harga-emas-perhiasan-hari-ini-rabu-28-oktober-2026-berbalik-naik\", waiting until \"load\"\n"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/235/2016265/harga-emas-perhiasan-hari-ini-rabu-28-oktober-2026-berbalik-naik",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261028/94/2016269/indef-soroti-arah-bursa-komoditas-efisiensi-dan-hilirisasi-harus-jadi-kunci",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/7/2016278/pergerakan-ihsg-dan-rekomendasi-saham-hari-ini-rabu-28-oktober-2026",
-                "status": 403,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 403"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/7/2016278/pergerakan-ihsg-dan-rekomendasi-saham-hari-ini-rabu-28-oktober-2026",
-                "status": null,
-                "reason": "TimeoutError",
-                "message": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://market.bisnis.com/read/20261028/7/2016278/pergerakan-ihsg-dan-rekomendasi-saham-hari-ini-rabu-28-oktober-2026\", waiting until \"load\"\n"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/7/2016278/pergerakan-ihsg-dan-rekomendasi-saham-hari-ini-rabu-28-oktober-2026",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             },
             {
                 "stage": "fetch",
@@ -225,17 +341,45 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/189/2016252/ftse-tahan-status-ri-pahami-secondary-emerging-market-dan-dampaknya",
-                "status": null,
-                "reason": "TimeoutError",
-                "message": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://market.bisnis.com/read/20261028/189/2016252/ftse-tahan-status-ri-pahami-secondary-emerging-market-dan-dampaknya\", waiting until \"load\"\n"
+                "url": "https://finansial.bisnis.com/read/20261028/90/2016355/bank-jago-arto-catat-laba-bersih-rp298-miliar-kredit-tumbuh-19",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
             },
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261028/189/2016252/ftse-tahan-status-ri-pahami-secondary-emerging-market-dan-dampaknya",
+                "url": "https://finansial.bisnis.com/read/20261028/215/2016310/msig-life-ungkap-efek-penurunan-ihsg-ke-kinerja-unit-linked",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261028/215/2016310/msig-life-ungkap-efek-penurunan-ihsg-ke-kinerja-unit-linked",
+                "status": null,
+                "reason": "TimeoutError",
+                "message": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://finansial.bisnis.com/read/20261028/215/2016310/msig-life-ungkap-efek-penurunan-ihsg-ke-kinerja-unit-linked\", waiting until \"load\"\n"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261028/215/2016310/msig-life-ungkap-efek-penurunan-ihsg-ke-kinerja-unit-linked",
                 "status": 407,
                 "reason": "WebUnlockerError",
                 "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261028/90/2016341/cimb-niaga-bnga-bukukan-laba-bersih-konsolidasian-rp45-triliun-hingga-kuartal-iii2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261028/11/2016306/bi-dan-industri-sepakati-4-langkah-prioritas-untuk-pendalaman-pasar-uang-dan-valas-2027",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
             },
             {
                 "stage": "fetch",
@@ -260,20 +404,6 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://finansial.bisnis.com/read/20261028/215/2016272/laba-msig-life-life-naik-69-jadi-rp181-miliar-semester-i2026-ini-faktor-pendorongnya",
-                "status": null,
-                "reason": "TimeoutError",
-                "message": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://finansial.bisnis.com/read/20261028/215/2016272/laba-msig-life-life-naik-69-jadi-rp181-miliar-semester-i2026-ini-faktor-pendorongnya\", waiting until \"load\"\n"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://finansial.bisnis.com/read/20261028/215/2016272/laba-msig-life-life-naik-69-jadi-rp181-miliar-semester-i2026-ini-faktor-pendorongnya",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
                 "url": "https://finansial.bisnis.com/read/20261028/90/2016256/paradoks-perbankan-ri-privasi-data-jadi-prioritas-tetapi-abai-audit-ai",
                 "status": 403,
                 "reason": "HTTPStatusError",
@@ -285,32 +415,35 @@
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://finansial.bisnis.com/read/20261028/563/2016251/jurus-aman-galbay-pinjol-cara-hadapi-debt-collector-tanpa-melanggar-hukum",
-                "status": null,
-                "reason": "TimeoutError",
-                "message": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://finansial.bisnis.com/read/20261028/563/2016251/jurus-aman-galbay-pinjol-cara-hadapi-debt-collector-tanpa-melanggar-hukum\", waiting until \"load\"\n"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://finansial.bisnis.com/read/20261028/563/2016251/jurus-aman-galbay-pinjol-cara-hadapi-debt-collector-tanpa-melanggar-hukum",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             }
         ]
     },
     {
         "source": "BloombergTechnoz",
         "date": "20261028",
-        "articles_found": 11,
-        "duration_minutes": 0.15089758668327705,
-        "requests": 12,
-        "successful_requests": 12,
+        "articles_found": 28,
+        "duration_minutes": 0.4439661930334599,
+        "requests": 29,
+        "successful_requests": 29,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -329,272 +462,51 @@
     {
         "source": "InvestorID",
         "date": "20261028",
-        "articles_found": 6,
-        "duration_minutes": 10.265297808950224,
-        "requests": 43,
-        "successful_requests": 11,
-        "failed_requests": 32,
+        "articles_found": 28,
+        "duration_minutes": 1.5248244217325313,
+        "requests": 31,
+        "successful_requests": 31,
+        "failed_requests": 0,
         "http_statuses": [
             200,
             200,
             200,
-            407,
-            407,
-            409,
-            407,
-            200,
-            200,
-            407,
-            407,
-            200,
-            407,
-            409,
-            407,
-            407,
-            200,
-            407,
-            407,
-            407,
-            407,
             200,
             200,
             200,
             200,
-            407,
-            407
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
         ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459670/sejumlah-saham-yang-masuk-keranjang-belanja-asing",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459670%2Fsejumlah-saham-yang-masuk-keranjang-belanja-asing&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8fadb350>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459671/kondisi-gudang-garam-ggrm-disorot",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459671%2Fkondisi-gudang-garam-ggrm-disorot&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8fadb770>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459671/kondisi-gudang-garam-ggrm-disorot",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459670/sejumlah-saham-yang-masuk-keranjang-belanja-asing",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459666/ihsg-dibayangi-the-fed-dan-msci-sampai-mana-bisa-bertahan",
-                "status": 409,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459666%2Fihsg-dibayangi-the-fed-dan-msci-sampai-mana-bisa-bertahan&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8ef26480>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459666/ihsg-dibayangi-the-fed-dan-msci-sampai-mana-bisa-bertahan",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459654/anthoni-salim-tergeser",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459654%2Fanthoni-salim-tergeser&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d735595e0>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459660/berita-populer-gabriel-rey-borong-mmix-hingga-dinamika-harga-emas-perhiasan",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459660%2Fberita-populer-gabriel-rey-borong-mmix-hingga-dinamika-harga-emas-perhiasan&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d7355aba0>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459657/cum-dividen-gede-emiten-grup-sinar-mas",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459657%2Fcum-dividen-gede-emiten-grup-sinar-mas&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d735597c0>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459660/berita-populer-gabriel-rey-borong-mmix-hingga-dinamika-harga-emas-perhiasan",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459654/anthoni-salim-tergeser",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459657/cum-dividen-gede-emiten-grup-sinar-mas",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Max retries exceeded with url: /request (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.brightdata.com', port=443) at 0x738d8eb18fb0>, 'Connection to api.brightdata.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459636/wamenko-dradjad-kritik-keras-msci",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459636%2Fwamenko-dradjad-kritik-keras-msci&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d71cb7aa0>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459621/prediksi-ihsg-dan-rekomendasi-saham-rabu-28-oktober-2026",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459621%2Fprediksi-ihsg-dan-rekomendasi-saham-rabu-28-oktober-2026&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d71d419d0>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459617/sisa-satu-catatan-dari-msci-bos-ojk-penegakan-hukum",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459617%2Fsisa-satu-catatan-dari-msci-bos-ojk-penegakan-hukum&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d71cb6660>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459617/sisa-satu-catatan-dari-msci-bos-ojk-penegakan-hukum",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459629/tiga-raksasa-bursa-terempas-asing-belum-juga-puas",
-                "status": 409,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459629%2Ftiga-raksasa-bursa-terempas-asing-belum-juga-puas&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d71d40c80>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459636/wamenko-dradjad-kritik-keras-msci",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459629/tiga-raksasa-bursa-terempas-asing-belum-juga-puas",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459621/prediksi-ihsg-dan-rekomendasi-saham-rabu-28-oktober-2026",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.brightdata.com', port=443): Max retries exceeded with url: /request (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.brightdata.com', port=443) at 0x738d71f48320>, 'Connection to api.brightdata.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459616/ihsg-anjlok-sahamsaham-ini-malah-melejit-hingga-33",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459616%2Fihsg-anjlok-sahamsaham-ini-malah-melejit-hingga-33&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8eb0f5c0>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459589/saham-bank-ini-dijual-asing-tapi-harga-bisa-naik",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459589%2Fsaham-bank-ini-dijual-asing-tapi-harga-bisa-naik&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8eb0de80>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459604/kapan-ihsg-pulih-efek-msci-lebih-dahsyat-dari-perang-dagang",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459604%2Fkapan-ihsg-pulih-efek-msci-lebih-dahsyat-dari-perang-dagang&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8eb0fd70>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459601/bird-menjaga-takhta-mobilitas",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459601%2Fbird-menjaga-takhta-mobilitas&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8eb0f800>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459601/bird-menjaga-takhta-mobilitas",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459589/saham-bank-ini-dijual-asing-tapi-harga-bisa-naik",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459616/ihsg-anjlok-sahamsaham-ini-malah-melejit-hingga-33",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459604/kapan-ihsg-pulih-efek-msci-lebih-dahsyat-dari-perang-dagang",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459656/laba-antam-antm-loncat-saham-lagi-murahmurahnya",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459656%2Flaba-antam-antm-loncat-saham-lagi-murahmurahnya&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8e763e00>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459618/impc-bidik-laba-bersihrp-800-miliar-lebih-pada-2026",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fmarket%2F459618%2Fimpc-bidik-laba-bersihrp-800-miliar-lebih-pada-2026&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8e781f10>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459618/impc-bidik-laba-bersihrp-800-miliar-lebih-pada-2026",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/459656/laba-antam-antm-loncat-saham-lagi-murahmurahnya",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            }
-        ]
+        "failures": []
     },
     {
         "source": "AbafScraper",
         "date": "20261028",
         "articles_found": 0,
-        "duration_minutes": 0.00797411958143736,
+        "duration_minutes": 0.015818095517655215,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -607,40 +519,31 @@
     {
         "source": "JakartaGlobe",
         "date": "20261028",
-        "articles_found": 0,
-        "duration_minutes": 1.0336187605823701,
-        "requests": 2,
-        "successful_requests": 0,
-        "failed_requests": 2,
+        "articles_found": 1,
+        "duration_minutes": 0.5555486137668292,
+        "requests": 6,
+        "successful_requests": 6,
+        "failed_requests": 0,
         "http_statuses": [
-            407
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
         ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://jakartaglobe.id/business/newsindex/1",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Fjakartaglobe.id%2Fbusiness%2Fnewsindex%2F1&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8fc5e030>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://jakartaglobe.id/business/newsindex/1",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            }
-        ]
+        "failures": []
     },
     {
         "source": "AntaraNews",
         "date": "20261028",
-        "articles_found": 0,
-        "duration_minutes": 0.015421562232465174,
-        "requests": 2,
-        "successful_requests": 2,
+        "articles_found": 1,
+        "duration_minutes": 0.06952297908331578,
+        "requests": 3,
+        "successful_requests": 3,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200
         ],
@@ -650,7 +553,7 @@
         "source": "AsianTelecom",
         "date": "20261028",
         "articles_found": 0,
-        "duration_minutes": 0.13056374238221907,
+        "duration_minutes": 0.01912245491791206,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -663,12 +566,13 @@
     {
         "source": "JakartaPost",
         "date": "20261028",
-        "articles_found": 0,
-        "duration_minutes": 0.02374076681638447,
-        "requests": 2,
-        "successful_requests": 2,
+        "articles_found": 1,
+        "duration_minutes": 0.022279250534484162,
+        "requests": 3,
+        "successful_requests": 3,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200
         ],
@@ -677,105 +581,55 @@
     {
         "source": "KontanInvestasi",
         "date": "20261028",
-        "articles_found": 3,
-        "duration_minutes": 3.208014671265846,
-        "requests": 16,
-        "successful_requests": 4,
-        "failed_requests": 12,
+        "articles_found": 14,
+        "duration_minutes": 0.686499839683529,
+        "requests": 17,
+        "successful_requests": 13,
+        "failed_requests": 4,
         "http_statuses": [
             200,
             200,
             200,
             200,
-            407,
-            407,
-            407,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             409,
+            409,
+            200,
             407,
             407,
-            407
+            200,
+            200
         ],
         "failures": [
             {
                 "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/gelar-rupslb-hari-ini-2810-bei-bakal-bagi-dividen-pertama-kali-dalam-sejarah",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestasi.kontan.co.id%2Fnews%2Fgelar-rupslb-hari-ini-2810-bei-bakal-bagi-dividen-pertama-kali-dalam-sejarah&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8dd69760>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/cek-rekomendasi-saham-mtel-eraa-dan-lsip-untuk-perdagangan-rabu-2810",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestasi.kontan.co.id%2Fnews%2Fcek-rekomendasi-saham-mtel-eraa-dan-lsip-untuk-perdagangan-rabu-2810&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8dd8c2f0>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/leyand-lapd-rights-issue-maksimal-2-miliar-saham-akuisisi-875-saham-bss",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestasi.kontan.co.id%2Fnews%2Fleyand-lapd-rights-issue-maksimal-2-miliar-saham-akuisisi-875-saham-bss&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8dd6a120>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/gelar-rupslb-hari-ini-2810-bei-bakal-bagi-dividen-pertama-kali-dalam-sejarah",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/leyand-lapd-rights-issue-maksimal-2-miliar-saham-akuisisi-875-saham-bss",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/cek-rekomendasi-saham-mtel-eraa-dan-lsip-untuk-perdagangan-rabu-2810",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/ihsg-rontok-39-asing-net-sell-hampir-rp-125-t-investor-ritel-perlu-beli-jual",
+                "url": "https://investasi.kontan.co.id/news/dayamitra-telekomunikasi-mtel-realisasikan-mesop-tahap-iii-pada-1-november-2026",
                 "status": 409,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestasi.kontan.co.id%2Fnews%2Fihsg-rontok-39-asing-net-sell-hampir-rp-125-t-investor-ritel-perlu-beli-jual&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8c378f50>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
+                "reason": "HTTPStatusError",
+                "message": "Received status code 409"
             },
             {
                 "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/ihsg-rontok-39-asing-net-sell-hampir-rp-125-t-investor-ritel-perlu-beli-jual",
+                "url": "https://investasi.kontan.co.id/news/window-dressing-akhir-2026-berpotensi-jadi-rebound-sesaat-cek-rekomendasi-analis",
+                "status": 409,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 409"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/dayamitra-telekomunikasi-mtel-realisasikan-mesop-tahap-iii-pada-1-november-2026",
                 "status": 407,
                 "reason": "WebUnlockerError",
                 "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
             },
             {
                 "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/daftar-saham-per-terendah-tertinggi-lq45-27-oktober-2026-banyak-saham-tertekan",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestasi.kontan.co.id%2Fnews%2Fdaftar-saham-per-terendah-tertinggi-lq45-27-oktober-2026-banyak-saham-tertekan&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8dd8c470>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/daftar-saham-per-terendah-tertinggi-lq45-27-oktober-2026-banyak-saham-tertekan",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal=28&bulan=10&tahun=2026&pos=indeks&per_page=20",
-                "status": null,
-                "reason": "ConnectTimeout",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Fwww.kontan.co.id%2Fsearch%2Findeks%3Fkanal%3Dinvestasi%26tanggal%3D28%26bulan%3D10%26tahun%3D2026%26pos%3Dindeks%26per_page%3D20&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.scrapingant.com', port=443) at 0x738d8e89a7b0>, 'Connection to api.scrapingant.com timed out. (connect timeout=60)'))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal=28&bulan=10&tahun=2026&pos=indeks&per_page=20",
+                "url": "https://investasi.kontan.co.id/news/window-dressing-akhir-2026-berpotensi-jadi-rebound-sesaat-cek-rekomendasi-analis",
                 "status": 407,
                 "reason": "WebUnlockerError",
                 "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
@@ -785,12 +639,19 @@
     {
         "source": "EmitenNews",
         "date": "20261028",
-        "articles_found": 8,
-        "duration_minutes": 0.7756952094341008,
-        "requests": 10,
-        "successful_requests": 10,
+        "articles_found": 14,
+        "duration_minutes": 0.21192280505007755,
+        "requests": 17,
+        "successful_requests": 17,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -808,7 +669,7 @@
         "source": "BCANews",
         "date": "20261028",
         "articles_found": 0,
-        "duration_minutes": 0.009638832550263033,
+        "duration_minutes": 0.009464671567548067,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -820,12 +681,17 @@
     {
         "source": "CNBCMarket",
         "date": "20261028",
-        "articles_found": 5,
-        "duration_minutes": 0.012850276415701956,
-        "requests": 6,
-        "successful_requests": 6,
+        "articles_found": 10,
+        "duration_minutes": 0.022769950731890275,
+        "requests": 11,
+        "successful_requests": 11,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -838,12 +704,21 @@
     {
         "source": "CNNEkonomi",
         "date": "20261028",
-        "articles_found": 7,
-        "duration_minutes": 0.04036955676662425,
-        "requests": 9,
-        "successful_requests": 9,
+        "articles_found": 15,
+        "duration_minutes": 0.07845913808171948,
+        "requests": 18,
+        "successful_requests": 18,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -859,8 +734,8 @@
     {
         "source": "KompasMoney",
         "date": "20261028",
-        "articles_found": 11,
-        "duration_minutes": 0.11431999769993126,
+        "articles_found": 37,
+        "duration_minutes": 0.1190252105181571,
         "requests": 2,
         "successful_requests": 1,
         "failed_requests": 1,
@@ -881,12 +756,16 @@
     {
         "source": "FinanceDetik",
         "date": "20261028",
-        "articles_found": 0,
-        "duration_minutes": 0.5073097134494068,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 3,
+        "duration_minutes": 0.1607605110000198,
+        "requests": 5,
+        "successful_requests": 5,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
             200
         ],
         "failures": []
@@ -894,12 +773,13 @@
     {
         "source": "KontanKeuangan",
         "date": "20261028",
-        "articles_found": 0,
-        "duration_minutes": 0.3856115875164202,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 5,
+        "duration_minutes": 0.04127277483348735,
+        "requests": 2,
+        "successful_requests": 2,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200
         ],
         "failures": []
