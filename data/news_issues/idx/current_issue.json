@@ -1,69 +1,98 @@
 {
   "issue_date": "2026-10-30",
   "window_start": "2026-10-29T13:50:00Z",
-  "window_end": "2026-10-30T05:56:04Z",
+  "window_end": "2026-10-30T09:55:56Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "IHSG falls below 5,000 for the first time since the pandemic era",
-    "headline": "IHSG falls below 5,000 for first time since pandemic era, closes at 4,985",
-    "blurb": "The index fell 108.06 points, or 2.2%, on Friday, after trading between 4,979 and 5,116. Continued foreign outflows included a Rp1.52 trillion net sell in the previous session. Panin Sekuritas maintained a cautious bias, warning that further weakness could put support at 4,270-4,440. It cited high oil prices pressuring the rupiah and possible spillover into bonds as SROs and OJK work to address MSCI reclassification concerns.",
+    "event": "Bank Indonesia cuts banks' reserve requirement ratio by two percentage points",
+    "headline": "Bank Indonesia cuts banks' reserve requirement ratio by 2 percentage points",
+    "blurb": "The phased cut addresses uneven liquidity distribution across banks despite a solid industry. Conventional banks' ratio falls from 9% to 8% on 1 November and 7% on 1 December, while Islamic banks' ratio drops from 7.5% to 6.5% and then 5.5%, releasing around Rp80 trillion in the first stage. BI said the second stage is tied to adjustments to its Macroprudential Liquidity Incentive Policy, which directs incentives to banks lending to strategic sectors. BI also kept its benchmark rate at 5.75% after its October 2026 Board of Governors Meeting.",
     "tickers": [],
     "supporting_news_ids": [
-      31588
+      31586
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: moved from story to lead"
   },
   "sections": {
-    "market_structure_policy": [
+    "deals_control": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Bank Indonesia cuts banks' reserve requirements by two percentage points",
-        "headline": "Bank Indonesia cuts banks' reserve requirements by 2 percentage points",
-        "blurb": "BI Deputy Governor Destry Damayanti said the cut addresses uneven liquidity across banks. Conventional banks' ratio falls from 9% to 8% on 1 November and 7% on 1 December, while Islamic banks and units move from 7.5% to 6.5% and then 5.5%; the first stage releases around Rp80 trillion, with the second tied to adjustments to the Macroprudential Liquidity Incentive Policy.",
+        "event": "Bayan Resources reports nine-month 2026 earnings",
+        "headline": "BYAN reports US$589.67 million nine-month attributable profit",
+        "blurb": "Bayan Resources' gross profit rose 11.73% to US$864.02 million for January-September 2026. Separately, Jhonlin Baratama bought 10.84 billion shares from Low Tuck Kwong and Elaine Low at Rp2,588 each, giving it 30.25% of the company.",
+        "tickers": [
+          "BYAN.JK"
+        ],
+        "supporting_news_ids": [
+          31618,
+          31655,
+          31633
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Satu Visi Putra completes a private placement to fund a hospital acquisition",
+        "headline": "VISI completes Rp120 billion private placement for hospital acquisition",
+        "blurb": "Satu Visi Putra issued 120.72 million shares at Rp994 each, equal to 3.78% of enlarged capital, to Harmoni Semesta Investama, Atlas Raya Abadi and Trinugraha Thohir Harmoni. Proceeds are intended to fund a subscription in Hasna Medika Bakti Cirebon for a 72.91% stake, with share recording finalized on 29 October.",
+        "tickers": [
+          "VISI.JK"
+        ],
+        "supporting_news_ids": [
+          31645
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "macro_flows": [
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Indonesian rupiah hits a record low amid fiscal-risk warnings",
+        "headline": "Rupiah hits record low at Rp18,183 per US dollar",
+        "blurb": "The currency breached Rp18,000/US$ on 28 October, far below the 2026 State Budget assumption of Rp16,500/US$. Economists warned that continued depreciation, high oil prices and SBN yields above the 6.9% budget assumption could widen fiscal risks as the deficit reached Rp319 trillion, or 1.24% of GDP, by September.",
         "tickers": [],
         "supporting_news_ids": [
-          31586
+          31630
         ],
         "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_03",
-        "slot": "story",
-        "event": "Energi Mega Persada shares hit auto-reject limits for three consecutive sessions",
-        "headline": "ENRG hits lower price limit for three consecutive sessions",
-        "blurb": "Energi Mega Persada was locked at Rp665 from 27 to 29 October. Net sales for the period ended 30 September rose to USD426.06 million from USD361.38 million a year earlier. The company plans to complete its USD200 million acquisition of HighPeak Energy by year-end.",
-        "tickers": [
-          "ENRG.JK"
-        ],
-        "supporting_news_ids": [
-          31549
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_04",
-        "slot": "story",
-        "event": "GoTo reports Q3 profit and raises its 2026 EBITDA target",
-        "headline": "GOTO reports Q3 profit and raises 2026 adjusted group EBITDA target to Rp3.5–3.7 trillion",
-        "blurb": "Nine-month profit attributable to parent owners reached Rp1.16 trillion, reversing a Rp775.55 billion loss a year earlier. The revised target, up from Rp3.2–3.4 trillion, reflects fintech outperformance centered on GoPay and renewed growth in on-demand services.",
-        "tickers": [
-          "GOTO.JK"
-        ],
-        "supporting_news_ids": [
-          31594,
-          31569,
-          31557,
-          31547,
-          31554
-        ],
-        "copy_decision": "rewritten: moved from lead to story"
-      },
-      {
         "id": "cur_05",
+        "slot": "story",
+        "event": "Amman Mineral reports a nine-month earnings turnaround",
+        "headline": "AMMN swings to profit in nine months as sales rise 494%",
+        "blurb": "Amman Mineral recorded US$3.24 billion in sales and US$1.83 billion in EBITDA, with a 57% margin. It raised 2026 gold concentrate guidance by 34% to 775,000 ounces and kept copper concentrate guidance at 485 million pounds.",
+        "tickers": [
+          "AMMN.JK"
+        ],
+        "supporting_news_ids": [
+          31615,
+          31656
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "BRI Danareksa cuts Medikaloka Hermina's target price",
+        "headline": "BRI Danareksa cuts HEAL target price to Rp 950",
+        "blurb": "The broker kept its Buy recommendation but cut its 2026 and 2027 net profit estimates by 8% and 10%, respectively. Medikaloka Hermina reported nine-month 2026 net profit of Rp 303 billion, down 15% year on year.",
+        "tickers": [
+          "HEAL.JK"
+        ],
+        "supporting_news_ids": [
+          31643
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_07",
         "slot": "story",
         "event": "BNI reports nine-month 2026 profit growth as shares rebound",
         "headline": "BBNI reports 6.6% nine-month profit growth as shares rebound",
@@ -78,23 +107,41 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_06",
+        "id": "cur_08",
         "slot": "story",
-        "event": "Chandra Asri Pacific reports lower nine-month profit",
-        "headline": "TPIA reports nine-month profit down 78.4% to US$279.81 million",
-        "blurb": "Chandra Asri's revenue rose 60.5% year-on-year to US$8.19 billion, while raw material and production expenses increased 40.77% to US$7.23 billion. The year-earlier period included a US$1.81 billion bargain purchase gain that was absent in the first nine months of 2026.",
+        "event": "Chandra Asri Pacific reports nine-month 2026 earnings and revenue",
+        "headline": "TPIA reports nine-month 2026 revenue of US$8.19 billion, net profit down 78.43%",
+        "blurb": "Sales rose 60.5% year on year, while EBITDA was US$981 million. PEFINDO maintained its idAA- rating and revised the outlook to Positive.",
         "tickers": [
           "TPIA.JK"
         ],
         "supporting_news_ids": [
+          31617,
+          31637,
           31601
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 2 new articles with a new fact: PEFINDO maintained TPIA's idAA- rating and revised its outlook to Positive."
+      }
+    ],
+    "other": [
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "Energi Mega Persada shares hit auto-reject limits for three consecutive sessions",
+        "headline": "ENRG hits lower price limit for three consecutive sessions",
+        "blurb": "Energi Mega Persada was locked at Rp665 from 27 to 29 October. Net sales for the period ended 30 September rose to USD426.06 million from USD361.38 million a year earlier. The company plans to complete its USD200 million acquisition of HighPeak Energy by year-end.",
+        "tickers": [
+          "ENRG.JK"
+        ],
+        "supporting_news_ids": [
+          31549
+        ],
+        "copy_decision": "kept: same articles"
       }
     ],
     "capital_raising_buybacks": [
       {
-        "id": "cur_07",
+        "id": "cur_10",
         "slot": "story",
         "event": "GoTo reports share buybacks and plans to cancel treasury shares",
         "headline": "GOTO reports Rp985 billion buyback and plans to cancel 32 billion shares",
@@ -106,13 +153,27 @@
           31560,
           31566
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: GoTo’s buyback accelerated after IDX removed the Rp50 minimum share price on 28 September 2026."
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "Indah Prakasa Sentosa reports nine-month earnings growth",
+        "headline": "INPS reports nine-month net profit up 417.7% to Rp14.65 billion",
+        "blurb": "Indah Prakasa Sentosa said higher revenue and lower bank-loan interest expense drove the increase, with revenue rising 61.4% to Rp299.71 billion. It plans a private placement of up to Rp125 billion to repay debt and fund its 90%-owned automotive subsidiary, subject to shareholder approval on 3 November. Its controlling shareholder is ready to act as a prospective investor.",
+        "tickers": [
+          "INPS.JK"
+        ],
+        "supporting_news_ids": [
+          31640
+        ],
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_08",
+      "id": "cur_12",
       "slot": "flash",
       "event": "Astra International schedules Rp98-per-share interim dividend",
       "headline": "PT Astra International Tbk (ASII) to Pay Interim Dividend of Rp 98 Per Share",
@@ -126,21 +187,23 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_09",
+      "id": "cur_13",
       "slot": "flash",
-      "event": "Bank Danamon reports nine-month net profit growth",
-      "headline": "PT Bank Danamon Indonesia Tbk (BDMN) posts 19% net profit growth on stronger loans and deposits",
+      "event": "Bank Danamon reports nine-month 2026 earnings",
+      "headline": "Bank Danamon (BDMN) reports Rp3.49 trillion net profit and proposes a name change to Bank MUFG Danamon",
       "blurb": null,
       "tickers": [
         "BDMN.JK"
       ],
       "supporting_news_ids": [
+        31627,
+        31658,
         31581
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 2 new articles with a new fact: Danamon proposed changing its name to PT Bank MUFG Danamon Tbk, targeted to take effect in 2027."
     },
     {
-      "id": "cur_10",
+      "id": "cur_14",
       "slot": "flash",
       "event": "CIMB Niaga reports nine-month 2026 pre-tax profit of Rp5.8 trillion",
       "headline": "BNGA reports Rp5.8 trillion pre-tax profit for nine months",
@@ -151,10 +214,10 @@
       "supporting_news_ids": [
         31546
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_15",
       "slot": "flash",
       "event": "Vale Indonesia reports nine-month 2026 earnings growth",
       "headline": "Vale Indonesia (INCO) reported nine-month net profit of US$147.12 million",
@@ -167,10 +230,10 @@
         31571,
         31548
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Q3 net profit fell 29.7% quarter-on-quarter to US$42.75 million."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_16",
       "slot": "flash",
       "event": "Bukit Asam reports nine-month 2026 earnings growth",
       "headline": "PT Bukit Asam (PTBA.JK) reported net profit of Rp4.41 trillion for the first nine months of 2026.",
@@ -182,52 +245,99 @@
         31597,
         31555
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net profit rose 316% from Rp1.39 trillion a year earlier."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_13",
+      "id": "cur_17",
       "slot": "flash",
-      "event": "PGN secures USD10.62 billion in gas-supply contracts",
-      "headline": "Pertamina Gas Negara (PGAS) Posts Q3 Net Profit Growth and Secures USD10.62 Billion in Gas Supply Contracts",
+      "event": "PGN reports nine-month earnings and secures long-term gas supply contracts",
+      "headline": "Pertamina Gas Negara (PGAS.JK) secures USD10.62 billion in gas supply contracts",
       "blurb": null,
       "tickers": [
         "PGAS.JK"
       ],
       "supporting_news_ids": [
+        31622,
         31575
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: PGAS reported nine-month net profit of US$292.95 million, up 23.14% year on year."
     },
     {
-      "id": "cur_14",
+      "id": "cur_18",
       "slot": "flash",
-      "event": "Jasa Marga reports Q3 toll revenue and profit growth",
-      "headline": "PT Jasa Marga (Persero) Tbk (JSMR) Posts 6.75% Toll Revenue Growth to Rp14.32 Trillion in Q3 2026",
+      "event": "Timah reports nine-month earnings growth as tin prices surge",
+      "headline": "Tin Price Surge Lifts PT Timah (Persero) Tbk (TINS) Net Profit to Rp4.12 Trillion",
+      "blurb": null,
+      "tickers": [
+        "TINS.JK"
+      ],
+      "supporting_news_ids": [
+        31652
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "Jasa Marga reports nine-month 2026 revenue and earnings",
+      "headline": "PT Jasa Marga (Persero) Tbk (JSMR) reports Rp14.32 trillion in toll revenue through Q3 2026",
       "blurb": null,
       "tickers": [
         "JSMR.JK"
       ],
       "supporting_news_ids": [
+        31662,
+        31642,
         31596
+      ],
+      "copy_decision": "rewritten: 2 new articles with a new fact: JSMR began operating the 24-kilometer Gending-Paiton toll-road segment in October 2026."
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "Daya Intiguna Yasa reports nine-month revenue growth and store expansion",
+      "headline": "MR DIY Indonesia Posts Rp 7.2 Trillion Revenue in 9M 2026, Expands Network to 1,416 Stores",
+      "blurb": null,
+      "tickers": [
+        "MDIY.JK"
+      ],
+      "supporting_news_ids": [
+        31638
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_15",
+      "id": "cur_21",
       "slot": "flash",
-      "event": "Bangun Kosambi Sukses reports nine-month 2026 revenue and profit growth",
-      "headline": "PT Bangun Kosambi Sukses Tbk (CBDK) Posts 11% Revenue Growth to Rp 2.56 Trillion in First Nine Months of 2026",
+      "event": "Bank Pan Indonesia reports nine-month 2026 earnings",
+      "headline": "PT Bank Pan Indonesia Tbk (PNBN) Posts Rp2.26 Trillion Consolidated Net Profit Through September 2026",
+      "blurb": null,
+      "tickers": [
+        "PNBN.JK"
+      ],
+      "supporting_news_ids": [
+        31625
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "Bangun Kosambi Sukses reports nine-month 2026 earnings growth",
+      "headline": "Bangun Kosambi Sukses (CBDK) reports Rp1.82 trillion nine-month net profit, up 39%",
       "blurb": null,
       "tickers": [
         "CBDK.JK"
       ],
       "supporting_news_ids": [
+        31659,
+        31620,
         31564
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 2 new articles with a new fact: Nine-month net profit rose 39% to Rp1.82 trillion."
     },
     {
-      "id": "cur_16",
+      "id": "cur_23",
       "slot": "flash",
       "event": "Garuda Indonesia reports nine-month results and Q3 net loss",
       "headline": "Garuda Indonesia (GIAA) reported US$2.71 billion in revenue for the first nine months of 2026, up 13.2%, while a report said its third-quarter net loss widened to Rp3.49 trillion.",
@@ -241,10 +351,39 @@
         31558,
         31552
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: A separate report said Garuda’s Q3 net loss widened to Rp3.49 trillion."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_17",
+      "id": "cur_24",
+      "slot": "flash",
+      "event": "Dharma Satya Nusantara reports nine-month 2026 earnings growth",
+      "headline": "PT Dharma Satya Nusantara Tbk (DSNG.JK) reported Rp1.44 trillion in net profit through the third quarter of 2026",
+      "blurb": null,
+      "tickers": [
+        "DSNG.JK"
+      ],
+      "supporting_news_ids": [
+        31613,
+        31639
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_25",
+      "slot": "flash",
+      "event": "Maybank Indonesia reports nine-month 2026 pre-tax profit",
+      "headline": "PT Bank Maybank Indonesia Tbk (BNII) Posts Rp1.43 Trillion Pre-Tax Profit for First Nine Months of 2026",
+      "blurb": null,
+      "tickers": [
+        "BNII.JK"
+      ],
+      "supporting_news_ids": [
+        31664
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_26",
       "slot": "flash",
       "event": "Super Bank Indonesia reports nine-month profit growth and Mandiri maintains its target",
       "headline": "PT Super Bank Indonesia Tbk (SUPA) Posts 398% Net Profit Surge to Rp 299.88 Billion in 9M26; Mandiri Sekuritas Sees 146% Upside to Rp 800 Target",
@@ -258,7 +397,49 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
+      "id": "cur_27",
+      "slot": "flash",
+      "event": "Sido Muncul reports lower nine-month 2026 earnings",
+      "headline": "PT Industri Jamu dan Farmasi Sido Muncul Tbk (SIDO) Posts 24.36% Drop in Q3 2026 Net Profit to Rp619.09 Billion",
+      "blurb": null,
+      "tickers": [
+        "SIDO.JK"
+      ],
+      "supporting_news_ids": [
+        31646
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_28",
+      "slot": "flash",
+      "event": "Ancara Logistics Indonesia reports softer nine-month results",
+      "headline": "PT Ancara Logistics Indonesia Tbk (ALII) Posts Slower Q3 2026 Performance as Revenue and Profit Ease",
+      "blurb": null,
+      "tickers": [
+        "ALII.JK"
+      ],
+      "supporting_news_ids": [
+        31650
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_29",
+      "slot": "flash",
+      "event": "Adira Finance reports nine-month results and completes Mandala Finance integration",
+      "headline": "Adira Finance's New Financing Rises 13 Percent to Rp35.1 Trillion as of September 2026",
+      "blurb": null,
+      "tickers": [
+        "ADMF.JK"
+      ],
+      "supporting_news_ids": [
+        31624
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_30",
       "slot": "flash",
       "event": "Erajaya Swasembada reports nine-month earnings growth",
       "headline": "PT Erajaya Swasembada Tbk (ERAA) Posts 38.5% Net Profit Growth to Rp1.08 Trillion on Broad-Based Sales Gains",
@@ -269,24 +450,25 @@
       "supporting_news_ids": [
         31583
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
+      "id": "cur_31",
       "slot": "flash",
-      "event": "Bank BJB reports nine-month net profit growth",
-      "headline": "Bank BJB Posts 37.3% Jump in Net Profit to Rp 1.1 Trillion Through Q3 2026",
+      "event": "Bank BJB reports nine-month 2026 earnings growth",
+      "headline": "Bank BJB (BJBR.JK) reports net profit of Rp 1.1 trillion through September 2026, up 37.3% year on year",
       "blurb": null,
       "tickers": [
         "BJBR.JK"
       ],
       "supporting_news_ids": [
+        31626,
         31606
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Consolidated loans and financing reached Rp142.3 trillion."
     },
     {
-      "id": "cur_20",
+      "id": "cur_32",
       "slot": "flash",
       "event": "Bank Jatim reports nine-month earnings growth",
       "headline": "PT Bank Pembangunan Daerah Jawa Timur Tbk (BJTM) Posts 38% Rise in Q3 2026 Net Interest Income",
@@ -297,10 +479,10 @@
       "supporting_news_ids": [
         31595
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_21",
+      "id": "cur_33",
       "slot": "flash",
       "event": "Victoria Care reports lower nine-month profit and appoints a deputy chief commissioner",
       "headline": "Victoria Care (VICI) Posts 26.36% Drop in Nine-Month Net Profit as Prabowo's Niece Joins Board",
@@ -311,10 +493,10 @@
       "supporting_news_ids": [
         31600
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_22",
+      "id": "cur_34",
       "slot": "flash",
       "event": "Sentul City reports nine-month 2026 revenue and profit growth",
       "headline": "PT Sentul City Tbk (BKSL) Posts Rp1.2 Trillion Revenue, Up 47.3%, Driven by Land and Residential Sales",
@@ -328,52 +510,116 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_23",
+      "id": "cur_35",
       "slot": "flash",
-      "event": "Solusi Sinergi Digital reports nine-month earnings and Internet Rakyat growth",
-      "headline": "PT Solusi Sinergi Digital Tbk (WIFI.JK) reports Rp2.96 trillion in nine-month 2026 revenue",
+      "event": "Cinema XXI and CGV operators report Q3 2026 results",
+      "headline": "Cinema XXI Posts Rp 4.2 Trillion Revenue While CGV Operator BLTZ Sees Profit Slump",
+      "blurb": null,
+      "tickers": [
+        "CNMA.JK",
+        "BLTZ.JK"
+      ],
+      "supporting_news_ids": [
+        31591
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_36",
+      "slot": "flash",
+      "event": "Solusi Sinergi Digital reports nine-month 2026 earnings and revenue growth",
+      "headline": "Solusi Sinergi Digital (WIFI) reports Rp478.22 billion attributable net profit for the first nine months of 2026",
       "blurb": null,
       "tickers": [
         "WIFI.JK"
       ],
       "supporting_news_ids": [
+        31619,
         31582,
         31593,
         31572
       ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: Internet Rakyat revenue rose 491% quarter-on-quarter to Rp139.6 billion."
+      "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month attributable net profit was Rp478.22 billion."
     },
     {
-      "id": "cur_24",
+      "id": "cur_37",
       "slot": "flash",
-      "event": "Prodia reports record nine-month revenue and higher net profit",
-      "headline": "Prodia Widyahusada (PRDA) recorded nine-month revenue of Rp1.71 trillion, up 8.3%.",
+      "event": "Mark Dynamics Indonesia reports Q3 2026 earnings growth",
+      "headline": "Glove Mold Maker PT Mark Dynamics Indonesia Tbk (MARK) Posts 42.2 Percent Net Profit Growth",
+      "blurb": null,
+      "tickers": [
+        "MARK.JK"
+      ],
+      "supporting_news_ids": [
+        31660
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_38",
+      "slot": "flash",
+      "event": "Blue Bird reports nine-month 2026 revenue and earnings",
+      "headline": "Taxi Business Grows as PT Blue Bird Tbk (BIRD) Posts Rp4.57 Trillion Revenue",
+      "blurb": null,
+      "tickers": [
+        "BIRD.JK"
+      ],
+      "supporting_news_ids": [
+        31648
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_39",
+      "slot": "flash",
+      "event": "TBS Energi Utama reports narrower nine-month losses",
+      "headline": "TBS Energi Utama (TOBA) reports a US$35.4 million net loss for January–September 2026, down 72%",
+      "blurb": null,
+      "tickers": [
+        "TOBA.JK"
+      ],
+      "supporting_news_ids": [
+        31628,
+        31641,
+        31661,
+        31649
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_40",
+      "slot": "flash",
+      "event": "Prodia Widyahusada reports nine-month 2026 earnings and revenue growth",
+      "headline": "Prodia Widyahusada (PRDA) recorded nine-month 2026 revenue of Rp1.71 trillion, up 8.3% year on year",
       "blurb": null,
       "tickers": [
         "PRDA.JK"
       ],
       "supporting_news_ids": [
+        31634,
+        31644,
         31570,
         31556
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 2 new articles with a new fact: Nine-month net profit rose 10% to Rp125.92 billion."
     },
     {
-      "id": "cur_25",
+      "id": "cur_41",
       "slot": "flash",
-      "event": "Citra Borneo Utama reports sharply higher nine-month 2026 profit",
-      "headline": "PT Citra Borneo Utama Tbk (CBUT) Posts Rp14.14 Trillion Revenue, Net Profit Soars 424% Through 9M-2026",
+      "event": "Citra Borneo Utama reports nine-month 2026 earnings growth",
+      "headline": "PT Citra Borneo Utama (CBUT) reported Rp297.15 billion in net profit for the nine months to September 2026, up 424.21%.",
       "blurb": null,
       "tickers": [
         "CBUT.JK"
       ],
       "supporting_news_ids": [
+        31636,
         31574
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net profit attributable to owners rose 424.21% to Rp297.15 billion."
     },
     {
-      "id": "cur_26",
+      "id": "cur_42",
       "slot": "flash",
       "event": "Bank Raya Indonesia reports Q3 profit",
       "headline": "Bank Raya Indonesia (AGRO) reports Rp21 billion net profit in Q3 2026",
@@ -385,10 +631,38 @@
         31599,
         31577
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Digital loan outstanding reached Rp3.04 trillion, up 11.3% year-on-year."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_27",
+      "id": "cur_43",
+      "slot": "flash",
+      "event": "Agung Podomoro Land reports nine-month 2026 earnings growth",
+      "headline": "PT Agung Podomoro Land Tbk (APLN) posts 21-fold profit surge to Rp594.2 billion through September 2026",
+      "blurb": null,
+      "tickers": [
+        "APLN.JK"
+      ],
+      "supporting_news_ids": [
+        31616
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_44",
+      "slot": "flash",
+      "event": "Rans Entertainment Indonesia reports nine-month 2026 earnings growth",
+      "headline": "PT Rans Entertainment Indonesia Tbk (RANS) Posts 25.47% Net Profit Growth, Total Assets Reach Rp855.72 Billion",
+      "blurb": null,
+      "tickers": [
+        "RANS.JK"
+      ],
+      "supporting_news_ids": [
+        31623
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_45",
       "slot": "flash",
       "event": "Cisadane Sawit Raya reports record revenue and sets an interim dividend",
       "headline": "PT Cisadane Sawit Raya Tbk (CSRA) Posts Record Rp2.07 Trillion Revenue in 9M26, Sets Interim Dividend of Rp15 Per Share",
@@ -399,10 +673,10 @@
       "supporting_news_ids": [
         31598
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_28",
+      "id": "cur_46",
       "slot": "flash",
       "event": "Jantra Grupo Indonesia reports higher nine-month 2026 profit",
       "headline": "PT Jantra Grupo Indonesia Tbk (KAQI) Posts Rp11.74 Billion Net Profit in Q3 2026, Up 84.05%",
@@ -416,7 +690,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_29",
+      "id": "cur_47",
       "slot": "flash",
       "event": "AGII reports nine-month net profit growth",
       "headline": "AGII Net Profit Surges 81.9% to Rp110.3 Billion Through September 2026",
@@ -425,10 +699,41 @@
       "supporting_news_ids": [
         31585
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_48",
+      "slot": "flash",
+      "event": "Bayan Resources calls an EGM to reshuffle its board after Haji Isam's entry",
+      "headline": "PT Bayan Resources Tbk (BYAN) Calls Extraordinary Shareholders Meeting to Reshuffle Board and Commissioners Following Haji Isam's Entry",
+      "blurb": null,
+      "tickers": [
+        "BYAN.JK"
+      ],
+      "supporting_news_ids": [
+        31651
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_30",
+      "id": "cur_49",
+      "slot": "flash",
+      "event": "OJK confirms payment of Rp2.1 trillion in capital-market administrative fines",
+      "headline": "OJK says parties related to Dian Swastatika Sentosa (DSSA.JK) and two other issuers paid Rp2.1 trillion in fines",
+      "blurb": null,
+      "tickers": [
+        "DSSA.JK",
+        "BREN.JK",
+        "CUAN.JK"
+      ],
+      "supporting_news_ids": [
+        31621,
+        31576
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: The issuers themselves did not pay the fines."
+    },
+    {
+      "id": "cur_50",
       "slot": "flash",
       "event": "OJK sanctions Supra Sekuritas over DSSA share trading",
       "headline": "Supra Sekuritas Handled Rp60.6 Trillion in Trades in Stocks Sanctioned by OJK",
@@ -440,10 +745,10 @@
       "supporting_news_ids": [
         31589
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_31",
+      "id": "cur_51",
       "slot": "flash",
       "event": "Indonesia Stock Exchange places five stocks under unusual market activity status",
       "headline": "Indonesia Stock Exchange Places Five Stocks Including PT Rukun Raharja Tbk (RAJA) and PT Multipolar Technology Tbk (MLPT) Under Unusual Market Activity Status",
@@ -458,10 +763,29 @@
       "supporting_news_ids": [
         31580
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_32",
+      "id": "cur_52",
+      "slot": "flash",
+      "event": "GoTo reports Q3 and nine-month 2026 earnings and raises EBITDA guidance",
+      "headline": "GoTo Gojek Tokopedia (GOTO.JK) reports Rp 1.16 trillion in nine-month profit and raises its 2026 adjusted EBITDA target",
+      "blurb": null,
+      "tickers": [
+        "GOTO.JK"
+      ],
+      "supporting_news_ids": [
+        31631,
+        31594,
+        31569,
+        31557,
+        31547,
+        31554
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: GoTo estimated the 8% commission cap's Q3 impact at Rp150 billion."
+    },
+    {
+      "id": "cur_53",
       "slot": "flash",
       "event": "Cinema XXI operator Nusantara Sejahtera Raya approves an interim dividend",
       "headline": "PT Nusantara Sejahtera Raya Tbk (CNMA) to Pay Interim Dividend with Yield Above Deposit Rates",
@@ -475,22 +799,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_33",
-      "slot": "flash",
-      "event": "Hashim Djojohadikusumo urges response to MSCI's proposed Indonesia market downgrade",
-      "headline": "Kadin Advisor Hashim Djojohadikusumo Says MSCI Reclassification Proposal Hurt 32.7 Million Indonesian Investors Including Himself",
-      "blurb": null,
-      "tickers": [
-        "WIFI.JK",
-        "COIN.JK"
-      ],
-      "supporting_news_ids": [
-        31545
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_34",
+      "id": "cur_54",
       "slot": "flash",
       "event": "JP Morgan Chase discloses a 5% stake in Guna Timur Raya",
       "headline": "JP Morgan Chase Holds 5% Stake in PT Guna Timur Raya Tbk (TRUK) Amid Share Price Surge",
@@ -504,7 +813,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_35",
+      "id": "cur_55",
+      "slot": "flash",
+      "event": "Pulau Subur announces its 2026 interim dividend",
+      "headline": "PT Pulau Subur Tbk (PTPS) Announces Interim Dividend of Rp2 Per Share for Fiscal Year 2026",
+      "blurb": null,
+      "tickers": [
+        "PTPS.JK"
+      ],
+      "supporting_news_ids": [
+        31647
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_56",
       "slot": "flash",
       "event": "Leyand International approves a mining-services pivot, rights issue, and acquisition",
       "headline": "PT Leyand International Tbk (LAPD) Transforms into Mining Contractor Services After Shareholder Approval",
@@ -515,10 +838,23 @@
       "supporting_news_ids": [
         31592
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_36",
+      "id": "cur_57",
+      "slot": "flash",
+      "event": "MSCI's Indonesia reclassification proposal draws responses from Kadin and OJK",
+      "headline": "MSCI's proposed downgrade hurt 32.7 million Indonesian investors, Hashim says",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        31614,
+        31545
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: OJK said Indonesia met 16 of MSCI's 18 market-accessibility indicators in June 2026."
+    },
+    {
+      "id": "cur_58",
       "slot": "flash",
       "event": "Bank Indonesia reports foreign investor preference for short-tenor instruments",
       "headline": "Bank Indonesia Says Global Investors Favor Short-Tenor Instruments to Avoid Market Volatility",
@@ -527,10 +863,10 @@
       "supporting_news_ids": [
         31587
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_37",
+      "id": "cur_59",
       "slot": "flash",
       "event": "Bank Jatim expands regional-bank collaboration with Bank Banten",
       "headline": "Bank Jatim Strengthens Collaboration with Regional Development Banks to Support National Economic Growth",
@@ -539,44 +875,63 @@
       "supporting_news_ids": [
         31603
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_38",
+      "id": "cur_60",
       "slot": "flash",
-      "event": "Related parties of DSSA, BREN, and CUAN pay Rp2.1 trillion in fines",
-      "headline": "OJK Says Related Parties of DSSA, BREN, and CUAN Have Paid Rp 2.1 Trillion in Administrative Fines",
+      "event": "MSIG Life reports limited impact from MSCI-driven market volatility",
+      "headline": "PT MSIG Life Insurance Indonesia Tbk Says Capital Market Volatility from MSCI Sentiment Has Limited Impact as Global Diversification Balances Losses",
       "blurb": null,
       "tickers": [
-        "DSSA.JK",
-        "BREN.JK",
-        "CUAN.JK"
+        "LIFE.JK"
       ],
       "supporting_news_ids": [
-        31576
+        31665
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-01",
-      "timing_label": "1 Nov",
-      "title": "BI first-stage reserve requirement cuts take effect",
-      "tickers": [],
+      "sort_date": "2026-11-03",
+      "timing_label": "3 Nov",
+      "title": "INPS shareholders vote on Rp125 billion private placement",
+      "tickers": [
+        "INPS.JK"
+      ],
       "supporting_news_ids": [
-        31586
+        31640
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2027-04-30",
-      "timing_label": "30 Apr 2027",
-      "title": "MSCI consultation on Indonesia's market classification closes",
-      "tickers": [],
+      "sort_date": "2026-11-06",
+      "timing_label": "6 Nov",
+      "title": "CNMA cum-dividend (regular market) for its Rp333.12 billion interim dividend",
+      "tickers": [
+        "CNMA.JK"
+      ],
       "supporting_news_ids": [
-        31587
+        31567
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2027-06-30",
+      "timing_label": "30 Jun 2027",
+      "title": "MSCI expected to decide Indonesia's market classification",
+      "tickers": [
+        "BREN.JK",
+        "CUAN.JK",
+        "DSSA.JK"
+      ],
+      "supporting_news_ids": [
+        31614,
+        31621,
+        31576,
+        31545
       ]
     }
   ]
