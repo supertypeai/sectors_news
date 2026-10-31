@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-10-31",
   "window_start": "2026-10-30T13:50:00Z",
-  "window_end": "2026-10-31T01:46:07Z",
+  "window_end": "2026-10-31T05:56:27Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -12,7 +12,7 @@
     "supporting_news_ids": [
       31736
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
     "market_structure_policy": [
@@ -30,24 +30,25 @@
         "supporting_news_ids": [
           31737
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "capital_raising_buybacks": [
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "MBMA seeks approval for a second private placement of up to 10.8 billion shares",
-        "headline": "MBMA seeks approval for second private placement of up to 10.8 billion shares",
-        "blurb": "Merdeka Battery Materials would issue the new shares at a nominal Rp100 each, potentially increasing paid-in capital by up to 10%. Shareholders will vote on the plan at an extraordinary general meeting on 8 December.",
+        "event": "MBMA plans second private placement",
+        "headline": "MBMA plans second private placement targeting Rp3.2 trillion",
+        "blurb": "Merdeka Battery Materials proposes up to 10.8 billion new shares, equal to 10% of its capital, with dilution of up to 9.09%. About 25% of the proceeds is planned for working capital, with the rest for business development. Shareholders will be asked to approve the proposal on 8 December 2026.",
         "tickers": [
           "MBMA.JK"
         ],
         "supporting_news_ids": [
+          31742,
           31715,
           31722
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 1 new articles with a new fact: The placement targets around Rp3.2 trillion in additional capital."
       },
       {
         "id": "cur_04",
@@ -61,26 +62,25 @@
         "supporting_news_ids": [
           31725
         ],
-        "copy_decision": "new story"
-      }
-    ],
-    "other": [
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "Attorney General raids IPPS in Toba Pulp Lestari corruption probe",
-        "headline": "Prosecutors raid IPPS in INRU probe over suspected 2008-2025 transfer-pricing corruption",
-        "blurb": "The Attorney General’s Office seized documents and electronic evidence at IPPS’s Jakarta office. Prosecutors suspect Toba Pulp Lestari director and former corporate secretary AL manipulated export invoices, and have designated the company a corporate suspect.",
-        "tickers": [
-          "INRU.JK"
-        ],
-        "supporting_news_ids": [
-          31714
-        ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Bakrie & Brothers reports nine-month 2026 financial results",
+        "headline": "BNBR reports 9M 2026 results with revenue up 55.44% to Rp4.12 trillion",
+        "blurb": "Growth was driven by the electric vehicle and manufacturing businesses, but net loss attributable to the parent reached Rp341.85 billion, versus a Rp11.65 billion profit a year earlier. Director Roy Hendrajanto M. Sakti attributed the loss mainly to rising floating-rate interest expense on Cimanggis Cibitung Tollways in the early years after its acquisition.",
+        "tickers": [
+          "BNBR.JK",
+          "VKTR.JK"
+        ],
+        "supporting_news_ids": [
+          31735
+        ],
+        "copy_decision": "new story"
+      },
       {
         "id": "cur_06",
         "slot": "story",
@@ -94,7 +94,7 @@
         "supporting_news_ids": [
           31718
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_07",
@@ -108,7 +108,7 @@
         "supporting_news_ids": [
           31720
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_08",
@@ -122,21 +122,23 @@
         "supporting_news_ids": [
           31731
         ],
-        "copy_decision": "new story"
-      },
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "other": [
       {
         "id": "cur_09",
         "slot": "story",
-        "event": "PANI reports 145% net profit growth for the first nine months of 2026",
-        "headline": "PANI reports 145% net profit growth in first nine months of 2026",
-        "blurb": "Pantai Indah Kapuk Dua reported Rp1.9 trillion in attributable net profit on revenue of Rp3.7 trillion, up 19% year on year. President Director Sugianto Kusuma said the company remains focused on developing PIK2, supported by partial operation of the KATARAJA Toll Road. The Hilton Hotel PIK2 is targeted to begin operations in the second half of 2027.",
+        "event": "Attorney General raids IPPS in Toba Pulp Lestari corruption probe",
+        "headline": "Prosecutors raid IPPS in INRU probe over suspected 2008-2025 transfer-pricing corruption",
+        "blurb": "The Attorney General’s Office seized documents and electronic evidence at IPPS’s Jakarta office. Prosecutors suspect Toba Pulp Lestari director and former corporate secretary AL manipulated export invoices, and have designated the company a corporate suspect.",
         "tickers": [
-          "PANI.JK"
+          "INRU.JK"
         ],
         "supporting_news_ids": [
-          31710
+          31714
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
@@ -144,19 +146,35 @@
     {
       "id": "cur_10",
       "slot": "flash",
+      "event": "PANI reports nine-month 2026 earnings growth",
+      "headline": "PT Pantai Indah Kapuk Dua (PANI.JK) reports Rp1.9 trillion net profit, up 145% in nine months of 2026",
+      "blurb": null,
+      "tickers": [
+        "PANI.JK"
+      ],
+      "supporting_news_ids": [
+        31747,
+        31710
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: Liabilities fell 10.4% to Rp16.9 trillion."
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
       "event": "Alamtri Resources reports nine-month 2026 profit growth",
-      "headline": "PT Alamtri Resources Indonesia Tbk (ADRO) Posts Rp9.2 Trillion Net Profit for Q3 2026",
+      "headline": "Alamtri Resources Indonesia (ADRO) reported US$516.55 million net profit for the first nine months of 2026.",
       "blurb": null,
       "tickers": [
         "ADRO.JK"
       ],
       "supporting_news_ids": [
+        31746,
         31733
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net profit attributable to owners of the parent entity rose 71.28% to US$516.55 million."
     },
     {
-      "id": "cur_11",
+      "id": "cur_12",
       "slot": "flash",
       "event": "ICBP reports nine-month 2026 sales and profit results",
       "headline": "Indofood CBP Sukses Makmur (ICBP) reports nine-month sales of Rp64.45 trillion, up 15%",
@@ -168,10 +186,10 @@
         31730,
         31717
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_13",
       "slot": "flash",
       "event": "Indofood reports nine-month 2026 sales and profit results",
       "headline": "Indofood Sukses Makmur (INDF) reported Rp101.49 trillion in nine-month 2026 net sales",
@@ -183,10 +201,10 @@
         31732,
         31721
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_13",
+      "id": "cur_14",
       "slot": "flash",
       "event": "BELI reports 46% nine-month revenue growth and a narrower EBITDA loss",
       "headline": "Global Digital Niaga (BELI.JK) reports 46% nine-month revenue growth to Rp22.23 trillion",
@@ -198,10 +216,10 @@
         31729,
         31726
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_15",
       "slot": "flash",
       "event": "Mitratel reports nine-month 2026 financial results and higher tower tenancy",
       "headline": "PT Dayamitra Telekomunikasi Tbk (MTEL) Posts Rp1.55 Trillion Net Profit as Tenancy Ratio Rises to 1.60x",
@@ -212,10 +230,24 @@
       "supporting_news_ids": [
         31724
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "Bank OCBC NISP reports nine-month 2026 profit growth",
+      "headline": "PT Bank OCBC NISP Tbk (NISP) Posts 5% Net Profit Growth to Rp4.03 Trillion Through September 2026",
+      "blurb": null,
+      "tickers": [
+        "NISP.JK"
+      ],
+      "supporting_news_ids": [
+        31743
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_15",
+      "id": "cur_17",
       "slot": "flash",
       "event": "Jasa Marga reports financial results through Q3 2026",
       "headline": "Toll Road Business Supports PT Jasa Marga Tbk (JSMR) Earnings Through Q3 2026",
@@ -226,10 +258,10 @@
       "supporting_news_ids": [
         31713
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
+      "id": "cur_18",
       "slot": "flash",
       "event": "COIN reports Q3 derivatives growth and lower nine-month revenue",
       "headline": "Indokripto Koin Semesta (COIN) Derivatives Segment Grows to 48.1% of Revenue Despite Crypto Market Pressure",
@@ -240,10 +272,10 @@
       "supporting_news_ids": [
         31719
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_17",
+      "id": "cur_19",
       "slot": "flash",
       "event": "TOBA reports a 72% narrower net loss for the first nine months of 2026",
       "headline": "TBS Energi Utama (TOBA) narrowed its nine-month 2026 net loss by 72% to US$35.4 million",
@@ -255,24 +287,25 @@
         31740,
         31711
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
+      "id": "cur_20",
       "slot": "flash",
-      "event": "Bank Raya reports Q3 2026 net profit of Rp21 billion",
-      "headline": "PT Bank Raya Indonesia Tbk (AGRO) Posts Rp 21 Billion Net Profit in Q3 2026",
+      "event": "Bank Raya reports Q3 2026 profit",
+      "headline": "PT Bank Raya Indonesia Tbk (AGRO.JK) reported Rp21 billion in net profit",
       "blurb": null,
       "tickers": [
         "AGRO.JK"
       ],
       "supporting_news_ids": [
+        31744,
         31727
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Gross NPL fell 203 basis points to 2.53%."
     },
     {
-      "id": "cur_19",
+      "id": "cur_21",
       "slot": "flash",
       "event": "RAAM reports nine-month 2026 financial results",
       "headline": "PT Tripar Multivision Plus Tbk (RAAM) Revenue Rises 32% but Remains in Loss Through Q3 2026",
@@ -283,10 +316,22 @@
       "supporting_news_ids": [
         31716
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "Indonesia's JCI falls during the October 26–30 trading week",
+      "headline": "JCI Plunges 7.03% in a Week to 5,057.05 as IDX Daily Transaction Value Falls to Rp14.33 Trillion",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        31734
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_20",
+      "id": "cur_23",
       "slot": "flash",
       "event": "BCA and DBS deny merger rumors",
       "headline": "Bank Central Asia (BBCA) denies merger rumor after shares rose 7% in a day.",
@@ -298,10 +343,10 @@
         31741,
         31723
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_21",
+      "id": "cur_24",
       "slot": "flash",
       "event": "Victoria Care signs a Malaysian distributor deal and pursues Japanese expansion",
       "headline": "PT Victoria Care Indonesia Tbk (VICI) Expands Export Markets to Malaysia and Japan",
@@ -312,10 +357,24 @@
       "supporting_news_ids": [
         31739
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_25",
+      "slot": "flash",
+      "event": "ACES opens its first AZKO store in Lahat",
+      "headline": "PT Aspirasi Hidup Indonesia Tbk (ACES) Expands AZKO Store Network with First Store in Lahat, South Sumatra",
+      "blurb": null,
+      "tickers": [
+        "ACES.JK"
+      ],
+      "supporting_news_ids": [
+        31745
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_22",
+      "id": "cur_26",
       "slot": "flash",
       "event": "GOTO reports a Q3 2026 profit",
       "headline": "GOTO Posts Profit in Q3 2026 as Analysts Highlight GoPay Fintech Performance",
@@ -324,34 +383,8 @@
       "supporting_news_ids": [
         31712
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
-  "what_to_watch": [
-    {
-      "id": "wtw_01",
-      "sort_date": "2026-11-02",
-      "timing_label": "2 Nov",
-      "title": "TBIG buyback opens, up to Rp106 billion, until 29 Jan 2027",
-      "tickers": [
-        "TBIG.JK"
-      ],
-      "supporting_news_ids": [
-        31725
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-12-08",
-      "timing_label": "8 Dec",
-      "title": "MBMA shareholders vote on private placement of up to 10.8 billion shares",
-      "tickers": [
-        "MBMA.JK"
-      ],
-      "supporting_news_ids": [
-        31715,
-        31722
-      ]
-    }
-  ]
+  "what_to_watch": []
 }
