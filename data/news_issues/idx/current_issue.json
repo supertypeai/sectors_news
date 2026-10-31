@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-10-31",
   "window_start": "2026-10-30T13:50:00Z",
-  "window_end": "2026-10-31T05:56:27Z",
+  "window_end": "2026-10-31T09:56:36Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -15,27 +15,9 @@
     "copy_decision": "kept: same articles"
   },
   "sections": {
-    "market_structure_policy": [
-      {
-        "id": "cur_02",
-        "slot": "story",
-        "event": "OJK imposes Rp2.1 trillion in fines over coordinated trading and IPO manipulation",
-        "headline": "OJK imposes Rp2.1 trillion in fines over DSSA trading and IPO manipulation",
-        "blurb": "The fines covered coordinated trading in DSSA shares and IPO-order manipulation involving BREN and CUAN, and targeted related parties rather than the issuers. Violators have paid in full, while OJK continues investigating, with 31 of 61 stocks on the exchange's High Shareholding Concentration list examined for potential criminal violations.",
-        "tickers": [
-          "DSSA.JK",
-          "BREN.JK",
-          "CUAN.JK"
-        ],
-        "supporting_news_ids": [
-          31737
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
     "capital_raising_buybacks": [
       {
-        "id": "cur_03",
+        "id": "cur_02",
         "slot": "story",
         "event": "MBMA plans second private placement",
         "headline": "MBMA plans second private placement targeting Rp3.2 trillion",
@@ -48,10 +30,10 @@
           31715,
           31722
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: The placement targets around Rp3.2 trillion in additional capital."
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_04",
+        "id": "cur_03",
         "slot": "story",
         "event": "Tower Bersama announces a share buyback of up to Rp106 billion",
         "headline": "TBIG announces share buyback of up to Rp106 billion",
@@ -67,6 +49,20 @@
     ],
     "earnings_guidance": [
       {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Saratoga Investama reports Q3 2026 profit",
+        "headline": "SRTG reports Rp3.47 trillion Q3 2026 profit",
+        "blurb": "Saratoga Investama reversed a Rp2.43 trillion loss in the same period last year. Stock and securities gains contributed Rp2.34 trillion, dividends Rp1.74 trillion and emerging-company gains Rp639.12 billion.",
+        "tickers": [
+          "SRTG.JK"
+        ],
+        "supporting_news_ids": [
+          31748
+        ],
+        "copy_decision": "new story"
+      },
+      {
         "id": "cur_05",
         "slot": "story",
         "event": "Bakrie & Brothers reports nine-month 2026 financial results",
@@ -79,7 +75,7 @@
         "supporting_news_ids": [
           31735
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_06",
@@ -109,23 +105,23 @@
           31720
         ],
         "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "Adaro Andalan reports Q3 2026 net profit of Rp12.2 trillion",
-        "headline": "AADI reports Q3 2026 net profit of Rp12.2 trillion",
-        "blurb": null,
-        "tickers": [
-          "AADI.JK"
-        ],
-        "supporting_news_ids": [
-          31731
-        ],
-        "copy_decision": "kept: same articles"
       }
     ],
     "other": [
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "BIKE subsidiary secures a PLN Indonesia Power EPC contract",
+        "headline": "BIKE subsidiary wins Rp3.8 trillion EPC contract from PLN Indonesia Power",
+        "blurb": "Karya Bersinar Indonesia, a BIKE subsidiary, will handle EPC work for a 2 x 100 MW gas engine power plant. BIKE expects the project to add a source of business revenue.",
+        "tickers": [
+          "BIKE.JK"
+        ],
+        "supporting_news_ids": [
+          31757
+        ],
+        "copy_decision": "new story"
+      },
       {
         "id": "cur_09",
         "slot": "story",
@@ -140,11 +136,44 @@
         ],
         "copy_decision": "kept: same articles"
       }
+    ],
+    "market_structure_policy": [
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "OJK discloses sanctions for stock manipulation cases including DSSA, BREN, and CUAN",
+        "headline": "OJK reports record Rp2.1 trillion in fines over DSSA, BREN and CUAN cases",
+        "blurb": "Supra Sekuritas handled Rp60.6 trillion in Dian Swastika Sentosa shares over the past year, more than triple the volume handled by any other broker. OJK said the fines targeted related parties, not the issuers, and had been paid in full. Sinar Mas Tunggal received the largest fine, Rp1.5 trillion.",
+        "tickers": [
+          "DSSA.JK",
+          "BREN.JK",
+          "CUAN.JK"
+        ],
+        "supporting_news_ids": [
+          31750,
+          31737
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: Supra handled Rp60.6 trillion in DSSA transactions over the past year."
+      }
     ]
   },
   "flash": [
     {
-      "id": "cur_10",
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Adaro Andalan reports Q3 2026 net profit of Rp12.2 trillion",
+      "headline": "AADI reports Q3 2026 net profit of Rp12.2 trillion",
+      "blurb": null,
+      "tickers": [
+        "AADI.JK"
+      ],
+      "supporting_news_ids": [
+        31731
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_12",
       "slot": "flash",
       "event": "PANI reports nine-month 2026 earnings growth",
       "headline": "PT Pantai Indah Kapuk Dua (PANI.JK) reports Rp1.9 trillion net profit, up 145% in nine months of 2026",
@@ -156,10 +185,10 @@
         31747,
         31710
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Liabilities fell 10.4% to Rp16.9 trillion."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_13",
       "slot": "flash",
       "event": "Alamtri Resources reports nine-month 2026 profit growth",
       "headline": "Alamtri Resources Indonesia (ADRO) reported US$516.55 million net profit for the first nine months of 2026.",
@@ -171,10 +200,10 @@
         31746,
         31733
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net profit attributable to owners of the parent entity rose 71.28% to US$516.55 million."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_14",
       "slot": "flash",
       "event": "ICBP reports nine-month 2026 sales and profit results",
       "headline": "Indofood CBP Sukses Makmur (ICBP) reports nine-month sales of Rp64.45 trillion, up 15%",
@@ -189,7 +218,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_13",
+      "id": "cur_15",
       "slot": "flash",
       "event": "Indofood reports nine-month 2026 sales and profit results",
       "headline": "Indofood Sukses Makmur (INDF) reported Rp101.49 trillion in nine-month 2026 net sales",
@@ -204,22 +233,24 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_16",
       "slot": "flash",
-      "event": "BELI reports 46% nine-month revenue growth and a narrower EBITDA loss",
-      "headline": "Global Digital Niaga (BELI.JK) reports 46% nine-month revenue growth to Rp22.23 trillion",
+      "event": "Blibli operator BELI reports nine-month 2026 revenue growth",
+      "headline": "Global Digital Niaga (BELI) reported 46% nine-month revenue growth to Rp22,238 billion",
       "blurb": null,
       "tickers": [
-        "BELI.JK"
+        "BELI.JK",
+        "RANC.JK"
       ],
       "supporting_news_ids": [
+        31752,
         31729,
         31726
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: The EBITDA loss narrowed 61% to Rp566 billion from Rp1.46 trillion."
     },
     {
-      "id": "cur_15",
+      "id": "cur_17",
       "slot": "flash",
       "event": "Mitratel reports nine-month 2026 financial results and higher tower tenancy",
       "headline": "PT Dayamitra Telekomunikasi Tbk (MTEL) Posts Rp1.55 Trillion Net Profit as Tenancy Ratio Rises to 1.60x",
@@ -233,7 +264,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
+      "id": "cur_18",
       "slot": "flash",
       "event": "Bank OCBC NISP reports nine-month 2026 profit growth",
       "headline": "PT Bank OCBC NISP Tbk (NISP) Posts 5% Net Profit Growth to Rp4.03 Trillion Through September 2026",
@@ -244,24 +275,39 @@
       "supporting_news_ids": [
         31743
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_17",
+      "id": "cur_19",
       "slot": "flash",
-      "event": "Jasa Marga reports financial results through Q3 2026",
-      "headline": "Toll Road Business Supports PT Jasa Marga Tbk (JSMR) Earnings Through Q3 2026",
+      "event": "Jasa Marga reports nine-month 2026 financial results",
+      "headline": "Jasa Marga (JSMR.JK) reported Rp15.6 trillion in revenue through Q3 2026, up 7.9% year on year",
       "blurb": null,
       "tickers": [
         "JSMR.JK"
       ],
       "supporting_news_ids": [
+        31758,
         31713
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Net profit attributable to owners of the parent entity was Rp2.7 trillion."
     },
     {
-      "id": "cur_18",
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "VKTR reports nine-month 2026 electric vehicle sales growth",
+      "headline": "PT VKTR Teknologi Mobilitas Tbk (VKTR) Posts Rp 186 Billion EV Sales, Up 91% Year-on-Year",
+      "blurb": null,
+      "tickers": [
+        "VKTR.JK"
+      ],
+      "supporting_news_ids": [
+        31760
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_21",
       "slot": "flash",
       "event": "COIN reports Q3 derivatives growth and lower nine-month revenue",
       "headline": "Indokripto Koin Semesta (COIN) Derivatives Segment Grows to 48.1% of Revenue Despite Crypto Market Pressure",
@@ -275,7 +321,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
+      "id": "cur_22",
       "slot": "flash",
       "event": "TOBA reports a 72% narrower net loss for the first nine months of 2026",
       "headline": "TBS Energi Utama (TOBA) narrowed its nine-month 2026 net loss by 72% to US$35.4 million",
@@ -290,7 +336,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_20",
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "Prodia reports nine-month 2026 financial results",
+      "headline": "PT Prodia Widyahusada Tbk (PRDA) Posts 8.3% Revenue Growth Through September 2026, Net Profit Up 10%",
+      "blurb": null,
+      "tickers": [
+        "PRDA.JK"
+      ],
+      "supporting_news_ids": [
+        31755
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_24",
       "slot": "flash",
       "event": "Bank Raya reports Q3 2026 profit",
       "headline": "PT Bank Raya Indonesia Tbk (AGRO.JK) reported Rp21 billion in net profit",
@@ -302,10 +362,10 @@
         31744,
         31727
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Gross NPL fell 203 basis points to 2.53%."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_21",
+      "id": "cur_25",
       "slot": "flash",
       "event": "RAAM reports nine-month 2026 financial results",
       "headline": "PT Tripar Multivision Plus Tbk (RAAM) Revenue Rises 32% but Remains in Loss Through Q3 2026",
@@ -319,19 +379,33 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_22",
+      "id": "cur_26",
       "slot": "flash",
-      "event": "Indonesia's JCI falls during the October 26–30 trading week",
-      "headline": "JCI Plunges 7.03% in a Week to 5,057.05 as IDX Daily Transaction Value Falls to Rp14.33 Trillion",
+      "event": "Cahayasakti Investindo reports nine-month 2026 financial results",
+      "headline": "Cikembar Industrial Estate Drives Earnings Growth for PT Cahayasakti Investindo Sukses Tbk (CSIS) Through Q3 2026",
       "blurb": null,
-      "tickers": [],
+      "tickers": [
+        "CSIS.JK"
+      ],
       "supporting_news_ids": [
-        31734
+        31756
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_23",
+      "id": "cur_27",
+      "slot": "flash",
+      "event": "KB Bank reports September 2026 lending and financial figures",
+      "headline": "PT Bank KB Indonesia Tbk (KB Bank) Loans Grow 3.07 Percent to Rp 45.68 Trillion Through September 2026",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        31759
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_28",
       "slot": "flash",
       "event": "BCA and DBS deny merger rumors",
       "headline": "Bank Central Asia (BBCA) denies merger rumor after shares rose 7% in a day.",
@@ -346,7 +420,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_24",
+      "id": "cur_29",
+      "slot": "flash",
+      "event": "Avia Avian announces an interim dividend",
+      "headline": "PT Avia Avian Tbk (AVIA) Announces Interim Dividend of Rp 12 Per Share for 2026 Fiscal Year",
+      "blurb": null,
+      "tickers": [
+        "AVIA.JK"
+      ],
+      "supporting_news_ids": [
+        31754
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_30",
       "slot": "flash",
       "event": "Victoria Care signs a Malaysian distributor deal and pursues Japanese expansion",
       "headline": "PT Victoria Care Indonesia Tbk (VICI) Expands Export Markets to Malaysia and Japan",
@@ -360,7 +448,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_25",
+      "id": "cur_31",
+      "slot": "flash",
+      "event": "Cinema XXI operator CNMA announces an interim dividend",
+      "headline": "Cinema XXI Operator PT Nusantara Sejahtera Raya Tbk (CNMA) to Distribute Rp 333 Billion Interim Dividend, 90.5% of Net Profit",
+      "blurb": null,
+      "tickers": [
+        "CNMA.JK"
+      ],
+      "supporting_news_ids": [
+        31753
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_32",
       "slot": "flash",
       "event": "ACES opens its first AZKO store in Lahat",
       "headline": "PT Aspirasi Hidup Indonesia Tbk (ACES) Expands AZKO Store Network with First Store in Lahat, South Sumatra",
@@ -371,10 +473,10 @@
       "supporting_news_ids": [
         31745
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_26",
+      "id": "cur_33",
       "slot": "flash",
       "event": "GOTO reports a Q3 2026 profit",
       "headline": "GOTO Posts Profit in Q3 2026 as Analysts Highlight GoPay Fintech Performance",
@@ -386,5 +488,54 @@
       "copy_decision": "kept: same articles"
     }
   ],
-  "what_to_watch": []
+  "what_to_watch": [
+    {
+      "id": "wtw_01",
+      "sort_date": "2026-11-02",
+      "timing_label": "2 Nov",
+      "title": "TBIG share buyback opens, running through 29 Jan 2027",
+      "tickers": [
+        "TBIG.JK"
+      ],
+      "supporting_news_ids": [
+        31725
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2026-11-06",
+      "timing_label": "6 Nov",
+      "title": "CNMA cum-dividend (regular market) for its Rp 4 interim dividend",
+      "tickers": [
+        "CNMA.JK"
+      ],
+      "supporting_news_ids": [
+        31753
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2026-12-08",
+      "timing_label": "8 Dec",
+      "title": "MBMA shareholders vote on its Rp3.2 trillion private placement",
+      "tickers": [
+        "MBMA.JK"
+      ],
+      "supporting_news_ids": [
+        31742,
+        31715,
+        31722
+      ]
+    },
+    {
+      "id": "wtw_04",
+      "sort_date": "2027-02-19",
+      "timing_label": "By 19 Feb 2027",
+      "title": "Indonesia must issue PFII implementing regulations",
+      "tickers": [],
+      "supporting_news_ids": [
+        31736
+      ]
+    }
+  ]
 }
