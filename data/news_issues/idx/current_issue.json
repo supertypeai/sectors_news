@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-01",
   "window_start": "2026-10-31T13:50:00Z",
-  "window_end": "2026-11-01T05:56:22Z",
+  "window_end": "2026-11-01T09:56:29Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -18,27 +18,45 @@
       31780,
       31779
     ],
-    "copy_decision": "rewritten: 3 new articles with a new fact: MSCI froze additions of Indonesian stocks to its indexes while its review is pending."
+    "copy_decision": "kept: same articles"
   },
   "sections": {
-    "earnings_guidance": [
+    "deals_control": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "GoTo reports Q3 profit and raises EBITDA target amid analyst target-price revision",
-        "headline": "GOTO reports Q3 profit and raises 2026 EBITDA target to Rp3.5 trillion-Rp3.7 trillion",
-        "blurb": "Nine-month net profit reached Rp1.16 trillion, versus a Rp775 billion loss a year earlier. Q3 net profit was Rp441 billion, up about 75% from the previous quarter. Phintraco Sekuritas cut its target price from Rp80 to Rp40 while retaining a buy recommendation.",
+        "event": "BSDE affiliate agrees to buy land for data center development",
+        "headline": "DSSA affiliate agrees to buy BSDE land for Rp3.1 trillion",
+        "blurb": "Bumi Serpong Damai subsidiary Surya Inter Wisesa signed a binding sale-and-purchase agreement on 26 October with SMPlus Cakrawala Cipta Gemilang, a Dian Swastatika Sentosa subsidiary, for about 166,261 square meters in BSD City's D-Hub Special Economic Zone. Dian Swastatika Sentosa says the site will support SMPlus Cakrawala Cipta Gemilang's data center service development.",
+        "tickers": [
+          "BSDE.JK",
+          "DSSA.JK"
+        ],
+        "supporting_news_ids": [
+          31811
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "GoTo reports Q3 earnings, raises its EBITDA target and receives analyst target updates",
+        "headline": "GOTO reports Q3 earnings, raises 2026 EBITDA target to Rp3.5 trillion-Rp3.7 trillion",
+        "blurb": "GoTo had repurchased nearly 3% of its shares and planned to cancel 32 billion treasury shares. Phintraco Sekuritas cut its target price from Rp80 to Rp40 while maintaining a buy recommendation.",
         "tickers": [
           "GOTO.JK"
         ],
         "supporting_news_ids": [
+          31807,
           31787,
           31784
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net profit reached Rp1.16 trillion, versus a Rp775 billion loss a year earlier."
+        "copy_decision": "rewritten: 1 new articles with a new fact: GoTo had repurchased nearly 3% of its shares and planned to cancel 32 billion treasury shares."
       },
       {
-        "id": "cur_03",
+        "id": "cur_04",
         "slot": "story",
         "event": "Kiwoom Sekuritas lowers Bank Mandiri valuation and price target",
         "headline": "Kiwoom cuts BMRI valuation and price target despite 20.7% profit growth",
@@ -49,10 +67,10 @@
         "supporting_news_ids": [
           31793
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_04",
+        "id": "cur_05",
         "slot": "story",
         "event": "Pantai Indah Kapuk Dua reports nine-month 2026 profit growth",
         "headline": "PANI reports 145% nine-month 2026 profit growth",
@@ -63,44 +81,41 @@
         "supporting_news_ids": [
           31797
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_05",
+        "id": "cur_06",
         "slot": "story",
-        "event": "MIND ID mining issuers report sharp profit growth through Q3 2026",
-        "headline": "MIND ID miners report profit growth through Q3 2026, with TINS up 584%",
-        "blurb": "Higher commodity prices, production and sales volumes, and cost efficiency supported profit growth. Aneka Tambang’s profit rose 46% to Rp9.66 trillion, Bukit Asam’s grew 216.3% to Rp4.41 trillion, Vale Indonesia’s tripled to US$147 million, and Timah’s jumped 584% to Rp4.12 trillion. Analysts expect commodity prices to support results through end-2026, but forecast more moderate growth in 2027.",
+        "event": "Alamtri Minerals reports nine-month 2026 earnings after starting aluminium sales",
+        "headline": "ADMR reports nine-month profit up 55.5% to US$317.53 million after aluminium sales start",
+        "blurb": "Alamtri Minerals shares were down 24.01% year to date to Rp1,250 as of 30 October. Aluminium sales contributed US$522.4 million to third-quarter revenue, helping lift total revenue 85.59% to US$1.2 billion, while net margin narrowed from 30.24% to 25.34%.",
         "tickers": [
-          "ANTM.JK",
-          "TINS.JK",
-          "PTBA.JK",
-          "INCO.JK"
+          "ADMR.JK"
         ],
         "supporting_news_ids": [
-          31798
+          31788
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_06",
+      "id": "cur_07",
       "slot": "flash",
-      "event": "Alamtri Minerals reports higher profit after beginning aluminium sales",
-      "headline": "Alamtri Minerals begins aluminium sales, net profit reaches Rp5.75 trillion",
+      "event": "MNC Digital Entertainment reports nine-month 2026 results",
+      "headline": "MDIY Records Rp7.19 Trillion in Revenue Through Q3 2026 as Profit Grows 12.9%",
       "blurb": null,
       "tickers": [
-        "ADMR.JK"
+        "MDIY.JK"
       ],
       "supporting_news_ids": [
-        31788
+        31805
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_07",
+      "id": "cur_08",
       "slot": "flash",
       "event": "Bangun Kosambi Sukses reports nine-month profit growth",
       "headline": "Bangun Kosambi Sukses (CBDK.JK) reported a 39% increase in nine-month net profit to Rp1.82 trillion",
@@ -112,10 +127,52 @@
         31796,
         31801
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "BFI Finance reports Q3 2026 earnings growth",
+      "headline": "BFI Finance (BFIN) Net Profit Grows 11.96% to Rp 1.31 Trillion in Q3-2026",
+      "blurb": null,
+      "tickers": [
+        "BFIN.JK"
+      ],
+      "supporting_news_ids": [
+        31817
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_08",
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "Ciputra Development reports lower nine-month 2026 earnings",
+      "headline": "PT Ciputra Development Tbk (CTRA) Net Profit Falls 18.5% YoY to Rp 1.32 Trillion in Q3 2026",
+      "blurb": null,
+      "tickers": [
+        "CTRA.JK"
+      ],
+      "supporting_news_ids": [
+        31808
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Bumi Serpong Damai reports lower nine-month 2026 earnings",
+      "headline": "PT Bumi Serpong Damai Tbk (BSDE) Posts 38% Net Profit Decline to Rp 844.69 Billion Through September 2026",
+      "blurb": null,
+      "tickers": [
+        "BSDE.JK"
+      ],
+      "supporting_news_ids": [
+        31810
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_12",
       "slot": "flash",
       "event": "London Sumatra reports nine-month 2026 profit growth",
       "headline": "PT PP London Sumatra Indonesia Tbk (LSIP) Net Profit Rises 40% to Rp 1.74 Trillion Through September 2026",
@@ -126,10 +183,39 @@
       "supporting_news_ids": [
         31794
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "Adira Finance reports Q3 2026 earnings and begins Mandala integration",
+      "headline": "Adira Finance (ADMF) reported Rp1.69 trillion in Q3 2026 net profit, up 55.04% year on year",
+      "blurb": null,
+      "tickers": [
+        "ADMF.JK"
+      ],
+      "supporting_news_ids": [
+        31806,
+        31818
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_09",
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "Salim Ivomas Pratama reports nine-month 2026 earnings growth",
+      "headline": "PT Salim Ivomas Pratama Tbk (SIMP) Net Profit Rises 45% to Rp 2.05 Trillion Through September 2026",
+      "blurb": null,
+      "tickers": [
+        "SIMP.JK"
+      ],
+      "supporting_news_ids": [
+        31812
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_15",
       "slot": "flash",
       "event": "SIG reports nine-month 2026 earnings",
       "headline": "SMCB reports nine-month net profit of Rp532 billion, up 363.1%",
@@ -140,10 +226,24 @@
       "supporting_news_ids": [
         31782
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_10",
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "SMDR reports Q3 earnings growth and orders five ships",
+      "headline": "SMDR Records 13% Net Profit Growth in Q3 2026 and Orders Five New Ships",
+      "blurb": null,
+      "tickers": [
+        "SMDR.JK"
+      ],
+      "supporting_news_ids": [
+        31804
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_17",
       "slot": "flash",
       "event": "MPMX reports nine-month 2026 earnings",
       "headline": "MPMX reports nine-month net profit up 23% to Rp539 billion",
@@ -154,10 +254,36 @@
       "supporting_news_ids": [
         31781
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "Hasnur Internasional Shipping reports Q3 2026 operating results",
+      "headline": "PT Hasnur Internasional Shipping Tbk (HAIS) Posts Rp221.11 Billion Revenue in Q3 2026, Up 5.57% Quarter-on-Quarter",
+      "blurb": null,
+      "tickers": [
+        "HAIS.JK"
+      ],
+      "supporting_news_ids": [
+        31813
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "Maybank Indonesia Finance reports Q3 2026 earnings growth",
+      "headline": "PT Maybank Indonesia Finance (BIIF) Net Profit Rises 33.7% to Rp 449.17 Billion in Q3 2026",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        31815
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_20",
       "slot": "flash",
       "event": "OJK enforcement and investor restitution in Indonesian stock-manipulation cases",
       "headline": "OJK imposes Rp1.5 trillion in fines in the Dian Swastatika Sentosa (DSSA.JK) trading case and reviews investor refunds",
@@ -173,10 +299,10 @@
         31800,
         31778
       ],
-      "copy_decision": "rewritten: 3 new articles with a new fact: As of 31 October 2026, OJK was reviewing options to return funds to investors affected by the DSSA, BREN and CUAN cases."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_21",
       "slot": "flash",
       "event": "Bhineka Inovasi Ketahanan Energi secures PLN Indonesia Power power-plant contract",
       "headline": "PT Bhineka Inovasi Ketahanan Energi Tbk (BIKE) Secures Rp 3.8 Trillion 200 MW Gas-Fired Power Plant Contract from PLN Indonesia Power",
@@ -186,6 +312,32 @@
       ],
       "supporting_news_ids": [
         31795
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "OJK imposes administrative sanctions for capital market violations through October",
+      "headline": "OJK Sanctions List as of October: Securities Firms, Issuers, and Individuals Fined up to Rp500 Billion for Capital Market Violations",
+      "blurb": null,
+      "tickers": [
+        "TRIM.JK"
+      ],
+      "supporting_news_ids": [
+        31814
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "Danantara Investment Management discloses its asset allocation",
+      "headline": "PT Danantara Investment Management parks the bulk of its Rp140 trillion assets in bank deposits",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        31803
       ],
       "copy_decision": "new story"
     }
