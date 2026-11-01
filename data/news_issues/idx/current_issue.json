@@ -1,63 +1,84 @@
 {
   "issue_date": "2026-11-01",
   "window_start": "2026-10-31T13:50:00Z",
-  "window_end": "2026-11-01T01:46:24Z",
+  "window_end": "2026-11-01T05:56:22Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "OJK and IDX market reforms amid MSCI's proposed downgrade of Indonesia",
-    "headline": "IDX excludes HSC stocks from JCI from 2 November as OJK sets 15% IPO float",
-    "blurb": "The affected stocks will remain listed and tradable, with their JCI weights redistributed among remaining constituents. OJK says MSCI could downgrade Indonesia from emerging-market to standalone status, citing concerns over market integrity, transparency and enforcement. Reforms include broader ownership disclosures, 39 investor subcategories and a 15% minimum free float for IPOs. MSCI’s consultation runs until 30 April 2027, with a final decision expected by 30 June 2027.",
+    "event": "MSCI downgrade proposal and Indonesian market reforms amid transparency concerns",
+    "headline": "MSCI proposes standalone status, freezes additions as OJK targets 15% free float",
+    "blurb": "The proposed move from emerging-market to standalone status reflects concerns over investability, ownership transparency, market integrity and enforcement. OJK's response includes disclosure of concentrated ownership and a gradual increase in minimum free float to 15%, with a 15% minimum for IPOs effective 31 March. Pending its review, MSCI will not raise Indonesian stocks' foreign inclusion factors or advance postponed weight increases and migrations to larger-priority indexes. Consultation runs through 30 April, with a final decision due by 30 June 2027.",
     "tickers": [],
     "supporting_news_ids": [
+      31791,
+      31789,
+      31799,
       31786,
       31783,
       31780,
       31779
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: 3 new articles with a new fact: MSCI froze additions of Indonesian stocks to its indexes while its review is pending."
   },
   "sections": {
     "earnings_guidance": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Phintraco Sekuritas cuts GOTO's target price to Rp40",
-        "headline": "Phintraco cuts GOTO target price to Rp40",
-        "blurb": "Phintraco Sekuritas cut its target from Rp80 with a buy recommendation, implying 66.6% upside from GoTo's last price of Rp24. Jason Gozali of Pluang Maju Sekuritas advised gradual accumulation, citing three consecutive quarters of net profit and a raised 2026 EBITDA target of Rp3.5 trillion to Rp3.7 trillion.",
+        "event": "GoTo reports Q3 profit and raises EBITDA target amid analyst target-price revision",
+        "headline": "GOTO reports Q3 profit and raises 2026 EBITDA target to Rp3.5 trillion-Rp3.7 trillion",
+        "blurb": "Nine-month net profit reached Rp1.16 trillion, versus a Rp775 billion loss a year earlier. Q3 net profit was Rp441 billion, up about 75% from the previous quarter. Phintraco Sekuritas cut its target price from Rp80 to Rp40 while retaining a buy recommendation.",
         "tickers": [
           "GOTO.JK"
         ],
         "supporting_news_ids": [
+          31787,
           31784
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net profit reached Rp1.16 trillion, versus a Rp775 billion loss a year earlier."
       },
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "SIG reports nine-month 2026 earnings",
-        "headline": "SMCB reports nine-month net profit of Rp532 billion, up 363.1%",
-        "blurb": "SIG said January-September revenue rose 9.3% to Rp27.67 trillion, while domestic sales volumes increased 4.2% to 22.27 million tons. Management attributed the result to resilience amid industry overcapacity and rising energy costs.",
+        "event": "Kiwoom Sekuritas lowers Bank Mandiri valuation and price target",
+        "headline": "Kiwoom cuts BMRI valuation and price target despite 20.7% profit growth",
+        "blurb": "Kiwoom Sekuritas lowered its valuation and price target for Bank Mandiri amid rising market uncertainty. The bank’s nine-month 2026 net profit rose 20.7% year on year to Rp45.5 trillion.",
         "tickers": [
-          "SMCB.JK"
+          "BMRI.JK"
         ],
         "supporting_news_ids": [
-          31782
+          31793
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_04",
         "slot": "story",
-        "event": "MPMX reports nine-month 2026 earnings",
-        "headline": "MPMX reports nine-month net profit up 23% to Rp539 billion",
-        "blurb": "Mitra Pinasthika Mustika’s revenue was nearly flat at Rp11.98 trillion, down 0.2% year on year, while operating profit rose 19% to Rp585 billion. CFO Beatrice Kartika said better margins in distribution, retail and transportation, and reduced financing losses, supported improved profitability.",
+        "event": "Pantai Indah Kapuk Dua reports nine-month 2026 profit growth",
+        "headline": "PANI reports 145% nine-month 2026 profit growth",
+        "blurb": "Pantai Indah Kapuk Dua's revenue rose 19% to Rp3.7 trillion, while profit attributable to the parent reached Rp1.9 trillion. Commercial land handovers in the CBD PIK2 area contributed about 60% of revenue, and the Hilton Hotel PIK2 is expected to begin operations in the second half of 2027.",
         "tickers": [
-          "MPMX.JK"
+          "PANI.JK"
         ],
         "supporting_news_ids": [
-          31781
+          31797
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "MIND ID mining issuers report sharp profit growth through Q3 2026",
+        "headline": "MIND ID miners report profit growth through Q3 2026, with TINS up 584%",
+        "blurb": "Higher commodity prices, production and sales volumes, and cost efficiency supported profit growth. Aneka Tambang’s profit rose 46% to Rp9.66 trillion, Bukit Asam’s grew 216.3% to Rp4.41 trillion, Vale Indonesia’s tripled to US$147 million, and Timah’s jumped 584% to Rp4.12 trillion. Analysts expect commodity prices to support results through end-2026, but forecast more moderate growth in 2027.",
+        "tickers": [
+          "ANTM.JK",
+          "TINS.JK",
+          "PTBA.JK",
+          "INCO.JK"
+        ],
+        "supporting_news_ids": [
+          31798
         ],
         "copy_decision": "new story"
       }
@@ -65,16 +86,106 @@
   },
   "flash": [
     {
-      "id": "cur_05",
+      "id": "cur_06",
       "slot": "flash",
-      "event": "OJK imposes Rp1.51 trillion in sanctions in the DSSA trading case",
-      "headline": "OJK Details Sanctions in PT Dian Swastatika Sentosa Tbk (DSSA) Trading Case, Totaling Rp1.5 Trillion in Fines",
+      "event": "Alamtri Minerals reports higher profit after beginning aluminium sales",
+      "headline": "Alamtri Minerals begins aluminium sales, net profit reaches Rp5.75 trillion",
       "blurb": null,
       "tickers": [
-        "DSSA.JK"
+        "ADMR.JK"
       ],
       "supporting_news_ids": [
+        31788
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_07",
+      "slot": "flash",
+      "event": "Bangun Kosambi Sukses reports nine-month profit growth",
+      "headline": "Bangun Kosambi Sukses (CBDK.JK) reported a 39% increase in nine-month net profit to Rp1.82 trillion",
+      "blurb": null,
+      "tickers": [
+        "CBDK.JK"
+      ],
+      "supporting_news_ids": [
+        31796,
+        31801
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_08",
+      "slot": "flash",
+      "event": "London Sumatra reports nine-month 2026 profit growth",
+      "headline": "PT PP London Sumatra Indonesia Tbk (LSIP) Net Profit Rises 40% to Rp 1.74 Trillion Through September 2026",
+      "blurb": null,
+      "tickers": [
+        "LSIP.JK"
+      ],
+      "supporting_news_ids": [
+        31794
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "SIG reports nine-month 2026 earnings",
+      "headline": "SMCB reports nine-month net profit of Rp532 billion, up 363.1%",
+      "blurb": null,
+      "tickers": [
+        "SMCB.JK"
+      ],
+      "supporting_news_ids": [
+        31782
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "MPMX reports nine-month 2026 earnings",
+      "headline": "MPMX reports nine-month net profit up 23% to Rp539 billion",
+      "blurb": null,
+      "tickers": [
+        "MPMX.JK"
+      ],
+      "supporting_news_ids": [
+        31781
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "OJK enforcement and investor restitution in Indonesian stock-manipulation cases",
+      "headline": "OJK imposes Rp1.5 trillion in fines in the Dian Swastatika Sentosa (DSSA.JK) trading case and reviews investor refunds",
+      "blurb": null,
+      "tickers": [
+        "DSSA.JK",
+        "BREN.JK",
+        "CUAN.JK"
+      ],
+      "supporting_news_ids": [
+        31790,
+        31802,
+        31800,
         31778
+      ],
+      "copy_decision": "rewritten: 3 new articles with a new fact: As of 31 October 2026, OJK was reviewing options to return funds to investors affected by the DSSA, BREN and CUAN cases."
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "Bhineka Inovasi Ketahanan Energi secures PLN Indonesia Power power-plant contract",
+      "headline": "PT Bhineka Inovasi Ketahanan Energi Tbk (BIKE) Secures Rp 3.8 Trillion 200 MW Gas-Fired Power Plant Contract from PLN Indonesia Power",
+      "blurb": null,
+      "tickers": [
+        "BIKE.JK"
+      ],
+      "supporting_news_ids": [
+        31795
       ],
       "copy_decision": "new story"
     }
@@ -87,6 +198,9 @@
       "title": "IDX removes high-concentration stocks from JCI and redistributes their weightings",
       "tickers": [],
       "supporting_news_ids": [
+        31791,
+        31789,
+        31799,
         31786,
         31783,
         31780,
@@ -100,6 +214,9 @@
       "title": "MSCI issues its final decision on Indonesia's market classification",
       "tickers": [],
       "supporting_news_ids": [
+        31791,
+        31789,
+        31799,
         31786,
         31783,
         31780,
