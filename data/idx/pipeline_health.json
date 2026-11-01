@@ -3,7 +3,7 @@
         "source": "ICNScraper",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.08078200623082618,
+        "duration_minutes": 0.02424110990250483,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +16,7 @@
         "source": "GapkiScraper",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.032252447536059964,
+        "duration_minutes": 0.030132809366720418,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,7 +29,7 @@
         "source": "MinerbaScraper",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.051558359533858795,
+        "duration_minutes": 0.004402299648306022,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -42,7 +42,7 @@
         "source": "IdnMinerScraper",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.0108993805013597,
+        "duration_minutes": 0.010379017202649266,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -54,8 +54,8 @@
     {
         "source": "IDNFinancialScraper",
         "date": "20261101",
-        "articles_found": 3,
-        "duration_minutes": 0.007924558517212668,
+        "articles_found": 7,
+        "duration_minutes": 0.0089639228147765,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -67,15 +67,14 @@
     {
         "source": "BisnisMarket",
         "date": "20261101",
-        "articles_found": 9,
-        "duration_minutes": 4.120258835466424,
-        "requests": 23,
-        "successful_requests": 12,
-        "failed_requests": 11,
+        "articles_found": 12,
+        "duration_minutes": 5.146973784132085,
+        "requests": 31,
+        "successful_requests": 16,
+        "failed_requests": 15,
         "http_statuses": [
             403,
             200,
-            200,
             403,
             200,
             403,
@@ -87,6 +86,15 @@
             403,
             200,
             403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
             200,
             403,
             200,
@@ -101,6 +109,13 @@
             {
                 "stage": "fetch",
                 "url": "https://www.bisnis.com/index?categoryId=194&type=indeks&page=1",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261101/7/2017273/ojk-ungkap-ada-23-perusahaan-pilih-tunda-ipo-sepanjang-2026",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -170,7 +185,28 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://www.bisnis.com/index?categoryId=5&type=indeks&page=1",
+                "url": "https://finansial.bisnis.com/read/20261101/563/2016747/pinjol-legal-vs-ilegal-ini-perbedaannya-menurut-ojk-dan-cara-mengecek-izinnya",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261101/90/2016714/syarat-mengajukan-pinjaman-bank-bri-pertama-kali-bisa-tanpa-agunan-ini-cicilannya",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261101/90/2017277/ojk-serahkan-dua-petinggi-bpr-dcn-ke-jaksa-dugaan-kredit-fiktif",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://www.bisnis.com/index?categoryId=5&type=indeks&page=2",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -180,12 +216,16 @@
     {
         "source": "BloombergTechnoz",
         "date": "20261101",
-        "articles_found": 0,
-        "duration_minutes": 0.01153265283210203,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 4,
+        "duration_minutes": 0.05711721916838239,
+        "requests": 5,
+        "successful_requests": 5,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
             200
         ],
         "failures": []
@@ -193,19 +233,16 @@
     {
         "source": "InvestorID",
         "date": "20261101",
-        "articles_found": 2,
-        "duration_minutes": 0.639300165247793,
-        "requests": 13,
-        "successful_requests": 11,
-        "failed_requests": 2,
+        "articles_found": 5,
+        "duration_minutes": 0.7607615344847242,
+        "requests": 10,
+        "successful_requests": 10,
+        "failed_requests": 0,
         "http_statuses": [
             200,
             200,
             200,
             200,
-            409,
-            200,
-            407,
             200,
             200,
             200,
@@ -213,28 +250,13 @@
             200,
             200
         ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/460197/ojk-sebut-2026-ujian-terberat-pasar-modal-ri",
-                "status": 409,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 409"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/460197/ojk-sebut-2026-ujian-terberat-pasar-modal-ri",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            }
-        ]
+        "failures": []
     },
     {
         "source": "AbafScraper",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.010676506933911393,
+        "duration_minutes": 0.005608132116807004,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -248,7 +270,7 @@
         "source": "JakartaGlobe",
         "date": "20261101",
         "articles_found": 2,
-        "duration_minutes": 0.2718429732020013,
+        "duration_minutes": 0.20552449875200787,
         "requests": 4,
         "successful_requests": 4,
         "failed_requests": 0,
@@ -263,12 +285,14 @@
     {
         "source": "AntaraNews",
         "date": "20261101",
-        "articles_found": 0,
-        "duration_minutes": 0.014042432815767825,
-        "requests": 2,
-        "successful_requests": 2,
+        "articles_found": 2,
+        "duration_minutes": 0.030135434466258933,
+        "requests": 4,
+        "successful_requests": 4,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200,
             200
         ],
@@ -278,7 +302,7 @@
         "source": "AsianTelecom",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.013266427349299193,
+        "duration_minutes": 0.01314597409994652,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -292,7 +316,7 @@
         "source": "JakartaPost",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.020091659564059228,
+        "duration_minutes": 0.012616749666631222,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -305,25 +329,49 @@
     {
         "source": "KontanInvestasi",
         "date": "20261101",
-        "articles_found": 3,
-        "duration_minutes": 0.2631334028982868,
-        "requests": 5,
-        "successful_requests": 5,
-        "failed_requests": 0,
+        "articles_found": 13,
+        "duration_minutes": 0.5937528916324178,
+        "requests": 14,
+        "successful_requests": 12,
+        "failed_requests": 2,
         "http_statuses": [
             200,
             200,
             200,
             200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            409,
+            200,
+            200,
+            407,
             200
         ],
-        "failures": []
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/ojk-buka-peluang-kasus-dssa-bren-cuan-berlanjut-ke-pidana",
+                "status": 409,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 409"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/ojk-buka-peluang-kasus-dssa-bren-cuan-berlanjut-ke-pidana",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            }
+        ]
     },
     {
         "source": "EmitenNews",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.055828064815917365,
+        "duration_minutes": 0.02676227338379249,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -337,7 +385,7 @@
         "source": "BCANews",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.01555197873385623,
+        "duration_minutes": 0.010612889965220045,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -349,22 +397,8 @@
     {
         "source": "CNBCMarket",
         "date": "20261101",
-        "articles_found": 1,
-        "duration_minutes": 0.01527847033382083,
-        "requests": 2,
-        "successful_requests": 2,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "CNNEkonomi",
-        "date": "20261101",
-        "articles_found": 2,
-        "duration_minutes": 0.03375976853227864,
+        "articles_found": 3,
+        "duration_minutes": 0.010103732549274961,
         "requests": 4,
         "successful_requests": 4,
         "failed_requests": 0,
@@ -377,10 +411,37 @@
         "failures": []
     },
     {
+        "source": "CNNEkonomi",
+        "date": "20261101",
+        "articles_found": 12,
+        "duration_minutes": 0.061015396782507496,
+        "requests": 15,
+        "successful_requests": 15,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
         "source": "KompasMoney",
         "date": "20261101",
-        "articles_found": 4,
-        "duration_minutes": 0.11668154008220881,
+        "articles_found": 17,
+        "duration_minutes": 0.07746751766729479,
         "requests": 2,
         "successful_requests": 1,
         "failed_requests": 1,
@@ -401,12 +462,15 @@
     {
         "source": "FinanceDetik",
         "date": "20261101",
-        "articles_found": 0,
-        "duration_minutes": 0.014995055269294729,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 2,
+        "duration_minutes": 0.03244076896614085,
+        "requests": 4,
+        "successful_requests": 4,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
             200
         ],
         "failures": []
@@ -415,7 +479,7 @@
         "source": "KontanKeuangan",
         "date": "20261101",
         "articles_found": 0,
-        "duration_minutes": 0.007684400852303952,
+        "duration_minutes": 0.0058207585165898,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
