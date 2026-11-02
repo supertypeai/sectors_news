@@ -1,25 +1,142 @@
 {
   "issue_date": "2026-11-02",
   "window_start": "2026-11-01T13:50:00Z",
-  "window_end": "2026-11-02T01:46:13Z",
+  "window_end": "2026-11-02T05:56:18Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "GOTO reports Q3 2026 profit as commission cap weighs on mobility",
-    "headline": "GOTO reports Rp441 billion Q3 2026 profit as 8% cap weighs on mobility",
-    "blurb": "GoTo’s net revenue rose 17% year on year to Rp5.6 trillion, while core gross transaction value climbed 89% to Rp194 trillion. Mobility adjusted EBITDA fell 16% year on year to Rp159 billion, as the 8% commission cap effective 1 July cut GoRide profitability by an estimated Rp150 billion in the quarter. Management said this was the first full quarter reflecting the cap and expects two-wheeler transport to move toward breakeven, with Delivery also supporting on-demand services.",
+    "event": "BEI removes high-concentration stocks from IHSG calculation",
+    "headline": "BEI removes HSC stocks from IHSG calculation through 29 January",
+    "blurb": "As the change took effect on 2 November, the IHSG opened down 1.41% at 4,981. The measure removes Barito Renewables (BREN) and other high-concentration stocks from the calculation, though they remain tradable. Their weights are redistributed among remaining constituents, leaving 837 issuers in the calculation.",
     "tickers": [
-      "GOTO.JK"
+      "BREN.JK",
+      "DSSA.JK",
+      "DCII.JK",
+      "BYAN.JK",
+      "BBCA.JK",
+      "BBRI.JK",
+      "ASII.JK",
+      "SSMS.JK",
+      "SMMT.JK",
+      "BMAS.JK",
+      "TBIG.JK",
+      "CITA.JK",
+      "PSAB.JK",
+      "BALI.JK",
+      "MAYA.JK",
+      "CLAY.JK",
+      "ADES.JK",
+      "TMAS.JK",
+      "BBMD.JK",
+      "INPP.JK",
+      "SAME.JK",
+      "DMND.JK",
+      "MTEL.JK",
+      "EPMT.JK",
+      "SHIP.JK",
+      "DUTI.JK",
+      "BSWD.JK",
+      "INDO.JK",
+      "BIKE.JK",
+      "MSJA.JK",
+      "NICK.JK",
+      "SAFE.JK",
+      "BDKR.JK",
+      "MDIA.JK",
+      "BAJA.JK",
+      "BKDP.JK",
+      "ALKA.JK",
+      "AGAR.JK",
+      "BNII.JK",
+      "MCOL.JK",
+      "LIFE.JK",
+      "POLU.JK",
+      "ELPI.JK",
+      "KING.JK",
+      "ALII.JK",
+      "FITT.JK",
+      "YUPI.JK",
+      "KONI.JK",
+      "MKPI.JK",
+      "CMNT.JK",
+      "SMAR.JK",
+      "CMNP.JK",
+      "PRAY.JK",
+      "MPRO.JK",
+      "BELI.JK",
+      "MEGA.JK",
+      "GEMS.JK",
+      "MLPT.JK",
+      "STTP.JK",
+      "BTPN.JK",
+      "BBSI.JK",
+      "SILO.JK",
+      "FAPA.JK",
+      "RISE.JK",
+      "SOHO.JK",
+      "BBHI.JK",
+      "PGUN.JK",
+      "BINA.JK",
+      "BNLI.JK",
+      "SRAJ.JK",
+      "MORA.JK",
+      "DNET.JK",
+      "HATM.JK",
+      "DGWG.JK",
+      "SATU.JK",
+      "MGRO.JK",
+      "TCPI.JK",
+      "WBSA.JK",
+      "SOTS.JK",
+      "ROCK.JK",
+      "RLCO.JK",
+      "IFSH.JK",
+      "AGII.JK",
+      "FILM.JK",
+      "TFCO.JK"
     ],
     "supporting_news_ids": [
-      31835
+      31884,
+      31859,
+      31860,
+      31839,
+      31853,
+      31829
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: moved from flash to lead"
   },
   "sections": {
     "earnings_guidance": [
       {
         "id": "cur_02",
+        "slot": "story",
+        "event": "Merdeka Gold Resources reports Pani Mine production growth",
+        "headline": "EMAS reports 69% quarterly production growth at Pani Mine",
+        "blurb": "Merdeka Gold Resources produced 26,331 ounces in Q3 2026 as heap-leach ramp-up continued; cash costs excluding royalties and silver credits fell 13% quarter on quarter to USD778 per ounce. Its CIL Stage I facility is under construction, with commissioning targeted for 2028.",
+        "tickers": [
+          "EMAS.JK"
+        ],
+        "supporting_news_ids": [
+          31878
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "OMED raises its 2026 revenue target",
+        "headline": "OMED raises 2026 revenue target to around Rp2.5 trillion",
+        "blurb": "Jayamas Medica lifted its previous Rp2.3 trillion goal, implying about 21% year-on-year growth, citing sales volume growth and production efficiency. Nine-month net sales rose 26.1% year on year, while EBITDA and current-period profit increased 34.0% and 31.6%, respectively.",
+        "tickers": [
+          "OMED.JK"
+        ],
+        "supporting_news_ids": [
+          31880
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_04",
         "slot": "story",
         "event": "Bayan Resources reports nine-month 2026 net profit growth",
         "headline": "BYAN reports 12.93% nine-month 2026 net profit growth to USD589.67 million",
@@ -30,10 +147,10 @@
         "supporting_news_ids": [
           31846
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_03",
+        "id": "cur_05",
         "slot": "story",
         "event": "Telkom reports nine-month 2026 revenue growth and lower attributable profit",
         "headline": "TLKM reports 3.55% revenue growth and lower attributable profit",
@@ -45,33 +162,35 @@
           31842,
           31833
         ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "BRIS addresses its free-float shortfall and planned rights issue",
+        "headline": "BRIS plans rights issue as free float stands at 9.33%",
+        "blurb": "Bank Syariah Indonesia is discussing an issue of up to 6.8 billion Series B shares at a nominal Rp500 each with stakeholders to meet the IDX’s 15% minimum. IDX says the threshold could be met if its three controlling shareholders do not exercise or transfer their pre-emptive rights, but no commitment has been received. The exercise price and timeline remain under discussion.",
+        "tickers": [
+          "BRIS.JK"
+        ],
+        "supporting_news_ids": [
+          31883
+        ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_04",
+        "id": "cur_07",
         "slot": "story",
-        "event": "VKTR reports nine-month 2026 revenue and profit growth",
-        "headline": "VKTR reports 49% revenue and 47% profit growth in 9M 2026",
-        "blurb": "VKTR's electric vehicle sales contributed Rp186 billion and automotive parts Rp880 billion. Net profit reached Rp12.1 billion, while assets stood at Rp2.03 trillion at end-September, up 13% YTD. The company is targeting completion of electric bus orders by end-2026 and is expanding with light-duty truck chassis deliveries and its e-MaaS scheme.",
+        "event": "MBMA seeks approval for a private placement",
+        "headline": "MBMA seeks approval for private placement of up to 10.79 billion shares",
+        "blurb": "Merdeka Battery Materials will put the proposal to shareholders at an extraordinary general meeting on 8 December. The new shares would have a Rp100 nominal value each and could increase paid-in capital by up to 10%, with the company aiming to strengthen its capital structure.",
         "tickers": [
-          "VKTR.JK"
+          "MBMA.JK"
         ],
         "supporting_news_ids": [
-          31831
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "SSMS reports nine-month 2026 revenue and profit growth",
-        "headline": "SSMS reports 34.85% revenue and 71.26% total profit growth",
-        "blurb": "Sawit Sumbermas Sarana reported revenue of Rp14.83 trillion for the nine months ended 30 September 2026, up from Rp11.00 trillion a year earlier, led by CPO and derivative products. Profit attributable to parent owners rose 58.43% to Rp1.59 trillion.",
-        "tickers": [
-          "SSMS.JK"
-        ],
-        "supporting_news_ids": [
-          31851
+          31864
         ],
         "copy_decision": "new story"
       }
@@ -79,7 +198,151 @@
   },
   "flash": [
     {
-      "id": "cur_06",
+      "id": "cur_08",
+      "slot": "flash",
+      "event": "AADI shares fall after third-quarter profit declines",
+      "headline": "PT Adaro Andalan Indonesia Tbk (AADI) Shares Plunge 6.97% Amid Selling Pressure After 3Q26 Net Profit Decline",
+      "blurb": null,
+      "tickers": [
+        "AADI.JK"
+      ],
+      "supporting_news_ids": [
+        31862
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Merdeka Copper Gold reports sales through September 2026",
+      "headline": "Merdeka Copper (MDKA) Sales Reach Rp14.62 Trillion, Nickel as Key Support",
+      "blurb": null,
+      "tickers": [
+        "MDKA.JK"
+      ],
+      "supporting_news_ids": [
+        31858
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "Mirae Asset downgrades PTBA after nine-month results",
+      "headline": "PT Bukit Asam Tbk (PTBA) Net Profit Jumps 216% but 2027 Outlook Weighed by Coal Price Weakness; Mirae Asset Downgrades to Sell",
+      "blurb": null,
+      "tickers": [
+        "PTBA.JK"
+      ],
+      "supporting_news_ids": [
+        31872
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "MBMA reports record third-quarter nickel ore production",
+      "headline": "Merdeka Battery Materials (MBMA) Posts Record Nickel Ore Production and Surging Margins in Q3 2026",
+      "blurb": null,
+      "tickers": [
+        "MBMA.JK"
+      ],
+      "supporting_news_ids": [
+        31877
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "Gudang Garam reports nine-month results and workforce reduction",
+      "headline": "Gudang Garam cuts 1,090 employees as nine-month net profit quadruples",
+      "blurb": null,
+      "tickers": [
+        "GGRM.JK"
+      ],
+      "supporting_news_ids": [
+        31855
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "JPFA reports third-quarter results and BRI Danareksa cuts its target price",
+      "headline": "DOC and Livebird Segments Support PT Japfa Comfeed Indonesia Tbk (JPFA) Performance Amid Rising Interest Expense",
+      "blurb": null,
+      "tickers": [
+        "JPFA.JK"
+      ],
+      "supporting_news_ids": [
+        31870
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "VKTR reports nine-month 2026 revenue and profit growth",
+      "headline": "VKTR reports 49% revenue and 47% profit growth in 9M 2026",
+      "blurb": null,
+      "tickers": [
+        "VKTR.JK"
+      ],
+      "supporting_news_ids": [
+        31831
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "PWON reports nine-month 2026 results",
+      "headline": "PT Pakuwon Jati Tbk (PWON) Net Profit Falls 23.89% YoY in Q3 2026 Despite Revenue Growth",
+      "blurb": null,
+      "tickers": [
+        "PWON.JK"
+      ],
+      "supporting_news_ids": [
+        31874
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "SSMS reports nine-month 2026 results",
+      "headline": "PT Sawit Sumbermas Sarana Tbk (SSMS) reports Rp14.83 trillion revenue in 9M26",
+      "blurb": null,
+      "tickers": [
+        "SSMS.JK"
+      ],
+      "supporting_news_ids": [
+        31857,
+        31868,
+        31851
+      ],
+      "copy_decision": "rewritten: 2 new articles with a new fact: Assets included Rp3.2 trillion in restricted bank balances related to export proceeds."
+    },
+    {
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "RAJA reports nine-month 2026 results",
+      "headline": "PT Rukun Raharja Tbk (RAJA) reported nine-month 2026 net profit of US$43.8 million, up 82%.",
+      "blurb": null,
+      "tickers": [
+        "RAJA.JK",
+        "RATU.JK"
+      ],
+      "supporting_news_ids": [
+        31886,
+        31867
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_18",
       "slot": "flash",
       "event": "Erajaya and Sinar Eka Selaras report nine-month 2026 results",
       "headline": "Erajaya Group Issuers ERAA and ERAL Post Solid Nine-Month 2026 Performance",
@@ -91,10 +354,24 @@
       "supporting_news_ids": [
         31845
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "ABM Investama reports nine-month 2026 profit growth",
+      "headline": "PT ABM Investama Tbk (ABMM) Posts 141.4% YoY Net Profit Growth in 9M26",
+      "blurb": null,
+      "tickers": [
+        "ABMM.JK"
+      ],
+      "supporting_news_ids": [
+        31863
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_07",
+      "id": "cur_20",
       "slot": "flash",
       "event": "BBKP reports loan growth through September 2026",
       "headline": "PT Bank KB Indonesia Tbk (BBKP) Loans Rise 3.07% Through September 2026",
@@ -105,24 +382,53 @@
       "supporting_news_ids": [
         31834
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "UNSP reports third-quarter sales growth and narrows its loss",
+      "headline": "Bakrie Group Palm Oil Issuer PT Bakrie Sumatera Plantations Tbk (UNSP) Posts Rp 2.2 Trillion Sales, Up 19%",
+      "blurb": null,
+      "tickers": [
+        "UNSP.JK"
+      ],
+      "supporting_news_ids": [
+        31865
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_08",
+      "id": "cur_22",
       "slot": "flash",
-      "event": "INET reports sharp nine-month 2026 revenue and profit growth",
-      "headline": "PT Sinergi Inti Andalan Prima Tbk (INET) Posts Sharp Revenue and Profit Growth in Q3 2026",
+      "event": "Arkora Hydro reports third-quarter 2026 profit growth",
+      "headline": "Arkora Hydro (ARKO) Net Profit Grows 18.7% in Q3 2026, Solar Power Plants as Key Support",
+      "blurb": null,
+      "tickers": [
+        "ARKO.JK"
+      ],
+      "supporting_news_ids": [
+        31856
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "INET reports nine-month 2026 results",
+      "headline": "PT Sinergi Inti Andalan Prima (INET) reports Rp1.55 trillion in nine-month 2026 revenue, up 2,154.30%",
       "blurb": null,
       "tickers": [
         "INET.JK"
       ],
       "supporting_news_ids": [
+        31869,
         31849
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month net revenue reached Rp1.55 trillion, up 2,154.30% year on year."
     },
     {
-      "id": "cur_09",
+      "id": "cur_24",
       "slot": "flash",
       "event": "CBRE reports nine-month 2026 net loss",
       "headline": "PT Cakra Buana Resources Energi Tbk (CBRE), Part of Andry Hakim's Portfolio, Posts Rp 191.77 Billion Net Loss",
@@ -133,10 +439,25 @@
       "supporting_news_ids": [
         31841
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_25",
+      "slot": "flash",
+      "event": "Kimia Farma reports third-quarter 2026 results",
+      "headline": "Kimia Farma (KAEF) narrows Q3 2026 net loss 94.49% to Rp13 billion",
+      "blurb": null,
+      "tickers": [
+        "KAEF.JK"
+      ],
+      "supporting_news_ids": [
+        31885,
+        31876
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_10",
+      "id": "cur_26",
       "slot": "flash",
       "event": "Agung Podomoro Land reports profit surge supported by asset divestment",
       "headline": "Agung Podomoro Land (APLN) Profit Surges 2,006%, Supported by Asset Divestment",
@@ -147,24 +468,25 @@
       "supporting_news_ids": [
         31836
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_27",
       "slot": "flash",
-      "event": "IRSX reports nine-month 2026 profit and revenue growth",
-      "headline": "PT Folago Global Nusantara Tbk (IRSX) Posts Q3-2026 Net Profit of Rp33.85 Billion as Revenue Rises 67%",
+      "event": "IRSX reports nine-month 2026 results",
+      "headline": "Folago Global Nusantara (IRSX) reported 9M26 revenue of Rp346.43 billion, up 67.11% year on year",
       "blurb": null,
       "tickers": [
         "IRSX.JK"
       ],
       "supporting_news_ids": [
+        31866,
         31848
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Digital marketing and advertising revenue rose 90.26% year on year to Rp110.05 billion."
     },
     {
-      "id": "cur_12",
+      "id": "cur_28",
       "slot": "flash",
       "event": "PADA reports nine-month 2026 revenue and profit growth",
       "headline": "PT Personel Alih Daya Tbk (PADA.JK) reports nine-month 2026 revenue of Rp1.4 trillion, up 75.9%",
@@ -176,10 +498,24 @@
         31847,
         31832
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_29",
+      "slot": "flash",
+      "event": "Phapros reports third-quarter 2026 profit growth",
+      "headline": "PT Phapros Tbk (PEHA) Net Profit Surges 311.58% in Q3 2026",
+      "blurb": null,
+      "tickers": [
+        "PEHA.JK"
+      ],
+      "supporting_news_ids": [
+        31882
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_13",
+      "id": "cur_30",
       "slot": "flash",
       "event": "REAL reports nine-month 2026 operating profit growth",
       "headline": "PT Repower Asia Indonesia Tbk (REAL) reported a 626% increase in operating profit through the third quarter of 2026.",
@@ -191,32 +527,56 @@
         31850,
         31837
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_31",
       "slot": "flash",
-      "event": "BEI removes high-shareholding-concentration stocks from IHSG calculation",
-      "headline": "Indonesia Stock Exchange (BEI) begins excluding 81 high-shareholding-concentration stocks from IHSG calculation",
+      "event": "NPGF reports nine-month 2026 results",
+      "headline": "Nusa Palapa Gemilang (NPGF) Posts Rp241.72 Billion Revenue as NPK Granul Sales Surge 116 Percent",
       "blurb": null,
       "tickers": [
-        "BREN.JK",
-        "DSSA.JK",
-        "DCII.JK",
-        "BYAN.JK",
-        "BBCA.JK",
-        "BBRI.JK",
-        "ASII.JK"
+        "NPGF.JK"
       ],
       "supporting_news_ids": [
-        31839,
-        31853,
-        31829
+        31879
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_15",
+      "id": "cur_32",
+      "slot": "flash",
+      "event": "GPSO reports results after Tjokro Group consolidation",
+      "headline": "PT Geoprima Solusi Tbk (GPSO) Sales Surge 194% Following Tjokro Group Consolidation",
+      "blurb": null,
+      "tickers": [
+        "GPSO.JK"
+      ],
+      "supporting_news_ids": [
+        31875
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_33",
+      "slot": "flash",
+      "event": "IHSG falls 7% as foreign investors sell Indonesian stocks",
+      "headline": "Foreign investors sold Rp1.18 trillion of Telkom Indonesia (TLKM) shares as the JCI fell 7.03% in a week",
+      "blurb": null,
+      "tickers": [
+        "BBRI.JK",
+        "BBNI.JK",
+        "TLKM.JK",
+        "BBCA.JK"
+      ],
+      "supporting_news_ids": [
+        31861,
+        31852
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: Foreign investors recorded a net sell of Rp4.20 trillion across all markets during 26–30 October."
+    },
+    {
+      "id": "cur_34",
       "slot": "flash",
       "event": "BEI implements constituent changes to LQ45, IDX30 and Kompas100",
       "headline": "LQ45, IDX30, and Kompas100 Index Changes Take Effect Today on the Indonesia Stock Exchange",
@@ -239,25 +599,10 @@
       "supporting_news_ids": [
         31843
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "IHSG falls 7% in a week amid foreign investor selling",
-      "headline": "JCI Falls 7% in a Week as Foreign Investors Sell 10 Stocks Including BRI and BNI",
-      "blurb": null,
-      "tickers": [
-        "BBRI.JK",
-        "BBNI.JK"
-      ],
-      "supporting_news_ids": [
-        31852
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_17",
+      "id": "cur_35",
       "slot": "flash",
       "event": "OJK sanctions capital-market violators in cases involving DSSA, BREN and CUAN",
       "headline": "OJK's Dian Swastika Sentosa (DSSA) case includes a Rp 1.5 trillion fine",
@@ -277,10 +622,10 @@
         31854,
         31830
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
+      "id": "cur_36",
       "slot": "flash",
       "event": "PGAS signs agreements including 15-year Masela LNG supply deal",
       "headline": "PT Perusahaan Gas Negara Tbk (PGAS) secures 775 TBTU LNG supply from Masela Abadi project for 15 years",
@@ -291,8 +636,63 @@
       "supporting_news_ids": [
         31838
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_37",
+      "slot": "flash",
+      "event": "GOTO reports Q3 2026 profit as commission cap weighs on mobility",
+      "headline": "GOTO reports Rp441 billion Q3 2026 profit as 8% cap weighs on mobility",
+      "blurb": null,
+      "tickers": [
+        "GOTO.JK"
+      ],
+      "supporting_news_ids": [
+        31835
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from lead"
+    },
+    {
+      "id": "cur_38",
+      "slot": "flash",
+      "event": "Controlling shareholder sells TRIN shares",
+      "headline": "PT Kunci Daud Indonesia Sells 35.94 Million Shares of PT Perintis Triniti Properti Tbk (TRIN) Worth Rp8.62 Billion",
+      "blurb": null,
+      "tickers": [
+        "TRIN.JK"
+      ],
+      "supporting_news_ids": [
+        31881
+      ],
       "copy_decision": "new story"
     }
   ],
-  "what_to_watch": []
+  "what_to_watch": [
+    {
+      "id": "wtw_01",
+      "sort_date": "2026-11-11",
+      "timing_label": "11 Nov",
+      "title": "RAJA bonds and sukuk list on IDX",
+      "tickers": [
+        "RAJA.JK",
+        "RATU.JK"
+      ],
+      "supporting_news_ids": [
+        31886,
+        31867
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2026-12-08",
+      "timing_label": "8 Dec",
+      "title": "MBMA shareholders vote on private placement of up to 10.79 billion shares",
+      "tickers": [
+        "MBMA.JK"
+      ],
+      "supporting_news_ids": [
+        31864
+      ]
+    }
+  ]
 }
