@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-03",
   "window_start": "2026-11-02T13:50:00Z",
-  "window_end": "2026-11-03T01:46:10Z",
+  "window_end": "2026-11-03T05:56:18Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -12,16 +12,30 @@
     "supporting_news_ids": [
       31976
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
     "capital_raising_buybacks": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Prajogo Pangestu-affiliated issuers continue share buyback programs",
-        "headline": "Prajogo-linked TPIA, BRPT, BREN and CUAN realize Rp830.7 billion in buybacks",
-        "blurb": "By 2 November, the four had used about 18.46% of their combined Rp4.5 trillion maximum budget, leaving more than Rp3 trillion available. Chandra Asri’s program runs until 28 January 2027, while Barito Pacific, Barito Renewables and Petrindo Jaya Kreasi run until 31 December.",
+        "event": "Bank Mandiri issues US$750 million perpetual bond",
+        "headline": "BMRI issues US$750 million perpetual bond",
+        "blurb": "Bank Mandiri set an initial annual distribution rate of 7.35% through bookbuilding with international investors. The bond will strengthen additional Tier 1 capital and has a first reset date of 10 September 2031.",
+        "tickers": [
+          "BMRI.JK"
+        ],
+        "supporting_news_ids": [
+          32005
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Four Prajogo-affiliated issuers continue share buybacks",
+        "headline": "TPIA, BRPT, BREN and CUAN continue buybacks, reaching Rp830.7 billion",
+        "blurb": "Chandra Asri repurchased 378.43 million shares worth Rp518.2 billion through 2 November, the largest individual total. The four programs have combined maximum allocations of Rp4.5 trillion, with more than Rp3 trillion still available. TPIA’s program runs through 28 January 2027, while the other three run through 31 December 2026.",
         "tickers": [
           "TPIA.JK",
           "BRPT.JK",
@@ -29,20 +43,21 @@
           "CUAN.JK"
         ],
         "supporting_news_ids": [
+          32015,
           31989,
           31980,
           31973
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 1 new articles with a new fact: TPIA repurchased 378,428,200 shares worth Rp518.2 billion through 2 November 2026."
       }
     ],
     "market_structure_policy": [
       {
-        "id": "cur_03",
+        "id": "cur_04",
         "slot": "story",
-        "event": "OJK crackdown follows alleged MSCI-related stock manipulation in Indonesia",
-        "headline": "Regulators crack down over alleged MSCI stock manipulation after a 70% share fall",
-        "blurb": "Bloomberg reported that brokerage firms inflated stock prices and trading volumes to qualify for MSCI inclusion. Regulators fined Barito Renewables Energy, Dian Swastika Sentosa, Petrindo Jaya Kreasi and Henan Putihrai Sekuritas, while MSCI removed Barito Renewables, Petrindo and Chandra Asri Pacific from its index.",
+        "event": "MSCI warns Indonesia after market-manipulation allegations; regulators respond",
+        "headline": "MSCI warns Indonesia could be downgraded by up to two tiers",
+        "blurb": "The warning follows concerns over share-ownership transparency and coordinated trading, including alleged schemes to boost prices and volumes for index inclusion. Regulators fined several companies and securities firms, while MSCI removed Barito Renewables, Petrindo and Chandra Asri from its index.",
         "tickers": [
           "BREN.JK",
           "DSSA.JK",
@@ -50,30 +65,27 @@
           "TPIA.JK"
         ],
         "supporting_news_ids": [
+          32001,
           31968
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 1 new articles with a new fact: MSCI warned Indonesia could be downgraded by up to two tiers."
       },
       {
-        "id": "cur_04",
+        "id": "cur_05",
         "slot": "story",
-        "event": "Indofood Agri meets Singapore authorities over planned haze law amendments",
-        "headline": "INDF subsidiary meets Singapore authorities over planned haze law amendments",
-        "blurb": "Indofood Agri Resources attended discussions on Singapore’s proposed amendments to its transboundary haze pollution act following forest and land fires in Kalimantan. The process remains ongoing pending further direction from Singapore authorities.",
-        "tickers": [
-          "INDF.JK",
-          "ICBP.JK",
-          "SIMP.JK"
-        ],
+        "event": "Indonesia Stock Exchange schedules delisting of 18 issuers",
+        "headline": "Indonesia Stock Exchange schedules delisting of 18 issuers for 10 November",
+        "blurb": "The exchange cited significant negative conditions affecting business continuity, with no adequate signs of recovery. Seven issuers were declared bankrupt, while 11 have had their shares suspended for more than 50 months. They remain obligated to meet listed-company duties until delisting takes effect.",
+        "tickers": [],
         "supporting_news_ids": [
-          31995
+          32016
         ],
         "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_05",
+        "id": "cur_06",
         "slot": "story",
         "event": "Fortune Resources Investment reports nine-month revenue and profit growth",
         "headline": "FITT reports 622% Q3 revenue growth as profit turns to Rp29.41 billion",
@@ -84,10 +96,24 @@
         "supporting_news_ids": [
           31972
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Telkom Indonesia reports Q3 2026 revenue growth",
+        "headline": "TLKM reports Q3 revenue growth of 3.5% to Rp113.5 trillion",
+        "blurb": "Telkom Indonesia’s Data, Internet & IT Services revenue rose 8.3% year on year to Rp71.5 trillion. EBITDA reached Rp55.5 trillion at a 48.9% margin, while normalized net profit increased 3.9% to Rp16.5 trillion.",
+        "tickers": [
+          "TLKM.JK"
+        ],
+        "supporting_news_ids": [
+          32019
+        ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_06",
+        "id": "cur_08",
         "slot": "story",
         "event": "Indofood and Indofood CBP report lower Q3 2026 net profit",
         "headline": "INDF and ICBP report lower Q3 profit, down 0.19% and 13.25%",
@@ -99,40 +125,41 @@
         "supporting_news_ids": [
           31986
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_07",
+        "id": "cur_09",
         "slot": "story",
-        "event": "Semen Indonesia reports Q3 2026 profit growth",
-        "headline": "SMGR reports 363% profit growth in Q3 2026",
-        "blurb": "Semen Indonesia attributed the increase to improved operational efficiency and expanded export activities. The results indicated an operational recovery during the quarter.",
+        "event": "Aspirasi Hidup Indonesia reports nine-month sales and profit growth",
+        "headline": "ACES reports nine-month sales and profit growth of 8.3% and 25.7%",
+        "blurb": "Aspirasi Hidup Indonesia recorded Rp6.9 trillion in sales and Rp604.7 billion in profit attributable to owners. Rival MR DIY posted revenue of Rp7.2 trillion, up 24.5%, and net profit of Rp894.3 billion, up 12.9%.",
         "tickers": [
-          "SMGR.JK"
+          "ACES.JK",
+          "MDIY.JK"
         ],
         "supporting_news_ids": [
-          31969
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "RMK Energy reports 9M26 results",
-        "headline": "RMKE reports 9M26 results with net profit up 149.2% to Rp344.4 billion",
-        "blurb": "Revenue rose 118.1% year over year to Rp2.4 trillion, driven by six new mining clients and clearer RKAB policies. Coal hauling reached 2.45 million tons, and operating cash flow was Rp422 billion.",
-        "tickers": [
-          "RMKE.JK"
-        ],
-        "supporting_news_ids": [
-          31970
+          32014
         ],
         "copy_decision": "new story"
       }
     ],
     "deals_control": [
       {
-        "id": "cur_09",
+        "id": "cur_10",
+        "slot": "story",
+        "event": "Chandra Asri Pacific acquires Cycle & Carriage",
+        "headline": "TPIA announces Cycle & Carriage acquisition in Singapore and Malaysia",
+        "blurb": "Chandra Asri says the move is intended to create a new revenue stream and a more sustainable bottom line. It will use its ESSO stations to direct Cycle & Carriage customers to buy fuel there, while its petrochemical business continues to supply 30% to 40% of Indonesia’s needs.",
+        "tickers": [
+          "TPIA.JK"
+        ],
+        "supporting_news_ids": [
+          31974
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_11",
         "slot": "story",
         "event": "Bumi Resources delays acquisition of Laman Mining stake",
         "headline": "BUMI extends deadline for 45% Laman Mining stake acquisition to 31 January 2027",
@@ -143,55 +170,129 @@
         "supporting_news_ids": [
           31981
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_12",
+        "slot": "story",
+        "event": "Karya Energy reports a sharp nine-month net profit decline",
+        "headline": "IATA reports 86.61% nine-month net profit decline",
+        "blurb": "Karya Energy's revenue was nearly flat at USD55.36 million, while direct expenses rose to USD33.65 million and gross profit fell to USD21.71 million. Controlling shareholder Karya Pacific bought 663.23 million shares at Rp87 each for about Rp57.7 billion, lifting its stake to 62.47% from 60.35%; the purchase was completed on 19 October.",
+        "tickers": [
+          "IATA.JK"
+        ],
+        "supporting_news_ids": [
+          32009
+        ],
         "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_10",
+      "id": "cur_13",
       "slot": "flash",
-      "event": "Indo Tambangraya Megah announces an interim dividend",
-      "headline": "PT Indo Tambangraya Megah Tbk (ITMG) Announces Interim Dividend of Around Rp 1,192 per Share",
+      "event": "Indo Tambangraya Megah announces interim dividend",
+      "headline": "Indo Tambangraya Megah (ITMG) declares an interim dividend of US$74.20 million",
       "blurb": null,
       "tickers": [
         "ITMG.JK"
       ],
       "supporting_news_ids": [
+        32000,
         31985
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: The US$74.20 million dividend is equivalent to about Rp1.34 trillion."
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "Samator Indo Gas reports nine-month earnings growth",
+      "headline": "PT Samator Indo Gas Tbk (AGII) Posts Q3 2026 Earnings Growth with Revenue and Net Profit Up",
+      "blurb": null,
+      "tickers": [
+        "AGII.JK"
+      ],
+      "supporting_news_ids": [
+        32010
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_11",
+      "id": "cur_15",
       "slot": "flash",
-      "event": "Bank Neo Commerce reports nine-month net profit",
-      "headline": "Bank Neo Commerce (BBYB) Posts Rp430.98 Billion Net Profit Through September 2026 on Stable Profitability",
+      "event": "Semen Indonesia reports Q3 2026 profit growth",
+      "headline": "SMGR reports 363% profit growth in Q3 2026",
+      "blurb": null,
+      "tickers": [
+        "SMGR.JK"
+      ],
+      "supporting_news_ids": [
+        31969
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "RMK Energy reports 9M26 results",
+      "headline": "RMKE reports 9M26 results with net profit up 149.2% to Rp344.4 billion",
+      "blurb": null,
+      "tickers": [
+        "RMKE.JK"
+      ],
+      "supporting_news_ids": [
+        31970
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "ITSEC Asia reports narrower operating loss and revenue growth",
+      "headline": "PT ITSEC Asia Tbk (CYBR) Posts Improved Q3-2026 Performance as Operating Loss Shrinks 48%",
+      "blurb": null,
+      "tickers": [
+        "CYBR.JK"
+      ],
+      "supporting_news_ids": [
+        32021
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "Bank Neo Commerce reports nine-month net profit decline",
+      "headline": "Bank Neo Commerce (BBYB) reported Rp430.98 billion in net profit through September 2026, down 7.12% year on year.",
       "blurb": null,
       "tickers": [
         "BBYB.JK"
       ],
       "supporting_news_ids": [
+        32004,
+        32023,
         31992
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 2 new articles with a new fact: BBYB's nine-month net profit was down 7.12% year on year."
     },
     {
-      "id": "cur_12",
+      "id": "cur_19",
       "slot": "flash",
-      "event": "Mitrabara Adiperdana reports a Q3 profit surge",
-      "headline": "Mitrabara Adiperdana (MBAP) Posts 3,281% Surge in Q3 Net Profit to USD17.02 Million",
+      "event": "Mitrabara Adiperdana reports a 3,281% net profit surge",
+      "headline": "Mitrabara Adiperdana (MBAP) reports net profit attributable to owners of US$17.02 million, up 3,281%",
       "blurb": null,
       "tickers": [
         "MBAP.JK"
       ],
       "supporting_news_ids": [
+        32007,
         31993
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: MBAP shares rose 13.14% to Rp1,765 following the report."
     },
     {
-      "id": "cur_13",
+      "id": "cur_20",
       "slot": "flash",
       "event": "Clipan Finance reports Q3 2026 profit growth",
       "headline": "PT Clipan Finance Indonesia Tbk (CFIN) Reports 13.26% Net Profit Growth in Q3 2026 Despite Revenue Decline",
@@ -202,10 +303,38 @@
       "supporting_news_ids": [
         31975
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "Bank MNC Internasional reports nine-month profit decline",
+      "headline": "PT Bank MNC Internasional Tbk (BABP) Net Profit Falls 22.78% YoY in Q3 2026 as Third-Party Funds Drop 17%",
+      "blurb": null,
+      "tickers": [
+        "BABP.JK"
+      ],
+      "supporting_news_ids": [
+        32018
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_14",
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "Phapros reports nine-month net profit growth",
+      "headline": "PT Phapros Tbk (PEHA) Net Profit Jumps More Than Fourfold in Q3-2026",
+      "blurb": null,
+      "tickers": [
+        "PEHA.JK"
+      ],
+      "supporting_news_ids": [
+        32012
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_23",
       "slot": "flash",
       "event": "Bayan Resources stake acquisition and planned board overhaul",
       "headline": "Bayan Resources (BYAN) schedules a board overhaul after Jhonlin Baratama acquires a 30.25% stake",
@@ -218,38 +347,25 @@
         31978,
         31971
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_15",
+      "id": "cur_24",
       "slot": "flash",
-      "event": "Chandra Asri Pacific acquires Cycle & Carriage",
-      "headline": "PT Chandra Asri Pacific Tbk (TPIA) Announces Strategic Expansion into Automotive Sector via Acquisition of Cycle & Carriage",
-      "blurb": null,
-      "tickers": [
-        "TPIA.JK"
-      ],
-      "supporting_news_ids": [
-        31974
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "Medco Energi announces a US$30 million interim dividend",
-      "headline": "PT Medco Energi Internasional Tbk (MEDC) to Distribute US$30 Million Interim Dividend for Fiscal Year 2026",
+      "event": "Medco Energi approves US$30 million interim dividend",
+      "headline": "Medco Energi Internasional (MEDC) plans to distribute a US$30 million interim dividend for fiscal year 2026.",
       "blurb": null,
       "tickers": [
         "MEDC.JK"
       ],
       "supporting_news_ids": [
+        32008,
         31982
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Payment will be made no later than 2 December 2026."
     },
     {
-      "id": "cur_17",
+      "id": "cur_25",
       "slot": "flash",
       "event": "Avia Avian approves an interim dividend",
       "headline": "Avia Avian (AVIA) Announces Interim Dividend of Rp12 Per Share with 4.02% Yield",
@@ -260,10 +376,53 @@
       "supporting_news_ids": [
         31994
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_26",
+      "slot": "flash",
+      "event": "Sawit Sumbermas Sarana approves interim dividend",
+      "headline": "PT Sawit Sumbermas Sarana Tbk (SSMS) to Distribute Rp 500 Billion Interim Dividend for Fiscal Year 2026",
+      "blurb": null,
+      "tickers": [
+        "SSMS.JK"
+      ],
+      "supporting_news_ids": [
+        32006
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_18",
+      "id": "cur_27",
+      "slot": "flash",
+      "event": "Midi Utama Indonesia approves interim dividend",
+      "headline": "PT Midi Utama Indonesia Tbk (MIDI) will distribute an interim dividend of Rp127,054,120,240",
+      "blurb": null,
+      "tickers": [
+        "MIDI.JK"
+      ],
+      "supporting_news_ids": [
+        32003,
+        32013
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_28",
+      "slot": "flash",
+      "event": "IDX questions unpaid acquisition payments by Bhineka Inovasi Ketahanan Energi",
+      "headline": "IDX Questions Unpaid Payments on Four Acquisitions by PT Bhineka Inovasi Ketahanan Energi Tbk (BIKE)",
+      "blurb": null,
+      "tickers": [
+        "BIKE.JK"
+      ],
+      "supporting_news_ids": [
+        31999
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_29",
       "slot": "flash",
       "event": "Eagle High Plantations approves an interim dividend",
       "headline": "PT Eagle High Plantations Tbk (BWPT) Announces Interim Dividend of Rp1 Per Share Following Quasi-Reorganization",
@@ -274,10 +433,10 @@
       "supporting_news_ids": [
         31979
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
+      "id": "cur_30",
       "slot": "flash",
       "event": "MNC Bank addresses digital transaction failures and cash withdrawal limits",
       "headline": "MNC Bank Responds to Customer Complaints Over Digital Transaction Failures and Limited Cash Withdrawals",
@@ -288,10 +447,10 @@
       "supporting_news_ids": [
         31997
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_20",
+      "id": "cur_31",
       "slot": "flash",
       "event": "Trisula International plans a share buyback",
       "headline": "PT Trisula International Tbk (TRIS) Prepares Up to Rp 10 Billion for Share Buyback",
@@ -302,23 +461,50 @@
       "supporting_news_ids": [
         31988
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_21",
+      "id": "cur_32",
       "slot": "flash",
-      "event": "Global oil prices plunge as Iran signals openness to peace talks",
-      "headline": "World oil prices fell more than 7% on hopes for US-Iran peace talks",
+      "event": "Sepatu Bata sells Purwakarta assets for Rp79 billion",
+      "headline": "Sepatu Bata Tbk (BATA) Sells Rp79 Billion Purwakarta Assets to Strengthen Liquidity Amid Worsening Performance",
       "blurb": null,
-      "tickers": [],
+      "tickers": [
+        "BATA.JK"
+      ],
       "supporting_news_ids": [
-        31996,
-        31990
+        32011
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_22",
+      "id": "cur_33",
+      "slot": "flash",
+      "event": "Global oil prices plunge over 7% on hopes of US-Iran peace talks",
+      "headline": "Brent crude fell 7.63% to US$104.77 per barrel as peace-talk hopes rose",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32020,
+        31996,
+        31990
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: Brent crude fell 7.63% to US$104.77 per barrel."
+    },
+    {
+      "id": "cur_34",
+      "slot": "flash",
+      "event": "Oil prices rise after reports of a US strike on Iran's Qeshm Island",
+      "headline": "Oil Prices Rise After Reports US Struck Iran's Qeshm Island",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32002
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_35",
       "slot": "flash",
       "event": "Prajogo Pangestu's wealth falls 72.1%",
       "headline": "Prajogo Pangestu's Wealth Falls Deepest Among Indonesian Conglomerates, Down 72.1% to $12.1 Billion",
@@ -331,7 +517,23 @@
       "supporting_news_ids": [
         31977
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_36",
+      "slot": "flash",
+      "event": "Indofood Agri meets Singapore authorities over planned haze law amendments",
+      "headline": "INDF subsidiary meets Singapore authorities over planned haze law amendments",
+      "blurb": null,
+      "tickers": [
+        "INDF.JK",
+        "ICBP.JK",
+        "SIMP.JK"
+      ],
+      "supporting_news_ids": [
+        31995
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
     }
   ],
   "what_to_watch": [
@@ -339,62 +541,10 @@
       "id": "wtw_01",
       "sort_date": "2026-11-10",
       "timing_label": "10 Nov",
-      "title": "ITMG cum-dividend (regular market) for its US$74.2 million interim dividend",
-      "tickers": [
-        "ITMG.JK"
-      ],
+      "title": "IDX delists 18 issuers",
+      "tickers": [],
       "supporting_news_ids": [
-        31985
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-11-10",
-      "timing_label": "10 Nov",
-      "title": "AVIA cum-dividend (regular market) for its Rp12 interim dividend",
-      "tickers": [
-        "AVIA.JK"
-      ],
-      "supporting_news_ids": [
-        31994
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2026-11-10",
-      "timing_label": "10 Nov",
-      "title": "MEDC cum-dividend (regular market) for its US$30 million interim dividend",
-      "tickers": [
-        "MEDC.JK"
-      ],
-      "supporting_news_ids": [
-        31982
-      ]
-    },
-    {
-      "id": "wtw_04",
-      "sort_date": "2026-11-23",
-      "timing_label": "23 Nov",
-      "title": "BYAN shareholders vote on board changes after 30.25% stake acquisition",
-      "tickers": [
-        "BYAN.JK",
-        "JARR.JK"
-      ],
-      "supporting_news_ids": [
-        31978,
-        31971
-      ]
-    },
-    {
-      "id": "wtw_05",
-      "sort_date": "2027-01-31",
-      "timing_label": "31 Jan 2027",
-      "title": "BUMI deadline to meet prerequisites for its 45% Laman Mining acquisition",
-      "tickers": [
-        "BUMI.JK"
-      ],
-      "supporting_news_ids": [
-        31981
+        32016
       ]
     }
   ]
