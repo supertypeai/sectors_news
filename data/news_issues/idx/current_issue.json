@@ -1,41 +1,100 @@
 {
   "issue_date": "2026-11-05",
   "window_start": "2026-11-04T13:50:00Z",
-  "window_end": "2026-11-05T01:46:04Z",
+  "window_end": "2026-11-05T05:56:09Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "ULTJ plans a rights issue to fund its acquisition of Frisian Flag Indonesia",
-    "headline": "ULTJ plans Rp16.94 trillion rights issue to fund Frisian Flag Indonesia acquisition",
-    "blurb": "Ultra Jaya will seek shareholder approval at an EGM on 6 November to issue 7.88 billion shares at Rp2,150 each, with a rights ratio of 15,200:11,517. About 86.01% of proceeds would fund its planned acquisition of 100% of Frisian Flag Indonesia, valued at Rp14.57 trillion, and the remainder would go to working capital. FrieslandCampina International Holding, Frisian Flag Indonesia’s parent, would become ULTJ’s controlling shareholder under the proposed rights transfers. Shareholders who do not exercise their rights could face dilution of up to 43.11%.",
+    "event": "Ultrajaya plans rights issue to fund Frisian Flag acquisition and transfer control",
+    "headline": "ULTJ plans Rp16.94 trillion rights issue to acquire Frisian Flag and transfer control",
+    "blurb": "Ultra Jaya plans to issue up to 7.88 billion shares at Rp2,150 each, with 86.01% of proceeds earmarked for the acquisition and the balance for working capital. The 100% acquisition of Frisian Flag Indonesia is valued at Rp14.57 trillion and will be paid for with shares, making FrieslandCampina International Holding (FCIH) ULTJ’s controlling shareholder. FCIH must make a mandatory tender offer for ULTJ’s remaining public shares. Shareholders will vote on the plan on 6 November, with completion targeted by 31 January 2027.",
     "tickers": [
       "ULTJ.JK"
     ],
     "supporting_news_ids": [
+      32236,
       32233
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: 1 new articles with a new fact: FCIH will be required to make a mandatory tender offer for ULTJ's remaining public shares."
   },
   "sections": {
-    "other": [
+    "capital_raising_buybacks": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "SMAR announces an interim dividend of Rp490 per share",
-        "headline": "SMAR announces interim dividend of Rp490 per share",
-        "blurb": "Sinar Mas Agro plans to distribute Rp1.4 trillion for fiscal 2026, backed by Rp4.06 trillion in net profit attributable to owners as of 30 September and a 34.65% payout ratio. The cum date is 12 November, with payment scheduled for 26 November.",
+        "event": "ITMG plans Rp2.311 trillion share buyback",
+        "headline": "ITMG plans share buyback of up to Rp2.311 trillion",
+        "blurb": "The program will run from 5 November to 4 February 2027, funded entirely from internal cash. Combined with shares retained from the previous buyback, repurchased shares will not exceed 20% of capital, while free-float requirements remain observed.",
         "tickers": [
-          "SMAR.JK"
+          "ITMG.JK"
         ],
         "supporting_news_ids": [
-          32226
+          32237,
+          32255,
+          32234
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Steel Pipe Industry of Indonesia plans Rp150 billion share buyback",
+        "headline": "ISSP plans Rp150 billion share buyback",
+        "blurb": "Steel Pipe Industry of Indonesia plans to repurchase about 250 million shares, or 3.48%, at up to Rp600 each, funded from internal cash. The buyback runs from 5 November to 5 February 2027. The company says its share price does not yet reflect fair value based on its performance.",
+        "tickers": [
+          "ISSP.JK"
+        ],
+        "supporting_news_ids": [
+          32248
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Indah Prakasa Sentosa plans Rp125 billion private placement",
+        "headline": "INPS plans Rp125 billion private placement",
+        "blurb": "Indah Prakasa Sentosa will issue 1.25 billion shares at Rp100 each, all subscribed in cash by controlling shareholder Graha Inti Guna Persada. It will use Rp33.55 billion to repay debt and Rp91.45 billion for a TSIM capital injection, aiming to restore equity and meet requirements to lift its securities suspension.",
+        "tickers": [
+          "INPS.JK"
+        ],
+        "supporting_news_ids": [
+          32243
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "ANDA begins IPO bookbuilding for up to 1.676 billion shares",
+        "headline": "ANDA begins IPO bookbuilding for up to 1.676 billion shares",
+        "blurb": "Andalan Artha Primanusa is offering up to 1.676 billion new shares, equal to 25.10% of post-IPO paid-up capital, at Rp158 to Rp189 each, targeting Rp264.81 billion to Rp316.76 billion. Henan Putihrai Sekuritas is the full-commitment underwriter. Bookbuilding runs through 17 November, ahead of the public offering from 24 November to 27 November.",
+        "tickers": [],
+        "supporting_news_ids": [
+          32242,
+          32247
         ],
         "copy_decision": "new story"
       }
     ],
-    "capital_raising_buybacks": [
+    "other": [
       {
-        "id": "cur_03",
+        "id": "cur_06",
+        "slot": "story",
+        "event": "SMAR announces Rp490-per-share interim dividend",
+        "headline": "SMAR announces Rp490-per-share interim dividend",
+        "blurb": "Sinar Mas Agro Resources and Technology plans to distribute Rp1.4 trillion for fiscal 2026, equal to 34.65% of its Rp4.06 trillion net profit for the nine months ended 30 September. It last paid an interim dividend of Rp105 per share for fiscal 2024. The cum-dividend date is 12 November, and payment is scheduled for 26 November.",
+        "tickers": [
+          "SMAR.JK"
+        ],
+        "supporting_news_ids": [
+          32249,
+          32226
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: SMAR last paid an interim dividend of Rp105 per share for fiscal year 2024."
+      },
+      {
+        "id": "cur_07",
         "slot": "story",
         "event": "Pefindo downgrades WIKA's bond rating after a missed coupon payment",
         "headline": "Pefindo cuts WIKA bond rating to idD after delayed coupon payment",
@@ -46,10 +105,10 @@
         "supporting_news_ids": [
           32231
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_04",
+        "id": "cur_08",
         "slot": "story",
         "event": "Fitch downgrades Pos Indonesia's sukuk after a missed payment",
         "headline": "Fitch downgrades Pos Indonesia's Rp1 trillion sukuk to default",
@@ -58,12 +117,58 @@
         "supporting_news_ids": [
           32232
         ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "Garuda plans rights issue including GMFI share inbreng",
+        "headline": "GIAA plans Rp16.91 trillion rights issue including GMFI shares",
+        "blurb": "Garuda plans to issue up to 248.71 billion new shares at an estimated Rp58-Rp68 each, with potential dilution of up to 37.92% for non-participants. Danantara Asset Management will contribute 82.10 billion GMFI shares, or 65.77% of GMFI's paid-up capital, after receiving them from InJourney on 2 November. The issue requires an effective OJK statement.",
+        "tickers": [
+          "GIAA.JK"
+        ],
+        "supporting_news_ids": [
+          32238,
+          32253
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "KB Bank completes sale of 85% stake in KB Bukopin Finance",
+        "headline": "BBKP completes sale of 85% stake in KB Bukopin Finance for Rp339.97 billion",
+        "blurb": "The 4 November sale to JB Woori Capital reduced KB Bank’s ownership to 14.24%. The bank said the divestment would add liquidity, optimize capital allocation and strengthen its focus on core banking.",
+        "tickers": [
+          "BBKP.JK"
+        ],
+        "supporting_news_ids": [
+          32252,
+          32257
+        ],
         "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_05",
+        "id": "cur_11",
+        "slot": "story",
+        "event": "Janu Putra Sejahtera swings to Q3 net profit",
+        "headline": "AYAM swings to Q3 net profit of Rp17.58 billion",
+        "blurb": "Janu Putra Sejahtera reversed a year-earlier loss for the period ended 30 September. Sales fell 9.82% to Rp203.28 billion, while cost of goods sold declined 17.64% to Rp192.66 billion.",
+        "tickers": [
+          "AYAM.JK"
+        ],
+        "supporting_news_ids": [
+          32245
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_12",
         "slot": "story",
         "event": "ANTM reports nine-month 2026 earnings growth and its shares rebound",
         "headline": "ANTM reports 47.9% nine-month profit growth as shares rebound",
@@ -75,10 +180,10 @@
           32229,
           32215
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_06",
+        "id": "cur_13",
         "slot": "story",
         "event": "Bank Mayapada reports nine-month 2026 net profit growth",
         "headline": "MAYA reports 107% nine-month net profit growth",
@@ -89,41 +194,104 @@
         "supporting_news_ids": [
           32218
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_14",
+        "slot": "story",
+        "event": "Lippo Karawaci reports nine-month 2026 earnings and property presales",
+        "headline": "LPKR reports Rp1.24 trillion nine-month profit and Rp5.49 trillion presales",
+        "blurb": "Revenue was Rp5.37 trillion, EBITDA Rp1.11 trillion and cash Rp1.37 trillion at 30 September. Affordable and mid-segment housing made up 75% of presales, while the new Hunian Warisan Bangsa Serang project offers eight housing types priced from Rp101 million to Rp262 million.",
+        "tickers": [
+          "LPKR.JK"
+        ],
+        "supporting_news_ids": [
+          32254
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "market_structure_policy": [
+      {
+        "id": "cur_15",
+        "slot": "story",
+        "event": "OJK calculates potential investor compensation in DSSA, BREN, and CUAN cases",
+        "headline": "OJK calculates potential compensation in DSSA, BREN, CUAN cases after Rp2.1 trillion fines",
+        "blurb": "OJK is identifying eligible investors and how much each could receive, but the mechanism and compensation amounts are not confirmed. It imposed fines of Rp1.5 trillion on Dian Swastatika Sentosa, Rp500 billion on Barito Renewables Energy and Rp100 billion on Petrindo Jaya Kreasi.",
+        "tickers": [
+          "DSSA.JK",
+          "BREN.JK",
+          "CUAN.JK"
+        ],
+        "supporting_news_ids": [
+          32251
+        ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_07",
+        "id": "cur_16",
         "slot": "story",
-        "event": "KIJA reports nine-month 2026 results and outlines its 2027 outlook",
-        "headline": "KIJA reports 9M26 revenue up 16% to Rp4.25 trillion and discusses 2027 outlook",
-        "blurb": "Jababeka's net profit fell 38% to Rp391.7 billion from Rp634.6 billion a year earlier, reflecting one-off refinancing costs in Q2. The company refinanced its US dollar-denominated senior notes into a rupiah-denominated bank facility and expects the move to deliver long-term financial benefits.",
+        "event": "IDX places CBRE and LAPD on Full-Call Auction Board for negative equity",
+        "headline": "IDX places CBRE and LAPD on Full-Call Auction Board for negative equity",
+        "blurb": "Cakra Buana Resources Energi and Leyand International entered the IDX’s special-monitoring list on 4 November under Criterion 5 for negative equity in their latest financial statements. CBRE’s Rp1.27 trillion rights issue, offering 11.79 billion to 11.8 billion shares at Rp108 each, remains in document completion and OJK evaluation.",
         "tickers": [
-          "KIJA.JK"
+          "CBRE.JK",
+          "LAPD.JK"
         ],
         "supporting_news_ids": [
-          32214
+          32244
         ],
         "copy_decision": "new story"
-      },
+      }
+    ],
+    "macro_flows": [
       {
-        "id": "cur_08",
+        "id": "cur_17",
         "slot": "story",
-        "event": "HAJJ reports third-quarter 2026 revenue growth",
-        "headline": "HAJJ reports third-quarter revenue up 43.1% to Rp294.07 billion",
-        "blurb": "Arsy Buana Travelindo's nine-month revenue fell to Rp657.67 billion from Rp727.25 billion a year earlier, while operating cash flow turned positive at Rp77.96 billion from a negative Rp60.53 billion. Hotels contributed 91.61% of nine-month revenue.",
-        "tickers": [
-          "HAJJ.JK"
-        ],
+        "event": "Global oil prices plunge amid expectations of US-Iran war ending",
+        "headline": "Global oil prices plunge more than 8% on hopes of US-Iran war ending",
+        "blurb": "Brent closed at US$94.62 a barrel and WTI at US$88.12, both their lowest closes since 31 August. Markets grew hopeful that Democrats’ capture of both chambers of Congress and Trump’s statement that the US had no immediate plan to attack Iran could hasten a diplomatic resolution.",
+        "tickers": [],
         "supporting_news_ids": [
-          32219
+          32230
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_09",
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "Jababeka reports nine-month 2026 results and outlines 2027 outlook",
+      "headline": "Kawasan Industri Jababeka (KIJA) reported Rp4.25 trillion in revenue for the first nine months of 2026 and discussed its 2027 outlook",
+      "blurb": null,
+      "tickers": [
+        "KIJA.JK"
+      ],
+      "supporting_news_ids": [
+        32239,
+        32246,
+        32214
+      ],
+      "copy_decision": "rewritten: 2 new articles with a new fact: Consolidated cash stood at Rp3.15 trillion at the end of September 2026."
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "HAJJ reports third-quarter 2026 revenue growth",
+      "headline": "HAJJ reports third-quarter revenue up 43.1% to Rp294.07 billion",
+      "blurb": null,
+      "tickers": [
+        "HAJJ.JK"
+      ],
+      "supporting_news_ids": [
+        32219
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_20",
       "slot": "flash",
       "event": "SeaBank reports nine-month 2026 net profit",
       "headline": "SeaBank Posts Rp1.11 Trillion Nine-Month Net Profit on Strong Digital Banking Fundamentals",
@@ -132,10 +300,10 @@
       "supporting_news_ids": [
         32217
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_10",
+      "id": "cur_21",
       "slot": "flash",
       "event": "Oona Insurance reports nine-month 2026 net profit growth",
       "headline": "Oona Insurance Indonesia Posts 80.5% Net Profit Growth to Rp 113.6 Billion Through Q3-2026 on 49.7% Premium Growth",
@@ -144,10 +312,36 @@
       "supporting_news_ids": [
         32220
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "Bank UOB Indonesia reports nine-month 2026 profit decline",
+      "headline": "PT Bank UOB Indonesia Posts Rp1.01 Trillion Net Profit in Q3-2026, Down 18.25% YoY",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32250
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_11",
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "CGS International accumulates BBCA shares in one-day trading",
+      "headline": "Foreign Broker CGS International Quietly Accumulates PT Bank Central Asia Tbk (BBCA) Shares",
+      "blurb": null,
+      "tickers": [
+        "BBCA.JK"
+      ],
+      "supporting_news_ids": [
+        32240
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_24",
       "slot": "flash",
       "event": "UNTR sets an interim dividend of up to Rp430 per share",
       "headline": "PT United Tractors Tbk (UNTR) Sets Interim Dividend of Up to Rp 430 per Share",
@@ -158,24 +352,10 @@
       "supporting_news_ids": [
         32224
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
-      "slot": "flash",
-      "event": "ITMG plans a share buyback of up to Rp2.311 trillion",
-      "headline": "PT Indo Tambangraya Megah Tbk (ITMG) to Begin Share Buyback of Up to Rp2.311 Trillion",
-      "blurb": null,
-      "tickers": [
-        "ITMG.JK"
-      ],
-      "supporting_news_ids": [
-        32234
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_13",
+      "id": "cur_25",
       "slot": "flash",
       "event": "BINA plans a private placement to raise capital from Salim-linked entities",
       "headline": "Anthoni Salim and Axton Salim Prepare Capital Injection into PT Bank Ina Perdana Tbk (BINA) via Private Placement",
@@ -186,17 +366,19 @@
       "supporting_news_ids": [
         32216
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_26",
       "slot": "flash",
-      "event": "Global oil prices plunge amid expectations of an earlier end to the US-Iran war",
-      "headline": "Global Oil Prices Plunge Over 8% as Markets Bet on Early End to US-Iran War",
+      "event": "FOLK posts nine-month profit, reversing prior-year loss",
+      "headline": "PT Multi Garam Utama Tbk (FOLK) Posts Rp17.31 Billion Net Profit in Q3 2026, Reversing Prior-Year Loss",
       "blurb": null,
-      "tickers": [],
+      "tickers": [
+        "FOLK.JK"
+      ],
       "supporting_news_ids": [
-        32230
+        32241
       ],
       "copy_decision": "new story"
     }
@@ -204,26 +386,13 @@
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-06",
-      "timing_label": "6 Nov",
-      "title": "ULTJ shareholders vote on Rp16.94 trillion rights issue for FFI acquisition",
-      "tickers": [
-        "ULTJ.JK"
-      ],
+      "sort_date": "2026-11-24",
+      "timing_label": "24 Nov",
+      "title": "ANDA IPO public offering opens, until 27 Nov",
+      "tickers": [],
       "supporting_news_ids": [
-        32233
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-11-12",
-      "timing_label": "12 Nov",
-      "title": "SMAR cum-dividend (regular market) for Rp490 interim dividend",
-      "tickers": [
-        "SMAR.JK"
-      ],
-      "supporting_news_ids": [
-        32226
+        32242,
+        32247
       ]
     }
   ]
