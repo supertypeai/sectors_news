@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-05",
   "window_start": "2026-11-04T13:50:00Z",
-  "window_end": "2026-11-05T09:57:37Z",
+  "window_end": "2026-11-05T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -29,10 +29,25 @@
         "supporting_news_ids": [
           32282
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_03",
+        "slot": "story",
+        "event": "IDX places CBRE and LAPD on Full-Call Auction Board for negative equity",
+        "headline": "IDX places CBRE and LAPD on Full-Call Auction Board for negative equity",
+        "blurb": "Cakra Buana Resources Energi and Leyand International entered the IDX’s special-monitoring list on 4 November under Criterion 5 for negative equity in their latest financial statements. CBRE’s Rp1.27 trillion rights issue, offering 11.79 billion to 11.8 billion shares at Rp108 each, remains in document completion and OJK evaluation.",
+        "tickers": [
+          "CBRE.JK",
+          "LAPD.JK"
+        ],
+        "supporting_news_ids": [
+          32244
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_04",
         "slot": "story",
         "event": "OJK calculates potential investor compensation in DSSA, BREN, and CUAN cases",
         "headline": "OJK calculates potential compensation in DSSA, BREN, CUAN cases after Rp2.1 trillion fines",
@@ -44,21 +59,6 @@
         ],
         "supporting_news_ids": [
           32251
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_04",
-        "slot": "story",
-        "event": "IDX places CBRE and LAPD on Full-Call Auction Board for negative equity",
-        "headline": "IDX places CBRE and LAPD on Full-Call Auction Board for negative equity",
-        "blurb": "Cakra Buana Resources Energi and Leyand International entered the IDX’s special-monitoring list on 4 November under Criterion 5 for negative equity in their latest financial statements. CBRE’s Rp1.27 trillion rights issue, offering 11.79 billion to 11.8 billion shares at Rp108 each, remains in document completion and OJK evaluation.",
-        "tickers": [
-          "CBRE.JK",
-          "LAPD.JK"
-        ],
-        "supporting_news_ids": [
-          32244
         ],
         "copy_decision": "kept: same articles"
       }
@@ -94,7 +94,7 @@
           32288,
           32248
         ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: ISSP shares rose 5.9% in the first trading session on 5 November."
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_07",
@@ -109,7 +109,7 @@
           32279,
           32243
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: INPS free float is estimated at 11.68%, below the IDX’s 15% minimum."
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_08",
@@ -125,7 +125,7 @@
           32242,
           32247
         ],
-        "copy_decision": "rewritten: 3 new articles with a new fact: ANDA is also offering up to 239,429,000 Series I Warrants."
+        "copy_decision": "kept: same articles"
       }
     ],
     "other": [
@@ -188,7 +188,7 @@
           32238,
           32253
         ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: An appraisal valued GMFI shares at Rp8.61 trillion, compared with the Rp5.66 trillion inbreng value."
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_13",
@@ -233,7 +233,7 @@
         "supporting_news_ids": [
           32276
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_16",
@@ -249,7 +249,7 @@
           32229,
           32215
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: BRI Danareksa raised its target price to Rp4,500."
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_17",
@@ -263,7 +263,7 @@
         "supporting_news_ids": [
           32289
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "macro_flows": [
@@ -285,16 +285,16 @@
     {
       "id": "cur_19",
       "slot": "flash",
-      "event": "GoTo reports its third consecutive profitable quarter",
-      "headline": "PT GoTo Gojek Tokopedia Tbk (GOTO) Posts Three Straight Quarters of Profit Yet Shares Remain at Rp 25",
+      "event": "UNTR sets an interim dividend of up to Rp430 per share",
+      "headline": "PT United Tractors Tbk (UNTR) Sets Interim Dividend of Up to Rp 430 per Share",
       "blurb": null,
       "tickers": [
-        "GOTO.JK"
+        "UNTR.JK"
       ],
       "supporting_news_ids": [
-        32284
+        32224
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_20",
@@ -308,7 +308,7 @@
       "supporting_news_ids": [
         32267
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_21",
@@ -322,7 +322,7 @@
       "supporting_news_ids": [
         32218
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_22",
@@ -336,7 +336,7 @@
       "supporting_news_ids": [
         32268
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_23",
@@ -352,7 +352,7 @@
         32280,
         32254
       ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: LPKR’s Rp5.49 trillion presales reached 91% of its Rp6 trillion full-year target."
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_24",
@@ -369,7 +369,7 @@
         32246,
         32214
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Net profit declined 38% to Rp391.7 billion."
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_25",
@@ -424,34 +424,6 @@
     {
       "id": "cur_29",
       "slot": "flash",
-      "event": "CGS International accumulates BBCA shares in one-day trading",
-      "headline": "Foreign Broker CGS International Quietly Accumulates PT Bank Central Asia Tbk (BBCA) Shares",
-      "blurb": null,
-      "tickers": [
-        "BBCA.JK"
-      ],
-      "supporting_news_ids": [
-        32240
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_30",
-      "slot": "flash",
-      "event": "UNTR sets an interim dividend of up to Rp430 per share",
-      "headline": "PT United Tractors Tbk (UNTR) Sets Interim Dividend of Up to Rp 430 per Share",
-      "blurb": null,
-      "tickers": [
-        "UNTR.JK"
-      ],
-      "supporting_news_ids": [
-        32224
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_31",
-      "slot": "flash",
       "event": "TAPG declares a Rp70-per-share interim dividend",
       "headline": "PT Triputra Agro Persada Tbk (TAPG) to Pay Interim Dividend of Rp70 Per Share with 75% Payout Ratio",
       "blurb": null,
@@ -461,10 +433,24 @@
       "supporting_news_ids": [
         32274
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_30",
+      "slot": "flash",
+      "event": "GOTO treasury-share cancellation remains pending after shareholder approval",
+      "headline": "PT GoTo Gojek Tokopedia Tbk (GOTO) Posts Three Straight Quarters of Profit Yet Shares Remain at Rp 25",
+      "blurb": null,
+      "tickers": [
+        "GOTO.JK"
+      ],
+      "supporting_news_ids": [
+        32284
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_32",
+      "id": "cur_31",
       "slot": "flash",
       "event": "BINA plans a private placement to raise capital from Salim-linked entities",
       "headline": "Anthoni Salim and Axton Salim Prepare Capital Injection into PT Bank Ina Perdana Tbk (BINA) via Private Placement",
@@ -478,7 +464,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_33",
+      "id": "cur_32",
       "slot": "flash",
       "event": "FOLK posts nine-month profit, reversing prior-year loss",
       "headline": "PT Multi Garam Utama Tbk (FOLK) Posts Rp17.31 Billion Net Profit in Q3 2026, Reversing Prior-Year Loss",
@@ -492,7 +478,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_34",
+      "id": "cur_33",
       "slot": "flash",
       "event": "LAPD plans a rights issue to acquire 87.5% of BSS",
       "headline": "Leyand International (LAPD) to Hold Second Rights Issue, Acquiring 87.5% of PT Bersaudara Sinergi Sejahtera via Non-Cash Contribution",
@@ -503,10 +489,10 @@
       "supporting_news_ids": [
         32285
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_35",
+      "id": "cur_34",
       "slot": "flash",
       "event": "EPAC shareholders approve a rights issue and appoint a new president commissioner",
       "headline": "PT Megalestari Epack Sentosaraya Tbk (EPAC) Approves Rights Issue of 2 Billion Shares and Appoints Noprian Fadli as President Commissioner",
@@ -517,10 +503,10 @@
       "supporting_news_ids": [
         32290
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_36",
+      "id": "cur_35",
       "slot": "flash",
       "event": "MNC Bank customers face withdrawal issues as OJK urges resolution",
       "headline": "MNC Bank Customers Face Savings Withdrawal Issues as OJK Urges the Company to Resolve Promptly",
@@ -529,57 +515,15 @@
       "supporting_news_ids": [
         32272
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-06",
-      "timing_label": "6 Nov",
-      "title": "ULTJ shareholders vote on Rp16.94 trillion rights issue",
-      "tickers": [
-        "ULTJ.JK"
-      ],
-      "supporting_news_ids": [
-        32236,
-        32233
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-11-06",
-      "timing_label": "6 Nov",
-      "title": "GIAA shareholders vote on Rp16.91 trillion rights issue",
-      "tickers": [
-        "GIAA.JK",
-        "GMFI.JK"
-      ],
-      "supporting_news_ids": [
-        32287,
-        32281,
-        32238,
-        32253
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2026-11-12",
-      "timing_label": "12 Nov",
-      "title": "SMAR cum-dividend (regular market) for its Rp490 interim dividend",
-      "tickers": [
-        "SMAR.JK"
-      ],
-      "supporting_news_ids": [
-        32249,
-        32226
-      ]
-    },
-    {
-      "id": "wtw_04",
-      "sort_date": "2026-12-01",
-      "timing_label": "1 Dec",
-      "title": "ANDA IPO shares list on the Indonesia Stock Exchange",
+      "sort_date": "2026-11-24",
+      "timing_label": "24 Nov",
+      "title": "ANDA IPO public offering opens, running through 27 Nov",
       "tickers": [],
       "supporting_news_ids": [
         32278,
