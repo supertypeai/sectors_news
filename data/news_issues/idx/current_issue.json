@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-06",
   "window_start": "2026-11-05T13:50:00Z",
-  "window_end": "2026-11-06T09:56:27Z",
+  "window_end": "2026-11-06T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -18,7 +18,7 @@
       32323,
       32302
     ],
-    "copy_decision": "rewritten: moved from story to lead"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
     "earnings_guidance": [
@@ -34,122 +34,74 @@
         "supporting_news_ids": [
           32365
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "Bank Permata reports lower Q3 net profit",
-        "headline": "BNLI reports nine-month net profit down 10.9% to Rp2.57 trillion",
-        "blurb": "Bank Permata's net interest and sharia income fell 2.49% to Rp7.38 trillion, while gains on sales of investment securities dropped 59.25%. Loans rose 10.1% to Rp172.9 trillion, and gross NPL improved to 2.1% from 2.2%.",
+        "event": "Poultry issuers report nine-month results and receive analyst recommendations",
+        "headline": "Poultry issuers report nine-month growth as analyst targets JPFA at Rp3,140",
+        "blurb": "JPFA, CPIN, MAIN and WMPP all grew revenue and net profit through Q3. Kiwoom's Abdul Azis Setyo Wibowo rated Japfa Comfeed Indonesia a buy with a Rp3,140 target, while Mirae's Nafan Aji Gusta recommended wait and see on all four. CPIN's net profit rose 54% to Rp5.18 trillion.",
         "tickers": [
-          "BNLI.JK"
+          "JPFA.JK",
+          "CPIN.JK",
+          "MAIN.JK",
+          "WMPP.JK"
         ],
         "supporting_news_ids": [
-          32343
+          32303
         ],
-        "copy_decision": "kept: same articles"
+        "copy_decision": "new story"
       },
       {
         "id": "cur_04",
         "slot": "story",
-        "event": "PTBA reports a sharp increase in nine-month net profit",
-        "headline": "PTBA reports nine-month net profit up 216.4% to Rp4.41 trillion",
-        "blurb": "Bukit Asam's revenue rose 12.4% to Rp35.2 trillion, driven by higher average selling prices. Citi views its business and stock prospects as attractive, citing potential coal quota increases, improved domestic selling prices and minimal logistics disruptions.",
+        "event": "Industrial estate issuers report divergent nine-month results",
+        "headline": "Industrial estate issuers post divergent nine-month results as DMAS profit rises 284%",
+        "blurb": "Puradelta Lestari's net profit reached Rp1.49 trillion, with its industrial segment contributing Rp2.54 trillion, about 96% of revenue. Surya Semesta's profit rose to Rp344.44 billion, while Jababeka's fell 38% to Rp391.7 billion after one-off refinancing costs despite 16% revenue growth.",
         "tickers": [
-          "PTBA.JK"
+          "SSIA.JK",
+          "DMAS.JK",
+          "KIJA.JK",
+          "BEST.JK"
         ],
         "supporting_news_ids": [
-          32354
+          32404
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_05",
         "slot": "story",
-        "event": "ACES reports nine-month results and lags its 2026 store-expansion target",
-        "headline": "ACES reports 9M26 profit up 25.7% as store openings trail target",
-        "blurb": "By August, Aspirasi Hidup Indonesia had opened 15 AZKO and 16 NEKA stores, versus 2026 targets of 25-30 and 40-50. Nine-month sales rose 8.3% to Rp6.9 trillion, while capex of Rp144.8 billion represented about 32%-36% of its annual budget, suggesting some expansion could shift to 2027.",
+        "event": "Diamond Propertindo reports a sharp increase in nine-month profit",
+        "headline": "DADA reports nine-month profit up 863.76%",
+        "blurb": "Diamond Propertindo shares had fallen 66% from Rp50 on 25 September and hit the lower price limit in the latest session. Net profit reached Rp8.24 billion for the period ended 30 September, while revenue rose 220% to Rp28.96 billion.",
         "tickers": [
-          "ACES.JK"
+          "DADA.JK"
         ],
         "supporting_news_ids": [
-          32304
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "market_structure_policy": [
-      {
-        "id": "cur_06",
-        "slot": "story",
-        "event": "IDX suspends MKNT trading and probes its share-price surge",
-        "headline": "IDX suspends MKNT after 3,100% rise and probes trading",
-        "blurb": "Mitra Komunikasi Nusantara shares rose from Rp1 to Rp32 and hit the upper price limit for 14 consecutive trading days from 15 October. The halt covers the Regular and Cash Markets from the 6 November pre-opening session until further notice, while IDX is investigating the volatile trading under letter No. S-13822/BEI.PP1/11-2026, dated 4 November.",
-        "tickers": [
-          "MKNT.JK"
-        ],
-        "supporting_news_ids": [
-          32353,
-          32341,
-          32339
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: IDX was investigating the volatile trading under letter No. S-13822/BEI.PP1/11-2026 dated 4 November 2026."
-      }
-    ],
-    "capital_raising_buybacks": [
-      {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "KB Bank postpones its planned US dollar global bond issuance",
-        "headline": "BBKP postpones planned US$300 million global bond issuance",
-        "blurb": "KB Bank cited global and domestic market conditions affecting funding costs and terms, and reported a Q3 2026 net loss of Rp184.17 billion and a gross NPL ratio of 10.26% in September. Its US$300 million notes issued in October 2024 mature on 30 October 2027, with shareholder support and domestic issuance among the alternatives.",
-        "tickers": [
-          "BBKP.JK"
-        ],
-        "supporting_news_ids": [
-          32366,
-          32318
-        ],
-        "copy_decision": "rewritten: moved from flash to story"
-      },
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "GOTO buyback and cancellation of treasury shares",
-        "headline": "GOTO shareholders approve cancellation of around 32 billion treasury shares",
-        "blurb": "GoTo had spent Rp985 billion to repurchase 36 billion shares by 29 October, with roughly Rp2.5 trillion remaining under its authorization through June 2027. Shareholders approved removing shares equal to about 2.7% of total shares outstanding from issuance on 14 October, raising existing investors’ ownership percentages and preventing the shares from returning to the market.",
-        "tickers": [
-          "GOTO.JK"
-        ],
-        "supporting_news_ids": [
-          32348,
-          32355,
-          32311
+          32327
         ],
         "copy_decision": "rewritten: moved from flash to story"
       }
     ],
     "deals_control": [
       {
-        "id": "cur_09",
+        "id": "cur_06",
         "slot": "story",
-        "event": "DOOH agrees to acquire a 29.88% stake in INET and announces related corporate actions",
-        "headline": "DOOH completes Rp2 trillion purchase of 29.88% stake in INET",
-        "blurb": "Era Media Sejahtera’s subsidiary CNI executed the purchase of 6.68 billion INET shares at Rp300 each from controlling shareholder AKUN through the IDX negotiation market. DOOH seeks shareholder approval on 9 November for a rights issue of up to 154.77 billion shares and other corporate actions.",
+        "event": "BRMS president director accumulates company shares",
+        "headline": "BRMS president director buys 15.16 million shares",
+        "blurb": "Bumi Resources Minerals shares fell 30.6% to Rp308 between 21 October and 6 November, despite President Director Agoes Projosasmito's purchases. He bought the shares for Rp6.45 billion at an average Rp425.49 each, while five other directors also bought shares, bringing total board holdings to around 23 million.",
         "tickers": [
-          "DOOH.JK",
-          "INET.JK"
+          "BRMS.JK"
         ],
         "supporting_news_ids": [
-          32362,
-          32334,
-          32326
+          32352
         ],
-        "copy_decision": "rewritten: moved from lead to story"
+        "copy_decision": "rewritten: moved from flash to story"
       },
       {
-        "id": "cur_10",
+        "id": "cur_07",
         "slot": "story",
         "event": "Bakrie Kalila Investment sells ENRG shares",
         "headline": "ENRG shareholder Bakrie Kalila sells shares for Rp312.66 billion",
@@ -164,24 +116,284 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_11",
+        "id": "cur_08",
         "slot": "story",
-        "event": "Takjub Finansial Teknologi sells a 9% stake in BNBA",
-        "headline": "Takjub Finansial sells 9% stake in BNBA",
-        "blurb": "It sold 304.92 million shares at Rp777 apiece on 2 November for about Rp236.92 billion. Its ownership fell from 33.45% to 24.45%, and it said it is not BNBA’s controlling shareholder and does not control the bank. The sale was reported to OJK on 5 November, according to an IDX disclosure.",
+        "event": "ENRG shares see large negotiation-market transactions",
+        "headline": "ENRG records more than Rp1.3 trillion in negotiation-market trades",
+        "blurb": "Energi Mega Persada shares changed hands in two transactions covering 15.81 million lots at Rp550 per share, worth Rp869.8 billion, and four transactions covering 7.62 million lots at Rp565, worth Rp430.6 billion. No official explanation has been issued.",
         "tickers": [
-          "BNBA.JK"
+          "ENRG.JK"
         ],
         "supporting_news_ids": [
-          32319
+          32396
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "ULTJ plans a rights issue to acquire Frisian Flag Indonesia",
+        "headline": "ULTJ shareholders approve rights issue for 100% FFI acquisition at 6 November EGM",
+        "blurb": "The issue is priced at Rp2,150 a share, with 86.01% of net proceeds intended for the acquisition and the remainder for working capital. On completion, FCIH would become ULTJ’s controlling party, followed by a mandatory tender offer for publicly held shares.",
+        "tickers": [
+          "ULTJ.JK"
+        ],
+        "supporting_news_ids": [
+          32406,
+          32301,
+          32309,
+          32300
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      }
+    ],
+    "market_structure_policy": [
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "IDX suspends and investigates Remitra Global after a sharp share-price surge",
+        "headline": "IDX suspends and investigates MKNT after 3,100% share-price surge",
+        "blurb": "As of 5 November, IDX said a small group held 99.64% of Mitra Komunikasi Nusantara’s shares, placing it on its high shareholding concentration list but saying this did not indicate a rules violation. The suspension covers the Regular and Cash Markets from the 6 November pre-opening session until further exchange announcement.",
+        "tickers": [
+          "MKNT.JK"
+        ],
+        "supporting_news_ids": [
+          32394,
+          32353,
+          32341,
+          32339
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: IDX said a small group of shareholders held 99.64% of MKNT shares as of 5 November."
+      },
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "Government prepares a single-door export scheme for strategic commodities",
+        "headline": "Government prepares single-door export scheme for three commodities",
+        "blurb": "The scheme covers coal, palm oil and iron alloy, with PT Danantara Sumberdaya Indonesia as sole intermediary approving export declaration drafts. Customs clearance remains with the Directorate General of Customs and Excise and Indonesia National Single Window. Revised regulations are expected in mid-November, ahead of a pilot expected to begin 15 December.",
+        "tickers": [],
+        "supporting_news_ids": [
+          32393
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_12",
+        "slot": "story",
+        "event": "Medco Energi issues bonds through Medco Redwood Tree",
+        "headline": "MEDC issues 2032 bonds with an 8.875% coupon",
+        "blurb": "Medco Energi issued the bonds through subsidiary Medco Redwood Tree Limited under Rule 144A/Reg S, with a guarantee from parent MedcoEnergi. Net proceeds are intended to refinance or repay existing debt, which MedcoEnergi said would support a balanced debt maturity profile.",
+        "tickers": [
+          "MEDC.JK"
+        ],
+        "supporting_news_ids": [
+          32401,
+          32399
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_13",
+        "slot": "story",
+        "event": "GOTO buyback and cancellation of treasury shares",
+        "headline": "GOTO shareholders approve cancellation of around 32 billion treasury shares",
+        "blurb": "GoTo had spent Rp985 billion to repurchase 36 billion shares by 29 October, with roughly Rp2.5 trillion remaining under its authorization through June 2027. Shareholders approved removing shares equal to about 2.7% of total shares outstanding from issuance on 14 October, raising existing investors’ ownership percentages and preventing the shares from returning to the market.",
+        "tickers": [
+          "GOTO.JK"
+        ],
+        "supporting_news_ids": [
+          32348,
+          32355,
+          32311
         ],
         "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_14",
+        "slot": "story",
+        "event": "KB Bank postpones its planned US dollar global bond issuance",
+        "headline": "BBKP postpones planned US$300 million global bond issuance",
+        "blurb": "KB Bank cited global and domestic market conditions affecting funding costs and terms, and reported a Q3 2026 net loss of Rp184.17 billion and a gross NPL ratio of 10.26% in September. Its US$300 million notes issued in October 2024 mature on 30 October 2027, with shareholder support and domestic issuance among the alternatives.",
+        "tickers": [
+          "BBKP.JK"
+        ],
+        "supporting_news_ids": [
+          32366,
+          32318
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_15",
+        "slot": "story",
+        "event": "BRIS shareholders approve a second rights issue",
+        "headline": "BRIS shareholders approve second rights issue of up to 6.8 billion shares",
+        "blurb": "Bank Syariah Indonesia's public shareholding is around 9.9%. The bank says the offering aims to strengthen capital, increase public ownership and expand financing capacity as projected capital needs rise to Rp64.41 trillion in 2027 from Rp51.07 trillion in 2026.",
+        "tickers": [
+          "BRIS.JK"
+        ],
+        "supporting_news_ids": [
+          32363,
+          32367,
+          32357
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      }
+    ],
+    "other": [
+      {
+        "id": "cur_16",
+        "slot": "story",
+        "event": "RANS shares fall amid controversy over its Yogyakarta carnival",
+        "headline": "RANS shares fall 51.1% amid controversy over Yogyakarta carnival",
+        "blurb": "Rans Entertainment said several performers withdrew from the 31 October to 1 November event, but denied instructing, initiating or funding alleged Rp50,000 payments to mobilize residents. It said the controversy has no material impact on operations or finances and is still evaluating the event’s revenue and costs.",
+        "tickers": [
+          "RANS.JK"
+        ],
+        "supporting_news_ids": [
+          32402
+        ],
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_12",
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "DOOH's proposed corporate actions include an INET stake acquisition and rights issue",
+      "headline": "Era Media Sejahtera (DOOH) acquires 29.88% of INET for Rp2 trillion and plans a rights issue of up to 154.77 billion shares",
+      "blurb": null,
+      "tickers": [
+        "DOOH.JK",
+        "INET.JK"
+      ],
+      "supporting_news_ids": [
+        32392,
+        32362,
+        32334,
+        32326
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: DOOH shareholders who do not exercise their rights could face dilution of up to 95.24%."
+    },
+    {
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "Analyst raises AMMN's projected 2026 profit estimate",
+      "headline": "PT Amman Mineral Internasional Tbk (AMMN) Projected to Post Large 2026 Profit, with Share Price Upside of 95%",
+      "blurb": null,
+      "tickers": [
+        "AMMN.JK"
+      ],
+      "supporting_news_ids": [
+        32397
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "Bank Permata reports lower Q3 net profit",
+      "headline": "BNLI reports nine-month net profit down 10.9% to Rp2.57 trillion",
+      "blurb": null,
+      "tickers": [
+        "BNLI.JK"
+      ],
+      "supporting_news_ids": [
+        32343
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "Palm oil issuers report nine-month profit growth and analyst recommendations",
+      "headline": "Palm Oil Issuers' Net Profit Jumps 35.7%, PT Triputra Agro Persada Tbk (TAPG) Becomes CGS International's Top Pick",
+      "blurb": null,
+      "tickers": [
+        "TAPG.JK",
+        "AALI.JK",
+        "DSNG.JK"
+      ],
+      "supporting_news_ids": [
+        32340
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "PTBA reports a sharp increase in nine-month net profit",
+      "headline": "PTBA reports nine-month net profit up 216.4% to Rp4.41 trillion",
+      "blurb": null,
+      "tickers": [
+        "PTBA.JK"
+      ],
+      "supporting_news_ids": [
+        32354
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "MTEL reports limited profit growth and receives a lower analyst target price",
+      "headline": "Rising Operational Costs Pressure Profitability of PT Dayamitra Telekomunikasi Tbk (MTEL) Amid Open Tower Business Prospects",
+      "blurb": null,
+      "tickers": [
+        "MTEL.JK"
+      ],
+      "supporting_news_ids": [
+        32405
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "Krom Bank reports nine-month profit growth",
+      "headline": "PT Krom Bank Indonesia Tbk (BBSI) Posts Rp 157.91 Billion Net Profit, Up 25% YoY",
+      "blurb": null,
+      "tickers": [
+        "BBSI.JK"
+      ],
+      "supporting_news_ids": [
+        32400
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_24",
+      "slot": "flash",
+      "event": "HRTA reports sales growth amid weak jewelry demand",
+      "headline": "Analysts Recommend PT Hartadinata Abadi Tbk (HRTA) Rely on Gold Bullion and Exports Amid Weak Jewelry Demand",
+      "blurb": null,
+      "tickers": [
+        "HRTA.JK"
+      ],
+      "supporting_news_ids": [
+        32305
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_25",
+      "slot": "flash",
+      "event": "ACES reports nine-month results and lags its 2026 store-expansion target",
+      "headline": "ACES reports 9M26 profit up 25.7% as store openings trail target",
+      "blurb": null,
+      "tickers": [
+        "ACES.JK"
+      ],
+      "supporting_news_ids": [
+        32304
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_26",
       "slot": "flash",
       "event": "GMFI reports Q3 revenue growth and improved financial structure",
       "headline": "PT Garuda Maintenance Facility Aero Asia Tbk (GMFI) Posts 34.6% Revenue Growth in Q3 2026",
@@ -195,7 +407,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_13",
+      "id": "cur_27",
       "slot": "flash",
       "event": "MTDL reports nine-month 2026 sales and profit",
       "headline": "PT Metrodata Electronics Tbk (MTDL) Posts Rp22.1 Trillion in Sales for Nine Months of 2026",
@@ -209,7 +421,24 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_28",
+      "slot": "flash",
+      "event": "Total Bangun Persada plans an interim dividend",
+      "headline": "Total Bangun Persada (TOTL) plans a Rp136.4 billion interim dividend for 2026",
+      "blurb": null,
+      "tickers": [
+        "TOTL.JK"
+      ],
+      "supporting_news_ids": [
+        32391,
+        32356,
+        32351,
+        32361
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: TOTL's fiscal 2026 distribution is its first interim dividend for the year."
+    },
+    {
+      "id": "cur_29",
       "slot": "flash",
       "event": "GJTL reports third-quarter sales and profit growth",
       "headline": "PT Gajah Tunggal Tbk (GJTL) Posts 9.15% Sales Growth in Q3 2026 as Lo Kheng Hong Retains 7.05% Stake",
@@ -220,10 +449,38 @@
       "supporting_news_ids": [
         32360
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_30",
+      "slot": "flash",
+      "event": "Blue Bird reports lower nine-month profit despite revenue growth",
+      "headline": "PT Blue Bird Tbk (BIRD) Posts Slight Net Profit Decline in Q3-2026 Despite Revenue Growth",
+      "blurb": null,
+      "tickers": [
+        "BIRD.JK"
+      ],
+      "supporting_news_ids": [
+        32409
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_15",
+      "id": "cur_31",
+      "slot": "flash",
+      "event": "Oona Insurance reports nine-month profit growth",
+      "headline": "Oona Insurance (ABDA) Posts 80% Net Profit Surge in 9M26",
+      "blurb": null,
+      "tickers": [
+        "ABDA.JK"
+      ],
+      "supporting_news_ids": [
+        32398
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_32",
       "slot": "flash",
       "event": "LPKR reports nine-month profit and housing presales",
       "headline": "PT Lippo Karawaci Tbk (LPKR) Posts Rp 1.24 Trillion Net Profit for First Nine Months of 2026",
@@ -237,21 +494,47 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
+      "id": "cur_33",
       "slot": "flash",
-      "event": "DADA reports a sharp Q3 2026 profit increase",
-      "headline": "DADA reports Q3 net profit up 863.76% to Rp8.24 billion",
+      "event": "Takjub Finansial Teknologi sells a 9% stake in BNBA",
+      "headline": "Takjub Finansial sells 9% stake in BNBA",
       "blurb": null,
       "tickers": [
-        "DADA.JK"
+        "BNBA.JK"
       ],
       "supporting_news_ids": [
-        32327
+        32319
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_34",
+      "slot": "flash",
+      "event": "ANDA launches its IPO to fund operations and repay bank debt",
+      "headline": "Andalan Artha Primanusa launches IPO targeting Rp316.76 billion",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32308
       ],
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_17",
+      "id": "cur_35",
+      "slot": "flash",
+      "event": "Bank Mandiri and BNI report results shaped by subsidiary performance",
+      "headline": "Subsidiaries Play Key Role in Shaping Performance of Major Banks Bank Mandiri and BNI",
+      "blurb": null,
+      "tickers": [
+        "BMRI.JK"
+      ],
+      "supporting_news_ids": [
+        32317
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_36",
       "slot": "flash",
       "event": "OJK outlines potential criminal escalation for serious or repeated stock manipulation",
       "headline": "OJK May Escalate Stock Manipulation Cases to Criminal Investigation for Serious or Repeated Violations",
@@ -267,53 +550,80 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
+      "id": "cur_37",
       "slot": "flash",
-      "event": "BRIS shareholders approve Rights Issue II",
-      "headline": "Bank Syariah Indonesia (BRIS) shareholders approve an issue of up to 6.8 billion Series B shares",
+      "event": "TPIA targets a 2027 start-up for its CA-EDC facility",
+      "headline": "PT Chandra Asri Pacific Tbk (TPIA) Prepares Business Expansion, Targets Growth in 2027",
       "blurb": null,
       "tickers": [
-        "BRIS.JK"
+        "TPIA.JK"
       ],
       "supporting_news_ids": [
-        32363,
-        32367,
-        32357
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_19",
-      "slot": "flash",
-      "event": "BRMS president director accumulates company shares",
-      "headline": "BRMS Director Agoes Projosasmito Accumulates PT Bumi Resources Minerals Tbk (BRMS) Shares Amid Foreign Selling Pressure",
-      "blurb": null,
-      "tickers": [
-        "BRMS.JK"
-      ],
-      "supporting_news_ids": [
-        32352
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_20",
-      "slot": "flash",
-      "event": "ULTJ plans a rights issue to acquire PT Frisian Flag Indonesia",
-      "headline": "Ultrajaya (ULTJ.JK) plans a rights issue to raise up to Rp16.94 trillion for the FFI acquisition",
-      "blurb": null,
-      "tickers": [
-        "ULTJ.JK"
-      ],
-      "supporting_news_ids": [
-        32301,
-        32309,
-        32300
+        32347
       ],
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_21",
+      "id": "cur_38",
+      "slot": "flash",
+      "event": "Foreign broker activity and MSCI review estimates for BRPT and BRMS",
+      "headline": "Foreign Brokers Diverge on PT Barito Pacific Tbk (BRPT) and PT Bumi Resources Minerals Tbk (BRMS) Ahead of MSCI Review",
+      "blurb": null,
+      "tickers": [
+        "BRPT.JK",
+        "BRMS.JK"
+      ],
+      "supporting_news_ids": [
+        32335
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_39",
+      "slot": "flash",
+      "event": "PGEO reports profit growth and geothermal expansion plans",
+      "headline": "Analyst Maintains Positive Outlook on PT Pertamina Geothermal Energy Tbk (PGEO) on Profit Growth and Geothermal Expansion Plans",
+      "blurb": null,
+      "tickers": [
+        "PGEO.JK"
+      ],
+      "supporting_news_ids": [
+        32297
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_40",
+      "slot": "flash",
+      "event": "Analysts assess Q3 profit growth at Pertamina Group issuers",
+      "headline": "Equity Analysts Maintain Positive Outlook on Profit Growth for Pertamina Group Issuers PGAS, ELSA, and PGEO",
+      "blurb": null,
+      "tickers": [
+        "PGAS.JK",
+        "ELSA.JK",
+        "PGEO.JK"
+      ],
+      "supporting_news_ids": [
+        32403
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_41",
+      "slot": "flash",
+      "event": "PTRO controlling shareholder buys company shares",
+      "headline": "PT Kreasi Jasa Persada Buys 11.57 Million PT Petrosea Tbk (PTRO) Shares Worth Rp25 Billion as Stock Hits Auto Rejection Bottom",
+      "blurb": null,
+      "tickers": [
+        "PTRO.JK"
+      ],
+      "supporting_news_ids": [
+        32408
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_42",
       "slot": "flash",
       "event": "SMAR approves a Rp1.407 trillion interim dividend",
       "headline": "PT Sinar Mas Agro Resources and Technology Tbk (SMAR) to Distribute Rp1.407 Trillion Interim Dividend for Fiscal Year 2026",
@@ -327,23 +637,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_22",
-      "slot": "flash",
-      "event": "TOTL announces its fiscal 2026 interim dividend",
-      "headline": "Total Bangun Persada (TOTL) plans to distribute an interim dividend of Rp136.4 billion",
-      "blurb": null,
-      "tickers": [
-        "TOTL.JK"
-      ],
-      "supporting_news_ids": [
-        32356,
-        32351,
-        32361
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_23",
+      "id": "cur_43",
       "slot": "flash",
       "event": "META sets an interim dividend of Rp3.5 per share",
       "headline": "Nusantara Infrastructure (META) Sets Interim Dividend of Rp3.5 Per Share, Cum Date November 11",
@@ -357,7 +651,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_24",
+      "id": "cur_44",
       "slot": "flash",
       "event": "MARK sets its second interim dividend for fiscal 2026",
       "headline": "PT Mark Dynamics Indonesia Tbk (MARK) Announces Second Interim Dividend of Rp 76 Billion with Potential Yield of 2.02%",
@@ -371,7 +665,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_25",
+      "id": "cur_45",
       "slot": "flash",
       "event": "PORT announces its fiscal 2026 interim dividend",
       "headline": "Nusantara Pelabuhan Handal (PORT) to distribute Rp100,250,350,000 interim dividend",
@@ -383,10 +677,10 @@
         32349,
         32359
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_26",
+      "id": "cur_46",
       "slot": "flash",
       "event": "PSSI approves a 1:1 stock bonus distribution",
       "headline": "PT IMC Pelita Logistik Tbk (PSSI) to Distribute Rp 17.2 Billion Stock Bonus, Schedule Announced",
@@ -400,7 +694,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_27",
+      "id": "cur_47",
       "slot": "flash",
       "event": "NFCX plans a share buyback of up to 49 million shares",
       "headline": "PT NFC Indonesia Tbk (NFCX) plans to buy back up to 49 million shares",
@@ -412,10 +706,10 @@
         32358,
         32350
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_28",
+      "id": "cur_48",
       "slot": "flash",
       "event": "OJK urges MNC Bank to resolve customer withdrawal problems",
       "headline": "OJK urges BABP to resolve withdrawal issues, says Rp6 trillion is not a minimum",
@@ -429,7 +723,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_29",
+      "id": "cur_49",
+      "slot": "flash",
+      "event": "AMOR shareholders approve a dividend and transfer of buyback shares",
+      "headline": "PT Ashmore Asset Management Indonesia Tbk (AMOR) Approves Final Dividend of Rp23 Per Share and Share Buyback Plan",
+      "blurb": null,
+      "tickers": [
+        "AMOR.JK"
+      ],
+      "supporting_news_ids": [
+        32407
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_50",
       "slot": "flash",
       "event": "Tokyu Construction agrees to acquire a 25% stake in DGIK",
       "headline": "Tokyu Construction to Acquire 25% Stake in PT Nusa Konstruksi Enjiniring Tbk (DGIK)",
@@ -443,13 +751,15 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_30",
+      "id": "cur_51",
       "slot": "flash",
-      "event": "MSCI reclassification consultation drives Indonesian market outflows and prompts exchange response",
-      "headline": "MSCI consultation puts $8-11 billion in foreign funds at risk",
+      "event": "MSCI reclassification consultation and its effects on Indonesia's stock market",
+      "headline": "Indonesia's stock market fell 16.7% in October as foreign investors recorded Rp 16.88 trillion in net sales",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
+        32395,
+        32364,
         32344,
         32328,
         32329,
@@ -457,10 +767,10 @@
         32298,
         32314
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "rewritten: 2 new articles with a new fact: IHSG fell 16.7% in October as foreign investors recorded Rp16.88 trillion in net sales."
     },
     {
-      "id": "cur_31",
+      "id": "cur_52",
       "slot": "flash",
       "event": "Brent and WTI rise amid renewed Middle East supply concerns",
       "headline": "Brent crude rebounded above US$98 per barrel as Middle East supply concerns returned",
@@ -473,19 +783,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_32",
-      "slot": "flash",
-      "event": "ANDA launches its IPO to fund operations and repay bank debt",
-      "headline": "Andalan Artha Primanusa launches IPO targeting Rp316.76 billion",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        32308
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
-      "id": "cur_33",
+      "id": "cur_53",
       "slot": "flash",
       "event": "Indonesia's mining-enforcement plans lift global nickel prices",
       "headline": "Global Nickel Prices Jump 3.8% as Indonesia Cracks Down on Mining Violations",
@@ -497,49 +795,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_34",
-      "slot": "flash",
-      "event": "TPIA targets a 2027 start-up for its CA-EDC facility",
-      "headline": "PT Chandra Asri Pacific Tbk (TPIA) Prepares Business Expansion, Targets Growth in 2027",
-      "blurb": null,
-      "tickers": [
-        "TPIA.JK"
-      ],
-      "supporting_news_ids": [
-        32347
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_35",
-      "slot": "flash",
-      "event": "PGAS retains positions in Indeks52 at MAE 2026",
-      "headline": "PGAS Retains Position in Indeks52 on Reliable Gas Supply and High Dividend Payout",
-      "blurb": null,
-      "tickers": [
-        "PGAS.JK"
-      ],
-      "supporting_news_ids": [
-        32293
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_36",
-      "slot": "flash",
-      "event": "ERAA added to the Indeks52 Main Index category",
-      "headline": "PT Erajaya Swasembada Tbk (ERAA) Joins Tempo-IDNFinancials 52 Index Main Category on Solid Earnings and 16% Share Gain",
-      "blurb": null,
-      "tickers": [
-        "ERAA.JK"
-      ],
-      "supporting_news_ids": [
-        32294
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_37",
+      "id": "cur_54",
       "slot": "flash",
       "event": "Asian markets and currencies fall amid an AI-driven technology selloff",
       "headline": "Asian Markets Plunge and Currencies Weaken as AI-Driven Tech Selloff Spreads from Wall Street",
@@ -548,76 +804,18 @@
       "supporting_news_ids": [
         32337
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-09",
-      "timing_label": "9 Nov",
-      "title": "DOOH shareholders vote on INET acquisition and related corporate actions",
-      "tickers": [
-        "DOOH.JK",
-        "INET.JK"
-      ],
-      "supporting_news_ids": [
-        32362,
-        32334,
-        32326
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-11-12",
-      "timing_label": "12 Nov",
-      "title": "SMAR cum-dividend (regular market) for its Rp490 interim dividend",
-      "tickers": [
-        "SMAR.JK"
-      ],
-      "supporting_news_ids": [
-        32310
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2026-11-12",
-      "timing_label": "12 Nov",
-      "title": "BRMS MSCI review results due; a Small Cap downgrade is possible",
-      "tickers": [
-        "BRMS.JK"
-      ],
-      "supporting_news_ids": [
-        32352
-      ]
-    },
-    {
-      "id": "wtw_04",
-      "sort_date": "2026-11-16",
-      "timing_label": "16 Nov",
-      "title": "TOTL cum-dividend (regular market) for its Rp40 interim dividend",
-      "tickers": [
-        "TOTL.JK"
-      ],
-      "supporting_news_ids": [
-        32356,
-        32351,
-        32361
-      ]
-    },
-    {
-      "id": "wtw_05",
-      "sort_date": "2027-06-30",
-      "timing_label": "Jun 2027",
-      "title": "MSCI decides Indonesia's market classification",
+      "sort_date": "2026-12-15",
+      "timing_label": "15 Dec",
+      "title": "Government begins single-door export pilot for coal, palm oil and iron alloy",
       "tickers": [],
       "supporting_news_ids": [
-        32344,
-        32328,
-        32329,
-        32312,
-        32298,
-        32314
+        32393
       ]
     }
   ]
