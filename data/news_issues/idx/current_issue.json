@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-07",
   "window_start": "2026-11-06T13:50:00Z",
-  "window_end": "2026-11-07T05:56:19Z",
+  "window_end": "2026-11-07T09:56:12Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -18,40 +18,34 @@
     "copy_decision": "kept: same articles"
   },
   "sections": {
-    "deals_control": [
+    "capital_raising_buybacks": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "A new shareholder emerges with a 2% stake in Bayan Resources",
-        "headline": "New shareholder emerges with 2% stake in BYAN",
-        "blurb": "KSEI data recorded Pelayaran Samudera Lamappepening as a new Bayan Resources shareholder with 666.67 million shares at end-October. That stake matches the combined shares Low Tuck Kwong and Elaine Low sold on 15 October at Rp2,588 per share; KSEI data as of 30 October also shows Jhonlin Baratama holding 30.25%.",
+        "event": "INDF, ICBP, and LSIP allocate Rp2.25 trillion for share buybacks",
+        "headline": "INDF, ICBP and LSIP allocate Rp2.25 trillion for share buybacks",
+        "blurb": "Indofood, Indofood CBP and London Sumatra each set a maximum budget of Rp750 billion, about 1% of paid-up capital, to dampen share-price volatility. London Sumatra's buyback is scheduled to run from 26 October to 31 December, while the other two will use adaptive timeframes following exchange clarification requests in early November.",
         "tickers": [
-          "BYAN.JK"
+          "INDF.JK",
+          "ICBP.JK",
+          "LSIP.JK"
         ],
         "supporting_news_ids": [
-          32420
+          32427
         ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "market_structure_policy": [
+        "copy_decision": "new story"
+      },
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "OJK imposes administrative sanctions on seven listed issuers",
-        "headline": "OJK sanctions seven listed issuers, including two Rp1.35 billion ASLI fines",
-        "blurb": "Asri Karya Lestari received two Rp1.35 billion fines over unreliable material-asset disclosures in its interim 2024, annual 2024 and interim 2025 statements. Adhi Karya and Adhi Commuter Properti each received Rp450 million fines over affiliate-transaction procedures, while other issuers faced fines or a written warning. OJK announced the sanctions on 6 November.",
+        "event": "MEDC subsidiary issues USD300 million bonds due 2032",
+        "headline": "MEDC subsidiary issues USD300 million bonds due 2032",
+        "blurb": "Medco subsidiary Medco Redwood Tree’s notes carry an 8.875% coupon and were rated BB- by Fitch and S&P Global and Ba3 by Moody’s. Net proceeds will refinance or repay existing debt.",
         "tickers": [
-          "ASLI.JK",
-          "ADHI.JK",
-          "ADCP.JK",
-          "WMUU.JK",
-          "KLBF.JK",
-          "EPMT.JK",
-          "LMAS.JK"
+          "MEDC.JK"
         ],
         "supporting_news_ids": [
-          32421
+          32415
         ],
         "copy_decision": "rewritten: moved from flash to story"
       }
@@ -61,16 +55,17 @@
         "id": "cur_04",
         "slot": "story",
         "event": "Bank Mandiri reports Rp46.5 trillion net profit through October 2026",
-        "headline": "BMRI reports Rp46.5 trillion net profit through October",
-        "blurb": "Recurring fee-based income rose 19.8% year on year to Rp17.2 trillion. Loans grew 16.5% to Rp1,635 trillion, while gross non-performing loans fell to 0.97% from 1.02%.",
+        "headline": "BMRI reports Rp46.5 trillion net profit through October, up 19.6% year on year",
+        "blurb": "Bank Mandiri attributed the increase to credit expansion and higher transaction-based income. Loans grew 16.5% year on year to Rp1,635 trillion, while gross non-performing loans fell to 0.97% from 1.02%.",
         "tickers": [
           "BMRI.JK"
         ],
         "supporting_news_ids": [
+          32431,
           32422,
           32416
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: Recurring fee-based income increased 19.8% year on year to Rp17.2 trillion."
+        "copy_decision": "rewritten: 1 new articles with a new fact: Bank Mandiri's bank-only net profit through October rose 19.6% year on year."
       },
       {
         "id": "cur_05",
@@ -84,7 +79,7 @@
         "supporting_news_ids": [
           32423
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_06",
@@ -115,11 +110,28 @@
         ],
         "copy_decision": "kept: same articles"
       }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "CSIS terminates its planned acquisition of KDTN",
+        "headline": "CSIS ends planned KDTN acquisition as shares fall 6.30%",
+        "blurb": "Cahayasakti Investindo Sukses, Putrasakti Mandiri and Intan Perdana Sukses agreed with prospective buyer Ruby Mining to terminate the conditional sale agreement on 5 November, ending a deal signed on 22 April. KDTN closed at Rp238 on 6 November, down 6.30%, with a 186,491-lot sell queue below that price.",
+        "tickers": [
+          "KDTN.JK",
+          "CSIS.JK"
+        ],
+        "supporting_news_ids": [
+          32428
+        ],
+        "copy_decision": "new story"
+      }
     ]
   },
   "flash": [
     {
-      "id": "cur_08",
+      "id": "cur_09",
       "slot": "flash",
       "event": "Electronic City Indonesia reports nine-month 2026 results",
       "headline": "PT Electronic City Indonesia Tbk Reports Rp 1.65 Trillion Revenue While Posting Rp 39.99 Billion Net Loss in 2026",
@@ -130,24 +142,72 @@
       "supporting_news_ids": [
         32424
       ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_09",
-      "slot": "flash",
-      "event": "Medco subsidiary issues USD300 million bonds due 2032",
-      "headline": "Medco Redwood Tree Limited, Subsidiary of PT Medco Energi Internasional Tbk (MEDC), Issues USD300 Million Bonds Due 2032",
-      "blurb": null,
-      "tickers": [
-        "MEDC.JK"
-      ],
-      "supporting_news_ids": [
-        32415
-      ],
       "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_10",
+      "slot": "flash",
+      "event": "A new shareholder emerges with a 2% stake in Bayan Resources",
+      "headline": "New shareholder emerges with 2% stake in BYAN",
+      "blurb": null,
+      "tickers": [
+        "BYAN.JK"
+      ],
+      "supporting_news_ids": [
+        32420
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "BRMS CEO Agoes Projosasmito buys company shares",
+      "headline": "Bumi Resources Minerals CEO Agoes Projosasmito Intensifies BRMS Share Buying as Net Profit Falls 36.86%",
+      "blurb": null,
+      "tickers": [
+        "BRMS.JK"
+      ],
+      "supporting_news_ids": [
+        32430
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "OJK imposes administrative sanctions on seven listed issuers",
+      "headline": "OJK sanctions seven listed issuers, including two Rp1.35 billion ASLI fines",
+      "blurb": null,
+      "tickers": [
+        "ASLI.JK",
+        "ADHI.JK",
+        "ADCP.JK",
+        "WMUU.JK",
+        "KLBF.JK",
+        "EPMT.JK",
+        "LMAS.JK"
+      ],
+      "supporting_news_ids": [
+        32421
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "ACES reports lagging capex and possible store expansion deferral",
+      "headline": "PT Aspirasi Hidup Indonesia Tbk (ACES) May Shift Store Expansion to Next Year as Capex Realization Lags Budget",
+      "blurb": null,
+      "tickers": [
+        "ACES.JK"
+      ],
+      "supporting_news_ids": [
+        32429
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_14",
       "slot": "flash",
       "event": "Nusantara Infrastructure announces an interim dividend",
       "headline": "PT Nusantara Infrastructure Tbk (META) to Distribute Rp 60.64 Billion Interim Dividend",
@@ -161,7 +221,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_15",
       "slot": "flash",
       "event": "Ashmore Asset Indonesia announces a Rp50.45 billion final dividend",
       "headline": "Ashmore Asset Indonesia (AMOR) Announces Final Dividend of Rp50.45 Billion and Provides Full Distribution Schedule",
@@ -172,10 +232,10 @@
       "supporting_news_ids": [
         32426
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_16",
       "slot": "flash",
       "event": "BSI shareholders approve a rights issue of up to 6.8 billion shares",
       "headline": "PT Bank Syariah Indonesia (Persero) Tbk (BSI) shareholders approve rights issue of up to 6.8 billion Series B shares",
@@ -187,18 +247,5 @@
       "copy_decision": "kept: same articles"
     }
   ],
-  "what_to_watch": [
-    {
-      "id": "wtw_01",
-      "sort_date": "2026-11-12",
-      "timing_label": "12 Nov",
-      "title": "AMOR cum-dividend (regular market) for its Rp23 final dividend",
-      "tickers": [
-        "AMOR.JK"
-      ],
-      "supporting_news_ids": [
-        32426
-      ]
-    }
-  ]
+  "what_to_watch": []
 }
