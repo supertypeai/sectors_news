@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-07",
   "window_start": "2026-11-06T13:50:00Z",
-  "window_end": "2026-11-07T01:45:59Z",
+  "window_end": "2026-11-07T05:56:19Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -15,7 +15,7 @@
     "supporting_news_ids": [
       32412
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
     "deals_control": [
@@ -31,26 +31,63 @@
         "supporting_news_ids": [
           32420
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "market_structure_policy": [
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "OJK imposes administrative sanctions on seven listed issuers",
+        "headline": "OJK sanctions seven listed issuers, including two Rp1.35 billion ASLI fines",
+        "blurb": "Asri Karya Lestari received two Rp1.35 billion fines over unreliable material-asset disclosures in its interim 2024, annual 2024 and interim 2025 statements. Adhi Karya and Adhi Commuter Properti each received Rp450 million fines over affiliate-transaction procedures, while other issuers faced fines or a written warning. OJK announced the sanctions on 6 November.",
+        "tickers": [
+          "ASLI.JK",
+          "ADHI.JK",
+          "ADCP.JK",
+          "WMUU.JK",
+          "KLBF.JK",
+          "EPMT.JK",
+          "LMAS.JK"
+        ],
+        "supporting_news_ids": [
+          32421
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_03",
+        "id": "cur_04",
         "slot": "story",
-        "event": "Bank Mandiri reports profit through October 2026",
-        "headline": "BMRI reports Rp46.5 trillion net profit through October, up 19.6%",
-        "blurb": "Bank Mandiri’s bank-only profit was supported by 16.5% loan growth to Rp1,635 trillion and higher transaction-based income. Gross NPL fell to 0.97% from 1.02%, while third-party funds rose 15.1% to Rp1,762 trillion.",
+        "event": "Bank Mandiri reports Rp46.5 trillion net profit through October 2026",
+        "headline": "BMRI reports Rp46.5 trillion net profit through October",
+        "blurb": "Recurring fee-based income rose 19.8% year on year to Rp17.2 trillion. Loans grew 16.5% to Rp1,635 trillion, while gross non-performing loans fell to 0.97% from 1.02%.",
         "tickers": [
           "BMRI.JK"
         ],
         "supporting_news_ids": [
+          32422,
           32416
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: Recurring fee-based income increased 19.8% year on year to Rp17.2 trillion."
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Mirae Asset Sekuritas cuts Dayamitra Telekomunikasi’s price target by 12%",
+        "headline": "Mirae cuts MTEL price target by 12%",
+        "blurb": "Dayamitra Telekomunikasi reported Q3 2026 core profit of Rp468 billion, down 14.2% quarter-on-quarter and equal to 69.3% of Mirae’s projection. Mirae attributed the shortfall primarily to general and administrative costs rising 22.8% year-on-year.",
+        "tickers": [
+          "MTEL.JK"
+        ],
+        "supporting_news_ids": [
+          32423
         ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_04",
+        "id": "cur_06",
         "slot": "story",
         "event": "Krom Bank reports nine-month 2026 earnings growth",
         "headline": "BBSI reports nine-month profit up 25% to Rp157.91 billion",
@@ -62,10 +99,10 @@
           32410,
           32411
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_05",
+        "id": "cur_07",
         "slot": "story",
         "event": "Tugu Insurance reports nine-month 2026 profit growth",
         "headline": "TUGU reports 17.4% nine-month 2026 profit growth",
@@ -76,33 +113,27 @@
         "supporting_news_ids": [
           32417
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_06",
+      "id": "cur_08",
       "slot": "flash",
-      "event": "OJK imposes administrative sanctions on seven issuers",
-      "headline": "OJK Imposes Administrative Sanctions on Seven Issuers Including PT Asri Karya Lestari Tbk (ASLI) and PT Adhi Karya Tbk (ADHI)",
+      "event": "Electronic City Indonesia reports nine-month 2026 results",
+      "headline": "PT Electronic City Indonesia Tbk Reports Rp 1.65 Trillion Revenue While Posting Rp 39.99 Billion Net Loss in 2026",
       "blurb": null,
       "tickers": [
-        "ASLI.JK",
-        "ADHI.JK",
-        "ADCP.JK",
-        "WMUU.JK",
-        "KLBF.JK",
-        "EPMT.JK",
-        "LMAS.JK"
+        "ECII.JK"
       ],
       "supporting_news_ids": [
-        32421
+        32424
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_07",
+      "id": "cur_09",
       "slot": "flash",
       "event": "Medco subsidiary issues USD300 million bonds due 2032",
       "headline": "Medco Redwood Tree Limited, Subsidiary of PT Medco Energi Internasional Tbk (MEDC), Issues USD300 Million Bonds Due 2032",
@@ -113,10 +144,10 @@
       "supporting_news_ids": [
         32415
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_08",
+      "id": "cur_10",
       "slot": "flash",
       "event": "Nusantara Infrastructure announces an interim dividend",
       "headline": "PT Nusantara Infrastructure Tbk (META) to Distribute Rp 60.64 Billion Interim Dividend",
@@ -127,10 +158,24 @@
       "supporting_news_ids": [
         32414
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Ashmore Asset Indonesia announces a Rp50.45 billion final dividend",
+      "headline": "Ashmore Asset Indonesia (AMOR) Announces Final Dividend of Rp50.45 Billion and Provides Full Distribution Schedule",
+      "blurb": null,
+      "tickers": [
+        "AMOR.JK"
+      ],
+      "supporting_news_ids": [
+        32426
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_09",
+      "id": "cur_12",
       "slot": "flash",
       "event": "BSI shareholders approve a rights issue of up to 6.8 billion shares",
       "headline": "PT Bank Syariah Indonesia (Persero) Tbk (BSI) shareholders approve rights issue of up to 6.8 billion Series B shares",
@@ -139,8 +184,21 @@
       "supporting_news_ids": [
         32413
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
-  "what_to_watch": []
+  "what_to_watch": [
+    {
+      "id": "wtw_01",
+      "sort_date": "2026-11-12",
+      "timing_label": "12 Nov",
+      "title": "AMOR cum-dividend (regular market) for its Rp23 final dividend",
+      "tickers": [
+        "AMOR.JK"
+      ],
+      "supporting_news_ids": [
+        32426
+      ]
+    }
+  ]
 }
