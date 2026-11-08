@@ -1,28 +1,45 @@
 {
   "issue_date": "2026-11-08",
   "window_start": "2026-11-07T13:50:00Z",
-  "window_end": "2026-11-08T09:56:08Z",
+  "window_end": "2026-11-08T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Haji Isam acquires Low Tuck Kwong’s 30.25% BYAN stake",
-    "headline": "Haji Isam completes acquisition of 30.25% BYAN stake",
-    "blurb": "Jhonlin Baratama bought 10.08 billion Bayan Resources shares from Dato' Low Tuck Kwong and Elaine Low at Rp2,588 per share. Agreed on 16 September, the sale was completed on 7 October for approximately Rp26.1 trillion. Low said it was a pure business negotiation and that no party pressured him.",
+    "event": "Haji Isam’s Jhonlin Baratama agrees to acquire 30.25% of BYAN",
+    "headline": "Jhonlin Baratama completes Rp26.1 trillion acquisition of 30.25% of BYAN",
+    "blurb": "Owned by Haji Isam, Jhonlin Baratama acquired the stake from Dato' Low Tuck Kwong and Elaine Low at Rp2,588 per share, with completion reported on 7 October. Bank Mandiri provided Jhonlin Baratama with a credit facility of up to Rp40 trillion, of which Rp17 trillion had been drawn for business development, including coal-industry capital expenditure. The bank did not explicitly say the facility funded the BYAN acquisition.",
     "tickers": [
-      "BYAN.JK",
       "JARR.JK",
-      "PGUN.JK"
+      "PGUN.JK",
+      "BYAN.JK"
     ],
     "supporting_news_ids": [
+      32462,
       32454,
       32448
     ],
-    "copy_decision": "rewritten: moved from flash to lead"
+    "copy_decision": "rewritten: 1 new articles with a new fact: Bank Mandiri provided Jhonlin Baratama with a credit facility of up to Rp40 trillion, of which Rp17 trillion had been drawn."
   },
   "sections": {
-    "capital_raising_buybacks": [
+    "deals_control": [
       {
         "id": "cur_02",
+        "slot": "story",
+        "event": "AADI completes sale of 48% of Kestrel shares",
+        "headline": "AADI completes sale of 48% of Kestrel shares",
+        "blurb": "The sale through Adaro Capital, in which AADI holds a 90% stake, generated US$814 million before tax and US$734 million after tax. Management plans to allocate the proceeds to a special dividend, business development and loan repayment.",
+        "tickers": [
+          "AADI.JK"
+        ],
+        "supporting_news_ids": [
+          32461
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_03",
         "slot": "story",
         "event": "Medco issues US$300 million bonds through Medco Redwood Tree",
         "headline": "MEDC issues US$300 million bonds through Medco Redwood Tree",
@@ -38,7 +55,7 @@
     ],
     "market_structure_policy": [
       {
-        "id": "cur_03",
+        "id": "cur_04",
         "slot": "story",
         "event": "BEI plans to delist 18 issuers on November 10, 2026",
         "headline": "BEI plans to delist 18 issuers on 10 November",
@@ -66,12 +83,12 @@
         "supporting_news_ids": [
           32447
         ],
-        "copy_decision": "rewritten: moved from lead to story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "other": [
       {
-        "id": "cur_04",
+        "id": "cur_05",
         "slot": "story",
         "event": "IKN signs new investor agreements for housing and private investment projects",
         "headline": "IKN signs housing and private investment agreements worth Rp3.74 trillion",
@@ -87,7 +104,7 @@
     ],
     "earnings_guidance": [
       {
-        "id": "cur_05",
+        "id": "cur_06",
         "slot": "story",
         "event": "Martina Berto returns to profit in the first nine months of 2026",
         "headline": "MBTO returns to profit with Rp19.41 billion nine-month net income",
@@ -98,10 +115,10 @@
         "supporting_news_ids": [
           32457
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_06",
+        "id": "cur_07",
         "slot": "story",
         "event": "Mirae Asset downgrades BRMS and cuts its target price",
         "headline": "Mirae Asset downgrades BRMS to hold and cuts target price 59.2% to Rp 310",
@@ -115,20 +132,6 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "Samuel Sekuritas projects TINS’s 2026 dividend at Rp336 per share",
-        "headline": "Samuel Sekuritas projects TINS 2026 dividend at Rp336 per share",
-        "blurb": "Timah posted nine-month 2026 net profit of Rp4.1 trillion, up 584.1% year on year. Samuel Sekuritas bases its estimate on Rp5 trillion in full-year profit and a 50% payout ratio, implying a 9.2% yield at Rp3,660, versus Rp88 per share for 2025.",
-        "tickers": [
-          "TINS.JK"
-        ],
-        "supporting_news_ids": [
-          32450
-        ],
-        "copy_decision": "rewritten: moved from flash to story"
-      },
-      {
         "id": "cur_08",
         "slot": "story",
         "event": "Indocement reports higher third-quarter 2026 profit",
@@ -140,25 +143,25 @@
         "supporting_news_ids": [
           32453
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "BFIN reports nine-month results and maintains its 2026 dividend payout plan",
+        "headline": "BFIN reports nine-month profit up 12.5%, keeps 2026 dividend payout at up to 70%",
+        "blurb": "BFI Finance's NPF ratio fell 22 basis points to 1.33% at end-Q3, with coverage at 300%. Q3 new financing rose 9% quarter-on-quarter to Rp5.6 trillion, while its cost of funding declined to 6.9% from 7.2% in 2025.",
+        "tickers": [
+          "BFIN.JK"
+        ],
+        "supporting_news_ids": [
+          32441
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ]
   },
   "flash": [
-    {
-      "id": "cur_09",
-      "slot": "flash",
-      "event": "BFI Finance reports nine-month results and maintains its 70% dividend payout plan",
-      "headline": "BFIN reports 12.5% nine-month profit growth, maintains payout plan of up to 70%",
-      "blurb": null,
-      "tickers": [
-        "BFIN.JK"
-      ],
-      "supporting_news_ids": [
-        32441
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
     {
       "id": "cur_10",
       "slot": "flash",
@@ -171,7 +174,7 @@
       "supporting_news_ids": [
         32456
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_11",
@@ -205,7 +208,7 @@
       "supporting_news_ids": [
         32455
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_13",
@@ -224,6 +227,20 @@
     {
       "id": "cur_14",
       "slot": "flash",
+      "event": "BABP faces withdrawal complaints and OJK and IDX scrutiny",
+      "headline": "PT Bank MNC Internasional Tbk (BABP) Faces Customer Fund Withdrawal Difficulties Under OJK and IDX Scrutiny",
+      "blurb": null,
+      "tickers": [
+        "BABP.JK"
+      ],
+      "supporting_news_ids": [
+        32465
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
       "event": "OJK Sanctions Parties over Panorama Sentrawisata Share Manipulation",
       "headline": "OJK Uncovers Stock Manipulation of PT Panorama Sentrawisata Tbk (PANR) Yielding Rp 5.07 Billion in Illicit Gains",
       "blurb": null,
@@ -236,7 +253,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_15",
+      "id": "cur_16",
       "slot": "flash",
       "event": "Indonesia accelerates capital-market reforms after MSCI warning",
       "headline": "Indonesia Accelerates Capital Market Reforms After MSCI Warning, Says Danantara Chief Rosan Roeslani",
@@ -245,61 +262,20 @@
       "supporting_news_ids": [
         32459
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-10",
-      "timing_label": "10 Nov",
-      "title": "BEI delists 18 suspended and bankrupt issuers",
-      "tickers": [
-        "COWL.JK",
-        "DUCK.JK",
-        "ENVY.JK",
-        "GOLL.JK",
-        "LCGP.JK",
-        "LMAS.JK",
-        "MABA.JK",
-        "MTRA.JK",
-        "PLAS.JK",
-        "SBAT.JK",
-        "SKYB.JK",
-        "SRIL.JK",
-        "SUGI.JK",
-        "TDPM.JK",
-        "TELE.JK",
-        "TOYS.JK",
-        "TRIL.JK",
-        "UNIT.JK"
-      ],
-      "supporting_news_ids": [
-        32447
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-11-12",
-      "timing_label": "12 Nov",
-      "title": "BRMS faces potential index demotion in index review",
-      "tickers": [
-        "BRMS.JK"
-      ],
-      "supporting_news_ids": [
-        32438
-      ]
-    },
-    {
-      "id": "wtw_03",
       "sort_date": "2026-11-16",
       "timing_label": "16 Nov",
-      "title": "YUPI cum-dividend (regular market) for its Rp14.83 interim dividend",
+      "title": "PORT cum-dividend (regular market) for its Rp35.6 interim dividend",
       "tickers": [
-        "YUPI.JK"
+        "PORT.JK"
       ],
       "supporting_news_ids": [
-        32455
+        32451
       ]
     }
   ]
