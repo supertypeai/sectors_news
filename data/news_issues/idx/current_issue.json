@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-08",
   "window_start": "2026-11-07T13:50:00Z",
-  "window_end": "2026-11-08T01:46:07Z",
+  "window_end": "2026-11-08T05:56:20Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -31,7 +31,7 @@
     "supporting_news_ids": [
       32447
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
     "capital_raising_buybacks": [
@@ -47,7 +47,7 @@
         "supporting_news_ids": [
           32439
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "other": [
@@ -63,7 +63,7 @@
         "supporting_news_ids": [
           32446
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
@@ -79,7 +79,7 @@
         "supporting_news_ids": [
           32438
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_05",
@@ -93,13 +93,43 @@
         "supporting_news_ids": [
           32441
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
       "id": "cur_06",
+      "slot": "flash",
+      "event": "Nusantara Pelabuhan Handal Plans an Interim Dividend of Rp35.6 per Share",
+      "headline": "PT Nusantara Pelabuhan Handal Tbk (PORT) to Pay Interim Dividend of Rp35.6 per Share, Totaling Rp100.25 Billion",
+      "blurb": null,
+      "tickers": [
+        "PORT.JK"
+      ],
+      "supporting_news_ids": [
+        32451
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_07",
+      "slot": "flash",
+      "event": "OJK Clarifies Haji Isam's JARR and PGUN Share Pledge Is Permitted",
+      "headline": "OJK Says Haji Isam's Share Pledge of JARR and PGUN to Bank Mandiri for BYAN Acquisition Is Permitted",
+      "blurb": null,
+      "tickers": [
+        "JARR.JK",
+        "PGUN.JK",
+        "BYAN.JK"
+      ],
+      "supporting_news_ids": [
+        32448
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_08",
       "slot": "flash",
       "event": "OJK sanctions seven issuers for capital market violations",
       "headline": "OJK Imposes Administrative Sanctions on Seven Issuers, Including PT Asri Karya Lestari Tbk (ASLI) with the Largest Fine of Rp 2.7 Billion",
@@ -116,49 +146,48 @@
       "supporting_news_ids": [
         32440
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Samuel Sekuritas Projects a Rp336 Dividend per Timah Share",
+      "headline": "PT Timah Tbk (TINS) Projected to Pay Rp 336 Dividend Per Share with 9.2% Yield as Net Cash Jumps to Rp 3.4 Trillion",
+      "blurb": null,
+      "tickers": [
+        "TINS.JK"
+      ],
+      "supporting_news_ids": [
+        32450
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "OJK Sanctions Parties over Panorama Sentrawisata Share Manipulation",
+      "headline": "OJK Uncovers Stock Manipulation of PT Panorama Sentrawisata Tbk (PANR) Yielding Rp 5.07 Billion in Illicit Gains",
+      "blurb": null,
+      "tickers": [
+        "PANR.JK"
+      ],
+      "supporting_news_ids": [
+        32452
+      ],
       "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-10",
-      "timing_label": "10 Nov",
-      "title": "IDX delists 18 issuers",
+      "sort_date": "2026-11-16",
+      "timing_label": "16 Nov",
+      "title": "PORT cum-dividend (regular market) for its Rp35.6 interim dividend",
       "tickers": [
-        "COWL.JK",
-        "DUCK.JK",
-        "ENVY.JK",
-        "GOLL.JK",
-        "LCGP.JK",
-        "LMAS.JK",
-        "MABA.JK",
-        "MTRA.JK",
-        "PLAS.JK",
-        "SBAT.JK",
-        "SKYB.JK",
-        "SRIL.JK",
-        "SUGI.JK",
-        "TDPM.JK",
-        "TELE.JK",
-        "TOYS.JK",
-        "TRIL.JK",
-        "UNIT.JK"
+        "PORT.JK"
       ],
       "supporting_news_ids": [
-        32447
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-11-12",
-      "timing_label": "12 Nov",
-      "title": "BRMS faces possible index demotion in review",
-      "tickers": [
-        "BRMS.JK"
-      ],
-      "supporting_news_ids": [
-        32438
+        32451
       ]
     }
   ]
