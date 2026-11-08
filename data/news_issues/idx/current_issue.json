@@ -1,37 +1,23 @@
 {
   "issue_date": "2026-11-08",
   "window_start": "2026-11-07T13:50:00Z",
-  "window_end": "2026-11-08T05:56:20Z",
+  "window_end": "2026-11-08T09:56:08Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "IDX announces delisting of 18 issuers on November 10, 2026",
-    "headline": "IDX will delist 18 issuers on 10 November",
-    "blurb": "The list comprises seven bankrupt companies and 11 issuers suspended for more than 50 months. They were required to conduct buybacks from 11 May to 9 November, but none has done so. Public investors hold 16.43 billion Sugih Energy (SUGI) shares (66.23%) and 11.05 billion Marga Abhinaya Abadi (MABA) shares (71.92%). The delistings are scheduled for 10 November.",
+    "event": "Haji Isam acquires Low Tuck Kwong’s 30.25% BYAN stake",
+    "headline": "Haji Isam completes acquisition of 30.25% BYAN stake",
+    "blurb": "Jhonlin Baratama bought 10.08 billion Bayan Resources shares from Dato' Low Tuck Kwong and Elaine Low at Rp2,588 per share. Agreed on 16 September, the sale was completed on 7 October for approximately Rp26.1 trillion. Low said it was a pure business negotiation and that no party pressured him.",
     "tickers": [
-      "COWL.JK",
-      "MTRA.JK",
-      "SRIL.JK",
-      "TOYS.JK",
-      "SBAT.JK",
-      "TDPM.JK",
-      "TELE.JK",
-      "LCGP.JK",
-      "SUGI.JK",
-      "MABA.JK",
-      "LMAS.JK",
-      "SKYB.JK",
-      "ENVY.JK",
-      "GOLL.JK",
-      "PLAS.JK",
-      "TRIL.JK",
-      "UNIT.JK",
-      "DUCK.JK"
+      "BYAN.JK",
+      "JARR.JK",
+      "PGUN.JK"
     ],
     "supporting_news_ids": [
-      32447
+      32454,
+      32448
     ],
-    "copy_decision": "kept: same articles"
+    "copy_decision": "rewritten: moved from flash to lead"
   },
   "sections": {
     "capital_raising_buybacks": [
@@ -50,9 +36,42 @@
         "copy_decision": "kept: same articles"
       }
     ],
-    "other": [
+    "market_structure_policy": [
       {
         "id": "cur_03",
+        "slot": "story",
+        "event": "BEI plans to delist 18 issuers on November 10, 2026",
+        "headline": "BEI plans to delist 18 issuers on 10 November",
+        "blurb": "The group comprises seven bankrupt firms and 11 issuers suspended for more than 50 months; none completed the required buybacks by 9 November. Public investors hold 8.16 billion Sri Rejeki Isman shares, or 39.89%.",
+        "tickers": [
+          "COWL.JK",
+          "MTRA.JK",
+          "SRIL.JK",
+          "TOYS.JK",
+          "SBAT.JK",
+          "TDPM.JK",
+          "TELE.JK",
+          "LCGP.JK",
+          "SUGI.JK",
+          "MABA.JK",
+          "LMAS.JK",
+          "SKYB.JK",
+          "ENVY.JK",
+          "GOLL.JK",
+          "PLAS.JK",
+          "TRIL.JK",
+          "UNIT.JK",
+          "DUCK.JK"
+        ],
+        "supporting_news_ids": [
+          32447
+        ],
+        "copy_decision": "rewritten: moved from lead to story"
+      }
+    ],
+    "other": [
+      {
+        "id": "cur_04",
         "slot": "story",
         "event": "IKN signs new investor agreements for housing and private investment projects",
         "headline": "IKN signs housing and private investment agreements worth Rp3.74 trillion",
@@ -68,7 +87,21 @@
     ],
     "earnings_guidance": [
       {
-        "id": "cur_04",
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Martina Berto returns to profit in the first nine months of 2026",
+        "headline": "MBTO returns to profit with Rp19.41 billion nine-month net income",
+        "blurb": "Sales rose 29.11% to Rp379.99 billion, while operating profit reached Rp38.08 billion from a Rp3.52 billion loss a year earlier. Martina Berto said founder Martha Tilaar’s death on 14 October had no negative impact on operations, financial condition or business continuity.",
+        "tickers": [
+          "MBTO.JK"
+        ],
+        "supporting_news_ids": [
+          32457
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_06",
         "slot": "story",
         "event": "Mirae Asset downgrades BRMS and cuts its target price",
         "headline": "Mirae Asset downgrades BRMS to hold and cuts target price 59.2% to Rp 310",
@@ -82,54 +115,66 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_05",
+        "id": "cur_07",
         "slot": "story",
-        "event": "BFI Finance reports nine-month results and maintains its 70% dividend payout plan",
-        "headline": "BFIN reports 12.5% nine-month profit growth, maintains payout plan of up to 70%",
-        "blurb": "BFI Finance posted Rp1.3 trillion in net profit after tax for the first nine months of 2026. Its NPF ratio fell 22 basis points to 1.33% at end-Q3, with coverage at 300%.",
+        "event": "Samuel Sekuritas projects TINS’s 2026 dividend at Rp336 per share",
+        "headline": "Samuel Sekuritas projects TINS 2026 dividend at Rp336 per share",
+        "blurb": "Timah posted nine-month 2026 net profit of Rp4.1 trillion, up 584.1% year on year. Samuel Sekuritas bases its estimate on Rp5 trillion in full-year profit and a 50% payout ratio, implying a 9.2% yield at Rp3,660, versus Rp88 per share for 2025.",
         "tickers": [
-          "BFIN.JK"
+          "TINS.JK"
         ],
         "supporting_news_ids": [
-          32441
+          32450
         ],
-        "copy_decision": "kept: same articles"
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "Indocement reports higher third-quarter 2026 profit",
+        "headline": "INTP reports 22.5% higher nine-month profit at Rp1.30 trillion",
+        "blurb": "Indocement's net revenue rose 8.9% to Rp14.07 trillion, while cement and clinker sales volume increased 9% to 15.75 million tons in the nine months to 30 September. It warned that high energy costs, foreign-exchange volatility and the coming rainy season could pressure margins and demand.",
+        "tickers": [
+          "INTP.JK"
+        ],
+        "supporting_news_ids": [
+          32453
+        ],
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_06",
+      "id": "cur_09",
       "slot": "flash",
-      "event": "Nusantara Pelabuhan Handal Plans an Interim Dividend of Rp35.6 per Share",
-      "headline": "PT Nusantara Pelabuhan Handal Tbk (PORT) to Pay Interim Dividend of Rp35.6 per Share, Totaling Rp100.25 Billion",
+      "event": "BFI Finance reports nine-month results and maintains its 70% dividend payout plan",
+      "headline": "BFIN reports 12.5% nine-month profit growth, maintains payout plan of up to 70%",
       "blurb": null,
       "tickers": [
-        "PORT.JK"
+        "BFIN.JK"
       ],
       "supporting_news_ids": [
-        32451
+        32441
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "Asia Pramulia reports higher liabilities and lower nine-month profit",
+      "headline": "PT Asia Pramulia Tbk (ASPR) Sees Total Liabilities Rise 21% in Q3 2026 on Increased Bank Debt",
+      "blurb": null,
+      "tickers": [
+        "ASPR.JK"
+      ],
+      "supporting_news_ids": [
+        32456
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_07",
-      "slot": "flash",
-      "event": "OJK Clarifies Haji Isam's JARR and PGUN Share Pledge Is Permitted",
-      "headline": "OJK Says Haji Isam's Share Pledge of JARR and PGUN to Bank Mandiri for BYAN Acquisition Is Permitted",
-      "blurb": null,
-      "tickers": [
-        "JARR.JK",
-        "PGUN.JK",
-        "BYAN.JK"
-      ],
-      "supporting_news_ids": [
-        32448
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_08",
+      "id": "cur_11",
       "slot": "flash",
       "event": "OJK sanctions seven issuers for capital market violations",
       "headline": "OJK Imposes Administrative Sanctions on Seven Issuers, Including PT Asri Karya Lestari Tbk (ASLI) with the Largest Fine of Rp 2.7 Billion",
@@ -149,21 +194,35 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_09",
+      "id": "cur_12",
       "slot": "flash",
-      "event": "Samuel Sekuritas Projects a Rp336 Dividend per Timah Share",
-      "headline": "PT Timah Tbk (TINS) Projected to Pay Rp 336 Dividend Per Share with 9.2% Yield as Net Cash Jumps to Rp 3.4 Trillion",
+      "event": "Yupi Indo Jelly Gum plans an interim dividend of Rp126.75 billion",
+      "headline": "PT Yupi Indo Jelly Gum Tbk (YUPI) to Distribute Interim Dividend of Rp 126.75 Billion",
       "blurb": null,
       "tickers": [
-        "TINS.JK"
+        "YUPI.JK"
       ],
       "supporting_news_ids": [
-        32450
+        32455
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_10",
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "Nusantara Pelabuhan Handal Plans an Interim Dividend of Rp35.6 per Share",
+      "headline": "PT Nusantara Pelabuhan Handal Tbk (PORT) to Pay Interim Dividend of Rp35.6 per Share, Totaling Rp100.25 Billion",
+      "blurb": null,
+      "tickers": [
+        "PORT.JK"
+      ],
+      "supporting_news_ids": [
+        32451
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_14",
       "slot": "flash",
       "event": "OJK Sanctions Parties over Panorama Sentrawisata Share Manipulation",
       "headline": "OJK Uncovers Stock Manipulation of PT Panorama Sentrawisata Tbk (PANR) Yielding Rp 5.07 Billion in Illicit Gains",
@@ -174,20 +233,73 @@
       "supporting_news_ids": [
         32452
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Indonesia accelerates capital-market reforms after MSCI warning",
+      "headline": "Indonesia Accelerates Capital Market Reforms After MSCI Warning, Says Danantara Chief Rosan Roeslani",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32459
+      ],
       "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-16",
-      "timing_label": "16 Nov",
-      "title": "PORT cum-dividend (regular market) for its Rp35.6 interim dividend",
+      "sort_date": "2026-11-10",
+      "timing_label": "10 Nov",
+      "title": "BEI delists 18 suspended and bankrupt issuers",
       "tickers": [
-        "PORT.JK"
+        "COWL.JK",
+        "DUCK.JK",
+        "ENVY.JK",
+        "GOLL.JK",
+        "LCGP.JK",
+        "LMAS.JK",
+        "MABA.JK",
+        "MTRA.JK",
+        "PLAS.JK",
+        "SBAT.JK",
+        "SKYB.JK",
+        "SRIL.JK",
+        "SUGI.JK",
+        "TDPM.JK",
+        "TELE.JK",
+        "TOYS.JK",
+        "TRIL.JK",
+        "UNIT.JK"
       ],
       "supporting_news_ids": [
-        32451
+        32447
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2026-11-12",
+      "timing_label": "12 Nov",
+      "title": "BRMS faces potential index demotion in index review",
+      "tickers": [
+        "BRMS.JK"
+      ],
+      "supporting_news_ids": [
+        32438
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2026-11-16",
+      "timing_label": "16 Nov",
+      "title": "YUPI cum-dividend (regular market) for its Rp14.83 interim dividend",
+      "tickers": [
+        "YUPI.JK"
+      ],
+      "supporting_news_ids": [
+        32455
       ]
     }
   ]
