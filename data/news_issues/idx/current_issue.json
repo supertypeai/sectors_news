@@ -1,75 +1,186 @@
 {
   "issue_date": "2026-11-09",
   "window_start": "2026-11-08T13:50:00Z",
-  "window_end": "2026-11-09T05:55:59Z",
+  "window_end": "2026-11-09T09:56:02Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "BBRI reports nine-month 2026 earnings and operating performance",
-    "headline": "BBRI reports nine-month 2026 earnings as operating profit rises 15.38% to Rp61.24 trillion",
-    "blurb": "BRI attributed earnings growth to higher interest income, which rose 4.92% to Rp162.79 trillion, and expanded banking intermediation. Loans and financing increased 14.5% to Rp1,647 trillion, ahead of the national banking industry’s 13.26% growth rate, with MSME loans at Rp1,250 trillion. BRI expects MSME loan growth to be slightly corrected in 2027 amid anticipated inflation from El Nino-driven drought.",
+    "event": "BBRI conducts a Rp1 trillion phase II share buyback",
+    "headline": "BBRI conducts Rp1 trillion phase II share buyback",
+    "blurb": "The second phase runs from 22 October 2026 to 21 January 2027. Bank Rakyat Indonesia President Director Hery Gunardi said it reflects confidence in the bank’s fundamentals and long-term shareholder value, citing the BRIVolution Reignite transformation to strengthen the core business and build new growth engines. Shareholders approved a maximum Rp3 trillion buyback at the 24 March 2025 AGM.",
     "tickers": [
       "BBRI.JK"
     ],
     "supporting_news_ids": [
-      32486,
-      32498,
-      32499,
-      32505,
-      32489,
-      32487,
-      32468,
-      32480,
-      32470
+      32512
     ],
-    "copy_decision": "rewritten: 6 new articles with a new fact: BRI expects MSME loan growth to be slightly corrected in 2027 amid anticipated inflation from El Nino-driven drought."
+    "copy_decision": "new story"
   },
   "sections": {
-    "earnings_guidance": [
+    "deals_control": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "BMRI reports October 2026 earnings and net interest margin",
-        "headline": "BMRI reports Rp4.6 trillion October profit as net interest margin contracts 89 bps",
-        "blurb": "Bank Mandiri's January–October profit rose 19.64% year on year to Rp46.52 trillion, while October pre-provision operating profit increased 20% to Rp6.3 trillion. BRI Danareksa Sekuritas said a high loan-to-deposit ratio would keep margin pressure ongoing through year-end and maintained its buy rating with a Rp6,400 target price, citing December seasonal profit and interest-rate direction as catalysts.",
+        "event": "ULTJ commissioner resigns amid the planned inbreng",
+        "headline": "ULTJ commissioner resigns amid planned Rp14.57 trillion FFI inbreng",
+        "blurb": "FCIH is to replace Sabana Prawirawidjaja as ULTJ’s controlling shareholder after the inbreng. Commissioner Suhendra’s resignation, citing personal reasons, was approved at the 6 November meeting and takes effect when the inbreng capital deposit is completed.",
         "tickers": [
-          "BMRI.JK"
+          "ULTJ.JK"
         ],
         "supporting_news_ids": [
-          32504,
-          32490
+          32506,
+          32492
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: moved from flash to story"
       },
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "BSML reports Q3 freight charter revenue growth and plans fleet strengthening",
-        "headline": "BSML reports 48.39% Q3 freight charter growth and plans to strengthen fleet",
-        "blurb": "Bintang Samudera’s total revenue fell year on year to Rp54.96 billion, while net profit was Rp2.12 billion. It operates 10 owned vessels and four under time charter, and plans to strengthen capacity and service quality to capture growth in commodity distribution and inter-island connectivity.",
+        "event": "GIAA reshuffles its leadership and revises its rights issue plan",
+        "headline": "GIAA approves 248.7 billion-share rights issue and reshuffles leadership",
+        "blurb": "At its 6 November extraordinary meeting, Garuda Indonesia shareholders approved the PMHMETD III adjustment and an inbreng of GMFI shares from Danantara Asset Management, intended to return majority ownership of GMFI to Garuda’s direct oversight. Hadiyan Sumintaatmadja replaces Thomas Sugiarto Oentoro, who becomes CEO, while Sophia I. Wattimena replaces Balagopal Kunduvara as finance and risk director.",
         "tickers": [
-          "BSML.JK"
+          "GIAA.JK"
         ],
         "supporting_news_ids": [
-          32466
+          32516,
+          32509,
+          32518
         ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "deals_control": [
+        "copy_decision": "new story"
+      },
       {
         "id": "cur_04",
         "slot": "story",
-        "event": "BP sells its 49.9% APR stake to AKRA subsidiaries",
-        "headline": "AKRA subsidiaries buy BP’s 49.9% APR stake for US$14.22 million",
-        "blurb": "AKR Corporindo completed the purchase through AKRIDA and ADH, acquiring 11,444,565 shares and giving the AKR Group full ownership of APR. The sale ends BP’s participation in the BP-AKR Fuels Retail network in Indonesia.",
+        "event": "AKRA acquires BP's stake in Aneka Petroindo Raya",
+        "headline": "AKRA acquires BP’s 49.9% stake in Aneka Petroindo Raya for US$14,221,500",
+        "blurb": "AKR Corporindo completed the purchase through subsidiaries AKRIDA and ADH on 6 November, taking the group’s ownership to 100% from 50.1%. The BP-AKR fuel retail network had 70 stations at end-2025.",
         "tickers": [
           "AKRA.JK"
         ],
         "supporting_news_ids": [
+          32522,
           32500,
           32484,
           32494
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: The BP-AKR network had 70 stations as of end-2025."
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "BBRI reports nine-month 2026 earnings and operating performance",
+        "headline": "BBRI reports nine-month net profit of Rp48.16 trillion, up 16.8%",
+        "blurb": "BRI’s loans and financing grew 14.5% year on year to Rp1,647 trillion, while third-party funds rose 12% to Rp1,651 trillion. Nine-month net interest margin eased to 6.16% from 6.53% a year earlier.",
+        "tickers": [
+          "BBRI.JK"
+        ],
+        "supporting_news_ids": [
+          32511,
+          32528,
+          32527,
+          32513,
+          32523,
+          32530,
+          32486,
+          32498,
+          32499,
+          32505,
+          32489,
+          32487,
+          32468,
+          32480,
+          32470
+        ],
+        "copy_decision": "rewritten: moved from lead to story"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "BMRI reports October 2026 earnings and net interest margin",
+        "headline": "BMRI reports October profit of Rp4.6 trillion as NIM falls to 3.7%",
+        "blurb": "Loans grew 16.45% year-on-year to Rp1,635 trillion. January–October net profit reached Rp46.52 trillion, up 19.64%, while cumulative NIM was 4%, below management’s 4.43% target. BRI Danareksa said the 92.8% loan-to-deposit ratio keeps margin pressure ongoing through year-end.",
+        "tickers": [
+          "BMRI.JK"
+        ],
+        "supporting_news_ids": [
+          32526,
+          32504,
+          32490
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: Loans grew 16.45% year-on-year to Rp1,635 trillion."
+      },
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "EMAS targets higher ore stacking at the Pani Gold Mine",
+        "headline": "EMAS targets 11 million tons of ore stacking at Pani in 2027",
+        "blurb": "Merdeka Gold Resources President Director Boyke P. Abidin said the mine has consistently exceeded plan since September 2026. The higher target is intended to support gold production of 165,000 to 180,000 ounces in 2027, up from 85,000 to 100,000 ounces in 2026. The plans remain subject to approvals, final geotechnical confirmation and sustained operational performance.",
+        "tickers": [
+          "EMAS.JK"
+        ],
+        "supporting_news_ids": [
+          32521
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "GIAA reports nine-month 2026 financial results",
+        "headline": "GIAA reports nine-month results with revenue up 13.2%",
+        "blurb": "Garuda Indonesia posted a US$179.3 million current-period loss, 3% narrower year on year, and US$97.2 million in operating profit. The group carried 16.7 million passengers as its operational fleet grew by 24 aircraft to 106.",
+        "tickers": [
+          "GIAA.JK"
+        ],
+        "supporting_news_ids": [
+          32524
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "UNTR approves treasury share withdrawal and commissioner changes",
+        "headline": "UNTR approves withdrawal of 238.79 million treasury shares and commissioner changes",
+        "blurb": "At United Tractors’ extraordinary shareholders meeting, the shares were approved for withdrawal through a capital reduction and came from buybacks in July 2022–January 2023 and October 2025–June 2026. Shareholders also approved one commissioner’s resignation and the appointments of Irwandy Arif as independent commissioner and Christopher Suprayogie Ganis as commissioner, effective through the 2027 annual meeting.",
+        "tickers": [
+          "UNTR.JK"
+        ],
+        "supporting_news_ids": [
+          32515
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "BRIS approves a rights issue of up to 6.8 billion shares",
+        "headline": "BRIS approves rights issue of up to 6.8 billion shares",
+        "blurb": "Approved at a 6 November EGM, the move aims to strengthen capital and lift BSI's 9.9% free float to improve liquidity and help meet global index criteria. President Director Anggoro Eko Cahyo said it supports the bank's goal of entering KBMI 4. BRI Danareksa Sekuritas cautioned about potential short-term dilution.",
+        "tickers": [
+          "BRIS.JK"
+        ],
+        "supporting_news_ids": [
+          32529
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "CBRE plans a rights issue with debt conversion",
+        "headline": "CBRE plans rights issue of up to 48 billion shares with debt conversion",
+        "blurb": "Cakra Buana Resources Energi will seek shareholder approval at an extraordinary meeting on 16 December. It plans to convert Rp858.59 billion of debt owed to four creditors into paid-in capital, with remaining net proceeds earmarked for working capital.",
+        "tickers": [
+          "CBRE.JK"
+        ],
+        "supporting_news_ids": [
+          32517
         ],
         "copy_decision": "new story"
       }
@@ -77,7 +188,36 @@
   },
   "flash": [
     {
-      "id": "cur_05",
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "BSML reports Q3 freight charter revenue growth and plans fleet strengthening",
+      "headline": "BSML reports 48.39% Q3 freight charter growth and plans to strengthen fleet",
+      "blurb": null,
+      "tickers": [
+        "BSML.JK"
+      ],
+      "supporting_news_ids": [
+        32466
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "VTNY directors and commissioner submit resignations",
+      "headline": "Venteny (VTNY) announces resignations of three leaders, pending shareholder approval",
+      "blurb": null,
+      "tickers": [
+        "VTNY.JK"
+      ],
+      "supporting_news_ids": [
+        32525,
+        32507
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_14",
       "slot": "flash",
       "event": "Foreign investors record net buying in BBCA shares",
       "headline": "Foreign Investors Net Buy PT Bank Central Asia Tbk (BBCA) Rp 516.2 Billion, Signaling Potential Recovery",
@@ -91,21 +231,23 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_06",
+      "id": "cur_15",
       "slot": "flash",
-      "event": "ULTJ commissioner Suhendra Prawirawidjaja resigns",
-      "headline": "Suhendra Prawirawidjaja Resigns as Commissioner of PT Ultrajaya Milk Industry & Trading Company Tbk (ULTJ)",
+      "event": "BYAN founder denies pressure in the 30.25% stake sale to Jhonlin Baratama",
+      "headline": "Bayan Resources (BYAN) founder Low Tuck Kwong sold a 30.25% stake to Jhonlin Baratama for about Rp26.09 trillion",
       "blurb": null,
       "tickers": [
-        "ULTJ.JK"
+        "BYAN.JK"
       ],
       "supporting_news_ids": [
-        32492
+        32495,
+        32501,
+        32476
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_07",
+      "id": "cur_16",
       "slot": "flash",
       "event": "AVIA declares an interim dividend of Rp12 per share",
       "headline": "Avia Avian (AVIA) approved an interim dividend of Rp709.24 billion for 2026",
@@ -118,24 +260,25 @@
         32491,
         32497
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_08",
+      "id": "cur_17",
       "slot": "flash",
       "event": "RAJA acquires 90% of Kapalindo Nusantara Jaya",
-      "headline": "PT Rukun Raharja Tbk (RAJA) Acquires 90% of PT Kapalindo Nusantara Jaya via Subsidiary",
+      "headline": "PT Rukun Raharja Tbk (RAJA) acquired 90% of Kapalindo Nusantara Jaya through its subsidiary.",
       "blurb": null,
       "tickers": [
         "RAJA.JK"
       ],
       "supporting_news_ids": [
+        32510,
         32485
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: KNJ holds a 25% stake in Golden Prima Maritim, which owns one LNG Carrier and one Very Large Gas Carrier."
     },
     {
-      "id": "cur_09",
+      "id": "cur_18",
       "slot": "flash",
       "event": "IDX announces delisting of 18 listed companies",
       "headline": "Indonesia Stock Exchange will delist 18 companies starting 10 November 2026",
@@ -164,10 +307,24 @@
         32502,
         32472
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Seven issuers are being delisted for bankruptcy and 11 after trading suspensions exceeding 50 months."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_10",
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "KINO declares an interim dividend",
+      "headline": "PT Kino Indonesia Tbk (KINO) to Distribute Rp 71.69 Billion in Interim Dividend for Fiscal Year 2026",
+      "blurb": null,
+      "tickers": [
+        "KINO.JK"
+      ],
+      "supporting_news_ids": [
+        32519
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_20",
       "slot": "flash",
       "event": "Karya Pacific Investama buys additional MNC Energy Investments shares",
       "headline": "Karya Pacific Investama Buys 1.22 Billion More Shares of MNC Energy Investments (IATA)",
@@ -181,7 +338,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_21",
       "slot": "flash",
       "event": "CGS International increases its stake in Wilton Makmur Indonesia",
       "headline": "CGS International Securities Singapore Buys 63.99 Million Shares of Wilton Makmur Indonesia (SQMI), Owner of Ciemas Gold Project",
@@ -195,63 +352,100 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_22",
       "slot": "flash",
-      "event": "EAST declares an interim cash dividend",
+      "event": "EAST declares an interim dividend",
       "headline": "Eastparc Hotel (EAST.JK) to distribute an interim dividend of Rp6,602,248,537.6",
       "blurb": null,
       "tickers": [
         "EAST.JK"
       ],
       "supporting_news_ids": [
+        32520,
         32496,
         32493
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: The dividend is Rp1.6 per share and payment is scheduled for 30 November 2026."
     },
     {
-      "id": "cur_13",
+      "id": "cur_23",
       "slot": "flash",
-      "event": "BYAN founder denies pressure in the 30.25% stake sale to Jhonlin Baratama",
-      "headline": "Bayan Resources (BYAN) founder Low Tuck Kwong sold a 30.25% stake to Jhonlin Baratama for about Rp26.09 trillion",
+      "event": "Yupi distributes a dividend despite lower profit",
+      "headline": "Yupi Distributes Rp126.76 Billion Dividend Despite 5% Profit Decline",
       "blurb": null,
-      "tickers": [
-        "BYAN.JK"
-      ],
+      "tickers": [],
       "supporting_news_ids": [
-        32495,
-        32501,
-        32476
+        32508
       ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: The stake was acquired at Rp2,588 per share."
+      "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-12",
-      "timing_label": "12 Nov",
-      "title": "AVIA cum-dividend (regular market) for its Rp12 interim dividend",
+      "sort_date": "2026-11-10",
+      "timing_label": "10 Nov",
+      "title": "IDX delists 18 listed companies",
       "tickers": [
-        "AVIA.JK"
+        "COWL.JK",
+        "DUCK.JK",
+        "ENVY.JK",
+        "GOLL.JK",
+        "LCGP.JK",
+        "LMAS.JK",
+        "MABA.JK",
+        "MTRA.JK",
+        "PLAS.JK",
+        "SBAT.JK",
+        "SKYB.JK",
+        "SRIL.JK",
+        "SUGI.JK",
+        "TDPM.JK",
+        "TELE.JK",
+        "TOYS.JK",
+        "TRIL.JK",
+        "UNIT.JK"
       ],
       "supporting_news_ids": [
-        32483,
-        32491,
-        32497
+        32502,
+        32472
       ]
     },
     {
       "id": "wtw_02",
       "sort_date": "2026-11-17",
       "timing_label": "17 Nov",
-      "title": "EAST cum-dividend (regular market) for its Rp1.6 interim dividend",
+      "title": "KINO cum-dividend (regular market) for its Rp52 interim dividend",
       "tickers": [
-        "EAST.JK"
+        "KINO.JK"
       ],
       "supporting_news_ids": [
-        32496,
-        32493
+        32519
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2026-11-23",
+      "timing_label": "23 Nov",
+      "title": "VTNY shareholders consider three leadership resignations",
+      "tickers": [
+        "VTNY.JK"
+      ],
+      "supporting_news_ids": [
+        32525,
+        32507
+      ]
+    },
+    {
+      "id": "wtw_04",
+      "sort_date": "2026-12-16",
+      "timing_label": "16 Dec",
+      "title": "CBRE shareholders vote on rights issue of up to 48 billion shares",
+      "tickers": [
+        "CBRE.JK"
+      ],
+      "supporting_news_ids": [
+        32517
       ]
     }
   ]
