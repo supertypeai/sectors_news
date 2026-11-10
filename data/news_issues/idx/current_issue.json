@@ -1,26 +1,57 @@
 {
   "issue_date": "2026-11-10",
   "window_start": "2026-11-09T13:50:00Z",
-  "window_end": "2026-11-10T05:56:11Z",
+  "window_end": "2026-11-10T09:56:11Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "ADRO and AADI record massive negotiation-market trades",
-    "headline": "ADRO and AADI record negotiation trades worth Rp32.3 trillion and Rp32.9 trillion",
-    "blurb": "On 10 November, Alamtri Resources traded 133.95 million lots at Rp2,413 per share across six negotiation-market transactions, while Adaro Andalan traded 32.00 million lots at Rp10,286 across four. No official explanation had been released at the time of writing. On the regular market, ADRO rose 1.72% to Rp2,370 while AADI fell 0.24% to Rp10,225.",
+    "event": "ADRO and AADI shares transfer in massive negotiated-market transactions",
+    "headline": "ASI transfers 48.7680% of ADRO and 41,0965% of AADI in negotiated deals",
+    "blurb": "Alamtri Resources and Adaro Andalan disclosed that Adaro Strategic Investments transferred its entire stakes in both companies through negotiated-market transactions on 10 November. The 48.7680% ADRO stake and 41,0965% AADI stake went to four investors: Trinugraha Thohir, Saratoga Investama Sedaya, Persada Capital Investama and Triputra Investindo Arya. One report put the combined value above Rp66 trillion. AADI said the transfer did not change its control, while ADRO's disclosure did not state whether control changed.",
     "tickers": [
       "ADRO.JK",
-      "AADI.JK"
+      "AADI.JK",
+      "SRTG.JK"
     ],
     "supporting_news_ids": [
+      32588,
+      32585,
       32573
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: 2 new articles with a new fact: ASI transferred its entire 48.7680% ADRO stake to four investors; the disclosure did not state whether ADRO's control changed."
   },
   "sections": {
-    "deals_control": [
+    "capital_raising_buybacks": [
       {
         "id": "cur_02",
+        "slot": "story",
+        "event": "Merdeka Battery Materials (MBMA) plans Rp2.5 trillion bond issuance",
+        "headline": "MBMA plans Rp2.5 trillion bond issuance",
+        "blurb": "Merdeka Battery Materials plans three fully committed series totaling Rp508.3 billion, with coupons of 9%, 10.25% and 10.75%; the remaining Rp2 trillion is on a best-effort basis. Proceeds from the committed portion will refinance the US$85.2 million still outstanding on Facility B, with any surplus for working capital. The offer runs 19-20 November, with listing scheduled for 26 November.",
+        "tickers": [
+          "MBMA.JK"
+        ],
+        "supporting_news_ids": [
+          32580
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Andalan Artha Primanusa sets IPO price range",
+        "headline": "Andalan Artha Primanusa sets IPO price range at Rp158-Rp189 per share",
+        "blurb": "The offer comprises up to 1.676 billion new shares, equal to 25.10% of enlarged capital, and targets proceeds of up to Rp316.76 billion. Andalan Artha Primanusa plans to use 34.94% for debt repayment and the balance for working capital; bookbuilding runs through 17 November, ahead of a 24-27 November offering and 1 December listing.",
+        "tickers": [],
+        "supporting_news_ids": [
+          32563
+        ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_04",
         "slot": "story",
         "event": "DOOH shareholders approve company transformation and corporate action package",
         "headline": "DOOH shareholders approve transformation and rights issue of up to 154.78 billion shares",
@@ -38,7 +69,7 @@
     ],
     "market_structure_policy": [
       {
-        "id": "cur_03",
+        "id": "cur_05",
         "slot": "story",
         "event": "IDX delists 18 issuers, including Sritex (SRIL)",
         "headline": "IDX delists 18 issuers, including SRIL",
@@ -67,12 +98,12 @@
           32565,
           32556
         ],
-        "copy_decision": "rewritten: moved from lead to story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "macro_flows": [
       {
-        "id": "cur_04",
+        "id": "cur_06",
         "slot": "story",
         "event": "Indonesia launches second panda bond offering",
         "headline": "Indonesia launches second panda bond offering targeting 12 billion yuan",
@@ -81,12 +112,26 @@
         "supporting_news_ids": [
           32572
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_05",
+        "id": "cur_07",
+        "slot": "story",
+        "event": "BRI Danareksa revises Astra International (ASII) forecasts and target price",
+        "headline": "BRI Danareksa raises ASII’s 2026 profit forecast 5.3% to Rp29.1 trillion",
+        "blurb": "BRI Danareksa Sekuritas also cut Astra International’s 2027 and 2028 net profit estimates by 2.1% and 5.2% to Rp33.1 trillion and Rp33.7 trillion. The revisions mainly reflect updated earnings estimates for United Tractors, which the broker expects to remain a key driver through Q4-2026 and 2027.",
+        "tickers": [
+          "ASII.JK"
+        ],
+        "supporting_news_ids": [
+          32587
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_08",
         "slot": "story",
         "event": "Mandiri Sekuritas raises Indofood forecasts and target price",
         "headline": "Mandiri Sekuritas raises INDF forecasts and target price to Rp 8,725",
@@ -100,7 +145,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_06",
+        "id": "cur_09",
         "slot": "story",
         "event": "Bukit Asam reports results and revises operational targets",
         "headline": "PTBA reports Rp4.41 trillion profit, revises 2026 sales target to 48 million tons",
@@ -114,7 +159,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_07",
+        "id": "cur_10",
         "slot": "story",
         "event": "BFI Finance reports nine-month 2026 results",
         "headline": "BFIN reports Rp1.3 trillion nine-month 2026 net profit",
@@ -127,25 +172,39 @@
         ],
         "copy_decision": "kept: same articles"
       }
-    ],
-    "capital_raising_buybacks": [
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "Andalan Artha Primanusa sets IPO price range",
-        "headline": "Andalan Artha Primanusa sets IPO price range at Rp158-Rp189 per share",
-        "blurb": "The offer comprises up to 1.676 billion new shares, equal to 25.10% of enlarged capital, and targets proceeds of up to Rp316.76 billion. Andalan Artha Primanusa plans to use 34.94% for debt repayment and the balance for working capital; bookbuilding runs through 17 November, ahead of a 24-27 November offering and 1 December listing.",
-        "tickers": [],
-        "supporting_news_ids": [
-          32563
-        ],
-        "copy_decision": "kept: same articles"
-      }
     ]
   },
   "flash": [
     {
-      "id": "cur_09",
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Bank Artha Graha Internasional (INPC) reports nine-month profit growth",
+      "headline": "Bank Artha Graha Internasional (INPC) Net Profit Jumps 125% to Rp 125.6 Billion in 9M2026",
+      "blurb": null,
+      "tickers": [
+        "INPC.JK"
+      ],
+      "supporting_news_ids": [
+        32590
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "Anabatic Technologies (ATIC) reports nine-month 2026 revenue growth",
+      "headline": "PT Anabatic Technologies Tbk (ATIC) Posts 17.8% Revenue Growth in First Nine Months of 2026",
+      "blurb": null,
+      "tickers": [
+        "ATIC.JK"
+      ],
+      "supporting_news_ids": [
+        32589
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_13",
       "slot": "flash",
       "event": "Global investors post net buying in BCA (BBCA) shares in early November",
       "headline": "Global Investors Rush to Buy PT Bank Central Asia Tbk (BBCA) Shares in November",
@@ -157,24 +216,53 @@
       "supporting_news_ids": [
         32575
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_10",
+      "id": "cur_14",
       "slot": "flash",
-      "event": "Bank Rakyat Indonesia reports Q3 2026 results",
-      "headline": "BRI Posts Rp 48.2 Trillion Net Profit in Q3 2026, Overtakes BCA in Savings Balance",
+      "event": "Bank Rakyat Indonesia (BBRI) reports nine-month 2026 earnings",
+      "headline": "Bank Rakyat Indonesia (BBRI.JK) reported Rp48.16 trillion net profit through September 2026",
       "blurb": null,
       "tickers": [
         "BBRI.JK"
       ],
       "supporting_news_ids": [
+        32583,
         32566
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Loans and financing increased 14.5% to Rp1,647.1 trillion."
     },
     {
-      "id": "cur_11",
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Merdeka Gold Resources (EMAS) sets 2027 Pani mine production targets",
+      "headline": "PT Merdeka Gold Resources Tbk (EMAS) Prospects Seen Promising in 2027 as Pani Gold Mine Capacity Rises, with Analysts Issuing Stock Recommendations",
+      "blurb": null,
+      "tickers": [
+        "EMAS.JK"
+      ],
+      "supporting_news_ids": [
+        32592
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "Bank Syariah Indonesia (BRIS) secures approval for rights issue",
+      "headline": "PT Bank Syariah Indonesia Tbk (BRIS) secures shareholder approval for rights issue of up to 6.8 billion new shares",
+      "blurb": null,
+      "tickers": [
+        "BRIS.JK"
+      ],
+      "supporting_news_ids": [
+        32581
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_17",
       "slot": "flash",
       "event": "Indo Tambangraya Megah announces 2026 interim dividend",
       "headline": "PT Indo Tambangraya Megah Tbk (ITMG) to Pay Interim Dividend of Around Rp 1,192 per Share",
@@ -188,22 +276,23 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_18",
       "slot": "flash",
-      "event": "AKR Corporindo (AKRA) acquires BP's remaining stake in Aneka Petroindo Raya",
-      "headline": "AKR Corporindo (AKRA) completes acquisition of BP’s remaining 49.9% stake in Aneka Petroindo Raya",
+      "event": "AKR Corporindo (AKRA) acquires BP's remaining stake in APR",
+      "headline": "AKR Corporindo (AKRA) acquires BP’s remaining 49.9% stake in APR for US$14.22 million",
       "blurb": null,
       "tickers": [
         "AKRA.JK"
       ],
       "supporting_news_ids": [
+        32586,
         32576,
         32578
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: The stations will continue operating under the BP brand and existing license agreement."
     },
     {
-      "id": "cur_13",
+      "id": "cur_19",
       "slot": "flash",
       "event": "Ultrajaya announces additional FY2025 dividend",
       "headline": "Ultrajaya (ULTJ) adds Rp1.04 trillion extra dividend for fiscal year 2025, lifting yield to 11.22%",
@@ -217,7 +306,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_20",
       "slot": "flash",
       "event": "Garuda Indonesia approves board reshuffle and rights issue plan",
       "headline": "PT Garuda Indonesia (Persero) Tbk (GIAA) Reshuffles Board and Approves Rights Issue Plan",
@@ -229,11 +318,79 @@
         32555
       ],
       "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "SINI controlling shareholder increases stake through share purchases",
+      "headline": "PT Deli Indonesia Raya Spends Rp7.6 Billion to Buy PT Singaraja Putra Tbk (SINI) Shares, Lifting Its Stake to 7.56%",
+      "blurb": null,
+      "tickers": [
+        "SINI.JK"
+      ],
+      "supporting_news_ids": [
+        32594
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "Tigaraksa Satria (TGKA) sets interim dividend",
+      "headline": "PT Tigaraksa Satria Tbk (TGKA) sets a Rp91.85 billion interim dividend for 2026",
+      "blurb": null,
+      "tickers": [
+        "TGKA.JK"
+      ],
+      "supporting_news_ids": [
+        32593,
+        32582
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "Nusantara Pelabuhan Handal (PORT) prepares interim dividend",
+      "headline": "PT Nusantara Pelabuhan Handal Tbk (PORT) Prepares Interim Dividend of Rp 100.25 Billion",
+      "blurb": null,
+      "tickers": [
+        "PORT.JK"
+      ],
+      "supporting_news_ids": [
+        32591
+      ],
+      "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
+      "sort_date": "2026-11-18",
+      "timing_label": "18 Nov",
+      "title": "TGKA cum-dividend (regular market) for its Rp100 interim dividend",
+      "tickers": [
+        "TGKA.JK"
+      ],
+      "supporting_news_ids": [
+        32593,
+        32582
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2026-11-19",
+      "timing_label": "19 Nov",
+      "title": "MBMA bond offering opens, until 20 Nov",
+      "tickers": [
+        "MBMA.JK"
+      ],
+      "supporting_news_ids": [
+        32580
+      ]
+    },
+    {
+      "id": "wtw_03",
       "sort_date": "2026-11-24",
       "timing_label": "24 Nov",
       "title": "ANDA public offering opens",
@@ -243,7 +400,19 @@
       ]
     },
     {
-      "id": "wtw_02",
+      "id": "wtw_04",
+      "sort_date": "2026-11-26",
+      "timing_label": "26 Nov",
+      "title": "MBMA bonds list",
+      "tickers": [
+        "MBMA.JK"
+      ],
+      "supporting_news_ids": [
+        32580
+      ]
+    },
+    {
+      "id": "wtw_05",
       "sort_date": "2026-12-01",
       "timing_label": "1 Dec",
       "title": "ANDA lists on the IDX",
