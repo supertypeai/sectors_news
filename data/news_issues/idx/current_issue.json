@@ -1,36 +1,19 @@
 {
   "issue_date": "2026-11-10",
   "window_start": "2026-11-09T13:50:00Z",
-  "window_end": "2026-11-10T01:46:08Z",
+  "window_end": "2026-11-10T05:56:11Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "IDX delists 18 issuers, including Sritex",
-    "headline": "IDX delists 18 issuers, including SRIL",
-    "blurb": "On 10 November, IDX removed 18 issuers. The group included Sritex, six companies identified as bankrupt and 11 suspended for more than 50 months. Delisted issuers must buy back public shares at the higher of the 30-day average trading price or latest book value per share. They must start within 30 days of IDX announcing its decision and complete by the delisting effective date or within six months of disclosure.",
+    "event": "ADRO and AADI record massive negotiation-market trades",
+    "headline": "ADRO and AADI record negotiation trades worth Rp32.3 trillion and Rp32.9 trillion",
+    "blurb": "On 10 November, Alamtri Resources traded 133.95 million lots at Rp2,413 per share across six negotiation-market transactions, while Adaro Andalan traded 32.00 million lots at Rp10,286 across four. No official explanation had been released at the time of writing. On the regular market, ADRO rose 1.72% to Rp2,370 while AADI fell 0.24% to Rp10,225.",
     "tickers": [
-      "COWL.JK",
-      "MTRA.JK",
-      "SRIL.JK",
-      "TOYS.JK",
-      "SBAT.JK",
-      "TDPM.JK",
-      "TELE.JK",
-      "LCGP.JK",
-      "SUGI.JK",
-      "MABA.JK",
-      "LMAS.JK",
-      "SKYB.JK",
-      "ENVY.JK",
-      "GOLL.JK",
-      "PLAS.JK",
-      "TRIL.JK",
-      "UNIT.JK",
-      "DUCK.JK"
+      "ADRO.JK",
+      "AADI.JK"
     ],
     "supporting_news_ids": [
-      32565,
-      32556
+      32573
     ],
     "copy_decision": "new story"
   },
@@ -50,12 +33,60 @@
           32564,
           32554
         ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "market_structure_policy": [
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "IDX delists 18 issuers, including Sritex (SRIL)",
+        "headline": "IDX delists 18 issuers, including SRIL",
+        "blurb": "Sritex was delisted on 10 November, alongside six other issuers classified as bankrupt; 11 more had been suspended for over 50 months. Under POJK No. 45 of 2024, issuers must buy back public shares, but the obligation may shift to controlling shareholders for specified corporate failures or violations.",
+        "tickers": [
+          "COWL.JK",
+          "MTRA.JK",
+          "SRIL.JK",
+          "TOYS.JK",
+          "SBAT.JK",
+          "TDPM.JK",
+          "TELE.JK",
+          "LCGP.JK",
+          "SUGI.JK",
+          "MABA.JK",
+          "LMAS.JK",
+          "SKYB.JK",
+          "ENVY.JK",
+          "GOLL.JK",
+          "PLAS.JK",
+          "TRIL.JK",
+          "UNIT.JK",
+          "DUCK.JK"
+        ],
+        "supporting_news_ids": [
+          32565,
+          32556
+        ],
+        "copy_decision": "rewritten: moved from lead to story"
+      }
+    ],
+    "macro_flows": [
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Indonesia launches second panda bond offering",
+        "headline": "Indonesia launches second panda bond offering targeting 12 billion yuan",
+        "blurb": "The yuan-denominated issuance comprises three-, five- and seven-year series. Indonesia raised 7 billion yuan in its first offering in July and has approval to issue up to 30 billion yuan in China’s interbank bond market over two years.",
+        "tickers": [],
+        "supporting_news_ids": [
+          32572
+        ],
         "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_03",
+        "id": "cur_05",
         "slot": "story",
         "event": "Mandiri Sekuritas raises Indofood forecasts and target price",
         "headline": "Mandiri Sekuritas raises INDF forecasts and target price to Rp 8,725",
@@ -66,10 +97,10 @@
         "supporting_news_ids": [
           32559
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_04",
+        "id": "cur_06",
         "slot": "story",
         "event": "Bukit Asam reports results and revises operational targets",
         "headline": "PTBA reports Rp4.41 trillion profit, revises 2026 sales target to 48 million tons",
@@ -80,10 +111,10 @@
         "supporting_news_ids": [
           32561
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_05",
+        "id": "cur_07",
         "slot": "story",
         "event": "BFI Finance reports nine-month 2026 results",
         "headline": "BFIN reports Rp1.3 trillion nine-month 2026 net profit",
@@ -94,12 +125,12 @@
         "supporting_news_ids": [
           32557
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "capital_raising_buybacks": [
       {
-        "id": "cur_06",
+        "id": "cur_08",
         "slot": "story",
         "event": "Andalan Artha Primanusa sets IPO price range",
         "headline": "Andalan Artha Primanusa sets IPO price range at Rp158-Rp189 per share",
@@ -108,13 +139,28 @@
         "supporting_news_ids": [
           32563
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_07",
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Global investors post net buying in BCA (BBCA) shares in early November",
+      "headline": "Global Investors Rush to Buy PT Bank Central Asia Tbk (BBCA) Shares in November",
+      "blurb": null,
+      "tickers": [
+        "BBCA.JK",
+        "ASII.JK"
+      ],
+      "supporting_news_ids": [
+        32575
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_10",
       "slot": "flash",
       "event": "Bank Rakyat Indonesia reports Q3 2026 results",
       "headline": "BRI Posts Rp 48.2 Trillion Net Profit in Q3 2026, Overtakes BCA in Savings Balance",
@@ -125,10 +171,10 @@
       "supporting_news_ids": [
         32566
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_08",
+      "id": "cur_11",
       "slot": "flash",
       "event": "Indo Tambangraya Megah announces 2026 interim dividend",
       "headline": "PT Indo Tambangraya Megah Tbk (ITMG) to Pay Interim Dividend of Around Rp 1,192 per Share",
@@ -139,10 +185,25 @@
       "supporting_news_ids": [
         32560
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "AKR Corporindo (AKRA) acquires BP's remaining stake in Aneka Petroindo Raya",
+      "headline": "AKR Corporindo (AKRA) completes acquisition of BP’s remaining 49.9% stake in Aneka Petroindo Raya",
+      "blurb": null,
+      "tickers": [
+        "AKRA.JK"
+      ],
+      "supporting_news_ids": [
+        32576,
+        32578
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_09",
+      "id": "cur_13",
       "slot": "flash",
       "event": "Ultrajaya announces additional FY2025 dividend",
       "headline": "Ultrajaya (ULTJ) adds Rp1.04 trillion extra dividend for fiscal year 2025, lifting yield to 11.22%",
@@ -153,10 +214,10 @@
       "supporting_news_ids": [
         32553
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_10",
+      "id": "cur_14",
       "slot": "flash",
       "event": "Garuda Indonesia approves board reshuffle and rights issue plan",
       "headline": "PT Garuda Indonesia (Persero) Tbk (GIAA) Reshuffles Board and Approves Rights Issue Plan",
@@ -167,7 +228,7 @@
       "supporting_news_ids": [
         32555
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
