@@ -1,41 +1,26 @@
 {
   "issue_date": "2026-11-11",
   "window_start": "2026-11-10T13:50:00Z",
-  "window_end": "2026-11-11T05:56:00Z",
+  "window_end": "2026-11-11T09:55:57Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Ultra Jaya schedules a rights issue to fund its Frisian Flag acquisition",
-    "headline": "ULTJ schedules Rp16.94 trillion rights issue to fund Frisian Flag acquisition",
-    "blurb": "Ultra Jaya plans to issue 7.88 billion new shares at Rp2,150 each, in a 15,200:11,517 ratio. About 86.01% of the proceeds will fund its planned acquisition of 100% of Frisian Flag Indonesia for Rp14.57 trillion, with the remainder for working capital. FCIH and two other parties will execute 6.77 billion rights, and FCIH will become ULTJ’s controlling shareholder. The cum-right date is 8 January 2027, with new shares due to list on 14 January 2027.",
+    "event": "Ultra Jaya rights issue funds Frisian Flag acquisition and transfers control",
+    "headline": "ULTJ plans Rp16.94 trillion rights issue to acquire Frisian Flag and transfer control",
+    "blurb": "Management projects Frisian Flag Indonesia’s additional revenue will boost Ultra Jaya’s income by 137% annually. Ultra Jaya plans to issue 7.88 billion shares at Rp2,150 each, with about 86.01% of proceeds funding its Rp14.57 trillion acquisition of all of Frisian Flag Indonesia and the remainder for working capital. The deal would make Frisian Flag parent FrieslandCampina International Holding ULTJ’s new controlling shareholder. Cum rights are set for 8 January 2027, with the new shares due to list on 14 January.",
     "tickers": [
       "ULTJ.JK"
     ],
     "supporting_news_ids": [
+      32696,
       32664
     ],
-    "copy_decision": "kept: same articles"
+    "copy_decision": "rewritten: 1 new articles with a new fact: Management projects FFI’s additional revenue will boost ULTJ’s income by 137% annually."
   },
   "sections": {
     "capital_raising_buybacks": [
       {
         "id": "cur_02",
-        "slot": "story",
-        "event": "Garuda Indonesia announces a rights issue",
-        "headline": "GIAA announces rights issue of up to 248.71 billion shares",
-        "blurb": "Shareholders approved it on 6 November at Rp58 to Rp68 a share, with up to 37.92% public dilution. Danantara Asset Management will contribute 82.1 billion Garuda Maintenance Facility Aero Asia shares worth Rp5.66 trillion, increasing Garuda Indonesia’s economic interest. Trading and execution are scheduled for 29 December to 7 January 2027.",
-        "tickers": [
-          "GIAA.JK",
-          "GMFI.JK"
-        ],
-        "supporting_news_ids": [
-          32671,
-          32683
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_03",
         "slot": "story",
         "event": "Indo Tambangraya conducts a Rp1.83 trillion share buyback",
         "headline": "ITMG conducts Rp1.83 trillion share buyback",
@@ -46,12 +31,97 @@
         "supporting_news_ids": [
           32676
         ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Shima Global Kapital increases its stake in Energi Mega Persada",
+        "headline": "ENRG shareholder Shima Global Kapital raises stake to 17.46%",
+        "blurb": "Shima Global Kapital bought 2.33 billion ENRG shares on 6 November for about Rp1.28 trillion. The purchase was intended for internal consolidation into Bakrie Kalila Investment, part of Grup Bakrie, ahead of the MSCI Small Cap Index rebalancing scheduled for 11 November.",
+        "tickers": [
+          "ENRG.JK"
+        ],
+        "supporting_news_ids": [
+          32708
+        ],
         "copy_decision": "new story"
+      },
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Garuda Indonesia prepares its third rights issue with Danantara participation",
+        "headline": "GIAA plans 248.71 billion-share rights issue and is expected to control GMFI",
+        "blurb": "Garuda plans to issue up to 248.71 billion new shares at Rp58 to Rp68 each, with potential dilution of up to 37.92% for shareholders who do not participate. Danantara Asset Management will exercise its rights by contributing 82.1 billion GMFI shares. Shareholders on the register at 16:15 WIB on 23 December will qualify, with trading and exercise scheduled from 29 December to 7 January.",
+        "tickers": [
+          "GIAA.JK",
+          "GMFI.JK"
+        ],
+        "supporting_news_ids": [
+          32704,
+          32698,
+          32715,
+          32671,
+          32683
+        ],
+        "copy_decision": "rewritten: 3 new articles with a new fact: GIAA is expected to become GMFI’s majority shareholder and controller."
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Menteng Heritage Realty shareholders sign a share purchase agreement",
+        "headline": "HRME shareholders sign share purchase agreement as shares rise 34.15%",
+        "blurb": "Menteng Heritage Realty said Wijaya Wisesa Realty and Twin Investment signed with Properti International Development as prospective buyer on 9 November. The proposed transfer remains subject to due diligence, and its share count and value have not been disclosed.",
+        "tickers": [
+          "HRME.JK"
+        ],
+        "supporting_news_ids": [
+          32709
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Dato’ Sri Tahir sells Maha Properti shares",
+        "headline": "Tahir sells 33.89 million MPRO shares for an estimated Rp399.99 billion",
+        "blurb": "MPRO joined the HSC list alongside 82 other issuers. The sale was disclosed on 9 November at Rp11,800 per share, reducing Tahir’s stake from 10.40% to 10.06% while he retained control.",
+        "tickers": [
+          "MPRO.JK"
+        ],
+        "supporting_news_ids": [
+          32711,
+          32674
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: MPRO was included on the HSC list alongside 82 other issuers."
+      }
+    ],
+    "other": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "RANS government influencer contracts face ICW and BEI scrutiny",
+        "headline": "RANS faces scrutiny over Rp14.7 billion in government influencer contracts",
+        "blurb": "Rans Entertainment's subsidiary received one Rp3.9 billion campaign and three Ministry of Marine Affairs and Fisheries campaigns worth Rp10.8 billion, covering 2024–2026. The company said the contracts followed procurement procedures through Inaproc and e-Katalog, while BEI reviews them. RANS closed at Rp94 on 11 November, down 45.7% from 12 October.",
+        "tickers": [
+          "RANS.JK"
+        ],
+        "supporting_news_ids": [
+          32697,
+          32714,
+          32706,
+          32684,
+          32679,
+          32663
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_04",
+        "id": "cur_08",
         "slot": "story",
         "event": "Indonesia’s four largest banks report declining net interest margins in 9M26",
         "headline": "Indonesia’s largest banks report 9M26 NIM shifts as BMRI falls to 4.21%",
@@ -65,7 +135,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_05",
+        "id": "cur_09",
         "slot": "story",
         "event": "Telkom reports lower nine-month profit amid investment losses",
         "headline": "TLKM reports nearly 4% nine-month profit decline to Rp14.45 trillion",
@@ -77,10 +147,10 @@
         "supporting_news_ids": [
           32670
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_06",
+        "id": "cur_10",
         "slot": "story",
         "event": "Gudang Garam shares fall despite strong nine-month profit growth",
         "headline": "GGRM shares fall 0.65% despite 308.56% nine-month profit growth",
@@ -91,10 +161,10 @@
         "supporting_news_ids": [
           32658
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_07",
+        "id": "cur_11",
         "slot": "story",
         "event": "Indo Tambangraya reports higher nine-month revenue and profit",
         "headline": "ITMG reports higher nine-month revenue and profit, net profit reaches US$162.93 million",
@@ -107,44 +177,46 @@
           32660,
           32666
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: ITMG reported 9M26 net profit of US$162.93 million."
-      }
-    ],
-    "deals_control": [
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "Dato' Sri Tahir sells Maha Properti Indonesia shares",
-        "headline": "Tahir sells 33.89 million MPRO shares for Rp399.99 billion",
-        "blurb": "Maha Properti Indonesia said Tahir sold the shares on 9 November at Rp11,800 each, reducing his stake from 10.40% to 10.06%. He remains the company's controlling shareholder.",
-        "tickers": [
-          "MPRO.JK"
-        ],
-        "supporting_news_ids": [
-          32674
-        ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_09",
+      "id": "cur_12",
       "slot": "flash",
-      "event": "BRI reports Rp48.2 trillion profit and savings balance surpassing BCA",
-      "headline": "BRI's Savings Balance Overtakes BCA as Net Profit Rises 16.8% YoY to Rp48.2 Trillion in Q3 2026",
+      "event": "Sido Muncul reports lower nine-month profit and sales",
+      "headline": "SIDO's Net Profit Declines 24.36% Amid Segment Weakness, Analysts Forecast Gradual Recovery by 2027",
       "blurb": null,
-      "tickers": [],
+      "tickers": [
+        "SIDO.JK"
+      ],
       "supporting_news_ids": [
-        32685
+        32705
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_10",
+      "id": "cur_13",
       "slot": "flash",
-      "event": "BEI revises HSC methodology and expands the list to 383 stocks",
-      "headline": "Indonesia Stock Exchange expands its High Shareholding Concentration list to 383 stocks",
+      "event": "Bank Rakyat Indonesia reports nine-month 2026 results and related analyst target revision",
+      "headline": "Bank Rakyat Indonesia (BBRI.JK) reported Rp48.2 trillion in profit as its savings balance overtook BCA’s",
+      "blurb": null,
+      "tickers": [
+        "BBRI.JK"
+      ],
+      "supporting_news_ids": [
+        32710,
+        32701,
+        32685
+      ],
+      "copy_decision": "rewritten: 2 new articles with a new fact: BRI’s savings balance reached Rp634.8 trillion, surpassing BCA’s Rp628.4 trillion at the end of Q3 2026."
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "BEI expands and revises High Shareholding Concentration rules and list",
+      "headline": "Indonesia Stock Exchange expands its high-shareholding-concentration list to 383 stocks",
       "blurb": null,
       "tickers": [
         "MPRO.JK",
@@ -231,16 +303,17 @@
         "MKNT.JK"
       ],
       "supporting_news_ids": [
+        32713,
         32678,
         32672,
         32661,
         32668,
         32652
       ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: The revised test removes the Rp5 trillion market-cap threshold and Price Impact Ratio."
+      "copy_decision": "rewritten: 1 new articles with a new fact: The revised test screens all listed stocks and flags those where 10 or fewer shareholders control at least 92.5% of shares."
     },
     {
-      "id": "cur_11",
+      "id": "cur_15",
       "slot": "flash",
       "event": "BRI Danareksa raises its Astra International forecast and target price",
       "headline": "BRI Danareksa raises ASII 2026 profit forecast 5.3% and target to Rp 6,950",
@@ -251,10 +324,10 @@
       "supporting_news_ids": [
         32653
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_16",
       "slot": "flash",
       "event": "Saratoga completes a purchase of ADRO and AADI shares from Adaro Strategic Investments",
       "headline": "Alamtri Resources Indonesia (ADRO) and Adaro Andalan Indonesia (AADI) shares worth Rp 66.81 trillion change hands in a shareholder transfer",
@@ -271,7 +344,24 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_13",
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "Indonesia’s upcoming MSCI review prompts reforms and market concerns",
+      "headline": "Barito Pacific (BRPT.JK) and Bumi Resources Minerals (BRMS.JK) face potential MSCI outflows of Rp900 billion and Rp300 billion as Indonesia prepares reforms",
+      "blurb": null,
+      "tickers": [
+        "BRPT.JK",
+        "BRMS.JK"
+      ],
+      "supporting_news_ids": [
+        32700,
+        32699,
+        32667
+      ],
+      "copy_decision": "rewritten: 2 new articles with a new fact: An economist projected US$2 billion to US$6 billion of outflows if Indonesia’s market status were downgraded in 2027."
+    },
+    {
+      "id": "cur_18",
       "slot": "flash",
       "event": "BPJS Ketenagakerjaan's pension fund falls below 1% ownership in Medco",
       "headline": "BPJS Ketenagakerjaan Divests Stake in PT Medco Energi Internasional Tbk (MEDC)",
@@ -282,10 +372,10 @@
       "supporting_news_ids": [
         32677
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_19",
       "slot": "flash",
       "event": "Akasha Wira plans a 1-for-10 stock split to meet free-float requirements",
       "headline": "PT Akasha Wira International Tbk (ADES) Plans 1:10 Stock Split to Meet Free Float Requirements",
@@ -296,10 +386,24 @@
       "supporting_news_ids": [
         32681
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "Mitra Agro Dharma Unggul sells Nusantara Sawit Sejahtera shares",
+      "headline": "PT Mitra Agro Dharma Unggul Sells 626.87 Million Shares of PT Nusantara Sawit Sejahtera Tbk (NSSS)",
+      "blurb": null,
+      "tickers": [
+        "NSSS.JK"
+      ],
+      "supporting_news_ids": [
+        32695
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_15",
+      "id": "cur_21",
       "slot": "flash",
       "event": "BEI delists 18 listed companies effective November 10, 2026",
       "headline": "BEI Delists 18 Listed Companies Including PT Sri Rejeki Isman Tbk and PT Jaya Bersama Indo Tbk",
@@ -330,7 +434,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
+      "id": "cur_22",
       "slot": "flash",
       "event": "Delta Giri Wacana meets 15% free-float threshold after shareholder sale",
       "headline": "Delta Giri Wacana (DGWG.JK) meets the 15% free-float requirement after a 0.09% share sale",
@@ -342,35 +446,49 @@
         32675,
         32682
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "Waskita Beton Precast converts creditor debt through a private placement",
+      "headline": "WSBP Announces Private Placement Converting Creditor Debt into Shares",
+      "blurb": null,
+      "tickers": [
+        "WSBP.JK"
+      ],
+      "supporting_news_ids": [
+        32703
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_17",
+      "id": "cur_24",
       "slot": "flash",
-      "event": "RANS responds to scrutiny over government influencer contracts",
-      "headline": "RANS Entertainment (RANS) faces BEI review of Rp14,696,955,002 in government influencer contracts",
+      "event": "Global Dinamika Kencana increases its stake in Nusa Konstruksi Enjiniring",
+      "headline": "PT Global Dinamika Kencana Accumulates 3.76% of Shares in PT Nusa Konstruksi Enjiniring Tbk (DGIK) for IDR 27.5 Billion",
       "blurb": null,
       "tickers": [
-        "RANS.JK"
+        "DGIK.JK"
       ],
       "supporting_news_ids": [
-        32684,
-        32679,
-        32663
+        32707
       ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: BEI is reviewing government influencer contracts worth Rp14,696,955,002 awarded to RANS's subsidiary."
+      "copy_decision": "new story"
     },
     {
-      "id": "cur_18",
+      "id": "cur_25",
       "slot": "flash",
-      "event": "Indonesia’s capital market reforms and planned IDX meeting with MSCI",
-      "headline": "Indonesia Prioritizes Capital Market Reforms Ahead of MSCI Index Review Announcement",
+      "event": "Nawasena Nugra Investama acquires control of Idea Indonesia Akademi",
+      "headline": "PT Nawasena Nugra Investama Acquires 66.58% Stake in PT Idea Indonesia Akademi Tbk (IDEA)",
       "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        32667
+      "tickers": [
+        "IDEA.JK"
       ],
-      "copy_decision": "kept: same articles"
+      "supporting_news_ids": [
+        32712
+      ],
+      "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
@@ -379,21 +497,112 @@
       "sort_date": "2026-11-12",
       "timing_label": "12 Nov",
       "title": "Indonesian market: MSCI index review announcement",
-      "tickers": [],
+      "tickers": [
+        "BRMS.JK",
+        "BRPT.JK"
+      ],
       "supporting_news_ids": [
+        32700,
+        32699,
         32667
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-12-16",
-      "timing_label": "16 Dec",
-      "title": "ADES shareholders vote on proposed 1-for-10 stock split",
+      "sort_date": "2026-11-13",
+      "timing_label": "13 Nov",
+      "title": "BEI removes 300 additional stocks from IHSG weighting",
       "tickers": [
-        "ADES.JK"
+        "ADES.JK",
+        "AGAR.JK",
+        "AGII.JK",
+        "ALII.JK",
+        "ALKA.JK",
+        "BAJA.JK",
+        "BALI.JK",
+        "BBHI.JK",
+        "BBMD.JK",
+        "BBSI.JK",
+        "BDKR.JK",
+        "BELI.JK",
+        "BIKE.JK",
+        "BINA.JK",
+        "BKDP.JK",
+        "BMAS.JK",
+        "BNII.JK",
+        "BNLI.JK",
+        "BREN.JK",
+        "BSWD.JK",
+        "BTPN.JK",
+        "BYAN.JK",
+        "CITA.JK",
+        "CLAY.JK",
+        "CMNP.JK",
+        "CMNT.JK",
+        "DCII.JK",
+        "DMND.JK",
+        "DNET.JK",
+        "DSSA.JK",
+        "DUTI.JK",
+        "ELPI.JK",
+        "EPMT.JK",
+        "FAPA.JK",
+        "FILM.JK",
+        "FITT.JK",
+        "GEMS.JK",
+        "HATM.JK",
+        "IFSH.JK",
+        "INDO.JK",
+        "INPP.JK",
+        "KING.JK",
+        "KONI.JK",
+        "LIFE.JK",
+        "MAYA.JK",
+        "MCOL.JK",
+        "MDIA.JK",
+        "MEGA.JK",
+        "MGRO.JK",
+        "MKNT.JK",
+        "MKPI.JK",
+        "MLPT.JK",
+        "MORA.JK",
+        "MPRO.JK",
+        "MSJA.JK",
+        "MTEL.JK",
+        "NICK.JK",
+        "PGUN.JK",
+        "POLU.JK",
+        "PRAY.JK",
+        "PSAB.JK",
+        "RISE.JK",
+        "RLCO.JK",
+        "ROCK.JK",
+        "SAFE.JK",
+        "SAME.JK",
+        "SATU.JK",
+        "SHIP.JK",
+        "SILO.JK",
+        "SMAR.JK",
+        "SMMT.JK",
+        "SOHO.JK",
+        "SOTS.JK",
+        "SRAJ.JK",
+        "SSMS.JK",
+        "STTP.JK",
+        "TBIG.JK",
+        "TCPI.JK",
+        "TFCO.JK",
+        "TMAS.JK",
+        "WBSA.JK",
+        "YUPI.JK"
       ],
       "supporting_news_ids": [
-        32681
+        32713,
+        32678,
+        32672,
+        32661,
+        32668,
+        32652
       ]
     },
     {
@@ -406,6 +615,9 @@
         "GMFI.JK"
       ],
       "supporting_news_ids": [
+        32704,
+        32698,
+        32715,
         32671,
         32683
       ]
@@ -419,6 +631,7 @@
         "ULTJ.JK"
       ],
       "supporting_news_ids": [
+        32696,
         32664
       ]
     },
@@ -431,6 +644,7 @@
         "ULTJ.JK"
       ],
       "supporting_news_ids": [
+        32696,
         32664
       ]
     }
