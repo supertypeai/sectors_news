@@ -1,56 +1,45 @@
 {
   "issue_date": "2026-11-11",
   "window_start": "2026-11-10T13:50:00Z",
-  "window_end": "2026-11-11T09:55:57Z",
+  "window_end": "2026-11-11T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Ultra Jaya rights issue funds Frisian Flag acquisition and transfers control",
-    "headline": "ULTJ plans Rp16.94 trillion rights issue to acquire Frisian Flag and transfer control",
-    "blurb": "Management projects Frisian Flag Indonesia’s additional revenue will boost Ultra Jaya’s income by 137% annually. Ultra Jaya plans to issue 7.88 billion shares at Rp2,150 each, with about 86.01% of proceeds funding its Rp14.57 trillion acquisition of all of Frisian Flag Indonesia and the remainder for working capital. The deal would make Frisian Flag parent FrieslandCampina International Holding ULTJ’s new controlling shareholder. Cum rights are set for 8 January 2027, with the new shares due to list on 14 January.",
+    "event": "Ultra Jaya plans a rights issue to acquire Frisian Flag Indonesia",
+    "headline": "ULTJ plans Rp16.94 trillion rights issue to acquire Frisian Flag Indonesia",
+    "blurb": "The plan covers 7.88 billion new shares at Rp2,150 each, with 86.01% of proceeds earmarked for the acquisition through a Rp14.57 trillion non-cash contribution and the balance for working capital. FCIH would acquire 100% of Frisian Flag Indonesia and become ULTJ’s controlling shareholder, replacing Sabana Prawiridjaja. Management projects a 137% annual income boost from FFI and expects net cash flow to increase by 30.12% to 42.32%. The cum-rights date is 8 January 2027.",
     "tickers": [
       "ULTJ.JK"
     ],
     "supporting_news_ids": [
+      32720,
       32696,
       32664
     ],
-    "copy_decision": "rewritten: 1 new articles with a new fact: Management projects FFI’s additional revenue will boost ULTJ’s income by 137% annually."
+    "copy_decision": "rewritten: 1 new articles with a new fact: Management expects net cash flow to increase by 30.12% to 42.32%."
   },
   "sections": {
-    "capital_raising_buybacks": [
+    "deals_control": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Indo Tambangraya conducts a Rp1.83 trillion share buyback",
-        "headline": "ITMG conducts Rp1.83 trillion share buyback",
-        "blurb": "From January to early November 2026, Indo Tambangraya bought 54.82 million shares, equal to 4.9% of its outstanding shares. It has announced a further Rp2.31 trillion buyback, scheduled to conclude in February 2027.",
+        "event": "Controlling-shareholder shares in Alamtri and Adaro Andalan change hands",
+        "headline": "ADRO and AADI controlling-shareholder shares worth Rp66.81 trillion change hands",
+        "blurb": "Saratoga disclosed it invested Rp17.5 trillion, buying 838.45 million AADI shares from Adaro Strategic Investments for Rp8.62 trillion and 3.68 billion ADRO shares for Rp8.87 trillion. The purchases give Saratoga direct benefits from both companies rather than an indirect interest through Adaro Strategic Investments, while ADRO said control was unchanged.",
         "tickers": [
-          "ITMG.JK"
+          "ADRO.JK",
+          "AADI.JK",
+          "SRTG.JK"
         ],
         "supporting_news_ids": [
-          32676
+          32728,
+          32665,
+          32662
         ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "deals_control": [
-      {
-        "id": "cur_03",
-        "slot": "story",
-        "event": "Shima Global Kapital increases its stake in Energi Mega Persada",
-        "headline": "ENRG shareholder Shima Global Kapital raises stake to 17.46%",
-        "blurb": "Shima Global Kapital bought 2.33 billion ENRG shares on 6 November for about Rp1.28 trillion. The purchase was intended for internal consolidation into Bakrie Kalila Investment, part of Grup Bakrie, ahead of the MSCI Small Cap Index rebalancing scheduled for 11 November.",
-        "tickers": [
-          "ENRG.JK"
-        ],
-        "supporting_news_ids": [
-          32708
-        ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: moved from flash to story"
       },
       {
-        "id": "cur_04",
+        "id": "cur_03",
         "slot": "story",
         "event": "Garuda Indonesia prepares its third rights issue with Danantara participation",
         "headline": "GIAA plans 248.71 billion-share rights issue and is expected to control GMFI",
@@ -66,7 +55,21 @@
           32671,
           32683
         ],
-        "copy_decision": "rewritten: 3 new articles with a new fact: GIAA is expected to become GMFI’s majority shareholder and controller."
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Shima Global Kapital increases its stake in Energi Mega Persada",
+        "headline": "ENRG shareholder Shima Global Kapital raises stake to 17.46%",
+        "blurb": "Shima Global Kapital bought 2.33 billion ENRG shares on 6 November for about Rp1.28 trillion. The purchase was intended for internal consolidation into Bakrie Kalila Investment, part of Grup Bakrie, ahead of the MSCI Small Cap Index rebalancing scheduled for 11 November.",
+        "tickers": [
+          "ENRG.JK"
+        ],
+        "supporting_news_ids": [
+          32708
+        ],
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_05",
@@ -80,46 +83,41 @@
         "supporting_news_ids": [
           32709
         ],
-        "copy_decision": "new story"
-      },
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "capital_raising_buybacks": [
       {
         "id": "cur_06",
         "slot": "story",
-        "event": "Dato’ Sri Tahir sells Maha Properti shares",
-        "headline": "Tahir sells 33.89 million MPRO shares for an estimated Rp399.99 billion",
-        "blurb": "MPRO joined the HSC list alongside 82 other issuers. The sale was disclosed on 9 November at Rp11,800 per share, reducing Tahir’s stake from 10.40% to 10.06% while he retained control.",
+        "event": "Indo Tambangraya conducts a Rp1.83 trillion share buyback",
+        "headline": "ITMG conducts Rp1.83 trillion share buyback",
+        "blurb": "From January to early November 2026, Indo Tambangraya bought 54.82 million shares, equal to 4.9% of its outstanding shares. It has announced a further Rp2.31 trillion buyback, scheduled to conclude in February 2027.",
         "tickers": [
-          "MPRO.JK"
+          "ITMG.JK"
         ],
         "supporting_news_ids": [
-          32711,
-          32674
+          32676
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: MPRO was included on the HSC list alongside 82 other issuers."
-      }
-    ],
-    "other": [
-      {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "RANS government influencer contracts face ICW and BEI scrutiny",
-        "headline": "RANS faces scrutiny over Rp14.7 billion in government influencer contracts",
-        "blurb": "Rans Entertainment's subsidiary received one Rp3.9 billion campaign and three Ministry of Marine Affairs and Fisheries campaigns worth Rp10.8 billion, covering 2024–2026. The company said the contracts followed procurement procedures through Inaproc and e-Katalog, while BEI reviews them. RANS closed at Rp94 on 11 November, down 45.7% from 12 October.",
-        "tickers": [
-          "RANS.JK"
-        ],
-        "supporting_news_ids": [
-          32697,
-          32714,
-          32706,
-          32684,
-          32679,
-          32663
-        ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Sido Muncul reports nine-month results and a third-quarter recovery",
+        "headline": "SIDO reports nine-month results and Q3 recovery, projects 10% 2026 revenue decline",
+        "blurb": "Sido Muncul's Q3 sales distribution ratio to end consumers improved to 94%, and analysts said the worst of distributor inventory adjustment had passed. Management cited El Nino and consumer purchasing power as risks behind its 2026 outlook.",
+        "tickers": [
+          "SIDO.JK"
+        ],
+        "supporting_news_ids": [
+          32716,
+          32705
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
       {
         "id": "cur_08",
         "slot": "story",
@@ -137,6 +135,20 @@
       {
         "id": "cur_09",
         "slot": "story",
+        "event": "BRI Danareksa raises its target price for Astra International",
+        "headline": "BRI Danareksa raises ASII target price to Rp6,950 from Rp6,850",
+        "blurb": "BRI Danareksa analyst Erindra Krisnawan projects Astra International's 2026 net profit at Rp29.14 trillion, 5.3% above the prior estimate, and maintains a buy recommendation. He cites recovering automotive profitability and stable financial services contributions, with UNTR expected to remain a key profit driver through Q4-2026 and 2027.",
+        "tickers": [
+          "ASII.JK"
+        ],
+        "supporting_news_ids": [
+          32653
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_10",
+        "slot": "story",
         "event": "Telkom reports lower nine-month profit amid investment losses",
         "headline": "TLKM reports nearly 4% nine-month profit decline to Rp14.45 trillion",
         "blurb": "Telkom said unrealized gains and losses totaling Rp1.66 trillion heavily influenced the decline, including losses of Rp759 billion on Telkomsel's GOTO investment and Rp794 billion at MDI Ventures. Operating income rose 3.54% to Rp113.5 trillion, but higher operating and administrative costs offset the increase.",
@@ -148,75 +160,160 @@
           32670
         ],
         "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_10",
-        "slot": "story",
-        "event": "Gudang Garam shares fall despite strong nine-month profit growth",
-        "headline": "GGRM shares fall 0.65% despite 308.56% nine-month profit growth",
-        "blurb": "Gudang Garam reported net profit of Rp4.52 trillion, up from Rp1.1 trillion, while revenue declined 8.67% to Rp61.49 trillion. Separately, its Dhoho International Airport was designated a regular hajj airport for 2027, set to serve 9,641 pilgrims from 15 East Java regencies and cities.",
-        "tickers": [
-          "GGRM.JK"
-        ],
-        "supporting_news_ids": [
-          32658
-        ],
-        "copy_decision": "kept: same articles"
-      },
+      }
+    ],
+    "other": [
       {
         "id": "cur_11",
         "slot": "story",
-        "event": "Indo Tambangraya reports higher nine-month revenue and profit",
-        "headline": "ITMG reports higher nine-month revenue and profit, net profit reaches US$162.93 million",
-        "blurb": "Revenue was US$1.6 billion, including US$1.55 billion from third-party coal sales. Sales volume rose 5% and the average selling price increased 12% year on year to US$86 per ton.",
+        "event": "RANS government influencer contracts face ICW and BEI scrutiny",
+        "headline": "RANS faces scrutiny over Rp14.7 billion in government influencer contracts",
+        "blurb": "Rans Entertainment's subsidiary received one Rp3.9 billion campaign and three Ministry of Marine Affairs and Fisheries campaigns worth Rp10.8 billion, covering 2024–2026. The company said the contracts followed procurement procedures through Inaproc and e-Katalog, while BEI reviews them. RANS closed at Rp94 on 11 November, down 45.7% from 12 October.",
         "tickers": [
-          "ITMG.JK"
+          "RANS.JK"
         ],
         "supporting_news_ids": [
-          32673,
-          32660,
-          32666
+          32697,
+          32714,
+          32706,
+          32684,
+          32679,
+          32663
         ],
         "copy_decision": "kept: same articles"
+      }
+    ],
+    "macro_flows": [
+      {
+        "id": "cur_12",
+        "slot": "story",
+        "event": "Bank Indonesia reports October consumer confidence and spending data",
+        "headline": "BI reports October consumer confidence index at 119.9 as consumption share falls",
+        "blurb": "The average share of consumer income allocated to consumption fell to 73.6%, while savings rose to 16.4%. Household consumption grew 5.04% year on year in Q3 2026.",
+        "tickers": [
+          "INDF.JK",
+          "CMRY.JK",
+          "ICBP.JK",
+          "MYOR.JK",
+          "MAPI.JK"
+        ],
+        "supporting_news_ids": [
+          32721,
+          32723
+        ],
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_12",
+      "id": "cur_13",
       "slot": "flash",
-      "event": "Sido Muncul reports lower nine-month profit and sales",
-      "headline": "SIDO's Net Profit Declines 24.36% Amid Segment Weakness, Analysts Forecast Gradual Recovery by 2027",
+      "event": "Dato’ Sri Tahir sells Maha Properti shares",
+      "headline": "Tahir sells 33.89 million MPRO shares for an estimated Rp399.99 billion",
       "blurb": null,
       "tickers": [
-        "SIDO.JK"
+        "MPRO.JK"
       ],
       "supporting_news_ids": [
-        32705
+        32711,
+        32674
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "Charoen Pokphand Indonesia reports strong third-quarter earnings",
+      "headline": "PT Charoen Pokphand Indonesia Tbk (CPIN) Reports Strong Q3 2026 Earnings Driven by Poultry Business Margin Improvements",
+      "blurb": null,
+      "tickers": [
+        "CPIN.JK"
+      ],
+      "supporting_news_ids": [
+        32724
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_13",
+      "id": "cur_15",
       "slot": "flash",
-      "event": "Bank Rakyat Indonesia reports nine-month 2026 results and related analyst target revision",
-      "headline": "Bank Rakyat Indonesia (BBRI.JK) reported Rp48.2 trillion in profit as its savings balance overtook BCA’s",
+      "event": "Gudang Garam shares fall despite strong nine-month profit growth",
+      "headline": "GGRM shares fall 0.65% despite 308.56% nine-month profit growth",
+      "blurb": null,
+      "tickers": [
+        "GGRM.JK"
+      ],
+      "supporting_news_ids": [
+        32658
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "Indo Tambangraya Megah reports nine-month 2026 financial results",
+      "headline": "Indo Tambangraya Megah (ITMG.JK) reported nine-month 2026 net profit of US$162.93 million",
+      "blurb": null,
+      "tickers": [
+        "ITMG.JK"
+      ],
+      "supporting_news_ids": [
+        32719,
+        32673,
+        32660,
+        32666
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: Coal production rose 14% quarter-on-quarter to 6.0 million tons in 3Q26."
+    },
+    {
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "Indocement reports nine-month profit growth",
+      "headline": "PT Indocement Tunggal Prakarsa Tbk Reports 22.5% Profit Growth and Signals Potential Dividend Distribution",
+      "blurb": null,
+      "tickers": [
+        "INTP.JK"
+      ],
+      "supporting_news_ids": [
+        32727
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "Bank Rakyat Indonesia reports third-quarter 2026 results",
+      "headline": "Bank Rakyat Indonesia (BBRI.JK) reported Q3 2026 net profit of Rp48.2 trillion as its savings balance reached Rp634.8 trillion",
       "blurb": null,
       "tickers": [
         "BBRI.JK"
       ],
       "supporting_news_ids": [
         32710,
-        32701,
         32685
       ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: BRI’s savings balance reached Rp634.8 trillion, surpassing BCA’s Rp628.4 trillion at the end of Q3 2026."
+      "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
     },
     {
-      "id": "cur_14",
+      "id": "cur_19",
       "slot": "flash",
-      "event": "BEI expands and revises High Shareholding Concentration rules and list",
-      "headline": "Indonesia Stock Exchange expands its high-shareholding-concentration list to 383 stocks",
+      "event": "Bank Rakyat Indonesia target price is revised by Kiwoom Sekuritas",
+      "headline": "Kiwoom Sekuritas Indonesia Revises Price Target for PT Bank Rakyat Indonesia Tbk (BBRI) Amid Weakening Quarterly Momentum",
+      "blurb": null,
+      "tickers": [
+        "BBRI.JK"
+      ],
+      "supporting_news_ids": [
+        32701
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "BEI revises High Shareholding Concentration rules and expands the affected stock list",
+      "headline": "Indonesia Stock Exchange expands its High Shareholding Concentration list to 383 stocks",
       "blurb": null,
       "tickers": [
         "MPRO.JK",
@@ -303,6 +400,7 @@
         "MKNT.JK"
       ],
       "supporting_news_ids": [
+        32722,
         32713,
         32678,
         32672,
@@ -310,58 +408,32 @@
         32668,
         32652
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: The revised test screens all listed stocks and flags those where 10 or fewer shareholders control at least 92.5% of shares."
+      "copy_decision": "rewritten: 1 new articles with a new fact: The 300 additions will be excluded from IHSG calculation and represent about 6.16% of its market capitalization."
     },
     {
-      "id": "cur_15",
+      "id": "cur_21",
       "slot": "flash",
-      "event": "BRI Danareksa raises its Astra International forecast and target price",
-      "headline": "BRI Danareksa raises ASII 2026 profit forecast 5.3% and target to Rp 6,950",
-      "blurb": null,
-      "tickers": [
-        "ASII.JK"
-      ],
-      "supporting_news_ids": [
-        32653
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "Saratoga completes a purchase of ADRO and AADI shares from Adaro Strategic Investments",
-      "headline": "Alamtri Resources Indonesia (ADRO) and Adaro Andalan Indonesia (AADI) shares worth Rp 66.81 trillion change hands in a shareholder transfer",
-      "blurb": null,
-      "tickers": [
-        "ADRO.JK",
-        "AADI.JK",
-        "SRTG.JK"
-      ],
-      "supporting_news_ids": [
-        32665,
-        32662
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_17",
-      "slot": "flash",
-      "event": "Indonesia’s upcoming MSCI review prompts reforms and market concerns",
-      "headline": "Barito Pacific (BRPT.JK) and Bumi Resources Minerals (BRMS.JK) face potential MSCI outflows of Rp900 billion and Rp300 billion as Indonesia prepares reforms",
+      "event": "MSCI’s November review prompts Indonesian market reforms and investor reactions",
+      "headline": "Barito Pacific (BRPT) faces possible MSCI exclusion and a Rp900 billion outflow risk",
       "blurb": null,
       "tickers": [
         "BRPT.JK",
-        "BRMS.JK"
+        "BRMS.JK",
+        "BREN.JK",
+        "MTEL.JK",
+        "WIFI.JK",
+        "RAJA.JK"
       ],
       "supporting_news_ids": [
+        32726,
         32700,
         32699,
         32667
       ],
-      "copy_decision": "rewritten: 2 new articles with a new fact: An economist projected US$2 billion to US$6 billion of outflows if Indonesia’s market status were downgraded in 2027."
+      "copy_decision": "rewritten: 1 new articles with a new fact: A downgrade of Indonesia to standalone-market status could trigger Rp36 trillion to Rp108 trillion in foreign outflows."
     },
     {
-      "id": "cur_18",
+      "id": "cur_22",
       "slot": "flash",
       "event": "BPJS Ketenagakerjaan's pension fund falls below 1% ownership in Medco",
       "headline": "BPJS Ketenagakerjaan Divests Stake in PT Medco Energi Internasional Tbk (MEDC)",
@@ -375,7 +447,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
+      "id": "cur_23",
       "slot": "flash",
       "event": "Akasha Wira plans a 1-for-10 stock split to meet free-float requirements",
       "headline": "PT Akasha Wira International Tbk (ADES) Plans 1:10 Stock Split to Meet Free Float Requirements",
@@ -389,7 +461,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_20",
+      "id": "cur_24",
       "slot": "flash",
       "event": "Mitra Agro Dharma Unggul sells Nusantara Sawit Sejahtera shares",
       "headline": "PT Mitra Agro Dharma Unggul Sells 626.87 Million Shares of PT Nusantara Sawit Sejahtera Tbk (NSSS)",
@@ -400,10 +472,10 @@
       "supporting_news_ids": [
         32695
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_21",
+      "id": "cur_25",
       "slot": "flash",
       "event": "BEI delists 18 listed companies effective November 10, 2026",
       "headline": "BEI Delists 18 Listed Companies Including PT Sri Rejeki Isman Tbk and PT Jaya Bersama Indo Tbk",
@@ -434,7 +506,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_22",
+      "id": "cur_26",
       "slot": "flash",
       "event": "Delta Giri Wacana meets 15% free-float threshold after shareholder sale",
       "headline": "Delta Giri Wacana (DGWG.JK) meets the 15% free-float requirement after a 0.09% share sale",
@@ -449,7 +521,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_23",
+      "id": "cur_27",
       "slot": "flash",
       "event": "Waskita Beton Precast converts creditor debt through a private placement",
       "headline": "WSBP Announces Private Placement Converting Creditor Debt into Shares",
@@ -460,10 +532,10 @@
       "supporting_news_ids": [
         32703
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_24",
+      "id": "cur_28",
       "slot": "flash",
       "event": "Global Dinamika Kencana increases its stake in Nusa Konstruksi Enjiniring",
       "headline": "PT Global Dinamika Kencana Accumulates 3.76% of Shares in PT Nusa Konstruksi Enjiniring Tbk (DGIK) for IDR 27.5 Billion",
@@ -474,10 +546,10 @@
       "supporting_news_ids": [
         32707
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_25",
+      "id": "cur_29",
       "slot": "flash",
       "event": "Nawasena Nugra Investama acquires control of Idea Indonesia Akademi",
       "headline": "PT Nawasena Nugra Investama Acquires 66.58% Stake in PT Idea Indonesia Akademi Tbk (IDEA)",
@@ -487,6 +559,18 @@
       ],
       "supporting_news_ids": [
         32712
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_30",
+      "slot": "flash",
+      "event": "Danareksa Investment Management Indonesia launches after a merger",
+      "headline": "Danareksa Investment Management Indonesia Formed from Merger of Four State-Owned Investment Managers with New Leadership",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32725
       ],
       "copy_decision": "new story"
     }
@@ -498,10 +582,15 @@
       "timing_label": "12 Nov",
       "title": "Indonesian market: MSCI index review announcement",
       "tickers": [
+        "BREN.JK",
         "BRMS.JK",
-        "BRPT.JK"
+        "BRPT.JK",
+        "MTEL.JK",
+        "RAJA.JK",
+        "WIFI.JK"
       ],
       "supporting_news_ids": [
+        32726,
         32700,
         32699,
         32667
@@ -597,6 +686,7 @@
         "YUPI.JK"
       ],
       "supporting_news_ids": [
+        32722,
         32713,
         32678,
         32672,
@@ -631,6 +721,7 @@
         "ULTJ.JK"
       ],
       "supporting_news_ids": [
+        32720,
         32696,
         32664
       ]
@@ -644,6 +735,7 @@
         "ULTJ.JK"
       ],
       "supporting_news_ids": [
+        32720,
         32696,
         32664
       ]
