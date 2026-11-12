@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-12",
   "window_start": "2026-11-11T13:50:00Z",
-  "window_end": "2026-11-12T09:56:49Z",
+  "window_end": "2026-11-12T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -49,7 +49,7 @@
           32776,
           32782
         ],
-        "copy_decision": "rewritten: 6 new articles with a new fact: The rupiah reached Rp18,250 per US dollar intraday on 12 November."
+        "copy_decision": "kept: same articles"
       }
     ],
     "deals_control": [
@@ -81,10 +81,22 @@
           32804,
           32795
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_05",
+        "slot": "story",
+        "event": "Sinar Mas receives conditional approval to acquire Hyundai LNG Shipping",
+        "headline": "Sinar Mas gets conditional approval for 100% buyout of Hyundai LNG Shipping parent",
+        "blurb": "South Korea granted conditional approval on 6 November for Sinar Mas affiliate Frontier Resources to acquire Aegis One, Hyundai LNG Shipping’s parent, from IMM Private Equity and IMM Investment. The equity purchase is valued at about 400 billion won, with the remaining payment and share transfer targeted for 23 November.",
+        "tickers": [],
+        "supporting_news_ids": [
+          32765
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_06",
         "slot": "story",
         "event": "Two shareholders sell more than 416 million LUCY shares",
         "headline": "Two LUCY shareholders sell 416.22 million shares for Rp127.7 billion",
@@ -95,12 +107,72 @@
         "supporting_news_ids": [
           32808
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "BSI lists Phase III 2026 sustainable mudharabah sukuk",
+        "headline": "BRIS lists Rp2 trillion Phase III 2026 sustainable mudharabah sukuk",
+        "blurb": "Bank Syariah Indonesia's three series carry annual yields of 7%, 7.05% and 7.20%, with quarterly payments and maturities in 2027, 2028 and 2029. The issuance completes the Rp10 trillion continuous offering target, following Rp3 trillion in 2024 and Rp5 trillion in 2025.",
+        "tickers": [
+          "BRIS.JK"
+        ],
+        "supporting_news_ids": [
+          32735
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "VIVA plans debt-conversion private placement",
+        "headline": "VIVA plans Rp1.72 trillion debt conversion into up to 86.17 billion shares",
+        "blurb": "Pro forma liabilities are projected to fall from Rp5.84 trillion to Rp4.12 trillion. Visi Media Asia would issue Series C shares to creditors HAJ and JSM, diluting existing shareholders by 83.9590% without bringing in new cash. Shareholders are scheduled to vote on 17 November, with listing set for 3 December.",
+        "tickers": [
+          "VIVA.JK"
+        ],
+        "supporting_news_ids": [
+          32785,
+          32805,
+          32751
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "ASSA secures a Rp300 billion credit facility from CIMB Niaga",
+        "headline": "ASSA secures Rp300 billion facility from CIMB Niaga",
+        "blurb": "Adi Sarana Armada agreed the fixed loan with CIMB Niaga on 11 November. It will fund working capital and vehicle purchases for the fleet rental business.",
+        "tickers": [
+          "ASSA.JK"
+        ],
+        "supporting_news_ids": [
+          32803
+        ],
+        "copy_decision": "kept: same articles"
       }
     ],
     "market_structure_policy": [
       {
-        "id": "cur_06",
+        "id": "cur_10",
+        "slot": "story",
+        "event": "XLSMART wins 700 MHz and 2.6 GHz spectrum allocations",
+        "headline": "EXCL wins 30 MHz of 700 MHz spectrum and 50 MHz at 2.6 GHz",
+        "blurb": "XLSMART bid Rp1,060.2 trillion for the 700 MHz block and Rp231.6 billion for the 2.6 GHz block in Komdigi’s 2026 selection. It plans to expand coverage and 4G and 5G capacity, and must provide mobile broadband in 538 designated villages and reach a 51% 5G coverage target in committed cities and regencies.",
+        "tickers": [
+          "EXCL.JK"
+        ],
+        "supporting_news_ids": [
+          32733
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_11",
         "slot": "story",
         "event": "MSCI November 2026 index review changes Indonesian constituents",
         "headline": "MSCI review leaves seven Indonesian stocks in Global Standard",
@@ -129,108 +201,39 @@
           32755,
           32744
         ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: On 12 November, BRPT fell 4.57%, BRMS fell 4.02% and WIFI hit the lower price limit, down 6.41%."
-      },
-      {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "XLSMART wins 700 MHz and 2.6 GHz spectrum allocations",
-        "headline": "EXCL wins 30 MHz of 700 MHz spectrum and 50 MHz at 2.6 GHz",
-        "blurb": "XLSMART bid Rp1,060.2 trillion for the 700 MHz block and Rp231.6 billion for the 2.6 GHz block in Komdigi’s 2026 selection. It plans to expand coverage and 4G and 5G capacity, and must provide mobile broadband in 538 designated villages and reach a 51% 5G coverage target in committed cities and regencies.",
-        "tickers": [
-          "EXCL.JK"
-        ],
-        "supporting_news_ids": [
-          32733
-        ],
         "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "Danantara consolidates four state-owned investment managers into Danareksa",
-        "headline": "Danantara consolidates four investment managers into Danareksa with Rp150 trillion",
-        "blurb": "The new entity combines Mandiri Manajemen Investasi, BRI Manajemen Investasi, BNI Asset Management and PNM Investment Management. Danareksa Investments’ acting director general separately put its assets under management at Rp172.5 trillion and said it was Indonesia’s largest, with about Rp13 trillion in assets under advisory.",
-        "tickers": [],
-        "supporting_news_ids": [
-          32734
-        ],
-        "copy_decision": "rewritten: moved from flash to story"
-      },
-      {
-        "id": "cur_09",
-        "slot": "story",
-        "event": "Sinar Mas receives conditional approval to acquire Hyundai LNG Shipping",
-        "headline": "Sinar Mas gets conditional approval for 100% buyout of Hyundai LNG Shipping parent",
-        "blurb": "South Korea granted conditional approval on 6 November for Sinar Mas affiliate Frontier Resources to acquire Aegis One, Hyundai LNG Shipping’s parent, from IMM Private Equity and IMM Investment. The equity purchase is valued at about 400 billion won, with the remaining payment and share transfer targeted for 23 November.",
-        "tickers": [],
-        "supporting_news_ids": [
-          32765
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "capital_raising_buybacks": [
-      {
-        "id": "cur_10",
-        "slot": "story",
-        "event": "BSI lists Phase III 2026 sustainable mudharabah sukuk",
-        "headline": "BRIS lists Rp2 trillion Phase III 2026 sustainable mudharabah sukuk",
-        "blurb": "Bank Syariah Indonesia's three series carry annual yields of 7%, 7.05% and 7.20%, with quarterly payments and maturities in 2027, 2028 and 2029. The issuance completes the Rp10 trillion continuous offering target, following Rp3 trillion in 2024 and Rp5 trillion in 2025.",
-        "tickers": [
-          "BRIS.JK"
-        ],
-        "supporting_news_ids": [
-          32735
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_11",
-        "slot": "story",
-        "event": "VIVA plans debt-conversion private placement",
-        "headline": "VIVA plans Rp1.72 trillion debt conversion into up to 86.17 billion shares",
-        "blurb": "Pro forma liabilities are projected to fall from Rp5.84 trillion to Rp4.12 trillion. Visi Media Asia would issue Series C shares to creditors HAJ and JSM, diluting existing shareholders by 83.9590% without bringing in new cash. Shareholders are scheduled to vote on 17 November, with listing set for 3 December.",
-        "tickers": [
-          "VIVA.JK"
-        ],
-        "supporting_news_ids": [
-          32785,
-          32805,
-          32751
-        ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: Pro forma liabilities are projected to fall from Rp5.84 trillion to Rp4.12 trillion."
       },
       {
         "id": "cur_12",
         "slot": "story",
-        "event": "Fitch downgrades BUMA's credit rating on default risk",
-        "headline": "Fitch cuts BUMA rating to CCC-(idn) on default risk",
-        "blurb": "Fitch also cut BUMA’s unguaranteed rupiah bonds and sukuk from A-(idn) to CC(idn), citing severe liquidity pressure and an unsustainable debt structure. It estimated BUMA had about US$66 million in cash, including US$16 million of restricted cash, against roughly US$200 million of debt maturing from October 2026 to September 2027. Further cuts could follow a distressed debt exchange or default.",
-        "tickers": [],
-        "supporting_news_ids": [
-          32801
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_13",
-        "slot": "story",
-        "event": "ASSA secures a Rp300 billion credit facility from CIMB Niaga",
-        "headline": "ASSA secures Rp300 billion facility from CIMB Niaga",
-        "blurb": "Adi Sarana Armada agreed the fixed loan with CIMB Niaga on 11 November. It will fund working capital and vehicle purchases for the fleet rental business.",
+        "event": "BEI changes LQ45 and IDX80 constituents in an incidental evaluation",
+        "headline": "BEI revises LQ45 and IDX80, adding GGRM at a 0.41% weight",
+        "blurb": "Erajaya (0.25%) and Pakuwon Jati (0.32%) also join LQ45, replacing Mitra Adiperkasa, Trimegah Bangun Persada and Pertamina Geothermal Energy. The revised constituents take effect on 18 November and remain in place until 29 January 2027.",
         "tickers": [
-          "ASSA.JK"
+          "GGRM.JK",
+          "ERAA.JK",
+          "PWON.JK",
+          "MAPI.JK",
+          "NCKL.JK",
+          "PGEO.JK",
+          "DKFT.JK",
+          "IMPC.JK",
+          "NICL.JK",
+          "RMKE.JK",
+          "TKIM.JK"
         ],
         "supporting_news_ids": [
-          32803
+          32783,
+          32767,
+          32748,
+          32749
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ],
     "other": [
       {
-        "id": "cur_14",
+        "id": "cur_13",
         "slot": "story",
         "event": "Petrosea reports new contracts and a US$5.36 billion backlog",
         "headline": "PTRO reports new contracts and a US$5.36 billion backlog",
@@ -243,10 +246,10 @@
           32798,
           32766
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: The Rp9.3 trillion Singaraja Putra contract involves its subsidiaries Cakrawala Bara Persada and Pesona Bara Cakrawala."
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_15",
+        "id": "cur_14",
         "slot": "story",
         "event": "SMAR announces an interim dividend of Rp 490 per share",
         "headline": "SMAR announces Rp490 interim dividend per share",
@@ -260,7 +263,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_16",
+        "id": "cur_15",
         "slot": "story",
         "event": "KEEN signs power purchase agreements with PLN for two hydroelectric plants",
         "headline": "KEEN signs 30-year power purchase agreements with PLN for two hydro plants",
@@ -276,7 +279,7 @@
     ],
     "earnings_guidance": [
       {
-        "id": "cur_17",
+        "id": "cur_16",
         "slot": "story",
         "event": "BBRI reports nine-month profit growth amid share-price gains",
         "headline": "BBRI reports 16.9% nine-month profit growth as shares gain 3.85%",
@@ -286,6 +289,20 @@
         ],
         "supporting_news_ids": [
           32771
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_17",
+        "slot": "story",
+        "event": "ITMG reports nine-month 2026 financial results",
+        "headline": "ITMG reports nine-month revenue of US$1.60 billion, up 16.96%",
+        "blurb": "Indo Tambangraya Megah’s gross profit rose 29.2% to US$422.6 million as coal sales volume and average selling price increased. Marubeni contributed US$240.23 million, more than 10% of consolidated revenue, while analysts advised a “wait and see” stance amid commodity-price and regulatory risks.",
+        "tickers": [
+          "ITMG.JK"
+        ],
+        "supporting_news_ids": [
+          32731
         ],
         "copy_decision": "kept: same articles"
       },
@@ -302,24 +319,10 @@
           32792,
           32778
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: MTEL reported Rp5.31 trillion in operating cash flow and a debt-to-equity ratio of 62.6%."
-      },
-      {
-        "id": "cur_19",
-        "slot": "story",
-        "event": "ITMG reports nine-month 2026 financial results",
-        "headline": "ITMG reports nine-month revenue of US$1.60 billion, up 16.96%",
-        "blurb": "Indo Tambangraya Megah’s gross profit rose 29.2% to US$422.6 million as coal sales volume and average selling price increased. Marubeni contributed US$240.23 million, more than 10% of consolidated revenue, while analysts advised a “wait and see” stance amid commodity-price and regulatory risks.",
-        "tickers": [
-          "ITMG.JK"
-        ],
-        "supporting_news_ids": [
-          32731
-        ],
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_20",
+        "id": "cur_19",
         "slot": "story",
         "event": "Petrosea reports H1 2026 revenue growth",
         "headline": "PTRO reports H1 2026 revenue up 60% to US$543.98 million",
@@ -332,40 +335,13 @@
           32799,
           32796
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_21",
-      "slot": "flash",
-      "event": "BEI revises LQ45 and IDX80 constituents",
-      "headline": "BEI revises LQ45 and IDX80, adding GGRM at 0.41% weight",
-      "blurb": null,
-      "tickers": [
-        "GGRM.JK",
-        "ERAA.JK",
-        "PWON.JK",
-        "MAPI.JK",
-        "NCKL.JK",
-        "PGEO.JK",
-        "DKFT.JK",
-        "IMPC.JK",
-        "NICL.JK",
-        "RMKE.JK",
-        "TKIM.JK"
-      ],
-      "supporting_news_ids": [
-        32783,
-        32767,
-        32748,
-        32749
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
-      "id": "cur_22",
+      "id": "cur_20",
       "slot": "flash",
       "event": "Mirae Asset downgrades DEWA and cuts its target price",
       "headline": "Mirae Asset Sekuritas cuts Darma Henwa (DEWA) target price to Rp 280",
@@ -377,22 +353,38 @@
         32793,
         32777
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: DEWA reported nine-month net profit of Rp513 billion, up 98% year on year."
-    },
-    {
-      "id": "cur_23",
-      "slot": "flash",
-      "event": "Gibran Rakabuming Raka resigns as vice president",
-      "headline": "Vice President Gibran Rakabuming Raka Resigns, MPR Asks President Prabowo Subianto to Propose Replacement Candidates",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        32762
-      ],
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_24",
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "Fitch downgrades BUMA's credit rating on default risk",
+      "headline": "Fitch cuts BUMA rating to CCC-(idn) on default risk",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32801
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "Stockbit expects normalized dividend payout ratios at BBRI, BMRI, and BBNI",
+      "headline": "State-Owned Banks BBRI, BMRI, and BBNI Signal Dividend Payout Ratio Normalization Despite Solid Profit Growth",
+      "blurb": null,
+      "tickers": [
+        "BBRI.JK",
+        "BMRI.JK",
+        "BBNI.JK"
+      ],
+      "supporting_news_ids": [
+        32772
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_23",
       "slot": "flash",
       "event": "ADES plans a 1:10 stock split",
       "headline": "PT Akasha Wira International Tbk (ADES) plans 1:10 stock split to boost liquidity and meet IDX free float requirement",
@@ -406,7 +398,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_25",
+      "id": "cur_24",
       "slot": "flash",
       "event": "POWR announces its 2026 interim dividend",
       "headline": "PT Cikarang Listrindo Tbk (POWR.JK) plans an interim dividend of Rp502.92 billion for 2026",
@@ -419,10 +411,10 @@
         32787,
         32806
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_26",
+      "id": "cur_25",
       "slot": "flash",
       "event": "Global Dinamika Kencana increases its stake in DGIK",
       "headline": "PT Global Dinamika Kencana Sequentially Acquires 8.16% Stake in PT Nusa Konstruksi Enjiniring Tbk (DGIK)",
@@ -433,10 +425,10 @@
       "supporting_news_ids": [
         32807
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_27",
+      "id": "cur_26",
       "slot": "flash",
       "event": "PPRE secures a mining-road flyover construction contract",
       "headline": "PT PP Presisi Tbk (PPRE) Secures Rp 68 Billion Contract to Develop Mining Flyover in North Maluku",
@@ -447,10 +439,34 @@
       "supporting_news_ids": [
         32797
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_27",
+      "slot": "flash",
+      "event": "Danantara consolidates four state-owned investment managers into Danareksa",
+      "headline": "Danantara consolidates four investment managers into Danareksa with Rp150 trillion",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32734
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
     },
     {
       "id": "cur_28",
+      "slot": "flash",
+      "event": "Gibran Rakabuming Raka resigns as vice president",
+      "headline": "Vice President Gibran Rakabuming Raka Resigns, MPR Asks President Prabowo Subianto to Propose Replacement Candidates",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32762
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_29",
       "slot": "flash",
       "event": "OJK and BEI meet the Coordinating Ministry to discuss capital-market initiatives",
       "headline": "OJK and BEI Meet with Coordinating Minister of Economic Affairs to Discuss MSCI Status and New High Shareholding Concentration Methodology",
@@ -468,7 +484,14 @@
       "sort_date": "2026-11-13",
       "timing_label": "13 Nov",
       "title": "BEI starts excluding HSC stocks from IHSG calculation",
-      "tickers": [],
+      "tickers": [
+        "BDMN.JK",
+        "BNGA.JK",
+        "BNII.JK",
+        "BNLI.JK",
+        "BRIS.JK",
+        "BYAN.JK"
+      ],
       "supporting_news_ids": [
         32754,
         32757,
