@@ -1,18 +1,54 @@
 {
   "issue_date": "2026-11-13",
   "window_start": "2026-11-12T13:50:00Z",
-  "window_end": "2026-11-13T05:56:32Z",
+  "window_end": "2026-11-13T10:59:38Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Rupiah reaches successive record lows on November 12–13, 2026",
-    "headline": "Rupiah sets successive record lows, opening at Rp18,233 per US dollar",
-    "blurb": "The rupiah had closed at Rp18,239 per US dollar on 12 November, down 0.50% or Rp90 and also reported as a historical low. Bank Indonesia attributed the weakness mainly to expectations of US rate hikes in December and domestic concerns over political uncertainty and MSCI’s consultation on Indonesia’s market classification. Danamon economist Irman Faiz warned the currency could test Rp18,300-Rp18,400 in the coming weeks. Bank Indonesia said it would continue foreign-exchange intervention through NDF, DNDF, spot transactions and government bond purchases.",
-    "tickers": [],
+    "event": "IDX's HSC review and related index adjustments, including DGWG's shareholder response",
+    "headline": "IDX removes 383 HSC stocks from IHSG calculation through 29 January 2027",
+    "blurb": "The IDX removed the stocks from IHSG calculation from 13 November 2026 through 29 January 2027 to limit volatility and passive-investor tracking errors. Delta Giri Wacana controlling shareholder David Yaory sold about 5.26 million shares at Rp260-262 each between 6 and 9 November, raising Rp1.37 billion and lifting free float to 15% to meet the IDX minimum. The IDX says HSC classification is a transparency indicator, not inherently a regulatory violation, and revised LQ45 and IDX80 constituents after input on 300 HSC stocks.",
+    "tickers": [
+      "DGWG.JK",
+      "MAPI.JK",
+      "NCKL.JK",
+      "PGEO.JK",
+      "ERAA.JK",
+      "GGRM.JK",
+      "PWON.JK",
+      "TKIM.JK",
+      "DKFT.JK",
+      "IMPC.JK",
+      "NICL.JK",
+      "RMKE.JK",
+      "BBCA.JK",
+      "BBRI.JK",
+      "BMRI.JK",
+      "BBNI.JK",
+      "BBTN.JK",
+      "AMMN.JK",
+      "ANTM.JK",
+      "ADRO.JK",
+      "AADI.JK",
+      "ASII.JK",
+      "INDF.JK",
+      "ICBP.JK",
+      "BREN.JK",
+      "BYAN.JK",
+      "GEMS.JK",
+      "BDMN.JK",
+      "BNGA.JK",
+      "BRIS.JK",
+      "DCII.JK",
+      "MTEL.JK",
+      "TBIG.JK",
+      "ROTI.JK"
+    ],
     "supporting_news_ids": [
-      32843,
-      32816,
-      32814
+      32870,
+      32855,
+      32821,
+      32810
     ],
     "copy_decision": "rewritten: moved from flash to lead"
   },
@@ -31,7 +67,7 @@
           32847,
           32844
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_03",
@@ -46,7 +82,7 @@
           32848,
           32842
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "deals_control": [
@@ -63,26 +99,41 @@
           32846,
           32822
         ],
-        "copy_decision": "rewritten: moved from lead to story"
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "VISI completes its acquisition of a 72.91% stake in HMBC",
+        "headline": "VISI completes acquisition of 72.91% stake in HMBC",
+        "blurb": "The purchase from Hasna Medika Utama Group closed on 30 October for Rp286 billion, covering 17,325 shares in Hasna Medika Bakti Cirebon, which manages Hasna Medika Cirebon Heart Hospital. Satu Visi Putra also issued 120.72 million shares at Rp994 each in a Rp120 billion private placement.",
+        "tickers": [
+          "VISI.JK"
+        ],
+        "supporting_news_ids": [
+          32860
+        ],
+        "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_05",
+        "id": "cur_06",
         "slot": "story",
-        "event": "MNC Sekuritas lowers BBRI’s price target after third-quarter earnings",
-        "headline": "MNC Sekuritas cuts BBRI price target despite 16% Q3 profit growth",
-        "blurb": "Bank Rakyat Indonesia posted Q3 net profit of Rp16.8 trillion, up 16% year-on-year, while nine-month profit of Rp47.7 trillion equaled 80% of MNC Sekuritas and consensus forecasts for 2026. The earnings beat was driven by a 30.6% quarterly decline in credit loss provisions, as net interest income fell 7.6% and net interest margin narrowed to 7.4% year-to-date.",
+        "event": "BRI's Q3 2026 results prompt MNC Sekuritas to cut its price target",
+        "headline": "BBRI posts Rp16.8 trillion Q3 profit as MNC Sekuritas cuts price target",
+        "blurb": "MNC Sekuritas lowered its target despite BRI's earnings beat. BRI's September non-performing loan ratio was 2.85%, down from 2.9% in June, while its January-September net profit reached Rp47.7 trillion, 80% of MNC Sekuritas' and consensus projections for 2026.",
         "tickers": [
           "BBRI.JK"
         ],
         "supporting_news_ids": [
+          32869,
           32812
         ],
-        "copy_decision": "kept: same articles"
+        "copy_decision": "rewritten: 1 new articles with a new fact: BRI's September 2026 non-performing loan ratio was 2.85%, down from 2.9% in June 2026."
       },
       {
-        "id": "cur_06",
+        "id": "cur_07",
         "slot": "story",
         "event": "Mirae Asset downgrades BRMS and cuts its target price",
         "headline": "Mirae Asset downgrades BRMS to hold and cuts target price to Rp310",
@@ -96,38 +147,37 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "Jasa Marga Q3 results and outlook for performance recovery in 2027",
-        "headline": "JSMR’s net profit falls 2.57% through Q3 as analysts see 2027 recovery",
-        "blurb": "Jasa Marga’s revenue fell 1.23% year on year to Rp20.82 trillion through September, while average daily traffic was about 3.6 million vehicles. BRI Danareksa analyst Abida Massi Armand recommends buying the shares, with a Rp4,750 target price.",
-        "tickers": [
-          "JSMR.JK"
-        ],
-        "supporting_news_ids": [
-          32835,
-          32824
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: Average daily traffic was about 3.6 million vehicles through Q3 2026."
-      },
-      {
         "id": "cur_08",
         "slot": "story",
-        "event": "ADES reports record Q3 2026 revenue and slower profit growth",
-        "headline": "ADES reports record Q3 revenue of Rp1.21 trillion as profit growth slows",
-        "blurb": "Akasha's gross profit margin fell to 46.4%, its lowest since Q2 2021, while net profit rose 2.4% quarter on quarter to Rp281 billion. The company plans to propose a 1:10 stock split at an extraordinary general meeting on 16 December, with trading at the new Rp100 nominal value scheduled from 15 January 2027.",
+        "event": "INCO reports a Q3 2026 net profit surge",
+        "headline": "INCO reports Q3 net profit up 182% to US$147 million",
+        "blurb": "Vale Indonesia's revenue rose 27% to US$896 million, supported by nickel matte production of 18,341 metric tons and higher sales from the Bahodopi and Pomalaa blocks. It spent US$95 million on capital expenditure in the first nine months and held US$247 million in cash and equivalents at 30 September.",
         "tickers": [
-          "ADES.JK"
+          "INCO.JK"
         ],
         "supporting_news_ids": [
-          32817
+          32868
         ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "PTBA receives MNC Sekuritas forecast and target revisions",
+        "headline": "MNC Sekuritas raises PTBA's 2026 profit forecast 51% to Rp6 trillion",
+        "blurb": "The broker also issued new price targets and projects Rp7.1 trillion in 2027 net profit. PTBA reported Rp1.8 trillion in Q3 net profit and Rp4.4 trillion from January to September. The outlook is supported in part by management's target to reduce domestic sales to about 34% by year-end amid potential DMO rule changes.",
+        "tickers": [
+          "PTBA.JK"
+        ],
+        "supporting_news_ids": [
+          32858
+        ],
+        "copy_decision": "new story"
       }
     ],
     "capital_raising_buybacks": [
       {
-        "id": "cur_09",
+        "id": "cur_10",
         "slot": "story",
         "event": "Merdeka Gold plans a private placement of 1.47 billion shares",
         "headline": "EMAS plans a private placement of 1.47 billion shares",
@@ -144,10 +194,80 @@
   },
   "flash": [
     {
-      "id": "cur_10",
+      "id": "cur_11",
       "slot": "flash",
-      "event": "MSCI removes eight Indonesian stocks from its global indexes",
-      "headline": "MSCI Removes Eight Indonesian Stocks from Global Indexes, Raising Mutual Fund Redemption Risk",
+      "event": "JSMR reports Q3 weakness and a 2027 recovery outlook",
+      "headline": "PT Jasa Marga Tbk (JSMR) Faces Performance Pressure Through 2026, with Acceleration Expected in 2027",
+      "blurb": null,
+      "tickers": [
+        "JSMR.JK"
+      ],
+      "supporting_news_ids": [
+        32824
+      ],
+      "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "BRI Danareksa rates JSMR Buy with a Rp4,750 target",
+      "headline": "BRI Danareksa Sekuritas Rates PT Jasa Marga Tbk (JSMR) a Buy with Rp 4,750 Target on Holiday Season Momentum",
+      "blurb": null,
+      "tickers": [
+        "JSMR.JK"
+      ],
+      "supporting_news_ids": [
+        32835
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "ADES reports record Q3 2026 revenue and slower profit growth",
+      "headline": "ADES reports record Q3 revenue of Rp1.21 trillion as profit growth slows",
+      "blurb": null,
+      "tickers": [
+        "ADES.JK"
+      ],
+      "supporting_news_ids": [
+        32817
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "Maybank revises BSDE earnings forecasts following a land sale",
+      "headline": "Analysts Forecast BSDE Profit Decline in 2026 Due to Slow Residential Sales and Market Pressures",
+      "blurb": null,
+      "tickers": [
+        "BSDE.JK"
+      ],
+      "supporting_news_ids": [
+        32864
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Telkom evaluates the sale of 70% of NeutraDC",
+      "headline": "PT Telkom Indonesia Tbk (TLKM) Prepares for Jumbo Transaction Involving NeutraDC Data Center Shares",
+      "blurb": null,
+      "tickers": [
+        "TLKM.JK"
+      ],
+      "supporting_news_ids": [
+        32857
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "MSCI's Indonesia review drives index removals and concerns over capital outflows",
+      "headline": "Barito Pacific (BRPT) was among eight Indonesian stocks affected by MSCI’s November review",
       "blurb": null,
       "tickers": [
         "BRPT.JK",
@@ -161,65 +281,44 @@
         "WIFI.JK"
       ],
       "supporting_news_ids": [
+        32851,
         32823
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: The finance minister said foreign capital outflows from Indonesian stocks reached Rp97 trillion as of 11 November 2026."
     },
     {
-      "id": "cur_11",
+      "id": "cur_17",
       "slot": "flash",
-      "event": "IDX revises LQ45 and IDX80 constituents after its HSC review",
-      "headline": "IDX Revamps LQ45 and IDX80 Constituents Following High Shareholding Concentration Review",
-      "blurb": null,
-      "tickers": [
-        "MAPI.JK",
-        "NCKL.JK",
-        "PGEO.JK",
-        "ERAA.JK",
-        "GGRM.JK",
-        "PWON.JK",
-        "TKIM.JK",
-        "DKFT.JK",
-        "IMPC.JK",
-        "NICL.JK",
-        "RMKE.JK"
-      ],
-      "supporting_news_ids": [
-        32821
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_12",
-      "slot": "flash",
-      "event": "Medco sets rupiah conversion rate for its interim dividend",
-      "headline": "PT Medco Energi Internasional Tbk (MEDC) Sets Rp18,154/USD Dividend Conversion Rate, Investors to Receive Rp22.02 per Share",
+      "event": "MEDC declares an interim dividend and sets its rupiah conversion rate",
+      "headline": "Medco Energi Internasional (MEDC) sets its 2026 interim dividend at Rp22.0252 per share",
       "blurb": null,
       "tickers": [
         "MEDC.JK"
       ],
       "supporting_news_ids": [
+        32866,
         32840
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: The interim dividend totals US$30 million, equivalent to Rp544.62 billion."
     },
     {
-      "id": "cur_13",
+      "id": "cur_18",
       "slot": "flash",
-      "event": "ITMG declares Rp1,286.83 per-share interim dividend",
-      "headline": "Indo Tambangraya Megah (ITMG) declares interim dividend of Rp 1,286.83 per share",
+      "event": "ITMG declares its 2026 interim dividend of Rp1,286.83 per share",
+      "headline": "Indo Tambangraya Megah (ITMG.JK) declares an interim dividend of Rp1,286.83 per share",
       "blurb": null,
       "tickers": [
         "ITMG.JK"
       ],
       "supporting_news_ids": [
+        32853,
         32841,
         32832
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: The interim dividend distributes US$74.2 million, equal to 70% of first-half net profit."
+      "copy_decision": "rewritten: 1 new articles with a new fact: The interim dividend totals approximately Rp1.35 trillion, or 70% of first-half 2026 net profit."
     },
     {
-      "id": "cur_14",
+      "id": "cur_19",
       "slot": "flash",
       "event": "POWR announces an interim dividend",
       "headline": "PT Cikarang Listrindo Tbk (POWR) to distribute interim dividend of Rp502.93 billion",
@@ -233,7 +332,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_15",
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "SINI's controlling shareholder accumulates shares in November",
+      "headline": "PT Singaraja Putra Tbk (SINI) Reaches Auto Rejection Top Driven by Controller's Share Accumulation in November",
+      "blurb": null,
+      "tickers": [
+        "SINI.JK"
+      ],
+      "supporting_news_ids": [
+        32867
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_21",
       "slot": "flash",
       "event": "MSTI announces an interim dividend",
       "headline": "PT Mastersystem Infotama Tbk (MSTI) Announces Interim Dividend of Rp 150.69 Billion and Distribution Schedule",
@@ -247,7 +360,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
+      "id": "cur_22",
       "slot": "flash",
       "event": "KEEN signs hydropower power-purchase agreements with PLN",
       "headline": "PT Kencana Energi Lestari Tbk (KEEN) Secures Rp21.93 Trillion Hydropower Contracts from PLN",
@@ -261,21 +374,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_17",
-      "slot": "flash",
-      "event": "DGWG controlling shareholder sells shares to meet the exchange’s free-float minimum",
-      "headline": "PT Delta Giri Wacana Tbk (DGWG) controlling shareholder sells 5.26 million shares to raise free float to 15% after HSC listing",
-      "blurb": null,
-      "tickers": [
-        "DGWG.JK"
-      ],
-      "supporting_news_ids": [
-        32810
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_18",
+      "id": "cur_23",
       "slot": "flash",
       "event": "IMBS becomes KETR’s controlling shareholder through a voluntary tender offer",
       "headline": "PT Ketrosden Triasmitra Tbk (KETR) Confirms PT Inti Mas Bangun Sejahtera as New Controlling Shareholder After Voluntary Tender Offer",
@@ -287,23 +386,57 @@
         32825
       ],
       "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_24",
+      "slot": "flash",
+      "event": "KMDS declares an interim dividend of Rp16 per share",
+      "headline": "Kurniamitra Duta Sentosa (KMDS.JK) will distribute Rp12.8 billion in 2026 interim dividends at Rp16 per share.",
+      "blurb": null,
+      "tickers": [
+        "KMDS.JK"
+      ],
+      "supporting_news_ids": [
+        32865,
+        32854,
+        32861
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_25",
+      "slot": "flash",
+      "event": "Rupiah reaches record lows as Bank Indonesia intervenes",
+      "headline": "The rupiah reached Rp18,239 per US dollar before strengthening to Rp18,207",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32856,
+        32843,
+        32816,
+        32814
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: The rupiah strengthened 0.14% to Rp18,207 per US dollar on Friday, 13 November."
+    },
+    {
+      "id": "cur_26",
+      "slot": "flash",
+      "event": "AUTO expands into EV, medical devices, and infrastructure",
+      "headline": "PT Astra Otoparts Tbk (AUTO) Expands Business Beyond Automotive Components into EV, Medical Devices, and Infrastructure",
+      "blurb": null,
+      "tickers": [
+        "AUTO.JK",
+        "ASII.JK"
+      ],
+      "supporting_news_ids": [
+        32863
+      ],
+      "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-20",
-      "timing_label": "20 Nov",
-      "title": "MSTI cum-dividend (regular market) for its Rp48 interim dividend",
-      "tickers": [
-        "MSTI.JK"
-      ],
-      "supporting_news_ids": [
-        32819
-      ]
-    },
-    {
-      "id": "wtw_02",
       "sort_date": "2026-11-20",
       "timing_label": "20 Nov",
       "title": "POWR cum-dividend (regular market) for its US$27.85 million interim dividend",
@@ -315,7 +448,7 @@
       ]
     },
     {
-      "id": "wtw_03",
+      "id": "wtw_02",
       "sort_date": "2026-11-26",
       "timing_label": "26 Nov",
       "title": "EMAS shareholders consider its 1.47 billion-share private placement",
@@ -327,10 +460,10 @@
       ]
     },
     {
-      "id": "wtw_04",
+      "id": "wtw_03",
       "sort_date": "2026-11-30",
       "timing_label": "30 Nov",
-      "title": "MSCI index changes take effect, removing eight Indonesian stocks",
+      "title": "MSCI changes take effect: BRPT deleted, BRMS downgraded, seven Small Cap stocks removed",
       "tickers": [
         "AVIA.JK",
         "BRMS.JK",
@@ -343,11 +476,12 @@
         "WIFI.JK"
       ],
       "supporting_news_ids": [
+        32851,
         32823
       ]
     },
     {
-      "id": "wtw_05",
+      "id": "wtw_04",
       "sort_date": "2026-12-16",
       "timing_label": "16 Dec",
       "title": "ADES proposes a 1:10 stock split at its extraordinary meeting",
@@ -356,6 +490,19 @@
       ],
       "supporting_news_ids": [
         32817
+      ]
+    },
+    {
+      "id": "wtw_05",
+      "sort_date": "2026-12-28",
+      "timing_label": "28 Dec",
+      "title": "DOID affiliate BUMA faces an IDR 201 billion debt maturity",
+      "tickers": [
+        "DOID.JK"
+      ],
+      "supporting_news_ids": [
+        32847,
+        32844
       ]
     }
   ]
