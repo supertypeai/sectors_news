@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-14",
   "window_start": "2026-11-13T13:50:00Z",
-  "window_end": "2026-11-14T09:56:29Z",
+  "window_end": "2026-11-14T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -15,40 +15,23 @@
     "copy_decision": "kept: same articles"
   },
   "sections": {
-    "capital_raising_buybacks": [
+    "deals_control": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "GMFI Plans Rights Issue of Up to Rp1.06 Trillion",
-        "headline": "GMFI plans rights issue of up to Rp1.06 trillion",
-        "blurb": "The offer covers up to 22.03 billion Series B shares with a nominal value of Rp19 each. Proceeds would fund business development, expansion and working capital, subject to shareholder approval at an extraordinary meeting on 19 November.",
+        "event": "Deli Indonesia increases its stake in SINI",
+        "headline": "SINI Deli Indonesia raises stake with Rp10.75 billion in purchases",
+        "blurb": "Deli Indonesia, SINI’s controlling shareholder, bought 1.25 million shares in 22 transactions on 10–11 November. It said the purchases were for investment and that it intends to maintain control. SINI gained 43.46% over the week to 13 November.",
         "tickers": [
-          "GMFI.JK"
+          "SINI.JK"
         ],
         "supporting_news_ids": [
-          32872,
-          32882
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "deals_control": [
-      {
-        "id": "cur_03",
-        "slot": "story",
-        "event": "Saiko Consultancy completes its mandatory tender offer for NAYZ",
-        "headline": "Saiko completes NAYZ mandatory tender offer, holds 37.02%",
-        "blurb": "NAYZ shares rose 9.43% to Rp58 and touched the upper price limit on 13 November. Forty shareholders tendered 193.93 million shares, all accepted, lifting Saiko Consultancy’s stake from 29.41% to 37.02%.",
-        "tickers": [
-          "NAYZ.JK"
-        ],
-        "supporting_news_ids": [
-          32881
+          32891
         ],
         "copy_decision": "rewritten: moved from flash to story"
       },
       {
-        "id": "cur_04",
+        "id": "cur_03",
         "slot": "story",
         "event": "HRME Transfers Hotel The Hermitage After Execution Auction Settlement",
         "headline": "HRME faces transfer of Rp489.58 billion hotel after execution auction",
@@ -62,7 +45,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_05",
+        "id": "cur_04",
         "slot": "story",
         "event": "KB Bank Completes 85% Divestment of KB Bukopin Finance",
         "headline": "BBKP completes 85% divestment of KB Bukopin Finance for Rp340 billion",
@@ -74,9 +57,40 @@
         "copy_decision": "kept: same articles"
       }
     ],
-    "market_structure_policy": [
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "GMFI Plans Rights Issue of Up to Rp1.06 Trillion",
+        "headline": "GMFI plans rights issue of up to Rp1.06 trillion",
+        "blurb": "The offer covers up to 22.03 billion Series B shares with a nominal value of Rp19 each. Proceeds would fund business development, expansion and working capital, subject to shareholder approval at an extraordinary meeting on 19 November.",
+        "tickers": [
+          "GMFI.JK"
+        ],
+        "supporting_news_ids": [
+          32872,
+          32882
+        ],
+        "copy_decision": "kept: same articles"
+      },
       {
         "id": "cur_06",
+        "slot": "story",
+        "event": "Ultrajaya distributes dividends and prepares a rights issue",
+        "headline": "ULTJ distributes Rp1.03 trillion in dividends and prepares rights issue",
+        "blurb": null,
+        "tickers": [
+          "ULTJ.JK"
+        ],
+        "supporting_news_ids": [
+          32894
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      }
+    ],
+    "market_structure_policy": [
+      {
+        "id": "cur_07",
         "slot": "story",
         "event": "MSCI proposes reclassifying Indonesia as a Standalone Market",
         "headline": "MSCI proposes reclassifying Indonesia as Standalone Market, decision due June 2027",
@@ -85,23 +99,7 @@
         "supporting_news_ids": [
           32899
         ],
-        "copy_decision": "rewritten: moved from flash to story"
-      },
-      {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "MSCI removes BRMS and BRPT from its November 2026 index review",
-        "headline": "MSCI removes BRMS and BRPT from Indonesia Index, moves BRMS to Small Cap",
-        "blurb": "The November review removes BRPT entirely from the MSCI Indonesia Index and moves BRMS to the MSCI Global Small Cap Index. Changes take effect on 1 December, after trading closes on 30 November. MSCI’s next review announcement is due on 8 February 2027, with changes effective on 1 March.",
-        "tickers": [
-          "BRMS.JK",
-          "BRPT.JK"
-        ],
-        "supporting_news_ids": [
-          32900,
-          32896
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: BRPT was removed from the MSCI Indonesia Index entirely."
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_08",
@@ -130,12 +128,28 @@
           32892,
           32888
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: FTSE Russell said it would monitor affected stocks' liquidity to ensure deletion prices can be replicated."
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "MSCI removes BRMS and BRPT from its November 2026 index review",
+        "headline": "MSCI removes BRMS and BRPT from Indonesia Index, moves BRMS to Small Cap",
+        "blurb": "The November review removes BRPT entirely from the MSCI Indonesia Index and moves BRMS to the MSCI Global Small Cap Index. Changes take effect on 1 December, after trading closes on 30 November. MSCI’s next review announcement is due on 8 February 2027, with changes effective on 1 March.",
+        "tickers": [
+          "BRMS.JK",
+          "BRPT.JK"
+        ],
+        "supporting_news_ids": [
+          32900,
+          32896
+        ],
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_09",
+        "id": "cur_10",
         "slot": "story",
         "event": "ICBP reports nine-month 2026 sales growth",
         "headline": "ICBP reports 14.5% nine-month sales growth to Rp64.44 trillion",
@@ -146,10 +160,10 @@
         "supporting_news_ids": [
           32902
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_10",
+        "id": "cur_11",
         "slot": "story",
         "event": "NCKL Reports Nine-Month 2026 Results Amid Cost and Nickel Pressures",
         "headline": "NCKL reports nine-month 2026 net profit of Rp8.69 trillion",
@@ -163,7 +177,23 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_11",
+        "id": "cur_12",
+        "slot": "story",
+        "event": "PGEO targets 12.5% free float by March 2027 and 15% in 2028",
+        "headline": "PGEO targets 12.5% free float by March 2027 and 15% in 2028",
+        "blurb": "Pertamina Geothermal Energy said the targets support its capital-market compliance and governance efforts. It also said it respects the IDX’s periodic evaluations of LQ45 and IDX80 constituents.",
+        "tickers": [
+          "PGEO.JK"
+        ],
+        "supporting_news_ids": [
+          32905,
+          32903,
+          32874
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_13",
         "slot": "story",
         "event": "TUGU Reports 17.4% Nine-Month Profit Growth",
         "headline": "TUGU reports 17.4% nine-month profit growth",
@@ -176,27 +206,27 @@
           32886
         ],
         "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_12",
-        "slot": "story",
-        "event": "DOID reports nine-month 2026 results after a client-site suspension",
-        "headline": "DOID reports US$43 million nine-month loss after client-site suspension",
-        "blurb": "BUMA's net loss narrowed 47% year on year, while revenue fell 18% to US$929 million as the Q3 force majeure suspension and contract expirations affected operations. Operations resumed in October, with full activity expected in November. BUMA also received a US$40 million dividend from Asiamet following the KSK Project sale.",
-        "tickers": [
-          "DOID.JK"
-        ],
-        "supporting_news_ids": [
-          32904,
-          32890
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: BUMA received a US$40 million dividend from Asiamet following the sale of the KSK Project."
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_13",
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "DOID reports nine-month 2026 results after a client-site suspension",
+      "headline": "DOID reports US$43 million nine-month loss after client-site suspension",
+      "blurb": null,
+      "tickers": [
+        "DOID.JK"
+      ],
+      "supporting_news_ids": [
+        32904,
+        32890
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_15",
       "slot": "flash",
       "event": "SLIS reports wider nine-month 2026 losses as electric-bike sales fall",
       "headline": "SLIS reports wider nine-month loss of Rp9.66 billion as electric-bike sales fall 19%",
@@ -207,10 +237,10 @@
       "supporting_news_ids": [
         32898
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_16",
       "slot": "flash",
       "event": "BBRI rebounds as foreign investors return and MNC Sekuritas cuts its target",
       "headline": "PT Bank Rakyat Indonesia Tbk (BBRI) Posts Dramatic Weekly Rebound with Rp 380.49 Billion Foreign Net Buy After Eight Weeks of Outflows",
@@ -224,7 +254,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_15",
+      "id": "cur_17",
       "slot": "flash",
       "event": "BEI expands its HSC list and changes index calculations",
       "headline": "Indonesia Stock Exchange expands the HSC list to 383 stocks under a new methodology",
@@ -246,22 +276,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "PGEO targets higher public shareholding",
-      "headline": "PT Pertamina Geothermal Energy Tbk (PGEO) targets a 12.5% free float by March 2027",
-      "blurb": null,
-      "tickers": [
-        "PGEO.JK"
-      ],
-      "supporting_news_ids": [
-        32903,
-        32874
-      ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: PGEO targets a 15% free float in 2028."
-    },
-    {
-      "id": "cur_17",
+      "id": "cur_18",
       "slot": "flash",
       "event": "BEI adds GGRM to the LQ45 index",
       "headline": "PT Gudang Garam Tbk (GGRM) joins the LQ45 index with a 0.41% weighting",
@@ -276,7 +291,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
+      "id": "cur_19",
       "slot": "flash",
       "event": "MEDC Declares US$30 Million Interim Dividend",
       "headline": "PT Medco Energi Internasional Tbk (MEDC) Declares Interim Dividend of Rp 22.02 per Share, Totaling US$ 30 Million",
@@ -290,35 +305,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
-      "slot": "flash",
-      "event": "ULTJ distributes dividends and prepares a rights issue",
-      "headline": "ULTJ distributes Rp1.03 trillion in dividends and prepares rights issue",
-      "blurb": null,
-      "tickers": [
-        "ULTJ.JK"
-      ],
-      "supporting_news_ids": [
-        32894
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
       "id": "cur_20",
-      "slot": "flash",
-      "event": "SINI Controlling Shareholder Increases Stake by Rp10.75 Billion",
-      "headline": "SINI controlling shareholder adds stake with Rp10.75 billion in purchases",
-      "blurb": null,
-      "tickers": [
-        "SINI.JK"
-      ],
-      "supporting_news_ids": [
-        32891
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
-      "id": "cur_21",
       "slot": "flash",
       "event": "RCS Raises Its CASS Stake to 61%, Meeting Free-Float Requirement",
       "headline": "Emtek Subsidiary RCS Now Controls 61% of CASS Shares, Free Float Reaches 17.35%",
@@ -330,6 +317,20 @@
         32871
       ],
       "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "Saiko Consultancy completes its mandatory tender offer for NAYZ",
+      "headline": "Saiko completes NAYZ mandatory tender offer, holds 37.02%",
+      "blurb": null,
+      "tickers": [
+        "NAYZ.JK"
+      ],
+      "supporting_news_ids": [
+        32881
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
     },
     {
       "id": "cur_22",
@@ -369,29 +370,6 @@
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-11-18",
-      "timing_label": "18 Nov",
-      "title": "GGRM joins the LQ45 index",
-      "tickers": [
-        "BRIS.JK",
-        "CDIA.JK",
-        "GGRM.JK",
-        "HMSP.JK",
-        "MAPI.JK",
-        "PANI.JK",
-        "PTRO.JK",
-        "SRTG.JK",
-        "STAA.JK"
-      ],
-      "supporting_news_ids": [
-        32895,
-        32893,
-        32878,
-        32885
-      ]
-    },
-    {
-      "id": "wtw_03",
       "sort_date": "2026-11-19",
       "timing_label": "19 Nov",
       "title": "GMFI shareholders vote on rights issue of up to US$59.41 million",
@@ -401,6 +379,19 @@
       "supporting_news_ids": [
         32872,
         32882
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2026-11-30",
+      "timing_label": "30 Nov",
+      "title": "BRMS moves from MSCI Global Standard to Global Small Cap",
+      "tickers": [
+        "BRMS.JK"
+      ],
+      "supporting_news_ids": [
+        32900,
+        32896
       ]
     },
     {
