@@ -1,209 +1,172 @@
 {
-  "issue_date": "2026-11-14",
-  "window_start": "2026-11-13T13:50:00Z",
-  "window_end": "2026-11-14T13:50:00Z",
+  "issue_date": "2026-11-15",
+  "window_start": "2026-11-14T13:50:00Z",
+  "window_end": "2026-11-15T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Rupiah Hits Record Weakness at Rp18,206 per US Dollar",
-    "headline": "Rupiah hits record weakness at Rp18,206 per US dollar",
-    "blurb": "The rupiah weakened 0.65% this week from Rp18,089, while the JISDOR rate fell 0.49% to Rp18,218 per dollar. CORE Indonesia economist Yusuf Rendy Manilet cited a stronger US dollar, rising US Treasury yields, expectations of Fed tightening, domestic political uncertainty and negative MSCI-related sentiment as sources of pressure. Bank Indonesia supported the currency through market interventions and government bond purchases. Next week, markets will watch US labor data and Bank Indonesia’s Board of Governors meeting, with the rupiah projected to trade between Rp18,100 and Rp18,250 per dollar.",
-    "tickers": [],
+    "event": "IDX places 383 stocks on the High Shareholding Concentration list and adjusts IHSG weights",
+    "headline": "IDX places 383 stocks on HSC list and adjusts IHSG weights",
+    "blurb": "In its incidental IHSG evaluation alongside the HSC designation, IDX gave BCA the largest weight at 10.38%, followed by BRI at 9.95%, Bank Mandiri at 7.82%, Astra at 5.49% and Telkom at 4.92%. Stocks qualify for HSC when 10 or fewer shareholders hold at least 92.5% of their shares, and gradual IHSG exclusions took effect on 13 November. IDX's next scheduled review is in January 2027.",
+    "tickers": [
+      "DNET.JK",
+      "IMAS.JK",
+      "BINA.JK",
+      "IMJS.JK",
+      "ROTI.JK",
+      "FAST.JK",
+      "DSSA.JK",
+      "DUTI.JK",
+      "SMAR.JK",
+      "GEMS.JK",
+      "TKIM.JK",
+      "LIFE.JK",
+      "MORA.JK",
+      "BREN.JK",
+      "CDIA.JK",
+      "BELI.JK",
+      "SUPR.JK",
+      "RANC.JK",
+      "CLEO.JK",
+      "RISE.JK",
+      "PEVE.JK",
+      "BLES.JK",
+      "CAKK.JK",
+      "DEPO.JK",
+      "ZONE.JK",
+      "MAYA.JK",
+      "SRAJ.JK",
+      "MPRO.JK",
+      "SONA.JK",
+      "LPCK.JK",
+      "LPGI.JK",
+      "NOBU.JK",
+      "MLPT.JK",
+      "GMTD.JK",
+      "SILO.JK",
+      "BYAN.JK",
+      "MYOH.JK",
+      "TRJA.JK",
+      "JARR.JK",
+      "PGUN.JK",
+      "NCKL.JK",
+      "CITA.JK",
+      "MAPI.JK",
+      "MAPB.JK",
+      "SRTG.JK",
+      "BBCA.JK",
+      "BBRI.JK",
+      "BMRI.JK",
+      "ASII.JK",
+      "TLKM.JK"
+    ],
     "supporting_news_ids": [
-      32880
+      32912,
+      32906
     ],
     "copy_decision": "kept: same articles"
   },
   "sections": {
-    "deals_control": [
+    "other": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Deli Indonesia increases its stake in SINI",
-        "headline": "SINI Deli Indonesia raises stake with Rp10.75 billion in purchases",
-        "blurb": "Deli Indonesia, SINI’s controlling shareholder, bought 1.25 million shares in 22 transactions on 10–11 November. It said the purchases were for investment and that it intends to maintain control. SINI gained 43.46% over the week to 13 November.",
+        "event": "ABMM subsidiary Cipta Kridatama secures a mining services contract through 2031",
+        "headline": "ABMM subsidiary wins mining services contract through 2031 for up to US$1.75 billion",
+        "blurb": "Cipta Kridatama will remove an estimated 500.2 million bcm of overburden and extract 80.5 million tons of coal. The US$1.60 billion-US$1.75 billion estimate assumes tariffs of US$3.2-US$3.5 per bcm, with analysts estimating annual contributions of US$280 million-US$320 million to the mining services segment.",
         "tickers": [
-          "SINI.JK"
+          "ABMM.JK"
         ],
         "supporting_news_ids": [
-          32891
+          32919
         ],
-        "copy_decision": "rewritten: moved from flash to story"
-      },
+        "copy_decision": "new story"
+      }
+    ],
+    "earnings_guidance": [
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "HRME Transfers Hotel The Hermitage After Execution Auction Settlement",
-        "headline": "HRME faces transfer of Rp489.58 billion hotel after execution auction",
-        "blurb": "Menteng Heritage reached an amicable settlement with related parties, including Hotel Menteng Jakarta, which won the execution auction. Its Rp205.35 billion obligation to Bank Mandiri will be netted to zero, though HRME will bear losses from the asset transfer.",
+        "event": "ICBP raises noodle prices and updates 2026 revenue growth guidance",
+        "headline": "ICBP raises noodle prices about 3%, lifts 2026 revenue growth guidance to 12%-14%",
+        "blurb": "Indofood CBP raised domestic prices in mid-October as higher raw-material and packaging costs narrowed nine-month gross margin to 34.1%. It maintained its EBIT margin target of 20%-22% and capped advertising and promotion spending at 4% of sales.",
         "tickers": [
-          "HRME.JK"
+          "ICBP.JK"
         ],
         "supporting_news_ids": [
-          32875
+          32914
         ],
         "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_04",
         "slot": "story",
-        "event": "KB Bank Completes 85% Divestment of KB Bukopin Finance",
-        "headline": "BBKP completes 85% divestment of KB Bukopin Finance for Rp340 billion",
-        "blurb": "The sale to JB Woori Capital concluded on 4 November. KB Bank retains 14.24% of the finance company under a three-year lock-up, and its assets and liabilities are no longer consolidated. Existing credit facilities will continue through November 2028.",
-        "tickers": [],
-        "supporting_news_ids": [
-          32887
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "capital_raising_buybacks": [
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "GMFI Plans Rights Issue of Up to Rp1.06 Trillion",
-        "headline": "GMFI plans rights issue of up to Rp1.06 trillion",
-        "blurb": "The offer covers up to 22.03 billion Series B shares with a nominal value of Rp19 each. Proceeds would fund business development, expansion and working capital, subject to shareholder approval at an extraordinary meeting on 19 November.",
+        "event": "BRMS returns to net profit in Q3 2026",
+        "headline": "BRMS returns to net profit in Q3 2026 with US$11 million",
+        "blurb": "Bumi Resources Minerals’ revenue rose 172.8% quarter on quarter to US$71.8 million as gold sales recovered to 16,748 troy ounces and ore grade improved to 1.94 grams per ton. Samuel Sekuritas maintained its buy recommendation, while the company plans to raise processing capacity from 500 to 2,000 tons per day in early 2027.",
         "tickers": [
-          "GMFI.JK"
+          "BRMS.JK"
         ],
         "supporting_news_ids": [
-          32872,
-          32882
+          32911
         ],
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_06",
+        "id": "cur_05",
         "slot": "story",
-        "event": "Ultrajaya distributes dividends and prepares a rights issue",
-        "headline": "ULTJ distributes Rp1.03 trillion in dividends and prepares rights issue",
-        "blurb": null,
+        "event": "ESSA reports Q3 2026 revenue and net profit",
+        "headline": "ESSA reports US$310.89 million revenue and US$51.11 million net profit through Q3",
+        "blurb": "ESSA’s ammonia segment accounted for about 91% of 9M26 revenue, while its average Q3 selling price fell 22% QoQ to US$508 per ton. Phintraco said earnings are highly sensitive to global prices, while KISI warned Q4 may weaken as ammonia prices decline.",
         "tickers": [
-          "ULTJ.JK"
+          "ESSA.JK"
         ],
         "supporting_news_ids": [
-          32894
+          32920
         ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "DOID reports a narrower 9M 2026 net loss amid a client force majeure",
+        "headline": "DOID reports 47% narrower 9M 2026 net loss at US$43 million amid client force majeure",
+        "blurb": "A client's force majeure declaration temporarily halted operations at a main Indonesian site in 3Q26, pressuring what is typically BUMA's strongest quarter. BUMA resumed work in October, expects full ramp-up in November and is discussing a 2027 normalization plan with the client.",
+        "tickers": [
+          "DOID.JK"
+        ],
+        "supporting_news_ids": [
+          32925
+        ],
+        "copy_decision": "new story"
       }
     ],
-    "market_structure_policy": [
+    "deals_control": [
       {
         "id": "cur_07",
         "slot": "story",
-        "event": "MSCI proposes reclassifying Indonesia as a Standalone Market",
-        "headline": "MSCI proposes reclassifying Indonesia as Standalone Market, decision due June 2027",
-        "blurb": "MSCI cited share-ownership transparency, alleged coordinated insider trading and weak regulatory enforcement. Public policy observer Hafiz Elfiansya Parawu said oversight should be judged by supervision outcomes and called for earlier detection of violations, stronger agency coordination and better investor protection.",
-        "tickers": [],
+        "event": "INPP sells its entire stake in subsidiary PT Indonesia Gemilang Mahasentosa",
+        "headline": "INPP sells its entire IGM stake for Rp185.7 billion",
+        "blurb": "Indonesian Paradise Property transferred 445.6 million shares, representing 99.99999978% of Indonesia Gemilang Mahasentosa, to Prospek Duta Sukses on 12 November. Prospek Duta Sukses and Praba Kumala Sajati are now the subsidiary’s sole shareholders.",
+        "tickers": [
+          "INPP.JK"
+        ],
         "supporting_news_ids": [
-          32899
+          32915
         ],
         "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_08",
         "slot": "story",
-        "event": "FTSE Russell removes 14 Indonesian HSC stocks from its indexes",
-        "headline": "FTSE Russell will remove 14 Indonesian HSC stocks from its indexes",
-        "blurb": "The deletions are part of the December 2026 review and take effect at the opening of trading on 21 December, using market prices at the review. FTSE Russell said it will monitor affected stocks’ liquidity to ensure deletion prices can be replicated. The final December GEIS changes list is due from 7 December.",
+        "event": "GDK increases its stake in DGIK",
+        "headline": "GDK raises its DGIK stake by 14.02%",
+        "blurb": "Nusa Konstruksi’s controlling shareholder GDK bought 777.47 million shares for about Rp107.8 billion from 9 to 12 November at Rp135 and Rp150 per share, lifting its holding to 68.20% from 54.24%. Nusa Konstruksi also plans to transfer up to 400.21 million treasury shares to GDK, amid plans for Tokyu Construction to enter.",
         "tickers": [
-          "BRIS.JK",
-          "MTEL.JK",
-          "TBIG.JK",
-          "MAPI.JK",
-          "TKIM.JK",
-          "MAYA.JK",
-          "IMAS.JK",
-          "MLBI.JK",
-          "SAME.JK",
-          "CLEO.JK",
-          "SSMS.JK",
-          "STAA.JK",
-          "TMAS.JK",
-          "TSPC.JK"
+          "DGIK.JK"
         ],
         "supporting_news_ids": [
-          32901,
-          32892,
-          32888
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_09",
-        "slot": "story",
-        "event": "MSCI removes BRMS and BRPT from its November 2026 index review",
-        "headline": "MSCI removes BRMS and BRPT from Indonesia Index, moves BRMS to Small Cap",
-        "blurb": "The November review removes BRPT entirely from the MSCI Indonesia Index and moves BRMS to the MSCI Global Small Cap Index. Changes take effect on 1 December, after trading closes on 30 November. MSCI’s next review announcement is due on 8 February 2027, with changes effective on 1 March.",
-        "tickers": [
-          "BRMS.JK",
-          "BRPT.JK"
-        ],
-        "supporting_news_ids": [
-          32900,
-          32896
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "earnings_guidance": [
-      {
-        "id": "cur_10",
-        "slot": "story",
-        "event": "ICBP reports nine-month 2026 sales growth",
-        "headline": "ICBP reports 14.5% nine-month sales growth to Rp64.44 trillion",
-        "blurb": "Indofood CBP's instant noodle segment remained its largest contributor, with sales up about 14% to Rp48.01 trillion and operating profit rising to Rp11.09 trillion from Rp10.4 trillion. BRI Danareksa Sekuritas said premiumization, led by Indomie and cup noodles such as Pop Mie, boosted growth.",
-        "tickers": [
-          "ICBP.JK"
-        ],
-        "supporting_news_ids": [
-          32902
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_11",
-        "slot": "story",
-        "event": "NCKL Reports Nine-Month 2026 Results Amid Cost and Nickel Pressures",
-        "headline": "NCKL reports nine-month 2026 net profit of Rp8.69 trillion",
-        "blurb": "Trimegah Bangun Persada recorded revenue of Rp26.87 trillion, while gross profit fell about 9% as production costs and royalties rose. Global nickel oversupply adds pressure, and NCKL’s removal from the LQ45 and IDX80 takes effect on 18 November.",
-        "tickers": [
-          "NCKL.JK"
-        ],
-        "supporting_news_ids": [
-          32877
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_12",
-        "slot": "story",
-        "event": "PGEO targets 12.5% free float by March 2027 and 15% in 2028",
-        "headline": "PGEO targets 12.5% free float by March 2027 and 15% in 2028",
-        "blurb": "Pertamina Geothermal Energy said the targets support its capital-market compliance and governance efforts. It also said it respects the IDX’s periodic evaluations of LQ45 and IDX80 constituents.",
-        "tickers": [
-          "PGEO.JK"
-        ],
-        "supporting_news_ids": [
-          32905,
-          32903,
-          32874
-        ],
-        "copy_decision": "rewritten: moved from flash to story"
-      },
-      {
-        "id": "cur_13",
-        "slot": "story",
-        "event": "TUGU Reports 17.4% Nine-Month Profit Growth",
-        "headline": "TUGU reports 17.4% nine-month profit growth",
-        "blurb": "Tugu Insurance posted Rp495.15 billion in net profit attributable to owners for January-September 2026. Consolidated underwriting results rose 17.2% to Rp602.04 billion, including Rp306.2 billion from Fire Insurance and Rp159.8 billion from Marine Cargo.",
-        "tickers": [
-          "TUGU.JK"
-        ],
-        "supporting_news_ids": [
-          32883,
-          32886
+          32916
         ],
         "copy_decision": "kept: same articles"
       }
@@ -211,194 +174,201 @@
   },
   "flash": [
     {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "MEDC advances Sakakemang and Paus Biru projects and signs gas supply agreements",
+      "headline": "MEDC outlines 2027 project pipeline from Sakakemang to Paus Biru fields",
+      "blurb": null,
+      "tickers": [
+        "MEDC.JK",
+        "PGAS.JK"
+      ],
+      "supporting_news_ids": [
+        32913
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "Rupiah hits a record low against the US dollar",
+      "headline": "Rupiah Weakens Toward Rp 18,200: Vulnerable Stocks and Sectors Identified",
+      "blurb": null,
+      "tickers": [
+        "BBCA.JK",
+        "BBRI.JK",
+        "BMRI.JK",
+        "BBNI.JK"
+      ],
+      "supporting_news_ids": [
+        32921
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "FTSE Russell removes 14 Indonesian stocks from its global indexes",
+      "headline": "FTSE Russell schedules removal of 14 Indonesian stocks from its global indexes",
+      "blurb": null,
+      "tickers": [
+        "BRIS.JK",
+        "MTEL.JK",
+        "TBIG.JK",
+        "MAPI.JK",
+        "TKIM.JK",
+        "MAYA.JK",
+        "IMAS.JK",
+        "MLBI.JK",
+        "SAME.JK",
+        "CLEO.JK",
+        "SSMS.JK",
+        "STAA.JK",
+        "TMAS.JK",
+        "TSPC.JK"
+      ],
+      "supporting_news_ids": [
+        32926,
+        32907
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: FTSE Russell deferred full composition changes, market-cap reclassifications, segment changes, free-float increases and new additions until at least the March 2027 review."
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "MSCI reclassifies CPIN and JPFA from Global Standard to Small Cap",
+      "headline": "Rupiah Weakness and MSCI Reclassification Weigh on Outlook for Poultry Stocks CPIN, JPFA, and MAIN",
+      "blurb": null,
+      "tickers": [
+        "CPIN.JK",
+        "JPFA.JK",
+        "MAIN.JK"
+      ],
+      "supporting_news_ids": [
+        32922
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "Pertamina Geothermal Energy targets 12.5% free float by March 2027",
+      "headline": "PT Pertamina Geothermal Energy Tbk (PGEO) Targets 12.5% Free Float by March 2027",
+      "blurb": null,
+      "tickers": [
+        "PGEO.JK"
+      ],
+      "supporting_news_ids": [
+        32910
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
       "id": "cur_14",
       "slot": "flash",
-      "event": "DOID reports nine-month 2026 results after a client-site suspension",
-      "headline": "DOID reports US$43 million nine-month loss after client-site suspension",
-      "blurb": null,
-      "tickers": [
-        "DOID.JK"
-      ],
-      "supporting_news_ids": [
-        32904,
-        32890
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
-      "id": "cur_15",
-      "slot": "flash",
-      "event": "SLIS reports wider nine-month 2026 losses as electric-bike sales fall",
-      "headline": "SLIS reports wider nine-month loss of Rp9.66 billion as electric-bike sales fall 19%",
-      "blurb": null,
-      "tickers": [
-        "SLIS.JK"
-      ],
-      "supporting_news_ids": [
-        32898
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "BBRI rebounds as foreign investors return and MNC Sekuritas cuts its target",
-      "headline": "PT Bank Rakyat Indonesia Tbk (BBRI) Posts Dramatic Weekly Rebound with Rp 380.49 Billion Foreign Net Buy After Eight Weeks of Outflows",
-      "blurb": null,
-      "tickers": [
-        "BBRI.JK"
-      ],
-      "supporting_news_ids": [
-        32897
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_17",
-      "slot": "flash",
-      "event": "BEI expands its HSC list and changes index calculations",
-      "headline": "Indonesia Stock Exchange expands the HSC list to 383 stocks under a new methodology",
-      "blurb": null,
-      "tickers": [
-        "MAPI.JK",
-        "HMSP.JK",
-        "STAA.JK",
-        "PTRO.JK",
-        "SRTG.JK",
-        "BRIS.JK",
-        "PANI.JK",
-        "CDIA.JK"
-      ],
-      "supporting_news_ids": [
-        32893,
-        32885
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_18",
-      "slot": "flash",
-      "event": "BEI adds GGRM to the LQ45 index",
-      "headline": "PT Gudang Garam Tbk (GGRM) joins the LQ45 index with a 0.41% weighting",
+      "event": "Gudang Garam joins the LQ45 index",
+      "headline": "GGRM joins LQ45 from 18 November 2026 to 29 January 2027",
       "blurb": null,
       "tickers": [
         "GGRM.JK"
       ],
       "supporting_news_ids": [
-        32895,
-        32878
+        32909
       ],
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
+      "id": "cur_15",
       "slot": "flash",
-      "event": "MEDC Declares US$30 Million Interim Dividend",
-      "headline": "PT Medco Energi Internasional Tbk (MEDC) Declares Interim Dividend of Rp 22.02 per Share, Totaling US$ 30 Million",
+      "event": "MSTI plans an interim dividend of Rp 150.69 billion",
+      "headline": "PT Mastersystem Infotama Tbk (MSTI) to Distribute Interim Dividend of Rp 150.69 Billion",
       "blurb": null,
       "tickers": [
-        "MEDC.JK"
+        "MSTI.JK"
       ],
       "supporting_news_ids": [
-        32879
+        32917
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
     },
     {
-      "id": "cur_20",
+      "id": "cur_16",
       "slot": "flash",
-      "event": "RCS Raises Its CASS Stake to 61%, Meeting Free-Float Requirement",
-      "headline": "Emtek Subsidiary RCS Now Controls 61% of CASS Shares, Free Float Reaches 17.35%",
+      "event": "KMDS plans an interim dividend of Rp 12.8 billion",
+      "headline": "PT Kurniamitra Duta Sentosa Tbk (KMDS) to Distribute Rp 12.8 Billion Interim Dividend for Fiscal Year 2026",
       "blurb": null,
       "tickers": [
-        "CASS.JK"
+        "KMDS.JK"
       ],
       "supporting_news_ids": [
-        32871
+        32918
       ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_21",
-      "slot": "flash",
-      "event": "Saiko Consultancy completes its mandatory tender offer for NAYZ",
-      "headline": "Saiko completes NAYZ mandatory tender offer, holds 37.02%",
-      "blurb": null,
-      "tickers": [
-        "NAYZ.JK"
-      ],
-      "supporting_news_ids": [
-        32881
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
-      "id": "cur_22",
-      "slot": "flash",
-      "event": "Gibran Resigns as Vice President, Prompting IHSG Rally",
-      "headline": "Political Shift and Market Reaction: Analysis of the IHSG's Surge Following Gibran's Resignation",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        32884
-      ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-18",
-      "timing_label": "18 Nov",
-      "title": "NCKL removed from the LQ45 and IDX80 indexes",
+      "sort_date": "2026-11-17",
+      "timing_label": "17–18 Nov",
+      "title": "Bank Indonesia holds its RDG",
       "tickers": [
-        "BRIS.JK",
-        "CDIA.JK",
-        "HMSP.JK",
-        "MAPI.JK",
-        "NCKL.JK",
-        "PANI.JK",
-        "PTRO.JK",
-        "SRTG.JK",
-        "STAA.JK"
+        "BBCA.JK",
+        "BBNI.JK",
+        "BBRI.JK",
+        "BMRI.JK"
       ],
       "supporting_news_ids": [
-        32893,
-        32877,
-        32885
+        32921
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-11-19",
-      "timing_label": "19 Nov",
-      "title": "GMFI shareholders vote on rights issue of up to US$59.41 million",
+      "sort_date": "2026-11-18",
+      "timing_label": "18 Nov",
+      "title": "GGRM joins the LQ45 index",
       "tickers": [
-        "GMFI.JK"
+        "GGRM.JK"
       ],
       "supporting_news_ids": [
-        32872,
-        32882
+        32909
       ]
     },
     {
       "id": "wtw_03",
       "sort_date": "2026-11-30",
       "timing_label": "30 Nov",
-      "title": "BRMS moves from MSCI Global Standard to Global Small Cap",
+      "title": "MSCI rebalances its Indonesian indexes",
       "tickers": [
-        "BRMS.JK"
+        "BBCA.JK",
+        "BBNI.JK",
+        "BBRI.JK",
+        "BMRI.JK"
       ],
       "supporting_news_ids": [
-        32900,
-        32896
+        32921
       ]
     },
     {
       "id": "wtw_04",
+      "sort_date": "2026-12-09",
+      "timing_label": "9 Dec",
+      "title": "Federal Reserve issues its rate decision",
+      "tickers": [
+        "BBCA.JK",
+        "BBNI.JK",
+        "BBRI.JK",
+        "BMRI.JK"
+      ],
+      "supporting_news_ids": [
+        32921
+      ]
+    },
+    {
+      "id": "wtw_05",
       "sort_date": "2026-12-21",
-      "timing_label": "21 Dec",
-      "title": "FTSE Russell removes 14 Indonesian HSC stocks from its global indexes",
+      "timing_label": "21 Dec 2026",
+      "title": "FTSE Russell removes 14 Indonesian stocks from global indexes",
       "tickers": [
         "BRIS.JK",
         "CLEO.JK",
@@ -416,19 +386,8 @@
         "TSPC.JK"
       ],
       "supporting_news_ids": [
-        32901,
-        32892,
-        32888
-      ]
-    },
-    {
-      "id": "wtw_05",
-      "sort_date": "2027-06-30",
-      "timing_label": "Jun 2027",
-      "title": "MSCI decides whether to reclassify Indonesia as a Standalone Market",
-      "tickers": [],
-      "supporting_news_ids": [
-        32899
+        32926,
+        32907
       ]
     }
   ]
