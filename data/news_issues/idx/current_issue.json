@@ -1,13 +1,13 @@
 {
   "issue_date": "2026-11-15",
   "window_start": "2026-11-14T13:50:00Z",
-  "window_end": "2026-11-15T01:46:36Z",
+  "window_end": "2026-11-15T05:56:29Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "IDX to exclude 383 high-shareholding-concentration stocks from IHSG calculations",
-    "headline": "IDX begins gradual exclusion of 383 stocks from IHSG calculations",
-    "blurb": "The exchange classifies stocks as highly concentrated when 10 or fewer shareholders hold at least 92.5% of their shares. The rules took effect on 13 November and now cover all listed companies, dropping the previous Rp5 trillion market-capitalization floor and Price Impact Ratio test. IDX President Director Jeffrey Hendrik said concentrated ownership can make stocks more vulnerable to price fluctuations in large-volume trades and create tracking error risk for passive investors. He said the designation aims to improve ownership transparency, not indicate a market violation.",
+    "event": "IDX places 383 stocks on the High Shareholding Concentration list and adjusts IHSG weights",
+    "headline": "IDX places 383 stocks on HSC list and adjusts IHSG weights",
+    "blurb": "In its incidental IHSG evaluation alongside the HSC designation, IDX gave BCA the largest weight at 10.38%, followed by BRI at 9.95%, Bank Mandiri at 7.82%, Astra at 5.49% and Telkom at 4.92%. Stocks qualify for HSC when 10 or fewer shareholders hold at least 92.5% of their shares, and gradual IHSG exclusions took effect on 13 November. IDX's next scheduled review is in January 2027.",
     "tickers": [
       "DNET.JK",
       "IMAS.JK",
@@ -15,8 +15,6 @@
       "IMJS.JK",
       "ROTI.JK",
       "FAST.JK",
-      "PANI.JK",
-      "DCII.JK",
       "DSSA.JK",
       "DUTI.JK",
       "SMAR.JK",
@@ -24,7 +22,6 @@
       "TKIM.JK",
       "LIFE.JK",
       "MORA.JK",
-      "SMDM.JK",
       "BREN.JK",
       "CDIA.JK",
       "BELI.JK",
@@ -54,19 +51,42 @@
       "PGUN.JK",
       "NCKL.JK",
       "CITA.JK",
-      "SRTG.JK",
       "MAPI.JK",
-      "MAPB.JK"
+      "MAPB.JK",
+      "SRTG.JK",
+      "BBCA.JK",
+      "BBRI.JK",
+      "BMRI.JK",
+      "ASII.JK",
+      "TLKM.JK"
     ],
     "supporting_news_ids": [
+      32912,
       32906
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: 1 new articles with a new fact: The largest IHSG weights after the evaluation were BBCA at 10.38%, BBRI at 9.95%, BMRI at 7.82%, ASII at 5.49% and TLKM at 4.92%."
   },
-  "sections": {},
+  "sections": {
+    "market_structure_policy": [
+      {
+        "id": "cur_02",
+        "slot": "story",
+        "event": "Gudang Garam joins the LQ45 index",
+        "headline": "GGRM joins LQ45 from 18 November 2026 to 29 January 2027",
+        "blurb": "BRI Danareksa Sekuritas analyst Abida Massi Armand said the move could raise institutional visibility and attract flows from funds tracking the index. Gudang Garam earned Rp4.52 trillion in net profit in the first nine months of 2026, roughly quadruple year on year, while revenue fell about 8.7%.",
+        "tickers": [
+          "GGRM.JK"
+        ],
+        "supporting_news_ids": [
+          32909
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      }
+    ]
+  },
   "flash": [
     {
-      "id": "cur_02",
+      "id": "cur_03",
       "slot": "flash",
       "event": "FTSE Russell to remove 14 Indonesian HSC stocks from global indexes",
       "headline": "FTSE Russell to Remove 14 Indonesian High Shareholding Concentration Stocks from Global Indexes Effective December 21, 2026",
@@ -90,21 +110,7 @@
       "supporting_news_ids": [
         32907
       ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_03",
-      "slot": "flash",
-      "event": "Gudang Garam to join the LQ45 index",
-      "headline": "PT Gudang Garam Tbk (GGRM) Joins LQ45 Index: Outlook and Key Investor Considerations",
-      "blurb": null,
-      "tickers": [
-        "GGRM.JK"
-      ],
-      "supporting_news_ids": [
-        32909
-      ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_04",
@@ -118,7 +124,7 @@
       "supporting_news_ids": [
         32910
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
@@ -157,6 +163,68 @@
       ],
       "supporting_news_ids": [
         32907
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2027-01-31",
+      "timing_label": "Jan 2027",
+      "title": "IDX holds its next scheduled index review",
+      "tickers": [
+        "ASII.JK",
+        "BBCA.JK",
+        "BBRI.JK",
+        "BELI.JK",
+        "BINA.JK",
+        "BLES.JK",
+        "BMRI.JK",
+        "BREN.JK",
+        "BYAN.JK",
+        "CAKK.JK",
+        "CDIA.JK",
+        "CITA.JK",
+        "CLEO.JK",
+        "DEPO.JK",
+        "DNET.JK",
+        "DSSA.JK",
+        "DUTI.JK",
+        "FAST.JK",
+        "GEMS.JK",
+        "GMTD.JK",
+        "IMAS.JK",
+        "IMJS.JK",
+        "JARR.JK",
+        "LIFE.JK",
+        "LPCK.JK",
+        "LPGI.JK",
+        "MAPB.JK",
+        "MAPI.JK",
+        "MAYA.JK",
+        "MLPT.JK",
+        "MORA.JK",
+        "MPRO.JK",
+        "MYOH.JK",
+        "NCKL.JK",
+        "NOBU.JK",
+        "PEVE.JK",
+        "PGUN.JK",
+        "RANC.JK",
+        "RISE.JK",
+        "ROTI.JK",
+        "SILO.JK",
+        "SMAR.JK",
+        "SONA.JK",
+        "SRAJ.JK",
+        "SRTG.JK",
+        "SUPR.JK",
+        "TKIM.JK",
+        "TLKM.JK",
+        "TRJA.JK",
+        "ZONE.JK"
+      ],
+      "supporting_news_ids": [
+        32912,
+        32906
       ]
     }
   ]
