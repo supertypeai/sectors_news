@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-15",
   "window_start": "2026-11-14T13:50:00Z",
-  "window_end": "2026-11-15T05:56:29Z",
+  "window_end": "2026-11-15T09:56:33Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -64,29 +64,73 @@
       32912,
       32906
     ],
-    "copy_decision": "rewritten: 1 new articles with a new fact: The largest IHSG weights after the evaluation were BBCA at 10.38%, BBRI at 9.95%, BMRI at 7.82%, ASII at 5.49% and TLKM at 4.92%."
+    "copy_decision": "kept: same articles"
   },
   "sections": {
-    "market_structure_policy": [
+    "earnings_guidance": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Gudang Garam joins the LQ45 index",
-        "headline": "GGRM joins LQ45 from 18 November 2026 to 29 January 2027",
-        "blurb": "BRI Danareksa Sekuritas analyst Abida Massi Armand said the move could raise institutional visibility and attract flows from funds tracking the index. Gudang Garam earned Rp4.52 trillion in net profit in the first nine months of 2026, roughly quadruple year on year, while revenue fell about 8.7%.",
+        "event": "ICBP raises noodle prices and updates 2026 revenue growth guidance",
+        "headline": "ICBP raises noodle prices about 3%, lifts 2026 revenue growth guidance to 12%-14%",
+        "blurb": "Indofood CBP raised domestic prices in mid-October as higher raw-material and packaging costs narrowed nine-month gross margin to 34.1%. It maintained its EBIT margin target of 20%-22% and capped advertising and promotion spending at 4% of sales.",
         "tickers": [
-          "GGRM.JK"
+          "ICBP.JK"
         ],
         "supporting_news_ids": [
-          32909
+          32914
         ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "BRMS returns to net profit in Q3 2026",
+        "headline": "BRMS returns to net profit in Q3 2026 with US$11 million",
+        "blurb": "Bumi Resources Minerals’ revenue rose 172.8% quarter on quarter to US$71.8 million as gold sales recovered to 16,748 troy ounces and ore grade improved to 1.94 grams per ton. Samuel Sekuritas maintained its buy recommendation, while the company plans to raise processing capacity from 500 to 2,000 tons per day in early 2027.",
+        "tickers": [
+          "BRMS.JK"
+        ],
+        "supporting_news_ids": [
+          32911
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "INPP sells its entire stake in subsidiary PT Indonesia Gemilang Mahasentosa",
+        "headline": "INPP sells its entire IGM stake for Rp185.7 billion",
+        "blurb": "Indonesian Paradise Property transferred 445.6 million shares, representing 99.99999978% of Indonesia Gemilang Mahasentosa, to Prospek Duta Sukses on 12 November. Prospek Duta Sukses and Praba Kumala Sajati are now the subsidiary’s sole shareholders.",
+        "tickers": [
+          "INPP.JK"
+        ],
+        "supporting_news_ids": [
+          32915
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "GDK increases its stake in DGIK",
+        "headline": "GDK raises its DGIK stake by 14.02%",
+        "blurb": "Nusa Konstruksi’s controlling shareholder GDK bought 777.47 million shares for about Rp107.8 billion from 9 to 12 November at Rp135 and Rp150 per share, lifting its holding to 68.20% from 54.24%. Nusa Konstruksi also plans to transfer up to 400.21 million treasury shares to GDK, amid plans for Tokyu Construction to enter.",
+        "tickers": [
+          "DGIK.JK"
+        ],
+        "supporting_news_ids": [
+          32916
+        ],
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_03",
+      "id": "cur_06",
       "slot": "flash",
       "event": "FTSE Russell to remove 14 Indonesian HSC stocks from global indexes",
       "headline": "FTSE Russell to Remove 14 Indonesian High Shareholding Concentration Stocks from Global Indexes Effective December 21, 2026",
@@ -113,7 +157,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_04",
+      "id": "cur_07",
       "slot": "flash",
       "event": "Pertamina Geothermal Energy targets 12.5% free float by March 2027",
       "headline": "PT Pertamina Geothermal Energy Tbk (PGEO) Targets 12.5% Free Float by March 2027",
@@ -125,6 +169,35 @@
         32910
       ],
       "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_08",
+      "slot": "flash",
+      "event": "MEDC advances Sakakemang and Paus Biru projects and signs gas supply agreements",
+      "headline": "MEDC outlines 2027 project pipeline from Sakakemang to Paus Biru fields",
+      "blurb": null,
+      "tickers": [
+        "MEDC.JK",
+        "PGAS.JK"
+      ],
+      "supporting_news_ids": [
+        32913
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Gudang Garam joins the LQ45 index",
+      "headline": "GGRM joins LQ45 from 18 November 2026 to 29 January 2027",
+      "blurb": null,
+      "tickers": [
+        "GGRM.JK"
+      ],
+      "supporting_news_ids": [
+        32909
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
     }
   ],
   "what_to_watch": [
@@ -184,6 +257,7 @@
         "CDIA.JK",
         "CITA.JK",
         "CLEO.JK",
+        "DCII.JK",
         "DEPO.JK",
         "DNET.JK",
         "DSSA.JK",
@@ -206,6 +280,7 @@
         "MYOH.JK",
         "NCKL.JK",
         "NOBU.JK",
+        "PANI.JK",
         "PEVE.JK",
         "PGUN.JK",
         "RANC.JK",
@@ -213,6 +288,7 @@
         "ROTI.JK",
         "SILO.JK",
         "SMAR.JK",
+        "SMDM.JK",
         "SONA.JK",
         "SRAJ.JK",
         "SRTG.JK",
