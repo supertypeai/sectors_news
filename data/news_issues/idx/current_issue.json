@@ -1,18 +1,19 @@
 {
   "issue_date": "2026-11-16",
   "window_start": "2026-11-15T13:50:00Z",
-  "window_end": "2026-11-16T01:46:25Z",
+  "window_end": "2026-11-16T05:56:42Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Rupiah hits record low against the US dollar",
-    "headline": "Rupiah hits record low at Rp18,239 per US dollar",
-    "blurb": "The currency touched Rp18,239 per US dollar on 12 November and closed at Rp18,206 on 13 November. Sucor Sekuritas' Hendry Wijaya says rupiah depreciation and foreign outflows, with year-to-date net selling of about Rp97 trillion, may pressure the IHSG. He says 64% of at-risk foreign exposure is concentrated in BCA, BRI, Mandiri and BNI, while exporters earning dollars are relatively protected. Investors face Bank Indonesia's meeting on 17–18 November, MSCI rebalancing at the 30 November close and the Fed's rate decision on 9 December.",
+    "event": "Rupiah depreciation brings the currency to successive record lows",
+    "headline": "Rupiah hits a new record low of Rp18,254/US$",
+    "blurb": "It had reached Rp18,239/US$ on 12 November and closed at Rp18,206 on 13 November. The currency had depreciated 2.9% since 16 September and 8.51% year to date, while foreign net selling totaled about Rp97 trillion. Sucor Sekuritas' Hendry Wijaya cited rupiah weakness, foreign outflows, MSCI concerns and expectations of a December Federal Reserve rate hike as market pressures. Bank Indonesia's Board of Governors meets on 17–18 November, ahead of MSCI rebalancing at the 30 November close and the Fed's decision on 9 December.",
     "tickers": [],
     "supporting_news_ids": [
+      32941,
       32933
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: 1 new articles with a new fact: The rupiah hit an all-time low of Rp18,254/US$ on 16 November 2026."
   },
   "sections": {
     "other": [
@@ -28,33 +29,111 @@
         "supporting_news_ids": [
           32930
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "Antam reports Rp9.7 trillion net profit through September 2026",
-        "headline": "ANTM reports Rp9.7 trillion net profit through September, up 46%",
-        "blurb": "Aneka Tambang’s revenue rose 23% year on year to Rp88.48 trillion, while its net profit margin widened to 11% from 9%. Finance and Risk Management Director Arini Kasmira attributed growth to revenue optimization, cost efficiency and disciplined financial and risk management.",
+        "event": "Astra International unveils its strategy and financial targets through 2030",
+        "headline": "ASII unveils strategy with EPS target of Rp1,150–Rp1,200 through 2030",
+        "blurb": "Astra’s earnings-per-share target excludes non-recurring items. It also targets minimum 15% ROE and annual total shareholder return in the low teens, will maintain a 45%–50% dividend payout policy, and plans to reallocate around Rp10 trillion in net assets by 2030.",
+        "tickers": [
+          "ASII.JK",
+          "AUTO.JK"
+        ],
+        "supporting_news_ids": [
+          32950,
+          32945
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Antam reports nine-month 2026 net profit up 46% to Rp9.7 trillion",
+        "headline": "ANTM reports nine-month net profit up 46% to Rp9.7 trillion",
+        "blurb": "Antam's revenue rose 23% to Rp88.48 trillion, with precious metals and refining contributing Rp68.8 trillion, about 78% of the total. Gold sales reached 25.2 tons worth Rp68.4 trillion, up 17%.",
         "tickers": [
           "ANTM.JK"
         ],
         "supporting_news_ids": [
+          32951,
           32929,
           32928
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: Precious metals and refining contributed Rp68.8 trillion, about 78% of revenue."
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Mirae Asset raises its target price and profit forecasts for Indo Tambangraya Megah",
+        "headline": "Mirae Asset raises ITMG target price to Rp26,520 and profit forecasts",
+        "blurb": "Mirae Asset Sekuritas lifted its target from Rp25,000, implying 8.9% upside, and kept a hold recommendation on Indo Tambangraya Megah. It raised its net profit projections by 15.6% for 2026 and 5.9% for 2027.",
+        "tickers": [
+          "ITMG.JK"
+        ],
+        "supporting_news_ids": [
+          32942,
+          32954
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Tugu Insurance reports nine-month 2026 net profit growth of 17.4%",
+        "headline": "TUGU reports 17.4% nine-month 2026 net profit growth",
+        "blurb": "Tugu Insurance's net profit attributable to parent owners reached Rp495.15 billion, up from Rp421.75 billion a year earlier. January-September insurance service revenue rose 4.5% to Rp6.7 trillion, while expenses increased to Rp6.72 trillion from Rp6 trillion.",
+        "tickers": [
+          "TUGU.JK"
+        ],
+        "supporting_news_ids": [
+          32952
         ],
         "copy_decision": "new story"
       }
     ],
+    "deals_control": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Antam signals a minimum 50% FY2026 dividend payout and plans mining acquisitions",
+        "headline": "ANTM signals at least 50% FY2026 dividend payout and plans mining acquisitions",
+        "blurb": "Antam is considering increasing its 10% stake in Weda Bay Nickel, with final decisions resting with MIND ID, and awaits direction and an IUPK for Kristalin Ekalestari’s former Nabire gold concession. Stockbit estimates a potential dividend of Rp225–314 per share, equivalent to an 8–11.2% yield.",
+        "tickers": [
+          "ANTM.JK"
+        ],
+        "supporting_news_ids": [
+          32944
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "Indokripto agrees to acquire a 10% stake in Mitra Informatika Gemilang for Rp200 billion",
+        "headline": "COIN signs conditional deal to acquire 10% of MIG for Rp200 billion",
+        "blurb": "The 13 November conditional share subscription agreement with Mitra Informatika Gemilang covers 1,223,435 new series B shares at Rp163,475 each. The data center and IT services provider operates Bitera in Jakarta’s Kuningan area, with capacity of more than 30 MG.",
+        "tickers": [
+          "COIN.JK"
+        ],
+        "supporting_news_ids": [
+          32949,
+          32940,
+          32932
+        ],
+        "copy_decision": "rewritten: 2 new articles with a new fact: MIG operates Bitera, a data center in Jakarta’s Kuningan area with capacity of more than 30 MG."
+      }
+    ],
     "market_structure_policy": [
       {
-        "id": "cur_04",
+        "id": "cur_09",
         "slot": "story",
-        "event": "FTSE Russell removes 14 Indonesian stocks in December index review",
+        "event": "FTSE Russell removes 14 Indonesian stocks from its global indexes in the December review",
         "headline": "FTSE Russell removes 14 Indonesian stocks in December index review",
-        "blurb": "Indonesia remains a Secondary Emerging Market and off FTSE Russell’s Watch List. The changes take effect on 21 December, with results provisional through 4 December and final from 7 December.",
+        "blurb": "FTSE Russell also extended its freeze on new Indonesian inclusions to March 2027, while retaining Indonesia’s Secondary Emerging Market classification and keeping it off its Watch List. All affected stocks are classified as high shareholding concentration. The changes take effect on 21 December, and the review results become final on 7 December.",
         "tickers": [
           "BRIS.JK",
           "MTEL.JK",
@@ -71,31 +150,17 @@
           "TSPC.JK"
         ],
         "supporting_news_ids": [
+          32953,
+          32937,
           32935
         ],
-        "copy_decision": "new story"
-      }
-    ],
-    "deals_control": [
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "COIN agrees to acquire 10% stake in data center company MIG",
-        "headline": "COIN agrees to acquire 10% of MIG for Rp200 billion",
-        "blurb": "Indokripto Koin Semesta signed a conditional share subscription agreement on 13 November to buy 1,223,435 new series B shares in MIG, each with a nominal value of Rp163,475. The subscription would give it a 10% stake in the data center and IT services provider.",
-        "tickers": [
-          "COIN.JK"
-        ],
-        "supporting_news_ids": [
-          32932
-        ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 2 new articles with a new fact: FTSE Russell extended its freeze on new Indonesian inclusions to March 2027."
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_06",
+      "id": "cur_10",
       "slot": "flash",
       "event": "DMAS schedules Rp1.39 trillion interim dividend for fiscal year 2026",
       "headline": "Sinar Mas Group Issuer PT Puradelta Lestari Tbk (DMAS) to Pay Interim Dividend with Nearly 14% Yield",
@@ -106,21 +171,48 @@
       "supporting_news_ids": [
         32931
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Geoprima Solusi reports higher nine-month sales and expects positive 2026 performance",
+      "headline": "Backed by Tjokro Group, PT Geoprima Solusi Tbk (GPSO) Optimistic About Closing 2026 with Positive Performance",
+      "blurb": null,
+      "tickers": [
+        "GPSO.JK"
+      ],
+      "supporting_news_ids": [
+        32946
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_07",
+      "id": "cur_12",
       "slot": "flash",
-      "event": "INPP restructures subsidiary ownership in Rp185.7 billion transaction",
-      "headline": "INPP Restructures Ownership of Subsidiary in Transaction Valued at Rp185.7 Billion",
+      "event": "BCA reports bank-only net profit of Rp50.37 trillion through October 2026",
+      "headline": "PT Bank Central Asia Tbk (BCA) Posts Rp 50.37 Trillion Net Profit Through October 2026 as LDR Reaches 81.52%",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        32956
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "INPP transfers its subsidiary stake to PT Prospek Duta Sukses for Rp185.7 billion",
+      "headline": "PT Indonesian Paradise Property Tbk (INPP.JK) sold 99.99999978% of PT Indonesia Gemilang Mahasentosa for Rp185,703 billion",
       "blurb": null,
       "tickers": [
         "INPP.JK"
       ],
       "supporting_news_ids": [
+        32938,
         32927
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: PDS and PKS became IGM’s new shareholders on 12 November 2026."
     }
   ],
   "what_to_watch": [
@@ -131,6 +223,7 @@
       "title": "MSCI rebalancing at the market close",
       "tickers": [],
       "supporting_news_ids": [
+        32941,
         32933
       ]
     },
@@ -141,6 +234,7 @@
       "title": "Federal Reserve rate decision",
       "tickers": [],
       "supporting_news_ids": [
+        32941,
         32933
       ]
     },
@@ -165,7 +259,21 @@
         "TSPC.JK"
       ],
       "supporting_news_ids": [
+        32953,
+        32937,
         32935
+      ]
+    },
+    {
+      "id": "wtw_04",
+      "sort_date": "2026-12-31",
+      "timing_label": "Dec",
+      "title": "ANTM equity injection of about Rp 4 trillion for RKEF and HPAL projects",
+      "tickers": [
+        "ANTM.JK"
+      ],
+      "supporting_news_ids": [
+        32944
       ]
     }
   ]
