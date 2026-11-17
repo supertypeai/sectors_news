@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-17",
   "window_start": "2026-11-16T13:50:00Z",
-  "window_end": "2026-11-17T05:56:21Z",
+  "window_end": "2026-11-17T09:56:40Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -14,9 +14,10 @@
       "AALI.JK"
     ],
     "supporting_news_ids": [
+      33027,
       33014
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: 1 new articles, no new fact"
   },
   "sections": {
     "capital_raising_buybacks": [
@@ -33,21 +34,22 @@
           33019,
           33011
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "BMAS plans a Rp1 trillion rights issue with KVF as standby buyer",
-        "headline": "BMAS plans Rp1 trillion rights issue with KVF as standby buyer",
-        "blurb": "KBank Indonesia plans to issue 2.87 billion shares at Rp350 each, equal to 13.70% of its paid-up capital. KVF will exercise 2.54 billion rights and buy all shares left unsubscribed. Rights trading and exercise run from 27 November to 3 December.",
+        "event": "Bank Kasikorn Indonesia plans a Rp1 trillion rights issue",
+        "headline": "BMAS plans Rp1 trillion rights issue",
+        "blurb": "Bank Kasikorn Indonesia plans to use the proceeds for working capital to support lending, with use planned over up to 12 months. The 2.87 billion new shares are priced at Rp350 each and represent 13.70% of post-offer paid-up capital. Major shareholder Kasikorn Vision Financial will exercise its rights and buy any shares left unsubscribed; rights trading and exercise run from 27 November to 3 December.",
         "tickers": [
           "BMAS.JK"
         ],
         "supporting_news_ids": [
+          33034,
           33026
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 1 new articles with a new fact: BMAS plans to use the rights issue proceeds for working capital to support lending."
       },
       {
         "id": "cur_04",
@@ -62,7 +64,7 @@
           33012,
           33009
         ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: GMFI plans to raise approximately Rp1.05 trillion through the rights issue."
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_05",
@@ -77,24 +79,25 @@
           33013,
           32999
         ],
-        "copy_decision": "kept: 1 new articles, no new fact"
+        "copy_decision": "kept: same articles"
       }
     ],
     "deals_control": [
       {
         "id": "cur_06",
         "slot": "story",
-        "event": "CNI plans to acquire 6.685 billion INET shares",
-        "headline": "CNI plans to buy 6.685 billion INET shares",
-        "blurb": "CNI, a subsidiary of Era Media Sejahtera, plans to buy the shares from Abadi Kreasi Unggul Nusantara at Rp300 each, after approval at Era Media Sejahtera’s 9 November RUPSLB. Abadi Kreasi Unggul Nusantara will remain INET’s controller.",
+        "event": "Cakrawala Nexus acquires a 29.87% stake in INET",
+        "headline": "Cakrawala Nexus acquires 29.87% of INET for Rp2 trillion",
+        "blurb": "The DOOH-affiliated buyer completed the purchase on 16 November at Rp300 per share from INET controller Abadi Kreasi Unggul Nusantara. The seller’s direct stake fell from 59.76% to 29.89%, but it retained control.",
         "tickers": [
           "INET.JK",
           "DOOH.JK"
         ],
         "supporting_news_ids": [
+          33032,
           33002
         ],
-        "copy_decision": "kept: same articles"
+        "copy_decision": "rewritten: 1 new articles with a new fact: The acquisition of 29.87% of INET for Rp2 trillion was completed on 16 November, while the seller retained control."
       }
     ],
     "other": [
@@ -110,49 +113,66 @@
         "supporting_news_ids": [
           33017
         ],
-        "copy_decision": "new story"
-      }
-    ],
-    "market_structure_policy": [
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "ERAA joins the IDX LQ45 index",
-        "headline": "ERAA joins LQ45 with a 0.25% index weight",
-        "blurb": "Erajaya's inclusion runs from 18 November to 29 January 2027. Panin Sekuritas analyst Elandry Pratama sees it as a positive catalyst for visibility and institutional exposure, and sets a 12-month target of Rp600–Rp650 with a speculative buy on weakness recommendation.",
-        "tickers": [
-          "ERAA.JK"
-        ],
-        "supporting_news_ids": [
-          33004
-        ],
         "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_09",
+        "id": "cur_08",
         "slot": "story",
-        "event": "CGS downgrades BBYB and cuts its target price",
-        "headline": "CGS downgrades BBYB to hold and cuts target price to Rp162",
-        "blurb": "Bank Neo Commerce's loan-at-risk ratio rose to 14.6%, while cost of credit reached 16.8% for the nine-month period. CGS values the stock at 0.4 times 2027 price to book after cutting its 2026-2028 EPS projections by 5.7%-18.2%.",
+        "event": "BRI reports Q3 2026 operating and financial performance",
+        "headline": "BBRI reports 14.5% loan growth to Rp1,647 trillion through Q3 2026",
+        "blurb": "BRI’s NPL ratio fell to 2.85% in September from 3.1% a year earlier. Net profit attributable to owners reached Rp16.8 trillion in Q3, up 16% year on year, bringing nine-month profit to Rp47.7 trillion, up 16.9%.",
         "tickers": [
-          "BBYB.JK"
+          "BBRI.JK"
         ],
         "supporting_news_ids": [
-          33010
+          33029,
+          33036,
+          33025
         ],
-        "copy_decision": "rewritten: moved from lead to story"
+        "copy_decision": "rewritten: 2 new articles with a new fact: BRI’s NPL ratio fell to 2.85% in September 2026 from 3.1% a year earlier."
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "Ekamas Mora reports 9M2026 revenue and profit growth",
+        "headline": "MORA reports about 78% revenue and 118% profit growth in 9M2026",
+        "blurb": "Ekamas Mora recorded Rp5 trillion in revenue, compared with Rp2.8 trillion a year earlier, and net profit attributable to owners of the parent entity of Rp506.75 billion, versus Rp231.55 billion. Revenue from internet telecommunications service customers rose to Rp3.35 trillion from Rp990.63 billion.",
+        "tickers": [
+          "MORA.JK"
+        ],
+        "supporting_news_ids": [
+          33031
+        ],
+        "copy_decision": "new story"
       },
       {
         "id": "cur_10",
         "slot": "story",
-        "event": "BRI reports Q3 loan and profit growth",
-        "headline": "BRI reports 14.5% loan and 16.8% profit growth in Q3",
-        "blurb": "Net profit reached Rp48.2 trillion. Third-party funds rose 12% to Rp1,651 trillion, while the bank’s capital adequacy ratio stood at 23%.",
-        "tickers": [],
+        "event": "Cimory plans price increases to recover margins",
+        "headline": "CMRY plans Q4 price increases as gross margin falls to 42.1%",
+        "blurb": "Cisarua Mountain Dairy plans to raise dairy product prices in Q4 2026 to offset pressure from raw material and packaging costs. Mirae Asset Sekuritas said the adjustment could restore gross margin to 42%-44%.",
+        "tickers": [
+          "CMRY.JK"
+        ],
         "supporting_news_ids": [
-          33025
+          33021,
+          33005
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "Sido Muncul reports Q3 2026 results and raises analyst estimates",
+        "headline": "SIDO reports Q3 profit up 30.9% to Rp285 billion as Mirae considers estimate revisions",
+        "blurb": "Sido Muncul's revenue reached Rp1.03 trillion, up 14.7% year on year, while EBITDA rose 27.5% to Rp395 billion. Nine-month revenue, net profit and EBITDA reached 70%, 76% and 75% of Mirae Asset's 2026 projections, while management still expects 2026 revenue and profit to decline 10% and 24%, respectively.",
+        "tickers": [
+          "SIDO.JK"
+        ],
+        "supporting_news_ids": [
+          33030
         ],
         "copy_decision": "new story"
       }
@@ -160,10 +180,25 @@
   },
   "flash": [
     {
-      "id": "cur_11",
+      "id": "cur_12",
       "slot": "flash",
-      "event": "President Prabowo announces a state-control policy for new mining permits",
-      "headline": "Mining Stocks Decline Following President Prabowo Subianto's Policy on State Control of Mining Permits",
+      "event": "CGS downgrades BBYB and cuts its target price to Rp162",
+      "headline": "CGS International Sekuritas cuts Bank Neo Commerce (BBYB.JK) target price to Rp 162 and downgrades it to Hold",
+      "blurb": null,
+      "tickers": [
+        "BBYB.JK"
+      ],
+      "supporting_news_ids": [
+        33040,
+        33010
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: CGS cut its BBYB target price from Rp350 to Rp162."
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "President Prabowo directs the state to receive at least 70% of mining benefits",
+      "headline": "Indonesia's mining sector faces a directive for the state to receive 70% of mining benefits",
       "blurb": null,
       "tickers": [
         "BYAN.JK",
@@ -187,12 +222,13 @@
         "PSAB.JK"
       ],
       "supporting_news_ids": [
+        33028,
         33007
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: The directive calls for the state to receive at least 70% of benefits from mining concessions."
     },
     {
-      "id": "cur_12",
+      "id": "cur_14",
       "slot": "flash",
       "event": "FTSE Russell removes 14 Indonesian stocks from its index",
       "headline": "14 Indonesian Stocks Removed from FTSE Russell Index Face Potential Selling Pressure Ahead of December 21, 2026 Effective Date",
@@ -216,25 +252,24 @@
       "supporting_news_ids": [
         33020
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Djarum Group plans to merge tower units into Protelindo",
+      "headline": "Djarum Group to Merge Tower Units PT Komet Infra Nusantara and PT Darmanusa Tritunggal into Protelindo",
+      "blurb": null,
+      "tickers": [
+        "TOWR.JK"
+      ],
+      "supporting_news_ids": [
+        33035
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_13",
-      "slot": "flash",
-      "event": "Cimory plans Q4 price increases to recover margins",
-      "headline": "Cisarua Mountain Dairy (CMRY) plans Q4 2026 price increases as Mirae Asset maintains Buy with a Rp 4,810 target",
-      "blurb": null,
-      "tickers": [
-        "CMRY.JK"
-      ],
-      "supporting_news_ids": [
-        33021,
-        33005
-      ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: CMRY's Q3 gross margin fell 4.2 percentage points year on year to 42.1%."
-    },
-    {
-      "id": "cur_14",
+      "id": "cur_16",
       "slot": "flash",
       "event": "IDX designates ALII and MDIA as High Shareholding Concentration stocks",
       "headline": "Two Bakrie Group Stocks Face High Shareholding Concentration (HSC) and Decline",
@@ -249,7 +284,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_15",
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "ERAA joins the IDX LQ45 index",
+      "headline": "ERAA joins LQ45 with a 0.25% index weight",
+      "blurb": null,
+      "tickers": [
+        "ERAA.JK"
+      ],
+      "supporting_news_ids": [
+        33004
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_18",
       "slot": "flash",
       "event": "HEAL President Director Yulisar Khiat buys 2.5 million shares",
       "headline": "PT Medikaloka Hermina Tbk (HEAL) Director Increases Share Ownership by 2.5 Million Shares",
@@ -263,7 +312,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
+      "id": "cur_19",
       "slot": "flash",
       "event": "Surya Toto Indonesia announces a 2026 interim dividend",
       "headline": "PT Surya Toto Indonesia Tbk (TOTO) Announces Interim Dividend of Rp 103.2 Billion for 2026",
@@ -277,7 +326,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_17",
+      "id": "cur_20",
       "slot": "flash",
       "event": "WINS declares an interim dividend of Rp5 per share",
       "headline": "Wintermar Offshore Marine (WINS) Declares Interim Dividend of Rp5 Per Share, Totaling Rp22.3 Billion",
@@ -288,25 +337,10 @@
       "supporting_news_ids": [
         33022
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
-      "slot": "flash",
-      "event": "KINO and EAST reach interim dividend cum dates",
-      "headline": "PT Kino Indonesia Tbk (KINO) and PT Eastparc Hotel Tbk (EAST) Announce Interim Dividend Cum Dates and Amounts",
-      "blurb": null,
-      "tickers": [
-        "KINO.JK",
-        "EAST.JK"
-      ],
-      "supporting_news_ids": [
-        33016
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_19",
+      "id": "cur_21",
       "slot": "flash",
       "event": "OJK detains suspects in alleged CHEM and DOOH warrant manipulation",
       "headline": "OJK detains three suspects in alleged warrant manipulation involving Era Media Sejahtera (DOOH), with losses of approximately Rp6.97 billion",
@@ -319,21 +353,22 @@
         33023,
         33015
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_20",
+      "id": "cur_22",
       "slot": "flash",
-      "event": "SPTO declares an interim dividend of Rp35 per share",
-      "headline": "PT Surya Pertiwi Tbk (SPTO) Declares Interim Dividend of Rp35 Per Share, 64% of Net Profit",
+      "event": "Surya Pertiwi announces an interim dividend of Rp35 per share",
+      "headline": "Surya Pertiwi (SPTO) will distribute an interim dividend of Rp94.5 billion",
       "blurb": null,
       "tickers": [
         "SPTO.JK"
       ],
       "supporting_news_ids": [
+        33038,
         33018
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: SPTO scheduled payment of its interim dividend for 10 December 2026."
     }
   ],
   "what_to_watch": [
@@ -351,6 +386,32 @@
     },
     {
       "id": "wtw_02",
+      "sort_date": "2026-11-24",
+      "timing_label": "24 Nov",
+      "title": "SPTO cum-dividend (regular market) for its Rp35 interim dividend",
+      "tickers": [
+        "SPTO.JK"
+      ],
+      "supporting_news_ids": [
+        33038,
+        33018
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2026-11-27",
+      "timing_label": "27 Nov",
+      "title": "BMAS rights trading and exercise opens, until 3 Dec",
+      "tickers": [
+        "BMAS.JK"
+      ],
+      "supporting_news_ids": [
+        33034,
+        33026
+      ]
+    },
+    {
+      "id": "wtw_04",
       "sort_date": "2026-12-08",
       "timing_label": "8 Dec",
       "title": "GMFI shareholders vote on rights issue of up to 22.02 billion shares",
@@ -358,7 +419,33 @@
         "GMFI.JK"
       ],
       "supporting_news_ids": [
+        33012,
         33009
+      ]
+    },
+    {
+      "id": "wtw_05",
+      "sort_date": "2026-12-21",
+      "timing_label": "21 Dec",
+      "title": "FTSE Russell removes 14 Indonesian stocks from its index",
+      "tickers": [
+        "BRIS.JK",
+        "CLEO.JK",
+        "IMAS.JK",
+        "MAPI.JK",
+        "MAYA.JK",
+        "MLBI.JK",
+        "MTEL.JK",
+        "SAME.JK",
+        "SSMS.JK",
+        "STAA.JK",
+        "TBIG.JK",
+        "TKIM.JK",
+        "TMAS.JK",
+        "TSPC.JK"
+      ],
+      "supporting_news_ids": [
+        33020
       ]
     }
   ]
