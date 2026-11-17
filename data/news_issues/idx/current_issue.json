@@ -1,25 +1,88 @@
 {
   "issue_date": "2026-11-17",
   "window_start": "2026-11-16T13:50:00Z",
-  "window_end": "2026-11-17T01:46:50Z",
+  "window_end": "2026-11-17T05:56:21Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "CGS downgrades BBYB and cuts its target price",
-    "headline": "CGS downgrades BBYB to hold and cuts target price to Rp 162 from Rp 350",
-    "blurb": "CGS now values the shares at 0.4 times 2027 price-to-book after cutting its 2026-2028 EPS forecasts by 5.7%-18.2% and lowering assumed return on equity to 12.5% from 15%. Bank Neo Commerce earned Rp431 billion in January-September, down 7% year on year, while loans fell 11% to Rp6.7 trillion. Management lowered its 2026 loan target to Rp7 trillion from Rp8 trillion.",
+    "event": "Rupiah reaches a record low as the IHSG declines",
+    "headline": "Rupiah hits record low of Rp18,288 as IHSG declines",
+    "blurb": "The IHSG is 41% below its peak, with pressure compounded by expected US Federal Reserve rate hikes and a potential MSCI reclassification that could trigger US$10 billion in outflows. Alamtri Resources and Indo Tambangraya are cited for natural hedging, trading at 0.77 and 0.76 times book value, respectively. Pharmaceuticals and automotive assembly face margin pressure from dollar-priced imported inputs.",
     "tickers": [
-      "BBYB.JK"
+      "ADRO.JK",
+      "ITMG.JK",
+      "AALI.JK"
     ],
     "supporting_news_ids": [
-      33010
+      33014
     ],
     "copy_decision": "new story"
   },
   "sections": {
-    "deals_control": [
+    "capital_raising_buybacks": [
       {
         "id": "cur_02",
+        "slot": "story",
+        "event": "ENRG secures a US$220 million Deutsche Bank facility for HighPeak investment",
+        "headline": "ENRG secures up to US$220 million Deutsche Bank facility for HighPeak investment",
+        "blurb": "Energi Mega Persada signed the facility on 13 November to fund its US$200 million participation in newly issued HighPeak convertible preferred shares. They may convert into common shares at US$9.5 each, and HighPeak will use the funds to strengthen its capital structure, including refinancing US$1.17 billion in debt.",
+        "tickers": [
+          "ENRG.JK"
+        ],
+        "supporting_news_ids": [
+          33019,
+          33011
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "BMAS plans a Rp1 trillion rights issue with KVF as standby buyer",
+        "headline": "BMAS plans Rp1 trillion rights issue with KVF as standby buyer",
+        "blurb": "KBank Indonesia plans to issue 2.87 billion shares at Rp350 each, equal to 13.70% of its paid-up capital. KVF will exercise 2.54 billion rights and buy all shares left unsubscribed. Rights trading and exercise run from 27 November to 3 December.",
+        "tickers": [
+          "BMAS.JK"
+        ],
+        "supporting_news_ids": [
+          33026
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "GMFI plans a rights issue of up to 22.03 billion shares",
+        "headline": "GMFI plans rights issue to raise about Rp1.05 trillion",
+        "blurb": "GMF Asia says shareholders who do not subscribe could face dilution of up to 15%. The plan requires shareholder approval at an extraordinary general meeting on 8 December 2026.",
+        "tickers": [
+          "GMFI.JK"
+        ],
+        "supporting_news_ids": [
+          33012,
+          33009
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: GMFI plans to raise approximately Rp1.05 trillion through the rights issue."
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Harum Energy ends its share buyback program early",
+        "headline": "HRUM ends Rp120 billion share buyback early",
+        "blurb": "Harum Energy ended the program effective 17 November, citing capital-market rules and a restructuring plan being prepared by its controlling shareholders. Announced on 25 September, the buyback was set to cover up to 111 million shares, about 0.82% of issued and paid-up capital, through 24 December. The board said another buyback may be conducted under applicable rules.",
+        "tickers": [
+          "HRUM.JK"
+        ],
+        "supporting_news_ids": [
+          33013,
+          32999
+        ],
+        "copy_decision": "kept: 1 new articles, no new fact"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_06",
         "slot": "story",
         "event": "CNI plans to acquire 6.685 billion INET shares",
         "headline": "CNI plans to buy 6.685 billion INET shares",
@@ -31,42 +94,28 @@
         "supporting_news_ids": [
           33002
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
-    "capital_raising_buybacks": [
+    "other": [
       {
-        "id": "cur_03",
+        "id": "cur_07",
         "slot": "story",
-        "event": "Harum Energy ends its share buyback program early",
-        "headline": "HRUM ends Rp120 billion share buyback early",
-        "blurb": "Harum Energy ended the program effective 17 November, citing capital-market rules and a restructuring plan being prepared by its controlling shareholders. Announced on 25 September, the buyback was set to cover up to 111 million shares, about 0.82% of issued and paid-up capital, through 24 December. The board said another buyback may be conducted under applicable rules.",
+        "event": "MMIX shares hit the auto-rejection bottom after a sharp decline",
+        "headline": "MMIX hits lower price limit after 6.81% fall to Rp356",
+        "blurb": "Multi Medika Internasional had fallen for 12 consecutive trading days since 2 November, losing more than 55% from Rp795 on 30 October. Sell queues at Rp356 reached about 154,186 lots by 09:22 WIB on 17 November.",
         "tickers": [
-          "HRUM.JK"
+          "MMIX.JK"
         ],
         "supporting_news_ids": [
-          32999
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_04",
-        "slot": "story",
-        "event": "GMF Asia plans a rights issue of up to 22.02 billion shares",
-        "headline": "GMFI plans rights issue of up to 22.02 billion shares",
-        "blurb": "The shares have a nominal value of Rp19 each, and existing investors who skip the offering face dilution of up to 15%. Proceeds are intended for expansion, capability development, equipment renewal, new subsidiaries and asset purchases, pending shareholder approval on 8 December.",
-        "tickers": [
-          "GMFI.JK"
-        ],
-        "supporting_news_ids": [
-          33009
+          33017
         ],
         "copy_decision": "new story"
       }
     ],
     "market_structure_policy": [
       {
-        "id": "cur_05",
+        "id": "cur_08",
         "slot": "story",
         "event": "ERAA joins the IDX LQ45 index",
         "headline": "ERAA joins LQ45 with a 0.25% index weight",
@@ -77,27 +126,41 @@
         "supporting_news_ids": [
           33004
         ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "CGS downgrades BBYB and cuts its target price",
+        "headline": "CGS downgrades BBYB to hold and cuts target price to Rp162",
+        "blurb": "Bank Neo Commerce's loan-at-risk ratio rose to 14.6%, while cost of credit reached 16.8% for the nine-month period. CGS values the stock at 0.4 times 2027 price to book after cutting its 2026-2028 EPS projections by 5.7%-18.2%.",
+        "tickers": [
+          "BBYB.JK"
+        ],
+        "supporting_news_ids": [
+          33010
+        ],
+        "copy_decision": "rewritten: moved from lead to story"
+      },
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "BRI reports Q3 loan and profit growth",
+        "headline": "BRI reports 14.5% loan and 16.8% profit growth in Q3",
+        "blurb": "Net profit reached Rp48.2 trillion. Third-party funds rose 12% to Rp1,651 trillion, while the bank’s capital adequacy ratio stood at 23%.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33025
+        ],
         "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_06",
-      "slot": "flash",
-      "event": "Stockbit estimates ANTM's 2026 dividend at Rp312 per share",
-      "headline": "PT Aneka Tambang Tbk (ANTM) Forecasted Dividend of Rp312 Per Share with 11.3% Yield",
-      "blurb": null,
-      "tickers": [
-        "ANTM.JK"
-      ],
-      "supporting_news_ids": [
-        33001
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_07",
+      "id": "cur_11",
       "slot": "flash",
       "event": "President Prabowo announces a state-control policy for new mining permits",
       "headline": "Mining Stocks Decline Following President Prabowo Subianto's Policy on State Control of Mining Permits",
@@ -126,24 +189,52 @@
       "supporting_news_ids": [
         33007
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "FTSE Russell removes 14 Indonesian stocks from its index",
+      "headline": "14 Indonesian Stocks Removed from FTSE Russell Index Face Potential Selling Pressure Ahead of December 21, 2026 Effective Date",
+      "blurb": null,
+      "tickers": [
+        "BRIS.JK",
+        "MTEL.JK",
+        "TBIG.JK",
+        "MAPI.JK",
+        "TKIM.JK",
+        "MAYA.JK",
+        "IMAS.JK",
+        "MLBI.JK",
+        "SAME.JK",
+        "CLEO.JK",
+        "SSMS.JK",
+        "STAA.JK",
+        "TMAS.JK",
+        "TSPC.JK"
+      ],
+      "supporting_news_ids": [
+        33020
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_08",
+      "id": "cur_13",
       "slot": "flash",
-      "event": "Cimory plans Q4 2026 dairy product price increases",
-      "headline": "PT Cisarua Mountain Dairy Tbk (CMRY) Plans Price Hikes to Recover Margins Amid Positive Analyst Outlook",
+      "event": "Cimory plans Q4 price increases to recover margins",
+      "headline": "Cisarua Mountain Dairy (CMRY) plans Q4 2026 price increases as Mirae Asset maintains Buy with a Rp 4,810 target",
       "blurb": null,
       "tickers": [
         "CMRY.JK"
       ],
       "supporting_news_ids": [
+        33021,
         33005
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: CMRY's Q3 gross margin fell 4.2 percentage points year on year to 42.1%."
     },
     {
-      "id": "cur_09",
+      "id": "cur_14",
       "slot": "flash",
       "event": "IDX designates ALII and MDIA as High Shareholding Concentration stocks",
       "headline": "Two Bakrie Group Stocks Face High Shareholding Concentration (HSC) and Decline",
@@ -155,10 +246,10 @@
       "supporting_news_ids": [
         33008
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_10",
+      "id": "cur_15",
       "slot": "flash",
       "event": "HEAL President Director Yulisar Khiat buys 2.5 million shares",
       "headline": "PT Medikaloka Hermina Tbk (HEAL) Director Increases Share Ownership by 2.5 Million Shares",
@@ -169,10 +260,10 @@
       "supporting_news_ids": [
         33000
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_16",
       "slot": "flash",
       "event": "Surya Toto Indonesia announces a 2026 interim dividend",
       "headline": "PT Surya Toto Indonesia Tbk (TOTO) Announces Interim Dividend of Rp 103.2 Billion for 2026",
@@ -182,6 +273,65 @@
       ],
       "supporting_news_ids": [
         33006
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "WINS declares an interim dividend of Rp5 per share",
+      "headline": "Wintermar Offshore Marine (WINS) Declares Interim Dividend of Rp5 Per Share, Totaling Rp22.3 Billion",
+      "blurb": null,
+      "tickers": [
+        "WINS.JK"
+      ],
+      "supporting_news_ids": [
+        33022
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "KINO and EAST reach interim dividend cum dates",
+      "headline": "PT Kino Indonesia Tbk (KINO) and PT Eastparc Hotel Tbk (EAST) Announce Interim Dividend Cum Dates and Amounts",
+      "blurb": null,
+      "tickers": [
+        "KINO.JK",
+        "EAST.JK"
+      ],
+      "supporting_news_ids": [
+        33016
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "OJK detains suspects in alleged CHEM and DOOH warrant manipulation",
+      "headline": "OJK detains three suspects in alleged warrant manipulation involving Era Media Sejahtera (DOOH), with losses of approximately Rp6.97 billion",
+      "blurb": null,
+      "tickers": [
+        "CHEM.JK",
+        "DOOH.JK"
+      ],
+      "supporting_news_ids": [
+        33023,
+        33015
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "SPTO declares an interim dividend of Rp35 per share",
+      "headline": "PT Surya Pertiwi Tbk (SPTO) Declares Interim Dividend of Rp35 Per Share, 64% of Net Profit",
+      "blurb": null,
+      "tickers": [
+        "SPTO.JK"
+      ],
+      "supporting_news_ids": [
+        33018
       ],
       "copy_decision": "new story"
     }
@@ -209,18 +359,6 @@
       ],
       "supporting_news_ids": [
         33009
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2026-12-31",
-      "timing_label": "Q4",
-      "title": "CMRY plans dairy product price increases",
-      "tickers": [
-        "CMRY.JK"
-      ],
-      "supporting_news_ids": [
-        33005
       ]
     }
   ]
