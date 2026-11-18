@@ -3,7 +3,7 @@
         "source": "ICNScraper",
         "date": "20261118",
         "articles_found": 2,
-        "duration_minutes": 0.02119211875057469,
+        "duration_minutes": 0.024122503446415068,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +16,7 @@
         "source": "GapkiScraper",
         "date": "20261118",
         "articles_found": 2,
-        "duration_minutes": 0.03668118730032196,
+        "duration_minutes": 0.03595610257859031,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,7 +29,7 @@
         "source": "MinerbaScraper",
         "date": "20261118",
         "articles_found": 0,
-        "duration_minutes": 0.0016657785046845675,
+        "duration_minutes": 0.0017650460203488668,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -42,7 +42,7 @@
         "source": "IdnMinerScraper",
         "date": "20261118",
         "articles_found": 0,
-        "duration_minutes": 0.020929989754222333,
+        "duration_minutes": 0.008372802628825109,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -54,12 +54,13 @@
     {
         "source": "IDNFinancialScraper",
         "date": "20261118",
-        "articles_found": 40,
-        "duration_minutes": 0.01496513249973456,
-        "requests": 5,
-        "successful_requests": 5,
+        "articles_found": 54,
+        "duration_minutes": 0.031043538132992883,
+        "requests": 6,
+        "successful_requests": 6,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
@@ -71,11 +72,11 @@
     {
         "source": "BisnisMarket",
         "date": "20261118",
-        "articles_found": 48,
-        "duration_minutes": 12.300759497905771,
-        "requests": 96,
-        "successful_requests": 52,
-        "failed_requests": 44,
+        "articles_found": 63,
+        "duration_minutes": 17.162701096214974,
+        "requests": 137,
+        "successful_requests": 69,
+        "failed_requests": 68,
         "http_statuses": [
             403,
             200,
@@ -97,14 +98,7 @@
             200,
             403,
             200,
-            200,
             403,
-            200,
-            403,
-            200,
-            200,
-            403,
-            200,
             200,
             403,
             200,
@@ -114,6 +108,7 @@
             200,
             403,
             200,
+            403,
             200,
             403,
             200,
@@ -129,8 +124,9 @@
             200,
             403,
             200,
+            403,
             200,
-            200,
+            403,
             200,
             403,
             200,
@@ -166,6 +162,52 @@
             200,
             403,
             200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
             200,
             403,
             200,
@@ -178,6 +220,69 @@
             {
                 "stage": "fetch",
                 "url": "https://www.bisnis.com/index?categoryId=194&type=indeks&page=1",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/92/2022555/danareksa-investments-bisa-picu-peningkatan-inklusi-keuangan-ri",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://foto.bisnis.com/view/20261118/2022479/bei-gelar-ring-the-bell-for-climate-2026-dorong-pembiayaan-berkelanjutan",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/92/2022519/pinnacle-investment-gandeng-brids-perluas-pangsa-reksa-dana",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/7/2022527/saham-bbri-asii-hingga-ammn-jadi-pemberat-utama-ihsg-hari-ini",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/192/2022496/akra-akuisisi-vivo-sekitar-rp282-miliar-spbu-diintegrasikan-ke-bp-akr",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/192/2022489/kokok-tipis-widodo-makmur-wmuu-saham-ditutup-mepet-arb",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/7/2022481/rencana-ipo-bumn-2029-pengamat-soroti-rekam-jejak-laba-dan-valuasi",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/7/2022457/indeks-bisnis-27-ditutup-melemah-saham-tins-bumi-hingga-mbma-ambrol-ke-zona-merah",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/189/2022280/pergerakan-ihsg-dan-rekomendasi-saham-hari-ini-rabu-18-november-2026",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -247,6 +352,13 @@
             },
             {
                 "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/7/2022378/ihsg-menguat-040-sesi-i-rabu-1810-ditopang-saham-big-banks",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261118/7/2022358/saham-ri-makin-murah-manulife-mami-jagokan-emiten-konsumsi-dan-komoditas",
                 "status": 403,
                 "reason": "HTTPStatusError",
@@ -254,7 +366,7 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261118/189/2022280/pergerakan-ihsg-dan-rekomendasi-saham-hari-ini-rabu-18-november-2026",
+                "url": "https://market.bisnis.com/read/20261118/7/2022368/ihsg-sesi-i-naik-tipis-040-ke-level-5325",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -262,6 +374,13 @@
             {
                 "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261118/192/2022362/vale-inco-rombak-susunan-direksi-dan-komisaris-ini-daftarnya",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/192/2022330/pendapatan-xlsmart-excl-tumbuh-17-jadi-rp3577-triliun-hingga-september-2026",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -296,7 +415,28 @@
             },
             {
                 "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/93/2022320/jelang-pengumuman-bi-rate-rupiah-menguat-ke-level-rp18239-per-dolar-as",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261118/7/2022318/indeks-bisnis-27-dibuka-menguat-saham-bbca-inco-hingga-tlkm-melaju",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/7/2022317/ihsg-dibuka-naik-111-ke-5363-saham-mapi-mdka-indy-justru-lesu",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://www.bisnis.com/index?categoryId=194&type=indeks&page=2",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -345,7 +485,28 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://www.bisnis.com/index?categoryId=194&type=indeks&page=2",
+                "url": "https://market.bisnis.com/read/20261118/235/2022291/harga-emas-antam-di-pegadaian-hari-ini-rabu-18-november-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/7/2022290/ihsg-diramal-konsolidasi-jelang-putusan-bi-rate-cek-saham-excl-vktr-bris",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261118/235/2022260/harga-emas-perhiasan-hari-ini-rabu-18-november-2026-turun",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://www.bisnis.com/index?categoryId=194&type=indeks&page=3",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -353,6 +514,48 @@
             {
                 "stage": "fetch",
                 "url": "https://www.bisnis.com/index?categoryId=5&type=indeks&page=1",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261118/11/2022498/bi-pede-bi-rate-jadi-6-tak-ganggu-pdb-sudah-siapkan-jamu-manis",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261118/90/2022528/cara-cek-bi-checking-atau-slik-ojk-online-lewat-hp-sebelum-ajukan-kredit",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261118/90/2022453/bi-catat-kredit-perbankan-rp2526-triliun-belum-dicairkan",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261118/11/2022482/ini-alasan-bi-kerek-suku-bunga-jadi-6-antisipasi-the-fed-hingga-tensi-geopolitik",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261118/11/2022480/bi-siapkan-fasilitas-repo-svbi-dan-suvbi-jaga-likuiditas-perbankan",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261118/11/2022442/bi-rate-naik-jadi-6-ekonom-soroti-tekanan-margin-bank-hingga-peluang-kenaikan-lanjutan",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -464,6 +667,13 @@
             },
             {
                 "stage": "fetch",
+                "url": "https://finansial.bisnis.com/read/20261118/215/2022270/ojk-ingin-uang-cadangan-pesangon-dikelola-dana-pensiun-ada-sederet-manfaat-buat-pekerja",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
                 "url": "https://finansial.bisnis.com/read/20261118/215/2022189/bpjs-kesehatan-gelontorkan-rp284-triliun-untuk-kanker-paru-paru",
                 "status": 403,
                 "reason": "HTTPStatusError",
@@ -488,12 +698,17 @@
     {
         "source": "BloombergTechnoz",
         "date": "20261118",
-        "articles_found": 40,
-        "duration_minutes": 0.5703179064129169,
-        "requests": 41,
-        "successful_requests": 41,
+        "articles_found": 45,
+        "duration_minutes": 0.5500347378663719,
+        "requests": 46,
+        "successful_requests": 46,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -541,27 +756,22 @@
     {
         "source": "InvestorID",
         "date": "20261118",
-        "articles_found": 32,
-        "duration_minutes": 1.3835714724380523,
-        "requests": 27,
-        "successful_requests": 21,
-        "failed_requests": 6,
+        "articles_found": 41,
+        "duration_minutes": 1.3960795282541463,
+        "requests": 22,
+        "successful_requests": 20,
+        "failed_requests": 2,
         "http_statuses": [
             200,
             200,
             200,
+            200,
+            200,
+            200,
+            200,
             409,
-            409,
-            409,
+            200,
             407,
-            407,
-            407,
-            200,
-            200,
-            200,
-            200,
-            200,
-            200,
             200,
             200,
             200,
@@ -578,20 +788,6 @@
         "failures": [
             {
                 "stage": "fetch",
-                "url": "https://investor.id/market/462461/di-balik-hijaunya-ihsg-ada-bayang-bi-rate-dan-the-fed",
-                "status": 409,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 409"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/462452/boyong-ace-hardware-hingga-akuisisi-mapi-ada-target-harga-baru",
-                "status": 409,
-                "reason": "HTTPStatusError",
-                "message": "Received status code 409"
-            },
-            {
-                "stage": "fetch",
                 "url": "https://investor.id/market/462468/kepincut-saham-asii-dan-bbca",
                 "status": 409,
                 "reason": "HTTPStatusError",
@@ -600,20 +796,6 @@
             {
                 "stage": "fetch",
                 "url": "https://investor.id/market/462468/kepincut-saham-asii-dan-bbca",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/462452/boyong-ace-hardware-hingga-akuisisi-mapi-ada-target-harga-baru",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/market/462461/di-balik-hijaunya-ihsg-ada-bayang-bi-rate-dan-the-fed",
                 "status": 407,
                 "reason": "WebUnlockerError",
                 "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
@@ -624,7 +806,7 @@
         "source": "AbafScraper",
         "date": "20261118",
         "articles_found": 0,
-        "duration_minutes": 0.011049334898901482,
+        "duration_minutes": 0.008928336886068184,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -637,11 +819,11 @@
     {
         "source": "JakartaGlobe",
         "date": "20261118",
-        "articles_found": 7,
-        "duration_minutes": 0.42110515690098205,
-        "requests": 8,
+        "articles_found": 11,
+        "duration_minutes": 0.7266712493107964,
+        "requests": 10,
         "successful_requests": 8,
-        "failed_requests": 0,
+        "failed_requests": 2,
         "http_statuses": [
             200,
             200,
@@ -650,19 +832,39 @@
             200,
             200,
             200,
-            200
+            409,
+            200,
+            407
         ],
-        "failures": []
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/2027-chair-singapore-to-deepen-asean-financial-links",
+                "status": 409,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 409"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/2027-chair-singapore-to-deepen-asean-financial-links",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            }
+        ]
     },
     {
         "source": "AntaraNews",
         "date": "20261118",
-        "articles_found": 2,
-        "duration_minutes": 0.048544324344644944,
-        "requests": 4,
-        "successful_requests": 4,
+        "articles_found": 5,
+        "duration_minutes": 0.0917764028844734,
+        "requests": 7,
+        "successful_requests": 7,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -674,7 +876,7 @@
         "source": "AsianTelecom",
         "date": "20261118",
         "articles_found": 0,
-        "duration_minutes": 0.028845241060480475,
+        "duration_minutes": 0.019737092188249032,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -688,7 +890,7 @@
         "source": "JakartaPost",
         "date": "20261118",
         "articles_found": 0,
-        "duration_minutes": 0.018195509367311995,
+        "duration_minutes": 0.017586330549481013,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -701,12 +903,16 @@
     {
         "source": "KontanInvestasi",
         "date": "20261118",
-        "articles_found": 38,
-        "duration_minutes": 0.8486712867316479,
-        "requests": 16,
-        "successful_requests": 14,
-        "failed_requests": 2,
+        "articles_found": 80,
+        "duration_minutes": 1.296201205579564,
+        "requests": 31,
+        "successful_requests": 27,
+        "failed_requests": 4,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -718,8 +924,19 @@
             200,
             200,
             409,
+            409,
             200,
             407,
+            407,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200
@@ -727,14 +944,28 @@
         "failures": [
             {
                 "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/hapsoro-borong-600-juta-saham-buva-tapi-langsung-lepas-333-juta-saham",
+                "url": "https://investasi.kontan.co.id/news/pergerakan-saham-bank-variatif-pasca-rdg-bi-simak-rekomendasi-berikut",
                 "status": 409,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 409"
             },
             {
                 "stage": "fetch",
-                "url": "https://investasi.kontan.co.id/news/hapsoro-borong-600-juta-saham-buva-tapi-langsung-lepas-333-juta-saham",
+                "url": "https://investasi.kontan.co.id/news/akuisisi-spbu-vivo-jadi-katalis-baru-akr-corporindo-akra-simak-prospek-sahamnya",
+                "status": 409,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 409"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/pergerakan-saham-bank-variatif-pasca-rdg-bi-simak-rekomendasi-berikut",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/akuisisi-spbu-vivo-jadi-katalis-baru-akr-corporindo-akra-simak-prospek-sahamnya",
                 "status": 407,
                 "reason": "WebUnlockerError",
                 "message": "Account is suspended. Login to brightdata.com/cp/setting/billing to activate your account"
@@ -744,12 +975,18 @@
     {
         "source": "EmitenNews",
         "date": "20261118",
-        "articles_found": 18,
-        "duration_minutes": 0.5153740440650533,
-        "requests": 22,
-        "successful_requests": 22,
+        "articles_found": 24,
+        "duration_minutes": 0.4818658131795625,
+        "requests": 28,
+        "successful_requests": 28,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -778,12 +1015,13 @@
     {
         "source": "BCANews",
         "date": "20261118",
-        "articles_found": 21,
-        "duration_minutes": 0.21988322338244567,
-        "requests": 4,
-        "successful_requests": 4,
+        "articles_found": 29,
+        "duration_minutes": 0.2104020751003797,
+        "requests": 5,
+        "successful_requests": 5,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
@@ -795,7 +1033,7 @@
         "source": "CNBCMarket",
         "date": "20261118",
         "articles_found": 10,
-        "duration_minutes": 0.03456076382814596,
+        "duration_minutes": 0.027425017401886482,
         "requests": 11,
         "successful_requests": 11,
         "failed_requests": 0,
@@ -817,12 +1055,30 @@
     {
         "source": "CNNEkonomi",
         "date": "20261118",
-        "articles_found": 31,
-        "duration_minutes": 0.2925096708194663,
-        "requests": 36,
-        "successful_requests": 36,
+        "articles_found": 48,
+        "duration_minutes": 0.2913886319845915,
+        "requests": 54,
+        "successful_requests": 54,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -865,8 +1121,8 @@
     {
         "source": "KompasMoney",
         "date": "20261118",
-        "articles_found": 71,
-        "duration_minutes": 0.08603796227835118,
+        "articles_found": 107,
+        "duration_minutes": 0.11512942774376521,
         "requests": 2,
         "successful_requests": 1,
         "failed_requests": 1,
@@ -887,12 +1143,14 @@
     {
         "source": "FinanceDetik",
         "date": "20261118",
-        "articles_found": 8,
-        "duration_minutes": 0.10229847283723453,
-        "requests": 10,
-        "successful_requests": 10,
+        "articles_found": 10,
+        "duration_minutes": 0.07249525361694395,
+        "requests": 12,
+        "successful_requests": 12,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200,
             200,
             200,
@@ -909,12 +1167,14 @@
     {
         "source": "KontanKeuangan",
         "date": "20261118",
-        "articles_found": 24,
-        "duration_minutes": 0.2209876692543427,
-        "requests": 3,
-        "successful_requests": 3,
+        "articles_found": 64,
+        "duration_minutes": 0.5299853800951193,
+        "requests": 5,
+        "successful_requests": 5,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
             200,
             200,
             200
