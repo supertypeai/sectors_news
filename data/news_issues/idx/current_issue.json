@@ -1,65 +1,58 @@
 {
   "issue_date": "2026-11-18",
   "window_start": "2026-11-17T13:50:00Z",
-  "window_end": "2026-11-18T09:56:22Z",
+  "window_end": "2026-11-18T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Rupiah hits record weakness as Bank Indonesia raises rates and responds",
-    "headline": "Rupiah hits record low of Rp18,289 as BI raises rate to 6%",
-    "blurb": "On 18 November, BI raised the BI Rate by 25 basis points, ending a four-month hold at 5.75% and marking its fourth increase in six months. It also lifted the Deposit Facility rate to 5.25% and the Lending Facility rate to 6.75%. Governor Destry Damayanti called the hike a pre-emptive step to stabilize the rupiah and keep inflation within BI’s target. The December Board of Governors Meeting will determine whether tightening continues.",
+    "event": "Bank Indonesia raises the BI Rate to 6% and markets respond",
+    "headline": "Bank Indonesia raises BI Rate to 6% as rupiah firms",
+    "blurb": "After raising its benchmark rate by 25 basis points, Bank Indonesia increased DNDF hedging incentives to 45% for six-month tenors and 50% for 12-month tenors. The move ended a four-month hold at 5.75%; BI also raised its Deposit Facility rate to 5.25% and Lending Facility rate to 6.75%. Governor Destry Damayanti said the hike was intended to stabilize the rupiah and keep inflation on target. The December BI Board of Governors meeting will help determine whether the hiking cycle is over.",
     "tickers": [],
     "supporting_news_ids": [
+      33270,
+      33251,
+      33272,
+      33253,
+      33255,
+      33275,
+      33274,
+      33256,
       33220,
       33221,
       33222,
       33232,
       33234,
-      33223,
       33224,
       33227,
       33217,
-      33235,
-      33201,
-      33200
+      33235
     ],
-    "copy_decision": "rewritten: moved from flash to lead"
+    "copy_decision": "rewritten: regrouped, 3 of its articles moved out"
   },
   "sections": {
-    "capital_raising_buybacks": [
+    "market_structure_policy": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Medco issues US$300 million notes to refinance debt",
-        "headline": "MEDC issues US$300 million notes to refinance debt",
-        "blurb": "Medco issued the notes on 17 November at 8.875%, with maturity in 2032. Net proceeds will fund tenders, repurchases, refinancing or repayment of existing debt, including notes due 2028, and replace an undrawn committed facility.",
+        "event": "Bank Indonesia reserve-requirement cuts and deposit-facility changes support bank liquidity",
+        "headline": "Bank Indonesia cuts reserve requirements by 2 points, adding Rp89.9 trillion in liquidity",
+        "blurb": "The cuts take conventional banks’ ratio from 9% to 7% and Islamic banks’ from 7.5% to 5.5%, while the Deposit Facility rate rises 25 bps to 5.25%. The liquidity cushion supports selective bank credit growth through end-2026.",
         "tickers": [
-          "MEDC.JK"
+          "BNGA.JK",
+          "BBCA.JK",
+          "DNAR.JK",
+          "BGTG.JK"
         ],
         "supporting_news_ids": [
-          33229,
-          33213
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: Medco issued the US$300 million notes on 17 November 2026."
-      },
-      {
-        "id": "cur_03",
-        "slot": "story",
-        "event": "Cipta Perdana Lancar seeks approval for a rights issue",
-        "headline": "PART seeks approval for rights issue targeting Rp200 billion",
-        "blurb": "Cipta Perdana Lancar plans to issue up to 1 billion new shares, with proceeds earmarked for working capital. Shareholders who do not exercise their rights face estimated dilution of 25.97%, and the plan goes to a shareholder meeting on 9 December.",
-        "tickers": [
-          "PART.JK"
-        ],
-        "supporting_news_ids": [
-          33231
+          33278
         ],
         "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_04",
+        "id": "cur_03",
         "slot": "story",
         "event": "XLSMART reports nine-month 2026 results and raises its synergy target",
         "headline": "EXCL reports nine-month results and raises 2026 gross synergy target above US$300 million",
@@ -75,21 +68,22 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_05",
+        "id": "cur_04",
         "slot": "story",
-        "event": "ACES raises its 2026 target for new Azko store openings",
-        "headline": "ACES raises 2026 target for new Azko stores to 40-45",
-        "blurb": "Aspirasi Hidup also maintained its plan to open 40-50 Neka stores in 2026. BRI Danareksa analysts see up to 48% potential upside for ACES shares, citing stronger 2026-2027 prospects and expected fourth-quarter sales momentum ahead of Christmas.",
+        "event": "ACES raises its 2026 AZKO store-opening target and receives an updated broker target price",
+        "headline": "ACES raises 2026 AZKO opening target to 40-45 stores",
+        "blurb": "BRI Danareksa raised its target price to Rp520 from Rp470 and maintained its buy rating. Aspirasi Hidup plans to use the expansion to support sales growth through 2027 and kept its target of 40-50 new Neka stores.",
         "tickers": [
           "ACES.JK"
         ],
         "supporting_news_ids": [
+          33263,
           33206
         ],
-        "copy_decision": "kept: same articles"
+        "copy_decision": "rewritten: 1 new articles with a new fact: BRI Danareksa raised its ACES target price to Rp520 from Rp470."
       },
       {
-        "id": "cur_06",
+        "id": "cur_05",
         "slot": "story",
         "event": "HM Sampoerna reports nine-month sales and market share",
         "headline": "HMSP reports Rp87.5 trillion nine-month sales and 30.0% market share",
@@ -100,10 +94,10 @@
         "supporting_news_ids": [
           33233
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_07",
+        "id": "cur_06",
         "slot": "story",
         "event": "KB Valbury raises its Antam target price and projects a high dividend payout",
         "headline": "KB Valbury raises ANTM target price, projects dividend payout above 80%",
@@ -114,12 +108,58 @@
         "supporting_news_ids": [
           33226
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Medco issues US$300 million notes to refinance debt",
+        "headline": "MEDC issues US$300 million notes to refinance debt",
+        "blurb": "Medco issued the notes on 17 November at 8.875%, with maturity in 2032. Net proceeds will fund tenders, repurchases, refinancing or repayment of existing debt, including notes due 2028, and replace an undrawn committed facility.",
+        "tickers": [
+          "MEDC.JK"
+        ],
+        "supporting_news_ids": [
+          33229,
+          33213
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "MBMA plans a private placement of up to 10.79 billion shares",
+        "headline": "MBMA plans placement of up to 10.79 billion shares",
+        "blurb": "Merdeka Battery Materials says existing shareholders could face dilution of up to 9.09% if all shares are issued. The new shares would equal 10% of paid-up capital, with an issue price of at least 90% of the average closing price over 25 consecutive trading days. Independent shareholders will vote on the plan on 8 December.",
+        "tickers": [
+          "MBMA.JK"
+        ],
+        "supporting_news_ids": [
+          33189,
+          33199
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "Cipta Perdana Lancar seeks approval for a rights issue",
+        "headline": "PART seeks approval for rights issue targeting Rp200 billion",
+        "blurb": "Cipta Perdana Lancar plans to issue up to 1 billion new shares, with proceeds earmarked for working capital. Shareholders who do not exercise their rights face estimated dilution of 25.97%, and the plan goes to a shareholder meeting on 9 December.",
+        "tickers": [
+          "PART.JK"
+        ],
+        "supporting_news_ids": [
+          33231
+        ],
+        "copy_decision": "kept: same articles"
       }
     ],
     "deals_control": [
       {
-        "id": "cur_08",
+        "id": "cur_10",
         "slot": "story",
         "event": "TGRA proposes a 21 billion-share private placement",
         "headline": "TGRA proposes 21 billion-share placement, with AMS to take control via 15 billion shares",
@@ -132,11 +172,27 @@
           33185
         ],
         "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "AKRA subsidiary APR agrees to acquire VIVO fuel-station businesses",
+        "headline": "AKRA subsidiary APR agrees to acquire 90% of VIVO fuel-station operator",
+        "blurb": "AKR Corporindo subsidiary APR signed the agreement on 18 November with Vivo Energi Indonesia, which operates SPBU VIVO. Petro Palma Persada will retain 10% after completion, while 47 stations in Jabodetabek and Bandung are planned to join the BP-AKR network through phased rebranding and operations from 2027.",
+        "tickers": [
+          "AKRA.JK"
+        ],
+        "supporting_news_ids": [
+          33271,
+          33259,
+          33254
+        ],
+        "copy_decision": "new story"
       }
     ],
     "other": [
       {
-        "id": "cur_09",
+        "id": "cur_12",
         "slot": "story",
         "event": "MNC Sky Vision faces PKPU and prepares debt restructuring",
         "headline": "MSKY enters temporary PKPU over Ascot's US$4 million claim",
@@ -149,13 +205,42 @@
           33210,
           33188
         ],
-        "copy_decision": "rewritten: moved from lead to story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_10",
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "CPIN reports third-quarter revenue growth amid rising chicken prices",
+      "headline": "PT Charoen Pokphand Indonesia Tbk (CPIN) Outlook Supported by Rising Chicken Prices and Free Nutritious Meal Program",
+      "blurb": null,
+      "tickers": [
+        "CPIN.JK"
+      ],
+      "supporting_news_ids": [
+        33266
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "PTBA reports a nine-month profit surge alongside analyst payout and price-target estimates",
+      "headline": "PT Bukit Asam (PTBA) is estimated to pay dividends at around 75% of net profit",
+      "blurb": null,
+      "tickers": [
+        "PTBA.JK"
+      ],
+      "supporting_news_ids": [
+        33257,
+        33260
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_15",
       "slot": "flash",
       "event": "CGS International cuts GoTo's target price and raises its 2026 profit forecast",
       "headline": "CGS International raises GOTO's 2026 profit forecast to Rp1.4 trillion, cuts target to Rp35",
@@ -166,10 +251,10 @@
       "supporting_news_ids": [
         33195
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_11",
+      "id": "cur_16",
       "slot": "flash",
       "event": "Indo Tambangraya Megah schedules an interim dividend payment",
       "headline": "PT Indo Tambangraya Megah Tbk (ITMG) to Pay Interim Dividend of Rp 1,286.83 per Share",
@@ -183,7 +268,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "INDY targets 50% non-coal revenue by 2028 as Awak Mas construction advances",
+      "headline": "PT Indika Energy Tbk (INDY) Targets 50% Non-Coal Revenue Contribution by 2028, Banking on Awak Mas Gold Project",
+      "blurb": null,
+      "tickers": [
+        "INDY.JK"
+      ],
+      "supporting_news_ids": [
+        33186
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_18",
       "slot": "flash",
       "event": "VIVA and MDIA report first-half 2026 financial results",
       "headline": "VIVA reports Rp60.02 billion H1 2026 profit as MDIA posts Rp32.30 billion loss",
@@ -199,7 +298,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_13",
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "CFIN explains declining cash-loan financing and reports higher nine-month profit",
+      "headline": "PT Clipan Finance Indonesia Tbk (CFIN) Explains Decline in Cash Loan Financing",
+      "blurb": null,
+      "tickers": [
+        "CFIN.JK"
+      ],
+      "supporting_news_ids": [
+        33277
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_20",
       "slot": "flash",
       "event": "Abadi Kreasi sells INET shares to Cakrawala Nexus, changing their ownership stakes",
       "headline": "PT Abadi Kreasi Unggul Nusantara sells 6.68 billion INET shares, cutting its stake in PT Sinergi Inti Andalan Prima Tbk (INET) to 29.89%",
@@ -219,7 +332,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_21",
       "slot": "flash",
       "event": "Aneka Tambang focuses on Pongkor to sustain 2027 gold production",
       "headline": "PT Aneka Tambang Tbk (ANTM) Relies on Pongkor Gold Mine Optimization to Secure 2027 Gold Production",
@@ -230,10 +343,10 @@
       "supporting_news_ids": [
         33219
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_15",
+      "id": "cur_22",
       "slot": "flash",
       "event": "Institutional investors change their BRMS shareholdings",
       "headline": "Vanguard Trims Position in PT Bumi Resources Mineral Tbk (BRMS) While BlackRock Moves in the Opposite Direction",
@@ -247,22 +360,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "Merdeka Battery Materials plans a 10.79-billion-share private placement",
-      "headline": "MBMA plans private placement of up to 10.8 billion shares",
-      "blurb": null,
-      "tickers": [
-        "MBMA.JK"
-      ],
-      "supporting_news_ids": [
-        33189,
-        33199
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
-      "id": "cur_17",
+      "id": "cur_23",
       "slot": "flash",
       "event": "MGLV shares fall after police search Megaspeed in an Nvidia chip investigation",
       "headline": "PT NexAI Digital Infrastruktur Tbk (MGLV) Shares Fall 9.88% on Megaspeed Investigation",
@@ -276,7 +374,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
+      "id": "cur_24",
       "slot": "flash",
       "event": "Multi Bintang Indonesia announces an interim dividend",
       "headline": "Multi Bintang Indonesia (MLBI) will distribute an interim dividend of Rp228 per share",
@@ -288,25 +386,39 @@
         33218,
         33228
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
+      "id": "cur_25",
       "slot": "flash",
-      "event": "Indika Energy advances the Awak Mas project amid a land dispute",
-      "headline": "Indika Energy (INDY) says a land dispute affecting 309 hectares has not disrupted the Awak Mas project",
+      "event": "INDY shares fall amid a land dispute involving the Awak Mas gold project",
+      "headline": "PT Indika Energy Tbk (INDY) Shares Fall 13.5% in a Month Amid Land Dispute Involving Subsidiary PT Masmindo Dwi Area",
       "blurb": null,
       "tickers": [
         "INDY.JK"
       ],
       "supporting_news_ids": [
-        33215,
-        33186
+        33215
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: INDY says claims over roughly 309 hectares have not disrupted Awak Mas, which was 72.84% complete at 30 September 2026."
+      "copy_decision": "rewritten: regrouped, 1 of its articles moved out"
     },
     {
-      "id": "cur_20",
+      "id": "cur_26",
+      "slot": "flash",
+      "event": "RDTX proceeds with a 1:20 stock split",
+      "headline": "Roda Vivatex (RDTX.JK) will conduct a 1:20 stock split, increasing issued shares to 5.376 billion",
+      "blurb": null,
+      "tickers": [
+        "RDTX.JK"
+      ],
+      "supporting_news_ids": [
+        33252,
+        33267
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_27",
       "slot": "flash",
       "event": "TOTO declares an interim dividend of Rp10 per share",
       "headline": "PT Surya Toto Indonesia Tbk (TOTO) Declares Interim Dividend of Rp 10 Per Share, 67.8% of Net Profit",
@@ -320,22 +432,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_21",
+      "id": "cur_28",
       "slot": "flash",
-      "event": "OJK responds to MSCI’s consultation on Indonesia’s market classification",
-      "headline": "OJK Says It Received No Advance Signal as MSCI Opens Consultation to Reclassify Indonesia to Standalone Market",
+      "event": "IPCC plans an interim dividend for fiscal 2026",
+      "headline": "PT Indonesia Kendaraan Terminal Tbk (IPCC) Announces Interim Dividend of Rp 70.87 Billion, Potential Yield of 3.89%",
       "blurb": null,
       "tickers": [
-        "CHEM.JK",
-        "DOOH.JK"
+        "IPCC.JK"
       ],
       "supporting_news_ids": [
-        33225
+        33264
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_22",
+      "id": "cur_29",
       "slot": "flash",
       "event": "DGWG declares an interim dividend of Rp19.50 per share",
       "headline": "PT Delta Giri Wacana Tbk (DGWG) to Distribute Interim Dividend of Rp 114.7 Billion, Equal to 71.7% of Net Profit",
@@ -349,7 +460,22 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_23",
+      "id": "cur_30",
+      "slot": "flash",
+      "event": "OJK responds to MSCI’s consultation on Indonesia’s market classification",
+      "headline": "OJK Says It Received No Advance Signal as MSCI Opens Consultation to Reclassify Indonesia to Standalone Market",
+      "blurb": null,
+      "tickers": [
+        "CHEM.JK",
+        "DOOH.JK"
+      ],
+      "supporting_news_ids": [
+        33225
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_31",
       "slot": "flash",
       "event": "Pool Advista divests a 10% stake in Pool Advista Finance",
       "headline": "Pool Advista (POOL) Divests 10% Stake in Pool Advista Finance (POLA) to Cicil Technologies for Rp16.75 Billion",
@@ -364,7 +490,35 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_24",
+      "id": "cur_32",
+      "slot": "flash",
+      "event": "Mondial Investama increases its stake in DYAN",
+      "headline": "PT Mondial Investama Indonesia Increases Stake in PT Dyandra Media International Tbk (DYAN) for Long-Term Investment",
+      "blurb": null,
+      "tickers": [
+        "DYAN.JK"
+      ],
+      "supporting_news_ids": [
+        33269
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_33",
+      "slot": "flash",
+      "event": "BOBA approves an interim dividend of Rp2 per share",
+      "headline": "PT Formosa Ingredient Factory Tbk (BOBA) Prepares Rp 2.31 Billion Interim Dividend of Rp 2 Per Share",
+      "blurb": null,
+      "tickers": [
+        "BOBA.JK"
+      ],
+      "supporting_news_ids": [
+        33261
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_34",
       "slot": "flash",
       "event": "BCA auctions Global Sukses Solusi’s property after a loan default",
       "headline": "PT Global Sukses Solusi Tbk (RUNS) Asset in Sleman Auctioned by BCA for Rp17.7 Billion After Loan Default",
@@ -374,6 +528,20 @@
       ],
       "supporting_news_ids": [
         33230
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_35",
+      "slot": "flash",
+      "event": "Rupiah hits record weakness as banks quote elevated dollar rates and BI outlines defenses",
+      "headline": "The rupiah touched a record low of Rp18,289 per US dollar before strengthening on 18 November",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        33223,
+        33201,
+        33200
       ],
       "copy_decision": "new story"
     }
@@ -425,18 +593,23 @@
       "title": "BI December meeting determines whether rate tightening continues",
       "tickers": [],
       "supporting_news_ids": [
+        33270,
+        33251,
+        33272,
+        33253,
+        33255,
+        33275,
+        33274,
+        33256,
         33220,
         33221,
         33222,
         33232,
         33234,
-        33223,
         33224,
         33227,
         33217,
-        33235,
-        33201,
-        33200
+        33235
       ]
     },
     {
