@@ -1,43 +1,37 @@
 {
   "issue_date": "2026-11-19",
   "window_start": "2026-11-18T13:50:00Z",
-  "window_end": "2026-11-19T01:46:32Z",
+  "window_end": "2026-11-19T05:56:23Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Mirae Asset recommends accumulative buys and sets targets for four Indonesian banks",
-    "headline": "Mirae recommends accumulative buys on four banks, sets BBCA target at Rp6,775",
-    "blurb": "Nafan Aji Gusta's per-share targets are Rp4,230 for BNI, Rp5,375 for Bank Mandiri, Rp6,775 for BCA and Rp3,360 for BRI. He said the 25-basis-point rate increase to 6% supports rupiah stability and could restore positive sentiment toward banking stocks, alongside controlled NPL levels and credit growth within BI and OJK's 10%-12% YoY target range.",
+    "event": "IDX extends Wijaya Karya’s trading suspension over delayed bond and sukuk payments",
+    "headline": "IDX extends WIKA trading suspension over six delayed bond and sukuk payments",
+    "blurb": "Wijaya Karya shares will remain suspended across all markets until further notice after the company postponed six payments due 18 November. They comprise interest on three bond series and profit-sharing payments on three sukuk series. The IDX said the delays indicate problems with the company's business continuity.",
     "tickers": [
-      "BBCA.JK",
-      "BMRI.JK",
-      "BBNI.JK",
-      "BBRI.JK"
+      "WIKA.JK"
     ],
     "supporting_news_ids": [
-      33304
+      33320
     ],
     "copy_decision": "new story"
   },
   "sections": {
-    "deals_control": [
+    "earnings_guidance": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "AKR Corporindo agrees to acquire Vivo Energy Indonesia and Nusantara Karya Oranye",
-        "headline": "AKRA agrees to acquire Vivo Energy Indonesia and NKO for US$15.5 million",
-        "blurb": "AKR Corporindo, through subsidiary Aneka Petroindo Raya and with Petro Palma Persada, signed a conditional share purchase agreement with three Singapore-based sellers. After completion, Aneka Petroindo Raya will hold 90% of each company and Petro Palma Persada the remaining 10%, with Vivo fuel stations set to join the BP-AKR retail network.",
+        "event": "XL Axiata reports a wider Q3 core loss as Mirae maintains its Buy rating",
+        "headline": "EXCL posts wider Q3 core loss of Rp666 billion as Mirae maintains Buy",
+        "blurb": "XL Axiata raised capitalized capex guidance to about Rp24 trillion. Mirae maintained its Buy rating with a Rp4,300 target price, projecting losses to shrink in Q4-2026 and net profit to reach Rp2.4 trillion in 2027.",
         "tickers": [
-          "AKRA.JK"
+          "EXCL.JK"
         ],
         "supporting_news_ids": [
-          33299,
-          33282
+          33318
         ],
         "copy_decision": "new story"
-      }
-    ],
-    "earnings_guidance": [
+      },
       {
         "id": "cur_03",
         "slot": "story",
@@ -50,10 +44,24 @@
         "supporting_news_ids": [
           33294
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_04",
+        "slot": "story",
+        "event": "Ciputra Development reports lower 9M2026 profit and receives an analyst outlook",
+        "headline": "CTRA reports 18% 9M profit decline as analyst cites support through 2027",
+        "blurb": "Ciputra Development’s nine-month revenue fell 10.80% to Rp7.485 trillion, while Q3 pre-sales rose 55% year on year to Rp2.901 trillion. Mirae Asset analyst Nafan Aji Gusta recommends accumulate buy with a Rp540 target, citing VAT incentives, potential rate cuts and new projects, including one slated for 2027.",
+        "tickers": [
+          "CTRA.JK"
+        ],
+        "supporting_news_ids": [
+          33317
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
         "slot": "story",
         "event": "Kimia Farma reports a 94.49% decline in net loss",
         "headline": "KAEF reports a 94.49% decline in net loss",
@@ -64,13 +72,61 @@
         "supporting_news_ids": [
           33289
         ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "market_structure_policy": [
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "MSCI demotes Bumi Resources Minerals from its Global Standard index",
+        "headline": "MSCI demotes BRMS to Small Cap index from 1 December",
+        "blurb": "Bumi Resources Minerals shifts from Global Standard to Small Cap in MSCI’s November review, effective 1 December. Shares touched a one-year low of Rp282, while Q3 revenue rose 172.8% quarter-on-quarter to US$71.8 million and net profit was US$11 million.",
+        "tickers": [
+          "BRMS.JK"
+        ],
+        "supporting_news_ids": [
+          33314
+        ],
         "copy_decision": "new story"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "AKR Corporindo agrees to acquire Vivo Energy Indonesia and Nusantara Karya Oranye",
+        "headline": "AKRA agrees to acquire Vivo Energy Indonesia and Nusantara Karya Oranye for US$15.5 million",
+        "blurb": "AKR Corporindo's subsidiary APR plans to integrate 47 Vivo fuel stations across Jabodetabek and Bandung into the BP-AKR network. Under the conditional agreement, APR would own 90% of both companies and non-affiliated Petro Palma Persada the remaining 10%, subject to preliminary conditions.",
+        "tickers": [
+          "AKRA.JK"
+        ],
+        "supporting_news_ids": [
+          33322,
+          33299,
+          33282
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: APR plans to integrate 47 Vivo fuel stations across Jabodetabek and Bandung into the BP-AKR network."
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_05",
+      "id": "cur_08",
+      "slot": "flash",
+      "event": "PGN discusses a potential dividend from fiscal 2026 earnings",
+      "headline": "PT Perusahaan Gas Negara Tbk (PGAS) Discusses 2026 Dividend, Historical Payout Ratio Reaches 80%",
+      "blurb": null,
+      "tickers": [
+        "PGAS.JK"
+      ],
+      "supporting_news_ids": [
+        33305
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_09",
       "slot": "flash",
       "event": "Multi Bintang Indonesia announces an interim dividend of Rp228 per share",
       "headline": "PT Multi Bintang Indonesia Tbk (MLBI) Announces Interim Dividend of Rp228 Per Share, Totaling Rp480.39 Billion",
@@ -81,10 +137,10 @@
       "supporting_news_ids": [
         33298
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_06",
+      "id": "cur_10",
       "slot": "flash",
       "event": "Adira Finance outlines its 2027 financing strategy",
       "headline": "Adira Finance (ADMF.JK) outlined plans through 2027 after reporting Q3 2026 net profit of Rp 1.69 trillion",
@@ -96,24 +152,54 @@
         33303,
         33283
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Palma Serasih schedules an interim dividend of Rp113.1 billion",
+      "headline": "Palma Serasih (PSGO) Schedules Rp113.1 Billion Interim Dividend with Cum Date on November 27",
+      "blurb": null,
+      "tickers": [
+        "PSGO.JK"
+      ],
+      "supporting_news_ids": [
+        33319
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_07",
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "Roda Vivatex schedules a 1:20 stock split",
+      "headline": "PT Roda Vivatex Tbk (RDTX) to Conduct 1:20 Stock Split Effective 24 November 2026",
+      "blurb": null,
+      "tickers": [
+        "RDTX.JK"
+      ],
+      "supporting_news_ids": [
+        33307
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_13",
       "slot": "flash",
       "event": "Atlas Resources plans a private placement to fund coal hauling road infrastructure",
-      "headline": "Atlas Resources (ARII) Plans Private Placement of 375 Million Shares to Fund Coal Hauling Road Infrastructure for Subsidiary Musi Mitra Jaya",
+      "headline": "Atlas Resources (ARII) plans a private placement of up to 375 million shares to fund a coal-hauling road",
       "blurb": null,
       "tickers": [
         "ARII.JK"
       ],
       "supporting_news_ids": [
+        33316,
+        33306,
         33300
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 2 new articles with a new fact: The placement could raise at least Rp75 billion before costs."
     },
     {
-      "id": "cur_08",
+      "id": "cur_14",
       "slot": "flash",
       "event": "Indonesia Kendaraan Terminal approves an interim dividend for fiscal year 2026",
       "headline": "PT Indonesia Kendaraan Terminal Tbk (IPCC) to Distribute Interim Dividend of Rp 70.87 Billion",
@@ -124,23 +210,43 @@
       "supporting_news_ids": [
         33281
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_09",
+      "id": "cur_15",
       "slot": "flash",
-      "event": "Bank Indonesia raises BI Rate to 6% with immediate policy and market reactions",
-      "headline": "Bank Indonesia raises its policy rate by 25 basis points to 6% and adds liquidity measures",
+      "event": "Bank Indonesia raises BI Rate to 6% and market participants assess the impact",
+      "headline": "Bank Indonesia raises its benchmark rate by 25 basis points to 6% to support rupiah stability",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
+        33309,
+        33321,
+        33323,
+        33315,
+        33325,
+        33308,
+        33312,
         33296,
         33293,
         33301,
         33302,
         33290,
+        33304,
         33279,
         33280
+      ],
+      "copy_decision": "rewritten: 8 new articles with a new fact: KLM liquidity incentives will be capped at 5% of third-party funds from 1 December 2026."
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "Global gold prices hit a 14-month low after Federal Reserve signals",
+      "headline": "Global Gold Prices Plunge 3.2 Percent to 14-Month Low as Aggressive Federal Reserve Signals Lift Rate Hike Expectations",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        33324
       ],
       "copy_decision": "new story"
     }
@@ -155,6 +261,8 @@
         "ARII.JK"
       ],
       "supporting_news_ids": [
+        33316,
+        33306,
         33300
       ]
     },
@@ -172,6 +280,18 @@
     },
     {
       "id": "wtw_03",
+      "sort_date": "2026-11-27",
+      "timing_label": "27 Nov",
+      "title": "PSGO cum-dividend (regular market) for its Rp6 interim dividend",
+      "tickers": [
+        "PSGO.JK"
+      ],
+      "supporting_news_ids": [
+        33319
+      ]
+    },
+    {
+      "id": "wtw_04",
       "sort_date": "2026-12-01",
       "timing_label": "1 Dec",
       "title": "BI implements the second 1-point GWM cut",
@@ -187,17 +307,25 @@
       ]
     },
     {
-      "id": "wtw_04",
+      "id": "wtw_05",
       "sort_date": "2026-12-01",
       "timing_label": "1 Dec",
       "title": "BI's KLM liquidity incentives take effect, capped at 5% of third-party funds",
       "tickers": [],
       "supporting_news_ids": [
+        33309,
+        33321,
+        33323,
+        33315,
+        33325,
+        33308,
+        33312,
         33296,
         33293,
         33301,
         33302,
         33290,
+        33304,
         33279,
         33280
       ]
