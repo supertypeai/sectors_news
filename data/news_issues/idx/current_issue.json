@@ -1,19 +1,20 @@
 {
   "issue_date": "2026-11-20",
   "window_start": "2026-11-19T13:50:00Z",
-  "window_end": "2026-11-20T09:56:56Z",
+  "window_end": "2026-11-20T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "The rupiah reaches record lows amid dollar strength",
-    "headline": "Rupiah hits record spot low of Rp18,281/US$ amid dollar strength",
-    "blurb": "The currency closed down 0.14% at Rp18,268/US$ and fell 0.4% for the week. The US dollar index reached 103.88, its highest in 19 months, as expectations grew for a Federal Reserve rate hike of at least 25 basis points in December. Forecasts put the rupiah in a weaker Rp18,230-18,300/US$ range.",
+    "event": "Rupiah reaches successive record lows against the US dollar",
+    "headline": "Rupiah sets record low at Rp18,319 per US dollar in NDF trading",
+    "blurb": "The currency also touched Rp18,281/US$ shortly after the spot market opened on 20 November, with reports putting its close at Rp18,268 and Rp18,270. JISDOR closed at Rp18,278, down 0.5% on the day. Analyst Ibrahim Assuaibi expected the rupiah to remain under pressure in the Rp18,270-Rp18,320/US$ range the following week.",
     "tickers": [],
     "supporting_news_ids": [
+      33505,
       33473,
       33448
     ],
-    "copy_decision": "rewritten: 1 new articles with a new fact: The rupiah touched an all-time spot low of Rp18,281/US$ and closed at Rp18,268/US$ on 20 November."
+    "copy_decision": "rewritten: 1 new articles with a new fact: The rupiah reached Rp18,319/US$ in NDF trading at 23:39 WIB before Friday, 20 November 2026."
   },
   "sections": {
     "deals_control": [
@@ -32,10 +33,27 @@
         "supporting_news_ids": [
           33471
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_03",
+        "slot": "story",
+        "event": "PT Sinergi Graha Kapital sells its WIFI stake to the controlling shareholder",
+        "headline": "WIFI controller buys Sinergi Graha Kapital’s 26.67% stake",
+        "blurb": "Solusi Sinergi Digital’s controlling shareholder, Investasi Sukses Bersama, acquired the entire stake on 19 November. It now holds 2.88 billion shares, or 54.42%, while Sinergi Graha Kapital holds none.",
+        "tickers": [
+          "WIFI.JK"
+        ],
+        "supporting_news_ids": [
+          33498,
+          33486,
+          33469,
+          33449
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_04",
         "slot": "story",
         "event": "AKR acquires BP Global's remaining stake in Aneka Petroindo Raya",
         "headline": "AKRA acquires BP Global’s remaining 49.9% stake in APR for US$14.22 million",
@@ -51,7 +69,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_04",
+        "id": "cur_05",
         "slot": "story",
         "event": "Dharma Polimetal partners with Minth Group on EV components",
         "headline": "DRMA partners Minth Group on EV components through Rp180 billion JV",
@@ -61,20 +79,6 @@
         ],
         "supporting_news_ids": [
           33402
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "Inocycle agrees to divest its stake in Urecel Indonesia",
-        "headline": "INOV agrees to divest 45.8% stake in Urecel Indonesia for Rp260 billion",
-        "blurb": "Inocycle signed a conditional share purchase agreement with CIP Capital covering 11,450 shares in Urecel Indonesia. The proposed sale is valued at 71.1% of Inocycle’s equity as of 30 June 2026 and is subject to shareholder approval at an extraordinary meeting on 28 December.",
-        "tickers": [
-          "INOV.JK"
-        ],
-        "supporting_news_ids": [
-          33455
         ],
         "copy_decision": "kept: same articles"
       }
@@ -105,7 +109,7 @@
         "supporting_news_ids": [
           33499
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "other": [
@@ -126,7 +130,7 @@
           33440,
           33404
         ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_09",
@@ -142,7 +146,7 @@
           33493,
           33454
         ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: PKPK shares stood at Rp6,700, up more than 1,000% over the past year."
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_10",
@@ -160,57 +164,25 @@
         "copy_decision": "kept: same articles"
       }
     ],
-    "capital_raising_buybacks": [
+    "earnings_guidance": [
       {
         "id": "cur_11",
         "slot": "story",
-        "event": "XLSMART prepares a Rp1 trillion share buyback",
-        "headline": "EXCL prepares Rp1 trillion share buyback",
-        "blurb": "The three-month program runs from 23 November to 22 February 2027 and will use internal cash; the number of shares depends on execution prices and regulatory limits. XLSMART expects pro forma basic EPS to move from minus Rp88 to minus Rp90 per share.",
+        "event": "Merdeka Copper Gold swings to nine-month net profit",
+        "headline": "MDKA swings to US$157 million nine-month net profit",
+        "blurb": "Merdeka Copper Gold’s revenue rose 76% year on year to US$2.26 billion. Nickel subsidiary MBMA posted record third-quarter revenue of US$732 million and net profit of US$92 million, while cumulative gold production rose 54% to 116,955 ounces.",
         "tickers": [
-          "EXCL.JK"
+          "MDKA.JK",
+          "MBMA.JK",
+          "EMAS.JK"
         ],
         "supporting_news_ids": [
-          33490,
-          33461,
-          33453,
-          33443
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: Pro forma basic EPS moves from minus Rp88 to minus Rp90 per share."
-      },
-      {
-        "id": "cur_12",
-        "slot": "story",
-        "event": "Semen Indonesia allocates Rp250 billion for a share buyback",
-        "headline": "SMGR plans share buyback of up to Rp250 billion",
-        "blurb": "Semen Indonesia expects to conduct the buyback over three months from 20 November using internal funds, with repurchased shares capped at 20% of issued and paid-up capital. In a simulation based on 30 June figures, earnings per share would rise from Rp34 to Rp35 while net profit remains Rp207.01 billion.",
-        "tickers": [
-          "SMGR.JK"
-        ],
-        "supporting_news_ids": [
-          33467,
-          33492
+          33500
         ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_13",
-        "slot": "story",
-        "event": "Prodia completes its 2026 share buyback",
-        "headline": "PRDA completes 2026 buyback of 36.14 million shares",
-        "blurb": "Prodia repurchased the shares for Rp112.42 billion, including transaction costs, at an average Rp3,033 each during a program that ran from 20 August to 19 November. Its treasury holdings now total 83.86 million shares, or 8.95% of paid-up capital, below the 20% maximum.",
-        "tickers": [
-          "PRDA.JK"
-        ],
-        "supporting_news_ids": [
-          33401
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "earnings_guidance": [
-      {
-        "id": "cur_14",
+        "id": "cur_12",
         "slot": "story",
         "event": "Astrindo reports nine-month results and maintains its 2026 revenue target",
         "headline": "BIPI keeps its approximately US$140 million 2026 target as nine-month revenue falls 34.23%",
@@ -224,7 +196,7 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_15",
+        "id": "cur_13",
         "slot": "story",
         "event": "JPMorgan downgrades BCA to Underweight",
         "headline": "JPMorgan downgrades BBCA to Underweight after 15% gain in 15 days",
@@ -235,10 +207,10 @@
         "supporting_news_ids": [
           33487
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_16",
+        "id": "cur_14",
         "slot": "story",
         "event": "Telkom’s InfraNexia reports third-quarter revenue and profit",
         "headline": "TLKM’s InfraNexia reports Q3 revenue of Rp10.5 trillion, profit of Rp1.04 trillion",
@@ -249,19 +221,53 @@
         "supporting_news_ids": [
           33494
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_15",
+        "slot": "story",
+        "event": "XLSMART prepares a Rp1 trillion share buyback",
+        "headline": "EXCL prepares Rp1 trillion share buyback",
+        "blurb": "The three-month program runs from 23 November to 22 February 2027 and will use internal cash; the number of shares depends on execution prices and regulatory limits. XLSMART expects pro forma basic EPS to move from minus Rp88 to minus Rp90 per share.",
+        "tickers": [
+          "EXCL.JK"
+        ],
+        "supporting_news_ids": [
+          33490,
+          33461,
+          33453,
+          33443
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_16",
+        "slot": "story",
+        "event": "Semen Indonesia allocates Rp250 billion for a share buyback",
+        "headline": "SMGR plans share buyback of up to Rp250 billion",
+        "blurb": "Semen Indonesia expects to conduct the buyback over three months from 20 November using internal funds, with repurchased shares capped at 20% of issued and paid-up capital. In a simulation based on 30 June figures, earnings per share would rise from Rp34 to Rp35 while net profit remains Rp207.01 billion.",
+        "tickers": [
+          "SMGR.JK"
+        ],
+        "supporting_news_ids": [
+          33467,
+          33492
+        ],
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_17",
         "slot": "story",
-        "event": "Timah reports Rp4.12 trillion in nine-month net profit",
-        "headline": "TINS reports Rp4.12 trillion in nine-month net profit",
-        "blurb": "Timah’s revenue rose 144% year on year to Rp16.15 trillion, supported by increased ore supply and stronger global tin prices. Tin ore output reached 18,893 tons by September, and the company targets 25,000 tons for full-year 2026.",
+        "event": "Prodia completes its 2026 share buyback",
+        "headline": "PRDA completes 2026 buyback of 36.14 million shares",
+        "blurb": "Prodia repurchased the shares for Rp112.42 billion, including transaction costs, at an average Rp3,033 each during a program that ran from 20 August to 19 November. Its treasury holdings now total 83.86 million shares, or 8.95% of paid-up capital, below the 20% maximum.",
         "tickers": [
-          "TINS.JK"
+          "PRDA.JK"
         ],
         "supporting_news_ids": [
-          33437
+          33401
         ],
         "copy_decision": "kept: same articles"
       }
@@ -270,6 +276,90 @@
   "flash": [
     {
       "id": "cur_18",
+      "slot": "flash",
+      "event": "Timah reports Rp4.12 trillion in nine-month net profit",
+      "headline": "TINS reports Rp4.12 trillion in nine-month net profit",
+      "blurb": null,
+      "tickers": [
+        "TINS.JK"
+      ],
+      "supporting_news_ids": [
+        33437
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "Bank Pan Indonesia reports nine-month net profit growth",
+      "headline": "PT Bank Pan Indonesia Tbk (PNBN) Posts 2.8% Net Profit Growth to Rp 2.25 Trillion in Q3 2026",
+      "blurb": null,
+      "tickers": [
+        "PNBN.JK"
+      ],
+      "supporting_news_ids": [
+        33509
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "Kimia Farma sharply reduces its nine-month net loss",
+      "headline": "PT Kimia Farma Tbk (KAEF) Slashes Net Loss 94.49% and Could Return to Profit in 2027",
+      "blurb": null,
+      "tickers": [
+        "KAEF.JK"
+      ],
+      "supporting_news_ids": [
+        33506
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "Inocycle agrees to divest its stake in Urecel Indonesia",
+      "headline": "INOV agrees to divest 45.8% stake in Urecel Indonesia for Rp260 billion",
+      "blurb": null,
+      "tickers": [
+        "INOV.JK"
+      ],
+      "supporting_news_ids": [
+        33455
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_22",
+      "slot": "flash",
+      "event": "BRI subsidiaries report profit growth through September 2026",
+      "headline": "Subsidiaries report 43.5% profit growth through September 2026",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        33465
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_23",
+      "slot": "flash",
+      "event": "Bank Indonesia raises its benchmark rate to 6%",
+      "headline": "BI Rate Rise to 6 Percent Pressures Banking Stocks, but BBCA, BMRI, and BBRI Seen as Resilient Buys",
+      "blurb": null,
+      "tickers": [
+        "BBCA.JK",
+        "BMRI.JK",
+        "BBRI.JK"
+      ],
+      "supporting_news_ids": [
+        33508
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_24",
       "slot": "flash",
       "event": "Triputra Agro Persada receives an interim dividend from its subsidiary",
       "headline": "PT Triputra Agro Persada Tbk (TAPG) Receives Rp 599.99 Billion Interim Dividend from Subsidiary PT Union Sampoerna Triputra Persada",
@@ -280,50 +370,10 @@
       "supporting_news_ids": [
         33495
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
-      "slot": "flash",
-      "event": "Ancora Indonesia Resources transfers its Bormindo stake to settle debt",
-      "headline": "PT Ancora Indonesia Resources Tbk (OKAS) Releases 60% Stake in PT Bormindo Nusantara to Settle All Debts",
-      "blurb": null,
-      "tickers": [
-        "OKAS.JK"
-      ],
-      "supporting_news_ids": [
-        33491
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_20",
-      "slot": "flash",
-      "event": "BRI subsidiaries report profit growth through September 2026",
-      "headline": "Subsidiaries report 43.5% profit growth through September 2026",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33465
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
-      "id": "cur_21",
-      "slot": "flash",
-      "event": "Astra International discloses its 2030 Investor Day targets",
-      "headline": "ROE, EPS, and TSR: Three Indicators for Assessing an Issuer's Future",
-      "blurb": null,
-      "tickers": [
-        "ASII.JK"
-      ],
-      "supporting_news_ids": [
-        33446
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_22",
+      "id": "cur_25",
       "slot": "flash",
       "event": "Morgan Stanley reduces its stake in GoTo Group",
       "headline": "Morgan Stanley Reduces Stake in Goto Group (GOTO) Amid Three Consecutive Quarters of Profit",
@@ -337,7 +387,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_23",
+      "id": "cur_26",
       "slot": "flash",
       "event": "Global tin prices fall 11.25% over one month",
       "headline": "Global Tin Price Plummets 11.25%, Analysts Discuss Outlook and Performance of PT Timah Tbk (TINS)",
@@ -351,7 +401,22 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_24",
+      "id": "cur_27",
+      "slot": "flash",
+      "event": "Japfa subsidiary agrees to acquire Tigaraksa Satria’s cold-chain businesses",
+      "headline": "PT Japfa Comfeed Indonesia Tbk (JPFA) Subsidiary PT Japfa Food Indonesia to Acquire Tigaraksa Satria's Cold Chain Business",
+      "blurb": null,
+      "tickers": [
+        "JPFA.JK",
+        "TGKA.JK"
+      ],
+      "supporting_news_ids": [
+        33507
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_28",
       "slot": "flash",
       "event": "BTN reports nine-month profit growth and revises its 2026 targets",
       "headline": "Bank Tabungan Negara (BBTN.JK) reports Rp2.82 trillion net profit, up 22.6% through September 2026",
@@ -364,10 +429,10 @@
         33463,
         33438
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: BTN raised its financing growth target to 8%-11% and cut its third-party funds growth target to 3%-5%."
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_25",
+      "id": "cur_29",
       "slot": "flash",
       "event": "BFI Finance declares an interim dividend of Rp35 per share",
       "headline": "BFI Finance Indonesia (BFIN) declares an interim dividend of Rp35 per share",
@@ -379,27 +444,10 @@
         33466,
         33489
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_26",
-      "slot": "flash",
-      "event": "WIFI's controller reacquires a 26.67% stake from Sinergi Graha Kapital",
-      "headline": "WIFI controller buys back 26.67% stake from Sinergi Graha Kapital",
-      "blurb": null,
-      "tickers": [
-        "WIFI.JK"
-      ],
-      "supporting_news_ids": [
-        33498,
-        33486,
-        33469,
-        33449
-      ],
-      "copy_decision": "kept: 3 new articles, no new fact, headline kept in flash from story"
-    },
-    {
-      "id": "cur_27",
+      "id": "cur_30",
       "slot": "flash",
       "event": "Elnusa plans an Rp84.5 billion share buyback",
       "headline": "Elnusa (ELSA) plans to resume a share buyback of up to Rp84.5 billion",
@@ -415,7 +463,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_28",
+      "id": "cur_31",
       "slot": "flash",
       "event": "Jasuindo announces an interim cash dividend of Rp10 per share",
       "headline": "PT Jasuindo Tiga Perkasa Tbk (JTPE) to Pay Interim Cash Dividend of Rp10 Per Share on December 17, 2026",
@@ -425,50 +473,6 @@
       ],
       "supporting_news_ids": [
         33405
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_29",
-      "slot": "flash",
-      "event": "Techno9 shareholders approve a rights issue, debt issuance, and board changes",
-      "headline": "Techno9 Indonesia (NINE.JK) wins approval for a rights issue of up to 2,443,000,000 shares",
-      "blurb": null,
-      "tickers": [
-        "NINE.JK"
-      ],
-      "supporting_news_ids": [
-        33497,
-        33445
-      ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Shareholders approved a rights issue of up to 2,443,000,000 shares, with the price and schedule still to be set."
-    },
-    {
-      "id": "cur_30",
-      "slot": "flash",
-      "event": "Falmaco plans a private placement to address capital deficiency",
-      "headline": "PT Falmaco Nonwoven Industri Tbk (FLMC) Plans Private Placement of 78.13 Million Shares to Address Capital Deficiency",
-      "blurb": null,
-      "tickers": [
-        "FLMC.JK"
-      ],
-      "supporting_news_ids": [
-        33442
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_31",
-      "slot": "flash",
-      "event": "Jababeka and BSI partner to develop Cikarang’s halal industry ecosystem",
-      "headline": "PT Jababeka Tbk (KIJA), via Subsidiary PT Grahabuana Cikarang, Partners with PT Bank Syariah Indonesia (Persero) Tbk (BRIS) to Build Halal Industry Ecosystem in Cikarang",
-      "blurb": null,
-      "tickers": [
-        "KIJA.JK",
-        "BRIS.JK"
-      ],
-      "supporting_news_ids": [
-        33428
       ],
       "copy_decision": "kept: same articles"
     },
@@ -484,7 +488,79 @@
       "supporting_news_ids": [
         33470
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_33",
+      "slot": "flash",
+      "event": "Indonesia Kendaraan Terminal plans an interim dividend for fiscal 2026",
+      "headline": "PT Indonesia Kendaraan Terminal Tbk (IPCC) to Distribute Rp70.87 Billion Interim Dividend for Fiscal Year 2026",
+      "blurb": null,
+      "tickers": [
+        "IPCC.JK"
+      ],
+      "supporting_news_ids": [
+        33504
+      ],
       "copy_decision": "new story"
+    },
+    {
+      "id": "cur_34",
+      "slot": "flash",
+      "event": "Ancora Indonesia Resources transfers its Bormindo stake to settle debt",
+      "headline": "PT Ancora Indonesia Resources Tbk (OKAS) Releases 60% Stake in PT Bormindo Nusantara to Settle All Debts",
+      "blurb": null,
+      "tickers": [
+        "OKAS.JK"
+      ],
+      "supporting_news_ids": [
+        33491
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_35",
+      "slot": "flash",
+      "event": "Techno9 shareholders approve a rights issue, debt issuance, and board changes",
+      "headline": "Techno9 Indonesia (NINE.JK) wins approval for a rights issue of up to 2,443,000,000 shares",
+      "blurb": null,
+      "tickers": [
+        "NINE.JK"
+      ],
+      "supporting_news_ids": [
+        33497,
+        33445
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_36",
+      "slot": "flash",
+      "event": "Falmaco plans a private placement to address capital deficiency",
+      "headline": "PT Falmaco Nonwoven Industri Tbk (FLMC) Plans Private Placement of 78.13 Million Shares to Address Capital Deficiency",
+      "blurb": null,
+      "tickers": [
+        "FLMC.JK"
+      ],
+      "supporting_news_ids": [
+        33442
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_37",
+      "slot": "flash",
+      "event": "Jababeka and BSI partner to develop Cikarang’s halal industry ecosystem",
+      "headline": "PT Jababeka Tbk (KIJA), via Subsidiary PT Grahabuana Cikarang, Partners with PT Bank Syariah Indonesia (Persero) Tbk (BRIS) to Build Halal Industry Ecosystem in Cikarang",
+      "blurb": null,
+      "tickers": [
+        "KIJA.JK",
+        "BRIS.JK"
+      ],
+      "supporting_news_ids": [
+        33428
+      ],
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
