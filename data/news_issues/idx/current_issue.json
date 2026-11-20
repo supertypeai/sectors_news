@@ -1,87 +1,56 @@
 {
   "issue_date": "2026-11-20",
   "window_start": "2026-11-19T13:50:00Z",
-  "window_end": "2026-11-20T01:46:28Z",
+  "window_end": "2026-11-20T05:56:52Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Astrindo reports nine-month results and maintains its 2026 revenue target",
-    "headline": "BIPI reports 34.23% nine-month revenue drop, keeps US$140 million 2026 target",
-    "blurb": "Astrindo reported January-September revenue of US$128.13 million, down 34.23% year on year, and net profit of US$5.51 million after a US$5.41 million loss a year earlier. It maintained its target of approximately US$140 million in revenue by the end of 2026. The company is expanding across Mini LNG, waste-to-energy and geothermal-powered data centers, including a 2.5 mmscfd plant in Wunut targeted for completion in the second quarter of 2027.",
-    "tickers": [
-      "BIPI.JK"
-    ],
+    "event": "Rupiah reaches a record low against the US dollar",
+    "headline": "Rupiah reaches record low of Rp18,319/US$ in NDF market",
+    "blurb": "The NDF quote was recorded at 23:39 WIB, with spot trading expected to remain under pressure on 20 November. The rupiah is forecast to trade at Rp18,230-18,300/US$, with technical targets of Rp18,280-18,300/US$ and medium-term weakness to Rp18,400/US$ if its trendline channel breaks. Pressure reflects a stronger dollar, rising Federal Reserve tightening expectations and domestic political and fiscal concerns.",
+    "tickers": [],
     "supporting_news_ids": [
-      33431
+      33448
     ],
     "copy_decision": "new story"
   },
   "sections": {
-    "other": [
+    "market_structure_policy": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Adhi Karya responds to a PKPU petition",
-        "headline": "ADHI responds to PKPU petition filed by two companies",
-        "blurb": "Atap Perkasa and Satek Aire Indonesia registered the petition at the Central Jakarta Commercial Court on 17 November. Adhi Karya says it has not received official court notice and will verify the petition’s basis once it arrives. The company says the petition has no significant impact on its operations, financial condition or business continuity.",
+        "event": "Indonesia introduces a severance reserve fund rule",
+        "headline": "Indonesia introduces severance reserve fund rule due by 28 October 2027",
+        "blurb": "The requirement under Law No. 27 of 2026 shifts severance from a liability paid at termination to funds set aside in advance. Gajah Tunggal had Rp1.86 trillion in post-employment benefit liabilities in June 2026, while Pan Brothers had 23,762 employees and US$7.63 million in cash.",
         "tickers": [
-          "ADHI.JK"
+          "GJTL.JK",
+          "PBRX.JK"
         ],
         "supporting_news_ids": [
-          33434
-        ],
-        "copy_decision": "new story"
-      }
-    ],
-    "deals_control": [
-      {
-        "id": "cur_03",
-        "slot": "story",
-        "event": "AKR acquires the remaining stake in Aneka Petroindo Raya",
-        "headline": "AKRA acquires Aneka Petroindo Raya’s remaining 49.9% for US$14.22 million",
-        "blurb": "The purchase from BP Global Investments Limited took effect on 6 November, raising AKR’s ownership of APR from 50.1% to 100%. AKR said the deal has no material impact because APR was already consolidated, with the main changes to profit attribution and consolidated equity.",
-        "tickers": [
-          "AKRA.JK"
-        ],
-        "supporting_news_ids": [
-          33436
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_04",
-        "slot": "story",
-        "event": "Dharma Polimetal partners with Minth Group on EV components",
-        "headline": "DRMA partners Minth Group on EV components through Rp180 billion JV",
-        "blurb": "Dharma Polimetal established the joint venture in September 2026 to supply EV components, particularly aluminium extrusion for chassis and body structures. The project is part of the company's Rp400 billion capital expenditure plan for 2026.",
-        "tickers": [
-          "DRMA.JK"
-        ],
-        "supporting_news_ids": [
-          33402
-        ],
-        "copy_decision": "new story"
-      }
-    ],
-    "earnings_guidance": [
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "Timah reports Rp4.12 trillion in nine-month net profit",
-        "headline": "TINS reports Rp4.12 trillion in nine-month net profit",
-        "blurb": "Timah’s revenue rose 144% year on year to Rp16.15 trillion, supported by increased ore supply and stronger global tin prices. Tin ore output reached 18,893 tons by September, and the company targets 25,000 tons for full-year 2026.",
-        "tickers": [
-          "TINS.JK"
-        ],
-        "supporting_news_ids": [
-          33437
+          33451
         ],
         "copy_decision": "new story"
       }
     ],
     "capital_raising_buybacks": [
       {
-        "id": "cur_06",
+        "id": "cur_03",
+        "slot": "story",
+        "event": "XLSMART prepares an Rp1 trillion share buyback",
+        "headline": "EXCL prepares share buyback of up to Rp1 trillion",
+        "blurb": "The buyback is planned to run from 23 November to 22 February and will be funded from internal cash. XLSMART may repurchase shares gradually or all at once, depending on market conditions.",
+        "tickers": [
+          "EXCL.JK"
+        ],
+        "supporting_news_ids": [
+          33461,
+          33453,
+          33443
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_04",
         "slot": "story",
         "event": "Prodia completes its 2026 share buyback",
         "headline": "PRDA completes 2026 buyback of 36.14 million shares",
@@ -92,28 +61,265 @@
         "supporting_news_ids": [
           33401
         ],
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "other": [
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Paragon subsidiary signs a coal sales contract with Xiangyu Trading Indonesia",
+        "headline": "PKPK subsidiary signs Rp1.38 trillion coal contract with Xiangyu Trading Indonesia",
+        "blurb": "Through Tri Oetama Persada, Paragon will supply 1 million metric tons from November 2026 to December 2027 at an estimated US$76 per ton. PKPK expects the agreement to optimize mining operations, increase sales certainty and support consolidated revenue.",
+        "tickers": [
+          "PKPK.JK"
+        ],
+        "supporting_news_ids": [
+          33454
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Adhi Karya faces a PKPU petition from two creditors",
+        "headline": "ADHI faces PKPU petition from two creditors",
+        "blurb": "Adhi Karya says Atap Perkasa and Satek Aire Indonesia filed the petition on 17 November. Its 30 September liabilities were Rp23.46 trillion against assets of Rp26.77 trillion. It has not received official court notice and will verify the petition on receipt, saying it expects no significant impact on operations or finances.",
+        "tickers": [
+          "ADHI.JK"
+        ],
+        "supporting_news_ids": [
+          33460,
+          33434
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: As of 30 September 2026, ADHI reported liabilities of Rp23.46 trillion and assets of Rp26.77 trillion."
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Astrindo reports nine-month results and maintains its 2026 revenue target",
+        "headline": "BIPI keeps its approximately US$140 million 2026 target as nine-month revenue falls 34.23%",
+        "blurb": "Astrindo's PSEL Cipeucang project is planned to handle about 1,100 tons of waste per day and roughly 25 MW of capacity. January-September revenue was US$128.13 million, while net profit of US$5.51 million reversed a US$5.41 million loss.",
+        "tickers": [
+          "BIPI.JK"
+        ],
+        "supporting_news_ids": [
+          33431
+        ],
+        "copy_decision": "rewritten: moved from lead to story"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "Timah reports Rp4.12 trillion in nine-month net profit",
+        "headline": "TINS reports Rp4.12 trillion in nine-month net profit",
+        "blurb": "Timah’s revenue rose 144% year on year to Rp16.15 trillion, supported by increased ore supply and stronger global tin prices. Tin ore output reached 18,893 tons by September, and the company targets 25,000 tons for full-year 2026.",
+        "tickers": [
+          "TINS.JK"
+        ],
+        "supporting_news_ids": [
+          33437
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "BRI subsidiaries report profit growth through September 2026",
+        "headline": "Subsidiaries report 43.5% profit growth through September 2026",
+        "blurb": "BRI said its subsidiaries earned Rp11.8 trillion, contributing 24.4% of group profit. Deputy President Director Viviana Dyah Ayu R.K. attributed the growth to the Ultra Micro Holding synergy among BRI, Pegadaian and PNM, as well as gold business development.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33465
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "WIFI's controller reacquires a 26.67% stake from Sinergi Graha Kapital",
+        "headline": "WIFI controller buys back 26.67% stake from Sinergi Graha Kapital",
+        "blurb": "Solusi Sinergi Digital's controlling shareholder, Investasi Sukses Bersama, bought 1.41 billion shares on 19 November at Rp2,870 each, for Rp4.06 trillion. The purchase raised its stake to 54.42% and reversed its sale of the same block to Sinergi Graha Kapital on 19 October.",
+        "tickers": [
+          "WIFI.JK"
+        ],
+        "supporting_news_ids": [
+          33449
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "AKR acquires BP Global's remaining stake in Aneka Petroindo Raya",
+        "headline": "AKRA acquires BP Global’s remaining 49.9% stake in APR for US$14.22 million",
+        "blurb": "AKR acquired 11,444,565 shares from BP Global Investments Limited, raising its ownership from 50.1% to 100% effective 6 November. APR will continue under the BP brand and its existing brand licence agreement.",
+        "tickers": [
+          "AKRA.JK"
+        ],
+        "supporting_news_ids": [
+          33441,
+          33456,
+          33436
+        ],
+        "copy_decision": "rewritten: 2 new articles with a new fact: APR will continue under the BP brand and its existing brand licence agreement."
+      },
+      {
+        "id": "cur_12",
+        "slot": "story",
+        "event": "Dharma Polimetal partners with Minth Group on EV components",
+        "headline": "DRMA partners Minth Group on EV components through Rp180 billion JV",
+        "blurb": "Dharma Polimetal established the joint venture in September 2026 to supply EV components, particularly aluminium extrusion for chassis and body structures. The project is part of the company's Rp400 billion capital expenditure plan for 2026.",
+        "tickers": [
+          "DRMA.JK"
+        ],
+        "supporting_news_ids": [
+          33402
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_13",
+        "slot": "story",
+        "event": "Inocycle agrees to divest its stake in Urecel Indonesia",
+        "headline": "INOV agrees to divest 45.8% stake in Urecel Indonesia for Rp260 billion",
+        "blurb": "Inocycle signed a conditional share purchase agreement with CIP Capital covering 11,450 shares in Urecel Indonesia. The proposed sale is valued at 71.1% of Inocycle’s equity as of 30 June 2026 and is subject to shareholder approval at an extraordinary meeting on 28 December.",
+        "tickers": [
+          "INOV.JK"
+        ],
+        "supporting_news_ids": [
+          33455
+        ],
         "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_07",
+      "id": "cur_14",
       "slot": "flash",
-      "event": "BCA announces its Q4 2026 interim dividend of Rp35 per share",
-      "headline": "PT Bank Central Asia Tbk (BBCA.JK) sets its third 2026 interim dividend at Rp35 per share",
+      "event": "BCA declares a Q4 2026 interim dividend of Rp35 per share",
+      "headline": "Bank Central Asia (BBCA) sets a Rp35-per-share interim dividend for the fourth quarter of 2026",
       "blurb": null,
       "tickers": [
         "BBCA.JK"
       ],
       "supporting_news_ids": [
+        33457,
+        33462,
+        33447,
         33440,
         33404
+      ],
+      "copy_decision": "rewritten: 3 new articles with a new fact: BCA's 2026 interim dividends total Rp80 per share, up 45.5% year on year."
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Morgan Stanley reduces its stake in GoTo Group",
+      "headline": "Morgan Stanley Reduces Stake in Goto Group (GOTO) Amid Three Consecutive Quarters of Profit",
+      "blurb": null,
+      "tickers": [
+        "GOTO.JK"
+      ],
+      "supporting_news_ids": [
+        33435
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "Global tin prices fall 11.25% over one month",
+      "headline": "Global Tin Price Plummets 11.25%, Analysts Discuss Outlook and Performance of PT Timah Tbk (TINS)",
+      "blurb": null,
+      "tickers": [
+        "TINS.JK"
+      ],
+      "supporting_news_ids": [
+        33433
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "BTN reports nine-month profit growth and revises 2026 targets",
+      "headline": "Bank Tabungan Negara (BBTN.JK) reports Rp 2.82 trillion net profit for January-September 2026",
+      "blurb": null,
+      "tickers": [
+        "BBTN.JK"
+      ],
+      "supporting_news_ids": [
+        33463,
+        33438
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: BTN raised financing growth guidance to 8%-11% and cut third-party funds growth guidance to 3%-5%."
+    },
+    {
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "Elnusa plans an Rp84.5 billion share buyback",
+      "headline": "Elnusa (ELSA) plans to resume a share buyback of up to Rp84.5 billion",
+      "blurb": null,
+      "tickers": [
+        "ELSA.JK"
+      ],
+      "supporting_news_ids": [
+        33452,
+        33444,
+        33403
+      ],
+      "copy_decision": "rewritten: 2 new articles with a new fact: The buyback period runs through 19 February 2027."
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "Jasuindo announces an interim cash dividend of Rp10 per share",
+      "headline": "PT Jasuindo Tiga Perkasa Tbk (JTPE) to Pay Interim Cash Dividend of Rp10 Per Share on December 17, 2026",
+      "blurb": null,
+      "tickers": [
+        "JTPE.JK"
+      ],
+      "supporting_news_ids": [
+        33405
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "Techno9 shareholders approve a rights issue, debt issuance, and board changes",
+      "headline": "PT Techno9 Indonesia Tbk (NINE) Secures Shareholder Approval for Rights Issue and Debt Issuance",
+      "blurb": null,
+      "tickers": [
+        "NINE.JK"
+      ],
+      "supporting_news_ids": [
+        33445
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_08",
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "Falmaco plans a private placement to address capital deficiency",
+      "headline": "PT Falmaco Nonwoven Industri Tbk (FLMC) Plans Private Placement of 78.13 Million Shares to Address Capital Deficiency",
+      "blurb": null,
+      "tickers": [
+        "FLMC.JK"
+      ],
+      "supporting_news_ids": [
+        33442
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_22",
       "slot": "flash",
       "event": "Jababeka and BSI partner to develop Cikarang’s halal industry ecosystem",
       "headline": "PT Jababeka Tbk (KIJA), via Subsidiary PT Grahabuana Cikarang, Partners with PT Bank Syariah Indonesia (Persero) Tbk (BRIS) to Build Halal Industry Ecosystem in Cikarang",
@@ -125,80 +331,26 @@
       "supporting_news_ids": [
         33428
       ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_09",
-      "slot": "flash",
-      "event": "Morgan Stanley reduces its stake in GoTo Group",
-      "headline": "Morgan Stanley Reduces Stake in Goto Group (GOTO) Amid Three Consecutive Quarters of Profit",
-      "blurb": null,
-      "tickers": [
-        "GOTO.JK"
-      ],
-      "supporting_news_ids": [
-        33435
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_10",
-      "slot": "flash",
-      "event": "Global tin prices fall 11.25% over one month",
-      "headline": "Global Tin Price Plummets 11.25%, Analysts Discuss Outlook and Performance of PT Timah Tbk (TINS)",
-      "blurb": null,
-      "tickers": [
-        "TINS.JK"
-      ],
-      "supporting_news_ids": [
-        33433
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_11",
-      "slot": "flash",
-      "event": "Elnusa resumes its share buyback program",
-      "headline": "PT Elnusa Tbk (ELSA) to Resume Share Buyback from November 20 with Up to Rp 84.5 Billion Fund",
-      "blurb": null,
-      "tickers": [
-        "ELSA.JK"
-      ],
-      "supporting_news_ids": [
-        33403
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_12",
-      "slot": "flash",
-      "event": "Jasuindo announces an interim cash dividend of Rp10 per share",
-      "headline": "PT Jasuindo Tiga Perkasa Tbk (JTPE) to Pay Interim Cash Dividend of Rp10 Per Share on December 17, 2026",
-      "blurb": null,
-      "tickers": [
-        "JTPE.JK"
-      ],
-      "supporting_news_ids": [
-        33405
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_13",
-      "slot": "flash",
-      "event": "BTN reports nine-month profit and revises its 2026 targets",
-      "headline": "PT Bank Tabungan Negara Tbk (BTN) Posts 22.6% Rise in Net Profit to Rp 2.82 Trillion Through September 2026",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33438
-      ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
+      "sort_date": "2026-11-23",
+      "timing_label": "23 Nov",
+      "title": "EXCL Rp1 trillion share buyback opens, until 22 Feb",
+      "tickers": [
+        "EXCL.JK"
+      ],
+      "supporting_news_ids": [
+        33461,
+        33453,
+        33443
+      ]
+    },
+    {
+      "id": "wtw_02",
       "sort_date": "2026-11-27",
       "timing_label": "27 Nov",
       "title": "BBCA cum-dividend (regular market) for its Rp35 interim dividend",
@@ -206,12 +358,15 @@
         "BBCA.JK"
       ],
       "supporting_news_ids": [
+        33457,
+        33462,
+        33447,
         33440,
         33404
       ]
     },
     {
-      "id": "wtw_02",
+      "id": "wtw_03",
       "sort_date": "2026-12-01",
       "timing_label": "1 Dec",
       "title": "JTPE cum-dividend (regular market) for its Rp10 interim dividend",
@@ -220,6 +375,31 @@
       ],
       "supporting_news_ids": [
         33405
+      ]
+    },
+    {
+      "id": "wtw_04",
+      "sort_date": "2026-12-28",
+      "timing_label": "28 Dec",
+      "title": "INOV EGM discusses proposed Rp260 billion Urecel divestment",
+      "tickers": [
+        "INOV.JK"
+      ],
+      "supporting_news_ids": [
+        33455
+      ]
+    },
+    {
+      "id": "wtw_05",
+      "sort_date": "2027-10-28",
+      "timing_label": "By 28 Oct 2027",
+      "title": "Indonesia severance reserve fund requirement due for implementation",
+      "tickers": [
+        "GJTL.JK",
+        "PBRX.JK"
+      ],
+      "supporting_news_ids": [
+        33451
       ]
     }
   ]
