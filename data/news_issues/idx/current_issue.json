@@ -1,67 +1,147 @@
 {
   "issue_date": "2026-11-21",
   "window_start": "2026-11-20T13:50:00Z",
-  "window_end": "2026-11-21T01:46:34Z",
+  "window_end": "2026-11-21T05:56:33Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Merdeka Gold Resources reports a nine-month net loss as Pani mine production ramps up",
-    "headline": "EMAS reports Rp339.6 billion nine-month loss as Pani mine production ramps up",
-    "blurb": "Merdeka Gold recorded a US$19 million loss attributable to owners for the first nine months of 2026, despite gross profit of US$33.3 million, operating profit of US$18 million and EBITDA of US$42.7 million. It cited timing differences between production and sales recognition, plus tax expenses. Gold output rose 69% quarter on quarter to 26,331 ounces in Q3, and the annualized run rate reached about 147,000 ounces in early October. Q4 sales are projected to more than double from Q3’s 8,680 ounces.",
-    "tickers": [
-      "EMAS.JK"
-    ],
+    "event": "MSCI consults on reclassifying Indonesia’s stock market",
+    "headline": "MSCI consults on Indonesia reclassification amid risks flagged through April 2027",
+    "blurb": "The index provider is seeking views on a possible shift of Indonesia’s market from emerging to standalone status. Manulife Aset Manajemen Indonesia senior portfolio manager Rizki Ardhi called the period through April 2027 one of the domestic market’s most important moments, citing potential selling pressure from passive and active funds if foreign ownership changes. He said MSCI’s concerns center on market governance, despite reforms including higher free float and greater ownership transparency. Rizki urged regulators to keep communicating with MSCI and provide verifiable evidence of improvements.",
+    "tickers": [],
     "supporting_news_ids": [
-      33510
+      33519
     ],
     "copy_decision": "new story"
   },
   "sections": {
-    "earnings_guidance": [
+    "market_structure_policy": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Merdeka Battery Materials reports sharply higher net profit through September 2026",
-        "headline": "MBMA reports net profit surge of hundreds of percent through September 2026",
-        "blurb": null,
+        "event": "OJK sanctions 10 capital-market violation cases and orders illicit gains returned",
+        "headline": "OJK sanctions 10 capital-market cases, orders Rp23.77 billion returned",
+        "blurb": "The cases include stock manipulation involving HOMI, SAMF and SMDM, with Rp3.71 billion in administrative fines. OJK also imposed 3-to-10-year capital-market activity bans on several individuals and ordered 15 securities accounts linked to the HOMI manipulation closed.",
         "tickers": [
-          "MBMA.JK"
+          "HOMI.JK",
+          "SAMF.JK",
+          "SMDM.JK",
+          "TECH.JK",
+          "KBAG.JK",
+          "ISSP.JK",
+          "GOOD.JK",
+          "SMGR.JK",
+          "MARK.JK",
+          "AKKU.JK"
         ],
         "supporting_news_ids": [
-          33512
+          33518
         ],
         "copy_decision": "new story"
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Bank Rakyat Indonesia targets 20% ROE by 2028",
+        "headline": "BBRI targets around 20% ROE by 2028",
+        "blurb": "BRI plans to revive Kupedes micro lending, optimize capital and sustain dividends, with a short-term ROE target of 17%-18%. Management considers a payout ratio of around 60% sustainable and targets a stable dividend per share for fiscal 2026.",
+        "tickers": [
+          "BBRI.JK"
+        ],
+        "supporting_news_ids": [
+          33520
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Merdeka Gold Resources reports nine-month loss amid Pani mine production ramp-up",
+        "headline": "EMAS reports Rp339.6 billion nine-month loss as Pani ramps up production",
+        "blurb": "Its 2027 production outlook is 165,000-180,000 ounces. Pani produced 26,331 ounces in Q3, up 69% quarter on quarter, while nine-month output reached 43,743 ounces; Merdeka Gold Resources attributed the loss to timing differences between production and sales recognition and tax expenses.",
+        "tickers": [
+          "EMAS.JK"
+        ],
+        "supporting_news_ids": [
+          33510
+        ],
+        "copy_decision": "rewritten: moved from lead to story"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Semen Indonesia announces Rp250 billion share buyback plan",
+        "headline": "SMGR plans Rp250 billion share buyback",
+        "blurb": "Semen Indonesia will fund the repurchase from internal cash, not IPO proceeds or debt, and limit it to 20% of placed and paid-up capital. The program will begin no later than three months after the announcement.",
+        "tickers": [
+          "SMGR.JK"
+        ],
+        "supporting_news_ids": [
+          33511
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_03",
+      "id": "cur_06",
       "slot": "flash",
-      "event": "Semen Indonesia announces a Rp250 billion share buyback plan",
-      "headline": "PT Semen Indonesia Tbk (SMGR) Announces Rp250 Billion Share Buyback Plan",
+      "event": "Bank Central Asia announces Rp35-per-share fourth-quarter interim dividend",
+      "headline": "BCA to Pay Q4 2026 Interim Dividend of Rp 35 Per Share, With Djarum Group Entities and Anthoni Salim Among Major Recipients",
       "blurb": null,
       "tickers": [
-        "SMGR.JK"
+        "BBCA.JK"
       ],
       "supporting_news_ids": [
-        33511
+        33517
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_07",
+      "slot": "flash",
+      "event": "Foreign net selling pressures Aneka Tambang shares during November 16–20",
+      "headline": "Foreign Net Sell Pressures PT Aneka Tambang Tbk (ANTM) Shares Despite Strong Nine-Month Earnings Growth",
+      "blurb": null,
+      "tickers": [
+        "ANTM.JK"
+      ],
+      "supporting_news_ids": [
+        33516
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_08",
+      "slot": "flash",
+      "event": "Merdeka Battery Materials reports sharply higher net profit through September 2026",
+      "headline": "MBMA reports net profit surge of hundreds of percent through September 2026",
+      "blurb": null,
+      "tickers": [
+        "MBMA.JK"
+      ],
+      "supporting_news_ids": [
+        33512
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Gold and silver prices plunge amid hawkish Federal Reserve signals",
+      "headline": "Gold Prices Post Biggest Weekly Drop Since March Amid Hawkish Fed Signals and AI Stock Sell-Off",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        33515
       ],
       "copy_decision": "new story"
     }
   ],
-  "what_to_watch": [
-    {
-      "id": "wtw_01",
-      "sort_date": "2027-02-20",
-      "timing_label": "By 20 Feb 2027",
-      "title": "SMGR begins Rp250 billion share buyback",
-      "tickers": [
-        "SMGR.JK"
-      ],
-      "supporting_news_ids": [
-        33511
-      ]
-    }
-  ]
+  "what_to_watch": []
 }
