@@ -1,16 +1,16 @@
 {
   "issue_date": "2026-11-21",
   "window_start": "2026-11-20T13:50:00Z",
-  "window_end": "2026-11-21T05:56:33Z",
+  "window_end": "2026-11-21T09:56:38Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "MSCI consults on reclassifying Indonesia’s stock market",
-    "headline": "MSCI consults on Indonesia reclassification amid risks flagged through April 2027",
-    "blurb": "The index provider is seeking views on a possible shift of Indonesia’s market from emerging to standalone status. Manulife Aset Manajemen Indonesia senior portfolio manager Rizki Ardhi called the period through April 2027 one of the domestic market’s most important moments, citing potential selling pressure from passive and active funds if foreign ownership changes. He said MSCI’s concerns center on market governance, despite reforms including higher free float and greater ownership transparency. Rizki urged regulators to keep communicating with MSCI and provide verifiable evidence of improvements.",
+    "event": "OJK sets a 120% minimum solvency ratio for insurers",
+    "headline": "OJK sets insurers’ minimum solvency ratio at 120%",
+    "blurb": "OJK issued the regulation on 26 October, requiring insurers designated as Domestic Significantly Important Insurers to hold additional capital equal to 15% of risk-based minimum capital (MMBR). It also sets rules for capital classification and risk calculations, and requires annual stress tests and audited solvency reports. The new calculation applies from first-quarter 2027 reports, while sanctions for breaches begin with first-quarter 2028 reporting.",
     "tickers": [],
     "supporting_news_ids": [
-      33519
+      33528
     ],
     "copy_decision": "new story"
   },
@@ -19,9 +19,9 @@
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "OJK sanctions 10 capital-market violation cases and orders illicit gains returned",
-        "headline": "OJK sanctions 10 capital-market cases, orders Rp23.77 billion returned",
-        "blurb": "The cases include stock manipulation involving HOMI, SAMF and SMDM, with Rp3.71 billion in administrative fines. OJK also imposed 3-to-10-year capital-market activity bans on several individuals and ordered 15 securities accounts linked to the HOMI manipulation closed.",
+        "event": "OJK sanctions 10 capital market violation cases and orders illicit gains returned",
+        "headline": "OJK sanctions 10 cases and orders Rp23.77 billion returned",
+        "blurb": "Semen Indonesia was fined Rp550 million and must transfer at least 236.74 million SMCB shares to the public by 31 December 2026. The cases also included manipulation involving HOMI, SAMF and SMDM, and OJK imposed Rp3.71 billion in total administrative fines.",
         "tickers": [
           "HOMI.JK",
           "SAMF.JK",
@@ -31,18 +31,48 @@
           "ISSP.JK",
           "GOOD.JK",
           "SMGR.JK",
+          "SMCB.JK",
           "MARK.JK",
           "AKKU.JK"
         ],
         "supporting_news_ids": [
+          33523,
+          33527,
           33518
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 2 new articles with a new fact: SMGR was fined Rp550 million and must transfer at least 236,738,922 SMCB shares to the public by 31 December 2026."
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "MSCI consults on Indonesia’s possible reclassification to standalone market",
+        "headline": "MSCI consults on Indonesia’s possible standalone reclassification as reforms cover owners above 1%",
+        "blurb": "MSCI has opened a consultation on moving Indonesia from emerging to standalone market. Reforms also include more granular investor classification, oversight of concentrated shareholdings and transaction supervision. Manulife Aset Manajemen Indonesia portfolio manager Rizki Ardhi says regulators should provide MSCI with verifiable evidence of improvements.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33519
+        ],
+        "copy_decision": "rewritten: moved from lead to story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_03",
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Bank Rakyat Indonesia reports Q3 savings balance and net profit",
+        "headline": "BBRI reports Rp634.8tn savings and Rp48.2tn Q3 net profit",
+        "blurb": "BRI's savings balance topped BCA's Rp628.4 trillion, reversing a Rp45.9 trillion gap in March 2025. Net profit rose 16.8% year on year, making BRI Indonesia's most profitable bank.",
+        "tickers": [
+          "BBRI.JK",
+          "BBCA.JK"
+        ],
+        "supporting_news_ids": [
+          33526
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
         "slot": "story",
         "event": "Bank Rakyat Indonesia targets 20% ROE by 2028",
         "headline": "BBRI targets around 20% ROE by 2028",
@@ -53,10 +83,10 @@
         "supporting_news_ids": [
           33520
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_04",
+        "id": "cur_06",
         "slot": "story",
         "event": "Merdeka Gold Resources reports nine-month loss amid Pani mine production ramp-up",
         "headline": "EMAS reports Rp339.6 billion nine-month loss as Pani ramps up production",
@@ -67,29 +97,27 @@
         "supporting_news_ids": [
           33510
         ],
-        "copy_decision": "rewritten: moved from lead to story"
-      }
-    ],
-    "capital_raising_buybacks": [
+        "copy_decision": "kept: same articles"
+      },
       {
-        "id": "cur_05",
+        "id": "cur_07",
         "slot": "story",
-        "event": "Semen Indonesia announces Rp250 billion share buyback plan",
-        "headline": "SMGR plans Rp250 billion share buyback",
-        "blurb": "Semen Indonesia will fund the repurchase from internal cash, not IPO proceeds or debt, and limit it to 20% of placed and paid-up capital. The program will begin no later than three months after the announcement.",
+        "event": "Bank QNB Indonesia reports Q3 2026 loan and profit growth",
+        "headline": "BKSW reports 19% loan growth and 10% profit growth through Q3 2026",
+        "blurb": null,
         "tickers": [
-          "SMGR.JK"
+          "BKSW.JK"
         ],
         "supporting_news_ids": [
-          33511
+          33521
         ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_06",
+      "id": "cur_08",
       "slot": "flash",
       "event": "Bank Central Asia announces Rp35-per-share fourth-quarter interim dividend",
       "headline": "BCA to Pay Q4 2026 Interim Dividend of Rp 35 Per Share, With Djarum Group Entities and Anthoni Salim Among Major Recipients",
@@ -100,10 +128,26 @@
       "supporting_news_ids": [
         33517
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Merdeka Copper Gold reports nine-month 2026 profit turnaround",
+      "headline": "Merdeka Copper Gold (MDKA) Posts USD157 Million Attributable Profit in 9M26 on Strong Nickel and Gold Performance",
+      "blurb": null,
+      "tickers": [
+        "MDKA.JK",
+        "MBMA.JK",
+        "EMAS.JK"
+      ],
+      "supporting_news_ids": [
+        33525
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_07",
+      "id": "cur_10",
       "slot": "flash",
       "event": "Foreign net selling pressures Aneka Tambang shares during November 16–20",
       "headline": "Foreign Net Sell Pressures PT Aneka Tambang Tbk (ANTM) Shares Despite Strong Nine-Month Earnings Growth",
@@ -114,24 +158,39 @@
       "supporting_news_ids": [
         33516
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_08",
+      "id": "cur_11",
       "slot": "flash",
-      "event": "Merdeka Battery Materials reports sharply higher net profit through September 2026",
-      "headline": "MBMA reports net profit surge of hundreds of percent through September 2026",
+      "event": "Merdeka Battery Materials reports strong Q3 and nine-month 2026 earnings",
+      "headline": "Merdeka Battery Materials (MBMA) reported a 372% year-on-year increase in third-quarter 2026 attributable profit to USD92 million.",
       "blurb": null,
       "tickers": [
         "MBMA.JK"
       ],
       "supporting_news_ids": [
+        33524,
         33512
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: Nine-month attributable profit reached USD146 million, compared with USD25 million a year earlier."
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "Semen Indonesia announces Rp250 billion share buyback plan",
+      "headline": "SMGR plans Rp250 billion share buyback",
+      "blurb": null,
+      "tickers": [
+        "SMGR.JK"
+      ],
+      "supporting_news_ids": [
+        33511
       ],
       "copy_decision": "kept: same articles, headline kept in flash from story"
     },
     {
-      "id": "cur_09",
+      "id": "cur_13",
       "slot": "flash",
       "event": "Gold and silver prices plunge amid hawkish Federal Reserve signals",
       "headline": "Gold Prices Post Biggest Weekly Drop Since March Amid Hawkish Fed Signals and AI Stock Sell-Off",
@@ -140,8 +199,53 @@
       "supporting_news_ids": [
         33515
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
-  "what_to_watch": []
+  "what_to_watch": [
+    {
+      "id": "wtw_01",
+      "sort_date": "2026-12-31",
+      "timing_label": "By 31 Dec",
+      "title": "SMGR deadline to transfer 236,738,922 SMCB shares to public",
+      "tickers": [
+        "AKKU.JK",
+        "GOOD.JK",
+        "HOMI.JK",
+        "ISSP.JK",
+        "KBAG.JK",
+        "MARK.JK",
+        "SAMF.JK",
+        "SMCB.JK",
+        "SMDM.JK",
+        "SMGR.JK",
+        "TECH.JK"
+      ],
+      "supporting_news_ids": [
+        33523,
+        33527,
+        33518
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2027-03-31",
+      "timing_label": "Q1 2027",
+      "title": "OJK's 120% minimum solvency calculation applies to insurers",
+      "tickers": [],
+      "supporting_news_ids": [
+        33528
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2028-03-31",
+      "timing_label": "Q1 2028",
+      "title": "OJK administrative sanctions for solvency breaches take effect",
+      "tickers": [],
+      "supporting_news_ids": [
+        33528
+      ]
+    }
+  ]
 }
