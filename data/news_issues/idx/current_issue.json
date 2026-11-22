@@ -1,226 +1,123 @@
 {
-  "issue_date": "2026-11-21",
-  "window_start": "2026-11-20T13:50:00Z",
-  "window_end": "2026-11-21T13:50:00Z",
+  "issue_date": "2026-11-22",
+  "window_start": "2026-11-21T13:50:00Z",
+  "window_end": "2026-11-22T01:46:34Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "OJK sets a 120% minimum solvency ratio for insurers",
-    "headline": "OJK sets insurers’ minimum solvency ratio at 120%",
-    "blurb": "OJK issued the regulation on 26 October, requiring insurers designated as Domestic Significantly Important Insurers to hold additional capital equal to 15% of risk-based minimum capital (MMBR). It also sets rules for capital classification and risk calculations, and requires annual stress tests and audited solvency reports. The new calculation applies from first-quarter 2027 reports, while sanctions for breaches begin with first-quarter 2028 reporting.",
+    "event": "Indonesia and European Union sign IEU-CEPA and Investment Protection Agreement",
+    "headline": "Indonesia and EU sign IEU-CEPA and IPA, with zero EU tariffs on 90.4% of lines",
+    "blurb": "Under the agreements, Indonesia secured duty-free quotas of 1.9 million tons for crude palm oil and 140,000 tons for palm oil products, rising to a peak in year nine, plus EU protection for 72 Indonesian geographical indications. Tariffs will also be cut on another 8.37% of lines, bringing EU tariff elimination or reductions to 98.3% of Indonesia’s tariff lines and 96.31% of export value. Entry into force is targeted for 1 January 2027, subject to ratification and domestic legal procedures.",
     "tickers": [],
     "supporting_news_ids": [
-      33528
+      33544,
+      33542
     ],
-    "copy_decision": "kept: same articles"
+    "copy_decision": "new story"
   },
   "sections": {
-    "market_structure_policy": [
+    "macro_flows": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "OJK sanctions 10 capital-market violation cases and orders illicit gains returned",
-        "headline": "OJK sanctions 10 market cases and orders Rp23.77 billion returned",
-        "blurb": "The cases included share-trading manipulation at Grand House Mulia, Saraswanti Anugerah Makmur and Suryamas Dutamakmur, as well as disclosure, reporting and transaction breaches. OJK also imposed Rp3.71 billion in fines and barred Hermanto from capital-market, derivatives and carbon-exchange activities for 10 years in the Grand House Mulia case.",
-        "tickers": [
-          "HOMI.JK",
-          "SAMF.JK",
-          "SMDM.JK",
-          "TECH.JK",
-          "KBAG.JK",
-          "ISSP.JK",
-          "GOOD.JK",
-          "SMGR.JK",
-          "MARK.JK",
-          "AKKU.JK"
-        ],
+        "event": "Rupiah falls to a record low against the US dollar",
+        "headline": "Rupiah hits record low at Rp18,270 per US dollar",
+        "blurb": "Currency and commodity observer Ibrahim Assuaibi forecasts the rupiah will trade between Rp18,270 and Rp18,320 per US dollar next week. The JISDOR rate closed at Rp18,278, while the spot rate fell 0.09% on the day and 0.35% for the week.",
+        "tickers": [],
         "supporting_news_ids": [
-          33529,
-          33533,
-          33523,
-          33527,
-          33518
+          33549
         ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: OJK barred Hermanto from capital-market, derivatives and carbon-exchange activities for 10 years."
-      }
-    ],
-    "earnings_guidance": [
-      {
-        "id": "cur_03",
-        "slot": "story",
-        "event": "Bank Rakyat Indonesia reports Q3 savings balance and net profit",
-        "headline": "BBRI reports Rp634.8tn savings and Rp48.2tn Q3 net profit",
-        "blurb": "BRI's savings balance topped BCA's Rp628.4 trillion, reversing a Rp45.9 trillion gap in March 2025. Net profit rose 16.8% year on year, making BRI Indonesia's most profitable bank.",
-        "tickers": [
-          "BBRI.JK",
-          "BBCA.JK"
-        ],
-        "supporting_news_ids": [
-          33526
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_04",
-        "slot": "story",
-        "event": "Bank Rakyat Indonesia targets 20% ROE by 2028",
-        "headline": "BBRI targets around 20% ROE by 2028",
-        "blurb": "BRI plans to revive Kupedes micro lending, optimize capital and sustain dividends, with a short-term ROE target of 17%-18%. Management considers a payout ratio of around 60% sustainable and targets a stable dividend per share for fiscal 2026.",
-        "tickers": [
-          "BBRI.JK"
-        ],
-        "supporting_news_ids": [
-          33520
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "Merdeka Gold Resources reports nine-month losses and Pani mine production outlook",
-        "headline": "EMAS reports US$19 million nine-month loss as Pani run rate reaches 147,000 ounces",
-        "blurb": "Merdeka Gold Resources attributed the loss to timing differences between production and sales recognition and tax expenses. It expects 165,000-180,000 ounces in 2027, after 85,000-100,000 ounces under 2026 guidance.",
-        "tickers": [
-          "EMAS.JK"
-        ],
-        "supporting_news_ids": [
-          33532,
-          33510
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: The annualized production run rate reached about 147,000 ounces in early October 2026."
-      },
-      {
-        "id": "cur_06",
-        "slot": "story",
-        "event": "Merdeka Battery Materials reports record third-quarter earnings",
-        "headline": "MBMA reports record Q3 earnings, with profit up 372% to US$92 million",
-        "blurb": "Merdeka Battery Materials reported nine-month profit of US$146 million, versus US$25 million a year earlier. Q3 revenue rose 138% to US$732 million and EBITDA climbed 276% to US$238 million, supported by record nickel ore output of 12.3 million wet metric tonnes.",
-        "tickers": [
-          "MBMA.JK"
-        ],
-        "supporting_news_ids": [
-          33530,
-          33524,
-          33512
-        ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "copy_decision": "new story"
       }
     ],
     "capital_raising_buybacks": [
       {
-        "id": "cur_07",
+        "id": "cur_03",
         "slot": "story",
-        "event": "Semen Indonesia announces a Rp250 billion share buyback",
-        "headline": "SMGR announces Rp250 billion share buyback",
-        "blurb": "Semen Indonesia plans to fund the repurchase with internal cash, not IPO proceeds or debt, and cap it at 20% of placed and paid-up capital. It will begin no later than three months after the announcement.",
+        "event": "SMGR, XLSmart, and Elnusa announce share buybacks",
+        "headline": "SMGR, EXCL and ELSA announce buybacks as EXCL budgets Rp1 trillion",
+        "blurb": "Semen Indonesia allocated Rp250 billion for a three-month buyback from 20 November, capped at 20% of its placed and paid-up capital. XLSmart’s Rp1 trillion plan runs from 23 November to 22 February 2027, while Elnusa allocated Rp84.5 billion for a buyback from 20 November to 19 February 2027.",
         "tickers": [
-          "SMGR.JK"
+          "SMGR.JK",
+          "EXCL.JK",
+          "ELSA.JK"
         ],
         "supporting_news_ids": [
-          33511
+          33548
         ],
-        "copy_decision": "rewritten: moved from flash to story"
+        "copy_decision": "new story"
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "UOB Kay Hian estimates Alamtri Resources dividend payout",
+        "headline": "UOB Kay Hian estimates ADRO dividend after US$517m nine-month profit",
+        "blurb": "Alamtri Resources earned US$517 million in net profit through September, up 71% year on year and equal to 72% of UOB Kay Hian’s full-year forecast. Its aluminium subsidiary contributed US$70 million to third-quarter profit.",
+        "tickers": [
+          "ADRO.JK"
+        ],
+        "supporting_news_ids": [
+          33545
+        ],
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_08",
+      "id": "cur_05",
       "slot": "flash",
-      "event": "Bank QNB Indonesia reports Q3 2026 loan and profit growth",
-      "headline": "BKSW reports 19% loan growth and 10% profit growth through Q3 2026",
+      "event": "OJK orders returns and imposes sanctions for capital market violations",
+      "headline": "OJK found Rp12.55 billion in illicit gains from manipulation of Saraswanti Anugerah Makmur (SAMF) shares",
       "blurb": null,
       "tickers": [
-        "BKSW.JK"
+        "SAMF.JK"
       ],
       "supporting_news_ids": [
-        33521
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
-    },
-    {
-      "id": "cur_09",
-      "slot": "flash",
-      "event": "Bank Central Asia announces Rp35-per-share fourth-quarter interim dividend",
-      "headline": "BCA to Pay Q4 2026 Interim Dividend of Rp 35 Per Share, With Djarum Group Entities and Anthoni Salim Among Major Recipients",
-      "blurb": null,
-      "tickers": [
-        "BBCA.JK"
-      ],
-      "supporting_news_ids": [
-        33517
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_10",
-      "slot": "flash",
-      "event": "PEFINDO affirms Bank Negara Indonesia's idAAA rating",
-      "headline": "PT Bank Negara Indonesia (Persero) Tbk (BBNI) Seen Resilient After PEFINDO Affirms idAAA Rating",
-      "blurb": null,
-      "tickers": [
-        "BBNI.JK"
-      ],
-      "supporting_news_ids": [
-        33534
+        33550,
+        33541
       ],
       "copy_decision": "new story"
-    },
-    {
-      "id": "cur_11",
-      "slot": "flash",
-      "event": "Merdeka Copper Gold reports nine-month profit after a prior-year loss",
-      "headline": "Merdeka Copper Gold (MDKA) reported US$157 million in attributable profit for the first nine months of 2026, reversing a year-earlier loss.",
-      "blurb": null,
-      "tickers": [
-        "MDKA.JK",
-        "MBMA.JK",
-        "EMAS.JK"
-      ],
-      "supporting_news_ids": [
-        33531,
-        33525
-      ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Consolidated revenue rose 76% year on year to US$2.26 billion."
-    },
-    {
-      "id": "cur_12",
-      "slot": "flash",
-      "event": "Foreign net selling pressures Aneka Tambang shares during November 16–20",
-      "headline": "Foreign Net Sell Pressures PT Aneka Tambang Tbk (ANTM) Shares Despite Strong Nine-Month Earnings Growth",
-      "blurb": null,
-      "tickers": [
-        "ANTM.JK"
-      ],
-      "supporting_news_ids": [
-        33516
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_13",
-      "slot": "flash",
-      "event": "Gold and silver prices plunge amid hawkish Federal Reserve signals",
-      "headline": "Gold Prices Post Biggest Weekly Drop Since March Amid Hawkish Fed Signals and AI Stock Sell-Off",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33515
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_14",
-      "slot": "flash",
-      "event": "MSCI consults on Indonesia’s possible reclassification to standalone market",
-      "headline": "MSCI consults on Indonesia’s possible standalone reclassification as reforms cover owners above 1%",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33519
-      ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
     }
   ],
-  "what_to_watch": []
+  "what_to_watch": [
+    {
+      "id": "wtw_01",
+      "sort_date": "2026-11-23",
+      "timing_label": "23 Nov",
+      "title": "EXCL starts its Rp1 trillion share buyback",
+      "tickers": [
+        "ELSA.JK",
+        "EXCL.JK",
+        "SMGR.JK"
+      ],
+      "supporting_news_ids": [
+        33548
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2026-12-31",
+      "timing_label": "31 Dec",
+      "title": "EU GSP facility for Indonesia expires",
+      "tickers": [],
+      "supporting_news_ids": [
+        33544,
+        33542
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2027-01-01",
+      "timing_label": "1 Jan 2027",
+      "title": "Indonesia–EU IEU-CEPA and IPA targeted to enter into force",
+      "tickers": [],
+      "supporting_news_ids": [
+        33544,
+        33542
+      ]
+    }
+  ]
 }
