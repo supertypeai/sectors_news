@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-23",
   "window_start": "2026-11-22T13:50:00Z",
-  "window_end": "2026-11-23T01:46:16Z",
+  "window_end": "2026-11-23T05:56:23Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -22,12 +22,56 @@
     "supporting_news_ids": [
       33565
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
-    "capital_raising_buybacks": [
+    "macro_flows": [
       {
         "id": "cur_02",
+        "slot": "story",
+        "event": "Indonesia's 10-year SBN yield reaches its highest level since 2020",
+        "headline": "Indonesia's 10-year SBN yield reaches around 7.79%, highest since 2020",
+        "blurb": "The 10-year US Treasury yield fell 10.2 basis points to 4.94%, while Indonesia’s 1-year SBN yield rose 13.5 basis points to 7.12%, widening the spread over Treasuries to 285 basis points. Investors are concerned that a possible MSCI reclassification could trigger up to US$4.9 billion in outflows, alongside fiscal deficit pressures and domestic political uncertainty.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33587
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Prabowo and MSCI discuss alternatives to downgrading Indonesia's market status",
+        "headline": "Prabowo and MSCI discuss alternatives to two-tier downgrade of Indonesia's market status",
+        "blurb": "MSCI said it does not intend to downgrade Indonesia immediately and will consider alternatives to moving it directly from emerging-market to standalone status after talks on 10 November. It will guide officials on reforms, with a final decision due by 30 June 2027.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33600,
+          33599,
+          33597
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "CDIA begins a share buyback of up to Rp1 trillion",
+        "headline": "CDIA begins share buyback of up to Rp1 trillion",
+        "blurb": "The program covers up to 4 billion shares, or 3.2% of issued shares, at a maximum price of Rp800 each. Chandra Daya Investasi will fund it gradually from internal cash, with Trimegah Sekuritas Indonesia executing the buyback through 22 February 2027; the company says it will not materially affect operations.",
+        "tickers": [
+          "CDIA.JK"
+        ],
+        "supporting_news_ids": [
+          33582,
+          33596,
+          33591
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
         "slot": "story",
         "event": "SMGR, EXCL, and ELSA announce share buyback plans",
         "headline": "SMGR, EXCL and ELSA announce buyback plans, with EXCL budgeting Rp1 trillion",
@@ -40,12 +84,73 @@
         "supporting_news_ids": [
           33570
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Prodia completes a Rp112.42 billion share buyback",
+        "headline": "PRDA completes Rp112.42 billion share buyback",
+        "blurb": "Prodia repurchased 36.14 million shares at an average Rp3,033 each from 20 August to 19 November, equal to 3.85% of paid-in capital. It now holds 83.86 million shares from buybacks, or 8.95% of paid-in capital.",
+        "tickers": [
+          "PRDA.JK"
+        ],
+        "supporting_news_ids": [
+          33594
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "other": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "PKPK secures a coal sales contract worth an estimated US$76 million",
+        "headline": "PKPK secures coal sales contract worth an estimated US$76 million",
+        "blurb": null,
+        "tickers": [
+          "PKPK.JK",
+          "MBMA.JK",
+          "EXCL.JK"
+        ],
+        "supporting_news_ids": [
+          33601
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "PPRE books Rp1.7 trillion in new contracts through the third quarter",
+        "headline": "PPRE books Rp1.7 trillion in new contracts through Q3",
+        "blurb": "PP Presisi said mining services and construction accounted for 98% of the contracts. Revenue reached Rp3.33 trillion as of 30 September 2026, up 20.1% year on year, and the company plans to prioritize those segments and explore partnerships to support new project acquisitions.",
+        "tickers": [
+          "PPRE.JK"
+        ],
+        "supporting_news_ids": [
+          33589
+        ],
         "copy_decision": "new story"
       }
     ],
     "deals_control": [
       {
-        "id": "cur_03",
+        "id": "cur_09",
+        "slot": "story",
+        "event": "ENRG completes a US$200 million investment in HighPeak Energy",
+        "headline": "ENRG completes US$200 million investment in HighPeak Energy",
+        "blurb": "Energi Mega Persada bought newly issued Series A 6% perpetual convertible preferred shares, while Danantara Investment Management will take US$250 million of the same stock. Together, the purchases total 450,000 shares, and each investor may appoint one director to HighPeak’s board.",
+        "tickers": [
+          "ENRG.JK"
+        ],
+        "supporting_news_ids": [
+          33579,
+          33585
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_10",
         "slot": "story",
         "event": "Sinarmas affiliate acquires an 18.13% stake in Ketrosden",
         "headline": "Sinarmas affiliate acquires 18.13% stake in KETR",
@@ -56,12 +161,42 @@
         "supporting_news_ids": [
           33573
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_04",
+        "id": "cur_11",
+        "slot": "story",
+        "event": "JPMorgan downgrades BBCA and cuts its target price to Rp4,800",
+        "headline": "JPMorgan downgrades BBCA, cuts target price to Rp4,800",
+        "blurb": "Its previous target was Rp5,900, cut in early November ahead of the 20 November downgrade. JPMorgan cited foreign-flow concerns as BCA’s MSCI Emerging Markets weight fell from 0.50% to 0.15%. Kiwoom’s Kevin Yudha Pratama maintained a BUY rating and Rp7,150 target.",
+        "tickers": [
+          "BBCA.JK"
+        ],
+        "supporting_news_ids": [
+          33598
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_12",
+        "slot": "story",
+        "event": "Panin Sekuritas issues indicative targets for ASII, AUTO and DRMA",
+        "headline": "Panin Sekuritas sets targets of Rp7,100, Rp4,200 and Rp1,560 for ASII, AUTO, DRMA",
+        "blurb": "Analyst Elandry Pratama sees positive prospects through 2027, citing recovering domestic sales and rising hybrid and EV production. He recommends gradual accumulation on healthy corrections and views ASII as more attractive for medium-to-long-term investment.",
+        "tickers": [
+          "ASII.JK",
+          "AUTO.JK",
+          "DRMA.JK"
+        ],
+        "supporting_news_ids": [
+          33572
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_13",
         "slot": "story",
         "event": "Bank QNB Indonesia reports nine-month growth and sharpens its corporate banking focus",
         "headline": "BKSW reports 19% loan growth and sharpens corporate banking focus",
@@ -72,13 +207,13 @@
         "supporting_news_ids": [
           33574
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_05",
+      "id": "cur_14",
       "slot": "flash",
       "event": "United Tractors announces an interim dividend of Rp430 per share",
       "headline": "PT United Tractors Tbk (UNTR) to Pay Interim Dividend of Rp 430 per Share on 23 November 2026",
@@ -89,38 +224,54 @@
       "supporting_news_ids": [
         33567
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_06",
+      "id": "cur_15",
       "slot": "flash",
-      "event": "OJK fines Indosterling Technomedia and executives for disclosure violations",
-      "headline": "OJK Fines PT Indosterling Technomedia Tbk (TECH) and Executives Rp690 Million Over Disclosure Violations, Spotlighting Sean William Henley",
-      "blurb": null,
-      "tickers": [
-        "TECH.JK"
-      ],
-      "supporting_news_ids": [
-        33576
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_07",
-      "slot": "flash",
-      "event": "Bayan Resources schedules a board reshuffle at an extraordinary shareholders meeting",
-      "headline": "PT Bayan Resources Tbk (BYAN) to Reshuffle Board of Directors and Commissioners at Extraordinary General Meeting",
+      "event": "BYAN shareholders consider board reshuffle at extraordinary meeting",
+      "headline": "Bayan Resources (BYAN) is holding a meeting to reshape its board after Jhonlin acquired 30.25% of its shares",
       "blurb": null,
       "tickers": [
         "BYAN.JK"
       ],
       "supporting_news_ids": [
+        33583,
         33569
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: KSEI recorded Jhonlin Baratama’s 30.25% stake as of 30 October 2026."
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "BTPN plans a voluntary delisting and goes private, prompting a trading suspension",
+      "headline": "Bank SMBC Indonesia (BTPN) plans to delist all its shares and go private as trading is suspended",
+      "blurb": null,
+      "tickers": [
+        "BTPN.JK"
+      ],
+      "supporting_news_ids": [
+        33590,
+        33593
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_08",
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "PTRO seeks approval for a rights issue and asset pledges",
+      "headline": "PT Petrosea Tbk (PTRO) Holds Extraordinary General Meeting on November 23 to Approve Rights Issue of Up to 170 Million New Shares",
+      "blurb": null,
+      "tickers": [
+        "PTRO.JK"
+      ],
+      "supporting_news_ids": [
+        33580
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_18",
       "slot": "flash",
       "event": "COIN shares plunge 90.7% year-to-date",
       "headline": "PT Indokripto Koin Semesta Tbk (COIN) Shares Plunge 90.7% Year-to-Date",
@@ -131,28 +282,61 @@
       "supporting_news_ids": [
         33566
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "DRMA expands into electric-vehicle charging and battery storage infrastructure",
+      "headline": "Dharma Polimetal (DRMA) Expands into EV Infrastructure While Core ICE Business Stays Solid",
+      "blurb": null,
+      "tickers": [
+        "DRMA.JK"
+      ],
+      "supporting_news_ids": [
+        33595
+      ],
       "copy_decision": "new story"
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "OJK fines Indosterling Technomedia and executives for disclosure violations",
+      "headline": "OJK Fines PT Indosterling Technomedia Tbk (TECH) and Executives Rp690 Million Over Disclosure Violations, Spotlighting Sean William Henley",
+      "blurb": null,
+      "tickers": [
+        "TECH.JK"
+      ],
+      "supporting_news_ids": [
+        33576
+      ],
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2027-01-01",
-      "timing_label": "1 Jan 2027",
-      "title": "Indonesia's CPO export verification fee begins at US$1/ton",
+      "sort_date": "2026-11-30",
+      "timing_label": "30 Nov",
+      "title": "BTPN discloses voluntary delisting details with its RUPSLB announcement",
       "tickers": [
-        "ADRO.JK",
-        "AMMN.JK",
-        "ANTM.JK",
-        "BRMS.JK",
-        "INCO.JK",
-        "ITMG.JK",
-        "MDKA.JK",
-        "NCKL.JK",
-        "PTBA.JK"
+        "BTPN.JK"
       ],
       "supporting_news_ids": [
-        33565
+        33590,
+        33593
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2027-06-30",
+      "timing_label": "By 30 Jun 2027",
+      "title": "MSCI due to issue final decision on Indonesia's market status",
+      "tickers": [],
+      "supporting_news_ids": [
+        33600,
+        33599,
+        33597
       ]
     }
   ]
