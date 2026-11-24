@@ -1,20 +1,23 @@
 {
   "issue_date": "2026-11-24",
   "window_start": "2026-11-23T13:50:00Z",
-  "window_end": "2026-11-24T01:46:12Z",
+  "window_end": "2026-11-24T05:56:11Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Bayan Resources reshuffles its board at an extraordinary shareholders meeting",
-    "headline": "BYAN reshuffles board after Jhonlin takes 30.25% stake",
-    "blurb": "Bayan Resources appointed Ary Bastari president director, replacing Low Tuck Kwong, at an extraordinary shareholders meeting on 23 November after Jhonlin Baratama completed its stake acquisition. Jhonlin now holds 10.08 billion shares, or 30.25% of the company, while Low retains 9.95% and Elaine Low 22.05%. The meeting also appointed new directors and commissioners, with the changes taking effect when it closed. Management said the changes would have no material negative impact on the business.",
+    "event": "IDX removes high-shareholding-concentration stocks from boards and index evaluations",
+    "headline": "IDX schedules HSC stock removals from boards and index evaluations, with 346 board exits",
+    "blurb": "Under the revised test, a stock is classified as high shareholding concentration (HSC) when its 10 largest shareholders collectively own at least 92.5%, with the previous Rp5 trillion market-cap threshold and Price Impact Ratio parameter dropped. IDX announced 4 Acceleration, 233 Development and 109 Main Board constituents exiting. The changes take effect on 30 November for boards and 1 December for index evaluations. HSC stocks have been excluded from the IHSG calculation since 13 November, IDX President Director Jeffrey Hendrik said.",
     "tickers": [
-      "BYAN.JK"
+      "ARCI.JK",
+      "RATU.JK",
+      "NRCA.JK",
+      "ADHI.JK",
+      "BRMS.JK",
+      "ENRG.JK"
     ],
     "supporting_news_ids": [
-      33670,
-      33674,
-      33662
+      33676
     ],
     "copy_decision": "new story"
   },
@@ -23,35 +26,81 @@
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Bank Syariah Indonesia reports Q3 2026 net profit growth",
-        "headline": "BRIS reports 10.02% growth in nine-month net profit",
-        "blurb": "Bank Syariah Indonesia disbursed Rp344.14 trillion in financing, up 14.61%, while third-party funds rose 10.81% to Rp386.07 trillion. Faster financing growth lifted its financing-to-deposit ratio to 90.04% from 86.29% a year earlier.",
+        "event": "BRIS reports Q3 2026 net profit growth",
+        "headline": "BRIS reports 10% net profit growth to Rp6.13 trillion through Q3 2026",
+        "blurb": "Bank Syariah Indonesia lowered its NIM guidance to 5.3%-5.5% from above 5.5%. Financing revenue rose 4.35% to Rp23.20 trillion and fee-based income increased 46.14% to Rp2.58 trillion. Gross and net NPF improved to 1.80% and 0.35%, respectively.",
         "tickers": [
           "BRIS.JK"
         ],
         "supporting_news_ids": [
+          33677,
+          33693,
+          33681,
           33672
         ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 3 new articles with a new fact: Management lowered its NIM guidance to 5.3%-5.5% from above 5.5%."
       },
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "Archi Indonesia reports a 54.57% net profit increase",
-        "headline": "ARCI reports 54.57% net profit increase",
-        "blurb": "For the period ended 30 September 2026, Archi Indonesia reported net profit of USD108.93 million, up from USD70.47 million a year earlier. Revenue from customer contracts rose 39.7% to USD459.2 million, while basic earnings per share increased to USD0.0043 from USD0.0028.",
+        "event": "ARCI reports nine-month 2026 net profit growth",
+        "headline": "ARCI reports nine-month net profit up 54.57% to US$108.94 million",
+        "blurb": "Archi Indonesia shares rose 3.82% to Rp815 on 23 November. For the nine months ended 30 September, sales and operating revenue increased 39.70% to US$459.21 million.",
         "tickers": [
           "ARCI.JK"
         ],
         "supporting_news_ids": [
+          33675,
           33671
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: ARCI shares rose 3.82% to Rp815 on 23 November 2026."
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "IDX sets BMAS theoretical share price after its rights issue",
+        "headline": "IDX sets BMAS theoretical share price at Rp418 after rights issue",
+        "blurb": "Bank Kasikorn Indonesia's 655:104 rights issue gives holders 104 rights to buy new shares for every 655 held, at Rp350 each. The adjusted price applies to trading on 24 November. BMAS plans to issue up to 2.87 billion shares to raise around Rp1 trillion for working capital and increased credit distribution.",
+        "tickers": [
+          "BMAS.JK"
+        ],
+        "supporting_news_ids": [
+          33692
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "ADHI notifies a potential delay in bond interest payments",
+        "headline": "ADHI flags potential delay in Rp60.82 billion bond interest",
+        "blurb": "Adhi Karya told KSEI and the exchange its 18th interest installment on 2022 Series B and C bonds, due 24 November, may be delayed. Bondholders rejected proposals to reschedule or split coupons at two meetings. ADHI will coordinate with trustee Bank Mega on another meeting as restructuring continues.",
+        "tickers": [
+          "ADHI.JK"
+        ],
+        "supporting_news_ids": [
+          33685
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "BUAT plans an IPO offering of up to 534 million shares",
+        "headline": "BUAT plans IPO of up to 534 million shares",
+        "blurb": "Bumi Atsiri Prima is offering the new shares at Rp135–Rp190 each, targeting up to Rp101.46 billion. It plans to use all proceeds for working capital, mainly to buy patchouli oil, nutmeg oil and massoia bark oil.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33683
         ],
         "copy_decision": "new story"
       }
     ],
     "deals_control": [
       {
-        "id": "cur_04",
+        "id": "cur_07",
         "slot": "story",
         "event": "TBIG signs agreement to acquire EDOTCO Infrastruktur Indonesia",
         "headline": "TBIG signs agreement to acquire 100% of EDOTCO Infrastruktur Indonesia",
@@ -60,7 +109,22 @@
           "TBIG.JK"
         ],
         "supporting_news_ids": [
+          33682,
           33661
+        ],
+        "copy_decision": "kept: 1 new articles, no new fact"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "Pikatan Baru becomes a major TMPO shareholder through an interim stock dividend",
+        "headline": "TMPO adds Pikatan Baru as 10.19% shareholder via interim stock dividend",
+        "blurb": "Pikatan Baru received 107.83 million shares at an execution price of Rp151 each, effective 18 November. It previously held no TMPO shares or voting rights.",
+        "tickers": [
+          "TMPO.JK"
+        ],
+        "supporting_news_ids": [
+          33684
         ],
         "copy_decision": "new story"
       }
@@ -68,7 +132,23 @@
   },
   "flash": [
     {
-      "id": "cur_05",
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Bayan Resources reshuffles its board at an extraordinary shareholders meeting",
+      "headline": "BYAN reshuffles board after Jhonlin takes 30.25% stake",
+      "blurb": null,
+      "tickers": [
+        "BYAN.JK"
+      ],
+      "supporting_news_ids": [
+        33670,
+        33674,
+        33662
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from lead"
+    },
+    {
+      "id": "cur_10",
       "slot": "flash",
       "event": "Chandra Daya Investasi begins a Rp1 trillion share buyback",
       "headline": "PT Chandra Daya Investasi Tbk (CDIA) Starts Rp 1 Trillion Share Buyback; Analysts Recommend Buy",
@@ -79,10 +159,10 @@
       "supporting_news_ids": [
         33665
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_06",
+      "id": "cur_11",
       "slot": "flash",
       "event": "Roda Vivatex executes a 1:20 stock split",
       "headline": "PT Roda Vivatex Tbk (RDTX) Executes 1:20 Stock Split, Share Price Adjusted to Rp 640",
@@ -93,10 +173,10 @@
       "supporting_news_ids": [
         33663
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_07",
+      "id": "cur_12",
       "slot": "flash",
       "event": "Prodia Widyahusada shareholders approve a 1:5 stock split",
       "headline": "PT Prodia Widyahusada Tbk (PRDA) Secures Shareholder Approval for 1:5 Stock Split Scheduled for December 2026",
@@ -107,10 +187,10 @@
       "supporting_news_ids": [
         33667
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_08",
+      "id": "cur_13",
       "slot": "flash",
       "event": "SAMF responds to OJK disclosure of illegal trading profits in its shares",
       "headline": "PT Saraswanti Anugerah Makmur Tbk (SAMF) Responds to OJK's Disclosure of Rp12.55 Billion Illegal Stock Trading Profits",
@@ -121,10 +201,10 @@
       "supporting_news_ids": [
         33660
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_09",
+      "id": "cur_14",
       "slot": "flash",
       "event": "Indovest Central sells 103.61 million Charnic Capital shares",
       "headline": "Charnic Capital (NICK) Controlling Shareholder Indovest Central Sells 103.61 Million Shares for Rp20.71 Billion",
@@ -135,52 +215,73 @@
       "supporting_news_ids": [
         33668
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "FOLK controlling shareholder sells shares and reduces its stake",
+      "headline": "Multi Garam (FOLK) Controlling Shareholder Sumber Garam Prataa Sells 9.3 Million Shares at Rp115 Each",
+      "blurb": null,
+      "tickers": [
+        "FOLK.JK"
+      ],
+      "supporting_news_ids": [
+        33686
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_10",
+      "id": "cur_16",
       "slot": "flash",
-      "event": "Prabowo and MSCI CEO discuss a possible Indonesian market downgrade",
-      "headline": "Prabowo-MSCI CEO Call Raises Hopes Indonesia Can Avoid Two-Notch Downgrade to Standalone Market",
+      "event": "MSCI consultation on Indonesia's market classification remains ongoing",
+      "headline": "MSCI maintains its proposal to downgrade Indonesia two levels to standalone market status",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
+        33689,
+        33678,
+        33687,
+        33679,
+        33688,
         33673
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 5 new articles with a new fact: MSCI said it had not dropped the proposal and that no final decision had been made."
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-12-18",
-      "timing_label": "18 Dec 2026",
-      "title": "PRDA shares begin trading at new nominal value after 1:5 split",
+      "sort_date": "2026-11-30",
+      "timing_label": "30 Nov",
+      "title": "IDX removes HSC stocks from Main, Development and Acceleration Boards",
       "tickers": [
-        "PRDA.JK"
+        "ADHI.JK",
+        "ARCI.JK",
+        "BRMS.JK",
+        "ENRG.JK",
+        "NRCA.JK",
+        "RATU.JK"
       ],
       "supporting_news_ids": [
-        33667
+        33676
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2027-04-30",
-      "timing_label": "30 Apr 2027",
-      "title": "MSCI’s consultation on Indonesia’s market classification closes for public input",
-      "tickers": [],
+      "sort_date": "2026-12-01",
+      "timing_label": "1 Dec",
+      "title": "IDX removes HSC stocks from index evaluations",
+      "tickers": [
+        "ADHI.JK",
+        "ARCI.JK",
+        "BRMS.JK",
+        "ENRG.JK",
+        "NRCA.JK",
+        "RATU.JK"
+      ],
       "supporting_news_ids": [
-        33673
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2027-06-30",
-      "timing_label": "Jun 2027",
-      "title": "MSCI issues final decision on Indonesia’s market classification",
-      "tickers": [],
-      "supporting_news_ids": [
-        33673
+        33676
       ]
     }
   ]
