@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-24",
   "window_start": "2026-11-23T13:50:00Z",
-  "window_end": "2026-11-24T09:56:22Z",
+  "window_end": "2026-11-24T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -22,9 +22,44 @@
     "copy_decision": "kept: same articles"
   },
   "sections": {
-    "market_structure_policy": [
+    "macro_flows": [
       {
         "id": "cur_02",
+        "slot": "story",
+        "event": "MSCI's Indonesia market reclassification consultation and reported presidential call",
+        "headline": "MSCI keeps Indonesia reclassification under consultation, with decision due by 30 June 2027",
+        "blurb": "Prabowo and MSCI CEO Henry Fernandez reportedly held an hour-long call on 10 November, with Fernandez reportedly open to alternatives. MSCI says public input remains open until 30 April 2027 and that a move from emerging to standalone status could remove Indonesian stocks from its indexes. No decision has been made.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33712,
+          33708,
+          33698,
+          33717,
+          33689,
+          33678,
+          33687,
+          33679,
+          33688,
+          33673
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Bank Indonesia reports growth in digital payment transactions through October",
+        "headline": "Bank Indonesia reports digital payments up 31.47% to 6.18 billion through October",
+        "blurb": "BTN said Balé transactions reached 2.5 billion, up 40% year on year, lifting fee-based income more than 41% in the first ten months. BCA’s myBCA frequency rose 40% year on year in the first nine months, while Maybank Indonesia recorded over 48 million transactions worth Rp870 trillion through Q3, up 34%.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33758
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "market_structure_policy": [
+      {
+        "id": "cur_04",
         "slot": "story",
         "event": "Indonesia and the EU sign IEU-CEPA and an investment protection agreement",
         "headline": "Indonesia and EU sign IEU-CEPA and investment pact, with 90.4% of lines duty-free",
@@ -33,10 +68,26 @@
         "supporting_news_ids": [
           33716
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "OJK imposes Rp2.1 trillion in trading-related fines on DSSA, BREN, and CUAN",
+        "headline": "OJK imposes Rp2.1 trillion in fines on DSSA, BREN and CUAN",
+        "blurb": "Dian Swastatika Sentosa received Rp1.5 trillion, Barito Renewables Rp500 billion and Petrindo Jaya Kreasi Rp100 billion in penalties over alleged market manipulation and public-offering violations. Analysts at Korea Investment & Sekuritas and RHB Sekuritas said the action addresses one MSCI concern, but Emerging Market status depends on changes through 30 April 2027.",
+        "tickers": [
+          "DSSA.JK",
+          "BREN.JK",
+          "CUAN.JK"
+        ],
+        "supporting_news_ids": [
+          33734
+        ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_03",
+        "id": "cur_06",
         "slot": "story",
         "event": "ADHI bond interest delay leads to an IDX trading suspension",
         "headline": "ADHI defers Rp60.82 billion bond interest as IDX extends trading suspension",
@@ -49,64 +100,29 @@
           33700,
           33685
         ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: ADHI deferred Rp60,824,400,000 in bond interest and IDX extended the suspension of its shares across all markets."
-      }
-    ],
-    "earnings_guidance": [
-      {
-        "id": "cur_04",
-        "slot": "story",
-        "event": "BRIS reports nine-month 2026 net profit growth",
-        "headline": "BRIS reports nine-month 2026 net profit up 10.02% to Rp6.13 trillion",
-        "blurb": "Operating expenses rose 17%, limiting pre-provision operating profit growth to 2% at Rp10 trillion. Lower provisioning costs also supported earnings, while management cut its net interest margin guidance to 5.3%-5.5% from above 5.5%.",
-        "tickers": [
-          "BRIS.JK"
-        ],
-        "supporting_news_ids": [
-          33715,
-          33720,
-          33677,
-          33693,
-          33681,
-          33672
-        ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: Operating expenses rose 17%, limiting pre-provision operating profit growth to 2%."
-      },
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "MDKA reports a return to profit in 2026",
-        "headline": "MDKA returns to profit with US$157 million net profit in 2026",
-        "blurb": "Merdeka Copper Gold posted Q3 revenue of US$858 million, up 10% quarter on quarter, and cumulative revenue of US$2.26 billion, up 76%, through September. Phintraco Sekuritas sees up to 122% upside for the shares.",
-        "tickers": [
-          "MDKA.JK"
-        ],
-        "supporting_news_ids": [
-          33699
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_06",
-        "slot": "story",
-        "event": "ARCI reports nine-month 2026 profit growth",
-        "headline": "ARCI reports nine-month 2026 profit of US$108.93 million, up 54.57%",
-        "blurb": "Archi's cash and cash equivalents rose 163.38% year on year to US$61.69 million. Revenue increased 39.70% to US$459.21 million, while gross profit rose 42.09% to US$202.91 million.",
-        "tickers": [
-          "ARCI.JK"
-        ],
-        "supporting_news_ids": [
-          33706,
-          33703,
-          33675,
-          33671
-        ],
-        "copy_decision": "rewritten: 2 new articles with a new fact: Cash and cash equivalents rose 163.38% year on year to US$61.69 million."
+        "copy_decision": "kept: same articles"
       }
     ],
     "capital_raising_buybacks": [
       {
         "id": "cur_07",
+        "slot": "story",
+        "event": "Bank Syariah Indonesia obtains approval for a 6.8-billion-share rights issue",
+        "headline": "BRIS shareholders approve rights issue of up to 6.8 billion shares",
+        "blurb": "The shares have a stated maximum nominal amount of Rp3.4 trillion, but the issue value and funding target are not set. Final terms remain subject to board determination, OJK registration and listing on the Indonesia Stock Exchange. Finance and Strategy Director Ade Cahyo Nugroho said the issue could temporarily pressure earnings per share.",
+        "tickers": [
+          "BRIS.JK"
+        ],
+        "supporting_news_ids": [
+          33754,
+          33738,
+          33757,
+          33710
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_08",
         "slot": "story",
         "event": "APIC plans a bond issue of up to Rp1 trillion",
         "headline": "APIC plans bond issue of up to Rp1 trillion",
@@ -117,10 +133,123 @@
         "supporting_news_ids": [
           33702
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "Bumi Atsiri Prima prepares its initial public offering",
+        "headline": "Bumi Atsiri Prima plans IPO of up to 534 million shares",
+        "blurb": "The offering covers 25.02% of fully paid-up capital at a book-building range of Rp135–Rp190 per share, with proceeds of up to Rp101.46 billion. All proceeds will fund working capital, allocated approximately 70% to patchouli oil, 20% to nutmeg oil and 10% to massoia bark purchases. The company plans to list in November, with no exact date stated.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33746,
+          33704,
+          33697,
+          33683
+        ],
+        "copy_decision": "rewritten: 2 new articles with a new fact: BUAT allocated IPO proceeds approximately 70% to patchouli oil, 20% to nutmeg oil and 10% to massoia bark purchases."
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_10",
+        "slot": "story",
+        "event": "MDKA reports a return to profit in 2026",
+        "headline": "MDKA returns to profit with US$157 million net profit in 2026",
+        "blurb": "Merdeka Copper Gold posted Q3 revenue of US$858 million, up 10% quarter on quarter, and cumulative revenue of US$2.26 billion, up 76%, through September. Phintraco Sekuritas sees up to 122% upside for the shares.",
+        "tickers": [
+          "MDKA.JK"
+        ],
+        "supporting_news_ids": [
+          33699
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_11",
+        "slot": "story",
+        "event": "Bank Tabungan Negara reports nine-month profit growth and revises 2026 targets",
+        "headline": "Bank Tabungan Negara reports 22.6% nine-month profit growth, revises 2026 targets",
+        "blurb": "BTN’s net profit reached Rp2.82 trillion for the first nine months as its cost of funds fell to 3.3% from 4.1% and provision expenses dropped 34.4% to Rp2.93 trillion. It raised full-year financing growth guidance to 8%-11% and cut third-party funds growth guidance to 3%-5%.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33756
+        ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_08",
+        "id": "cur_12",
+        "slot": "story",
+        "event": "Pantai Indah Kapuk Dua reports nine-month 2026 profit growth",
+        "headline": "PANI reports 145% nine-month 2026 profit growth",
+        "blurb": "Pantai Indah Kapuk Dua’s revenue rose about 19%, and marketing sales reached Rp3 trillion by end-September. Residential sales led at Rp1.63 trillion, up 34%, while liabilities fell 10.4% to Rp16.9 trillion.",
+        "tickers": [
+          "PANI.JK"
+        ],
+        "supporting_news_ids": [
+          33739
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_13",
+        "slot": "story",
+        "event": "Bank Syariah Indonesia reports nine-month 2026 earnings growth",
+        "headline": "BRIS reports nine-month net profit up 10% to Rp6.13 trillion",
+        "blurb": "Bank Syariah Indonesia said operating income rose 9.40% year on year to Rp21.21 trillion through September. Its financing-to-deposit ratio increased to 90.04% from 86.29%, tightening liquidity as financing grew faster than deposits.",
+        "tickers": [
+          "BRIS.JK"
+        ],
+        "supporting_news_ids": [
+          33755,
+          33751,
+          33715,
+          33720,
+          33677,
+          33693,
+          33681,
+          33672
+        ],
+        "copy_decision": "rewritten: 2 new articles with a new fact: The financing-to-deposit ratio rose to 90.04% from 86.29%, tightening liquidity."
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_14",
+        "slot": "story",
+        "event": "DMS Propertindo plans a rights issue to fund two acquisitions",
+        "headline": "KOTA plans Rp4.95 trillion rights issue for two acquisitions",
+        "blurb": "DMS Propertindo would allocate Rp1.2 trillion to acquire a 99.99% stake in Art Design Indonesia and Rp3.2 trillion for a 99.99% stake in Mandirinusa Graha Perkasa, with remaining proceeds for working capital, operations and business development. Shareholders vote on the plan on 27 November, and approval would start a 12-month implementation window.",
+        "tickers": [
+          "KOTA.JK"
+        ],
+        "supporting_news_ids": [
+          33742,
+          33750
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_15",
+        "slot": "story",
+        "event": "Bayan Resources reshuffles its board after Haji Isam-linked share acquisition",
+        "headline": "BYAN names Ary Bastari president director after Jhonlin takes 30.25% stake",
+        "blurb": "At the 23 November extraordinary general meeting, Bastari replaced Low Tuck Kwong. Jhonlin Baratama completed its October share purchase from Low and Elaine Low, leaving it with 30.25% of issued capital. The meeting also appointed three other directors and named Budi Waseso independent president commissioner.",
+        "tickers": [
+          "BYAN.JK"
+        ],
+        "supporting_news_ids": [
+          33753,
+          33713,
+          33670,
+          33674,
+          33662
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_16",
         "slot": "story",
         "event": "IGAR plans a share buyback as part of its go-private and delisting process",
         "headline": "IGAR plans Rp163.44 billion buyback for go-private and delisting process",
@@ -131,43 +260,87 @@
         "supporting_news_ids": [
           33696
         ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_09",
-        "slot": "story",
-        "event": "BUAT IPO offering and prospectus disclosures",
-        "headline": "Bumi Atsiri Prima plans IPO of up to 534 million shares",
-        "blurb": "Bumi Atsiri Prima's prospectus reports negative operating cash flow of Rp118 billion, and auditors flagged Rp124.7 billion in receivables without an impairment reserve. Shares are priced at Rp135–Rp190, with maximum proceeds of Rp101.46 billion targeted for working capital.",
-        "tickers": [],
-        "supporting_news_ids": [
-          33697,
-          33683
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: The prospectus reported negative operating cash flow of Rp118 billion and auditors flagged Rp124.7 billion in receivables without an impairment reserve."
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_10",
+      "id": "cur_17",
       "slot": "flash",
-      "event": "BYAN reshuffles its board and appoints Ary Bastari as president director",
-      "headline": "Bayan Resources (BYAN) reshuffles its board after Jhonlin Baratama acquires a reported 30.25% stake",
+      "event": "XLSmart reports merger synergies and network integration progress",
+      "headline": "PT XLSmart Telecom Sejahtera Tbk (EXCL) performance supported by merger synergy and 5G expansion, with mixed analyst recommendations",
       "blurb": null,
       "tickers": [
-        "BYAN.JK"
+        "EXCL.JK"
       ],
       "supporting_news_ids": [
-        33713,
-        33670,
-        33674,
-        33662
+        33740
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: Ary Bastari replaced Low as President Director at the 23 November 2026 meeting."
+      "copy_decision": "new story"
     },
     {
-      "id": "cur_11",
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "BRI Danareksa projects fourth-quarter profit growth for XLSmart",
+      "headline": "Easing Depreciation Burden Seen Driving PT XLSmart Telecom Sejahtera Tbk (EXCL) to Rp 300 Billion Net Profit in Q4-2026",
+      "blurb": null,
+      "tickers": [
+        "EXCL.JK"
+      ],
+      "supporting_news_ids": [
+        33744
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_19",
+      "slot": "flash",
+      "event": "Archi Indonesia reports nine-month 2026 earnings growth",
+      "headline": "Archi Indonesia (ARCI) reports US$108.94 million attributable profit for the first nine months of 2026, up 54.57%",
+      "blurb": null,
+      "tickers": [
+        "ARCI.JK"
+      ],
+      "supporting_news_ids": [
+        33745,
+        33706,
+        33703,
+        33675,
+        33671
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: Third-quarter net profit fell 20.4% to US$28.9 million and gross margin declined to 41.6%."
+    },
+    {
+      "id": "cur_20",
+      "slot": "flash",
+      "event": "Kiwoom cuts its target price for Hartadinata Abadi",
+      "headline": "PT Hartadinata Abadi Tbk (HRTA) Sustains Growth via Bullion Bank Sales as Kiwoom Maintains Buy but Cuts Target Price to Rp 2,200",
+      "blurb": null,
+      "tickers": [
+        "HRTA.JK"
+      ],
+      "supporting_news_ids": [
+        33748
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_21",
+      "slot": "flash",
+      "event": "Bank Syariah Indonesia strengthens low-cost funding amid tight liquidity",
+      "headline": "PT Bank Syariah Indonesia (Persero) Tbk (BRIS) Ramps Up Low-Cost Funding Strategy Amid Tight Banking Liquidity",
+      "blurb": null,
+      "tickers": [
+        "BRIS.JK"
+      ],
+      "supporting_news_ids": [
+        33752
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_22",
       "slot": "flash",
       "event": "Chandra Daya Investasi begins a Rp1 trillion share buyback",
       "headline": "PT Chandra Daya Investasi Tbk (CDIA) Starts Rp 1 Trillion Share Buyback; Analysts Recommend Buy",
@@ -181,7 +354,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_12",
+      "id": "cur_23",
       "slot": "flash",
       "event": "TBIG signs agreement to acquire EDOTCO Infrastruktur Indonesia",
       "headline": "TBIG signs agreement to acquire 100% of EDOTCO Infrastruktur Indonesia",
@@ -193,10 +366,10 @@
         33682,
         33661
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_13",
+      "id": "cur_24",
       "slot": "flash",
       "event": "IDX sets BMAS theoretical share price after its rights issue",
       "headline": "IDX sets BMAS theoretical share price at Rp418 after rights issue",
@@ -207,10 +380,25 @@
       "supporting_news_ids": [
         33692
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_14",
+      "id": "cur_25",
+      "slot": "flash",
+      "event": "Astra Graphia announces a Rp297-per-share dividend",
+      "headline": "Astra Graphia (ASGR.JK) plans Rp400.58 billion dividend for fiscal year 2025",
+      "blurb": null,
+      "tickers": [
+        "ASGR.JK"
+      ],
+      "supporting_news_ids": [
+        33737,
+        33694
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: The total FY2025 dividend is Rp400.58 billion."
+    },
+    {
+      "id": "cur_26",
       "slot": "flash",
       "event": "Roda Vivatex executes a 1:20 stock split",
       "headline": "PT Roda Vivatex Tbk (RDTX) Executes 1:20 Stock Split, Share Price Adjusted to Rp 640",
@@ -224,35 +412,22 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_15",
+      "id": "cur_27",
       "slot": "flash",
-      "event": "ASGR announces a Rp297 per-share dividend",
-      "headline": "Astra Graphia (ASGR) Announces Dividend of Rp297 per Share",
-      "blurb": null,
-      "tickers": [
-        "ASGR.JK"
-      ],
-      "supporting_news_ids": [
-        33694
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "Prodia Widyahusada shareholders approve a 1:5 stock split",
-      "headline": "PT Prodia Widyahusada Tbk (PRDA) Secures Shareholder Approval for 1:5 Stock Split Scheduled for December 2026",
+      "event": "Prodia Widyahusada approves a 1:5 stock split",
+      "headline": "PT Prodia Widyahusada Tbk (PRDA) shareholders approve a 1:5 stock split",
       "blurb": null,
       "tickers": [
         "PRDA.JK"
       ],
       "supporting_news_ids": [
+        33741,
         33667
       ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: Trading under the new nominal value will start on 18 December 2026."
     },
     {
-      "id": "cur_17",
+      "id": "cur_28",
       "slot": "flash",
       "event": "SAMF responds to OJK disclosure of illegal trading profits in its shares",
       "headline": "PT Saraswanti Anugerah Makmur Tbk (SAMF) Responds to OJK's Disclosure of Rp12.55 Billion Illegal Stock Trading Profits",
@@ -266,7 +441,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_18",
+      "id": "cur_29",
+      "slot": "flash",
+      "event": "Bank Maspion addresses its third-quarter profit decline",
+      "headline": "Bank Maspion (BMHS) Addresses 60% Drop in Net Profit for Q3 2026",
+      "blurb": null,
+      "tickers": [
+        "BMHS.JK"
+      ],
+      "supporting_news_ids": [
+        33735
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_30",
       "slot": "flash",
       "event": "Indovest Central sells 103.61 million Charnic Capital shares",
       "headline": "Charnic Capital (NICK) Controlling Shareholder Indovest Central Sells 103.61 Million Shares for Rp20.71 Billion",
@@ -280,7 +469,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_19",
+      "id": "cur_31",
       "slot": "flash",
       "event": "FOLK controlling shareholder sells shares and reduces its stake",
       "headline": "Multi Garam (FOLK) Controlling Shareholder Sumber Garam Prataa Sells 9.3 Million Shares at Rp115 Each",
@@ -294,21 +483,23 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_20",
+      "id": "cur_32",
       "slot": "flash",
-      "event": "GPRA plans a share buyback of up to Rp40 billion",
-      "headline": "PT Perdana Gapuraprima Tbk (GPRA) Prepares Up to Rp40 Billion for Share Buyback",
+      "event": "Perdana Gapuraprima prepares a Rp40 billion share buyback",
+      "headline": "PT Perdana Gapuraprima Tbk (GPRA) plans a share buyback of up to Rp40 billion",
       "blurb": null,
       "tickers": [
         "GPRA.JK"
       ],
       "supporting_news_ids": [
+        33749,
+        33747,
         33709
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 2 new articles with a new fact: The three-month buyback runs from 23 November 2026 to 23 February 2027 and covers up to 333,333,333 shares."
     },
     {
-      "id": "cur_21",
+      "id": "cur_33",
       "slot": "flash",
       "event": "Pikatan Baru becomes a major TMPO shareholder through an interim stock dividend",
       "headline": "TMPO adds Pikatan Baru as 10.19% shareholder via interim stock dividend",
@@ -319,55 +510,24 @@
       "supporting_news_ids": [
         33684
       ],
-      "copy_decision": "kept: same articles, headline kept in flash from story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_22",
+      "id": "cur_34",
       "slot": "flash",
-      "event": "MSCI consultation, reported Prabowo call, and denials of compromise reports",
-      "headline": "MSCI keeps its proposal to reclassify Indonesia from emerging to standalone market in force pending a decision by June 2027",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33712,
-        33708,
-        33698,
-        33717,
-        33689,
-        33687,
-        33679,
-        33673
-      ],
-      "copy_decision": "rewritten: regrouped, 2 of its articles moved out"
-    },
-    {
-      "id": "cur_23",
-      "slot": "flash",
-      "event": "BRIS acknowledges potential short-term EPS pressure from its stage II rights issue",
-      "headline": "PT Bank Syariah Indonesia (Persero) Tbk (BRIS) Admits Rights Issue Could Pressure Earnings Per Share",
+      "event": "Bersama Mencapai Puncak announces an interim dividend",
+      "headline": "PT Bersama Mencapai Puncak Tbk (BAIK) to Distribute Interim Dividend of Rp 1.24 Billion",
       "blurb": null,
       "tickers": [
-        "BRIS.JK"
+        "BAIK.JK"
       ],
       "supporting_news_ids": [
-        33710
+        33743
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_24",
-      "slot": "flash",
-      "event": "OJK responds to reported MSCI request concerning commissioners' political affiliations",
-      "headline": "OJK Responds to MSCI's Request Over Political Affiliations of OJK Board of Commissioners Members",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33688
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_25",
+      "id": "cur_35",
       "slot": "flash",
       "event": "Pegadaian pursues a multi-sector transformation strategy",
       "headline": "PT Pegadaian Expands Multi-Sector Strategy to Face Growing Competition from Fintech and P2P Lending",
@@ -376,37 +536,45 @@
       "supporting_news_ids": [
         33711
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-12-18",
-      "timing_label": "18 Dec",
-      "title": "PRDA begins trading under new nominal value after its 1-for-5 split",
+      "sort_date": "2026-11-27",
+      "timing_label": "27 Nov",
+      "title": "KOTA shareholders vote on Rp4.95 trillion rights issue for acquisitions",
       "tickers": [
-        "PRDA.JK"
+        "KOTA.JK"
       ],
       "supporting_news_ids": [
-        33667
+        33742,
+        33750
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2027-01-01",
-      "timing_label": "1 Jan 2027",
-      "title": "Indonesia-EU IEU-CEPA and investment protection agreement take effect",
-      "tickers": [],
+      "sort_date": "2026-11-30",
+      "timing_label": "30 Nov",
+      "title": "IDX starts phased HSC removals from trading boards and index evaluations",
+      "tickers": [
+        "ADHI.JK",
+        "ARCI.JK",
+        "BRMS.JK",
+        "ENRG.JK",
+        "NRCA.JK",
+        "RATU.JK"
+      ],
       "supporting_news_ids": [
-        33716
+        33676
       ]
     },
     {
       "id": "wtw_03",
-      "sort_date": "2027-06-30",
-      "timing_label": "By 30 Jun 2027",
-      "title": "MSCI announces Indonesia market classification decision",
+      "sort_date": "2027-04-30",
+      "timing_label": "30 Apr 2027",
+      "title": "Indonesia's MSCI reclassification consultation closes for public input",
       "tickers": [],
       "supporting_news_ids": [
         33712,
@@ -414,8 +582,10 @@
         33698,
         33717,
         33689,
+        33678,
         33687,
         33679,
+        33688,
         33673
       ]
     }
