@@ -1,53 +1,52 @@
 {
   "issue_date": "2026-11-25",
   "window_start": "2026-11-24T13:50:00Z",
-  "window_end": "2026-11-25T01:46:27Z",
+  "window_end": "2026-11-25T05:56:22Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Bank Central Asia sets its Q4 2026 interim dividend",
-    "headline": "BBCA sets Q4 2026 interim dividend at Rp35 per share",
-    "blurb": "The third and final interim payout for fiscal 2026 is payable on 16 December. Shares go ex-dividend on 30 November, after a 27 November cum-dividend date, with holders recorded on 1 December. The payout takes cumulative 2026 interim dividends to Rp80 per share, up 45.5% year on year. All interim dividends will count toward the final dividend, subject to approval at the 2027 annual shareholders meeting.",
+    "event": "Harta Djaya Karya plans rights issue to acquire a 45% stake in Trimata Coal Perkasa",
+    "headline": "MEJA plans Rp1.11 trillion rights issue for 45% stake in Trimata Coal Perkasa",
+    "blurb": "The share-swap offer has an indicative exercise price of Rp450–Rp550 a share, with TCP shareholders expected to absorb around 70% of the new shares. The valuation is based on an internal estimate and remains subject to an independent appraisal. MEJA is targeting shareholder approval at an extraordinary meeting in February 2027, followed by OJK effectiveness and mining permits.",
     "tickers": [
-      "BBCA.JK"
+      "MEJA.JK"
     ],
     "supporting_news_ids": [
-      33763
+      33784
     ],
     "copy_decision": "new story"
   },
   "sections": {
-    "capital_raising_buybacks": [
+    "earnings_guidance": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Indocement Tunggal Prakarsa launches a share buyback",
-        "headline": "INTP launches buyback worth up to Rp750 billion",
-        "blurb": "Indocement will fund the buyback entirely from internal funds, capped at 10% of paid-in capital. The period runs from 22 May 2026 to 21 May 2027, and the withdrawal of 84.53 million treasury shares has been approved.",
+        "event": "Telkom reports lower first-half 2026 net profit",
+        "headline": "TLKM reports first-half 2026 net profit down 7.67% to Rp9.96 trillion",
+        "blurb": "Telkom's revenue rose 4.12% to Rp75.88 trillion, while network operating, maintenance and telecommunication services expenses increased 9.15% to Rp21.47 trillion. Basic earnings per share fell to Rp100.75 from Rp108.85.",
         "tickers": [
-          "INTP.JK"
+          "TLKM.JK"
         ],
         "supporting_news_ids": [
-          33773
+          33781,
+          33790
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "Cakra Buana Resources plans a rights issue",
-        "headline": "CBRE plans rights issue of up to 48 billion shares",
-        "blurb": "The proposed shares have a nominal value of Rp25 each. Cakra Buana Resources would use proceeds to convert Rp858.59 billion in promissory note payables to Garuda Nusantara Mineral, Saga Investama Sedaya, Yafin Tandiono Tan and Hilong Shipping Holding, with the remainder for working capital. The plan requires shareholder approval at an extraordinary meeting on 16 December.",
+        "event": "Tugu Insurance reports nine-month 2026 profit growth",
+        "headline": "TUGU reports nine-month profit up 17.4% to Rp495.15 billion",
+        "blurb": "Tugu Insurance also recorded Insurance Service Revenue of Rp6.73 trillion, up 4.5% year on year, and Insurance Service Results of Rp602.04 billion, up 17.2%. President Director Adi Pramana said the company would continue its transformation through portfolio development, digital technology, risk management and human resource capabilities.",
         "tickers": [
-          "CBRE.JK"
+          "TUGU.JK"
         ],
         "supporting_news_ids": [
-          33771
+          33795
         ],
         "copy_decision": "new story"
-      }
-    ],
-    "earnings_guidance": [
+      },
       {
         "id": "cur_04",
         "slot": "story",
@@ -61,13 +60,86 @@
           33768,
           33762
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "BRI reports consumer loan growth and improved non-performing loan ratio",
+        "headline": "BRI reports 9% consumer loan growth and a 2.9% NPL ratio",
+        "blurb": "Consumer lending reached Rp242.9 trillion, versus Rp222.9 trillion a year earlier, with KPR up 13.1%, Multiguna 8.9% and KKB 302.8% year on year. The non-performing loan ratio fell from 3.1% to 2.9%, an improvement of 22 basis points.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33794
+        ],
         "copy_decision": "new story"
+      }
+    ],
+    "deals_control": [
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Tower Bersama agrees to acquire EDOTCO Infrastruktur Indonesia",
+        "headline": "TBIG agrees to acquire 100% of EDOTCO Infrastruktur Indonesia",
+        "blurb": "Tower Bersama signed a sale and purchase agreement with Axiata Group, EDOTCO Group and EDOTCO Malaysia. Completion remains subject to preliminary conditions in the agreement.",
+        "tickers": [
+          "TBIG.JK"
+        ],
+        "supporting_news_ids": [
+          33783
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_07",
+        "slot": "story",
+        "event": "Indocement Tunggal Prakarsa launches a share buyback",
+        "headline": "INTP launches buyback worth up to Rp750 billion",
+        "blurb": "Indocement will fund the buyback entirely from internal funds, capped at 10% of paid-in capital. The period runs from 22 May 2026 to 21 May 2027, and the withdrawal of 84.53 million treasury shares has been approved.",
+        "tickers": [
+          "INTP.JK"
+        ],
+        "supporting_news_ids": [
+          33773
+        ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "Cakra Buana Resources plans rights issue to convert promissory note receivables",
+        "headline": "CBRE plans rights issue of up to 48 billion shares",
+        "blurb": "Cakra Buana Resources proposes using the proceeds to convert Rp858.59 billion of promissory note payables, including Rp354.06 billion owed to Garuda Nusantara Mineral. The company expects the conversion to reduce liabilities and increase equity. Shareholders are due to vote on the plan at an extraordinary meeting on 16 December 2026.",
+        "tickers": [
+          "CBRE.JK"
+        ],
+        "supporting_news_ids": [
+          33787,
+          33771
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: Rp354.06 billion of the debt conversion is owed to Garuda Nusantara Mineral."
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_05",
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Bank Central Asia sets its Q4 2026 interim dividend",
+      "headline": "BBCA sets Q4 2026 interim dividend at Rp35 per share",
+      "blurb": null,
+      "tickers": [
+        "BBCA.JK"
+      ],
+      "supporting_news_ids": [
+        33763
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from lead"
+    },
+    {
+      "id": "cur_10",
       "slot": "flash",
       "event": "Waskita Karya wins Ngurah Rai Airport taxiway reconstruction contract",
       "headline": "PT Waskita Karya (Persero) Tbk (WSKT) Wins Rp 216.9 Billion Contract for I Gusti Ngurah Rai Airport Apron Taxiway Reconstruction in Bali",
@@ -78,10 +150,10 @@
       "supporting_news_ids": [
         33760
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_06",
+      "id": "cur_11",
       "slot": "flash",
       "event": "Bayan Resources approves a new president director after a major stake sale",
       "headline": "Low Tuck Kwong Steps Down as CEO of PT Bayan Resources Tbk (BYAN) After Selling 30.25% Stake to PT Jhonlin Baratama",
@@ -92,24 +164,10 @@
       "supporting_news_ids": [
         33766
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_07",
-      "slot": "flash",
-      "event": "Sariguna Primatirta launches its SuperO2 Imut bottled water product",
-      "headline": "Sariguna Primatirta (CLEO) Launches SuperO2 Imut 180 ml to Expand into Bottled Mineral Water Segment",
-      "blurb": null,
-      "tickers": [
-        "CLEO.JK"
-      ],
-      "supporting_news_ids": [
-        33769
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_08",
+      "id": "cur_12",
       "slot": "flash",
       "event": "Astra Graphia sets its fiscal 2025 cash dividend",
       "headline": "PT Astra Graphia Tbk (ASGR) Sets Rp 297 Per Share Dividend with 11.56% Yield, Announces Cum Date Schedule",
@@ -120,10 +178,53 @@
       "supporting_news_ids": [
         33765
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "DMS Propertindo plans rights issue to acquire two property companies",
+      "headline": "PT DMS Propertindo (KOTA.JK) plans a rights issue of up to Rp4.95 trillion to fund two acquisitions",
+      "blurb": null,
+      "tickers": [
+        "KOTA.JK"
+      ],
+      "supporting_news_ids": [
+        33792,
+        33786
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_09",
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "OJK sanctions four parties for manipulating Grand House Mulia shares",
+      "headline": "OJK Sanctions Four Parties for Stock Manipulation of PT Grand House Mulia Tbk (HOMI), Reveals Controlling Shareholders",
+      "blurb": null,
+      "tickers": [
+        "HOMI.JK"
+      ],
+      "supporting_news_ids": [
+        33791
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Pudjiadi & Sons receives dividend from subsidiary Bali Realtindo Benoa",
+      "headline": "PT Pudjiadi & Sons Tbk (PNSE) Receives Rp 49.49 Billion Dividend from Subsidiary PT Bali Realtindo Benoa",
+      "blurb": null,
+      "tickers": [
+        "PNSE.JK"
+      ],
+      "supporting_news_ids": [
+        33788
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_16",
       "slot": "flash",
       "event": "Bersama Menuju Puncak sets an interim dividend",
       "headline": "Bersama Menuju Puncak (BAIK) Sets Interim Dividend of Rp1.1 Per Share, Cum Date December 2",
@@ -134,20 +235,49 @@
       "supporting_news_ids": [
         33770
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_17",
+      "slot": "flash",
+      "event": "Sariguna Primatirta launches its SuperO2 Imut bottled water product",
+      "headline": "Sariguna Primatirta (CLEO) Launches SuperO2 Imut 180 ml to Expand into Bottled Mineral Water Segment",
+      "blurb": null,
+      "tickers": [
+        "CLEO.JK"
+      ],
+      "supporting_news_ids": [
+        33769
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_18",
+      "slot": "flash",
+      "event": "Fore Kopi expands its outlet network through 2026",
+      "headline": "PT Fore Kopi Indonesia Tbk (FORE) Accelerates Outlet Network Expansion Through 2026",
+      "blurb": null,
+      "tickers": [
+        "FORE.JK"
+      ],
+      "supporting_news_ids": [
+        33782
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_10",
+      "id": "cur_19",
       "slot": "flash",
-      "event": "MSCI maintains its Indonesia standalone-market reclassification consultation",
-      "headline": "MSCI maintains consultation on Indonesia’s reclassification to standalone market through 30 April 2027",
+      "event": "MSCI continues Indonesia market reclassification consultation amid rupiah pressure",
+      "headline": "MSCI keeps Indonesia’s market reclassification consultation open through 30 April 2027",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
+        33789,
         33774,
         33759
       ],
-      "copy_decision": "new story"
+      "copy_decision": "rewritten: 1 new articles with a new fact: MSCI denied reports that it was considering alternatives to the reclassification."
     }
   ],
   "what_to_watch": [
@@ -155,59 +285,25 @@
       "id": "wtw_01",
       "sort_date": "2026-11-27",
       "timing_label": "27 Nov",
-      "title": "BBCA cum-dividend (regular market) for its Rp 35 interim dividend",
+      "title": "KOTA shareholders vote on an up to Rp4.95 trillion rights issue",
       "tickers": [
-        "BBCA.JK"
+        "KOTA.JK"
       ],
       "supporting_news_ids": [
-        33763
+        33792,
+        33786
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-12-02",
-      "timing_label": "2 Dec",
-      "title": "BAIK cum-dividend (regular market) for its Rp1.1 interim dividend",
-      "tickers": [
-        "BAIK.JK"
-      ],
-      "supporting_news_ids": [
-        33770
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2026-12-16",
-      "timing_label": "16 Dec",
-      "title": "CBRE shareholders vote on the proposed rights issue",
-      "tickers": [
-        "CBRE.JK"
-      ],
-      "supporting_news_ids": [
-        33771
-      ]
-    },
-    {
-      "id": "wtw_04",
-      "sort_date": "2027-04-30",
-      "timing_label": "30 Apr 2027",
-      "title": "MSCI Indonesia reclassification consultation ends",
+      "sort_date": "2027-06-30",
+      "timing_label": "By 30 Jun 2027",
+      "title": "MSCI expected to decide Indonesia's market classification",
       "tickers": [],
       "supporting_news_ids": [
+        33789,
         33774,
         33759
-      ]
-    },
-    {
-      "id": "wtw_05",
-      "sort_date": "2027-05-21",
-      "timing_label": "21 May 2027",
-      "title": "INTP share buyback period closes",
-      "tickers": [
-        "INTP.JK"
-      ],
-      "supporting_news_ids": [
-        33773
       ]
     }
   ]
