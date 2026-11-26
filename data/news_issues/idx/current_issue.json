@@ -1,42 +1,90 @@
 {
   "issue_date": "2026-11-26",
   "window_start": "2026-11-25T13:50:00Z",
-  "window_end": "2026-11-26T01:46:47Z",
+  "window_end": "2026-11-26T05:56:44Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Adaro Andalan Indonesia announces US$500 million interim dividend",
-    "headline": "AADI announces US$500 million interim dividend",
-    "blurb": "Adaro Andalan Indonesia approved the cash dividend on 25 November, doubling its US$250 million interim payout in 2025. It is sourced from net profit for the nine months ended 30 September 2026. The per-share amount has not been announced, and rupiah conversion will use Bank Indonesia’s middle rate announced on 7 December, with payment scheduled for 11 December.",
-    "tickers": [
-      "AADI.JK"
-    ],
+    "event": "Rupiah reaches successive record lows against the US dollar",
+    "headline": "Rupiah hits successive record lows at Rp18,400 per US dollar",
+    "blurb": "It closed at Rp18,332 on 25 November, its lowest level at the time, then fell 68 points or 0.37% by 11:48 on 26 November. October trade and November inflation data are due the following week.",
+    "tickers": [],
     "supporting_news_ids": [
-      33861,
-      33855
+      33883,
+      33867,
+      33869,
+      33875,
+      33882,
+      33866
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: moved from flash to lead"
   },
   "sections": {
-    "capital_raising_buybacks": [
+    "market_structure_policy": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Bank Syariah Indonesia receives approval for 6.8 billion-share rights issue",
-        "headline": "BRIS receives approval for 6.8 billion-share rights issue",
-        "blurb": "Shareholders approved the capital increase at an extraordinary meeting on 6 November. Bank Syariah Indonesia will use net proceeds to support financing growth, placing funds temporarily in safe, liquid instruments if not immediately deployed. Trading and exercise are scheduled for 18–24 February 2027, with new shares recorded on the exchange on 18 February.",
+        "event": "IDX excludes High Shareholding Concentration stocks from JCI weighting",
+        "headline": "IDX sets JCI weighting exclusion for HSC stocks on 383-issuer list",
+        "blurb": "The exchange cited higher price-fluctuation risk and potential tracking error for passive investors. Krom Bank, whose shareholding concentration is 99.94%, is exploring consolidation and awaits new OJK rules.",
         "tickers": [
-          "BRIS.JK"
+          "AGRS.JK",
+          "AMAR.JK",
+          "BBHI.JK",
+          "BBSI.JK",
+          "BCIC.JK",
+          "BDMN.JK",
+          "BINA.JK",
+          "BKSW.JK",
+          "BMAS.JK",
+          "BNBA.JK",
+          "BNGA.JK",
+          "BNII.JK",
+          "BRIS.JK",
+          "BSWD.JK",
+          "BTPN.JK",
+          "DNAR.JK",
+          "MAYA.JK",
+          "MCOR.JK",
+          "SDRA.JK",
+          "SUPA.JK"
         ],
         "supporting_news_ids": [
-          33864
+          33865
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "Bank Indonesia cuts conventional banks' reserve requirement to 7%",
+        "headline": "Bank Indonesia cuts conventional banks' reserve requirement to 7% from 1 December",
+        "blurb": "BI has also lowered the macroprudential liquidity incentive limit from 6% to 5%. The reserve requirement fell from 9% to 8% on 1 November and reaches 7% on 1 December, leaving effective GWM at 2% for banks receiving the maximum incentive.",
+        "tickers": [],
+        "supporting_news_ids": [
+          33885
         ],
         "copy_decision": "new story"
       }
     ],
     "other": [
       {
-        "id": "cur_03",
+        "id": "cur_04",
+        "slot": "story",
+        "event": "Adaro Andalan Indonesia announces US$500 million interim dividend",
+        "headline": "AADI announces US$500 million interim dividend",
+        "blurb": "The dividend is double the US$250 million paid in 2025 and will come from net profit for the nine months ended 30 September. The per-share amount has not been announced, and the cum-dividend date for regular and negotiation markets is 3 December, with payment scheduled for 11 December.",
+        "tickers": [
+          "AADI.JK"
+        ],
+        "supporting_news_ids": [
+          33861,
+          33855
+        ],
+        "copy_decision": "rewritten: moved from lead to story"
+      },
+      {
+        "id": "cur_05",
         "slot": "story",
         "event": "Adhi Karya secures Rp1.29 trillion contract for 26 irrigation projects",
         "headline": "ADHI secures Rp1.29 trillion contract for 26 irrigation projects",
@@ -47,12 +95,29 @@
         "supporting_news_ids": [
           33850
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
+      }
+    ],
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Bank Syariah Indonesia obtains approval for 6.8 billion-share rights issue",
+        "headline": "BRIS obtains approval for rights issue of up to 6.8 billion shares",
+        "blurb": "There is no standby buyer, and shareholders who do not exercise their rights face dilution of up to 12.85%. Shareholders approved the capital increase on 6 November, with rights scheduled to trade and be exercised from 18 to 24 February 2027.",
+        "tickers": [
+          "BRIS.JK"
+        ],
+        "supporting_news_ids": [
+          33880,
+          33864
+        ],
+        "copy_decision": "rewritten: 1 new articles with a new fact: There is no standby buyer, and shareholders who do not exercise their rights face dilution of up to 12.85%."
       }
     ],
     "deals_control": [
       {
-        "id": "cur_04",
+        "id": "cur_07",
         "slot": "story",
         "event": "Energi Mega Persada completes US$200 million investment in HighPeak Energy",
         "headline": "Energi Mega Persada completes US$200 million investment in HighPeak Energy",
@@ -61,27 +126,75 @@
         "supporting_news_ids": [
           33854
         ],
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_08",
+        "slot": "story",
+        "event": "Trimegah Sekuritas executes Rp278.84 billion reverse repo of Energi Mega Persada shares",
+        "headline": "TRIM executes Rp278.84 billion reverse repo of ENRG shares",
+        "blurb": "Trimegah Sekuritas completed the transaction on 25 November at Rp555 per share for 502.42 million shares. Its ENRG holdings fell to 4.26 billion shares, or 10.71%, from 4.76 billion shares, or 11.97%.",
+        "tickers": [
+          "ENRG.JK",
+          "TRIM.JK"
+        ],
+        "supporting_news_ids": [
+          33877
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_09",
+        "slot": "story",
+        "event": "BCA Sekuritas acquires 5.41% stake in Darma Henwa",
+        "headline": "BCA Sekuritas acquires 5.41% stake in DEWA",
+        "blurb": "BCA Sekuritas bought 2.2 billion shares on 24 November for an estimated Rp490.55 billion, according to Stockbit's estimate based on KSEI data. Darma Henwa shares rose 1.71% to Rp238 on 26 November.",
+        "tickers": [
+          "DEWA.JK"
+        ],
+        "supporting_news_ids": [
+          33876
+        ],
         "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_05",
+        "id": "cur_10",
         "slot": "story",
-        "event": "BUMI reports nine-month 2026 net profit growth",
-        "headline": "BUMI reports 190.45% nine-month profit growth",
-        "blurb": "Bumi Resources' profit attributable to owners rose 405% to US$148.47 million, while revenue increased 38.85% to US$1.44 billion. The figures cover the nine months ended 30 September 2026.",
+        "event": "Mirae Asset downgrades Indonesian telecommunications sector to Neutral",
+        "headline": "Mirae Asset downgrades Indonesian telecom sector to Neutral, cuts targets 26%",
+        "blurb": "Mirae Asset Sekuritas cited MSCI reclassification risk to Standalone Market and rising US rate expectations, not weak operations. It raised the sector’s cost of equity to 16.5-17.5% from 14.0-14.5% and estimated US$850 million in potential foreign outflows, including about Rp15 trillion from TLKM. EXCL is its top pick, with a buy rating and Rp2,850 target.",
         "tickers": [
-          "BUMI.JK"
+          "EXCL.JK",
+          "ISAT.JK",
+          "TLKM.JK"
         ],
         "supporting_news_ids": [
-          33860,
-          33851
+          33872
         ],
         "copy_decision": "new story"
       },
       {
-        "id": "cur_06",
+        "id": "cur_11",
+        "slot": "story",
+        "event": "BUMI reports nine-month 2026 earnings growth",
+        "headline": "BUMI reports 404.9% rise in nine-month attributable profit to US$148.47 million",
+        "blurb": "Receivables owed to Bumi Resources by Jhonlin Group rose to US$127 million, or 51% of trade receivables, from US$14 million a year earlier. Revenue increased 38.85% to US$1.44 billion for the nine months ended 30 September.",
+        "tickers": [
+          "BUMI.JK"
+        ],
+        "supporting_news_ids": [
+          33881,
+          33868,
+          33870,
+          33860,
+          33851
+        ],
+        "copy_decision": "rewritten: 3 new articles with a new fact: Receivables owed by Jhonlin Group rose to US$127 million and represented 51% of trade receivables."
+      },
+      {
+        "id": "cur_12",
         "slot": "story",
         "event": "Hana Bank reports nine-month 2026 earnings and loan growth",
         "headline": "Hana Bank reports Rp541.86 billion profit and 8.03% loan growth",
@@ -90,46 +203,55 @@
         "supporting_news_ids": [
           33853
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_07",
+      "id": "cur_13",
       "slot": "flash",
-      "event": "IDX excludes High Shareholding Concentration stocks from JCI weighting",
-      "headline": "27 Banks Enter IDX High Shareholding Concentration (HSC) List, Excluded from JCI Weighting",
+      "event": "BCA sets cum-dividend date for its third 2026 interim dividend",
+      "headline": "PT Bank Central Asia Tbk (BBCA) Sets Cum Dividend Date for Rp 35 Interim Dividend on 27 November 2026",
       "blurb": null,
       "tickers": [
-        "AGRS.JK",
-        "AMAR.JK",
-        "BBHI.JK",
-        "BBSI.JK",
-        "BCIC.JK",
-        "BDMN.JK",
-        "BINA.JK",
-        "BKSW.JK",
-        "BMAS.JK",
-        "BNBA.JK",
-        "BNGA.JK",
-        "BNII.JK",
-        "BRIS.JK",
-        "BSWD.JK",
-        "BTPN.JK",
-        "DNAR.JK",
-        "MAYA.JK",
-        "MCOR.JK",
-        "SDRA.JK",
-        "SUPA.JK"
+        "BBCA.JK"
       ],
       "supporting_news_ids": [
-        33865
+        33874
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_08",
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "Bayan Resources replaces President Director Low Tuck Kwong with Ary Bastari",
+      "headline": "PT Bayan Resources Tbk (BYAN) Reveals Reason Behind Low Tuck Kwong's Departure as President Director",
+      "blurb": null,
+      "tickers": [
+        "BYAN.JK"
+      ],
+      "supporting_news_ids": [
+        33879
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Petrosea shareholders approve rights issue and asset pledging",
+      "headline": "PT Petrosea Tbk (PTRO) Shareholders Approve Rights Issue of Up to 170 Million New Shares and Asset Pledging",
+      "blurb": null,
+      "tickers": [
+        "PTRO.JK"
+      ],
+      "supporting_news_ids": [
+        33873
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_16",
       "slot": "flash",
       "event": "Jasuindo Tiga Perkasa schedules Rp67.7 billion interim dividend",
       "headline": "Jasuindo Tiga Perkasa Tbk (JTPE) Schedules Interim Dividend of Rp67.7 Billion",
@@ -140,10 +262,10 @@
       "supporting_news_ids": [
         33863
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_09",
+      "id": "cur_17",
       "slot": "flash",
       "event": "Perdana Gapuraprima plans share buyback of up to Rp40 billion",
       "headline": "PT Perdana Gapuraprima Tbk (GPRA) Plans Share Buyback of Up to Rp 40 Billion Backed by Solid Fundamentals",
@@ -154,70 +276,18 @@
       "supporting_news_ids": [
         33852
       ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_10",
-      "slot": "flash",
-      "event": "Indonesian rupiah hits a record low amid renewed pressure",
-      "headline": "The rupiah hit a record low as Bank Indonesia intervened to stem its decline",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33856,
-        33866
-      ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-27",
-      "timing_label": "27 Nov",
-      "title": "JTPE cum-dividend (regular market) for its Rp10 interim dividend",
-      "tickers": [
-        "JTPE.JK"
-      ],
+      "sort_date": "2026-12-01",
+      "timing_label": "1 Dec",
+      "title": "Bank Indonesia lowers conventional banks’ reserve requirement to 7%",
+      "tickers": [],
       "supporting_news_ids": [
-        33863
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2026-12-03",
-      "timing_label": "3 Dec",
-      "title": "AADI cum-dividend (regular market) for its US$500 million interim dividend",
-      "tickers": [
-        "AADI.JK"
-      ],
-      "supporting_news_ids": [
-        33861,
-        33855
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2027-02-18",
-      "timing_label": "18 Feb 2027",
-      "title": "BRIS rights issue trading and exercise period opens, through 24 Feb",
-      "tickers": [
-        "BRIS.JK"
-      ],
-      "supporting_news_ids": [
-        33864
-      ]
-    },
-    {
-      "id": "wtw_04",
-      "sort_date": "2027-02-18",
-      "timing_label": "18 Feb 2027",
-      "title": "BRIS records 6.8 billion new shares on IDX",
-      "tickers": [
-        "BRIS.JK"
-      ],
-      "supporting_news_ids": [
-        33864
+        33885
       ]
     }
   ]
