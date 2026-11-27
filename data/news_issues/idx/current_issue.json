@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-27",
   "window_start": "2026-11-26T13:50:00Z",
-  "window_end": "2026-11-27T01:47:46Z",
+  "window_end": "2026-11-27T05:57:48Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -14,72 +14,64 @@
     "supporting_news_ids": [
       33940
     ],
-    "copy_decision": "new story"
+    "copy_decision": "kept: same articles"
   },
   "sections": {
-    "deals_control": [
+    "market_structure_policy": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Abadi Nusantara Hijau Investama postpones its extraordinary shareholders meeting",
-        "headline": "PACK postpones extraordinary shareholders meeting to 8 December",
-        "blurb": "Abadi Nusantara Hijau Investama rescheduled the meeting from 30 November after OJK requested additional information and clarification on its planned business change, material transactions and rights issue. The unchanged agenda includes a rights issue of up to 100 billion new shares worth a maximum Rp8.19 trillion, the acquisition of Bukit Makmur Istindo Nikeltama shares and a planned purchase of Denway Development shares.",
+        "event": "IDX suspends five companies over inaccurate free-float disclosures",
+        "headline": "IDX suspends AKKU, BAJA, FIRE, KING and KPIG over inaccurate free-float disclosures",
+        "blurb": "Anugerah Kagum Karya Utama, Saranacentral Bajatama, Alfa Energi Investama, Hoffmen Cleanindo and MNC Tourism Indonesia had inconsistencies in September share-registration reports compared with KSEI ownership data for shareholders holding above 1%. Trading in their regular and cash markets has been suspended from 27 November until further notice after the companies failed to clarify or correct the reports by 26 November.",
         "tickers": [
-          "PACK.JK"
+          "AKKU.JK",
+          "BAJA.JK",
+          "FIRE.JK",
+          "KING.JK",
+          "KPIG.JK"
         ],
         "supporting_news_ids": [
-          33944
+          33965,
+          33959
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_03",
+        "slot": "story",
+        "event": "MSCI removes Barito Pacific from Global Standard and downgrades Bumi Resources Minerals",
+        "headline": "MSCI removes BRPT from Global Standard and downgrades BRMS to Small Cap on 1 December",
+        "blurb": "MSCI announced the changes on 11 November, with index-tracking funds set to adjust portfolios after the Indonesia Stock Exchange closes on 30 November. BRIDS warned of potential ownership changes and transaction volatility ahead of the effective date. MSCI will announce its next review on 9 February 2027.",
+        "tickers": [
+          "BRPT.JK",
+          "BRMS.JK"
+        ],
+        "supporting_news_ids": [
+          33963,
+          33956
         ],
         "copy_decision": "new story"
       }
     ],
     "earnings_guidance": [
       {
-        "id": "cur_03",
+        "id": "cur_04",
         "slot": "story",
-        "event": "Krakatau Steel reports H1 2026 revenue growth and returns to profit",
-        "headline": "KRAS reports 36.5% H1 revenue growth and returns to profit",
-        "blurb": "Krakatau Steel's revenue reached US$609.21 million, up from US$446.45 million a year earlier. Net profit attributable to owners was US$655,000, reversing a US$107.12 million loss in H1 2025.",
+        "event": "Krakatau Steel reports first-half 2026 results",
+        "headline": "KRAS reports US$6.31 million consolidated profit in first half of 2026",
+        "blurb": "Revenue rose 36.5% to US$609.21 million from US$446.45 million a year earlier. Profit attributable to owners of the parent was US$655,000, reversing a US$107.12 million loss.",
         "tickers": [
           "KRAS.JK"
         ],
         "supporting_news_ids": [
+          33961,
           33937
         ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_04",
-        "slot": "story",
-        "event": "Bumi Resources reports a sharp increase in profit through September 2026",
-        "headline": "BUMI reports 404.9% rise in attributable profit through September",
-        "blurb": "Bumi Resources’ revenue rose 38.85% to US$1.44 billion, while profit for the period increased 190.45% to US$174.56 million, supported by higher volumes, a lower strip ratio and cost efficiency. Shares closed at Rp131 on 26 November, down 68.81% year to date. Mirae Asset assigned an Accumulative Buy recommendation with a Rp222 target price.",
-        "tickers": [
-          "BUMI.JK"
-        ],
-        "supporting_news_ids": [
-          33945
-        ],
-        "copy_decision": "new story"
+        "copy_decision": "rewritten: 1 new articles with a new fact: KRAS reported consolidated net profit of US$6.31 million in the first half of 2026."
       },
       {
         "id": "cur_05",
-        "slot": "story",
-        "event": "CGS International issues palm-oil sector ratings and a 2027 CPO price forecast",
-        "headline": "CGS International keeps palm-oil sector overweight, sees 2027 CPO at RM4,800 per ton",
-        "blurb": "The broker cites potential supply tightening from El Niño and rising biodiesel demand. Its top pick is Triputra Agro Persada, rated add with a Rp2,700 target, while Astra Agro Lestari and Dharma Satya Nusantara also carry add ratings, with targets of Rp11,000 and Rp2,000, respectively.",
-        "tickers": [
-          "TAPG.JK",
-          "AALI.JK",
-          "DSNG.JK"
-        ],
-        "supporting_news_ids": [
-          33947
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_06",
         "slot": "story",
         "event": "Fortune Indonesia reports higher nine-month revenue after entering coal mining",
         "headline": "FORU reports higher nine-month revenue of Rp312.31 billion after coal entry",
@@ -90,85 +82,27 @@
         "supporting_news_ids": [
           33943
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
+      },
+      {
+        "id": "cur_06",
+        "slot": "story",
+        "event": "Jakarta Setiabudi Internasional reports January–September 2026 results",
+        "headline": "JSPT reports 73% rise in January–September net profit to Rp399.2 billion",
+        "blurb": "Jakarta Setiabudi Internasional’s revenue rose 21% to Rp2.17 trillion, while EBITDA increased 39% to Rp912.7 billion. Both figures compare January to September 2026 with the same period in 2025.",
+        "tickers": [
+          "JSPT.JK"
+        ],
+        "supporting_news_ids": [
+          33929
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
       }
     ]
   },
   "flash": [
     {
       "id": "cur_07",
-      "slot": "flash",
-      "event": "Jakarta Setiabudi Internasional reports January–September 2026 results",
-      "headline": "PT Jakarta Setiabudi Internasional Tbk (JSPT) Posts Rp2.17 Trillion Revenue in Q3 2026",
-      "blurb": null,
-      "tickers": [
-        "JSPT.JK"
-      ],
-      "supporting_news_ids": [
-        33929
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_08",
-      "slot": "flash",
-      "event": "AKRA controlling shareholder Arthakencana Rayatama buys company shares",
-      "headline": "AKR Corporindo Controller Arthakencana Rayatama Buys 6.22 Million AKRA Shares for Rp7.92 Billion",
-      "blurb": null,
-      "tickers": [
-        "AKRA.JK"
-      ],
-      "supporting_news_ids": [
-        33948
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_09",
-      "slot": "flash",
-      "event": "Bank SMBC Indonesia plans to go private and delist from the IDX",
-      "headline": "PT Bank SMBC Indonesia Tbk (BTPN.JK) advances its go-private and delisting plan as trading is suspended",
-      "blurb": null,
-      "tickers": [
-        "BTPN.JK"
-      ],
-      "supporting_news_ids": [
-        33951,
-        33931
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_10",
-      "slot": "flash",
-      "event": "Kian Santang Muliatama wins LPG supply contracts from Pertamina Patra Niaga",
-      "headline": "Kian Santang Muliatama (RGAS.JK) wins Rp 72.68 billion LPG contract",
-      "blurb": null,
-      "tickers": [
-        "RGAS.JK"
-      ],
-      "supporting_news_ids": [
-        33949,
-        33927
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_11",
-      "slot": "flash",
-      "event": "Bank Indonesia discusses rupiah weakness as it reaches a record low",
-      "headline": "The rupiah closed at Rp18,364 per US dollar amid global and MSCI concerns",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33952,
-        33928,
-        33926
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_12",
       "slot": "flash",
       "event": "Foreign investors record their largest weekly net buy in BBCA shares",
       "headline": "Foreign Investors Post Largest Net Buy in PT Bank Central Asia Tbk (BBCA) Shares Worth Rp 1.19 Trillion",
@@ -179,10 +113,10 @@
       "supporting_news_ids": [
         33942
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_13",
+      "id": "cur_08",
       "slot": "flash",
       "event": "Barito Pacific advances diversification through Aster integration and planned acquisition",
       "headline": "Barito Pacific Strengthens Diversification to Support Downstreaming Strategy",
@@ -194,7 +128,123 @@
       "supporting_news_ids": [
         33930
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Bumi Resources reports a sharp increase in profit through September 2026",
+      "headline": "BUMI reports 404.9% rise in attributable profit through September",
+      "blurb": null,
+      "tickers": [
+        "BUMI.JK"
+      ],
+      "supporting_news_ids": [
+        33945
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "AKRA controlling shareholder Arthakencana Rayatama buys company shares",
+      "headline": "AKR Corporindo Controller Arthakencana Rayatama Buys 6.22 Million AKRA Shares for Rp7.92 Billion",
+      "blurb": null,
+      "tickers": [
+        "AKRA.JK"
+      ],
+      "supporting_news_ids": [
+        33948
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Bank SMBC Indonesia plans to go private and delist from the IDX",
+      "headline": "PT Bank SMBC Indonesia Tbk (BTPN.JK) advances its go-private and delisting plan as trading is suspended",
+      "blurb": null,
+      "tickers": [
+        "BTPN.JK"
+      ],
+      "supporting_news_ids": [
+        33951,
+        33931
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "Abadi Nusantara Hijau Investama postpones its extraordinary shareholders meeting",
+      "headline": "PACK postpones extraordinary shareholders meeting to 8 December",
+      "blurb": null,
+      "tickers": [
+        "PACK.JK"
+      ],
+      "supporting_news_ids": [
+        33944
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
+      "event": "Nusantara Infrastructure appoints a director and declares an interim dividend",
+      "headline": "Nusantara Infrastructure (META) appointed a new director and declared an interim dividend of Rp60.64 billion",
+      "blurb": null,
+      "tickers": [
+        "META.JK"
+      ],
+      "supporting_news_ids": [
+        33957,
+        33950
+      ],
       "copy_decision": "new story"
+    },
+    {
+      "id": "cur_14",
+      "slot": "flash",
+      "event": "Maharaksa Biru Energi’s controlling shareholder sells shares",
+      "headline": "Maharaksa Biru Energi (OASA) Hits Auto Reject Bottom as Controlling Shareholder Gafur Sulistyo Umar Trims Stake",
+      "blurb": null,
+      "tickers": [
+        "OASA.JK"
+      ],
+      "supporting_news_ids": [
+        33960
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_15",
+      "slot": "flash",
+      "event": "Kian Santang Muliatama wins LPG supply contracts from Pertamina Patra Niaga",
+      "headline": "Kian Santang Muliatama (RGAS.JK) wins Rp 72.68 billion LPG contract",
+      "blurb": null,
+      "tickers": [
+        "RGAS.JK"
+      ],
+      "supporting_news_ids": [
+        33949,
+        33927
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_16",
+      "slot": "flash",
+      "event": "Rupiah falls to a record low amid global and domestic pressures",
+      "headline": "The rupiah weakened to a reported record closing low of Rp18,364 per US dollar",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        33964,
+        33952,
+        33928,
+        33926
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: The rupiah was down 9.75% year to date from Rp16,715 per US dollar."
     }
   ],
   "what_to_watch": [
@@ -202,25 +252,28 @@
       "id": "wtw_01",
       "sort_date": "2026-11-30",
       "timing_label": "30 Nov",
-      "title": "BTPN discloses EGM details for its planned go-private and delisting",
+      "title": "MSCI-linked funds adjust BRPT and BRMS portfolios after IDX close",
       "tickers": [
-        "BTPN.JK"
+        "BRMS.JK",
+        "BRPT.JK"
       ],
       "supporting_news_ids": [
-        33951,
-        33931
+        33963,
+        33956
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-12-08",
-      "timing_label": "8 Dec",
-      "title": "PACK shareholders vote on acquisition, rights issue and other transactions",
+      "sort_date": "2027-02-09",
+      "timing_label": "9 Feb 2027",
+      "title": "MSCI announces its next index review",
       "tickers": [
-        "PACK.JK"
+        "BRMS.JK",
+        "BRPT.JK"
       ],
       "supporting_news_ids": [
-        33944
+        33963,
+        33956
       ]
     }
   ]
