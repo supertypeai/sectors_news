@@ -1,473 +1,198 @@
 {
-  "issue_date": "2026-11-26",
-  "window_start": "2026-11-25T13:50:00Z",
-  "window_end": "2026-11-26T13:50:00Z",
+  "issue_date": "2026-11-27",
+  "window_start": "2026-11-26T13:50:00Z",
+  "window_end": "2026-11-27T01:47:46Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "Rupiah hits successive record lows amid market pressure",
-    "headline": "Rupiah hits successive record lows, reaching Rp18,403 per US dollar",
-    "blurb": "The currency closed at Rp18,335/US$ on 26 November, compared with a 25 November close of Rp18,332/US$ in most reports. Bank Indonesia said it was using offshore NDF, domestic spot and DNDF transactions, government-bond purchases and measures to ensure banks had adequate foreign-exchange liquidity. It cited global risk-off sentiment, strong US data, concerns over MSCI’s proposed reclassification of Indonesia and month-end corporate dollar demand as factors behind the pressure.",
-    "tickers": [],
-    "supporting_news_ids": [
-      33919,
-      33891,
-      33897,
-      33886,
-      33901,
-      33898,
-      33902,
-      33883,
-      33867,
-      33869,
-      33875,
-      33882,
-      33856,
-      33866
+    "event": "Bank Central Asia announces its third interim dividend for fiscal 2026",
+    "headline": "BBCA announces third 2026 interim dividend of Rp4.29 trillion",
+    "blurb": "Bank Central Asia will pay Rp35 per share. The cum date on regular and negotiation markets is 27 November, the recording date is 1 December and payment is scheduled for 16 December. This is the final interim dividend for fiscal 2026, bringing cumulative interim dividends to Rp80 per share, up 45.5% from the previous fiscal year.",
+    "tickers": [
+      "BBCA.JK"
     ],
-    "copy_decision": "rewritten: 2 new articles with a new fact: The rupiah reached Rp18,403/US$ at 13:02 WIB."
+    "supporting_news_ids": [
+      33940
+    ],
+    "copy_decision": "new story"
   },
   "sections": {
-    "market_structure_policy": [
+    "deals_control": [
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Bank Indonesia cuts conventional banks' reserve requirement to 7%",
-        "headline": "Bank Indonesia cuts conventional banks' reserve requirement to 7% from 1 December",
-        "blurb": "BI has also lowered the macroprudential liquidity incentive limit from 6% to 5%. The reserve requirement fell from 9% to 8% on 1 November and reaches 7% on 1 December, leaving effective GWM at 2% for banks receiving the maximum incentive.",
-        "tickers": [],
-        "supporting_news_ids": [
-          33885
+        "event": "Abadi Nusantara Hijau Investama postpones its extraordinary shareholders meeting",
+        "headline": "PACK postpones extraordinary shareholders meeting to 8 December",
+        "blurb": "Abadi Nusantara Hijau Investama rescheduled the meeting from 30 November after OJK requested additional information and clarification on its planned business change, material transactions and rights issue. The unchanged agenda includes a rights issue of up to 100 billion new shares worth a maximum Rp8.19 trillion, the acquisition of Bukit Makmur Istindo Nikeltama shares and a planned purchase of Denway Development shares.",
+        "tickers": [
+          "PACK.JK"
         ],
-        "copy_decision": "kept: same articles"
-      },
+        "supporting_news_ids": [
+          33944
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "earnings_guidance": [
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "Bank SMBC Indonesia advances its plan to go private and delist",
-        "headline": "BTPN plans to go private and delist, with details due 30 November",
-        "blurb": "Bank SMBC Indonesia notified OJK and the IDX on 19 November that it plans to seek shareholder approval at an extraordinary general meeting. Further details are due with the meeting announcement on 30 November.",
+        "event": "Krakatau Steel reports H1 2026 revenue growth and returns to profit",
+        "headline": "KRAS reports 36.5% H1 revenue growth and returns to profit",
+        "blurb": "Krakatau Steel's revenue reached US$609.21 million, up from US$446.45 million a year earlier. Net profit attributable to owners was US$655,000, reversing a US$107.12 million loss in H1 2025.",
         "tickers": [
-          "BTPN.JK"
+          "KRAS.JK"
         ],
         "supporting_news_ids": [
-          33925,
-          33892,
-          33889
+          33937
         ],
-        "copy_decision": "kept: 1 new articles, no new fact"
+        "copy_decision": "new story"
       },
       {
         "id": "cur_04",
         "slot": "story",
-        "event": "US proposes additional tariffs on Indonesia",
-        "headline": "US proposes additional 18% tariff on Indonesia",
-        "blurb": "Citing unfair trade practices identified by the USTR, the proposal still must pass the Section 301 process. Korea Investment and Sekuritas Indonesia's research team said the impact could be smaller than in April 2025, but flagged risks to the rupiah and textile, footwear and furniture exports.",
-        "tickers": [],
+        "event": "Bumi Resources reports a sharp increase in profit through September 2026",
+        "headline": "BUMI reports 404.9% rise in attributable profit through September",
+        "blurb": "Bumi Resources’ revenue rose 38.85% to US$1.44 billion, while profit for the period increased 190.45% to US$174.56 million, supported by higher volumes, a lower strip ratio and cost efficiency. Shares closed at Rp131 on 26 November, down 68.81% year to date. Mirae Asset assigned an Accumulative Buy recommendation with a Rp222 target price.",
+        "tickers": [
+          "BUMI.JK"
+        ],
         "supporting_news_ids": [
-          33918
+          33945
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_05",
         "slot": "story",
-        "event": "IDX excludes High Shareholding Concentration stocks from JCI weighting",
-        "headline": "IDX sets JCI weighting exclusion for HSC stocks on 383-issuer list",
-        "blurb": "The exchange cited higher price-fluctuation risk and potential tracking error for passive investors. Krom Bank, whose shareholding concentration is 99.94%, is exploring consolidation and awaits new OJK rules.",
+        "event": "CGS International issues palm-oil sector ratings and a 2027 CPO price forecast",
+        "headline": "CGS International keeps palm-oil sector overweight, sees 2027 CPO at RM4,800 per ton",
+        "blurb": "The broker cites potential supply tightening from El Niño and rising biodiesel demand. Its top pick is Triputra Agro Persada, rated add with a Rp2,700 target, while Astra Agro Lestari and Dharma Satya Nusantara also carry add ratings, with targets of Rp11,000 and Rp2,000, respectively.",
         "tickers": [
-          "AGRS.JK",
-          "AMAR.JK",
-          "BBHI.JK",
-          "BBSI.JK",
-          "BCIC.JK",
-          "BDMN.JK",
-          "BINA.JK",
-          "BKSW.JK",
-          "BMAS.JK",
-          "BNBA.JK",
-          "BNGA.JK",
-          "BNII.JK",
-          "BRIS.JK",
-          "BSWD.JK",
-          "BTPN.JK",
-          "DNAR.JK",
-          "MAYA.JK",
-          "MCOR.JK",
-          "SDRA.JK",
-          "SUPA.JK"
+          "TAPG.JK",
+          "AALI.JK",
+          "DSNG.JK"
         ],
         "supporting_news_ids": [
-          33865
+          33947
         ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "other": [
+        "copy_decision": "new story"
+      },
       {
         "id": "cur_06",
         "slot": "story",
-        "event": "Adaro Andalan Indonesia announces a US$500 million interim dividend",
-        "headline": "AADI announces US$500 million interim dividend for 2026",
-        "blurb": "Adaro Andalan shares rose 4.29% to Rp10,325 in the first trading session on 26 November. The payout is double the US$250 million interim dividend paid in 2025 and comes from net profit for the nine months to 30 September. The per-share amount has not been announced, and payment is scheduled for 11 December, after cum-dividend dates of 3 December for regular and negotiation markets and 7 December for the cash market.",
+        "event": "Fortune Indonesia reports higher nine-month revenue after entering coal mining",
+        "headline": "FORU reports higher nine-month revenue of Rp312.31 billion after coal entry",
+        "blurb": "Export coal sales accounted for Rp292.46 billion of Fortune Indonesia's revenue for the nine months ended 30 September, while media income was Rp10.29 billion. Operating expenses of Rp226.75 billion led to a Rp61.71 billion operating loss and an approximately Rp8.2 billion net loss.",
         "tickers": [
-          "AADI.JK"
+          "FORU.JK"
         ],
         "supporting_news_ids": [
-          33887,
-          33861,
-          33855
+          33943
         ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_07",
-        "slot": "story",
-        "event": "Adhi Karya secures Rp1.29 trillion contract for 26 irrigation projects",
-        "headline": "ADHI secures Rp1.29 trillion contract for 26 irrigation projects",
-        "blurb": "The award directly impacts Adhi Karya's construction order backlog. Further details were not available.",
-        "tickers": [
-          "ADHI.JK"
-        ],
-        "supporting_news_ids": [
-          33850
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "capital_raising_buybacks": [
-      {
-        "id": "cur_08",
-        "slot": "story",
-        "event": "Bank Syariah Indonesia plans a rights issue of up to 6.8 billion shares",
-        "headline": "BRIS plans rights issue of up to 6.8 billion shares",
-        "blurb": "Bank Syariah Indonesia shareholders approved the plan on 6 November, and the new shares would represent 12.85% of post-issue capital. If Bank Mandiri, BNI and BRI do not exercise their rights, their stakes would fall to 44.85%, 20.25% and 13.40%, respectively. The exercise price and rights ratio are due after an OJK effective statement targeted for 3 February 2027.",
-        "tickers": [
-          "BRIS.JK"
-        ],
-        "supporting_news_ids": [
-          33905,
-          33880,
-          33864
-        ],
-        "copy_decision": "kept: same articles"
-      }
-    ],
-    "earnings_guidance": [
-      {
-        "id": "cur_09",
-        "slot": "story",
-        "event": "Mahkota Group reports nine-month results and sets 2026 financial targets",
-        "headline": "MGRO swings to Rp45.65 billion nine-month profit, targets Rp75 billion for 2026",
-        "blurb": "January-September revenue rose to Rp6.55 trillion from Rp4.93 trillion a year earlier, while using palm oil mill effluent as renewable energy cut costs by Rp17.4 billion. MGRO also targets Rp9 trillion in 2026 revenue.",
-        "tickers": [
-          "MGRO.JK"
-        ],
-        "supporting_news_ids": [
-          33888
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_10",
-        "slot": "story",
-        "event": "Mirae Asset downgrades Indonesia’s telecommunications sector to Neutral",
-        "headline": "Mirae Asset downgrades Indonesia telecoms to Neutral on Rp15 trillion TLKM outflow risk",
-        "blurb": "The broker cited potential foreign outflows of up to US$850 million, including about Rp15 trillion from Telkom Indonesia, amid uncertainty over MSCI classification and market accessibility. It raised its cost-of-equity assumption to 16.5–17.5% from 14.0–14.5% and cut average sector target prices by 26%; core profit across the sector weakened 34.8% quarter on quarter in Q3 2026.",
-        "tickers": [
-          "EXCL.JK",
-          "ISAT.JK",
-          "TLKM.JK"
-        ],
-        "supporting_news_ids": [
-          33899,
-          33872
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_11",
-        "slot": "story",
-        "event": "BUMI reports nine-month 2026 earnings surge",
-        "headline": "BUMI reports nine-month net profit up 190.45% to US$174.56 million",
-        "blurb": "At Bumi Resources, receivables owed by Jhonlin Group rose to US$127 million, or 51% of trade receivables, from US$14 million. Profit attributable to owners increased 404.9% to US$148.47 million, while revenue rose 38.85% to US$1.44 billion.",
-        "tickers": [
-          "BUMI.JK"
-        ],
-        "supporting_news_ids": [
-          33920,
-          33890,
-          33881,
-          33868,
-          33870,
-          33860,
-          33851
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: Receivables owed by Jhonlin Group rose to US$127 million, equal to 51% of trade receivables."
-      },
-      {
-        "id": "cur_12",
-        "slot": "story",
-        "event": "Analysts issue recommendations and target prices for ENRG",
-        "headline": "Analysts set ENRG target prices at Rp800 and Rp1,200",
-        "blurb": "For Energi Mega Persada, analysts flagged potential dilution of up to 33.33% from a Rp4.1 trillion rights issue. Ciptadana and Samuel recommended buying, while Infovesta advised a wait-and-see approach or trading buy after reversal confirmation; Ciptadana projects gas output of 326.7 BBTUD by 2030.",
-        "tickers": [
-          "ENRG.JK"
-        ],
-        "supporting_news_ids": [
-          33917,
-          33893
-        ],
-        "copy_decision": "rewritten: 1 new articles with a new fact: Analysts cited potential dilution of up to 33.33% from a Rp4.1 trillion rights issue as a risk."
-      }
-    ],
-    "deals_control": [
-      {
-        "id": "cur_13",
-        "slot": "story",
-        "event": "Energi Mega Persada completes US$200 million investment in HighPeak Energy",
-        "headline": "Energi Mega Persada completes US$200 million investment in HighPeak Energy",
-        "blurb": "The investment was made through subsidiary Tunas Harapan Perkasa in Nasdaq-listed HighPeak Energy. Energi Mega Persada said it targets operational synergies and technology transfer, with the deal potentially adding around 47 million barrels of oil equivalent in economic exposure to its 14-asset portfolio.",
-        "tickers": [],
-        "supporting_news_ids": [
-          33854
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_14",
-        "slot": "story",
-        "event": "Trimegah Sekuritas executes Rp278.84 billion reverse repo of Energi Mega Persada shares",
-        "headline": "TRIM executes Rp278.84 billion reverse repo of ENRG shares",
-        "blurb": "Trimegah Sekuritas completed the transaction on 25 November at Rp555 per share for 502.42 million shares. Its ENRG holdings fell to 4.26 billion shares, or 10.71%, from 4.76 billion shares, or 11.97%.",
-        "tickers": [
-          "ENRG.JK",
-          "TRIM.JK"
-        ],
-        "supporting_news_ids": [
-          33877
-        ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_15",
-        "slot": "story",
-        "event": "Jasa Marga shareholders approve board overhaul and subsidiary merger",
-        "headline": "JSMR shareholders approve board overhaul and merger of two subsidiaries into JTT",
-        "blurb": "At its 25 November EGM, Jasa Marga named Juri Ardiantoro president commissioner and Rivan Achmad Purwantono president director. Shareholders also approved changes to the company’s articles of association.",
-        "tickers": [
-          "JSMR.JK"
-        ],
-        "supporting_news_ids": [
-          33895
-        ],
-        "copy_decision": "rewritten: moved from flash to story"
-      },
-      {
-        "id": "cur_16",
-        "slot": "story",
-        "event": "BCA Sekuritas acquires 5.41% stake in Darma Henwa",
-        "headline": "BCA Sekuritas acquires 5.41% stake in DEWA",
-        "blurb": "BCA Sekuritas bought 2.2 billion shares on 24 November for an estimated Rp490.55 billion, according to Stockbit's estimate based on KSEI data. Darma Henwa shares rose 1.71% to Rp238 on 26 November.",
-        "tickers": [
-          "DEWA.JK"
-        ],
-        "supporting_news_ids": [
-          33876
-        ],
-        "copy_decision": "kept: same articles"
+        "copy_decision": "new story"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_17",
+      "id": "cur_07",
       "slot": "flash",
-      "event": "BCA sets cum-dividend date for its third 2026 interim dividend",
-      "headline": "PT Bank Central Asia Tbk (BBCA) Sets Cum Dividend Date for Rp 35 Interim Dividend on 27 November 2026",
+      "event": "Jakarta Setiabudi Internasional reports January–September 2026 results",
+      "headline": "PT Jakarta Setiabudi Internasional Tbk (JSPT) Posts Rp2.17 Trillion Revenue in Q3 2026",
+      "blurb": null,
+      "tickers": [
+        "JSPT.JK"
+      ],
+      "supporting_news_ids": [
+        33929
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_08",
+      "slot": "flash",
+      "event": "AKRA controlling shareholder Arthakencana Rayatama buys company shares",
+      "headline": "AKR Corporindo Controller Arthakencana Rayatama Buys 6.22 Million AKRA Shares for Rp7.92 Billion",
+      "blurb": null,
+      "tickers": [
+        "AKRA.JK"
+      ],
+      "supporting_news_ids": [
+        33948
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "Bank SMBC Indonesia plans to go private and delist from the IDX",
+      "headline": "PT Bank SMBC Indonesia Tbk (BTPN.JK) advances its go-private and delisting plan as trading is suspended",
+      "blurb": null,
+      "tickers": [
+        "BTPN.JK"
+      ],
+      "supporting_news_ids": [
+        33951,
+        33931
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "Kian Santang Muliatama wins LPG supply contracts from Pertamina Patra Niaga",
+      "headline": "Kian Santang Muliatama (RGAS.JK) wins Rp 72.68 billion LPG contract",
+      "blurb": null,
+      "tickers": [
+        "RGAS.JK"
+      ],
+      "supporting_news_ids": [
+        33949,
+        33927
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "Bank Indonesia discusses rupiah weakness as it reaches a record low",
+      "headline": "The rupiah closed at Rp18,364 per US dollar amid global and MSCI concerns",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        33952,
+        33928,
+        33926
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "Foreign investors record their largest weekly net buy in BBCA shares",
+      "headline": "Foreign Investors Post Largest Net Buy in PT Bank Central Asia Tbk (BBCA) Shares Worth Rp 1.19 Trillion",
       "blurb": null,
       "tickers": [
         "BBCA.JK"
       ],
       "supporting_news_ids": [
-        33874
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_18",
-      "slot": "flash",
-      "event": "Bayan Resources replaces President Director Low Tuck Kwong with Ary Bastari",
-      "headline": "PT Bayan Resources Tbk (BYAN) Reveals Reason Behind Low Tuck Kwong's Departure as President Director",
-      "blurb": null,
-      "tickers": [
-        "BYAN.JK"
-      ],
-      "supporting_news_ids": [
-        33879
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_19",
-      "slot": "flash",
-      "event": "Bank IBK Indonesia reports third-quarter 2026 financial results",
-      "headline": "PT Bank IBK Indonesia Tbk Posts 21.25% Net Profit Growth to Rp194 Billion Through Q3-2026",
-      "blurb": null,
-      "tickers": [
-        "AGRS.JK"
-      ],
-      "supporting_news_ids": [
-        33903
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_20",
-      "slot": "flash",
-      "event": "Hana Bank reports nine-month 2026 earnings and loan growth",
-      "headline": "Hana Bank reports Rp541.86 billion profit and 8.03% loan growth",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33853
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_21",
-      "slot": "flash",
-      "event": "KB Bank reports its third-quarter 2026 net loss",
-      "headline": "PT Bank KB Indonesia Tbk (KB Bank) Still Records Rp 197 Billion Net Loss Through Q3-2026",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33904
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_22",
-      "slot": "flash",
-      "event": "Petrosea shareholders approve rights issue and asset pledging",
-      "headline": "PT Petrosea Tbk (PTRO) Shareholders Approve Rights Issue of Up to 170 Million New Shares and Asset Pledging",
-      "blurb": null,
-      "tickers": [
-        "PTRO.JK"
-      ],
-      "supporting_news_ids": [
-        33873
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_23",
-      "slot": "flash",
-      "event": "Edwin Soeryadjaya buys Saratoga Investama Sedaya shares",
-      "headline": "Edwin Soeryadjaya Buys PT Saratoga Investama Sedaya Tbk (SRTG) Shares 13 Times in November for Rp12.05 Billion",
-      "blurb": null,
-      "tickers": [
-        "SRTG.JK"
-      ],
-      "supporting_news_ids": [
-        33896
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_24",
-      "slot": "flash",
-      "event": "BFI Finance targets 70% dividend payout from 2026 net profit",
-      "headline": "BFI Finance Targets 70% of 2026 Net Profit for Dividends",
-      "blurb": null,
-      "tickers": [
-        "BFIN.JK"
-      ],
-      "supporting_news_ids": [
-        33923
+        33942
       ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_25",
+      "id": "cur_13",
       "slot": "flash",
-      "event": "Selamat Sempurna receives an interim dividend from its subsidiary",
-      "headline": "PT Selamat Sempurna Tbk (SMSM) Receives Rp 34.12 Billion Interim Dividend from Subsidiary PT Panata Jaya Mandiri",
-      "blurb": null,
-      "tickers": [
-        "SMSM.JK"
-      ],
-      "supporting_news_ids": [
-        33894
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_26",
-      "slot": "flash",
-      "event": "Jasuindo Tiga Perkasa schedules Rp67.7 billion interim dividend",
-      "headline": "Jasuindo Tiga Perkasa Tbk (JTPE) Schedules Interim Dividend of Rp67.7 Billion",
-      "blurb": null,
-      "tickers": [
-        "JTPE.JK"
-      ],
-      "supporting_news_ids": [
-        33863
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_27",
-      "slot": "flash",
-      "event": "Perdana Gapuraprima plans share buyback of up to Rp40 billion",
-      "headline": "PT Perdana Gapuraprima Tbk (GPRA) Plans Share Buyback of Up to Rp 40 Billion Backed by Solid Fundamentals",
-      "blurb": null,
-      "tickers": [
-        "GPRA.JK"
-      ],
-      "supporting_news_ids": [
-        33852
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_28",
-      "slot": "flash",
-      "event": "Barito Pacific targets more than 1,000 new jobs through 2028",
-      "headline": "Barito Pacific Pushes Expansion, Targets 1,000 New Jobs in Indonesia",
+      "event": "Barito Pacific advances diversification through Aster integration and planned acquisition",
+      "headline": "Barito Pacific Strengthens Diversification to Support Downstreaming Strategy",
       "blurb": null,
       "tickers": [
         "BRPT.JK",
-        "CDIA.JK"
+        "TPIA.JK"
       ],
       "supporting_news_ids": [
-        33900
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_29",
-      "slot": "flash",
-      "event": "CLEO launches SuperO2 in a 180 ml package",
-      "headline": "PT Sariguna Primatirta Tbk (CLEO) Expands Mineral Water Product Line with SuperO2 180 ml",
-      "blurb": null,
-      "tickers": [
-        "CLEO.JK"
-      ],
-      "supporting_news_ids": [
-        33921
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_30",
-      "slot": "flash",
-      "event": "Government appoints temporary manager for seized RAPP concession land",
-      "headline": "Government Appoints PT Garuda Adidaya Nusantara as Temporary Manager of Seized RAPP Concession Land",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        33922
+        33930
       ],
       "copy_decision": "new story"
     }
@@ -475,12 +200,27 @@
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-12-01",
-      "timing_label": "1 Dec",
-      "title": "BI cuts conventional-bank reserve requirement to 7%",
-      "tickers": [],
+      "sort_date": "2026-11-30",
+      "timing_label": "30 Nov",
+      "title": "BTPN discloses EGM details for its planned go-private and delisting",
+      "tickers": [
+        "BTPN.JK"
+      ],
       "supporting_news_ids": [
-        33885
+        33951,
+        33931
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2026-12-08",
+      "timing_label": "8 Dec",
+      "title": "PACK shareholders vote on acquisition, rights issue and other transactions",
+      "tickers": [
+        "PACK.JK"
+      ],
+      "supporting_news_ids": [
+        33944
       ]
     }
   ]
