@@ -1,20 +1,16 @@
 {
-  "issue_date": "2026-11-20",
-  "window_start": "2026-11-13T09:20:00Z",
-  "window_end": "2026-11-20T09:20:00Z",
+  "issue_date": "2026-11-27",
+  "window_start": "2026-11-20T09:20:00Z",
+  "window_end": "2026-11-27T09:20:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "US introduces advanced-chip export licensing rules affecting Singapore and regional data centres",
-    "headline": "US requires licences for advanced-chip exports to five economies",
-    "blurb": "The US Commerce Department’s interim final rule covers exports, re-exports and transfers of advanced semiconductors to Singapore, Malaysia, Thailand, Indonesia and Brazil. Existing data centre operators providing substantial computing capacity to China-headquartered companies have 90 days to obtain licences, with applications reviewed case by case. The US says the restrictions address a higher-than-normal risk of diversion to China, including Chinese firms’ remote access to regional computing power.",
+    "event": "Singapore reports record Q3 non-oil domestic export growth",
+    "headline": "Singapore reports record 45.8% Q3 growth in non-oil domestic exports",
+    "blurb": "Electronics NODX climbed 117%, following 88.1% growth in Q2, while non-electronics exports rose 20.8%. Enterprise Singapore attributed the record to mainly AI-related demand for electronics and specialised machinery. NODX grew 27.6% in the first three quarters.",
     "tickers": [],
     "supporting_news_ids": [
-      1880,
-      1862,
-      1851,
-      1848,
-      1846
+      1986
     ],
     "copy_decision": "new story"
   },
@@ -23,118 +19,128 @@
       {
         "id": "cur_02",
         "slot": "story",
-        "event": "Blackstone Digital Infrastructure Trust agrees to acquire majority stake in AWS data-centre ventures",
-        "headline": "Blackstone Digital Infrastructure Trust agrees to acquire 75% of AWS ventures",
-        "blurb": "The roughly US$5 billion deal covers 13 newly constructed powered shells across two AWS campuses in northern Indiana and Mississippi. AWS will retain 25% and lease the entire portfolio for an initial 12-year term, extendable to 32 years. Completion is expected in 2026.",
-        "tickers": [],
+        "event": "StarHub and Keppel agree M1 merger and Circles Life acquisition",
+        "headline": "StarHub agrees S$1.06 billion M1 merger with Keppel and Circles Life acquisition",
+        "blurb": "StarHub will issue about 651.7 million shares at an implied S$1.04 each and take on up to S$380 million of M1 net debt. M1 will become a wholly owned subsidiary, with completion expected in the first half of 2027, subject to regulatory and shareholder approvals.",
+        "tickers": [
+          "CC3.SI",
+          "BN4.SI"
+        ],
         "supporting_news_ids": [
-          1834
+          2087,
+          2084,
+          2081,
+          2055,
+          1993,
+          1992,
+          1994,
+          1990,
+          1985,
+          1991
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_03",
         "slot": "story",
-        "event": "UOB sells Marina Collection condominium units",
-        "headline": "UOB sells 36 Marina Collection units for about S$103.5 million",
-        "blurb": "The 38 units UOB put up for sale on 14 November averaged $1,342 psf, and the sale was 1.7 times subscribed after more than 400 viewing groups. UOB’s damages award in its lawsuit against Lippo Marina Collection was raised to about S$82.4 million including interest.",
+        "event": "Marco Polo Marine seeks shareholder approval for shipyard spin-off and listing",
+        "headline": "Marco Polo Marine seeks approval for shipyard spin-off and listing in deal worth up to S$139 million",
+        "blurb": "Shareholders will vote at an extraordinary general meeting on 10 December on three resolutions, all of which must pass. Fuji Offset Plates Manufacturing will pay up to S$139 million in new shares for the shipyard business, reducing Marco Polo Marine’s effective interest from 100% to about 74.1%, or about 76.8% if all deferred shares are issued; completion remains conditional.",
         "tickers": [
-          "U11.SI"
+          "5LY.SI",
+          "508.SI"
         ],
         "supporting_news_ids": [
-          1807
+          2058
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_04",
         "slot": "story",
-        "event": "Hongkong Land reports capital recycling ahead of target and expands share buyback",
-        "headline": "Hongkong Land recycles US$4.2 billion ahead of target, lifts buyback to US$750 million",
-        "blurb": "About US$500 million of Southeast Asian property sales this year contributed to recycling against an initial target of at least US$4 billion by end-2027, with the disposals pending regulatory approvals. Hongkong Land added US$100 million to the buyback, with US$508.5 million repurchased to date, and extended it to 31 December 2027.",
+        "event": "Stoneweg European Stapled Trust acquires Verona logistics facility",
+        "headline": "Stoneweg Europe Stapled Trust acquires Verona logistics facility for EUR61 million",
+        "blurb": "The newly completed, 43,500-square-metre freehold facility is fully leased to Stora Enso for 15 years and has a net initial yield of about 6%. The price was about 7% below its EUR65.7 million independent valuation, lifting the trust’s logistics, light industrial and data-centre exposure to 63.8%. The trust is targeting close to 80% exposure to those assets by 2028.",
         "tickers": [
-          "H78.SI"
+          "SET.SI"
         ],
         "supporting_news_ids": [
-          1797
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "Frasers Property FY2026 results, capital release and dividend proposal",
-        "headline": "Frasers Property reports S$300 million FY2026 profit and releases S$4.1 billion",
-        "blurb": "The board proposed a year-end dividend of 5 cents per share, up from 4.5 cents a year earlier. Capital releases included S$1.1 billion from portfolio optimisation, which brought Fraser Suites Singapore under full ownership, and proceeds from the sale of six Australian retail properties to fund residential projects.",
-        "tickers": [
-          "TQ5.SI"
-        ],
-        "supporting_news_ids": [
-          1867,
-          1824,
-          1798
+          1951,
+          1952
         ],
         "copy_decision": "new story"
       }
     ],
-    "earnings_guidance": [
+    "capital_raising_buybacks": [
+      {
+        "id": "cur_05",
+        "slot": "story",
+        "event": "Sembcorp-linked Taweelah C project reaches financial close",
+        "headline": "Sembcorp-linked Taweelah C reaches financial close on AED 7.76 billion project",
+        "blurb": "TAQA holds 60% of the project company, with Sembcorp and Saudi Arabia's Al Jomaih Energy and Water Company holding the remaining 40% through a consortium. The 2.6 GW gas-fired plant is expected to begin commercial operations in 2029.",
+        "tickers": [
+          "U96.SI"
+        ],
+        "supporting_news_ids": [
+          1975
+        ],
+        "copy_decision": "new story"
+      },
       {
         "id": "cur_06",
         "slot": "story",
-        "event": "AEM reports Q3 growth and raises FY2026 guidance",
-        "headline": "AEM reports Q3 growth and raises FY2026 revenue guidance to S$680–705 million",
-        "blurb": "Q3 revenue was S$204.9 million, up 110.7% year on year, and EPS guidance is 30–33 cents. Growth was driven by Intel and its fabless AI/HPC customer, while the AMPS backlog exceeded S$450 million as of 11 November and is expected to ship over the next two to two-and-a-half quarters.",
+        "event": "US AI chip export controls prompt Natixis warning and bank reviews",
+        "headline": "US chip controls prompt bank reviews as Natixis cites Asean banks’ 31 per cent loan share",
+        "blurb": "DBS, OCBC and UOB are seeking chip-use details and compliance proof from data centre clients under new US licensing rules. Lenders froze a US$480 million loan intended to fund Nvidia hardware for ByteDance.",
         "tickers": [
-          "XWA.SI"
+          "D05.SI",
+          "O39.SI",
+          "U11.SI"
         ],
         "supporting_news_ids": [
-          1841
+          2057,
+          2017
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_07",
         "slot": "story",
-        "event": "Metro Holdings reports 1HFY2027 results and strategic update",
-        "headline": "Metro Holdings reports 1HFY2027 net profit of S$5.17 million",
-        "blurb": "It re-entered Singapore’s residential market in May through a 30:70 joint venture with Wing Tai Holdings to develop a planned 330-unit Dunearn Road project. Metro plans to close its Paragon and Causeway Point stores when their leases expire, shifting to smaller, more flexible multi-concept stores.",
+        "event": "Manulife US REIT reaches lender agreement to exit restructuring",
+        "headline": "Manulife US REIT reaches proposed lender deal to exit restructuring, US$3m yearly cap",
+        "blurb": "The lender proposal would extend loan maturities by about 12 to 18 months, excluding the sponsor-lender loan, and allow half-yearly distributions capped at the lower of 20 per cent of annual distributable income or US$3 million a year. Unitholders will vote at an extraordinary general meeting on 15 December 2026.",
         "tickers": [
-          "M01.SI",
-          "W05.SI"
+          "BTOU.SI"
         ],
         "supporting_news_ids": [
-          1809,
-          1800
+          1987,
+          1971
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_08",
         "slot": "story",
-        "event": "Citi cuts target prices for DBS, UOB and OCBC",
-        "headline": "Citi cuts DBS target to S$78, lowers UOB and OCBC targets",
-        "blurb": "Citi lowered DBS's target to S$78 from S$80.3, UOB's to S$33.9 from S$35 and OCBC's to S$25.3 from S$26, while keeping a Buy rating on DBS and Sell ratings on UOB and OCBC. It cited uncertainty over US chip restrictions and credit risks in AI-related financing. CreditSights estimates data centre financing accounts for about 3% to 5% of the banks' total loans.",
-        "tickers": [
-          "D05.SI",
-          "U11.SI",
-          "O39.SI"
-        ],
+        "event": "China Vanke seeks extension on bond payment",
+        "headline": "China Vanke seeks three-year extension on 1.2 billion yuan bond",
+        "blurb": "The proposal would defer principal due 15 December while paying the 3% coupon on time, according to people familiar with the matter. Vanke has also discussed upfront principal payments of less than half the 40% offered in its January extension deal.",
+        "tickers": [],
         "supporting_news_ids": [
-          1892
+          2068
         ],
         "copy_decision": "new story"
-      },
+      }
+    ],
+    "other": [
       {
         "id": "cur_09",
         "slot": "story",
-        "event": "Analysts maintain Buy calls after Singtel H1 FY2027 results",
-        "headline": "Analysts maintain Singtel buy calls after underlying profit rises 10%",
-        "blurb": "Maybank Securities raised its target price to S$5.22, while DBS Group Research, RHB and CGS International kept theirs at S$5.46, S$5.40 and S$5.16. Underlying net profit rose 10 per cent to S$1.49 billion, and Singtel raised full-year OpCo Ebit growth guidance to mid-to-high single digits.",
-        "tickers": [
-          "Z77.SI"
-        ],
+        "event": "Boeing receives Xiamen Airlines order for 50 737-8 Max jets",
+        "headline": "Boeing receives Xiamen Airlines order for 50 737-8 Max jets worth US$7.4 billion",
+        "blurb": "The order is from a unit of China Southern Airlines and is Boeing’s biggest order from Chinese airlines since 2017. It follows China’s May commitment to buy 200 planes, while a previously discussed 500-jet agreement has not been formalised.",
+        "tickers": [],
         "supporting_news_ids": [
-          1850
+          2010
         ],
         "copy_decision": "new story"
       }
@@ -143,79 +149,115 @@
       {
         "id": "cur_10",
         "slot": "story",
-        "event": "Geo Energy shares slide, then rebound after clarification on Indonesian mining policy",
-        "headline": "Geo Energy shares fall 23%, then rebound almost 8% after mining policy clarification",
-        "blurb": "In a 17 November clarification, the company said its Indonesian mining and logistics operations were normal and it had received no notice of new rules or directives. It said it already contributes more than 70% of profits to Indonesia through taxes, royalties and fees, while its permits remain valid until 10 January 2028 and 22 May 2030.",
+        "event": "Singapore and China expand RMB financing and explore payment linkage",
+        "headline": "Singapore and China expand RMB financing and explore payment linkage",
+        "blurb": "The MAS RMB Facility will be restructured into corporate financing for trade with third countries, working capital and capital expenditure, plus a liquidity backstop. Eligible collateral will expand to include Singapore Government Securities and MAS bills, with China Government Bonds potentially added. DBS is starting renminbi clearing services, and Bank of China's Singapore branch is becoming an MAS Primary Dealer.",
         "tickers": [
-          "RE4.SI"
+          "D05.SI",
+          "S68.SI"
         ],
         "supporting_news_ids": [
-          1877,
-          1865,
-          1825
+          1972
         ],
         "copy_decision": "new story"
       },
       {
         "id": "cur_11",
         "slot": "story",
-        "event": "Simba admits spectrum misuse and director Richard Tan prepares to step down",
-        "headline": "Simba admits spectrum breaches as Tan prepares to resign amid S$75 million fine risk",
-        "blurb": "Simba Telecom will not contest IMDA's allegations, and president Richard Tan will resign as a director subject to regulatory approval. The investigation is ongoing, and IMDA has not confirmed findings. DBS Group Research estimates potential fines of up to about S$75 million and says IMDA may suspend Simba's spectrum rights.",
+        "event": "Singapore-US proposed tariffs and negotiations",
+        "headline": "US proposes tariffs of up to 20% on Singapore goods",
+        "blurb": "The proposal would lift the effective tariff rate on Singapore exports to the US from 7.8% to 10.3%, affecting about S$9.4 billion of exports. The rate could fall to 10% if Singapore reaches an Agreement on Reciprocal Trade or concludes other negotiations addressing the findings, with written comments due by 5 January 2027.",
+        "tickers": [],
+        "supporting_news_ids": [
+          2088,
+          2080,
+          2065,
+          2083
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_12",
+        "slot": "story",
+        "event": "US announces new Section 301 tariff plans on major trading partners",
+        "headline": "US plans Section 301 tariffs of up to 20% on Singapore",
+        "blurb": "Proposed rates include 20% for China, potentially rising to 40%; 15% for the EU, Japan, South Korea and Switzerland; and 17% for India. The tariffs face public comment, with final action possible as early as January, and will not stack with existing forced-labour-related duties of 10% or 12.5%, as only the higher rate applies.",
+        "tickers": [],
+        "supporting_news_ids": [
+          2064
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_13",
+        "slot": "story",
+        "event": "Hongkong Land raises 2026 earnings guidance and DBS responds",
+        "headline": "Hongkong Land raises FY2026 profit guidance to mid-teens growth as DBS maintains Buy",
+        "blurb": "The company now expects a mid-teens percentage rise in underlying profit and high-teens growth in earnings per share, supported by its share buyback programme. DBS Group Research maintained its Buy rating with a US$10.08 target price, against a closing price of US$8.46. Hongkong Land’s US$750 million buyback programme has been extended to February 2027.",
         "tickers": [
-          "BN4.SI"
+          "H78.SI"
         ],
         "supporting_news_ids": [
-          1887,
-          1847,
-          1840
+          2059,
+          1938
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_14",
+        "slot": "story",
+        "event": "Seatrium analysts react to Q3 business update",
+        "headline": "Analysts split on Seatrium as order book falls to S$12.2 billion after Q3 update",
+        "blurb": "CGS International downgraded Seatrium to hold and cut its target to S$1.80 from S$2.60, while UOB Kay Hian kept hold and lowered its target to S$1.80 from S$2.30. DBS Group Research and OCBC retained buy calls, citing margin recovery and steady execution. Seatrium reported S$1.7 billion in new orders this year, with deliveries extending to 2033.",
+        "tickers": [
+          "5E2.SI"
+        ],
+        "supporting_news_ids": [
+          1954
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_15",
+        "slot": "story",
+        "event": "Riverstone Holdings reports Q3 recovery and analyst forecast revisions",
+        "headline": "Riverstone reports Q3 profit up 34.7% as UOB Kay Hian raises forecasts",
+        "blurb": "UOB Kay Hian lifted FY2026–28 earnings forecasts by 11.1%–14.9% to RM242.0–278.3 million but cut its target price from S$1.21 to S$1.08, using a lower 19x FY2027 valuation multiple. Riverstone expects new facilities to lift cleanroom capacity by 10%–15% by 1Q2027.",
+        "tickers": [
+          "AP4.SI"
+        ],
+        "supporting_news_ids": [
+          2018
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_16",
+        "slot": "story",
+        "event": "DBS cuts its target price for Frencken Group",
+        "headline": "DBS cuts Frencken Group target price to S$2.58",
+        "blurb": "DBS maintained its Buy call, lowering the target from S$3.76 after Frencken’s Q3 FY2026 results broadly met expectations. It cited the enlarged share base after the rights issue and a lower valuation multiple of 23 times FY2027 expected earnings, down from 35 times.",
+        "tickers": [
+          "E28.SI"
+        ],
+        "supporting_news_ids": [
+          2013
         ],
         "copy_decision": "new story"
       }
     ],
     "macro_flows": [
       {
-        "id": "cur_12",
+        "id": "cur_17",
         "slot": "story",
-        "event": "Citi rates Singapore equities underweight and sets STI target",
-        "headline": "Citi rates Singapore equities underweight, sets STI target at 5,325",
-        "blurb": "The call applies for H1 2027, with Citi saying the index looks expensive against history and regional peers after falling over 12 per cent from its 5,801.96 peak on 4 September to 5,054.89 on 18 November. Citi names DBS its only bank pick with a buy rating and also recommends Sats, Singtel, Yangzijiang Shipbuilding and CapitaLand Integrated Commercial Trust.",
-        "tickers": [
-          "D05.SI",
-          "S58.SI",
-          "Z77.SI",
-          "SO7.SI",
-          "C38U.SI",
-          "O39.SI"
-        ],
-        "supporting_news_ids": [
-          1898
-        ],
-        "copy_decision": "new story"
-      },
-      {
-        "id": "cur_13",
-        "slot": "story",
-        "event": "URA reports October private-home sales rebound",
-        "headline": "URA reports October new private-home sales rebound to 1,716 units",
-        "blurb": "Sales were 5.8 times September’s 296 units but 29.2% below October 2025. Thomson Reserve led with 1,029 of its 1,268 units sold at a median of $2,865 psf.",
+        "event": "Singapore raises its 2026 GDP growth forecast",
+        "headline": "Singapore raises 2026 GDP growth forecast to around 6%",
+        "blurb": "The upgrade replaces the 4.5% to 5.5% range set in August, with strong global AI-related demand cited. Q3 GDP growth was revised to 6.1% year on year from 5.4%, while the 2027 forecast is 2.5% to 4.5% as AI investment moderates.",
         "tickers": [],
         "supporting_news_ids": [
-          1821
-        ],
-        "copy_decision": "new story"
-      }
-    ],
-    "capital_raising_buybacks": [
-      {
-        "id": "cur_14",
-        "slot": "story",
-        "event": "mm2 Asia reports H1 FY2027 results and debt repayment scheme progress",
-        "headline": "mm2 Asia reports S$106.57 million H1 loss as creditors back debt scheme",
-        "blurb": "Majority creditors approved a repayment scheme proposed by mm2 Asia and mm2 Entertainment on 4 November. It will be submitted to the court, while shareholders are to vote at an extraordinary general meeting in the second half of December as a white-knight investor conducts final due diligence.",
-        "tickers": [],
-        "supporting_news_ids": [
-          1799
+          1982
         ],
         "copy_decision": "new story"
       }
@@ -223,322 +265,190 @@
   },
   "flash": [
     {
-      "id": "cur_15",
-      "slot": "flash",
-      "event": "High Court approves collective sale of The Centrepoint rear block to Frasers Property",
-      "headline": "High Court approves S$391.9 million collective sale of The Centrepoint rear block to Frasers Property",
-      "blurb": null,
-      "tickers": [
-        "TQ5.SI"
-      ],
-      "supporting_news_ids": [
-        1900
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_16",
-      "slot": "flash",
-      "event": "Olam's agreement to sell its Arise P&L stake is terminated",
-      "headline": "Olam's US$175 million sale of 32.4% stake in Arise P&L terminated",
-      "blurb": null,
-      "tickers": [
-        "VC2.SI"
-      ],
-      "supporting_news_ids": [
-        1835
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_17",
-      "slot": "flash",
-      "event": "ST Engineering shares fall after Q3 business update",
-      "headline": "ST Engineering falls over 5% in morning trade after Q3 report as brokers keep Buy ratings",
-      "blurb": null,
-      "tickers": [
-        "S63.SI"
-      ],
-      "supporting_news_ids": [
-        1826
-      ],
-      "copy_decision": "new story"
-    },
-    {
       "id": "cur_18",
       "slot": "flash",
-      "event": "Jardine Matheson raises full-year profit guidance and expects 2026 dividend",
-      "headline": "Jardine Matheson expects 2026 dividend of at least US$2.50 per share amid strong Q3 performance",
+      "event": "OCBC initiates coverage of Wee Hur Holdings",
+      "headline": "OCBC initiates coverage of Wee Hur Holdings with Buy rating and S$0.78 fair value",
       "blurb": null,
       "tickers": [
-        "J36.SI"
+        "E3B.SI"
       ],
       "supporting_news_ids": [
-        1863
+        2012
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_19",
       "slot": "flash",
-      "event": "Genting Singapore shares fall after weaker-than-expected Q3 results",
-      "headline": "Genting Singapore falls for a second day, hitting near six-year low after weaker-than-expected Q3 results",
+      "event": "iX Biopharma share placement",
+      "headline": "iX Biopharma aims to raise at least $14 million by placing new shares at 39.8 cents each",
       "blurb": null,
       "tickers": [
-        "G13.SI"
+        "42C.SI"
       ],
       "supporting_news_ids": [
-        1819
+        2021
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_20",
       "slot": "flash",
-      "event": "Seatrium reports order wins, order book and FY2026 profit outlook",
-      "headline": "Seatrium (5E2.SI) reported a S$12.2 billion net orderbook and S$1.7 billion in year-to-date order wins",
+      "event": "Kimly reports lower second-half profit and proposes final dividend",
+      "headline": "Kimly H2 net profit falls 30.8% to S$12.8 million on flat revenue",
       "blurb": null,
       "tickers": [
-        "5E2.SI"
+        "1D0.SI"
       ],
       "supporting_news_ids": [
-        1896,
-        1894
+        2061
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_21",
       "slot": "flash",
-      "event": "Fraser and Neave reports FY2026 results and proposes final dividend",
-      "headline": "Fraser and Neave (F99.SI) reports higher FY2026 profit and proposes a 4-cent final dividend",
+      "event": "Marco Polo Marine reports lower FY2026 earnings",
+      "headline": "Marco Polo Marine FY2026 earnings fall 44% y-o-y to $32.9 million on one-off items; defers PKR Offshore Taiwan listing submission",
       "blurb": null,
       "tickers": [
-        "F99.SI"
+        "5LY.SI",
+        "508.SI"
       ],
       "supporting_news_ids": [
-        1849,
-        1844
+        2089
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_22",
       "slot": "flash",
-      "event": "Riverstone reports Q3 results and announces CEO succession",
-      "headline": "Riverstone Holdings Q3 net profit rises 34.7%; Chong Chu Mee to succeed Wong Teek Son as CEO from Dec 1",
+      "event": "Elite UK REIT reports higher nine-month distributable income and full-year DPU outlook",
+      "headline": "Elite UK Reit expects higher full-year DPU as 9M distributable income rises 4.8%",
       "blurb": null,
       "tickers": [
-        "AP4.SI"
+        "MXNU.SI"
       ],
       "supporting_news_ids": [
-        1871
+        2008
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_23",
       "slot": "flash",
-      "event": "Centurion agrees to acquire 3 Kim Chuan Lane for S$61 million",
-      "headline": "Centurion Corporation (OU8.SI) proposes to acquire 3 Kim Chuan Lane for S$61 million through a joint venture",
+      "event": "OCBC initiates coverage of OKP Holdings",
+      "headline": "OCBC Group Research initiated coverage of OKP Holdings (5CF.SI) with a Buy rating and S$0.98 fair value as its order book reached S$797.9 million.",
       "blurb": null,
       "tickers": [
-        "OU8.SI",
-        "5PC.SI"
+        "5CF.SI"
       ],
       "supporting_news_ids": [
-        1822,
-        1817
+        2062,
+        2011
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_24",
       "slot": "flash",
-      "event": "Frencken reports Q3 FY2026 profit growth and maintains full-year outlook",
-      "headline": "Frencken Group Q3 2026 net profit rises 31.3% to S$13 million on semiconductor and medical demand",
+      "event": "Analysts cut Nam Cheong earnings forecasts and target prices",
+      "headline": "DBS and CGS International stay positive on Nam Cheong despite earnings cuts and lower target prices",
       "blurb": null,
       "tickers": [
-        "E28.SI"
+        "1MZ.SI"
       ],
       "supporting_news_ids": [
-        1886
+        1949
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_25",
       "slot": "flash",
-      "event": "Q&M Dental completes acquisition of 51% stake in Deezy Thailand",
-      "headline": "Q&M Dental Group (Singapore) (QC7.SI) completed its acquisition of a 51% stake in Deezy for 994.5 million baht",
+      "event": "JustCo expands to 60 centres in its 2026 business update",
+      "headline": "JustCo Holdings reaches 60 operational centres after opening 10 in the first nine months of 2026",
       "blurb": null,
-      "tickers": [
-        "QC7.SI"
-      ],
+      "tickers": [],
       "supporting_news_ids": [
-        1836,
-        1796
+        2009,
+        1989
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_26",
       "slot": "flash",
-      "event": "United Hampshire US REIT reports nine-month distributable income growth",
-      "headline": "United Hampshire US REIT's distributable income up 3.6% to US$20.7 million for first nine months",
+      "event": "Atlassian reports first-quarter results and guides for slower cloud growth",
+      "headline": "Atlassian 1Q'FY27: AI Agents Didn't Displace Human Users — They Drove More Work and Stronger Results",
       "blurb": null,
-      "tickers": [
-        "ODBU.SI"
-      ],
+      "tickers": [],
       "supporting_news_ids": [
-        1808
+        2063
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_27",
       "slot": "flash",
-      "event": "Analysts cut Sea target prices after Q3 results",
-      "headline": "Analysts lower Sea target prices after Q3 results, flag rising credit costs at Monee",
+      "event": "HomesToLife reports lower nine-month profit and maintains revenue guidance",
+      "headline": "Furniture retailer HomesToLife posts 73% fall in 9M net profit to US$3.5 million on forex losses",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
-        1816
+        1976
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_28",
       "slot": "flash",
-      "event": "Deluge secures new contracts and lifts order book",
-      "headline": "Deluge secures $18.5 million in new contracts, lifting order book to $459.1 million",
+      "event": "Deluge Corporation reports first-half results and record order book",
+      "headline": "Deluge Corporation posts strong 1H results with S$459 million order book and Changi T5 tender as potential catalyst",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
-        1864
+        1983
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_29",
       "slot": "flash",
-      "event": "Tencent reports Q3 results as AI demand lifts cloud business",
-      "headline": "Tencent Q3 revenue growth slows to 8% as AI demand lifts cloud business",
+      "event": "Bayan Resources replaces president director after stake sale",
+      "headline": "Indonesian coal tycoon Low Tuck Kwong steps down as president director of Bayan Resources after S$1.845 billion stake sale",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
-        1891
+        1996
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_30",
       "slot": "flash",
-      "event": "Metrocon reports Q3 FY2026 results",
-      "headline": "Metrocon posts Q3 revenue of S$25.78 million with 8.1% net margin",
+      "event": "Seatrium announces Singapore workforce reduction",
+      "headline": "Seatrium (5E2.SI) announced plans to cut about 220 Singapore jobs, or 2% of its workforce",
       "blurb": null,
-      "tickers": [],
+      "tickers": [
+        "5E2.SI"
+      ],
       "supporting_news_ids": [
-        1893
+        2019,
+        1995
       ],
       "copy_decision": "new story"
     },
     {
       "id": "cur_31",
       "slot": "flash",
-      "event": "Singtel transfers Special Discounted Shares to individual CDP accounts",
-      "headline": "Singtel Transitions Special Discounted Shares from CPF to Individual CDP Accounts, Changing Shareholder Ownership Structure",
-      "blurb": null,
-      "tickers": [
-        "Z77.SI"
-      ],
-      "supporting_news_ids": [
-        1919
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_32",
-      "slot": "flash",
-      "event": "UOB CEO Wee Ee Cheong buys 200,000 UOB shares",
-      "headline": "UOB Vice Chairman and CEO Wee Ee Cheong Buys 200,000 UOB Shares Worth S$7.23 Million",
-      "blurb": null,
-      "tickers": [
-        "U11.SI"
-      ],
-      "supporting_news_ids": [
-        1918
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_33",
-      "slot": "flash",
-      "event": "CDL issues weaker 2H2026 guidance and defers capital recycling deals",
-      "headline": "City Developments (C09.SI) expects a significantly weaker second half of 2026 as asset sales are deferred to 2027",
-      "blurb": null,
-      "tickers": [
-        "C09.SI"
-      ],
-      "supporting_news_ids": [
-        1839,
-        1801
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_34",
-      "slot": "flash",
-      "event": "SingLand outlines Marina Square redevelopment plan",
-      "headline": "SingLand CEO Jonathan Eu outlines Marina Square redevelopment plan refocusing the mall on sports and wellness",
-      "blurb": null,
-      "tickers": [
-        "U06.SI"
-      ],
-      "supporting_news_ids": [
-        1921
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_35",
-      "slot": "flash",
-      "event": "Gold bullion hits a one-year low, pressuring Singapore gold-linked counters",
-      "headline": "SGX gold-linked counters lose their shine as the precious metal hits one-year low",
-      "blurb": null,
-      "tickers": [
-        "5TP.SI",
-        "T6I.SI",
-        "5WJ.SI",
-        "5UF.SI"
-      ],
-      "supporting_news_ids": [
-        1922
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_36",
-      "slot": "flash",
-      "event": "HomesToLife completes SGX Mainboard dual listing and S$8.6 million placement",
-      "headline": "HomesToLife raises about S$8.6 million in SGX Mainboard placement and begins its secondary listing",
+      "event": "KORE US REIT leases entire Westpark Building C",
+      "headline": "KORE US Reit secures full-building tenant at The Westpark Portfolio in Redmond, Washington",
       "blurb": null,
       "tickers": [],
       "supporting_news_ids": [
-        1872,
-        1843
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_37",
-      "slot": "flash",
-      "event": "JLL reports Singapore hotel investment figures and 2026 forecast",
-      "headline": "Singapore hotel investments may reach US$1.3 billion in 2026 as regional momentum defies headwinds: JLL",
-      "blurb": null,
-      "tickers": [],
-      "supporting_news_ids": [
-        1852
+        1973
       ],
       "copy_decision": "new story"
     }
@@ -546,48 +456,66 @@
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2026-11-21",
-      "timing_label": "21 Nov",
-      "title": "Singtel starts transferring Special Discounted Shares to individual CDP accounts",
+      "sort_date": "2026-12-10",
+      "timing_label": "10 Dec",
+      "title": "Marco Polo Marine shareholders vote on shipyard sale, spin-off and listing",
       "tickers": [
-        "Z77.SI"
+        "508.SI",
+        "5LY.SI"
       ],
       "supporting_news_ids": [
-        1919
+        2058
       ]
     },
     {
       "id": "wtw_02",
-      "sort_date": "2026-12-01",
-      "timing_label": "1 Dec",
-      "title": "Riverstone's Chong Chu Mee becomes CEO as Wong Teek Son steps down",
+      "sort_date": "2026-12-15",
+      "timing_label": "15 Dec",
+      "title": "Manulife US REIT unitholders vote on proposed lender agreement and distribution resumption",
       "tickers": [
-        "AP4.SI"
+        "BTOU.SI"
       ],
       "supporting_news_ids": [
-        1871
+        1987,
+        1971
       ]
     },
     {
       "id": "wtw_03",
-      "sort_date": "2026-12-31",
-      "timing_label": "Second half of Dec",
-      "title": "mm2 Asia shareholders vote on debt repayment scheme",
+      "sort_date": "2027-01-05",
+      "timing_label": "5 Jan 2027",
+      "title": "USTR deadline for comments on proposed tariffs affecting Singapore exports",
       "tickers": [],
       "supporting_news_ids": [
-        1799
+        2088,
+        2080,
+        2065,
+        2083
       ]
     },
     {
       "id": "wtw_04",
-      "sort_date": "2027-03-31",
-      "timing_label": "31 Mar 2027",
-      "title": "SingLand closes Marina Square mall for redevelopment",
+      "sort_date": "2027-01-31",
+      "timing_label": "Jan 2027",
+      "title": "Kimly’s two independent directors step down at its AGM",
       "tickers": [
-        "U06.SI"
+        "1D0.SI"
       ],
       "supporting_news_ids": [
-        1921
+        2061
+      ]
+    },
+    {
+      "id": "wtw_05",
+      "sort_date": "2027-09-30",
+      "timing_label": "Q3 2027",
+      "title": "PKR Offshore submits its Taiwan listing application",
+      "tickers": [
+        "508.SI",
+        "5LY.SI"
+      ],
+      "supporting_news_ids": [
+        2089
       ]
     }
   ]
