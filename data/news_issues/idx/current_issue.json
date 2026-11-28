@@ -1,18 +1,19 @@
 {
   "issue_date": "2026-11-28",
   "window_start": "2026-11-27T13:50:00Z",
-  "window_end": "2026-11-28T01:46:24Z",
+  "window_end": "2026-11-28T05:56:24Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
-    "event": "United States sets 18% tariff on Indonesian imports",
-    "headline": "US sets 18% tariff on Indonesian imports",
-    "blurb": "The United States announced the 18% rate on Indonesian goods as part of a new wave of import tariffs. Coordinating Minister for Economic Affairs Airlangga Hartarto said it is below the initial 25% threat and favorable compared with Singapore and Vietnam. Indonesia’s tariff schemes are 0%, 10% and 18% per commodity under an agreement signed in February, with excess capacity to be addressed through an addendum. The government can continue negotiations until 5 January 2027.",
+    "event": "US sets an 18% tariff on Indonesian goods",
+    "headline": "US sets 18% tariff on Indonesian goods",
+    "blurb": "The US announced the rate under its Section 301 excess-capacity scheme, and Coordinating Minister for Economic Affairs Airlangga Hartarto said it is final. Indonesia secured zero-tariff exemptions for 2,273 commodities, including crude palm oil, rubber, coffee and cocoa, after completing negotiations on commodity rates of 0%, 10% and 18%. Airlangga said the 18% rate is below the initial 25% threat. The government can continue negotiations until 5 January 2027, with a public hearing scheduled for 25 January 2027.",
     "tickers": [],
     "supporting_news_ids": [
+      34032,
       33997
     ],
-    "copy_decision": "new story"
+    "copy_decision": "rewritten: 1 new articles with a new fact: Indonesia secured zero-tariff exemptions for 2,273 commodities, including crude palm oil, rubber, coffee and cocoa."
   },
   "sections": {
     "earnings_guidance": [
@@ -28,10 +29,38 @@
         "supporting_news_ids": [
           34003
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_03",
+        "slot": "story",
+        "event": "UBS upgrades BRMS",
+        "headline": "UBS upgrades BRMS, citing a 6x 2028 projected PER",
+        "blurb": "Bumi Resources Minerals rose 16.55% over 23-27 November, reversing the prior week’s 20.11% decline, when foreign investors net sold Rp156.21 billion. UBS said that selling reflected a potential MSCI Indonesia index downgrade rather than fundamental deterioration, citing production growth prospects backed by adequate gold reserves at BRMS and Merdeka Gold Resources.",
+        "tickers": [
+          "BRMS.JK"
+        ],
+        "supporting_news_ids": [
+          34028
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_04",
+        "slot": "story",
+        "event": "KRAS reports nine-month 2026 net profit growth",
+        "headline": "KRAS reports nine-month net profit of US$83.1 million, up 246% year-on-year",
+        "blurb": "Steel sales volume reached 877,700 tons, up 18% year-on-year, while revenue rose 30% to US$919.8 million. Krakatau Steel said working-capital funding from Danantara Indonesia helped secure raw materials, improve production utilization and enhance funding efficiency.",
+        "tickers": [
+          "KRAS.JK"
+        ],
+        "supporting_news_ids": [
+          34031
+        ],
+        "copy_decision": "new story"
+      },
+      {
+        "id": "cur_05",
         "slot": "story",
         "event": "KKGI reports nine-month 2026 financial results",
         "headline": "KKGI reports nine-month 2026 net profit of USD11.61 million",
@@ -42,13 +71,25 @@
         "supporting_news_ids": [
           34002
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_04",
+      "id": "cur_06",
+      "slot": "flash",
+      "event": "BTN reports profit growth through October 2026",
+      "headline": "PT Bank Tabungan Negara Tbk (BTN) Posts Rp 2.92 Trillion Net Profit Through October 2026, Up 16.55%",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        34033
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_07",
       "slot": "flash",
       "event": "Foreign investors record five-day net buying streak in BBCA",
       "headline": "Foreign Investors Log Five Straight Days of Net Buys in PT Bank Central Asia Tbk (BBCA) Worth Rp 1.4 Trillion",
@@ -59,10 +100,10 @@
       "supporting_news_ids": [
         33998
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_05",
+      "id": "cur_08",
       "slot": "flash",
       "event": "DSSA stock manipulation investigation advances with detentions and examinations",
       "headline": "PT Dian Swastatika Sentosa (DSSA) stock manipulation case has three suspects detained",
@@ -75,10 +116,54 @@
         34004,
         34005
       ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_09",
+      "slot": "flash",
+      "event": "BUMI shares rebound after the previous week's decline",
+      "headline": "PT Bumi Resources Tbk (BUMI) Shares Rebound 18.49% Weekly After Prior Week's Slump",
+      "blurb": null,
+      "tickers": [
+        "BUMI.JK",
+        "BRMS.JK"
+      ],
+      "supporting_news_ids": [
+        34029
+      ],
       "copy_decision": "new story"
     },
     {
-      "id": "cur_06",
+      "id": "cur_10",
+      "slot": "flash",
+      "event": "KOTA approves a rights issue to fund two property acquisitions",
+      "headline": "DMS Propertindo (KOTA) wins approval for a rights issue of up to 100 billion shares to fund Rp 4.4 trillion in acquisitions",
+      "blurb": null,
+      "tickers": [
+        "KOTA.JK"
+      ],
+      "supporting_news_ids": [
+        34030,
+        34006
+      ],
+      "copy_decision": "rewritten: 1 new articles with a new fact: The acquisitions would add about 572.28 hectares to KOTA's land bank."
+    },
+    {
+      "id": "cur_11",
+      "slot": "flash",
+      "event": "MIKA shares rebound as 9M patient volume declines",
+      "headline": "PT Mitra Keluarga Karyasehat Tbk (MIKA) Shares Begin Rebound, Patient Volume Recovery Seen as Key to Prospects",
+      "blurb": null,
+      "tickers": [
+        "MIKA.JK"
+      ],
+      "supporting_news_ids": [
+        34000
+      ],
+      "copy_decision": "new story"
+    },
+    {
+      "id": "cur_12",
       "slot": "flash",
       "event": "RISE begins construction of VASA Malang",
       "headline": "PT Jaya Sukses Makmur Sentosa Tbk (RISE) Expands Portfolio with VASA Malang Development",
@@ -89,31 +174,18 @@
       "supporting_news_ids": [
         33999
       ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_07",
-      "slot": "flash",
-      "event": "KOTA shareholders approve rights issue to fund property acquisitions",
-      "headline": "PT DMS Propertindo Tbk (KOTA) Plans Rights Issue of Up to 100 Billion Shares to Fund Rp 4.4 Trillion Acquisition of Two Property Companies",
-      "blurb": null,
-      "tickers": [
-        "KOTA.JK"
-      ],
-      "supporting_news_ids": [
-        34006
-      ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2027-01-05",
-      "timing_label": "5 Jan 2027",
-      "title": "Indonesia-US tariff negotiations reach deadline",
+      "sort_date": "2027-01-25",
+      "timing_label": "25 Jan 2027",
+      "title": "US public hearing on Indonesia's Section 301 tariff",
       "tickers": [],
       "supporting_news_ids": [
+        34032,
         33997
       ]
     }
