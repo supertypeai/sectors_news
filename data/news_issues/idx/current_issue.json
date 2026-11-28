@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-28",
   "window_start": "2026-11-27T13:50:00Z",
-  "window_end": "2026-11-28T05:56:24Z",
+  "window_end": "2026-11-28T09:56:27Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -13,7 +13,7 @@
       34032,
       33997
     ],
-    "copy_decision": "rewritten: 1 new articles with a new fact: Indonesia secured zero-tariff exemptions for 2,273 commodities, including crude palm oil, rubber, coffee and cocoa."
+    "copy_decision": "kept: same articles"
   },
   "sections": {
     "earnings_guidance": [
@@ -43,7 +43,7 @@
         "supporting_news_ids": [
           34028
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_04",
@@ -57,7 +57,7 @@
         "supporting_news_ids": [
           34031
         ],
-        "copy_decision": "new story"
+        "copy_decision": "kept: same articles"
       },
       {
         "id": "cur_05",
@@ -86,7 +86,7 @@
       "supporting_news_ids": [
         34033
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_07",
@@ -131,7 +131,7 @@
       "supporting_news_ids": [
         34029
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_10",
@@ -146,24 +146,10 @@
         34030,
         34006
       ],
-      "copy_decision": "rewritten: 1 new articles with a new fact: The acquisitions would add about 572.28 hectares to KOTA's land bank."
+      "copy_decision": "kept: same articles"
     },
     {
       "id": "cur_11",
-      "slot": "flash",
-      "event": "MIKA shares rebound as 9M patient volume declines",
-      "headline": "PT Mitra Keluarga Karyasehat Tbk (MIKA) Shares Begin Rebound, Patient Volume Recovery Seen as Key to Prospects",
-      "blurb": null,
-      "tickers": [
-        "MIKA.JK"
-      ],
-      "supporting_news_ids": [
-        34000
-      ],
-      "copy_decision": "new story"
-    },
-    {
-      "id": "cur_12",
       "slot": "flash",
       "event": "RISE begins construction of VASA Malang",
       "headline": "PT Jaya Sukses Makmur Sentosa Tbk (RISE) Expands Portfolio with VASA Malang Development",
@@ -175,18 +161,50 @@
         33999
       ],
       "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_12",
+      "slot": "flash",
+      "event": "MSCI confirms Indonesia market reclassification consultation remains unchanged",
+      "headline": "MSCI Denies Any Change to Indonesia Market Reclassification Consultation After Reported Prabowo Call",
+      "blurb": null,
+      "tickers": [],
+      "supporting_news_ids": [
+        34035
+      ],
+      "copy_decision": "new story"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2027-01-25",
-      "timing_label": "25 Jan 2027",
-      "title": "US public hearing on Indonesia's Section 301 tariff",
+      "sort_date": "2027-01-05",
+      "timing_label": "5 Jan 2027",
+      "title": "US response deadline for Indonesia's Section 301 tariff negotiations",
       "tickers": [],
       "supporting_news_ids": [
         34032,
         33997
+      ]
+    },
+    {
+      "id": "wtw_02",
+      "sort_date": "2027-04-30",
+      "timing_label": "30 Apr 2027",
+      "title": "MSCI Indonesia reclassification consultation closes for market feedback",
+      "tickers": [],
+      "supporting_news_ids": [
+        34035
+      ]
+    },
+    {
+      "id": "wtw_03",
+      "sort_date": "2027-06-30",
+      "timing_label": "30 Jun 2027",
+      "title": "MSCI final decision on Indonesia's market classification",
+      "tickers": [],
+      "supporting_news_ids": [
+        34035
       ]
     }
   ]
