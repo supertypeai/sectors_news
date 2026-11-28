@@ -1,7 +1,7 @@
 {
   "issue_date": "2026-11-28",
   "window_start": "2026-11-27T13:50:00Z",
-  "window_end": "2026-11-28T09:56:27Z",
+  "window_end": "2026-11-28T13:50:00Z",
   "lead": {
     "id": "cur_01",
     "slot": "lead",
@@ -16,9 +16,25 @@
     "copy_decision": "kept: same articles"
   },
   "sections": {
-    "earnings_guidance": [
+    "capital_raising_buybacks": [
       {
         "id": "cur_02",
+        "slot": "story",
+        "event": "EMAS shareholders approve a private placement of 1.47 billion shares",
+        "headline": "EMAS shareholders approve 1.47 billion-share private placement",
+        "blurb": "Merdeka Gold’s new shares will equal 10% of placed capital and have a nominal value of Rp150 each. At its 26 November extraordinary meeting, the plan won about 58.14% of votes, or 2.33 billion voting rights, with proceeds allocated to working capital (25%), business development (50%) and refinancing or repayment of obligations (25%).",
+        "tickers": [
+          "EMAS.JK"
+        ],
+        "supporting_news_ids": [
+          34036
+        ],
+        "copy_decision": "new story"
+      }
+    ],
+    "earnings_guidance": [
+      {
+        "id": "cur_03",
         "slot": "story",
         "event": "BRIS outlines its 2027 financing growth outlook",
         "headline": "BRIS projects double-digit financing growth in 2027",
@@ -32,7 +48,22 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_03",
+        "id": "cur_04",
+        "slot": "story",
+        "event": "BUMI reports strong Q3 2026 results as shares rebound",
+        "headline": "BUMI reports strong Q3 results as shares rebound 18.49%",
+        "blurb": "Bumi posted Q3 net profit of US$89.6 million, up 158.3% quarter on quarter and tenfold year on year, largely on improved performance at KPC. Foreign investors were net buyers of Rp32.87 billion during the week of 23-27 November, following net selling of Rp98.38 billion the prior week.",
+        "tickers": [
+          "BUMI.JK",
+          "BRMS.JK"
+        ],
+        "supporting_news_ids": [
+          34029
+        ],
+        "copy_decision": "rewritten: moved from flash to story"
+      },
+      {
+        "id": "cur_05",
         "slot": "story",
         "event": "UBS upgrades BRMS",
         "headline": "UBS upgrades BRMS, citing a 6x 2028 projected PER",
@@ -46,38 +77,39 @@
         "copy_decision": "kept: same articles"
       },
       {
-        "id": "cur_04",
+        "id": "cur_06",
         "slot": "story",
-        "event": "KRAS reports nine-month 2026 net profit growth",
-        "headline": "KRAS reports nine-month net profit of US$83.1 million, up 246% year-on-year",
-        "blurb": "Steel sales volume reached 877,700 tons, up 18% year-on-year, while revenue rose 30% to US$919.8 million. Krakatau Steel said working-capital funding from Danantara Indonesia helped secure raw materials, improve production utilization and enhance funding efficiency.",
+        "event": "KRAS reports a 246% increase in nine-month net profit",
+        "headline": "KRAS reports 246% increase in nine-month net profit to US$83.1 million",
+        "blurb": "Krakatau Steel's net profit was US$4.6 million in Q1 and US$6.3 million through Q2 2026. Steel sales volume rose 18% to 877,700 tons and revenue increased 30% to US$919.8 million. Its corporate secretary attributed growth to the transformation strategy and stronger operational, commercial and financial performance.",
         "tickers": [
           "KRAS.JK"
         ],
         "supporting_news_ids": [
+          34037,
           34031
         ],
-        "copy_decision": "kept: same articles"
-      },
-      {
-        "id": "cur_05",
-        "slot": "story",
-        "event": "KKGI reports nine-month 2026 financial results",
-        "headline": "KKGI reports nine-month 2026 net profit of USD11.61 million",
-        "blurb": "Resource Alam Indonesia's revenue fell 2.55% to USD106.85 million year on year. Gross profit rose to USD31.42 million from USD17.39 million, while operating profit increased to USD21.28 million from USD2.92 million.",
-        "tickers": [
-          "KKGI.JK"
-        ],
-        "supporting_news_ids": [
-          34002
-        ],
-        "copy_decision": "kept: same articles"
+        "copy_decision": "rewritten: 1 new articles with a new fact: Net profit was US$4.6 million in Q1 and US$6.3 million through Q2 2026."
       }
     ]
   },
   "flash": [
     {
-      "id": "cur_06",
+      "id": "cur_07",
+      "slot": "flash",
+      "event": "KKGI reports nine-month 2026 financial results",
+      "headline": "KKGI reports nine-month 2026 net profit of USD11.61 million",
+      "blurb": null,
+      "tickers": [
+        "KKGI.JK"
+      ],
+      "supporting_news_ids": [
+        34002
+      ],
+      "copy_decision": "kept: same articles, headline kept in flash from story"
+    },
+    {
+      "id": "cur_08",
       "slot": "flash",
       "event": "BTN reports profit growth through October 2026",
       "headline": "PT Bank Tabungan Negara Tbk (BTN) Posts Rp 2.92 Trillion Net Profit Through October 2026, Up 16.55%",
@@ -89,7 +121,7 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_07",
+      "id": "cur_09",
       "slot": "flash",
       "event": "Foreign investors record five-day net buying streak in BBCA",
       "headline": "Foreign Investors Log Five Straight Days of Net Buys in PT Bank Central Asia Tbk (BBCA) Worth Rp 1.4 Trillion",
@@ -103,50 +135,21 @@
       "copy_decision": "kept: same articles"
     },
     {
-      "id": "cur_08",
+      "id": "cur_10",
       "slot": "flash",
-      "event": "DSSA stock manipulation investigation advances with detentions and examinations",
-      "headline": "PT Dian Swastatika Sentosa (DSSA) stock manipulation case has three suspects detained",
+      "event": "Police investigate alleged DSSA stock manipulation and detain three suspects",
+      "headline": "Dian Swastatika Sentosa (DSSA) stock manipulation case has three suspects detained",
       "blurb": null,
       "tickers": [
         "DSSA.JK"
       ],
       "supporting_news_ids": [
+        34038,
         34025,
         34004,
         34005
       ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_09",
-      "slot": "flash",
-      "event": "BUMI shares rebound after the previous week's decline",
-      "headline": "PT Bumi Resources Tbk (BUMI) Shares Rebound 18.49% Weekly After Prior Week's Slump",
-      "blurb": null,
-      "tickers": [
-        "BUMI.JK",
-        "BRMS.JK"
-      ],
-      "supporting_news_ids": [
-        34029
-      ],
-      "copy_decision": "kept: same articles"
-    },
-    {
-      "id": "cur_10",
-      "slot": "flash",
-      "event": "KOTA approves a rights issue to fund two property acquisitions",
-      "headline": "DMS Propertindo (KOTA) wins approval for a rights issue of up to 100 billion shares to fund Rp 4.4 trillion in acquisitions",
-      "blurb": null,
-      "tickers": [
-        "KOTA.JK"
-      ],
-      "supporting_news_ids": [
-        34030,
-        34006
-      ],
-      "copy_decision": "kept: same articles"
+      "copy_decision": "rewritten: 1 new articles with a new fact: OJK said DSSA shares rose an abnormal 210% over 34 trading days from May to July."
     },
     {
       "id": "cur_11",
@@ -165,6 +168,21 @@
     {
       "id": "cur_12",
       "slot": "flash",
+      "event": "KOTA approves a rights issue to fund two property acquisitions",
+      "headline": "DMS Propertindo (KOTA) wins approval for a rights issue of up to 100 billion shares to fund Rp 4.4 trillion in acquisitions",
+      "blurb": null,
+      "tickers": [
+        "KOTA.JK"
+      ],
+      "supporting_news_ids": [
+        34030,
+        34006
+      ],
+      "copy_decision": "kept: same articles"
+    },
+    {
+      "id": "cur_13",
+      "slot": "flash",
       "event": "MSCI confirms Indonesia market reclassification consultation remains unchanged",
       "headline": "MSCI Denies Any Change to Indonesia Market Reclassification Consultation After Reported Prabowo Call",
       "blurb": null,
@@ -172,39 +190,19 @@
       "supporting_news_ids": [
         34035
       ],
-      "copy_decision": "new story"
+      "copy_decision": "kept: same articles"
     }
   ],
   "what_to_watch": [
     {
       "id": "wtw_01",
-      "sort_date": "2027-01-05",
-      "timing_label": "5 Jan 2027",
-      "title": "US response deadline for Indonesia's Section 301 tariff negotiations",
+      "sort_date": "2027-01-25",
+      "timing_label": "25 Jan 2027",
+      "title": "US public hearing on Indonesia's Section 301 tariff",
       "tickers": [],
       "supporting_news_ids": [
         34032,
         33997
-      ]
-    },
-    {
-      "id": "wtw_02",
-      "sort_date": "2027-04-30",
-      "timing_label": "30 Apr 2027",
-      "title": "MSCI Indonesia reclassification consultation closes for market feedback",
-      "tickers": [],
-      "supporting_news_ids": [
-        34035
-      ]
-    },
-    {
-      "id": "wtw_03",
-      "sort_date": "2027-06-30",
-      "timing_label": "30 Jun 2027",
-      "title": "MSCI final decision on Indonesia's market classification",
-      "tickers": [],
-      "supporting_news_ids": [
-        34035
       ]
     }
   ]
