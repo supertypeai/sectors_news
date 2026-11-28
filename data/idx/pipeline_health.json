@@ -3,7 +3,7 @@
         "source": "ICNScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.02197901668647925,
+        "duration_minutes": 0.01800828978108863,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +16,7 @@
         "source": "GapkiScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.04708679671554516,
+        "duration_minutes": 0.05463120670368274,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,20 +29,26 @@
         "source": "MinerbaScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.05161741853225976,
+        "duration_minutes": 0.25101691372692586,
         "requests": 1,
-        "successful_requests": 1,
-        "failed_requests": 0,
-        "http_statuses": [
-            200
-        ],
-        "failures": []
+        "successful_requests": 0,
+        "failed_requests": 1,
+        "http_statuses": [],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://www.minerba.esdm.go.id/berita/minerba/1",
+                "status": null,
+                "reason": "ConnectionError",
+                "message": "HTTPSConnectionPool(host='www.minerba.esdm.go.id', port=443): Max retries exceeded with url: /berita/minerba/1 (Caused by NameResolutionError(\"HTTPSConnection(host='www.minerba.esdm.go.id', port=443): Failed to resolve 'www.minerba.esdm.go.id' ([Errno -5] No address associated with hostname)\"))"
+            }
+        ]
     },
     {
         "source": "IdnMinerScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.009121813136152923,
+        "duration_minutes": 0.010803630016744137,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -54,8 +60,8 @@
     {
         "source": "IDNFinancialScraper",
         "date": "20261128",
-        "articles_found": 11,
-        "duration_minutes": 0.009471207531169057,
+        "articles_found": 13,
+        "duration_minutes": 0.009255604616676768,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -68,11 +74,11 @@
     {
         "source": "BisnisMarket",
         "date": "20261128",
-        "articles_found": 19,
-        "duration_minutes": 5.979328559952167,
-        "requests": 44,
-        "successful_requests": 23,
-        "failed_requests": 21,
+        "articles_found": 21,
+        "duration_minutes": 7.559784184869689,
+        "requests": 49,
+        "successful_requests": 25,
+        "failed_requests": 24,
         "http_statuses": [
             403,
             200,
@@ -82,16 +88,6 @@
             200,
             403,
             200,
-            403,
-            200,
-            403,
-            200,
-            403,
-            200,
-            403,
-            200,
-            403,
-            200,
             200,
             403,
             200,
@@ -103,6 +99,21 @@
             200,
             403,
             200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
             200,
             403,
             200,
@@ -129,14 +140,21 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261128/192/2025179/andalan-artha-anda-siapkan-ekspansi-bisnis-nikel-hingga-emas",
+                "url": "https://foto.bisnis.com/view/20261128/2025196/ekspor-sawit-2027-diproyeksi-turun-1227-jadi-2973-juta-ton",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
             },
             {
                 "stage": "fetch",
-                "url": "https://market.bisnis.com/read/20261128/192/2025142/capex-emiten-telko-tlkm-isat-risiko-terkerek-aturan-baru-data-center",
+                "url": "https://market.bisnis.com/read/20261128/7/2025174/prabowo-soroti-goreng-saham-yang-rugikan-investor-ritel-minta-ojk-perkuat-pengawasan",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/192/2025179/andalan-artha-anda-siapkan-ekspansi-bisnis-nikel-hingga-emas",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -185,6 +203,13 @@
             },
             {
                 "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/192/2025124/emiten-grup-sinar-mas-ketr-bidik-proyek-digital-di-kek-batang",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261128/192/2025126/daya-beli-lesu-cinema-xxi-cnma-jaga-harga-tiket-bioskop-tetap-hemat",
                 "status": 403,
                 "reason": "HTTPStatusError",
@@ -214,6 +239,13 @@
             {
                 "stage": "fetch",
                 "url": "https://market.bisnis.com/read/20261128/192/2025131/mrdiy-mdiy-andalkan-efisiensi-gudang-jaga-ekspansi",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/92/2025033/ayovest-bidik-10-juta-investor-genjot-layanan-investasi-berbasis-ai",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -272,211 +304,8 @@
     {
         "source": "BloombergTechnoz",
         "date": "20261128",
-        "articles_found": 5,
-        "duration_minutes": 0.0753251617308706,
-        "requests": 6,
-        "successful_requests": 6,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200,
-            200,
-            200,
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "InvestorID",
-        "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.08076927173727502,
-        "requests": 4,
-        "successful_requests": 0,
-        "failed_requests": 4,
-        "http_statuses": [
-            407,
-            407
-        ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/stock/indeks/1",
-                "status": null,
-                "reason": "SSLError",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fstock%2Findeks%2F1&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/stock/indeks/1",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Invalid authentication: check credentials and retry. Bright Data credentials include your account ID, zone name and password"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/corporate-action/indeks/1",
-                "status": null,
-                "reason": "SSLError",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Finvestor.id%2Fcorporate-action%2Findeks%2F1&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://investor.id/corporate-action/indeks/1",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Invalid authentication: check credentials and retry. Bright Data credentials include your account ID, zone name and password"
-            }
-        ]
-    },
-    {
-        "source": "AbafScraper",
-        "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.007142575752610961,
-        "requests": 2,
-        "successful_requests": 2,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "JakartaGlobe",
-        "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.037347513569208485,
-        "requests": 2,
-        "successful_requests": 0,
-        "failed_requests": 2,
-        "http_statuses": [
-            407
-        ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://jakartaglobe.id/business/newsindex/1",
-                "status": null,
-                "reason": "SSLError",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Fjakartaglobe.id%2Fbusiness%2Fnewsindex%2F1&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://jakartaglobe.id/business/newsindex/1",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Invalid authentication: check credentials and retry. Bright Data credentials include your account ID, zone name and password"
-            }
-        ]
-    },
-    {
-        "source": "AntaraNews",
-        "date": "20261128",
-        "articles_found": 1,
-        "duration_minutes": 0.030428569996729493,
-        "requests": 3,
-        "successful_requests": 3,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "AsianTelecom",
-        "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.017114934511482716,
-        "requests": 2,
-        "successful_requests": 2,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "JakartaPost",
-        "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.024099641867602866,
-        "requests": 2,
-        "successful_requests": 2,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "KontanInvestasi",
-        "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.04288747919878612,
-        "requests": 2,
-        "successful_requests": 0,
-        "failed_requests": 2,
-        "http_statuses": [
-            407
-        ],
-        "failures": [
-            {
-                "stage": "fetch",
-                "url": "https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal=28&bulan=11&tahun=2026&pos=indeks",
-                "status": null,
-                "reason": "SSLError",
-                "message": "HTTPSConnectionPool(host='api.scrapingant.com', port=443): Max retries exceeded with url: /v2/general?url=https%3A%2F%2Fwww.kontan.co.id%2Fsearch%2Findeks%3Fkanal%3Dinvestasi%26tanggal%3D28%26bulan%3D11%26tahun%3D2026%26pos%3Dindeks&x-api-key=d1518309e64c420abb08f63013cc10d0&browser=false (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
-            },
-            {
-                "stage": "fetch",
-                "url": "https://www.kontan.co.id/search/indeks?kanal=investasi&tanggal=28&bulan=11&tahun=2026&pos=indeks",
-                "status": 407,
-                "reason": "WebUnlockerError",
-                "message": "Invalid authentication: check credentials and retry. Bright Data credentials include your account ID, zone name and password"
-            }
-        ]
-    },
-    {
-        "source": "EmitenNews",
-        "date": "20261128",
-        "articles_found": 2,
-        "duration_minutes": 0.06099345594799767,
-        "requests": 4,
-        "successful_requests": 4,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200,
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "BCANews",
-        "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.018309817222567897,
-        "requests": 1,
-        "successful_requests": 1,
-        "failed_requests": 0,
-        "http_statuses": [
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "CNBCMarket",
-        "date": "20261128",
         "articles_found": 7,
-        "duration_minutes": 0.0331112520614018,
+        "duration_minutes": 0.11190825991798192,
         "requests": 8,
         "successful_requests": 8,
         "failed_requests": 0,
@@ -493,14 +322,244 @@
         "failures": []
     },
     {
-        "source": "CNNEkonomi",
+        "source": "InvestorID",
         "date": "20261128",
-        "articles_found": 17,
-        "duration_minutes": 0.1133868884993717,
-        "requests": 20,
-        "successful_requests": 20,
+        "articles_found": 9,
+        "duration_minutes": 1.229424931597896,
+        "requests": 17,
+        "successful_requests": 17,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "AbafScraper",
+        "date": "20261128",
+        "articles_found": 0,
+        "duration_minutes": 0.008625904703512788,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "JakartaGlobe",
+        "date": "20261128",
+        "articles_found": 2,
+        "duration_minutes": 0.7014435702624421,
+        "requests": 8,
+        "successful_requests": 6,
+        "failed_requests": 2,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            409,
+            200,
+            407,
+            200
+        ],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/time-for-nickel-giants-indonesia-philippines-to-team-up",
+                "status": 409,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 409"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/time-for-nickel-giants-indonesia-philippines-to-team-up",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Invalid authentication: check credentials and retry. Bright Data credentials include your account ID, zone name and password"
+            }
+        ]
+    },
+    {
+        "source": "AntaraNews",
+        "date": "20261128",
+        "articles_found": 1,
+        "duration_minutes": 0.02101149023510516,
+        "requests": 3,
+        "successful_requests": 3,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "AsianTelecom",
+        "date": "20261128",
+        "articles_found": 0,
+        "duration_minutes": 0.019612818265644212,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "JakartaPost",
+        "date": "20261128",
+        "articles_found": 0,
+        "duration_minutes": 0.054524309514090416,
+        "requests": 2,
+        "successful_requests": 2,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "KontanInvestasi",
+        "date": "20261128",
+        "articles_found": 18,
+        "duration_minutes": 0.9215143349176894,
+        "requests": 22,
+        "successful_requests": 20,
+        "failed_requests": 2,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            409,
+            200,
+            407,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/pan-brothers-pbrx-pangkas-nilai-owk-jumlah-maksimal-saham-baru-ikut-turun",
+                "status": 409,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 409"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://investasi.kontan.co.id/news/pan-brothers-pbrx-pangkas-nilai-owk-jumlah-maksimal-saham-baru-ikut-turun",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Invalid authentication: check credentials and retry. Bright Data credentials include your account ID, zone name and password"
+            }
+        ]
+    },
+    {
+        "source": "EmitenNews",
+        "date": "20261128",
+        "articles_found": 5,
+        "duration_minutes": 0.07702719626637797,
+        "requests": 7,
+        "successful_requests": 7,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "BCANews",
+        "date": "20261128",
+        "articles_found": 0,
+        "duration_minutes": 0.011125257898432514,
+        "requests": 1,
+        "successful_requests": 1,
+        "failed_requests": 0,
+        "http_statuses": [
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "CNBCMarket",
+        "date": "20261128",
+        "articles_found": 10,
+        "duration_minutes": 0.02446776320381711,
+        "requests": 11,
+        "successful_requests": 11,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
+        "source": "CNNEkonomi",
+        "date": "20261128",
+        "articles_found": 21,
+        "duration_minutes": 0.11758908942962686,
+        "requests": 25,
+        "successful_requests": 25,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
             200,
             200,
             200,
@@ -527,14 +586,15 @@
     {
         "source": "KompasMoney",
         "date": "20261128",
-        "articles_found": 31,
-        "duration_minutes": 0.17308098246964315,
-        "requests": 2,
-        "successful_requests": 1,
-        "failed_requests": 1,
+        "articles_found": 0,
+        "duration_minutes": 0.30318284513584026,
+        "requests": 3,
+        "successful_requests": 0,
+        "failed_requests": 3,
         "http_statuses": [
             202,
-            200
+            202,
+            407
         ],
         "failures": [
             {
@@ -543,18 +603,33 @@
                 "status": 202,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 202"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://money.kompas.com/sitemap-news-money.xml",
+                "status": 202,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 202"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://money.kompas.com/sitemap-news-money.xml",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Invalid authentication: check credentials and retry. Bright Data credentials include your account ID, zone name and password"
             }
         ]
     },
     {
         "source": "FinanceDetik",
         "date": "20261128",
-        "articles_found": 2,
-        "duration_minutes": 0.04906433301512152,
-        "requests": 4,
-        "successful_requests": 4,
+        "articles_found": 3,
+        "duration_minutes": 0.07498645770053068,
+        "requests": 5,
+        "successful_requests": 5,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200,
             200,
             200,
@@ -565,8 +640,8 @@
     {
         "source": "KontanKeuangan",
         "date": "20261128",
-        "articles_found": 7,
-        "duration_minutes": 0.10574169158159445,
+        "articles_found": 8,
+        "duration_minutes": 0.07820474466619393,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
