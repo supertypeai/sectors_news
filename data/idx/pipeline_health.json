@@ -3,7 +3,7 @@
         "source": "ICNScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.017813064251095058,
+        "duration_minutes": 0.0262099072492371,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -16,7 +16,7 @@
         "source": "GapkiScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.037537392469433446,
+        "duration_minutes": 0.05566399320183943,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -29,7 +29,7 @@
         "source": "MinerbaScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.07823020770059277,
+        "duration_minutes": 0.0018233772522459428,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -42,7 +42,7 @@
         "source": "IdnMinerScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.010790706588886678,
+        "duration_minutes": 0.012361529539339245,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -54,8 +54,8 @@
     {
         "source": "IDNFinancialScraper",
         "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.003921095452581843,
+        "articles_found": 3,
+        "duration_minutes": 0.007643947013032933,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -67,25 +67,93 @@
     {
         "source": "BisnisMarket",
         "date": "20261128",
-        "articles_found": 1,
-        "duration_minutes": 3.0098751251508173,
-        "requests": 8,
-        "successful_requests": 4,
-        "failed_requests": 4,
+        "articles_found": 12,
+        "duration_minutes": 4.158343263187756,
+        "requests": 27,
+        "successful_requests": 16,
+        "failed_requests": 11,
         "http_statuses": [
             403,
             200,
+            200,
+            200,
+            403,
+            200,
             403,
             200,
             403,
             200,
             403,
+            200,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            403,
+            200,
+            200,
+            403,
+            200,
             200
         ],
         "failures": [
             {
                 "stage": "fetch",
                 "url": "https://www.bisnis.com/index?categoryId=194&type=indeks&page=1",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/235/2025134/harga-emas-antam-di-pegadaian-tebus-mulai-rp132-juta-hari-ini-2811",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/235/2025135/harga-emas-antam-ubs-dan-galeri-24-di-pegadaian-sabtu-28-november-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/192/2025124/emiten-grup-sinar-mas-ketr-bidik-proyek-digital-di-kek-batang",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/192/2025126/daya-beli-lesu-cinema-xxi-cnma-jaga-harga-tiket-bioskop-tetap-hemat",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/7/2025127/daftar-10-saham-top-losers-gainers-pekan-terakhir-november-2026-piket-sabtu",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/7/2025128/daftar-10-saham-top-leaders-laggards-pekan-akhir-november-2026",
+                "status": 403,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 403"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://market.bisnis.com/read/20261128/192/2025131/mrdiy-mdiy-andalkan-efisiensi-gudang-jaga-ekspansi",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -106,7 +174,7 @@
             },
             {
                 "stage": "fetch",
-                "url": "https://www.bisnis.com/index?categoryId=5&type=indeks&page=1",
+                "url": "https://finansial.bisnis.com/read/20261128/90/2025020/lulusan-pkh-bisa-ajukan-kur-mikro-ini-syarat-bunga-dan-dokumen-yang-dibutuhkan",
                 "status": 403,
                 "reason": "HTTPStatusError",
                 "message": "Received status code 403"
@@ -116,21 +184,8 @@
     {
         "source": "BloombergTechnoz",
         "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.03524922134820372,
-        "requests": 1,
-        "successful_requests": 1,
-        "failed_requests": 0,
-        "http_statuses": [
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "InvestorID",
-        "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.07476283721625805,
+        "articles_found": 1,
+        "duration_minutes": 0.024329709401354194,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -141,10 +196,34 @@
         "failures": []
     },
     {
+        "source": "InvestorID",
+        "date": "20261128",
+        "articles_found": 1,
+        "duration_minutes": 0.5855209055511902,
+        "requests": 12,
+        "successful_requests": 12,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
         "source": "AbafScraper",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.09141256431272875,
+        "duration_minutes": 0.00954866106621921,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -158,20 +237,41 @@
         "source": "JakartaGlobe",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.03235742766410112,
-        "requests": 1,
-        "successful_requests": 1,
-        "failed_requests": 0,
+        "duration_minutes": 0.4575786947660769,
+        "requests": 7,
+        "successful_requests": 5,
+        "failed_requests": 2,
         "http_statuses": [
-            200
+            200,
+            200,
+            200,
+            200,
+            409,
+            200,
+            407
         ],
-        "failures": []
+        "failures": [
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/us-tariff-threat-puts-indonesias-manufacturing-exports-at-risk",
+                "status": 409,
+                "reason": "HTTPStatusError",
+                "message": "Received status code 409"
+            },
+            {
+                "stage": "fetch",
+                "url": "https://jakartaglobe.id/business/us-tariff-threat-puts-indonesias-manufacturing-exports-at-risk",
+                "status": 407,
+                "reason": "WebUnlockerError",
+                "message": "Invalid authentication: check credentials and retry. Bright Data credentials include your account ID, zone name and password"
+            }
+        ]
     },
     {
         "source": "AntaraNews",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.013909617229364813,
+        "duration_minutes": 0.014093917251254121,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -185,7 +285,7 @@
         "source": "AsianTelecom",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.014669121770809094,
+        "duration_minutes": 0.014370128116570412,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -199,7 +299,7 @@
         "source": "JakartaPost",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.0460328163811937,
+        "duration_minutes": 0.023302450364766022,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -212,12 +312,23 @@
     {
         "source": "KontanInvestasi",
         "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.04058302581931154,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 10,
+        "duration_minutes": 0.6244346871816864,
+        "requests": 12,
+        "successful_requests": 12,
         "failed_requests": 0,
         "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             200
         ],
         "failures": []
@@ -226,7 +337,7 @@
         "source": "EmitenNews",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.04209994430032869,
+        "duration_minutes": 0.01991435423648606,
         "requests": 2,
         "successful_requests": 2,
         "failed_requests": 0,
@@ -240,7 +351,7 @@
         "source": "BCANews",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.013157516065984965,
+        "duration_minutes": 0.0109140881182005,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -252,22 +363,8 @@
     {
         "source": "CNBCMarket",
         "date": "20261128",
-        "articles_found": 1,
-        "duration_minutes": 0.0027441080504407487,
-        "requests": 2,
-        "successful_requests": 2,
-        "failed_requests": 0,
-        "http_statuses": [
-            200,
-            200
-        ],
-        "failures": []
-    },
-    {
-        "source": "CNNEkonomi",
-        "date": "20261128",
-        "articles_found": 1,
-        "duration_minutes": 0.02456773610319942,
+        "articles_found": 2,
+        "duration_minutes": 0.00920775660003225,
         "requests": 3,
         "successful_requests": 3,
         "failed_requests": 0,
@@ -279,10 +376,30 @@
         "failures": []
     },
     {
+        "source": "CNNEkonomi",
+        "date": "20261128",
+        "articles_found": 6,
+        "duration_minutes": 0.05957507888476054,
+        "requests": 8,
+        "successful_requests": 8,
+        "failed_requests": 0,
+        "http_statuses": [
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200
+        ],
+        "failures": []
+    },
+    {
         "source": "KompasMoney",
         "date": "20261128",
-        "articles_found": 1,
-        "duration_minutes": 0.17402428748706977,
+        "articles_found": 7,
+        "duration_minutes": 0.13669106153150398,
         "requests": 2,
         "successful_requests": 1,
         "failed_requests": 1,
@@ -304,7 +421,7 @@
         "source": "FinanceDetik",
         "date": "20261128",
         "articles_found": 0,
-        "duration_minutes": 0.030614712663615744,
+        "duration_minutes": 0.03172079441913714,
         "requests": 1,
         "successful_requests": 1,
         "failed_requests": 0,
@@ -316,12 +433,13 @@
     {
         "source": "KontanKeuangan",
         "date": "20261128",
-        "articles_found": 0,
-        "duration_minutes": 0.006135594968994459,
-        "requests": 1,
-        "successful_requests": 1,
+        "articles_found": 2,
+        "duration_minutes": 0.04916452646721155,
+        "requests": 2,
+        "successful_requests": 2,
         "failed_requests": 0,
         "http_statuses": [
+            200,
             200
         ],
         "failures": []
